@@ -178,7 +178,12 @@ npm run build
 
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=CheShiping/calculus-formula-theater&type=Date)](https://star-history.com/#CheShiping/calculus-formula-theater&Date)
+[![GitHub Stars](https://img.shields.io/github/stars/CheShiping/calculus-formula-theater?style=social)](https://github.com/CheShiping/calculus-formula-theater/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/CheShiping/calculus-formula-theater?style=social)](https://github.com/CheShiping/calculus-formula-theater/forks)
+[![GitHub Watchers](https://img.shields.io/github/watchers/CheShiping/calculus-formula-theater?style=social)](https://github.com/CheShiping/calculus-formula-theater/watchers)
+
+<!-- Star History 趋势图：仓库 Star 数量达到一定值后可启用下方嵌入 -->
+<!-- [![Star History Chart](https://api.star-history.com/svg?repos=CheShiping/calculus-formula-theater&type=Date)](https://star-history.com/#CheShiping/calculus-formula-theater&Date) -->
 
 ---
 
