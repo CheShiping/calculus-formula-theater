@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微积分与三角函数 · 公式体系联动记忆</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <link href="https://fonts.font.im/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+SC:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans SC', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    colors: {
+                        primary: '#0A84FF',
+                        accent: '#30D158',
+                        warning: '#FFD60A',
+                        danger: '#FF3B30',
+                        purple: '#BF5AF2',
+                        orange: '#FF9F0A',
+                        cyan: '#5AC8FA',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { box-sizing: border-box; }
+
+        /* ========== 主题变量 ========== */
+        :root {
+            --bg-body: #000;
+            --bg-main-stage: radial-gradient(ellipse at center, #0f1117 0%, #000 70%);
+            --bg-sidebar: rgba(15, 15, 20, 0.7);
+            --border-soft: rgba(255,255,255,0.08);
+            --border-medium: rgba(255,255,255,0.12);
+            --border-strong: rgba(255,255,255,0.25);
+            --text-primary: #fff;
+            --text-secondary: #d1d5db;
+            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
+            --text-faint: rgba(255,255,255,0.5);
+            --text-ghost: rgba(255,255,255,0.2);
+            --bg-card: rgba(30, 32, 40, 0.5);
+            --bg-card-active: rgba(40, 45, 55, 0.7);
+            --bg-formula: rgba(0,0,0,0.3);
+            --bg-elevated: rgba(255,255,255,0.03);
+            --bg-elevated-hover: rgba(255,255,255,0.06);
+            --bg-elevated-strong: rgba(255,255,255,0.04);
+            --bg-detail: #06070a;
+            --bg-detail-header: rgba(6,7,10,0.85);
+            --bg-number: rgba(255,255,255,0.025);
+            --shadow-card: 0 20px 50px rgba(0,0,0,0.6);
+            --shadow-active: 0 0 50px rgba(10, 132, 255, 0.15);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.3);
+            --scrollbar-thumb: rgba(255,255,255,0.1);
+            --scrollbar-hover: rgba(255,255,255,0.2);
+            --hl-text-color: #000;
+            --hex-vertex-fill: rgba(20,22,30,0.95);
+            --hex-label-color: #FFD60A;
+            --accent-yellow: #FFD60A;
+            --accent-yellow-text: #FFD60A;
+        }
+        [data-theme="light"] {
+            --bg-body: #f5f6f8;
+            --bg-main-stage: radial-gradient(ellipse at center, #ffffff 0%, #eef0f4 70%);
+            --bg-sidebar: rgba(255, 255, 255, 0.75);
+            --border-soft: rgba(0,0,0,0.08);
+            --border-medium: rgba(0,0,0,0.12);
+            --border-strong: rgba(0,0,0,0.2);
+            --text-primary: #1a1d24;
+            --text-secondary: #2d3139;
+            --text-muted: #5a6172;
+            --text-dim: #767d8c;
+            --text-faint: rgba(0,0,0,0.55);
+            --text-ghost: rgba(0,0,0,0.25);
+            --bg-card: rgba(255, 255, 255, 0.7);
+            --bg-card-active: rgba(255, 255, 255, 0.95);
+            --bg-formula: rgba(0,0,0,0.04);
+            --bg-elevated: rgba(0,0,0,0.03);
+            --bg-elevated-hover: rgba(0,0,0,0.06);
+            --bg-elevated-strong: rgba(0,0,0,0.04);
+            --bg-detail: #f7f8fa;
+            --bg-detail-header: rgba(247,248,250,0.88);
+            --bg-number: rgba(0,0,0,0.04);
+            --shadow-card: 0 20px 50px rgba(0,0,0,0.15);
+            --shadow-active: 0 0 50px rgba(10, 132, 255, 0.2);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.1);
+            --scrollbar-thumb: rgba(0,0,0,0.15);
+            --scrollbar-hover: rgba(0,0,0,0.3);
+            --hl-text-color: #000;
+            --hex-vertex-fill: rgba(255,255,255,0.98);
+            --hex-label-color: #8a5e00;
+            --accent-yellow: #C88800;
+            --accent-yellow-text: #8a5e00;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            margin: 0;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* ========== 主题切换按钮 ========== */
+        .theme-toggle {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.5rem;
+            z-index: 200;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border-medium);
+            background: var(--bg-sidebar);
+            backdrop-filter: blur(20px);
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-card);
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            border-color: var(--border-strong);
+        }
+        .theme-toggle .icon-sun { display: none; }
+        .theme-toggle .icon-moon { display: block; }
+        [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+        [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+        /* ========== 主视图 ========== */
+        #main-view {
+            display: flex;
+            height: 100vh;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        #main-view.hidden-view {
+            opacity: 0;
+            transform: scale(0.96);
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+        }
+
+        /* 侧边栏 */
+        .sidebar-container {
+            width: 380px;
+            flex-shrink: 0;
+            background: var(--bg-sidebar);
+            backdrop-filter: blur(30px);
+            border-right: 1px solid var(--border-soft);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2.5rem 2rem;
+            z-index: 20;
+            position: relative;
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+
+        /* 主舞台 */
+        .main-stage {
+            flex-grow: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--bg-main-stage);
+            transition: background 0.4s ease;
+        }
+        .swiper { width: 100%; padding-top: 60px; padding-bottom: 60px; }
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 360px;
+            height: 520px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-card);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.4s ease, border-color 0.4s ease;
+            user-select: none;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .swiper-slide-shadow-left, .swiper-slide-shadow-right { border-radius: 28px; }
+        .swiper-slide-active {
+            border: 1px solid var(--border-strong);
+            box-shadow: var(--shadow-active);
+            background: var(--bg-card-active);
+        }
+        .swiper-slide-active .enter-hint { opacity: 1; }
+        .enter-hint {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            animation: pulse 2s ease-in-out infinite;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:0.8} }
+
+        /* 荧光笔 */
+        .highlight-text {
+            background: linear-gradient(120deg, transparent 50%, transparent 50%);
+            background-size: 200% 100%;
+            background-position: 100% 0;
+            transition: background-position 0.6s ease;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+        .swiper-slide-active .highlight-text {
+            background-image: linear-gradient(120deg, transparent 0%, var(--hl-color, #FFD60A) 0%, var(--hl-color, #FFD60A) 100%);
+            background-position: 0 0;
+            color: var(--hl-text-color);
+        }
+
+        .bg-number {
+            position: absolute; top: 5px; left: 50%;
+            transform: translateX(-50%);
+            font-size: 160px; font-weight: 900;
+            color: var(--bg-number);
+            pointer-events: none; z-index: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        .card-content {
+            position: relative; z-index: 10;
+            display: flex; flex-direction: column;
+            align-items: center; text-align: center;
+            width: 100%; height: 100%; justify-content: center;
+        }
+        .card-icon {
+            font-size: 3rem; margin-bottom: 1.25rem;
+            filter: drop-shadow(0 0 20px var(--icon-glow, rgba(255,255,255,0.3)));
+        }
+        .card-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.35rem; color: var(--text-primary); }
+        .card-subtitle {
+            font-size: 0.8rem; font-family: 'JetBrains Mono', monospace;
+            color: var(--sub-color, #9ca3af); margin-bottom: 1.25rem;
+            letter-spacing: 1px; text-transform: uppercase;
+        }
+        .formula-block {
+            width: 100%; margin: 0.5rem 0; padding: 0.75rem 0.5rem;
+            background: var(--bg-formula); border-radius: 12px;
+            border: 1px solid var(--border-soft);
+        }
+        .formula-block .katex { font-size: 1.1em; }
+        .formula-list { width: 100%; text-align: left; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.8; list-style: none; padding: 0; margin: 0; }
+        .formula-list li { margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.5rem; }
+        .formula-list li::before {
+            content: ''; width: 6px; height: 6px; border-radius: 50%;
+            background: var(--dot-color, #0A84FF); flex-shrink: 0;
+        }
+        .memory-tip {
+            margin-top: auto; padding-top: 1rem; font-size: 0.75rem;
+            color: var(--text-muted); font-style: italic;
+            border-top: 1px solid var(--border-soft);
+            width: 100%; text-align: center;
+        }
+        .progress-bar { width: 100%; height: 4px; background: var(--bg-elevated-hover); border-radius: 2px; overflow: hidden; margin-top: 1.5rem; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #0A84FF, #30D158); border-radius: 2px; transition: width 0.4s ease; }
+        .module-tag {
+            display: inline-block; padding: 4px 12px; border-radius: 20px;
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; margin-bottom: 1rem;
+        }
+
+        /* ========== 详情视图 ========== */
+        #detail-view {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-detail);
+            overflow-y: auto;
+            opacity: 0; pointer-events: none;
+            transform: scale(1.04);
+            transition: opacity 0.45s cubic-bezier(0.25,0.8,0.25,1), transform 0.45s cubic-bezier(0.25,0.8,0.25,1), background 0.4s ease;
+            z-index: 100;
+        }
+        #detail-view.active { opacity: 1; pointer-events: auto; transform: scale(1); }
+
+        .detail-header {
+            position: sticky; top: 0; z-index: 50;
+            background: var(--bg-detail-header);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--border-soft);
+            padding: 1rem 2rem;
+            display: flex; align-items: center; gap: 1.5rem;
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+        .back-btn {
+            display: flex; align-items: center; gap: 0.5rem;
+            padding: 0.5rem 1rem; border-radius: 10px;
+            background: var(--bg-elevated-hover);
+            border: 1px solid var(--border-soft);
+            color: var(--text-primary); font-size: 0.85rem; cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .back-btn:hover { background: var(--bg-elevated-strong); }
+
+        .detail-tabs {
+            display: flex; gap: 0.5rem; flex-wrap: wrap; flex: 1;
+        }
+        .detail-tab {
+            padding: 0.4rem 1rem; border-radius: 8px;
+            font-size: 0.8rem; font-weight: 600;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-soft);
+            color: var(--text-muted); cursor: pointer;
+            transition: all 0.2s ease; white-space: nowrap;
+        }
+        .detail-tab:hover { color: var(--text-primary); background: var(--bg-elevated-hover); }
+        .detail-tab.active {
+            color: var(--text-primary);
+            background: var(--tab-color, rgba(10,132,255,0.2));
+            border-color: var(--tab-border, rgba(10,132,255,0.4));
+        }
+
+        .detail-body { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+
+        .detail-section { display: none; animation: fadeIn 0.4s ease; }
+        .detail-section.active { display: block; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(15px)} to{opacity:1;transform:translateY(0)} }
+
+        .section-title {
+            font-size: 1.75rem; font-weight: 800; margin-bottom: 0.5rem;
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .section-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.7; }
+
+        /* 公式网格 */
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1rem; margin-bottom: 2rem;
+        }
+        .formula-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px; padding: 1.25rem;
+            transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+        .formula-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 3px; height: 100%;
+            background: var(--card-accent, #0A84FF);
+            opacity: 0.6;
+        }
+        .formula-card:hover {
+            background: var(--bg-elevated-hover);
+            border-color: var(--border-medium);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        .formula-card .katex { font-size: 1.05em; }
+        .formula-card .katex-display { margin: 0.3rem 0; }
+        .formula-num {
+            position: absolute; top: 0.5rem; right: 0.75rem;
+            font-size: 0.65rem; font-family: 'JetBrains Mono', monospace;
+            color: var(--text-ghost); font-weight: 700;
+        }
+        .formula-label {
+            font-size: 0.7rem; font-family: 'JetBrains Mono', monospace;
+            color: var(--card-accent, #0A84FF);
+            text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 0.5rem; font-weight: 700;
+        }
+        .formula-note {
+            font-size: 0.75rem; color: var(--text-dim);
+            margin-top: 0.5rem; line-height: 1.5;
+        }
+
+        /* 分组标题 */
+        .group-title {
+            font-size: 1.1rem; font-weight: 700;
+            margin: 1.5rem 0 1rem; padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-soft);
+            display: flex; align-items: center; gap: 0.5rem;
+            color: var(--group-color, var(--text-primary));
+        }
+        .group-title i { font-size: 0.9rem; }
+
+        /* 记忆提示框 */
+        .memory-box {
+            background: linear-gradient(135deg, rgba(255,214,10,0.1), rgba(48,209,88,0.06));
+            border: 1px solid rgba(255,214,10,0.2);
+            border-radius: 16px; padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            display: flex; gap: 1rem; align-items: flex-start;
+        }
+        .memory-box i { color: #C88800; font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+        [data-theme="light"] .memory-box i { color: #B07A00; }
+        .memory-box-content { flex: 1; }
+        .memory-box-title { font-weight: 700; color: #C88800; font-size: 0.9rem; margin-bottom: 0.25rem; }
+        [data-theme="light"] .memory-box-title { color: #8a5e00; }
+        .memory-box-text { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; }
+
+        /* 特殊值表格 */
+        .special-table {
+            width: 100%; border-collapse: collapse;
+            margin: 1rem 0; font-size: 0.85rem;
+            background: var(--bg-elevated);
+            border-radius: 12px; overflow: hidden;
+        }
+        .special-table th {
+            background: rgba(10,132,255,0.12);
+            padding: 0.6rem 0.5rem; text-align: center;
+            font-weight: 700; color: #0A84FF;
+            border-bottom: 1px solid var(--border-soft);
+            font-size: 0.8rem;
+        }
+        .special-table th:first-child { background: var(--bg-elevated-strong); color: var(--text-muted); }
+        .special-table td {
+            padding: 0.5rem 0.4rem; text-align: center;
+            border-bottom: 1px solid var(--border-soft);
+            color: var(--text-secondary);
+        }
+        .special-table td:first-child { font-weight: 600; color: var(--text-muted); background: var(--bg-elevated); }
+        .special-table tr:hover td { background: var(--bg-elevated-hover); }
+        .special-table td .katex { font-size: 0.9em; }
+
+        /* 六边形 SVG */
+        .hexagon-container {
+            display: flex; justify-content: center;
+            padding: 1rem 0; margin: 1.5rem 0;
+        }
+        .hexagon-svg {
+            max-width: 500px; width: 100%; height: auto;
+        }
+        .hex-vertex {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .hex-vertex circle {
+            transition: all 0.3s ease;
+        }
+        .hex-vertex:hover circle {
+            r: 32;
+            filter: drop-shadow(0 0 12px currentColor);
+        }
+        .hex-vertex text {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            pointer-events: none;
+            text-anchor: middle;
+            dominant-baseline: central;
+        }
+        .hex-line {
+            stroke-width: 2;
+            fill: none;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+        .hex-line.reciprocal { stroke: #FFD60A; stroke-dasharray: 5 4; }
+        .hex-line.pythagorean { stroke: #30D158; opacity: 0.2; }
+        .hex-center {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            text-anchor: middle;
+            dominant-baseline: central;
+        }
+
+        /* 导数-积分配对表 */
+        .pair-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem; margin: 1rem 0;
+        }
+        .pair-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px; padding: 1rem;
+            text-align: center;
+        }
+        .pair-card .katex { font-size: 1em; }
+        .pair-arrow {
+            display: flex; align-items: center; justify-content: center;
+            color: #FFD60A; font-size: 1.2rem;
+        }
+
+        /* 滚动条 */
+        #detail-view::-webkit-scrollbar { width: 6px; }
+        #detail-view::-webkit-scrollbar-track { background: transparent; }
+        #detail-view::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+        #detail-view::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-hover); }
+
+        /* 主题切换时的过渡：KaTeX 文字颜色 */
+        .katex { color: var(--text-primary); transition: color 0.4s ease; }
+        .katex .mathnormal { color: inherit; }
+
+        /* 侧边栏文字颜色适配 */
+        .sidebar-container h5 { color: var(--text-muted) !important; }
+        .sidebar-container h1 { color: var(--text-primary) !important; }
+        #info-title { color: var(--text-primary) !important; }
+        #info-desc { color: var(--text-secondary) !important; }
+        #info-note { color: var(--text-muted) !important; }
+        #progress-text, #module-text { color: var(--text-muted) !important; }
+        .sidebar-container .bg-white\/5 { background: var(--bg-elevated) !important; }
+    </style>
+</head>
+<body>
+
+<!-- ========== 主题切换按钮 ========== -->
+<button class="theme-toggle" onclick="toggleTheme()" title="切换深色/浅色主题">
+    <i class="fa-solid fa-sun icon-sun"></i>
+    <i class="fa-solid fa-moon icon-moon"></i>
+</button>
+
+<!-- ========== 主视图：卡片剧场 ========== -->
+<div id="main-view">
+    <aside class="sidebar-container">
+        <div class="mb-auto">
+            <h5 class="text-xs font-bold text-gray-500 tracking-[4px] uppercase mb-2">微积分与三角函数</h5>
+            <h1 class="text-3xl font-extrabold text-white mb-1 leading-tight">公式体系</h1>
+            <h2 class="text-xl font-bold text-accent mb-6">联动记忆卡</h2>
+
+            <div id="info-panel" class="transition-all duration-300">
+                <div id="info-module" class="module-tag" style="background:rgba(191,90,242,0.2);color:#BF5AF2;">总览</div>
+                <h2 id="info-title" class="text-xl font-bold text-white mb-3">准备开始</h2>
+                <p id="info-desc" class="text-gray-300 text-sm leading-relaxed mb-4">
+                    点击当前居中的卡片，进入对应模块的完整公式详情页。<br><br>
+                    每张定义卡片背后，都藏着该模块的全部公式——一个不漏，配合结构化记忆文本，帮你建立完整的公式网络。
+                </p>
+                <div class="p-3 bg-white/5 rounded-lg border-l-2 border-accent">
+                    <p id="info-note" class="text-xs text-gray-400 leading-relaxed">
+                        💡 点击居中卡片 → 进入详情页
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-auto">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs text-gray-500 font-mono" id="progress-text">01 / 05</span>
+                <span class="text-xs text-gray-500" id="module-text">总览</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 20%"></div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-stage">
+        <div class="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-purple/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper" id="swiper-wrapper">
+
+                <!-- 卡片 01：体系总览 -->
+                <div class="swiper-slide" onclick="enterDetail('overview')">
+                    <span class="bg-number">01</span>
+                    <div class="card-content">
+                        <div class="card-icon text-purple" style="--icon-glow: rgba(191, 90, 242, 0.4);">
+                            <i class="fa-solid fa-sitemap"></i>
+                        </div>
+                        <div class="module-tag bg-purple/20 text-purple">总览</div>
+                        <h3 class="card-title">公式体系总览</h3>
+                        <p class="card-subtitle" style="--sub-color: #BF5AF2;">四大模块联动</p>
+                        <div class="formula-list" style="--dot-color: #BF5AF2;">
+                            <li>导数 → 变化率 / 切线斜率</li>
+                            <li>微分 → 导数 × dx（延伸）</li>
+                            <li>积分 → 导数的逆运算</li>
+                            <li>三角函数 → 贯穿三大模块</li>
+                        </div>
+                        <div class="memory-tip">
+                            <span class="highlight-text" style="--hl-color: #BF5AF2;">导数是核心枢纽</span>
+                        </div>
+                        <div class="enter-hint">⟜ 滚动浏览 · 点击进入 ⟝</div>
+                    </div>
+                </div>
+
+                <!-- 卡片 02：导数定义 -->
+                <div class="swiper-slide" onclick="enterDetail('derivative')">
+                    <span class="bg-number">02</span>
+                    <div class="card-content">
+                        <div class="card-icon text-primary" style="--icon-glow: rgba(10, 132, 255, 0.4);">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div class="module-tag bg-primary/20 text-primary">导数模块</div>
+                        <h3 class="card-title">导数的定义</h3>
+                        <p class="card-subtitle" style="--sub-color: #0A84FF;">Derivative · 18条公式</p>
+                        <div class="formula-block">
+                            $$f'(x) = \lim_{\Delta x \to 0} \frac{f(x+\Delta x) - f(x)}{\Delta x}$$
+                        </div>
+                        <div class="formula-list" style="--dot-color: #0A84FF;">
+                            <li>几何意义：切线斜率</li>
+                            <li>物理意义：瞬时变化率</li>
+                            <li>可导 ⟹ 连续（反之不成立）</li>
+                        </div>
+                        <div class="memory-tip">
+                            <span class="highlight-text" style="--hl-color: #0A84FF;">点击查看全部18条导数公式</span>
+                        </div>
+                        <div class="enter-hint">⟜ 点击进入导数公式详情 ⟝</div>
+                    </div>
+                </div>
+
+                <!-- 卡片 03：微分定义 -->
+                <div class="swiper-slide" onclick="enterDetail('differential')">
+                    <span class="bg-number">03</span>
+                    <div class="card-content">
+                        <div class="card-icon text-purple" style="--icon-glow: rgba(191, 90, 242, 0.4);">
+                            <i class="fa-solid fa-arrows-left-right"></i>
+                        </div>
+                        <div class="module-tag bg-purple/20 text-purple">微分模块</div>
+                        <h3 class="card-title">微分的定义</h3>
+                        <p class="card-subtitle" style="--sub-color: #BF5AF2;">Differential · 16条+方程</p>
+                        <div class="formula-block">
+                            $$dy = f'(x) \, dx$$
+                            $$\text{可导} \iff \text{可微}$$
+                        </div>
+                        <div class="formula-list" style="--dot-color: #BF5AF2;">
+                            <li>微分 = 导数 × dx</li>
+                            <li>一阶微分形式不变性</li>
+                            <li>含微分方程三大类型</li>
+                        </div>
+                        <div class="memory-tip">
+                            <span class="highlight-text" style="--hl-color: #BF5AF2;">点击查看微分公式+微分方程</span>
+                        </div>
+                        <div class="enter-hint">⟜ 点击进入微分公式详情 ⟝</div>
+                    </div>
+                </div>
+
+                <!-- 卡片 04：积分定义 -->
+                <div class="swiper-slide" onclick="enterDetail('integral')">
+                    <span class="bg-number">04</span>
+                    <div class="card-content">
+                        <div class="card-icon text-accent" style="--icon-glow: rgba(48, 209, 88, 0.4);">
+                            <i class="fa-solid fa-infinity"></i>
+                        </div>
+                        <div class="module-tag bg-accent/20 text-accent">积分模块</div>
+                        <h3 class="card-title">积分的定义</h3>
+                        <p class="card-subtitle" style="--sub-color: #30D158;">Integral · 常见+特殊</p>
+                        <div class="formula-block">
+                            $$\int f(x) \, dx = F(x) + C$$
+                            $$F'(x) = f(x)$$
+                        </div>
+                        <div class="formula-list" style="--dot-color: #30D158;">
+                            <li>不定积分 = 一族函数（+C）</li>
+                            <li>定积分 = 曲线下面积</li>
+                            <li>常见11条 + 特殊8条</li>
+                        </div>
+                        <div class="memory-tip">
+                            <span class="highlight-text" style="--hl-color: #30D158;">点击查看全部积分公式</span>
+                        </div>
+                        <div class="enter-hint">⟜ 点击进入积分公式详情 ⟝</div>
+                    </div>
+                </div>
+
+                <!-- 卡片 05：三角函数定义 -->
+                <div class="swiper-slide" onclick="enterDetail('trigonometric')">
+                    <span class="bg-number">05</span>
+                    <div class="card-content">
+                        <div class="card-icon text-danger" style="--icon-glow: rgba(255, 59, 48, 0.4);">
+                            <i class="fa-solid fa-wave-square"></i>
+                        </div>
+                        <div class="module-tag bg-danger/20 text-danger">三角函数</div>
+                        <h3 class="card-title">三角函数定义</h3>
+                        <p class="card-subtitle" style="--sub-color: #FF3B30;">Trigonometric · 6大版块</p>
+                        <div class="formula-block">
+                            $$\sin^2 x + \cos^2 x = 1$$
+                            $$\tan x = \frac{\sin x}{\cos x}$$
+                        </div>
+                        <div class="formula-list" style="--dot-color: #FF3B30;">
+                            <li>关系 · 特殊值 · 常见转换</li>
+                            <li>升幂缩角 · 降幂扩角</li>
+                            <li>六边形记忆法 · 诱导公式</li>
+                        </div>
+                        <div class="memory-tip">
+                            <span class="highlight-text" style="--hl-color: #FF3B30;">点击查看三角函数互换公式</span>
+                        </div>
+                        <div class="enter-hint">⟜ 点击进入三角函数详情 ⟝</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- ========== 详情视图 ========== -->
+<div id="detail-view">
+    <div class="detail-header">
+        <button class="back-btn" onclick="exitDetail()">
+            <i class="fa-solid fa-arrow-left"></i> 返回卡片
+        </button>
+        <h2 id="detail-header-title" class="text-lg font-bold text-white">详情</h2>
+        <div class="detail-tabs" id="detail-tabs"></div>
+    </div>
+    <div class="detail-body" id="detail-body"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+// ============================================================
+//  侧边栏数据
+// ============================================================
+const sidebarData = [
+    {
+        module: "总览", moduleColor: "#BF5AF2",
+        title: "公式体系总览",
+        desc: "微积分与三角函数的公式不是孤立的，它们构成一个完整的知识网络。导数是核心枢纽——微分是导数的另一种表达，积分是导数的逆运算，三角函数贯穿始终。理解了这个关系图，记忆就有了骨架。",
+        note: "💡 点击居中的卡片，进入对应模块的完整公式详情页"
+    },
+    {
+        module: "导数模块", moduleColor: "#0A84FF",
+        title: "导数的定义",
+        desc: "导数 f'(x) 描述函数在某一点的瞬时变化率。几何上，它就是函数图像在该点的切线斜率。理解了本质，18条导数公式就有了根基——幂函数降次、eˣ不变、三角函数正变余余变负，一切都有迹可循。",
+        note: "💡 可导一定连续，但连续不一定可导（比如尖点）。点击进入全部18条导数公式"
+    },
+    {
+        module: "微分模块", moduleColor: "#BF5AF2",
+        title: "微分的定义",
+        desc: "微分完全不用单独记！求出导数后乘以 dx 就是微分。16条微分公式与导数一一对应，再加上3类微分方程，构成了微分学的完整体系。核心记住「一阶微分形式不变性」。",
+        note: "⭐ 微分公式 = 导数公式 × dx，背一套就够了。点击进入微分公式+微分方程详情"
+    },
+    {
+        module: "积分模块", moduleColor: "#30D158",
+        title: "积分的定义",
+        desc: "积分是导数的逆运算——从导函数找回原函数。基本积分公式就是导数公式倒过来看，联动记忆效率翻倍。常见11条 + 特殊8条，覆盖专升本全部考点。",
+        note: "⭐⭐⭐ 导数↔积分联动记忆，记住一边等于记住两边。点击进入全部积分公式"
+    },
+    {
+        module: "三角函数", moduleColor: "#FF3B30",
+        title: "三角函数定义",
+        desc: "三角函数的根基只有一个核心公式：sin²+cos²=1。由此衍生倒数关系、商数关系、平方关系；二倍角公式升幂缩角，降幂公式扩角降次；六边形记忆法将所有关系一图打包；诱导公式八字口诀搞定全部。",
+        note: "💡 一个平方公式 → 推导出所有三角恒等式。点击进入三角函数互换公式详情"
+    }
+];
+
+// ============================================================
+//  Swiper 初始化
+// ============================================================
+var swiper = new Swiper(".mySwiper", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    initialSlide: 0,
+    coverflowEffect: { rotate: 35, stretch: 0, depth: 150, modifier: 1, slideShadows: true },
+    keyboard: { enabled: true },
+    mousewheel: { thresholdDelta: 50, sensitivity: 1 },
+    speed: 600,
+    on: { slideChange: function() { updateSidebar(this.activeIndex); } }
+});
+
+const moduleEl = document.getElementById('info-module');
+const titleEl = document.getElementById('info-title');
+const descEl = document.getElementById('info-desc');
+const noteEl = document.getElementById('info-note');
+const infoPanel = document.getElementById('info-panel');
+const progressText = document.getElementById('progress-text');
+const moduleText = document.getElementById('module-text');
+const progressFill = document.getElementById('progress-fill');
+
+function updateSidebar(index) {
+    infoPanel.style.opacity = '0';
+    infoPanel.style.transform = 'translateY(10px)';
+    setTimeout(() => {
+        if (sidebarData[index]) {
+            const data = sidebarData[index];
+            moduleEl.innerText = data.module;
+            moduleEl.style.backgroundColor = data.moduleColor + '20';
+            moduleEl.style.color = data.moduleColor;
+            titleEl.innerText = data.title;
+            descEl.innerText = data.desc;
+            noteEl.innerText = data.note;
+            const num = String(index + 1).padStart(2, '0');
+            progressText.innerText = `${num} / 05`;
+            moduleText.innerText = data.module;
+            progressFill.style.width = ((index + 1) / 5 * 100) + '%';
+        }
+        infoPanel.style.opacity = '1';
+        infoPanel.style.transform = 'translateY(0)';
+    }, 300);
+}
+updateSidebar(0);
+
+// ============================================================
+//  详情页导航
+// ============================================================
+const mainView = document.getElementById('main-view');
+const detailView = document.getElementById('detail-view');
+const detailBody = document.getElementById('detail-body');
+const detailTabs = document.getElementById('detail-tabs');
+const detailHeaderTitle = document.getElementById('detail-header-title');
+
+function enterDetail(type) {
+    const content = buildDetailContent(type);
+    detailHeaderTitle.innerText = content.title;
+    detailHeaderTitle.style.color = content.color;
+    detailTabs.innerHTML = content.tabs;
+    detailBody.innerHTML = content.body;
+    // 默认激活第一个 tab
+    const firstTab = detailTabs.querySelector('.detail-tab');
+    if (firstTab) firstTab.click();
+    mainView.classList.add('hidden-view');
+    detailView.classList.add('active');
+    detailView.scrollTop = 0;
+    setTimeout(renderMath, 50);
+}
+
+function exitDetail() {
+    detailView.classList.remove('active');
+    mainView.classList.remove('hidden-view');
+}
+
+function switchTab(tabId, btn) {
+    document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.detail-section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    const section = document.getElementById(tabId);
+    if (section) section.classList.add('active');
+    setTimeout(renderMath, 50);
+}
+
+// ============================================================
+//  详情内容构建器
+// ============================================================
+
+function formulaCard(num, label, formula, note, color) {
+    return `<div class="formula-card" style="--card-accent:${color};">
+        <span class="formula-num">${num}</span>
+        <div class="formula-label" style="color:${color};">${label}</div>
+        <div class="formula-block" style="border:none;background:none;padding:0;">${formula}</div>
+        ${note ? `<div class="formula-note">${note}</div>` : ''}
+    </div>`;
+}
+
+function groupTitle(icon, text, color) {
+    return `<div class="group-title" style="--group-color:${color};"><i class="fa-solid ${icon}"></i> ${text}</div>`;
+}
+
+function memoryBox(title, text) {
+    return `<div class="memory-box">
+        <i class="fa-solid fa-lightbulb"></i>
+        <div class="memory-box-content">
+            <div class="memory-box-title">${title}</div>
+            <div class="memory-box-text">${text}</div>
+        </div>
+    </div>`;
+}
+
+// ---------- 导数详情 ----------
+function buildDerivativeDetail() {
+    const C = '#0A84FF';
+    const tabs = `
+        <div class="detail-tab active" style="--tab-color:rgba(10,132,255,0.2);--tab-border:rgba(10,132,255,0.4);" onclick="switchTab('deriv-all', this)">全部公式</div>
+    `;
+    const body = `
+        <div class="detail-section active" id="deriv-all">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-chart-line"></i> 导数公式大全</div>
+            <div class="section-desc">导数 f'(x) 是函数在某点的瞬时变化率，几何意义为切线斜率。以下 18 条公式覆盖了专升本全部考点——按函数类型分组记忆，效率最高。</div>
+
+            ${groupTitle('fa-calculator', '常数 & 幂函数', '#FFD60A')}
+            <div class="formula-grid">
+                ${formulaCard('(1)', '常数', '$$(c)\' = 0$$', '常数的导数为零——因为常数不变化', '#FFD60A')}
+                ${formulaCard('(2)', '幂函数', '$$(x^\\mu)\' = \\mu x^{\\mu-1}$$', '核心口诀：指数降一次做系数。这是用得最多的求导公式', '#FFD60A')}
+                ${formulaCard('(17)', '线性', '$$(x)\' = 1$$', '幂函数 μ=1 的特例', '#FFD60A')}
+                ${formulaCard('(18)', '根式', '$$(\\sqrt{x})\' = \\frac{1}{2\\sqrt{x}}$$', '幂函数 μ=1/2 的特例，高频考点', '#FFD60A')}
+            </div>
+
+            ${groupTitle('fa-wave-square', '三角函数', '#30D158')}
+            <div class="formula-grid">
+                ${formulaCard('(3)', '正弦', '$$(\\sin x)\' = \\cos x$$', 'sin → cos，正变余', '#30D158')}
+                ${formulaCard('(4)', '余弦', '$$(\\cos x)\' = -\\sin x$$', 'cos → -sin，余变负', '#30D158')}
+                ${formulaCard('(5)', '正切', '$$(\\tan x)\' = \\sec^2 x$$', '积分高频：∫sec²x dx = tan x + C', '#30D158')}
+                ${formulaCard('(6)', '余切', '$$(\\cot x)\' = -\\csc^2 x$$', '带「余」字的导数都带负号', '#30D158')}
+                ${formulaCard('(7)', '正割', '$$(\\sec x)\' = \\sec x \\cdot \\tan x$$', '积分高频：∫sec x tan x dx = sec x + C', '#30D158')}
+                ${formulaCard('(8)', '余割', '$$(\\csc x)\' = -\\csc x \\cdot \\cot x$$', '同样带负号', '#30D158')}
+            </div>
+            ${memoryBox('三角求导口诀', '正变余，余变负。sin→cos→(-sin)→(-cos)→sin 形成四步循环。带「正」字的（sin, tan, sec）求导不带负号；带「余」字的（cos, cot, csc）都带负号。记住 sec²x 和 sec x tan x 这两个积分高频结果。')}
+
+            ${groupTitle('fa-superscript', '指数 & 对数', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('(9)', '自然指数', '$$(e^x)\' = e^x$$', '⭐ 唯一一个求导后不变形的初等函数！高频考点', '#FF9F0A')}
+                ${formulaCard('(10)', '一般指数', '$$(a^x)\' = a^x \\ln a$$', '多出一个 ln a 因子。eˣ 是 a=e 的特例', '#FF9F0A')}
+                ${formulaCard('(11)', '自然对数', '$$(\\ln x)\' = \\frac{1}{x}$$', '对数变倒数', '#FF9F0A')}
+                ${formulaCard('(12)', '一般对数', '$$(\\log_a x)\' = \\frac{1}{x \\ln a}$$', '分母多一个 ln a', '#FF9F0A')}
+            </div>
+            ${memoryBox('指数对数求导', 'eˣ 求导不变形——因为它的增长速度和自身大小成正比。aˣ 求导多一个 ln a。ln x 求导变 1/x。记忆链：eˣ→eˣ（不变），aˣ→aˣ·ln a（多因子），ln x→1/x（变倒数）。')}
+
+            ${groupTitle('fa-rotate', '反三角函数', '#BF5AF2')}
+            <div class="formula-grid">
+                ${formulaCard('(13)', '反正弦', '$$(\\arcsin x)\' = \\frac{1}{\\sqrt{1-x^2}}$$', '分子为正', '#BF5AF2')}
+                ${formulaCard('(14)', '反余弦', '$$(\\arccos x)\' = -\\frac{1}{\\sqrt{1-x^2}}$$', '分子为负——和 arcsin 只差一个负号', '#BF5AF2')}
+                ${formulaCard('(15)', '反正切', '$$(\\arctan x)\' = \\frac{1}{1+x^2}$$', '分子为正', '#BF5AF2')}
+                ${formulaCard('(16)', '反余切', '$$(\\text{arccot}\\, x)\' = -\\frac{1}{1+x^2}$$', '分子为负——和 arctan 只差一个负号', '#BF5AF2')}
+            </div>
+            ${memoryBox('反三角求导配对记忆', 'arcsin 和 arccos 共享同一个导数结构，只差正负号——「正弦正，余弦负」。arctan 和 arccot 同理。记忆：分母含 1-x² → 对应 sin/cos；分母含 1+x² → 对应 tan/cot。')}
+        </div>
+    `;
+    return { title: '导数公式详情', color: C, tabs, body };
+}
+
+// ---------- 微分详情 ----------
+function buildDifferentialDetail() {
+    const C = '#BF5AF2';
+    const tabs = `
+        <div class="detail-tab active" style="--tab-color:rgba(191,90,242,0.2);--tab-border:rgba(191,90,242,0.4);" onclick="switchTab('diff-formula', this)">微分公式</div>
+        <div class="detail-tab" style="--tab-color:rgba(191,90,242,0.2);--tab-border:rgba(191,90,242,0.4);" onclick="switchTab('diff-equation', this)">微分方程</div>
+    `;
+    const formulaBody = `
+        <div class="detail-section active" id="diff-formula">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-arrows-left-right"></i> 微分公式大全</div>
+            <div class="section-desc">微分 dy = f'(x) dx。求出导数后乘以 dx 就是微分——16条微分公式与导数公式一一对应，不用单独背。核心记住「一阶微分形式不变性」：无论 u 是自变量还是中间变量，dy = f'(u) du 的形式都不变。</div>
+
+            ${groupTitle('fa-calculator', '常数 & 幂函数', '#FFD60A')}
+            <div class="formula-grid">
+                ${formulaCard('(1)', '常数', '$$d(c) = 0$$', '常数不变化，微分为零', '#FFD60A')}
+                ${formulaCard('(2)', '幂函数', '$$d(x^\\mu) = \\mu x^{\\mu-1} \\, dx$$', '导数公式 × dx', '#FFD60A')}
+            </div>
+
+            ${groupTitle('fa-wave-square', '三角函数', '#30D158')}
+            <div class="formula-grid">
+                ${formulaCard('(3)', '正弦', '$$d(\\sin x) = \\cos x \\, dx$$', '', '#30D158')}
+                ${formulaCard('(4)', '余弦', '$$d(\\cos x) = -\\sin x \\, dx$$', '', '#30D158')}
+                ${formulaCard('(5)', '正切', '$$d(\\tan x) = \\sec^2 x \\, dx$$', '', '#30D158')}
+                ${formulaCard('(6)', '余切', '$$d(\\cot x) = -\\csc^2 x \\, dx$$', '', '#30D158')}
+                ${formulaCard('(7)', '正割', '$$d(\\sec x) = \\sec x \\cdot \\tan x \\, dx$$', '', '#30D158')}
+                ${formulaCard('(8)', '余割', '$$d(\\csc x) = -\\csc x \\cdot \\cot x \\, dx$$', '', '#30D158')}
+            </div>
+
+            ${groupTitle('fa-superscript', '指数 & 对数', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('(9)', '自然指数', '$$d(e^x) = e^x \\, dx$$', '', '#FF9F0A')}
+                ${formulaCard('(10)', '一般指数', '$$d(a^x) = a^x \\ln a \\, dx$$', '', '#FF9F0A')}
+                ${formulaCard('(11)', '自然对数', '$$d(\\ln x) = \\frac{1}{x} \\, dx$$', '', '#FF9F0A')}
+                ${formulaCard('(12)', '一般对数', '$$d(\\log_a x) = \\frac{1}{x \\ln a} \\, dx$$', '', '#FF9F0A')}
+            </div>
+
+            ${groupTitle('fa-rotate', '反三角函数', '#BF5AF2')}
+            <div class="formula-grid">
+                ${formulaCard('(13)', '反正弦', '$$d(\\arcsin x) = \\frac{1}{\\sqrt{1-x^2}} \\, dx$$', '', '#BF5AF2')}
+                ${formulaCard('(14)', '反余弦', '$$d(\\arccos x) = -\\frac{1}{\\sqrt{1-x^2}} \\, dx$$', '', '#BF5AF2')}
+                ${formulaCard('(15)', '反正切', '$$d(\\arctan x) = \\frac{1}{1+x^2} \\, dx$$', '', '#BF5AF2')}
+                ${formulaCard('(16)', '反余切', '$$d(\\text{arccot}\\, x) = -\\frac{1}{1+x^2} \\, dx$$', '', '#BF5AF2')}
+            </div>
+
+            ${memoryBox('微分 = 导数 × dx', '微分公式完全不用单独记！只需在导数公式右边乘以 dx 即可。例如：(sin x)\' = cos x → d(sin x) = cos x dx。核心概念：一阶微分形式不变性——无论 u 是自变量还是中间变量，d(f(u)) = f\'(u) du 的形式始终不变。')}
+        </div>
+    `;
+
+    const equationBody = `
+        <div class="detail-section" id="diff-equation">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-equals"></i> 常见微分方程</div>
+            <div class="section-desc">微分方程是含有未知函数及其导数的方程。专升本主要考查三类一阶微分方程——可分离变量、齐次、一阶线性非齐次。掌握特征识别和求解套路，就能拿到满分。</div>
+
+            ${groupTitle('fa-1', '可分离变量的微分方程', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#0A84FF;">标准形式</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\frac{dy}{dx} = f(x)g(y)$$
+                    <p style="text-align:center;color:var(--text-muted);font-size:0.8rem;margin:0.5rem 0;">或</p>
+                    $$f_1(x)g_1(y)\\,dx + f_2(x)g_2(y)\\,dy = 0$$
+                </div>
+                <div class="formula-note">特征：等号一边只含 x，另一边只含 y。解法：把含 y 的移到左边，含 x 的移到右边，两边积分。</div>
+            </div>
+
+            ${groupTitle('fa-2', '齐次微分方程', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#30D158;">标准形式</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\frac{dy}{dx} = f\\left(\\frac{y}{x}\\right)$$
+                </div>
+                <div class="formula-note">特征：右端是 y/x 的函数。解法：令 u = y/x，则 y = ux，dy = u dx + x du，代入后化为可分离变量方程。</div>
+            </div>
+
+            ${groupTitle('fa-3', '一阶线性非齐次微分方程', '#FFD60A')}
+            <div class="formula-card" style="--card-accent:#FFD60A;margin-bottom:1rem;">
+                <div class="formula-label" style="color:var(--accent-yellow-text);">标准形式</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\frac{dy}{dx} + p(x)y = Q(x)$$
+                </div>
+                <div class="formula-label" style="color:var(--accent-yellow-text);margin-top:1rem;">通解公式</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$y = e^{-\\int p(x)\\,dx} \\left[ \\int Q(x)\\, e^{\\int p(x)\\,dx} \\, dx + c \\right]$$
+                </div>
+                <div class="formula-note">特征：y 和 y\' 都是一次的（线性），p(x) 和 Q(x) 是已知函数。直接套通解公式，注意积分常数 c 只在最后出现一次。</div>
+            </div>
+
+            ${memoryBox('微分方程识别口诀', '① 能把 x、y 分到等号两边 → 可分离变量型，两边积分。② 右端是 y/x 的函数 → 齐次型，令 u=y/x 换元。③ y\' + p(x)y = Q(x) → 一阶线性型，直接套通解公式。先识别类型，再用对应解法。')}
+        </div>
+    `;
+
+    return { title: '微分公式详情', color: C, tabs, body: formulaBody + equationBody };
+}
+
+// ---------- 积分详情 ----------
+function buildIntegralDetail() {
+    const C = '#30D158';
+    const tabs = `
+        <div class="detail-tab active" style="--tab-color:rgba(48,209,88,0.2);--tab-border:rgba(48,209,88,0.4);" onclick="switchTab('int-common', this)">常见积分公式</div>
+        <div class="detail-tab" style="--tab-color:rgba(48,209,88,0.2);--tab-border:rgba(48,209,88,0.4);" onclick="switchTab('int-special', this)">特殊积分公式</div>
+    `;
+    const commonBody = `
+        <div class="detail-section active" id="int-common">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-sync-alt"></i> 基本积分公式</div>
+            <div class="section-desc">基本积分公式完全不用死记——它们就是导数公式的逆运算！知道 (tan x)' = sec²x，自然就知道 ∫sec²x dx = tan x + C。把导数公式倒过来看，就是积分公式。以下 11 条是积分的基石。</div>
+
+            ${groupTitle('fa-calculator', '常数 & 幂函数', '#FFD60A')}
+            <div class="formula-grid">
+                ${formulaCard('(1)', '常数', '$$\\int k \\, dx = kx + c$$', '导数 (kx)\'=k 的逆运算', '#FFD60A')}
+                ${formulaCard('(2)', '幂函数', '$$\\int x^\\mu \\, dx = \\frac{x^{\\mu+1}}{\\mu+1} + c$$', '导数 (x^(μ+1)/(μ+1))\'=x^μ 的逆运算。注意 μ≠-1', '#FFD60A')}
+                ${formulaCard('(3)', '倒数', '$$\\int \\frac{dx}{x} = \\ln|x| + c$$', 'μ=-1 的特例，结果是对数。绝对值不能丢', '#FFD60A')}
+            </div>
+
+            ${groupTitle('fa-superscript', '指数函数', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('(4)', '一般指数', '$$\\int a^x \\, dx = \\frac{a^x}{\\ln a} + c$$', '导数 (a^x/ln a)\'=a^x 的逆运算', '#FF9F0A')}
+                ${formulaCard('(5)', '自然指数', '$$\\int e^x \\, dx = e^x + c$$', '⭐ eˣ 积分还是 eˣ，最特殊', '#FF9F0A')}
+            </div>
+
+            ${groupTitle('fa-wave-square', '三角函数', '#30D158')}
+            <div class="formula-grid">
+                ${formulaCard('(6)', '余弦→正弦', '$$\\int \\cos x \\, dx = \\sin x + c$$', '导数 (sin x)\'=cos x 的逆运算', '#30D158')}
+                ${formulaCard('(7)', '正弦→负余弦', '$$\\int \\sin x \\, dx = -\\cos x + c$$', '导数 (-cos x)\'=sin x 的逆运算', '#30D158')}
+                ${formulaCard('(8)', '正割平方', '$$\\int \\frac{1}{\\cos^2 x} \\, dx = \\int \\sec^2 x \\, dx = \\tan x + c$$', '导数 (tan x)\'=sec²x 的逆运算。高频', '#30D158')}
+                ${formulaCard('(9)', '余割平方', '$$\\int \\frac{1}{\\sin^2 x} \\, dx = \\int \\csc^2 x \\, dx = -\\cot x + c$$', '导数 (-cot x)\'=csc²x 的逆运算', '#30D158')}
+            </div>
+
+            ${groupTitle('fa-rotate', '反三角型', '#BF5AF2')}
+            <div class="formula-grid">
+                ${formulaCard('(10)', '反正切型', '$$\\int \\frac{1}{1+x^2} \\, dx = \\arctan x + c$$', '导数 (arctan x)\'=1/(1+x²) 的逆运算', '#BF5AF2')}
+                ${formulaCard('(11)', '反正弦型', '$$\\int \\frac{1}{\\sqrt{1-x^2}} \\, dx = \\arcsin x + c$$', '导数 (arcsin x)\'=1/√(1-x²) 的逆运算', '#BF5AF2')}
+            </div>
+
+            ${memoryBox('导数↔积分联动记忆', '⭐⭐⭐ 最高效记忆法：导数公式倒过来 = 积分公式。记住 (tan x)\'=sec²x → 就知道 ∫sec²x dx=tan x+C。记住一边等于记住两边。11条基本积分 = 11条基本导数的逆运算。')}
+        </div>
+    `;
+
+    const specialBody = `
+        <div class="detail-section" id="int-special">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-star"></i> 特殊积分公式</div>
+            <div class="section-desc">这些积分公式不是基本导数的直接逆运算，需要通过换元或分部积分推导。但在考试中经常出现，建议直接记住结果——尤其是 ∫tan x、∫sec x 以及含 a² 的三类公式。</div>
+
+            ${groupTitle('fa-wave-square', '三角函数特殊积分', '#30D158')}
+            <div class="formula-grid">
+                ${formulaCard('', '正切', '$$\\int \\tan x \\, dx = -\\ln|\\cos x| + c$$', '等价于 ln|sec x|+C，因为 sec x=1/cos x', '#30D158')}
+                ${formulaCard('', '余切', '$$\\int \\cot x \\, dx = \\ln|\\sin x| + c$$', '等价于 -ln|csc x|+C', '#30D158')}
+                ${formulaCard('', '正割', '$$\\int \\sec x \\, dx = \\ln|\\sec x + \\tan x| + c$$', '⭐ 高频考点，结果很有特色', '#30D158')}
+                ${formulaCard('', '余割', '$$\\int \\csc x \\, dx = \\ln|\\csc x - \\cot x| + c$$', '与 ∫sec x 配对记忆', '#30D158')}
+            </div>
+
+            ${groupTitle('fa-square-root-variable', '含 a² 的积分', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('', 'a²+x² 型', '$$\\int \\frac{1}{a^2+x^2} \\, dx = \\frac{1}{a} \\arctan \\frac{x}{a} + c$$', '口诀：a 在前面用 arctan', '#FF9F0A')}
+                ${formulaCard('', 'x²-a² 型', '$$\\int \\frac{1}{x^2-a^2} \\, dx = \\frac{1}{2a} \\ln\\left|\\frac{x-a}{x+a}\\right| + c$$', '注意：分母是 x²-a²（减号）', '#FF9F0A')}
+                ${formulaCard('', '√(a²-x²) 型', '$$\\int \\frac{1}{\\sqrt{a^2-x^2}} \\, dx = \\arcsin \\frac{x}{a} + c$$', '口诀：a 在前面用 arcsin', '#FF9F0A')}
+                ${formulaCard('', '√(x²±a²) 型', '$$\\int \\frac{1}{\\sqrt{x^2 \\pm a^2}} \\, dx = \\ln\\left|x + \\sqrt{x^2 \\pm a^2}\\right| + c$$', '⭐ 记忆口诀：塞进去弹出来', '#FF9F0A')}
+            </div>
+
+            ${memoryBox('含 a² 积分记忆口诀', '「塞进去，弹出来，a 在前面用 arc」——含 √(x²±a²) 的积分结果是 ln|x+√(...)|（塞进去弹出来）；含 a²+x² 的结果是 (1/a)arctan(x/a)（a 在前面用 arc）；含 √(a²-x²) 的结果是 arcsin(x/a)（a 在前面用 arc）。')}
+        </div>
+    `;
+
+    return { title: '积分公式详情', color: C, tabs, body: commonBody + specialBody };
+}
+
+// ---------- 三角函数详情 ----------
+function buildTrigonometricDetail() {
+    const C = '#FF3B30';
+    const tabs = `
+        <div class="detail-tab active" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('trig-relation', this)">关系与特殊值</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('trig-common', this)">常见关系</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('trig-up', this)">升幂缩角</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('trig-down', this)">降幂扩角</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('trig-hex', this)">六边形记忆法</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('trig-induce', this)">诱导公式</div>
+    `;
+
+    // --- 关系与特殊值 ---
+    const relationBody = `
+        <div class="detail-section active" id="trig-relation">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-table"></i> 三角函数关系与特殊值</div>
+            <div class="section-desc">三角函数的关系是整个体系的根基。特殊值表覆盖了专升本全部常考角度——从 0° 到 360°，加上 15° 这个「需要实记」的特殊值。</div>
+
+            ${groupTitle('fa-table', '特殊三角函数值表', '#0A84FF')}
+            <table class="special-table">
+                <thead>
+                    <tr>
+                        <th>角度</th>
+                        <th>$0°$</th><th>$30°$</th><th>$45°$</th><th>$60°$</th><th>$90°$</th>
+                        <th>$120°$</th><th>$135°$</th><th>$150°$</th><th>$180°$</th><th>$270°$</th><th>$360°$</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>弧度</td>
+                        <td>$0$</td><td>$\\frac{\\pi}{6}$</td><td>$\\frac{\\pi}{4}$</td><td>$\\frac{\\pi}{3}$</td><td>$\\frac{\\pi}{2}$</td>
+                        <td>$\\frac{2\\pi}{3}$</td><td>$\\frac{3\\pi}{4}$</td><td>$\\frac{5\\pi}{6}$</td><td>$\\pi$</td><td>$\\frac{3\\pi}{2}$</td><td>$2\\pi$</td>
+                    </tr>
+                    <tr>
+                        <td>$\\sin\\alpha$</td>
+                        <td>$0$</td><td>$\\frac{1}{2}$</td><td>$\\frac{\\sqrt{2}}{2}$</td><td>$\\frac{\\sqrt{3}}{2}$</td><td>$1$</td>
+                        <td>$\\frac{\\sqrt{3}}{2}$</td><td>$\\frac{\\sqrt{2}}{2}$</td><td>$\\frac{1}{2}$</td><td>$0$</td><td>$-1$</td><td>$0$</td>
+                    </tr>
+                    <tr>
+                        <td>$\\cos\\alpha$</td>
+                        <td>$1$</td><td>$\\frac{\\sqrt{3}}{2}$</td><td>$\\frac{\\sqrt{2}}{2}$</td><td>$\\frac{1}{2}$</td><td>$0$</td>
+                        <td>$-\\frac{1}{2}$</td><td>$-\\frac{\\sqrt{2}}{2}$</td><td>$-\\frac{\\sqrt{3}}{2}$</td><td>$-1$</td><td>$0$</td><td>$1$</td>
+                    </tr>
+                    <tr>
+                        <td>$\\tan\\alpha$</td>
+                        <td>$0$</td><td>$\\frac{\\sqrt{3}}{3}$</td><td>$1$</td><td>$\\sqrt{3}$</td><td>$-$</td>
+                        <td>$-\\sqrt{3}$</td><td>$-1$</td><td>$-\\frac{\\sqrt{3}}{3}$</td><td>$0$</td><td>$-$</td><td>$0$</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            ${groupTitle('fa-star', '还需实记的值（15° = π/12）', '#FFD60A')}
+            <div class="formula-grid">
+                ${formulaCard('', 'sin 15°', '$$\\sin 15° = \\frac{\\sqrt{6}-\\sqrt{2}}{4}$$', '利用 sin(45°-30°) 推导', '#FFD60A')}
+                ${formulaCard('', 'cos 15°', '$$\\cos 15° = \\frac{\\sqrt{6}+\\sqrt{2}}{4}$$', '利用 cos(45°-30°) 推导', '#FFD60A')}
+                ${formulaCard('', 'tan 15°', '$$\\tan 15° = 2-\\sqrt{3}$$', '由 sin15°/cos15° 得到', '#FFD60A')}
+            </div>
+
+            ${memoryBox('特殊值记忆规律', 'sin 和 cos 在 0°~90° 的值只有 0, 1/2, √2/2, √3/2, 1 五个值，按角度递增排列。sin 从 0 到 1，cos 从 1 到 0。90°~180° 镜像对称。tan = sin/cos。15° 的值需要实记——可以用和差角公式 sin(45°-30°) 现场推导。')}
+        </div>
+    `;
+
+    // --- 常见关系 ---
+    const commonBody = `
+        <div class="detail-section" id="trig-common">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-link"></i> 常见关系（倒数·转换·平方）</div>
+            <div class="section-desc">三角函数之间的三大关系——倒数关系、商数关系（转换）、平方关系。这三组关系是所有三角恒等变换的基础，也是六边形记忆法的核心内容。</div>
+
+            ${groupTitle('fa-arrows-rotate', '倒数与转换关系', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('', '正余切互倒', '$$\\tan x \\cdot \\cot x = 1$$', 'tan = 1/cot', '#0A84FF')}
+                ${formulaCard('', '正余割互倒', '$$\\sin x \\cdot \\csc x = 1 \\implies \\csc x = \\frac{1}{\\sin x}$$', 'csc = 1/sin', '#0A84FF')}
+                ${formulaCard('', '正余割互倒', '$$\\cos x \\cdot \\sec x = 1 \\implies \\sec x = \\frac{1}{\\cos x}$$', 'sec = 1/cos', '#0A84FF')}
+                ${formulaCard('', '正切换商', '$$\\tan x = \\frac{\\sin x}{\\cos x}$$', 'sin 除以 cos', '#0A84FF')}
+                ${formulaCard('', '余切换商', '$$\\cot x = \\frac{\\cos x}{\\sin x}$$', 'cos 除以 sin', '#0A84FF')}
+            </div>
+
+            ${groupTitle('fa-square', '平方关系', '#30D158')}
+            <div class="formula-grid">
+                ${formulaCard('', '核心平方', '$$\\sin^2 x + \\cos^2 x = 1$$', '⭐ 三角函数的根基公式', '#30D158')}
+                ${formulaCard('', '正切平方', '$$\\tan^2 x = \\sec^2 x - 1$$', '等价于 1 + tan²x = sec²x', '#30D158')}
+                ${formulaCard('', '余切平方', '$$\\cot^2 x = \\csc^2 x - 1$$', '等价于 1 + cot²x = csc²x', '#30D158')}
+                ${formulaCard('', '正切变形', '$$1 + \\tan^2 x = \\sec^2 x = \\frac{1}{\\cos^2 x}$$', '两边除以 cos² 得到', '#30D158')}
+                ${formulaCard('', '余切变形', '$$1 + \\cot^2 x = \\csc^2 x = \\frac{1}{\\sin^2 x}$$', '两边除以 sin² 得到', '#30D158')}
+            </div>
+
+            ${memoryBox('一个公式衍生所有', '所有三角恒等式的根基只有一个：sin²x + cos²x = 1。两边除以 cos²x → 1 + tan²x = sec²x；两边除以 sin²x → 1 + cot²x = csc²x。再加上倒数关系和商数关系，全部恒等式都能推出来。')}
+        </div>
+    `;
+
+    // --- 升幂缩角（二倍角）---
+    const upBody = `
+        <div class="detail-section" id="trig-up">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-arrow-up-1-9"></i> 升幂缩角公式（二倍角）</div>
+            <div class="section-desc">二倍角公式将角度从 α 变为 2α（缩角），同时幂次升高（升幂）。cos2α 有三种等价形式，在积分降幂时极为有用。这组公式是三角变换的核心工具。</div>
+
+            ${groupTitle('fa-arrow-up', '二倍角公式', '#FFD60A')}
+            <div class="formula-grid">
+                ${formulaCard('', '正弦二倍角', '$$\\sin 2\\alpha = 2 \\sin \\alpha \\cos \\alpha$$', '最简洁的二倍角公式', '#FFD60A')}
+                ${formulaCard('', '余弦二倍角①', '$$\\cos 2\\alpha = \\cos^2 \\alpha - \\sin^2 \\alpha$$', '原始形式：差平方', '#FFD60A')}
+                ${formulaCard('', '余弦二倍角②', '$$\\cos 2\\alpha = 2\\cos^2 \\alpha - 1$$', '只含 cos²：用平方关系消去 sin²', '#FFD60A')}
+                ${formulaCard('', '余弦二倍角③', '$$\\cos 2\\alpha = 1 - 2\\sin^2 \\alpha$$', '只含 sin²：用平方关系消去 cos²', '#FFD60A')}
+            </div>
+
+            ${memoryBox('二倍角三种形式各有用途', 'cos2α 的三种形式不是多余的——在不同场景下选用不同形式：① 需要同时保留 sin 和 cos 时用 cos²-sin²；② 积分遇到 cos² 时用 2cos²-1 反解（降幂）；③ 积分遇到 sin² 时用 1-2sin² 反解（降幂）。记住了二倍角，降幂公式自然就有了。')}
+        </div>
+    `;
+
+    // --- 降幂扩角 ---
+    const downBody = `
+        <div class="detail-section" id="trig-down">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-arrow-down-1-9"></i> 降幂扩角公式</div>
+            <div class="section-desc">降幂公式从二倍角余弦公式反解得到——把 cos2α 的公式倒过来解出 cos²α 和 sin²α。幂次降低（²→¹），角度扩大（α→2α）。这是积分中处理 sin²x、cos²x 的标准工具。</div>
+
+            ${groupTitle('fa-arrow-down', '降幂公式', '#30D158')}
+            <div class="formula-grid">
+                ${formulaCard('', 'sin² 降幂', '$$\\sin^2 x = \\frac{1 - \\cos 2x}{2}$$', '由 cos2x = 1-2sin²x 反解', '#30D158')}
+                ${formulaCard('', 'cos² 降幂', '$$\\cos^2 x = \\frac{1 + \\cos 2x}{2}$$', '由 cos2x = 2cos²x-1 反解', '#30D158')}
+            </div>
+
+            ${memoryBox('积分遇平方 → 先降幂', '⭐ 积分高频考点：遇到 sin²x 或 cos²x 没法直接积分，但降幂后变成 cos2x 的形式，就能直接积分了。标准套路：sin²x/cos²x → 降幂 → ∫cos2x dx → (1/2)sin2x + C。降幂公式不是新公式，是二倍角公式的逆变形。')}
+        </div>
+    `;
+
+    // --- 六边形记忆法 ---
+    const hexBody = `
+        <div class="detail-section" id="trig-hex">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-hexagon-nodes"></i> 宇宙无敌最强六边形记忆法</div>
+            <div class="section-desc">将六个三角函数排成六边形，三条对角线代表倒数关系，三个阴影三角形代表平方关系——一张图打包所有基本恒等式。记住六边形的位置布局，所有公式都能从图中读出来。</div>
+
+            <div class="hexagon-container">
+                ${generateHexagonSVG()}
+            </div>
+
+            ${groupTitle('fa-arrows-left-right', '六边形三大规则', '#FFD60A')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#FFD60A;">
+                    <div class="formula-label" style="color:var(--accent-yellow-text);">规则一：倒数关系</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">对角线两端的函数互为倒数（黄色虚线连接）：<br>
+                    sin ↔ csc，cos ↔ sec，tan ↔ cot<br>
+                    $$\\sin x \\cdot \\csc x = 1$$
+                    $$\\cos x \\cdot \\sec x = 1$$
+                    $$\\tan x \\cdot \\cot x = 1$$</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <div class="formula-label" style="color:#30D158;">规则二：平方关系</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">三个阴影三角形各给出一个平方恒等式：<br>
+                    顶部三角（sin, cos）→ sin²+cos²=1<br>
+                    左侧三角（tan, sec）→ tan²+1=sec²<br>
+                    右侧三角（cot, csc）→ cot²+1=csc²</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <div class="formula-label" style="color:#0A84FF;">规则三：商数关系</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">顺时针方向，每个函数等于下一个除以再下一个：<br>
+                    $$\\tan x = \\frac{\\sin x}{\\cos x}$$
+                    $$\\cot x = \\frac{\\cos x}{\\sin x}$$</div>
+                </div>
+            </div>
+
+            ${groupTitle('fa-square', '平方关系汇总', '#30D158')}
+            <div class="formula-grid">
+                ${formulaCard('', 'sin² + cos²', '$$\\sin^2 x + \\cos^2 x = 1$$', '顶部三角形', '#30D158')}
+                ${formulaCard('', 'tan² + 1', '$$\\tan^2 x + 1 = \\sec^2 x$$', '左侧三角形', '#30D158')}
+                ${formulaCard('', '1 + cot²', '$$1 + \\cot^2 x = \\csc^2 x$$', '右侧三角形', '#30D158')}
+            </div>
+
+            ${groupTitle('fa-link', '导数与积分配对', '#BF5AF2')}
+            <div class="formula-grid">
+                ${formulaCard('', 'tan 导数↔积分', '$$(\\tan x)\' = \\sec^2 x \\quad \\int \\sec^2 x \\, dx = \\tan x + C$$', '', '#BF5AF2')}
+                ${formulaCard('', 'sec 导数↔积分', '$$(\\sec x)\' = \\sec x \\tan x \\quad \\int \\sec x \\tan x \\, dx = \\sec x + C$$', '', '#BF5AF2')}
+                ${formulaCard('', 'cot 导数↔积分', '$$(\\cot x)\' = -\\csc^2 x \\quad \\int \\csc^2 x \\, dx = -\\cot x + C$$', '', '#BF5AF2')}
+                ${formulaCard('', 'csc 导数↔积分', '$$(\\csc x)\' = -\\csc x \\cot x \\quad \\int \\csc x \\cot x \\, dx = -\\csc x + C$$', '', '#BF5AF2')}
+            </div>
+
+            ${groupTitle('fa-star', '三角函数积分补充', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('', 'tan 积分', '$$\\int \\tan x \\, dx = \\ln|\\sec x + \\tan x| + C = \\ln|\\sec x| + C$$', '两种形式等价', '#FF9F0A')}
+                ${formulaCard('', 'sec 积分', '$$\\int \\sec x \\, dx = \\ln|\\sec x + \\tan x| + C$$', '⭐ 与 ∫tan x 结果相同', '#FF9F0A')}
+                ${formulaCard('', 'cot 积分', '$$\\int \\cot x \\, dx = -\\ln|\\csc x + \\cot x| + C = \\ln|\\sin x| + C$$', '两种形式等价', '#FF9F0A')}
+                ${formulaCard('', 'csc 积分', '$$\\int \\csc x \\, dx = -\\ln|\\csc x + \\cot x| + C$$', '与 ∫cot x 结果相关', '#FF9F0A')}
+            </div>
+
+            <div class="formula-grid">
+                ${formulaCard('', 'sec³ 积分', '$$\\int \\sec^3 x \\, dx = \\frac{1}{2} \\left[\\sec x \\tan x + \\ln|\\sec x + \\tan x|\\right] + C$$', '分部积分得到', '#FF9F0A')}
+                ${formulaCard('', 'csc³ 积分', '$$\\int \\csc^3 x \\, dx = -\\frac{1}{2} \\left[\\csc x \\cot x + \\ln|\\csc x + \\cot x|\\right] + C$$', '分部积分得到', '#FF9F0A')}
+                ${formulaCard('', 'a²+x² 积分', '$$\\int \\frac{dx}{a^2 + x^2} = \\frac{1}{a} \\arctan \\frac{x}{a} + C$$', '口诀：a在前面用arc', '#FF9F0A')}
+                ${formulaCard('', '√(a²-x²) 积分', '$$\\int \\frac{dx}{\\sqrt{a^2-x^2}} = \\arcsin \\frac{x}{a} + C$$', '口诀：a在前面用arc', '#FF9F0A')}
+                ${formulaCard('', '√(x²±a²) 积分', '$$\\int \\frac{dx}{\\sqrt{x^2 \\pm a^2}} = \\ln\\left|x + \\sqrt{x^2 \\pm a^2}\\right| + C$$', '口诀：塞进去弹出来', '#FF9F0A')}
+            </div>
+
+            ${memoryBox('六边形记忆口诀', '记忆口诀：中下二、下中下、导相乘、对对和。六边形中：对角线 = 倒数（乘积为1），阴影三角形 = 平方和。导数与积分配对记忆：tan的导数=sec²，反过来∫sec²=tan。∫sec x 和 ∫tan x 的结果都含 ln|sec x + tan x|，配对记忆效率最高。')}
+        </div>
+    `;
+
+    // --- 诱导公式 ---
+    const induceBody = `
+        <div class="detail-section" id="trig-induce">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-sync"></i> 诱导公式</div>
+            <div class="section-desc">诱导公式用于将任意角的三角函数转化为锐角三角函数。不用逐条背诵——记住八字口诀「奇变偶不变，符号看象限」，所有诱导公式都能现场推导。</div>
+
+            ${groupTitle('fa-key', '八字口诀定义', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1.5rem;">
+                <div class="formula-label" style="color:#5AC8FA;">奇变偶不变，符号看象限</div>
+                <div class="formula-note" style="font-size:0.95rem;color:var(--text-secondary);line-height:1.8;">
+                    <strong>奇变</strong>：当 k 为奇数时，sin(k·π/2 ± α) 函数名改变（sin↔cos，tan↔cot）<br>
+                    <strong>偶不变</strong>：当 k 为偶数时，sin(k·π/2 ± α) 函数名不变<br>
+                    <strong>符号看象限</strong>：把 α 看作锐角，判断 k·π/2 ± α 在第几象限，看原函数在该象限的正负
+                </div>
+            </div>
+
+            ${groupTitle('fa-check', '典型诱导公式', '#30D158')}
+            <div class="formula-grid">
+                ${formulaCard('', 'π - x', '$$\\sin(\\pi - x) = \\sin x$$', '第二象限，sin 为正', '#30D158')}
+                ${formulaCard('', 'π - x', '$$\\cos(\\pi - x) = -\\cos x$$', '第二象限，cos 为负', '#30D158')}
+                ${formulaCard('', '负角', '$$\\sin(-x) = -\\sin x$$', 'sin 为奇函数', '#30D158')}
+                ${formulaCard('', '负角', '$$\\cos(-x) = \\cos x$$', 'cos 为偶函数', '#30D158')}
+                ${formulaCard('', 'π + x', '$$\\sin(\\pi + x) = -\\sin x$$', '第三象限，sin 为负', '#30D158')}
+                ${formulaCard('', 'π + x', '$$\\cos(\\pi + x) = -\\cos x$$', '第三象限，cos 为负', '#30D158')}
+            </div>
+
+            ${memoryBox('八字口诀 = 全部诱导公式', '诱导公式不用死记！八字口诀记住了，所有诱导公式都能现场推。步骤：① 判断 k 是奇还是偶 → 决定函数名变不变；② 把 α 当锐角，判断角在第几象限 → 决定正负号。例如 sin(3π/2 + x)：k=3 奇数 → 函数名变（sin→cos）；3π/2+x 在第四象限 → sin 为负 → 结果 = -cos x。')}
+        </div>
+    `;
+
+    return { title: '三角函数互换公式详情', color: C, tabs, body: relationBody + commonBody + upBody + downBody + hexBody + induceBody };
+}
+
+// ---------- 总览详情 ----------
+function buildOverviewDetail() {
+    const C = '#BF5AF2';
+    const tabs = `
+        <div class="detail-tab active" style="--tab-color:rgba(191,90,242,0.2);--tab-border:rgba(191,90,242,0.4);" onclick="switchTab('over-all', this)">体系全景</div>
+    `;
+    const body = `
+        <div class="detail-section active" id="over-all">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-sitemap"></i> 公式体系全景</div>
+            <div class="section-desc">四大模块构成完整的微积分与三角函数公式网络。导数是核心枢纽，微分是导数的延伸，积分是导数的逆运算，三角函数贯穿三大模块。</div>
+
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('derivative'),450)">
+                    <div class="formula-label" style="color:#0A84FF;"><i class="fa-solid fa-chart-line"></i> 导数模块</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        <strong>定义</strong>：f'(x) = lim Δy/Δx<br>
+                        <strong>公式数</strong>：18条<br>
+                        <strong>核心</strong>：幂函数降次、eˣ不变、三角正变余余变负<br>
+                        <strong>地位</strong>：核心枢纽，微分和积分的基础
+                    </div>
+                    <div style="margin-top:0.75rem;color:#0A84FF;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
+                </div>
+
+                <div class="formula-card" style="--card-accent:#BF5AF2;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('differential'),450)">
+                    <div class="formula-label" style="color:#BF5AF2;"><i class="fa-solid fa-arrows-left-right"></i> 微分模块</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        <strong>定义</strong>：dy = f'(x) dx<br>
+                        <strong>公式数</strong>：16条 + 3类方程<br>
+                        <strong>核心</strong>：微分 = 导数 × dx，一阶微分形式不变性<br>
+                        <strong>延伸</strong>：微分方程（可分离变量、齐次、一阶线性）
+                    </div>
+                    <div style="margin-top:0.75rem;color:#BF5AF2;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
+                </div>
+
+                <div class="formula-card" style="--card-accent:#30D158;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('integral'),450)">
+                    <div class="formula-label" style="color:#30D158;"><i class="fa-solid fa-infinity"></i> 积分模块</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        <strong>定义</strong>：∫f(x)dx = F(x)+C<br>
+                        <strong>公式数</strong>：常见11条 + 特殊8条<br>
+                        <strong>核心</strong>：导数的逆运算，联动记忆<br>
+                        <strong>方法</strong>：凑微分、换元、分部积分
+                    </div>
+                    <div style="margin-top:0.75rem;color:#30D158;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
+                </div>
+
+                <div class="formula-card" style="--card-accent:#FF3B30;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('trigonometric'),450)">
+                    <div class="formula-label" style="color:#FF3B30;"><i class="fa-solid fa-wave-square"></i> 三角函数模块</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        <strong>定义</strong>：sin²x + cos²x = 1<br>
+                        <strong>内容</strong>：关系·特殊值·常见转换·升幂缩角·降幂扩角·六边形·诱导<br>
+                        <strong>核心</strong>：一个平方公式衍生所有恒等式<br>
+                        <strong>地位</strong>：贯穿导数、微分、积分三大模块
+                    </div>
+                    <div style="margin-top:0.75rem;color:#FF3B30;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
+                </div>
+            </div>
+
+            ${memoryBox('联动记忆三大策略', '① 导数↔积分联动记忆，记住一边等于记住两边；② 微分不用单独背，导数 × dx 就是微分；③ 三角函数抓主干——从一个核心平方公式推导所有恒等式，从二倍角推导降幂公式。')}
+        </div>
+    `;
+    return { title: '公式体系总览', color: C, tabs, body };
+}
+
+// ============================================================
+//  详情内容路由
+// ============================================================
+function buildDetailContent(type) {
+    switch(type) {
+        case 'overview': return buildOverviewDetail();
+        case 'derivative': return buildDerivativeDetail();
+        case 'differential': return buildDifferentialDetail();
+        case 'integral': return buildIntegralDetail();
+        case 'trigonometric': return buildTrigonometricDetail();
+    }
+}
+
+// ============================================================
+//  六边形 SVG 生成器
+// ============================================================
+function generateHexagonSVG() {
+    // 六边形布局（flat-top）：
+    //      sin ——— cos
+    //     /    \  /    \
+    //   tan     \/     cot
+    //     \     /\     /
+    //      sec ——— csc
+    //
+    // 对角线（倒数）：sin↔csc, cos↔sec, tan↔cot
+    // 阴影三角（平方）：
+    //   顶部：sin, cos → sin²+cos²=1
+    //   左侧：tan, sec → tan²+1=sec²
+    //   右侧：cot, csc → cot²+1=csc²
+
+    const cx = 250, cy = 250, r = 170;
+    // 6个顶点位置 (flat-top hexagon)
+    const vertices = [
+        { name: 'sin',  x: cx - r * 0.866, y: cy - r * 0.5,  color: '#0A84FF' },  // 左上
+        { name: 'cos',  x: cx + r * 0.866, y: cy - r * 0.5,  color: '#30D158' },  // 右上
+        { name: 'cot',  x: cx + r * 0.866, y: cy + r * 0.5,  color: '#FFD60A' },  // 右下
+        { name: 'csc',  x: cx,             y: cy + r,        color: '#FF9F0A' },  // 正下
+        { name: 'sec',  x: cx - r * 0.866, y: cy + r * 0.5,  color: '#BF5AF2' },  // 左下
+        { name: 'tan',  x: cx,             y: cy - r,        color: '#FF3B30' },  // 正上
+    ];
+
+    // 对角线连接（倒数关系）
+    const reciprocalPairs = [
+        [0, 3], // sin ↔ csc
+        [1, 4], // cos ↔ sec
+        [5, 2], // tan ↔ cot
+    ];
+
+    // 阴影三角形（平方关系）
+    const pythagoreanTriangles = [
+        [5, 0, 1], // tan, sin, cos → sin²+cos²=1 (顶部)
+        [5, 4, 0], // tan, sec, sin → 不对
+    ];
+
+    // 实际平方关系三角形：
+    // 顶部: sin(0), cos(1), 中心 → sin²+cos²=1
+    // 左侧: tan(5), sec(4), 中心 → 1+tan²=sec²
+    // 右侧: cot(2), csc(3), 中心 → 1+cot²=csc²
+
+    // 顶点圆填充色：深色主题用深底，浅色主题用白底（通过 CSS 变量）
+    let svg = `<svg class="hexagon-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">`;
+
+    // 定义渐变和滤镜
+    svg += `<defs>
+        <radialGradient id="hexGlow" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="rgba(10,132,255,0.08)"/>
+            <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+        </radialGradient>
+        <filter id="vertexGlow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <style>
+            .hex-vertex-bg { fill: var(--hex-vertex-fill, rgba(20,22,30,0.95)); }
+            .hex-center-bg { fill: var(--bg-elevated, rgba(255,255,255,0.04)); stroke: var(--border-medium, rgba(255,255,255,0.15)); }
+            .hex-center-text { fill: var(--text-muted, rgba(255,255,255,0.6)); }
+            .hex-border { stroke: var(--border-soft, rgba(255,255,255,0.1)); }
+            .hex-label-fill { fill: var(--hex-label-color, #B07A00); }
+        </style>
+    </defs>`;
+
+    // 背景光晕
+    svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#hexGlow)"/>`;
+
+    // 阴影三角形（平方关系）
+    // 顶部三角: sin(0), cos(1), 中心
+    svg += `<polygon points="${vertices[0].x},${vertices[0].y} ${vertices[1].x},${vertices[1].y} ${cx},${cy}" fill="rgba(48,209,88,0.06)" stroke="rgba(48,209,88,0.15)" stroke-width="1"/>`;
+    // 左侧三角: tan(5), sec(4), 中心
+    svg += `<polygon points="${vertices[5].x},${vertices[5].y} ${vertices[4].x},${vertices[4].y} ${cx},${cy}" fill="rgba(48,209,88,0.06)" stroke="rgba(48,209,88,0.15)" stroke-width="1"/>`;
+    // 右侧三角: cot(2), csc(3), 中心
+    svg += `<polygon points="${vertices[2].x},${vertices[2].y} ${vertices[3].x},${vertices[3].y} ${cx},${cy}" fill="rgba(48,209,88,0.06)" stroke="rgba(48,209,88,0.15)" stroke-width="1"/>`;
+
+    // 六边形边框
+    let hexPath = '';
+    vertices.forEach((v, i) => {
+        hexPath += (i === 0 ? 'M' : 'L') + v.x + ',' + v.y + ' ';
+    });
+    hexPath += 'Z';
+    svg += `<path class="hex-border" d="${hexPath}" fill="none" stroke-width="2"/>`;
+
+    // 对角线（倒数关系 - 黄色虚线）
+    reciprocalPairs.forEach(([a, b]) => {
+        svg += `<line x1="${vertices[a].x}" y1="${vertices[a].y}" x2="${vertices[b].x}" y2="${vertices[b].y}" stroke="#D89A00" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.5"/>`;
+    });
+
+    // 中心 "1"
+    svg += `<circle class="hex-center-bg" cx="${cx}" cy="${cy}" r="22" stroke-width="1.5"/>`;
+    svg += `<text class="hex-center-text" x="${cx}" y="${cy}" font-size="16" font-weight="900" text-anchor="middle" dominant-baseline="central" font-family="Inter,sans-serif">1</text>`;
+
+    // 顶点
+    vertices.forEach((v, i) => {
+        svg += `<g class="hex-vertex" style="color:${v.color};">`;
+        // 外圈光晕
+        svg += `<circle cx="${v.x}" cy="${v.y}" r="28" fill="${v.color}" opacity="0.12"/>`;
+        // 主圆（用 class 适配主题）
+        svg += `<circle class="hex-vertex-bg" cx="${v.x}" cy="${v.y}" r="24" stroke="${v.color}" stroke-width="2" filter="url(#vertexGlow)"/>`;
+        // 文字
+        svg += `<text x="${v.x}" y="${v.y}" fill="${v.color}" font-size="13">${v.name}</text>`;
+        svg += `</g>`;
+    });
+
+    // 标注（颜色用 class 适配主题）
+    svg += `<text class="hex-label-fill" x="${cx}" y="${cy - r - 30}" font-size="11" text-anchor="middle" font-family="JetBrains Mono,monospace" font-weight="700">↑ 顶部三角: sin² + cos² = 1</text>`;
+    svg += `<text class="hex-label-fill" x="${cx - r * 0.866 - 45}" y="${cy + r * 0.5 + 50}" font-size="10" text-anchor="end" font-family="JetBrains Mono,monospace" font-weight="700">← 左侧三角: 1 + tan² = sec²</text>`;
+    svg += `<text class="hex-label-fill" x="${cx + r * 0.866 + 45}" y="${cy + r * 0.5 + 50}" font-size="10" text-anchor="start" font-family="JetBrains Mono,monospace" font-weight="700">右侧三角: 1 + cot² = csc² →</text>`;
+    svg += `<text class="hex-label-fill" x="${cx}" y="${cy + r + 45}" font-size="10" text-anchor="middle" font-family="JetBrains Mono,monospace" font-weight="700">⋯ 对角线 = 倒数关系 ⋯</text>`;
+
+    svg += `</svg>`;
+    return svg;
+}
+
+// ============================================================
+//  KaTeX 渲染
+// ============================================================
+function renderMath() {
+    if (typeof renderMathInElement === 'function') {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '\\[', right: '\\]', display: true}
+            ],
+            throwOnError: false
+        });
+    }
+}
+
+// 初始渲染
+document.addEventListener('DOMContentLoaded', function() {
+    renderMath();
+});
+
+// 等待 KaTeX 加载
+function waitForKatex() {
+    if (typeof renderMathInElement === 'function') {
+        renderMath();
+    } else {
+        setTimeout(waitForKatex, 100);
+    }
+}
+waitForKatex();
+
+// 键盘 ESC 返回
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && detailView.classList.contains('active')) {
+        exitDetail();
+    }
+});
+
+// ============================================================
+//  主题切换（深色/浅色）
+// ============================================================
+function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+}
+
+function applyTheme(theme) {
+    const html = document.documentElement;
+    if (theme === 'light') {
+        html.setAttribute('data-theme', 'light');
+    } else {
+        html.removeAttribute('data-theme');
+    }
+    try { localStorage.setItem('formula-theme', theme); } catch(e) {}
+}
+
+// 初始化：读取本地存储，无记录时跟随系统偏好
+(function initTheme() {
+    let saved;
+    try { saved = localStorage.getItem('formula-theme'); } catch(e) {}
+    if (saved) {
+        applyTheme(saved);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        applyTheme('light');
+    }
+})();
+</script>
+</body>
+</html>
