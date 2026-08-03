@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="140" viewBox="0 0 1200 140"
+     role="img" aria-labelledby="s2Title s2Desc">
+  <title id="s2Title">技术栈 · 单文件无框架</title>
+  <desc id="s2Desc">项目使用的技术栈章节标题。</desc>
+
+  <defs>
+    <linearGradient id="s2Bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#30D158"/>
+      <stop offset="100%" stop-color="#30D158" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="140" rx="20" fill="#0F1320"/>
+  <rect x="0" y="0" width="6" height="140" rx="3" fill="url(#s2Bar)"/>
+
+  <text x="64" y="86" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="64" font-weight="800" fill="#30D158" fill-opacity="0.25">02</text>
+
+  <text x="180" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" fill="#30D158" letter-spacing="3">TECH STACK</text>
+  <text x="180" y="98" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="32" font-weight="800" fill="#FFFFFF">单文件无框架</text>
+
+  <!-- 右侧装饰：代码括号 -->
+  <g transform="translate(1040 60)" fill="none" stroke="#30D158" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 12 0 L 0 14 L 12 28" stroke-opacity="0.7"/>
+    <path d="M 48 0 L 60 14 L 48 28" stroke-opacity="0.7"/>
+    <text x="30" y="20" text-anchor="middle" font-family="ui-monospace, monospace" font-size="20" font-weight="700" fill="#30D158" stroke="none">{ }</text>
+  </g>
+</svg>

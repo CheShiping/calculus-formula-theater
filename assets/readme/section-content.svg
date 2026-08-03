@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="140" viewBox="0 0 1200 140"
+     role="img" aria-labelledby="s3Title s3Desc">
+  <title id="s3Title">内容覆盖 · 五大模块</title>
+  <desc id="s3Desc">项目内容覆盖的五大模块章节标题。</desc>
+
+  <defs>
+    <linearGradient id="s3Bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFD60A"/>
+      <stop offset="100%" stop-color="#FFD60A" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="140" rx="20" fill="#0F1320"/>
+  <rect x="0" y="0" width="6" height="140" rx="3" fill="url(#s3Bar)"/>
+
+  <text x="64" y="86" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="64" font-weight="800" fill="#FFD60A" fill-opacity="0.25">03</text>
+
+  <text x="180" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" fill="#FFD60A" letter-spacing="3">CONTENT</text>
+  <text x="180" y="98" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="32" font-weight="800" fill="#FFFFFF">五大模块 · 层级递进</text>
+
+  <!-- 右侧装饰：5 个模块圆点 -->
+  <g transform="translate(1010 70)">
+    <circle cx="0" cy="0" r="8" fill="#0A84FF"/>
+    <circle cx="28" cy="0" r="8" fill="#30D158"/>
+    <circle cx="56" cy="0" r="8" fill="#FFD60A"/>
+    <circle cx="84" cy="0" r="8" fill="#BF5AF2"/>
+    <circle cx="112" cy="0" r="8" fill="#FF453A"/>
+    <line x1="-20" y1="0" x2="132" y2="0" stroke="#FFFFFF" stroke-opacity="0.1" stroke-width="1"/>
+  </g>
+</svg>

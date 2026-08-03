@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="420" viewBox="0 0 1200 420"
+     role="img" aria-labelledby="heroTitle heroDesc">
+  <title id="heroTitle">calculus-formula-theater · 微积分与三角函数公式体系联动记忆卡</title>
+  <desc id="heroDesc">一套用 3D 卡片剧场 + 公式详情页重新组织的微积分与三角函数公式速查系统。</desc>
+
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B0E14"/>
+      <stop offset="55%" stop-color="#0F1320"/>
+      <stop offset="100%" stop-color="#0B0E14"/>
+    </linearGradient>
+    <radialGradient id="glowBlue" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#0A84FF" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#0A84FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPurple" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#BF5AF2" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#BF5AF2" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A1F2E"/>
+      <stop offset="100%" stop-color="#0F1320"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1200" height="420" rx="28" fill="url(#bgGrad)"/>
+  <circle cx="980" cy="120" r="280" fill="url(#glowBlue)"/>
+  <circle cx="1090" cy="320" r="220" fill="url(#glowPurple)"/>
+
+  <!-- 左侧标题区 -->
+  <g transform="translate(64 70)">
+    <!-- 类别标签 -->
+    <rect x="0" y="0" width="156" height="28" rx="14" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.12"/>
+    <circle cx="16" cy="14" r="4" fill="#0A84FF"/>
+    <text x="28" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="#9CA3AF" letter-spacing="1.5">MATH · FORMULA</text>
+
+    <!-- 项目名 -->
+    <text x="0" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="46" font-weight="800" fill="#FFFFFF">微积分与三角函数</text>
+    <text x="0" y="128" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="600" fill="#0A84FF">公式体系联动记忆卡</text>
+
+    <!-- 描述 -->
+    <text x="0" y="172" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="16" fill="#D1D5DB">点开一张定义卡 → 进入完整公式网络</text>
+    <text x="0" y="196" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="16" fill="#9CA3AF">3D Coverflow 卡片剧场 · 4 大模块 · 53+ 公式</text>
+
+    <!-- 元数据 -->
+    <g transform="translate(0 232)">
+      <rect x="0" y="0" width="100" height="26" rx="13" fill="#0A84FF" fill-opacity="0.15" stroke="#0A84FF" stroke-opacity="0.4"/>
+      <text x="50" y="17" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" fill="#0A84FF">HTML/CSS/JS</text>
+
+      <rect x="110" y="0" width="78" height="26" rx="13" fill="#30D158" fill-opacity="0.15" stroke="#30D158" stroke-opacity="0.4"/>
+      <text x="149" y="17" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" fill="#30D158">Swiper</text>
+
+      <rect x="198" y="0" width="78" height="26" rx="13" fill="#FFD60A" fill-opacity="0.15" stroke="#FFD60A" stroke-opacity="0.4"/>
+      <text x="237" y="17" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" fill="#FFD60A">KaTeX</text>
+    </g>
+  </g>
+
+  <!-- 右侧：3D 卡片剧场（项目原生视觉）-->
+  <g transform="translate(720 60)">
+    <!-- 卡片 1（后景，紫，倾斜）-->
+    <g transform="translate(280 50) skewY(-12) scale(0.85)">
+      <rect width="200" height="260" rx="22" fill="url(#cardGrad)" stroke="#BF5AF2" stroke-opacity="0.3" stroke-width="1"/>
+      <circle cx="100" cy="50" r="20" fill="#BF5AF2" fill-opacity="0.2"/>
+      <text x="100" y="56" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700" fill="#BF5AF2">∫</text>
+      <text x="100" y="130" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">积分</text>
+      <text x="100" y="200" text-anchor="middle" font-family="ui-monospace, monospace" font-size="36" font-weight="800" fill="#BF5AF2" fill-opacity="0.3">04</text>
+    </g>
+
+    <!-- 卡片 2（中景，黄，轻微倾斜）-->
+    <g transform="translate(150 30) skewY(-6) scale(0.92)">
+      <rect width="200" height="260" rx="22" fill="url(#cardGrad)" stroke="#FFD60A" stroke-opacity="0.35" stroke-width="1"/>
+      <circle cx="100" cy="50" r="20" fill="#FFD60A" fill-opacity="0.2"/>
+      <text x="100" y="56" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700" fill="#FFD60A">d</text>
+      <text x="100" y="130" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">微分</text>
+      <text x="100" y="200" text-anchor="middle" font-family="ui-monospace, monospace" font-size="36" font-weight="800" fill="#FFD60A" fill-opacity="0.3">03</text>
+    </g>
+
+    <!-- 卡片 3（前景，居中，蓝）-->
+    <g transform="translate(20 10)">
+      <rect width="220" height="290" rx="24" fill="url(#cardGrad)" stroke="#0A84FF" stroke-opacity="0.55" stroke-width="1.5"/>
+      <!-- 顶部光晕 -->
+      <rect x="0" y="0" width="220" height="80" rx="24" fill="#0A84FF" fill-opacity="0.08"/>
+      <!-- 图标 -->
+      <circle cx="110" cy="60" r="28" fill="#0A84FF" fill-opacity="0.2"/>
+      <text x="110" y="68" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="700" fill="#0A84FF">f′</text>
+      <!-- 模块标签 -->
+      <rect x="78" y="100" width="64" height="22" rx="11" fill="#0A84FF" fill-opacity="0.25"/>
+      <text x="110" y="115" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#0A84FF" letter-spacing="1">导数</text>
+      <!-- 标题 -->
+      <text x="110" y="150" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">变化率 / 切线</text>
+      <!-- 公式列表 -->
+      <text x="110" y="185" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#9CA3AF">(sin x)′ = cos x</text>
+      <text x="110" y="205" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#9CA3AF">(eˣ)′ = eˣ</text>
+      <text x="110" y="225" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#9CA3AF">(xᵘ)′ = μxᵘ⁻¹</text>
+      <!-- 底部大编号 -->
+      <text x="110" y="270" text-anchor="middle" font-family="ui-monospace, monospace" font-size="42" font-weight="800" fill="#0A84FF" fill-opacity="0.3">02</text>
+    </g>
+  </g>
+
+  <!-- 底部分隔线 -->
+  <line x1="64" y1="380" x2="1136" y2="380" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="1"/>
+  <text x="64" y="402" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#6B7280">github.com/CheShiping/calculus-formula-theater</text>
+  <text x="1136" y="402" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#6B7280">v1.0 · MIT</text>
+</svg>

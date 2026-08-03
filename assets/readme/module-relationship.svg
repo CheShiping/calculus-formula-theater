@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="420" viewBox="0 0 1200 420"
+     role="img" aria-labelledby="relTitle relDesc">
+  <title id="relTitle">四大模块联动关系</title>
+  <desc id="relDesc">导数是核心枢纽：导数×dx=微分，积分是导数的逆运算，三角函数贯穿三大模块。</desc>
+
+  <defs>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0A84FF"/>
+    </marker>
+    <marker id="arrowYellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FFD60A"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#BF5AF2"/>
+    </marker>
+    <radialGradient id="coreGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#30D158" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#30D158" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="420" rx="24" fill="#0F1320"/>
+
+  <!-- 背景光晕 -->
+  <circle cx="600" cy="160" r="180" fill="url(#coreGlow)"/>
+
+  <!-- 左上：微分 -->
+  <g transform="translate(60 130)">
+    <rect width="200" height="80" rx="14" fill="#FFD60A" fill-opacity="0.08" stroke="#FFD60A" stroke-opacity="0.45" stroke-width="1.5"/>
+    <text x="100" y="34" text-anchor="middle" font-family="-apple-system, 'PingFang SC', sans-serif" font-size="17" font-weight="700" fill="#FFD60A">微分</text>
+    <text x="100" y="58" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" fill="#9CA3AF">dy = f′(x)dx</text>
+  </g>
+
+  <!-- 右上：积分 -->
+  <g transform="translate(940 130)">
+    <rect width="200" height="80" rx="14" fill="#BF5AF2" fill-opacity="0.08" stroke="#BF5AF2" stroke-opacity="0.45" stroke-width="1.5"/>
+    <text x="100" y="34" text-anchor="middle" font-family="-apple-system, 'PingFang SC', sans-serif" font-size="17" font-weight="700" fill="#BF5AF2">积分</text>
+    <text x="100" y="58" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" fill="#9CA3AF">∫f(x)dx = F(x)+C</text>
+  </g>
+
+  <!-- 中心：导数（核心枢纽，居中偏上）-->
+  <g transform="translate(500 80)">
+    <circle cx="100" cy="80" r="92" fill="#30D158" fill-opacity="0.08" stroke="#30D158" stroke-width="2.5"/>
+    <circle cx="100" cy="80" r="76" fill="#30D158" fill-opacity="0.12" stroke="#30D158" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="100" y="62" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" font-weight="700" fill="#30D158" letter-spacing="2">CORE</text>
+    <text x="100" y="90" text-anchor="middle" font-family="-apple-system, 'PingFang SC', sans-serif" font-size="26" font-weight="800" fill="#FFFFFF">导数</text>
+    <text x="100" y="112" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" fill="#9CA3AF">f′(x)</text>
+  </g>
+
+  <!-- 底部：三角函数（贯穿）-->
+  <g transform="translate(420 300)">
+    <rect width="360" height="80" rx="14" fill="#FF453A" fill-opacity="0.08" stroke="#FF453A" stroke-opacity="0.45" stroke-width="1.5"/>
+    <text x="180" y="34" text-anchor="middle" font-family="-apple-system, 'PingFang SC', sans-serif" font-size="17" font-weight="700" fill="#FF453A">三角函数</text>
+    <text x="180" y="58" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" fill="#9CA3AF">sin²x + cos²x = 1 · 贯穿三大模块</text>
+  </g>
+
+  <!-- 箭头：导数 → 微分（×dx）-->
+  <path d="M 500 160 Q 350 150 260 170" fill="none" stroke="#FFD60A" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrowYellow)"/>
+  <text x="360" y="140" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#FFD60A">× dx</text>
+
+  <!-- 箭头：导数 → 积分（逆运算）-->
+  <path d="M 700 160 Q 850 150 940 170" fill="none" stroke="#BF5AF2" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrowPurple)"/>
+  <text x="840" y="140" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#BF5AF2">逆运算</text>
+
+  <!-- 箭头：导数 → 三角函数（贯穿）-->
+  <path d="M 600 260 Q 600 285 600 300" fill="none" stroke="#FF453A" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrowBlue)" opacity="0.6"/>
+  <text x="620" y="285" font-family="ui-monospace, monospace" font-size="12" font-weight="600" fill="#FF453A" opacity="0.8">贯穿</text>
+
+  <!-- 角落标注 -->
+  <text x="64" y="400" font-family="ui-monospace, monospace" font-size="12" fill="#6B7280">导数是核心枢纽 · 记住一个 = 推出一串</text>
+  <text x="1136" y="400" text-anchor="end" font-family="ui-monospace, monospace" font-size="12" fill="#6B7280">CORE → DERIVATIVE</text>
+</svg>
