@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>微积分与三角函数 · 公式体系联动记忆</title>
+    <title>四川专升本高数 · 框架梳理</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -656,8 +656,8 @@
 <div id="main-view">
     <aside class="sidebar-container">
         <div class="mb-auto">
-            <h5 class="text-xs font-bold text-gray-500 tracking-[4px] uppercase mb-2">微积分与三角函数</h5>
-            <h1 class="text-3xl font-extrabold text-white mb-1 leading-tight">公式体系</h1>
+            <h5 class="text-xs font-bold text-gray-500 tracking-[4px] uppercase mb-2">四川专升本高数</h5>
+            <h1 class="text-3xl font-extrabold text-white mb-1 leading-tight">框架梳理</h1>
             <h2 class="text-xl font-bold text-accent mb-6">联动记忆卡</h2>
 
             <div id="info-panel" class="transition-all duration-300">
@@ -677,7 +677,7 @@
 
         <div class="mt-auto">
             <div class="flex justify-between items-center mb-2">
-                <span class="text-xs text-gray-500 font-mono" id="progress-text">01 / 05</span>
+                <span class="text-xs text-gray-500 font-mono" id="progress-text">01 / 06</span>
                 <span class="text-xs text-gray-500" id="module-text">总览</span>
             </div>
             <div class="progress-bar">
@@ -702,13 +702,14 @@
                             <i class="fa-solid fa-sitemap"></i>
                         </div>
                         <div class="module-tag bg-purple/20 text-purple">总览</div>
-                        <h3 class="card-title">公式体系总览</h3>
-                        <p class="card-subtitle" style="--sub-color: #BF5AF2;">四大模块联动</p>
+                        <h3 class="card-title">高数框架总览</h3>
+                        <p class="card-subtitle" style="--sub-color: #BF5AF2;">五大模块联动</p>
                         <div class="formula-list" style="--dot-color: #BF5AF2;">
                             <li>导数 → 变化率 / 切线斜率</li>
                             <li>微分 → 导数 × dx（延伸）</li>
                             <li>积分 → 导数的逆运算</li>
-                            <li>三角函数 → 贯穿三大模块</li>
+                            <li>微分方程 → 导数与积分的综合应用</li>
+                            <li>三角函数 → 贯穿四大模块</li>
                         </div>
                         <div class="memory-tip">
                             <span class="highlight-text" style="--hl-color: #BF5AF2;">导数是核心枢纽</span>
@@ -751,7 +752,7 @@
                         </div>
                         <div class="module-tag bg-purple/20 text-purple">微分模块</div>
                         <h3 class="card-title">微分的定义</h3>
-                        <p class="card-subtitle" style="--sub-color: #BF5AF2;">Differential · 16条+方程</p>
+                        <p class="card-subtitle" style="--sub-color: #BF5AF2;">Differential · 16条公式</p>
                         <div class="formula-block">
                             $$dy = f'(x) \, dx$$
                             $$\text{可导} \iff \text{可微}$$
@@ -759,10 +760,10 @@
                         <div class="formula-list" style="--dot-color: #BF5AF2;">
                             <li>微分 = 导数 × dx</li>
                             <li>一阶微分形式不变性</li>
-                            <li>含微分方程三大类型</li>
+                            <li>与导数公式一一对应</li>
                         </div>
                         <div class="memory-tip">
-                            <span class="highlight-text" style="--hl-color: #BF5AF2;">点击查看微分公式+微分方程</span>
+                            <span class="highlight-text" style="--hl-color: #BF5AF2;">点击查看16条微分公式</span>
                         </div>
                         <div class="enter-hint">⟜ 点击进入微分公式详情 ⟝</div>
                     </div>
@@ -820,6 +821,32 @@
                     </div>
                 </div>
 
+                <!-- 卡片 06：微分方程 -->
+                <div class="swiper-slide" onclick="enterDetail('equation')">
+                    <span class="bg-number">06</span>
+                    <div class="card-content">
+                        <div class="card-icon text-orange" style="--icon-glow: rgba(255, 159, 10, 0.4);">
+                            <i class="fa-solid fa-square-root-variable"></i>
+                        </div>
+                        <div class="module-tag bg-orange/20 text-orange">微分方程</div>
+                        <h3 class="card-title">微分方程框架</h3>
+                        <p class="card-subtitle" style="--sub-color: #FF9F0A;">一阶 + 二阶 · 含例题</p>
+                        <div class="formula-block">
+                            $$y'' + py' + qy = P(x)e^{\alpha x}$$
+                        </div>
+                        <div class="formula-list" style="--dot-color: #FF9F0A;">
+                            <li>一阶：可分离 · 线性公式 · y/x 型</li>
+                            <li>二阶齐次：特征方程三种根</li>
+                            <li>二阶非齐次：齐通解 + 特解</li>
+                            <li>含完整例题（待定系数法）</li>
+                        </div>
+                        <div class="memory-tip">
+                            <span class="highlight-text" style="--hl-color: #FF9F0A;">非齐等于齐加特</span>
+                        </div>
+                        <div class="enter-hint">⟜ 点击进入微分方程详情 ⟝</div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </main>
@@ -845,9 +872,9 @@
 const sidebarData = [
     {
         module: "总览", moduleColor: "#BF5AF2",
-        title: "公式体系总览",
-        desc: "微积分与三角函数的公式不是孤立的，它们构成一个完整的知识网络。导数是核心枢纽——微分是导数的另一种表达，积分是导数的逆运算，三角函数贯穿始终。理解了这个关系图，记忆就有了骨架。",
-        note: "💡 点击居中的卡片，进入对应模块的完整公式详情页"
+        title: "高数框架总览",
+        desc: "四川专升本高数的知识不是孤立的，它们构成一个完整的网络。导数是核心枢纽——微分是导数的另一种表达，积分是导数的逆运算，微分方程是导数与积分的综合应用，三角函数贯穿始终。理解了这个关系图，记忆就有了骨架。",
+        note: "💡 点击居中的卡片，进入对应模块的完整知识详情页"
     },
     {
         module: "导数模块", moduleColor: "#0A84FF",
@@ -858,8 +885,8 @@ const sidebarData = [
     {
         module: "微分模块", moduleColor: "#BF5AF2",
         title: "微分的定义",
-        desc: "微分完全不用单独记！求出导数后乘以 dx 就是微分。16条微分公式与导数一一对应，再加上3类微分方程，构成了微分学的完整体系。核心记住「一阶微分形式不变性」。",
-        note: "⭐ 微分公式 = 导数公式 × dx，背一套就够了。点击进入微分公式+微分方程详情"
+        desc: "微分完全不用单独记！求出导数后乘以 dx 就是微分。16条微分公式与导数一一对应，背一套就够了。核心记住「一阶微分形式不变性」——无论 u 是自变量还是中间变量，形式都不变。",
+        note: "⭐ 微分公式 = 导数公式 × dx。点击进入16条微分公式详情"
     },
     {
         module: "积分模块", moduleColor: "#30D158",
@@ -872,6 +899,12 @@ const sidebarData = [
         title: "三角函数定义",
         desc: "三角函数的根基只有一个核心公式：sin²+cos²=1。由此衍生倒数关系、商数关系、平方关系；二倍角公式升幂缩角，降幂公式扩角降次；六边形记忆法将所有关系一图打包；诱导公式八字口诀搞定全部。",
         note: "💡 一个平方公式 → 推导出所有三角恒等式。点击进入三角函数互换公式详情"
+    },
+    {
+        module: "微分方程", moduleColor: "#FF9F0A",
+        title: "微分方程框架",
+        desc: "微分方程是导数与积分的综合应用。一阶分三类（可分离变量、一阶线性公式、齐次y/x型），二阶分齐次与非齐次——齐次用特征方程法三种根套三种通解，非齐次用「齐通解+特解」的待定系数法。配完整例题演示计算全流程。",
+        note: "💡 非齐等于齐加特。k值口诀：不重0，单重1，双重2。点击进入微分方程详情"
     }
 ];
 
@@ -913,9 +946,9 @@ function updateSidebar(index) {
             descEl.innerText = data.desc;
             noteEl.innerText = data.note;
             const num = String(index + 1).padStart(2, '0');
-            progressText.innerText = `${num} / 05`;
+            progressText.innerText = `${num} / 06`;
             moduleText.innerText = data.module;
-            progressFill.style.width = ((index + 1) / 5 * 100) + '%';
+            progressFill.style.width = ((index + 1) / 6 * 100) + '%';
         }
         infoPanel.style.opacity = '1';
         infoPanel.style.transform = 'translateY(0)';
@@ -1045,7 +1078,6 @@ function buildDifferentialDetail() {
     const C = '#BF5AF2';
     const tabs = `
         <div class="detail-tab active" style="--tab-color:rgba(191,90,242,0.2);--tab-border:rgba(191,90,242,0.4);" onclick="switchTab('diff-formula', this)">微分公式</div>
-        <div class="detail-tab" style="--tab-color:rgba(191,90,242,0.2);--tab-border:rgba(191,90,242,0.4);" onclick="switchTab('diff-equation', this)">微分方程</div>
     `;
     const formulaBody = `
         <div class="detail-section active" id="diff-formula">
@@ -1088,49 +1120,7 @@ function buildDifferentialDetail() {
         </div>
     `;
 
-    const equationBody = `
-        <div class="detail-section" id="diff-equation">
-            <div class="section-title" style="color:${C};"><i class="fa-solid fa-equals"></i> 常见微分方程</div>
-            <div class="section-desc">微分方程是含有未知函数及其导数的方程。专升本主要考查三类一阶微分方程——可分离变量、齐次、一阶线性非齐次。掌握特征识别和求解套路，就能拿到满分。</div>
-
-            ${groupTitle('fa-1', '可分离变量的微分方程', '#0A84FF')}
-            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
-                <div class="formula-label" style="color:#0A84FF;">标准形式</div>
-                <div class="formula-block" style="border:none;background:none;padding:0;">
-                    $$\\frac{dy}{dx} = f(x)g(y)$$
-                    <p style="text-align:center;color:var(--text-muted);font-size:0.8rem;margin:0.5rem 0;">或</p>
-                    $$f_1(x)g_1(y)\\,dx + f_2(x)g_2(y)\\,dy = 0$$
-                </div>
-                <div class="formula-note">特征：等号一边只含 x，另一边只含 y。解法：把含 y 的移到左边，含 x 的移到右边，两边积分。</div>
-            </div>
-
-            ${groupTitle('fa-2', '齐次微分方程', '#30D158')}
-            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
-                <div class="formula-label" style="color:#30D158;">标准形式</div>
-                <div class="formula-block" style="border:none;background:none;padding:0;">
-                    $$\\frac{dy}{dx} = f\\left(\\frac{y}{x}\\right)$$
-                </div>
-                <div class="formula-note">特征：右端是 y/x 的函数。解法：令 u = y/x，则 y = ux，dy = u dx + x du，代入后化为可分离变量方程。</div>
-            </div>
-
-            ${groupTitle('fa-3', '一阶线性非齐次微分方程', '#FFD60A')}
-            <div class="formula-card" style="--card-accent:#FFD60A;margin-bottom:1rem;">
-                <div class="formula-label" style="color:var(--accent-yellow-text);">标准形式</div>
-                <div class="formula-block" style="border:none;background:none;padding:0;">
-                    $$\\frac{dy}{dx} + p(x)y = Q(x)$$
-                </div>
-                <div class="formula-label" style="color:var(--accent-yellow-text);margin-top:1rem;">通解公式</div>
-                <div class="formula-block" style="border:none;background:none;padding:0;">
-                    $$y = e^{-\\int p(x)\\,dx} \\left[ \\int Q(x)\\, e^{\\int p(x)\\,dx} \\, dx + c \\right]$$
-                </div>
-                <div class="formula-note">特征：y 和 y\' 都是一次的（线性），p(x) 和 Q(x) 是已知函数。直接套通解公式，注意积分常数 c 只在最后出现一次。</div>
-            </div>
-
-            ${memoryBox('微分方程识别口诀', '① 能把 x、y 分到等号两边 → 可分离变量型，两边积分。② 右端是 y/x 的函数 → 齐次型，令 u=y/x 换元。③ y\' + p(x)y = Q(x) → 一阶线性型，直接套通解公式。先识别类型，再用对应解法。')}
-        </div>
-    `;
-
-    return { title: '微分公式详情', color: C, tabs, body: formulaBody + equationBody };
+    return { title: '微分公式详情', color: C, tabs, body: formulaBody };
 }
 
 // ---------- 积分详情 ----------
@@ -1431,6 +1421,381 @@ function buildTrigonometricDetail() {
     return { title: '三角函数互换公式详情', color: C, tabs, body: relationBody + commonBody + upBody + downBody + hexBody + induceBody };
 }
 
+// ---------- 微分方程详情 ----------
+function buildEquationDetail() {
+    const C = '#FF9F0A';
+    const tabs = `
+        <div class="detail-tab active" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('eq-basic', this)">基础概念</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('eq-first', this)">一阶方程</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('eq-homo', this)">二阶齐次</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('eq-nonhomo', this)">二阶非齐次</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('eq-example', this)">例题</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('eq-summary', this)">速查总表</div>
+    `;
+
+    // === Tab 1: 基础概念 ===
+    const basicBody = `
+        <div class="detail-section active" id="eq-basic">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-book"></i> 微分方程基础概念</div>
+            <div class="section-desc">微分方程是含有未知函数及其导数的方程。四川专升本高数主要考查一阶和二阶线性微分方程。先掌握三个基础概念，再学解法。</div>
+
+            ${groupTitle('fa-key', '三大基础概念', '#0A84FF')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <span class="formula-num">阶数</span>
+                    <div class="formula-label" style="color:#0A84FF;">方程中出现的最高阶导数的阶数</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$y'$ 是一阶，$y''$ 是二阶。看最高阶导数即可。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <span class="formula-num">通解</span>
+                    <div class="formula-label" style="color:#30D158;">含有任意常数的解</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">几阶就有几个任意常数 $C$。一阶一个 $C$，二阶两个 $C_1, C_2$。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FFD60A;">
+                    <span class="formula-num">特解</span>
+                    <div class="formula-label" style="color:var(--accent-yellow-text);">不含任意常数的解</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">先求通解，再用初始条件定 $C$。</div>
+                </div>
+            </div>
+
+            ${memoryBox('记忆锚点', '通解含 $C$，特解不含 $C$；阶数 = $C$ 的个数。一阶方程通解有 1 个 $C$，二阶方程通解有 2 个 $C$。求特解就是用初始条件把 $C$ 定下来。')}
+
+            ${groupTitle('fa-sitemap', '知识地图', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    <strong>一阶微分方程</strong><br>
+                    ├─ 可分离变量型（最基础）<br>
+                    ├─ 一阶线性公式法（最常用）<br>
+                    └─ 齐次 y/x 型（换元法）<br><br>
+                    <strong>二阶线性微分方程</strong><br>
+                    ├─ 齐次（特征方程法，三种根对应三种通解）<br>
+                    └─ 非齐次（齐通解 + 特解，待定系数法）
+                </div>
+            </div>
+            ${memoryBox('学习路径', '基础概念 → 可分离变量 → 一阶线性公式 → y/x 型 → 二阶齐次 → 二阶非齐次。层层递进，后一个都依赖前一个。')}
+        </div>
+    `;
+
+    // === Tab 2: 一阶方程 ===
+    const firstBody = `
+        <div class="detail-section" id="eq-first">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-arrow-up-1-9"></i> 一阶微分方程</div>
+            <div class="section-desc">一阶微分方程有三种解法，按优先级选择：先看能不能分离变量 → 再看是不是线性（套公式）→ 最后看 y/x 次数是否相同（换元）。</div>
+
+            ${groupTitle('fa-1', '3.1 可分离变量型', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#0A84FF;">识别特征</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">能把 $x$ 与 $dx$ 放一边、$y$ 与 $dy$ 放另一边。</div>
+                <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">标准步骤</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\frac{dy}{dx} = f(x)g(y) \\;\\Longrightarrow\\; \\frac{dy}{g(y)} = f(x)\\,dx \\;\\Longrightarrow\\; \\int \\frac{dy}{g(y)} = \\int f(x)\\,dx + C$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;">1. <strong>分离</strong> — $x,dx$ 和 $y,dy$ 归到两边<br>2. <strong>积分</strong> — 两边同时积分<br>3. <strong>加 $C$</strong> — 别忘了任意常数</div>
+            </div>
+            ${memoryBox('三个易错点', '① $e^{\\ln(\\text{框})} = \\text{框}$ — 指数对抵，别多写一步<br>② $\\int \\frac{1}{x}\\,dx = \\ln|x|$ — 绝对值不能丢<br>③ 加加减减混在一起的一般不可分离，别硬分')}
+
+            ${groupTitle('fa-2', '3.2 一阶线性微分方程（公式法）', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#30D158;">识别特征</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$y$ 和 $y'$ 都是一次的，右边有自由项。</div>
+                <div class="formula-label" style="color:#30D158;margin-top:1rem;">标准型</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$y' + P(x)\\,y = Q(x)$$
+                </div>
+                <div class="formula-label" style="color:#30D158;margin-top:1rem;">通解公式</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$y = e^{-\\int P(x)\\,dx}\\left[\\int Q(x)\\,e^{\\int P(x)\\,dx}\\,dx + C\\right]$$
+                </div>
+            </div>
+            ${memoryBox('记忆口诀：先积 P 得中间量，前负后正套括号，里面积分再加 C', '拆三步：<br>1. 先算 $\\int P(x)\\,dx$ — 记作"中间量"<br>2. 前头 $e^{-\\text{中间量}}$，括号里是 $\\int Q(x) \\cdot e^{\\text{中间量}}\\,dx + C$<br>3. $e^{-\\int}$ 在外面，$e^{+\\int}$ 在里面，一正一负别搞反')}
+            ${memoryBox('易错点', '① $P(x)$ 必须是标准型中 $y$ 前面的系数——$y\' - 3y = e^x$ 里 $P(x) = -3$，别漏负号<br>② $\\int P(x)\\,dx$ 不加 $C$（公式里已有一个总的 $C$）<br>③ $e^{-\\int P\\,dx}$ 在最外层，别写到括号里去')}
+
+            ${groupTitle('fa-3', '3.3 齐次型（y/x 型）', '#FFD60A')}
+            <div class="formula-card" style="--card-accent:#FFD60A;margin-bottom:1rem;">
+                <div class="formula-label" style="color:var(--accent-yellow-text);">识别特征</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">当方程里 $x$ 和 $y$ 的次数相同时，考虑用此法。</div>
+                <div class="formula-label" style="color:var(--accent-yellow-text);margin-top:1rem;">标准型</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\frac{dy}{dx} = \\varphi\\!\\left(\\frac{y}{x}\\right)$$
+                </div>
+                <div class="formula-label" style="color:var(--accent-yellow-text);margin-top:1rem;">换元步骤</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">1. 令 $u = \\frac{y}{x}$，即 $y = ux$<br>2. 求导：$\\frac{dy}{dx} = u + x\\frac{du}{dx}$<br>3. 代入原方程，转化为可分离变量型<br>4. 解出 $u$ 后，回代 $u = y/x$ 得到 $y$</div>
+            </div>
+            ${memoryBox('概念辨析：三个词别混', '线性 = 未知函数 $y$ 及其各阶导数都是一次<br>齐次（线性意义）= 方程右边自由项 = 0<br>非齐次 = 方程右边自由项 ≠ 0<br><br>记忆锚点：齐次 = 右边归零；线性 = 全是一次的。')}
+
+            ${groupTitle('fa-list-check', '一阶方法选择顺序', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    <strong>优先级 1</strong>：可分离变量 — $x,dx$ 与 $y,dy$ 可分开 → 分离 → 积分 → 加 $C$<br>
+                    <strong>优先级 2</strong>：一阶线性 — $y\',y$ 都一次，标准型 → 直接套通解公式<br>
+                    <strong>优先级 3</strong>：齐次 y/x 型 — $x,y$ 次数相同 → 令 $u=y/x$ 换元<br><br>
+                    <strong>选择口诀</strong>：先看能不能分离 → 再看是不是线性 → 最后看 y/x 次数同不同。
+                </div>
+            </div>
+        </div>
+    `;
+
+    // === Tab 3: 二阶齐次 ===
+    const homoBody = `
+        <div class="detail-section" id="eq-homo">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-equals"></i> 二阶齐次线性微分方程</div>
+            <div class="section-desc">二阶齐次线性方程用特征方程法求解。核心三步：标准型 → 特征方程 → 特征根 → 套通解。三种特征根对应三种通解形式。</div>
+
+            ${groupTitle('fa-calculator', '核心三步', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    <table style="width:100%;color:var(--text-secondary);font-size:0.9rem;">
+                        <tr><td style="padding:0.3rem 0;">标准型</td><td>$y'' + py' + qy = 0$</td></tr>
+                        <tr><td style="padding:0.3rem 0;">特征方程</td><td>$r^2 + pr + q = 0$</td></tr>
+                        <tr><td style="padding:0.3rem 0;">特征根</td><td>$r_{1,2} = \\dfrac{-p \\pm \\sqrt{p^2 - 4q}}{2}$</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            ${groupTitle('fa-link', '线性无关性', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    两个解 $y_1, y_2$ 若 $\\frac{y_1}{y_2} \\neq C$（常数）→ <strong>线性无关</strong>，可组合成通解<br>
+                    若 $\\frac{y_1}{y_2} = C$ → <strong>线性相关</strong>，不能直接相加
+                </div>
+            </div>
+
+            ${groupTitle('fa-star', '三种特征根 → 三种通解', '#FFD60A')}
+            <div class="formula-grid">
+                ${formulaCard('', '两个不相等实根', '$$y = C_1 e^{r_1 x} + C_2 e^{r_2 x}$$', '条件：$r_1 \\neq r_2$', '#FFD60A')}
+                ${formulaCard('', '两个相等实根', '$$y = (C_1 + C_2 x)\\,e^{r_1 x}$$', '条件：$r_1 = r_2$。重的那个乘 $x$', '#FFD60A')}
+                ${formulaCard('', '共轭复根', '$$y = e^{\\alpha x}(C_1 \\cos\\beta x + C_2 \\sin\\beta x)$$', '条件：$r_{1,2} = \\alpha \\pm \\beta i$', '#FFD60A')}
+            </div>
+            ${memoryBox('记忆锚点', '不等实根 → 两个 $e$ 直接加<br>相等实根 → 重的那个乘 $x$（$C_1 + C_2 x$）<br>复根 → 实部 $\\alpha$ 进指数，虚部 $\\beta$ 进三角（一 cos 一 sin）')}
+        </div>
+    `;
+
+    // === Tab 4: 二阶非齐次 ===
+    const nonhomoBody = `
+        <div class="detail-section" id="eq-nonhomo">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-plus"></i> 二阶非齐次线性微分方程</div>
+            <div class="section-desc">二阶非齐次方程的通解 = 齐次通解 + 非齐次特解。先求齐次通解（特征方程法），再用待定系数法求特解，最后组合。</div>
+
+            ${groupTitle('fa-key', '核心公式', '#FFD60A')}
+            <div class="formula-card" style="--card-accent:#FFD60A;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                    $$\\boxed{\\text{非齐通解} = \\text{齐次通解} + \\text{非齐次特解}}$$
+                </div>
+            </div>
+            ${memoryBox('记忆口诀：非齐等于齐加特', '先求齐次通解（同 4.1 的特征方程法），再设特解 $y^* = x^k \\cdot e^{\\alpha x} \\cdot Q(x)$，最后组合。')}
+
+            ${groupTitle('fa-list-ol', '求解流程', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    <strong>Step 1</strong>：求齐次通解（特征方程法）<br>
+                    <strong>Step 2</strong>：看右端 $P(x)e^{\\alpha x}$，设特解 $y^* = x^k \\cdot e^{\\alpha x} \\cdot Q(x)$<br>
+                    <strong>Step 3</strong>：由 $\\alpha$ 对比特征根 $r_1, r_2$ 定 $k$<br>
+                    <strong>Step 4</strong>：$Q(x)$ 取 $P(x)$ 的同次一般式（待定系数 $a, b, ...$）<br>
+                    <strong>Step 5</strong>：把 $y^*$ 代入原方程，解出 $a, b$ 等待定系数<br>
+                    <strong>Step 6</strong>：组合：非齐通解 = 齐通解 + 特解
+                </div>
+            </div>
+
+            ${groupTitle('fa-star', '关键：k 值怎么定', '#30D158')}
+            <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:1rem;">把右端指数里的 $\\alpha$ 拿去和特征根 $r_1, r_2$ 比较：</div>
+            <div class="formula-grid">
+                ${formulaCard('', 'α 不是特征根', '$$k = 0$$', '不重', '#30D158')}
+                ${formulaCard('', 'α 是单根（等于其中一个）', '$$k = 1$$', '重一次', '#30D158')}
+                ${formulaCard('', 'α 是重根（等于两个）', '$$k = 2$$', '重两次', '#30D158')}
+            </div>
+            ${memoryBox('记忆口诀', '看 $\\alpha$ 对根，$k$ 定 0/1/2；不重 0，单重 1，双重 2。')}
+
+            ${groupTitle('fa-square-root-variable', 'Q(x) 怎么设', '#FF9F0A')}
+            <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:1rem;">$Q(x)$ 取与 $P(x)$ 同次的一般式（系数用 $a, b, c$ 等待定）：</div>
+            <div class="formula-grid">
+                ${formulaCard('', 'P(x) = 常数 A', '$$Q(x) = a$$', '', '#FF9F0A')}
+                ${formulaCard('', 'P(x) = 一次 Ax+B', '$$Q(x) = ax + b$$', '', '#FF9F0A')}
+                ${formulaCard('', 'P(x) = 二次 Ax²+Bx+C', '$$Q(x) = ax^2 + bx + c$$', '', '#FF9F0A')}
+            </div>
+
+            ${groupTitle('fa-check', '完整特解形式', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                    $$y^* = x^k \\cdot e^{\\alpha x} \\cdot Q(x)$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">设好后代入原方程 $y'' + py' + qy = P(x)e^{\\alpha x}$，两边比较系数解出 $a, b, c$，得到真正的特解。</div>
+            </div>
+            ${memoryBox('易错警示', '① 设特解时 $x^k$ 别漏 — $k$ 由 $\\alpha$ 和特征根关系决定<br>② $Q(x)$ 必须是一般式（带待定系数），不能直接抄 $P(x)$ 的系数<br>③ 求完特解别忘了和齐次通解组合，题目问"通解"时只给特解会丢分<br>④ 题目若问"特解"，需用初始条件定 $C_1, C_2$')}
+        </div>
+    `;
+
+    // === Tab 5: 例题 ===
+    const exampleBody = `
+        <div class="detail-section" id="eq-example">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-pen-to-square"></i> 例题：完整计算流程</div>
+            <div class="section-desc">通过一道典型例题演示二阶非齐次微分方程的完整求解流程——从齐通解到设特解、定 $k$、求系数、组合。选了 $\\alpha$ 是单根（$k=1$）的题，最能体现 $k$ 值判断这个核心考点。</div>
+
+            ${groupTitle('fa-flag', '题目', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1.5rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                    $$y'' - 2y' - 3y = (2x+1)e^{3x}$$
+                </div>
+            </div>
+
+            ${groupTitle('fa-1', 'Step 1 — 求齐次通解 Y', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$r^2 - 2r - 3 = 0 \\;\\Rightarrow\\; (r-3)(r+1) = 0 \\;\\Rightarrow\\; r_1 = 3,\\; r_2 = -1$$
+                    <p style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin:0.5rem 0;">两个不相等实根 → 齐次通解：</p>
+                    $$Y = C_1 e^{3x} + C_2 e^{-x}$$
+                </div>
+                <div class="formula-note" style="font-size:0.85rem;color:var(--text-muted);">对应知识点：三种根的第一种。</div>
+            </div>
+
+            ${groupTitle('fa-2', 'Step 2 — 判断 k 值', '#FFD60A')}
+            <div class="formula-card" style="--card-accent:#FFD60A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">右端 $(2x+1)e^{3x}$ 中 $\\alpha = 3$，拿去和特征根 $r_1=3,\\; r_2=-1$ 比较：</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\alpha = 3 = r_1 \\quad\\text{（等于其中一个）}\\;\\Rightarrow\\; \\text{单根} \\;\\Rightarrow\\; k = 1$$
+                </div>
+                <div class="formula-note" style="font-size:0.85rem;color:var(--text-muted);">对应知识点：α 是单根 → k=1。如果不重 k=0，双重 k=2。</div>
+            </div>
+
+            ${groupTitle('fa-3', 'Step 3 — 设特解 y*', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$P(x) = 2x+1$ 是一次多项式 → $Q(x)$ 设同次一般式 $ax + b$。</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$y^* = x^k \\cdot e^{\\alpha x} \\cdot Q(x) = x^1 \\cdot e^{3x} \\cdot (ax + b) = (ax^2 + bx)\\,e^{3x}$$
+                </div>
+                <div class="formula-note" style="font-size:0.85rem;color:var(--accent-yellow-text);">注意：k=1 所以前面乘了 x，这一步最容易漏。</div>
+            </div>
+
+            ${groupTitle('fa-4', 'Step 4 — 求导并代入原方程', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#BF5AF2;">一阶导</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;font-size:0.85rem;">
+                    $$(y^*)' = e^{3x}\\big[\\,3(ax^2+bx) + (2ax+b)\\,\\big] = e^{3x}\\big[\\,3ax^2 + (2a+3b)x + b\\,\\big]$$
+                </div>
+                <div class="formula-label" style="color:#BF5AF2;margin-top:0.75rem;">二阶导</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;font-size:0.85rem;">
+                    $$(y^*)'' = e^{3x}\\big[\\,9ax^2 + (12a+9b)x + (2a+6b)\\,\\big]$$
+                </div>
+                <div class="formula-label" style="color:#BF5AF2;margin-top:0.75rem;">代入 $y'' - 2y' - 3y = (2x+1)e^{3x}$，两边约掉 $e^{3x}$</div>
+                <table style="width:100%;color:var(--text-secondary);font-size:0.85rem;margin-top:0.5rem;border-collapse:collapse;">
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem;"></td><td style="padding:0.3rem;">$x^2$ 项</td><td style="padding:0.3rem;">$x$ 项</td><td style="padding:0.3rem;">常数项</td></tr>
+                    <tr><td style="padding:0.3rem;">$y''$</td><td style="padding:0.3rem;">$9a$</td><td style="padding:0.3rem;">$12a+9b$</td><td style="padding:0.3rem;">$2a+6b$</td></tr>
+                    <tr><td style="padding:0.3rem;">$-2y'$</td><td style="padding:0.3rem;">$-6a$</td><td style="padding:0.3rem;">$-4a-6b$</td><td style="padding:0.3rem;">$-2b$</td></tr>
+                    <tr><td style="padding:0.3rem;">$-3y^*$</td><td style="padding:0.3rem;">$-3a$</td><td style="padding:0.3rem;">$-3b$</td><td style="padding:0.3rem;">$0$</td></tr>
+                    <tr style="border-top:1px solid var(--border-medium);font-weight:bold;"><td style="padding:0.3rem;">合计</td><td style="padding:0.3rem;color:#30D158;">$0$ ✓</td><td style="padding:0.3rem;">$8a$</td><td style="padding:0.3rem;">$2a+4b$</td></tr>
+                    <tr style="font-weight:bold;"><td style="padding:0.3rem;">右端</td><td style="padding:0.3rem;">$0$</td><td style="padding:0.3rem;">$2$</td><td style="padding:0.3rem;">$1$</td></tr>
+                </table>
+                <div class="formula-note" style="font-size:0.85rem;color:var(--accent-yellow-text);margin-top:0.5rem;">$x^2$ 项自动消为 0，说明设对了（否则说明 $k$ 设错）。</div>
+            </div>
+
+            ${groupTitle('fa-5', 'Step 5 — 解待定系数', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\begin{cases} 8a = 2 \\\\ 2a + 4b = 1 \\end{cases} \\;\\Longrightarrow\\; a = \\frac{1}{4},\\quad b = \\frac{1}{8}$$
+                </div>
+            </div>
+
+            ${groupTitle('fa-6', 'Step 6 — 写出特解并组合通解', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#30D158;">特解</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$y^* = \\left(\\frac{1}{4}x^2 + \\frac{1}{8}x\\right)e^{3x} = \\frac{x(2x+1)}{8}\\,e^{3x}$$
+                </div>
+                <div class="formula-label" style="color:#30D158;margin-top:0.75rem;">非齐通解 = 齐通解 + 特解</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\boxed{\\,y = C_1 e^{3x} + C_2 e^{-x} + \\frac{x(2x+1)}{8}\\,e^{3x}\\,}$$
+                </div>
+            </div>
+
+            ${memoryBox('复盘对照', '① 齐通解：特征方程 $(r-3)(r+1)=0$ → 两不等实根<br>② 定 $k$：$\\alpha=3=r_1$ 单根 → $k=1$<br>③ 设 $Q(x)$：$P(x)$ 一次 → $ax+b$<br>④ 代入：求导后代入，$x^2$ 项自动消掉（验证 $k$ 设对）<br>⑤ 解系数：联立方程组 $a=1/4,\\; b=1/8$<br>⑥ 组合：齐通解 + 特解')}
+        </div>
+    `;
+
+    // === Tab 6: 速查总表 ===
+    const summaryBody = `
+        <div class="detail-section" id="eq-summary">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-table"></i> 速查总表与口诀汇总</div>
+            <div class="section-desc">所有微分方程类型、识别方法、解法和关键点一表打包。考前复习看这一页就够了。</div>
+
+            ${groupTitle('fa-table', '速查总表', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1.5rem;">
+                <table style="width:100%;color:var(--text-secondary);font-size:0.85rem;border-collapse:collapse;">
+                    <tr style="border-bottom:1px solid var(--border-medium);">
+                        <th style="padding:0.5rem;text-align:left;">类型</th>
+                        <th style="padding:0.5rem;text-align:left;">识别</th>
+                        <th style="padding:0.5rem;text-align:left;">解法</th>
+                        <th style="padding:0.5rem;text-align:left;">关键点</th>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;">可分离变量</td>
+                        <td style="padding:0.5rem;">$x,dx$ 与 $y,dy$ 可分开</td>
+                        <td style="padding:0.5rem;">分离 → 积分 → 加 $C$</td>
+                        <td style="padding:0.5rem;">$\\ln|x|$ 别漏绝对值</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;">一阶线性</td>
+                        <td style="padding:0.5rem;">$y',y$ 都一次，标准型</td>
+                        <td style="padding:0.5rem;">套通解公式</td>
+                        <td style="padding:0.5rem;">$P(x)$ 别漏负号</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;">齐次 y/x 型</td>
+                        <td style="padding:0.5rem;">$x,y$ 次数相同</td>
+                        <td style="padding:0.5rem;">令 $u=y/x$ 换元</td>
+                        <td style="padding:0.5rem;">回代别忘了</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;">二阶齐次线性</td>
+                        <td style="padding:0.5rem;">$y''+py'+qy=0$</td>
+                        <td style="padding:0.5rem;">特征方程 → 三种根套三种通解</td>
+                        <td style="padding:0.5rem;">判别式定根的类型</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0.5rem;">二阶非齐次线性</td>
+                        <td style="padding:0.5rem;">右端 $=P(x)e^{\\alpha x}$</td>
+                        <td style="padding:0.5rem;">齐通解 + 设特解 $x^k e^{\\alpha x}Q(x)$</td>
+                        <td style="padding:0.5rem;">$k$ 由 $\\alpha$ 对根定</td>
+                    </tr>
+                </table>
+            </div>
+
+            ${groupTitle('fa-lightbulb', '核心记忆口诀汇总', '#FFD60A')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <div class="formula-label" style="color:#0A84FF;">基础概念</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">通解含 $C$，特解不含 $C$；阶数 = $C$ 的个数</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <div class="formula-label" style="color:#30D158;">一阶线性公式</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">先积 $P$ 得中间量，前负后正套括号，里面积分再加 $C$</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FFD60A;">
+                    <div class="formula-label" style="color:var(--accent-yellow-text);">概念辨析</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">齐次 = 右边归零；线性 = 全是一次的</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <div class="formula-label" style="color:#FF9F0A;">二阶齐次三种通解</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">不等实根两个 $e$ 加，相等实根重的乘 $x$，复根实进指虚进角</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#BF5AF2;">
+                    <div class="formula-label" style="color:#BF5AF2;">二阶非齐次核心公式</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">非齐等于齐加特</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <div class="formula-label" style="color:#FF3B30;">k 值判断</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">看 $\\alpha$ 对根，$k$ 定 0/1/2；不重 0，单重 1，双重 2</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#5AC8FA;">
+                    <div class="formula-label" style="color:#5AC8FA;">一阶方法选择</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">先看分离 → 再看线性 → 最后看 y/x</div>
+                </div>
+            </div>
+            ${memoryBox('考前必背', '这 7 条口诀覆盖了微分方程全部考点。遇到题目先识别类型，再套对应口诀，最后按流程求解。')}
+        </div>
+    `;
+
+    return { title: '微分方程框架详情', color: C, tabs, body: basicBody + firstBody + homoBody + nonhomoBody + exampleBody + summaryBody };
+}
+
 // ---------- 总览详情 ----------
 function buildOverviewDetail() {
     const C = '#BF5AF2';
@@ -1439,8 +1804,8 @@ function buildOverviewDetail() {
     `;
     const body = `
         <div class="detail-section active" id="over-all">
-            <div class="section-title" style="color:${C};"><i class="fa-solid fa-sitemap"></i> 公式体系全景</div>
-            <div class="section-desc">四大模块构成完整的微积分与三角函数公式网络。导数是核心枢纽，微分是导数的延伸，积分是导数的逆运算，三角函数贯穿三大模块。</div>
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-sitemap"></i> 高数框架全景</div>
+            <div class="section-desc">五大模块构成完整的四川专升本高数知识网络。导数是核心枢纽，微分是导数的延伸，积分是导数的逆运算，微分方程是导数与积分的综合应用，三角函数贯穿所有模块。</div>
 
             <div class="formula-grid">
                 <div class="formula-card" style="--card-accent:#0A84FF;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('derivative'),450)">
@@ -1458,9 +1823,9 @@ function buildOverviewDetail() {
                     <div class="formula-label" style="color:#BF5AF2;"><i class="fa-solid fa-arrows-left-right"></i> 微分模块</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                         <strong>定义</strong>：dy = f'(x) dx<br>
-                        <strong>公式数</strong>：16条 + 3类方程<br>
+                        <strong>公式数</strong>：16条<br>
                         <strong>核心</strong>：微分 = 导数 × dx，一阶微分形式不变性<br>
-                        <strong>延伸</strong>：微分方程（可分离变量、齐次、一阶线性）
+                        <strong>地位</strong>：导数的延伸，与导数公式一一对应
                     </div>
                     <div style="margin-top:0.75rem;color:#BF5AF2;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
                 </div>
@@ -1482,16 +1847,27 @@ function buildOverviewDetail() {
                         <strong>定义</strong>：sin²x + cos²x = 1<br>
                         <strong>内容</strong>：关系·特殊值·常见转换·升幂缩角·降幂扩角·六边形·诱导<br>
                         <strong>核心</strong>：一个平方公式衍生所有恒等式<br>
-                        <strong>地位</strong>：贯穿导数、微分、积分三大模块
+                        <strong>地位</strong>：贯穿导数、微分、积分、微分方程
                     </div>
                     <div style="margin-top:0.75rem;color:#FF3B30;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
                 </div>
+
+                <div class="formula-card" style="--card-accent:#FF9F0A;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('equation'),450)">
+                    <div class="formula-label" style="color:#FF9F0A;"><i class="fa-solid fa-square-root-variable"></i> 微分方程模块</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        <strong>内容</strong>：一阶3种 + 二阶齐次/非齐次<br>
+                        <strong>一阶</strong>：可分离变量、一阶线性公式、齐次y/x型<br>
+                        <strong>二阶</strong>：特征方程法 + 待定系数法<br>
+                        <strong>地位</strong>：导数与积分的综合应用，含完整例题
+                    </div>
+                    <div style="margin-top:0.75rem;color:#FF9F0A;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
+                </div>
             </div>
 
-            ${memoryBox('联动记忆三大策略', '① 导数↔积分联动记忆，记住一边等于记住两边；② 微分不用单独背，导数 × dx 就是微分；③ 三角函数抓主干——从一个核心平方公式推导所有恒等式，从二倍角推导降幂公式。')}
+            ${memoryBox('联动记忆四大策略', '① 导数↔积分联动记忆，记住一边等于记住两边；② 微分不用单独背，导数 × dx 就是微分；③ 三角函数抓主干——从一个核心平方公式推导所有恒等式；④ 微分方程 = 导数与积分的综合应用，非齐等于齐加特。')}
         </div>
     `;
-    return { title: '公式体系总览', color: C, tabs, body };
+    return { title: '高数框架总览', color: C, tabs, body };
 }
 
 // ============================================================
@@ -1504,6 +1880,7 @@ function buildDetailContent(type) {
         case 'differential': return buildDifferentialDetail();
         case 'integral': return buildIntegralDetail();
         case 'trigonometric': return buildTrigonometricDetail();
+        case 'equation': return buildEquationDetail();
     }
 }
 
