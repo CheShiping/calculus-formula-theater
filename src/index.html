@@ -622,6 +622,38 @@
                 height: 36px;
                 font-size: 0.85rem;
             }
+
+            /* 详情页头部：紧凑化 */
+            .detail-header {
+                padding: 0.6rem 0.75rem;
+                gap: 0.5rem;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .detail-header::-webkit-scrollbar { display: none; }
+            .back-btn {
+                padding: 0.35rem 0.5rem;
+                font-size: 0.75rem;
+                border-radius: 8px;
+                flex-shrink: 0;
+                gap: 0.25rem;
+            }
+            .back-btn span { display: none; }
+            #detail-header-title { display: none; }
+            .detail-tabs {
+                gap: 0.35rem;
+                flex-wrap: nowrap;
+                flex: 0 0 auto;
+            }
+            .detail-tab {
+                padding: 0.3rem 0.7rem;
+                font-size: 0.7rem;
+                border-radius: 6px;
+                flex-shrink: 0;
+            }
+            .detail-body { padding: 1rem; }
         }
 
         /* 小屏手机 */
@@ -856,7 +888,7 @@
 <div id="detail-view">
     <div class="detail-header">
         <button class="back-btn" onclick="exitDetail()">
-            <i class="fa-solid fa-arrow-left"></i> 返回卡片
+            <i class="fa-solid fa-arrow-left"></i><span> 返回卡片</span>
         </button>
         <h2 id="detail-header-title" class="text-lg font-bold text-white">详情</h2>
         <div class="detail-tabs" id="detail-tabs"></div>
