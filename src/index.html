@@ -735,13 +735,14 @@
                         </div>
                         <div class="module-tag bg-purple/20 text-purple">总览</div>
                         <h3 class="card-title">高数框架总览</h3>
-                        <p class="card-subtitle" style="--sub-color: #BF5AF2;">五大模块联动</p>
+                        <p class="card-subtitle" style="--sub-color: #BF5AF2;">六大模块联动</p>
                         <div class="formula-list" style="--dot-color: #BF5AF2;">
                             <li>导数 → 变化率 / 切线斜率</li>
                             <li>微分 → 导数 × dx（延伸）</li>
                             <li>积分 → 导数的逆运算</li>
                             <li>微分方程 → 导数与积分的综合应用</li>
                             <li>三角函数 → 贯穿四大模块</li>
+                            <li>行列式 → 线性代数基础工具</li>
                         </div>
                         <div class="memory-tip">
                             <span class="highlight-text" style="--hl-color: #BF5AF2;">导数是核心枢纽</span>
@@ -879,6 +880,32 @@
                     </div>
                 </div>
 
+                <!-- 卡片 07：线性代数-行列式 -->
+                <div class="swiper-slide" onclick="enterDetail('linear')">
+                    <span class="bg-number">07</span>
+                    <div class="card-content">
+                        <div class="card-icon text-cyan" style="--icon-glow: rgba(90, 200, 250, 0.4);">
+                            <i class="fa-solid fa-table-cells"></i>
+                        </div>
+                        <div class="module-tag bg-cyan/20 text-cyan">线性代数</div>
+                        <h3 class="card-title">行列式框架</h3>
+                        <p class="card-subtitle" style="--sub-color: #5AC8FA;">计算 + 性质 + 展开 · 含例题</p>
+                        <div class="formula-block">
+                            $$D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}$$
+                        </div>
+                        <div class="formula-list" style="--dot-color: #5AC8FA;">
+                            <li>二阶三阶：对角线法（主减副）</li>
+                            <li>六条性质：转置·互换·倍乘·倍加·拆分</li>
+                            <li>特殊型：范德蒙德·行和·爪形·分块</li>
+                            <li>展开逆用：同自己得 D，替别人得 0</li>
+                        </div>
+                        <div class="memory-tip">
+                            <span class="highlight-text" style="--hl-color: #5AC8FA;">大下标减小下标</span>
+                        </div>
+                        <div class="enter-hint">⟜ 点击进入行列式详情 ⟝</div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </main>
@@ -937,6 +964,12 @@ const sidebarData = [
         title: "微分方程框架",
         desc: "微分方程是导数与积分的综合应用。一阶分三类（可分离变量、一阶线性公式、齐次y/x型），二阶分齐次与非齐次——齐次用特征方程法三种根套三种通解，非齐次用「齐通解+特解」的待定系数法。配完整例题演示计算全流程。",
         note: "💡 非齐等于齐加特。k值口诀：不重0，单重1，双重2。点击进入微分方程详情"
+    },
+    {
+        module: "线性代数", moduleColor: "#5AC8FA",
+        title: "行列式框架",
+        desc: "行列式是线性代数的基础工具。二阶三阶用对角线法（主减副），四阶以上用展开降阶。六条性质是化简的核心——倍加不变是化上三角的关键。特殊行列式各有套路：范德蒙德套连乘公式、行和相同用加提减三步、爪形消头化尾、分块三角直接乘。展开逆用是重要考点：同自己得D，替别人得0。",
+        note: "💡 大下标减小下标，所有差乘起来。展开逆用：同自己得D，替别人得0。点击进入行列式详情"
     }
 ];
 
@@ -1828,6 +1861,306 @@ function buildEquationDetail() {
     return { title: '微分方程框架详情', color: C, tabs, body: basicBody + firstBody + homoBody + nonhomoBody + exampleBody + summaryBody };
 }
 
+// ---------- 行列式详情 ----------
+function buildLinearDetail() {
+    const C = '#5AC8FA';
+    const tabs = `
+        <div class="detail-tab active" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('ln-basic', this)">基础计算</div>
+        <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('ln-prop', this)">六条性质</div>
+        <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('ln-special', this)">特殊行列式</div>
+        <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('ln-expand', this)">展开定理</div>
+        <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('ln-summary', this)">速查总表</div>
+    `;
+
+    // === Tab 1: 基础计算 ===
+    const basicBody = `
+        <div class="detail-section active" id="ln-basic">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-table-cells"></i> 行列式基础计算</div>
+            <div class="section-desc">行列式是一个方阵对应的标量值。二阶三阶有专门的对角线法，四阶及以上必须用展开降阶。</div>
+
+            ${groupTitle('fa-2', '1.1 二阶行列式', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\begin{vmatrix} a_{11} & a_{12} \\\\ a_{21} & a_{22} \\end{vmatrix} = a_{11}a_{22} - a_{12}a_{21}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">口诀：<strong>主对角相乘减副对角相乘</strong>。</div>
+            </div>
+
+            ${groupTitle('fa-3', '1.2 三阶行列式（沙路法）', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\begin{vmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{vmatrix}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    <strong>一个串两个</strong>——每行元素向后串两列，形成 3 条主对角线 + 3 条副对角线：<br>
+                    • 主对角线方向（3 条）相乘<strong>相加</strong><br>
+                    • 副对角线方向（3 条）相乘<strong>相减</strong>
+                </div>
+            </div>
+            ${memoryBox('关键提醒', '四阶及以上<strong>没有</strong>对角线计算法！必须用后面的展开定理降阶。')}
+
+            ${groupTitle('fa-sitemap', '知识地图', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    <strong>计算</strong><br>
+                    ├─ 二阶：对角线法<br>
+                    ├─ 三阶：沙路法（3 主 + 3 副）<br>
+                    └─ 四阶及以上：展开降阶<br><br>
+                    <strong>性质</strong>（6 条）：转置 · 互换 · 倍乘 · 倍加 · 拆分 · 零判<br><br>
+                    <strong>特殊行列式</strong><br>
+                    ├─ 范德蒙德<br>
+                    ├─ 行和相同<br>
+                    ├─ 爪形<br>
+                    └─ 分块<br><br>
+                    <strong>展开</strong>：余子式 → 代数余子式 → 拉普拉斯 → 逆用
+                </div>
+            </div>
+        </div>
+    `;
+
+    // === Tab 2: 六条性质 ===
+    const propBody = `
+        <div class="detail-section" id="ln-prop">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-list-check"></i> 行列式的性质</div>
+            <div class="section-desc">六条性质是化简行列式的核心工具，尤其是「倍加不变」用于化上三角，「互换变号」用于调整主元位置。</div>
+
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <span class="formula-num">性质 1</span>
+                    <div class="formula-label" style="color:#0A84FF;">转置不变</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$D^T = D$$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">行与列等价，对行成立的性质对列也成立。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <span class="formula-num">性质 2</span>
+                    <div class="formula-label" style="color:#30D158;">互换变号</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">任意两行（列）互换，行列式<strong>变号</strong>。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FFD60A;">
+                    <span class="formula-num">性质 3</span>
+                    <div class="formula-label" style="color:var(--accent-yellow-text);">倍乘</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">某行（列）乘 $k$，行列式乘 $k$。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <span class="formula-num">性质 4</span>
+                    <div class="formula-label" style="color:#FF9F0A;">倍加不变 ★</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">某行 × $k$ 加到另一行，行列式<strong>不变</strong>。化上三角的核心！</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#BF5AF2;">
+                    <span class="formula-num">性质 5</span>
+                    <div class="formula-label" style="color:#BF5AF2;">拆分</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">某行可拆成两元素之和，行列式拆为两个之和。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <span class="formula-num">性质 6</span>
+                    <div class="formula-label" style="color:#FF3B30;">零判</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">某行全为 0 / 两行成比例 → $D = 0$。</div>
+                </div>
+            </div>
+            ${memoryBox('记忆要点', '性质 4「倍加不变」是化上三角的核心工具；性质 2「互换变号」用于调整主元位置时记号。两行相同或成比例，行列式必为 0。')}
+        </div>
+    `;
+
+    // === Tab 3: 特殊行列式 ===
+    const specialBody = `
+        <div class="detail-section" id="ln-special">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-shapes"></i> 特殊行列式</div>
+            <div class="section-desc">四类常见特殊行列式各有套路：范德蒙德套公式、行和相同用加提减、爪形消头化尾、分块三角直接乘。</div>
+
+            ${groupTitle('fa-star', '3.1 范德蒙德行列式', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$V = \\begin{vmatrix} 1 & 1 & 1 \\\\ x_1 & x_2 & x_3 \\\\ x_1^2 & x_2^2 & x_3^2 \\end{vmatrix} = \\prod_{1 \\le i < j \\le 3}(x_j - x_i)$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    <strong>标准形式</strong>：第 1 行 0 次方（全 1）、第 2 行 1 次方、第 3 行 2 次方<br>
+                    <strong>口诀</strong>：大下标减小下标，所有差乘起来<br>
+                    3 阶展开：$V = (x_2-x_1)(x_3-x_1)(x_3-x_2)$
+                </div>
+                <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    计算 $\\begin{vmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 3 \\\\ 1 & 4 & 9 \\end{vmatrix}$，识别 $x_1=1,x_2=2,x_3=3$：<br>
+                    $V = (2-1)(3-1)(3-2) = 1 \\times 2 \\times 1 = 2$
+                </div>
+            </div>
+
+            ${groupTitle('fa-equals', '3.2 行和相同的行列式', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#30D158;">特征</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">每一行（或每一列）元素之和为同一常数。</div>
+                <div class="formula-label" style="color:#30D158;margin-top:1rem;">通用解法（5 步）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    <strong>Step 1</strong> 把其余各列加到第 1 列<br>
+                    <strong>Step 2</strong> 提取第 1 列公因式，该列全变 1<br>
+                    <strong>Step 3</strong> 其余各行减去第 1 行<br>
+                    <strong>Step 4</strong> 得到接近上三角的形式<br>
+                    <strong>Step 5</strong> 必要时调换行序；若出现两列全为 1，重新提公因式
+                </div>
+                <div class="formula-label" style="color:#30D158;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 2 & 3 & 1 \\\\ 3 & 1 & 2 \\end{vmatrix}$（行和均为 6）<br>
+                    加列 → 提 6 → 消行 → 展开：<br>
+                    $D = 6 \\begin{vmatrix} 1 & 2 & 3 \\\\ 0 & 1 & -2 \\\\ 0 & -1 & -1 \\end{vmatrix} = 6 \\times (-3) = -18$
+                </div>
+            </div>
+
+            ${groupTitle('fa-anchor', '3.3 爪形行列式', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\begin{vmatrix} a_1 & b_1 & b_2 & b_3 \\\\ c_1 & a_2 & 0 & 0 \\\\ c_2 & 0 & a_3 & 0 \\\\ c_3 & 0 & 0 & a_4 \\end{vmatrix}$$
+                </div>
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">解法</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">利用性质把第 1 行（或第 1 列）的非对角元素消为 0，化为上（下）三角，再按行/列展开计算。</div>
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $D = \\begin{vmatrix} 1 & 2 & 3 & 4 \\\\ 2 & 3 & 0 & 0 \\\\ 3 & 0 & 4 & 0 \\\\ 4 & 0 & 0 & 5 \\end{vmatrix}$<br>
+                    消第 1 行非对角元（用各列消）：$a'_{11} = 1 - \\tfrac{4}{3} - \\tfrac{9}{4} - \\tfrac{16}{5} = -\\tfrac{347}{60}$<br>
+                    $D = -\\tfrac{347}{60} \\times 3 \\times 4 \\times 5 = -347$
+                </div>
+            </div>
+            ${memoryBox('爪形技巧', '通用套路——「消头化尾」：把第 1 行（或第 1 列）的非对角元全部消为 0，剩下对角线元素相乘。')}
+
+            ${groupTitle('fa-th-large', '3.4 分块行列式', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\begin{vmatrix} A & O \\\\ O & B \\end{vmatrix} = |A| \\cdot |B| \\quad\\quad \\begin{vmatrix} A & C \\\\ O & B \\end{vmatrix} = |A| \\cdot |B|$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">分块上/下三角行列式 = 主对角分块行列式之积；非对角分块需具体展开，不可直接套乘。</div>
+                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $D = \\begin{vmatrix} 2 & 1 & 0 & 0 \\\\ 1 & 3 & 0 & 0 \\\\ 1 & 2 & 4 & 5 \\\\ 3 & 4 & 1 & 2 \\end{vmatrix}$<br>
+                    识别为分块下三角（右上为零）：<br>
+                    $|A| = \\begin{vmatrix} 2 & 1 \\\\ 1 & 3 \\end{vmatrix} = 5$，$|B| = \\begin{vmatrix} 4 & 5 \\\\ 1 & 2 \\end{vmatrix} = 3$<br>
+                    $D = |A| \\cdot |B| = 5 \\times 3 = 15$
+                </div>
+            </div>
+            ${memoryBox('分块关键', '识别分块结构后，右上角为零即为分块下三角，左下角为零即为分块上三角，两者都可套用 $|A| \\cdot |B|$；分块 $C$ 的内容不影响结果。')}
+        </div>
+    `;
+
+    // === Tab 4: 展开定理 ===
+    const expandBody = `
+        <div class="detail-section" id="ln-expand">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-expand"></i> 展开定理</div>
+            <div class="section-desc">展开定理是四阶及以上行列式计算的核心工具，也是重要考点。掌握「同自己得 D，替别人得 0」的逆用。</div>
+
+            ${groupTitle('fa-square-root-variable', '4.1 余子式与代数余子式', '#0A84FF')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <span class="formula-num">余子式</span>
+                    <div class="formula-label" style="color:#0A84FF;">$M_{ij}$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">划去第 $i$ 行第 $j$ 列后剩下的 $(n-1)$ 阶行列式。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <span class="formula-num">代数余子式</span>
+                    <div class="formula-label" style="color:#30D158;">$A_{ij} = (-1)^{i+j} M_{ij}$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$i+j$ 偶数取正，奇数取负（棋盘格）。</div>
+                </div>
+            </div>
+
+            ${groupTitle('fa-list-ol', '4.2 拉普拉斯展开定理', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#30D158;">按第 $i$ 行展开</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$D = a_{i1}A_{i1} + a_{i2}A_{i2} + \\cdots + a_{in}A_{in}$$
+                </div>
+                <div class="formula-label" style="color:#30D158;margin-top:1rem;">按第 $j$ 列展开</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$D = a_{1j}A_{1j} + a_{2j}A_{2j} + \\cdots + a_{nj}A_{nj}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;">选择策略：优先选 <strong>0 元素最多</strong>的行/列展开，减少计算量。</div>
+            </div>
+
+            ${groupTitle('fa-arrows-rotate', '4.3 展开的逆用', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#FF9F0A;">引理（代数余子式线性组合）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">若某行代数余子式 $A_{i1}, A_{i2}, \\cdots, A_{in}$ 前的系数为 $b_1, b_2, \\cdots, b_n$，则其和等于<strong>把原行列式第 $i$ 行替换为 $b_1, b_2, \\cdots, b_n$ 后</strong>的新行列式。</div>
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    设 $D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 2 & 1 & 1 \\\\ 3 & 2 & 1 \\end{vmatrix}$，求 $2A_{21} + A_{22} + A_{23}$。<br>
+                    系数 $(2,1,1)$ 恰为第 2 行本身，故：$2A_{21} + A_{22} + A_{23} = D$
+                </div>
+            </div>
+
+            <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#BF5AF2;">定理（异行代数余子式之和为 0）</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$a_{i1}A_{j1} + a_{i2}A_{j2} + \\cdots + a_{in}A_{jn} = 0 \\quad (i \\neq j)$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">相当于把第 $j$ 行替换为第 $i$ 行元素后求行列式，此时两行相同，故 $D = 0$。</div>
+                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    同上 $D$，求 $a_{11}A_{21} + a_{12}A_{22} + a_{13}A_{23}$（第 1 行元素 × 第 2 行代数余子式，异行）：<br>
+                    $a_{11}A_{21} + a_{12}A_{22} + a_{13}A_{23} = 0$
+                </div>
+            </div>
+            ${memoryBox('核心记忆', '<strong>同自己得 D，替别人得 0</strong>。<br>• 同行（列）元素 × 自己的代数余子式 = $D$<br>• 异行（列）元素 × 代数余子式 = $0$')}
+        </div>
+    `;
+
+    // === Tab 5: 速查总表 ===
+    const summaryBody = `
+        <div class="detail-section" id="ln-summary">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-table-list"></i> 速查总表</div>
+            <div class="section-desc">七类行列式一表打包，考前速查。</div>
+
+            <div class="formula-card" style="--card-accent:${C};margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:2;">
+                    <strong>二阶</strong> — 主对角减副对角 — $ad - bc$<br>
+                    <strong>三阶</strong> — 沙路法（3 主 + 3 副）— 四阶以上不可用<br>
+                    <strong>范德蒙德</strong> — 大下标减小下标连乘 — $\\prod (x_j - x_i)$<br>
+                    <strong>行和相同</strong> — 加到第 1 列 → 提公因式 → 减第 1 行 — 化上三角<br>
+                    <strong>爪形</strong> — 消第 1 行非对角元为 0 — 再展开<br>
+                    <strong>分块三角</strong> — 主对角分块相乘 — $|A| \\cdot |B|$<br>
+                    <strong>一般 n 阶</strong> — 选 0 最多的行/列展开降阶 — 拉普拉斯
+                </div>
+            </div>
+
+            ${groupTitle('fa-lightbulb', '七条核心记忆口诀', '#FFD60A')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <span class="formula-num">1</span>
+                    <div class="formula-label" style="color:#0A84FF;">二阶三阶</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">主减副</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <span class="formula-num">2</span>
+                    <div class="formula-label" style="color:#30D158;">范德蒙德</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">大下标减小下标，所有差乘起来</div>
+                </div>
+                <div class="formula-card" style="--card-accent:var(--accent-yellow);">
+                    <span class="formula-num">3</span>
+                    <div class="formula-label" style="color:var(--accent-yellow-text);">行和相同</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">加、提、减、三角</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <span class="formula-num">4</span>
+                    <div class="formula-label" style="color:#FF9F0A;">展开符号</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">棋盘格定正负，$(-1)^{i+j}$</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#BF5AF2;">
+                    <span class="formula-num">5</span>
+                    <div class="formula-label" style="color:#BF5AF2;">展开逆用</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">同自己得 D，替别人得 0</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <span class="formula-num">6</span>
+                    <div class="formula-label" style="color:#FF3B30;">爪形</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">消头化尾再展开</div>
+                </div>
+                <div class="formula-card" style="--card-accent:${C};">
+                    <span class="formula-num">7</span>
+                    <div class="formula-label" style="color:${C};">分块三角</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">主对角分块直接乘</div>
+                </div>
+            </div>
+            ${memoryBox('考前必背', '这 7 条口诀覆盖了行列式全部考点。遇到题目先识别类型，再套对应口诀，最后按流程求解。')}
+        </div>
+    `;
+
+    return { title: '行列式框架详情', color: C, tabs, body: basicBody + propBody + specialBody + expandBody + summaryBody };
+}
+
 // ---------- 总览详情 ----------
 function buildOverviewDetail() {
     const C = '#BF5AF2';
@@ -1837,7 +2170,7 @@ function buildOverviewDetail() {
     const body = `
         <div class="detail-section active" id="over-all">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-sitemap"></i> 高数框架全景</div>
-            <div class="section-desc">五大模块构成完整的四川专升本高数知识网络。导数是核心枢纽，微分是导数的延伸，积分是导数的逆运算，微分方程是导数与积分的综合应用，三角函数贯穿所有模块。</div>
+            <div class="section-desc">六大模块构成完整的四川专升本高数知识网络。导数是核心枢纽，微分是导数的延伸，积分是导数的逆运算，微分方程是导数与积分的综合应用，三角函数贯穿所有模块，行列式是线性代数的基础工具。</div>
 
             <div class="formula-grid">
                 <div class="formula-card" style="--card-accent:#0A84FF;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('derivative'),450)">
@@ -1894,6 +2227,17 @@ function buildOverviewDetail() {
                     </div>
                     <div style="margin-top:0.75rem;color:#FF9F0A;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
                 </div>
+
+                <div class="formula-card" style="--card-accent:#5AC8FA;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('linear'),450)">
+                    <div class="formula-label" style="color:#5AC8FA;"><i class="fa-solid fa-table-cells"></i> 行列式模块</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        <strong>内容</strong>：计算 + 6条性质 + 4类特殊型 + 展开<br>
+                        <strong>计算</strong>：二阶三阶对角线法，四阶以上展开降阶<br>
+                        <strong>特殊型</strong>：范德蒙德、行和相同、爪形、分块<br>
+                        <strong>地位</strong>：线性代数基础工具，含完整例题
+                    </div>
+                    <div style="margin-top:0.75rem;color:#5AC8FA;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
+                </div>
             </div>
 
             ${memoryBox('联动记忆四大策略', '① 导数↔积分联动记忆，记住一边等于记住两边；② 微分不用单独背，导数 × dx 就是微分；③ 三角函数抓主干——从一个核心平方公式推导所有恒等式；④ 微分方程 = 导数与积分的综合应用，非齐等于齐加特。')}
@@ -1913,6 +2257,7 @@ function buildDetailContent(type) {
         case 'integral': return buildIntegralDetail();
         case 'trigonometric': return buildTrigonometricDetail();
         case 'equation': return buildEquationDetail();
+        case 'linear': return buildLinearDetail();
     }
 }
 
