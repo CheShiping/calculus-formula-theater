@@ -735,25 +735,53 @@
                         </div>
                         <div class="module-tag bg-purple/20 text-purple">总览</div>
                         <h3 class="card-title">高数框架总览</h3>
-                        <p class="card-subtitle" style="--sub-color: #BF5AF2;">六大模块联动</p>
+                        <p class="card-subtitle" style="--sub-color: #BF5AF2;">七大模块联动</p>
                         <div class="formula-list" style="--dot-color: #BF5AF2;">
+                            <li>函数·极限·连续 → 地基与核心工具</li>
                             <li>导数 → 变化率 / 切线斜率</li>
                             <li>微分 → 导数 × dx（延伸）</li>
                             <li>积分 → 导数的逆运算</li>
                             <li>微分方程 → 导数与积分的综合应用</li>
-                            <li>三角函数 → 贯穿四大模块</li>
+                            <li>三角函数 → 贯穿以上所有模块</li>
                             <li>行列式 → 线性代数基础工具</li>
                         </div>
                         <div class="memory-tip">
-                            <span class="highlight-text" style="--hl-color: #BF5AF2;">导数是核心枢纽</span>
+                            <span class="highlight-text" style="--hl-color: #BF5AF2;">函数极限连续是地基</span>
                         </div>
                         <div class="enter-hint">⟜ 滚动浏览 · 点击进入 ⟝</div>
                     </div>
                 </div>
 
-                <!-- 卡片 02：导数定义 -->
-                <div class="swiper-slide" onclick="enterDetail('derivative')">
+                <!-- 卡片 02：函数·极限·连续 -->
+                <div class="swiper-slide" onclick="enterDetail('function')">
                     <span class="bg-number">02</span>
+                    <div class="card-content">
+                        <div class="card-icon text-warning" style="--icon-glow: rgba(255, 214, 10, 0.45);">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <div class="module-tag bg-warning/20" style="color:#FFD60A;">第一章 · 地基</div>
+                        <h3 class="card-title">函数 · 极限 · 连续</h3>
+                        <p class="card-subtitle" style="--sub-color: #FFD60A;">高数开篇 · 七种未定式</p>
+                        <div class="formula-block">
+                            $$\lim_{x \to x_0} f(x) = f(x_0)$$
+                            $$\text{七种未定式：} \frac{0}{0},\, \frac{\infty}{\infty},\, \infty{-}\infty,\, 0{\cdot}\infty,\, 1^\infty,\, 0^0,\, \infty^0$$
+                        </div>
+                        <div class="formula-list" style="--dot-color: #FFD60A;">
+                            <li>函数：定义域 · 奇偶性 · 反函数</li>
+                            <li>极限：洛必达 · 等价 · 抓大头 · 夹逼</li>
+                            <li>连续：间断点分类 + 渐近线</li>
+                            <li>含四川 / 山东 / 河南真题</li>
+                        </div>
+                        <div class="memory-tip">
+                            <span class="highlight-text" style="--hl-color: #FFD60A;">1^∞ → e^{lim αβ}</span>
+                        </div>
+                        <div class="enter-hint">⟜ 点击进入第一章详情 ⟝</div>
+                    </div>
+                </div>
+
+                <!-- 卡片 03：导数定义 -->
+                <div class="swiper-slide" onclick="enterDetail('derivative')">
+                    <span class="bg-number">03</span>
                     <div class="card-content">
                         <div class="card-icon text-primary" style="--icon-glow: rgba(10, 132, 255, 0.4);">
                             <i class="fa-solid fa-chart-line"></i>
@@ -776,9 +804,9 @@
                     </div>
                 </div>
 
-                <!-- 卡片 03：微分定义 -->
+                <!-- 卡片 04：微分定义 -->
                 <div class="swiper-slide" onclick="enterDetail('differential')">
-                    <span class="bg-number">03</span>
+                    <span class="bg-number">04</span>
                     <div class="card-content">
                         <div class="card-icon text-purple" style="--icon-glow: rgba(191, 90, 242, 0.4);">
                             <i class="fa-solid fa-arrows-left-right"></i>
@@ -802,9 +830,9 @@
                     </div>
                 </div>
 
-                <!-- 卡片 04：积分定义 -->
+                <!-- 卡片 05：积分定义 -->
                 <div class="swiper-slide" onclick="enterDetail('integral')">
-                    <span class="bg-number">04</span>
+                    <span class="bg-number">05</span>
                     <div class="card-content">
                         <div class="card-icon text-accent" style="--icon-glow: rgba(48, 209, 88, 0.4);">
                             <i class="fa-solid fa-infinity"></i>
@@ -828,9 +856,9 @@
                     </div>
                 </div>
 
-                <!-- 卡片 05：三角函数定义 -->
+                <!-- 卡片 06：三角函数定义 -->
                 <div class="swiper-slide" onclick="enterDetail('trigonometric')">
-                    <span class="bg-number">05</span>
+                    <span class="bg-number">06</span>
                     <div class="card-content">
                         <div class="card-icon text-danger" style="--icon-glow: rgba(255, 59, 48, 0.4);">
                             <i class="fa-solid fa-wave-square"></i>
@@ -854,9 +882,9 @@
                     </div>
                 </div>
 
-                <!-- 卡片 06：微分方程 -->
+                <!-- 卡片 07：微分方程 -->
                 <div class="swiper-slide" onclick="enterDetail('equation')">
-                    <span class="bg-number">06</span>
+                    <span class="bg-number">07</span>
                     <div class="card-content">
                         <div class="card-icon text-orange" style="--icon-glow: rgba(255, 159, 10, 0.4);">
                             <i class="fa-solid fa-square-root-variable"></i>
@@ -880,9 +908,9 @@
                     </div>
                 </div>
 
-                <!-- 卡片 07：线性代数-行列式 -->
+                <!-- 卡片 08：线性代数-行列式 -->
                 <div class="swiper-slide" onclick="enterDetail('linear')">
-                    <span class="bg-number">07</span>
+                    <span class="bg-number">08</span>
                     <div class="card-content">
                         <div class="card-icon text-cyan" style="--icon-glow: rgba(90, 200, 250, 0.4);">
                             <i class="fa-solid fa-table-cells"></i>
@@ -932,8 +960,14 @@ const sidebarData = [
     {
         module: "总览", moduleColor: "#BF5AF2",
         title: "高数框架总览",
-        desc: "四川专升本高数的知识不是孤立的，它们构成一个完整的网络。导数是核心枢纽——微分是导数的另一种表达，积分是导数的逆运算，微分方程是导数与积分的综合应用，三角函数贯穿始终。理解了这个关系图，记忆就有了骨架。",
+        desc: "四川专升本高数的知识不是孤立的，它们构成一个完整的网络。函数·极限·连续是地基；导数是核心枢纽——微分是导数的另一种表达，积分是导数的逆运算，微分方程是导数与积分的综合应用；三角函数贯穿始终；行列式是线性代数基础工具。理解了这个关系图，记忆就有了骨架。",
         note: "💡 点击居中的卡片，进入对应模块的完整知识详情页"
+    },
+    {
+        module: "第一章·地基", moduleColor: "#FFD60A",
+        title: "函数 · 极限 · 连续",
+        desc: "高数开篇第一章，也是一切的地基。函数是研究对象（定义域、奇偶性、反函数）；极限是核心工具（七种未定式、洛必达、等价无穷小、夹逼、反求参数、无穷小比较）；连续是函数的性质（间断点分类、水平/垂直渐近线）。含四川2024、山东2023、河南2023专升本真题。",
+        note: "💡 1^∞ 高频：有 1+ 直接 e^{αβ}，没有先减 1 再套。点击进入第一章详情"
     },
     {
         module: "导数模块", moduleColor: "#0A84FF",
@@ -1011,9 +1045,9 @@ function updateSidebar(index) {
             descEl.innerText = data.desc;
             noteEl.innerText = data.note;
             const num = String(index + 1).padStart(2, '0');
-            progressText.innerText = `${num} / 06`;
+            progressText.innerText = `${num} / 08`;
             moduleText.innerText = data.module;
-            progressFill.style.width = ((index + 1) / 6 * 100) + '%';
+            progressFill.style.width = ((index + 1) / 8 * 100) + '%';
         }
         infoPanel.style.opacity = '1';
         infoPanel.style.transform = 'translateY(0)';
@@ -2169,6 +2203,837 @@ function buildLinearDetail() {
     return { title: '行列式框架详情', color: C, tabs, body: basicBody + propBody + specialBody + expandBody + summaryBody };
 }
 
+// ---------- 第一章·函数·极限·连续详情 ----------
+function buildFunctionDetail() {
+    const C = '#FFD60A';
+    const tabs = `
+        <div class="detail-tab active" style="--tab-color:rgba(255,214,10,0.2);--tab-border:rgba(255,214,10,0.4);" onclick="switchTab('fn-map', this)">知识地图 · 函数</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,214,10,0.2);--tab-border:rgba(255,214,10,0.4);" onclick="switchTab('fn-limit1', this)">极限·七种未定式</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,214,10,0.2);--tab-border:rgba(255,214,10,0.4);" onclick="switchTab('fn-limit2', this)">极限·方法汇总</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,214,10,0.2);--tab-border:rgba(255,214,10,0.4);" onclick="switchTab('fn-cont', this)">连续·间断·渐近线</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,214,10,0.2);--tab-border:rgba(255,214,10,0.4);" onclick="switchTab('fn-summary', this)">速查总表</div>
+    `;
+
+    // === Tab 1: 知识地图 · 函数板块 ===
+    const mapBody = `
+        <div class="detail-section active" id="fn-map">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-building-columns"></i> 第一章 · 函数</div>
+            <div class="section-desc">函数是高数的研究对象，极限是核心工具，连续是函数的良好性质。本章是一切后续模块的地基——先把函数搞懂，极限才有意义，导数、积分、微分方程才有落脚点。</div>
+
+            ${groupTitle('fa-sitemap', '知识地图与学习路径', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>函数（研究对象）</strong><br>
+                    ├─ 定义域（4 条规则：分数≠0、根式≥0、对数>0、sinx/cosx∈[-1,1]）<br>
+                    ├─ 表达式（换元法：令 □=t；配凑法：凑 f(□)=A）<br>
+                    ├─ 相同判定（定义域相同 且 对应法则相同）<br>
+                    ├─ 四大特性：奇偶性⭐ · 有界性 · 周期性 · 单调性<br>
+                    └─ 反函数（4 步：求值域 → 反解 x → 换字母 → 写定义域）<br><br>
+                    <strong>极限（核心工具）</strong>：七种未定式 → 方法汇总 → 无穷小比较<br>
+                    <strong>连续（性质）</strong>：间断点分类 → 水平/垂直渐近线
+                </div>
+            </div>
+            ${memoryBox('友好提示', '本章是专升本考试的第一大题高频区域——单选、填空、计算都可能出。核心得分点：① 求定义域（送分题）；② 七种未定式求极限（必考计算大题）；③ 间断点类型判断；④ 已知极限存在反求参数。')}
+
+            ${groupTitle('fa-1', '1.1 求函数的定义域（4 条铁律）', '#0A84FF')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <span class="formula-num">规则 1</span>
+                    <div class="formula-label" style="color:#0A84FF;">分数</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$\\frac{A}{B} \\implies B \\neq 0$$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">分母不能为零</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <span class="formula-num">规则 2</span>
+                    <div class="formula-label" style="color:#30D158;">偶次根式</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$\\sqrt[2k]{A} \\implies A \\geq 0$$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">平方根、四次方根等</div>
+                </div>
+                <div class="formula-card" style="--card-accent:${C};">
+                    <span class="formula-num">规则 3</span>
+                    <div class="formula-label" style="color:var(--accent-yellow-text);">对数</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$\\log_a B \\implies B > 0$$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">真数必须严格大于零</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <span class="formula-num">规则 4</span>
+                    <div class="formula-label" style="color:#FF9F0A;">反正弦/余弦</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$\\arcsin A, \\arccos A \\implies A \\in [-1,\\,1]$$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">sin x, cos x 的值域是 [-1,1]</div>
+                </div>
+            </div>
+            ${memoryBox('💡 定义域·专升本真题（2023 山东专升本·高数Ⅰ·第1题）', '求函数 $y = \\ln(1 - 3x)$ 的定义域。<br><br><strong>解</strong>：对数的真数必须严格大于 0：<br>$$1 - 3x > 0 \\implies x < \\frac{1}{3}$$<br>故定义域为 $\\boldsymbol{\\left(-\\infty,\\, \\dfrac{1}{3}\\right)}$。<br><br><span style="color:#30D158;">✅ 真题启示：定义域题是专升本选择题高频第 1 题，逐条列限制条件取交集即可，属于送分题不能丢！</span>')}
+
+            ${memoryBox('💡 多条件交集·进阶例题（四川专升本难度）', '求 $f(x) = \\dfrac{\\sqrt{x+2}}{\\ln(1-x)}$ 的定义域：<br>① 根式：x+2 ≥ 0 → x ≥ -2<br>② 分母 ln(1-x) ≠ 0 → 1-x ≠ 1 → x ≠ 0<br>③ 对数真数：1-x > 0 → x < 1<br>三者取交集：<strong>[-2, 0) ∪ (0, 1)</strong><br><br><span style="color:#FF9F0A;">⚠ 易错点：对数同时有「真数>0」和「做分母时≠1」两个约束，别漏了 ≠0！</span>')}
+
+            ${groupTitle('fa-2', '1.2 求函数的表达式（两类方法）', '#30D158')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <div class="formula-label" style="color:#0A84FF;">方法一：换元法</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                        已知 $f(\\square) = A$，令 $t = \\square$，反解出 $\\square$ 中的 $x = \\varphi(t)$，再代入右边把 $A$ 变成关于 $t$ 的表达式，最后把 $t$ 换回 $x$。
+                    </div>
+                    <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">例题</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        已知 $f(2x-1) = x^2$，求 $f(x)$：<br>
+                        令 $t = 2x-1 \\implies x = \\dfrac{t+1}{2}$，代入得：<br>
+                        $f(t) = \\left(\\dfrac{t+1}{2}\\right)^2 = \\dfrac{(t+1)^2}{4}$，<br>
+                        故 $f(x) = \\dfrac{(x+1)^2}{4}$
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <div class="formula-label" style="color:#30D158;">方法二：配凑法</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                        本质是凑：$f(\\square) = A$，想办法把右边的 $A$ 写成含 $\\square$ 的式子，直接看出 $f(x)$ 的形式。
+                    </div>
+                    <div class="formula-label" style="color:#30D158;margin-top:1rem;">例题</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        已知 $f\\!\\left(x + \\dfrac{1}{x}\\right) = x^2 + \\dfrac{1}{x^2}$：<br>
+                        配凑：右边 $= \\left(x+\\dfrac{1}{x}\\right)^2 - 2$<br>
+                        $\\therefore f(\\square) = \\square^2 - 2$，即 $f(x) = x^2 - 2$
+                    </div>
+                </div>
+            </div>
+            ${memoryBox('选择建议', '题目能换元就先换元——普适性最强，不容易错。配凑法需要数感，凑不出就老老实实换元。')}
+
+            ${groupTitle('fa-check-double', '1.3 判断两个函数是否相同', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                    $$\\text{两函数相同} \\iff \\begin{cases} \\text{定义域相同} \\\\ \\text{对应法则相同（即对相同输入，输出相同）} \\end{cases}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;">
+                    例题：$f(x)=x$ 与 $g(x) = (\\sqrt{x})^2$ 是否相同？<br>
+                    定义域：$f(x)$ 为 $\\mathbb{R}$，$g(x)$ 为 $[0, +\\infty)$ → <strong>定义域不同</strong> → <strong>不是同一函数</strong>。
+                </div>
+            </div>
+
+            ${groupTitle('fa-star', '1.4 函数四大特性', '#FF9F0A')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <div class="formula-label" style="color:#FF3B30;">特性 1：奇偶性 ⭐（最高频）</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">
+                        $$\\text{偶：}f(-x)=f(x) \\qquad \\text{奇：}f(-x)=-f(x)$$
+                    </div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);line-height:1.8;">
+                        <strong>加减</strong>：偶±偶=偶，奇±奇=奇，偶±奇=非奇非偶<br>
+                        <strong>乘除</strong>：偶×偶=偶，奇×奇=偶，偶×奇=奇<br>
+                        <strong>复合</strong>：遇偶则偶（外层偶就偶；外层奇看内层）
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <div class="formula-label" style="color:#0A84FF;">特性 2：有界性</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                        若 $\\exists M>0$，使 $|f(x)| \\leq M$ 对所有 $x$ 成立 → $f$ 有界。<br>
+                        <strong>常见有界函数</strong>（常考）：<br>
+                        $|\\sin x| \\leq 1$，$|\\cos x| \\leq 1$，$|\\arctan x| < \\dfrac{\\pi}{2}$
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <div class="formula-label" style="color:#30D158;">特性 3：周期性</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                        $f(x+T) = f(x)$，$T$ 为周期。<br>
+                        $\sin x, \\cos x$ 周期 $2\\pi$；$\tan x, \\cot x$ 周期 $\\pi$。
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:${C};">
+                    <div class="formula-label" style="color:var(--accent-yellow-text);">特性 4：单调性</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">
+                        $$x_1>x_2 \\implies \\begin{cases} f(x_1)>f(x_2) \\;\\text{（增）} \\\\ f(x_1)<f(x_2) \\;\\text{（减）} \\end{cases}$$
+                    </div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);">后续会学：导数 $f'(x)>0$ 函数递增，$f'(x)<0$ 函数递减。</div>
+                </div>
+            </div>
+            ${memoryBox('奇偶性友好提醒', '判断奇偶性第一步永远是先看定义域是否关于原点对称！如果定义域不对称（比如 [0, +∞)），直接非奇非偶。经典：$f(x)=x^2$ 在 $[0,+\\infty)$ 上非奇非偶，在 $\\mathbb{R}$ 上才是偶函数。')}
+
+            ${memoryBox('💡 专升本真题（2024 四川专升本·第1题）· 奇偶性+有界性综合', '函数 $y = \\dfrac{1}{1 + x^2}$ 是（ ）。<br>A. 有界奇函数　B. 有界偶函数　C. 无界奇函数　D. 无界偶函数<br><br><strong>解</strong>：<br>① <strong>判奇偶</strong>：$f(-x) = \\dfrac{1}{1+(-x)^2} = \\dfrac{1}{1+x^2} = f(x)$ → 偶函数。<br>② <strong>判有界</strong>：$1 + x^2 \\geq 1$，故 $0 < \\dfrac{1}{1+x^2} \\leq 1$ → 有界。<br>∴ 选 <strong>B</strong>。<br><br><span style="color:#30D158;">✅ 真题启示：四川专升本第 1 题常考「四大特性综合判断」，先判奇偶再判有界，两步走稳拿分。</span>')}
+
+            ${groupTitle('fa-rotate', '1.5 反函数求解四步走', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>Step 1</strong> 求原函数 $y=f(x)$ 的<strong>值域</strong>（即反函数的定义域）<br>
+                    <strong>Step 2</strong> 反解 $x = \\varphi(y)$：把式子移动直到只剩一个 $x$（有多个 $x$ 就提公因子）<br>
+                    <strong>Step 3</strong> 交换字母：$y = \\varphi(x)$<br>
+                    <strong>Step 4</strong> 写出定义域（即 Step 1 求出的值域）
+                </div>
+                <div class="formula-label" style="color:#5AC8FA;margin-top:1rem;">例题（提公因子演示）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    求 $y = \\dfrac{1-x}{1+x}$ 的反函数：<br>
+                    反解：$y(1+x) = 1-x \\implies y + xy = 1 - x \\implies xy + x = 1 - y$<br>
+                    <strong>提公因子 x</strong>：$x(y+1) = 1-y \\implies x = \\dfrac{1-y}{1+y}$<br>
+                    交换字母得：$y = \\dfrac{1-x}{1+x}$，即该函数的反函数就是它自己！
+                </div>
+            </div>
+            ${memoryBox('分段函数反函数', '分段函数分别对每个式子求反函数，再对应拼起来写定义域即可。')}
+        </div>
+    `;
+
+    // === Tab 2: 极限·七种未定式 ===
+    const limit1Body = `
+        <div class="detail-section" id="fn-limit1">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-infinity"></i> 极限 · 七种未定式全题型</div>
+            <div class="section-desc">极限是整个高数的灵魂——导数定义、定积分定义、无穷小比较、级数收敛都是极限。专升本必考 1~2 道计算大题，核心是识别七种未定式类型、选对方法。</div>
+
+            ${groupTitle('fa-key', '2.1 极限基础', '#0A84FF')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <div class="formula-label" style="color:#0A84FF;">左右极限存在且相等</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">
+                        $$\\lim_{x \\to x_0} f(x) = A \\iff \\lim_{x \\to x_0^-} f(x) = \\lim_{x \\to x_0^+} f(x) = A$$
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <div class="formula-label" style="color:#30D158;">四则运算法则</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                        设 $\\lim f = A$，$\\lim g = B$（极限都存在）：<br>
+                        $\\lim(f \\pm g) = A \\pm B$<br>
+                        $\\lim(f \\cdot g) = A \\cdot B$<br>
+                        $\\lim\\dfrac{f}{g} = \\dfrac{A}{B} \\;(B \\neq 0)$
+                    </div>
+                </div>
+            </div>
+
+            ${groupTitle('fa-table', '2.2 七种未定式速查表', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1.5rem;">
+                <table style="width:100%;color:var(--text-secondary);font-size:0.85rem;border-collapse:collapse;">
+                    <tr style="border-bottom:1px solid var(--border-medium);">
+                        <th style="padding:0.5rem;text-align:left;">类型</th>
+                        <th style="padding:0.5rem;text-align:left;">识别标志</th>
+                        <th style="padding:0.5rem;text-align:left;">首选方法</th>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;font-weight:700;color:#0A84FF;">$\\dfrac{0}{0}$ 型</td>
+                        <td style="padding:0.5rem;">分子分母都 → 0</td>
+                        <td style="padding:0.5rem;">洛必达 / 等价无穷小 / 因式分解</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;font-weight:700;color:#30D158;">$\\dfrac{\\infty}{\\infty}$ 型</td>
+                        <td style="padding:0.5rem;">分子分母都 → ∞</td>
+                        <td style="padding:0.5rem;">抓大头 / 洛必达 / 除以最大次</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;font-weight:700;color:${C};">$\\infty - \\infty$ 型</td>
+                        <td style="padding:0.5rem;">两个 ∞ 相减</td>
+                        <td style="padding:0.5rem;">有根号 → 有理化；分式减 → 通分；难处理 → 倒代换</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;font-weight:700;color:#FF9F0A;">$0 \\cdot \\infty$ 型</td>
+                        <td style="padding:0.5rem;">一个 → 0，另一个 → ∞</td>
+                        <td style="padding:0.5rem;">下放「简单」的那个，转为 $\\frac{0}{0}$ 或 $\\frac{\\infty}{\\infty}$</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;font-weight:700;color:#BF5AF2;">$1^\\infty$ 型 ⭐⭐⭐</td>
+                        <td style="padding:0.5rem;">底 → 1，指 → ∞</td>
+                        <td style="padding:0.5rem;">$\\lim u^v = e^{\\lim\\alpha\\beta}$，其中 $u = 1 + \\alpha$，$v = \\beta$</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;font-weight:700;color:#5AC8FA;">$0^0$ 型</td>
+                        <td style="padding:0.5rem;">底 → 0⁺，指 → 0</td>
+                        <td style="padding:0.5rem;">$u^v = e^{v \\ln u}$ 指数化</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0.5rem;font-weight:700;color:#FF3B30;">$\\infty^0$ 型</td>
+                        <td style="padding:0.5rem;">底 → ∞，指 → 0</td>
+                        <td style="padding:0.5rem;">同上：$u^v = e^{v \\ln u}$ 指数化</td>
+                    </tr>
+                </table>
+            </div>
+
+            ${groupTitle('fa-1', '2.3 $\\dfrac{0}{0}$ 型：洛必达 + 等价无穷小', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#0A84FF;">方法 1：洛必达法则（$\\frac{0}{0}$ 或 $\\frac{\\infty}{\\infty}$）</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\lim \\frac{f(x)}{g(x)} = \\lim \\frac{f'(x)}{g'(x)}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;">
+                    前提：① 确为 $\\frac{0}{0}$ 或 $\\frac{\\infty}{\\infty}$；② 右端极限存在或为 ∞。每用一次必须检查是否还能再用。
+                </div>
+                <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">方法 2：等价无穷小替换（乘除关系直接用）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    核心：$x \\to 0$ 时，$\\sin x \\sim x$，$\\tan x \\sim x$，$e^x-1 \\sim x$，$\\ln(1+x) \\sim x$，$1-\\cos x \\sim \\dfrac{x^2}{2}$ 等（完整等价表见 Tab 3）。
+                </div>
+                <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">例题（2024 四川专升本难度）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    求 $I = \\lim\\limits_{x \\to 0} \\dfrac{\\sin 3x}{\\tan 2x}$（$\\frac{0}{0}$ 型）<br><br>
+                    <strong>等价法</strong>：$\\sin 3x \\sim 3x$，$\\tan 2x \\sim 2x$ → $I = \\lim\\limits_{x\\to 0} \\dfrac{3x}{2x} = \\dfrac{3}{2}$
+                </div>
+            </div>
+            ${memoryBox('友好提醒：加减关系慎用等价！', '等价无穷小在「乘除关系」可以直接替换；「加减关系」一般不能直接替——除非你非常熟练，知道高阶项抵消后没问题。专升本稳拿分建议：加减不要直接等价，先处理成乘除形式再替。')}
+
+            ${groupTitle('fa-2', '2.4 $\\dfrac{\\infty}{\\infty}$ 型：抓大头', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#30D158;">抓大头口诀</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    $x \\to \\infty$ 时，只看分子分母最高次项：<br>
+                    ① 分子最高次 <strong>=</strong> 分母最高次 → 极限 = <strong>最高次系数之比</strong><br>
+                    ② 分子最高次 <strong><</strong> 分母最高次 → 极限 = <strong>0</strong><br>
+                    ③ 分子最高次 <strong>></strong> 分母最高次 → 极限 = <strong>∞（不存在）</strong>
+                </div>
+                <div class="formula-label" style="color:#30D158;margin-top:1rem;">例题（2023 山东专升本难度）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $I = \\lim\\limits_{x \\to \\infty} \\dfrac{3x^3 - 2x + 1}{5x^3 + x^2 - 7}$<br>
+                    分子最高次 $x^3$ 系数 3，分母最高次 $x^3$ 系数 5 → 抓大头：<br>
+                    $I = \\dfrac{3}{5}$
+                </div>
+            </div>
+
+            ${groupTitle('fa-3', '2.5 $\\infty - \\infty$ 型：有理化 / 通分 / 倒代换', '#FF9F0A')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <div class="formula-label" style="color:#FF9F0A;">有根号 → 先有理化</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;">
+                        $\\sqrt{A} - \\sqrt{B}$ 乘 $\\frac{\\sqrt{A}+\\sqrt{B}}{\\sqrt{A}+\\sqrt{B}}$ 化为 $\\frac{A-B}{\\sqrt{A}+\\sqrt{B}}$，通常变为 $\\frac{\\infty}{\\infty}$ 再抓大头。
+                    </div>
+                    <div class="formula-label" style="color:#FF9F0A;margin-top:0.75rem;">例题</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        $I = \\lim\\limits_{n \\to \\infty} (\\sqrt{n^2+n} - n)$<br>
+                        有理化：$I = \\lim\\limits_{n \\to \\infty} \\dfrac{n}{\\sqrt{n^2+n}+n}$<br>
+                        抓大头（分子 n 次 1，分母 n 次 1）→ $\\dfrac{1}{1+1} = \\dfrac{1}{2}$
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:#BF5AF2;">
+                    <div class="formula-label" style="color:#BF5AF2;">分式 - 分式 → 直接通分</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;">
+                        左右分母相乘为公分母，分子交叉相乘并相减。通分后通常成为 $\\frac{0}{0}$ 型，再洛必达或等价。
+                    </div>
+                    <div class="formula-label" style="color:#BF5AF2;margin-top:0.75rem;">例题</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        $I = \\lim\\limits_{x \\to 0} \\left(\\dfrac{1}{x} - \\dfrac{1}{e^x-1}\\right)$<br>
+                        通分：$I = \\lim\\limits_{x \\to 0} \\dfrac{e^x-1-x}{x(e^x-1)}$<br>
+                        分母：$x(e^x-1) \\sim x \\cdot x = x^2$，分子用泰勒或两次洛必达 → $I = \\dfrac{1}{2}$
+                    </div>
+                </div>
+            </div>
+            ${memoryBox('兜底工具：倒代换', '当上面两种方法都难处理时（比如 x→∞ 出现复杂分式-分式），设 $x = \\dfrac{1}{t}$（即 $t = \\dfrac{1}{x}$），转为 $t \\to 0$ 的问题，此时可做等价或洛必达。本质：把 ∞→0 好处理。')}
+
+            ${groupTitle('fa-4', '2.6 $0 \\cdot \\infty$ 型：下放简单的那个', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    核心：把其中一个挪到分母，转为 $\\frac{0}{0}$ 或 $\\frac{\\infty}{\\infty}$。<strong>下放「简单」的那个</strong>——指多项式、简单因子，不要下放 $\\ln x$、复杂三角函数。
+                </div>
+                <div class="formula-label" style="color:#5AC8FA;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $I = \\lim\\limits_{x \\to 0^+} x \\ln x$（$0 \\cdot (-\\infty)$ 型）<br>
+                    下放简单的 $x$：$I = \\lim\\limits_{x \\to 0^+} \\dfrac{\\ln x}{1/x}$（现为 $\\frac{-\\infty}{+\\infty}$ 型）<br>
+                    洛必达：$\\lim\\limits_{x \\to 0^+} \\dfrac{1/x}{-1/x^2} = \\lim\\limits_{x \\to 0^+} (-x) = 0$
+                </div>
+            </div>
+
+            ${groupTitle('fa-star', '2.7 $1^\\infty$ 型 ⭐⭐⭐ 最高频必考题', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#FF3B30;">通用公式（两种情况统一处理）</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                    $$\\boxed{\\lim u^v \\ (1^\\infty \\text{型}) \\;\\Longrightarrow\\; \\lim u^v = e^{\\;\\lim (u-1) \\cdot v}}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.75rem;line-height:1.8;">
+                    <strong>情况 A（题目里已经有 $1+$ 形式）</strong>：直接 $e^{\\lim \\alpha \\cdot \\beta}$，其中 $u = 1 + \\alpha$，$v = \\beta$。<br>
+                    <strong>情况 B（题目里没有明显 $1+$）</strong>：先写成 $[1 + (u-1)]^v$，然后 $e^{\\;\\lim (u-1) \\cdot v}$。上面的方框公式两种都适用。
+                </div>
+                <div class="formula-label" style="color:#FF3B30;margin-top:1rem;">例题一（2023 河南专升本真题难度 · 情况 A：有 1+）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $I = \\lim\\limits_{x \\to \\infty} \\left(1 + \\dfrac{3}{x}\\right)^{2x}$<br>
+                    识别：$1^\\infty$，其中 $\\alpha = \\dfrac{3}{x}$，$\\beta = 2x$<br>
+                    直接用：$I = e^{\\;\\lim \\alpha \\cdot \\beta} = e^{\\;\\lim \\frac{3}{x} \\cdot 2x} = e^{\\;\\lim 6} = \\boxed{e^6}$
+                </div>
+                <div class="formula-label" style="color:#FF3B30;margin-top:1rem;">例题二（2024 四川专升本难度 · 情况 B：没有 1+，先减 1）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $I = \\lim\\limits_{x \\to 0} (\\cos x)^{\\frac{1}{x^2}}$<br>
+                    识别：底 $\\cos x \\to 1$，指 $1/x^2 \\to \\infty$，属 $1^\\infty$ 型。用方框公式：<br>
+                    $I = e^{\\;\\lim (\\cos x - 1) \\cdot \\frac{1}{x^2}}$<br>
+                    其中 $\\cos x - 1 \\sim -\\dfrac{x^2}{2}$，代入：<br>
+                    $I = e^{\\;\\lim \\frac{-x^2/2}{x^2}} = e^{-1/2} = \\boxed{\\dfrac{1}{\\sqrt{e}}}$
+                </div>
+            </div>
+            ${memoryBox('1^∞ 友好提醒', '① 看到「底 → 1，指 → ∞」立刻触发此公式；② 有 1+ 直接乘指数，没有先减 1 再乘指数；③ 专升本考 1^∞ 的概率是所有未定式里最高的，必须练到不假思索就能套公式。')}
+
+            ${groupTitle('fa-5', '2.8 $0^0$ 型 与 $\\infty^0$ 型：统一指数化', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                    $$\\boxed{u^v = e^{\\;v \\cdot \\ln u}}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;line-height:1.8;">
+                    指对恒等式把幂指函数拆成指数函数，再看指数上的 $v \\cdot \\ln u$ 通常变为 $0 \\cdot \\infty$，再下放（见 2.6）。
+                </div>
+                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">例题（$0^0$ 型）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $I = \\lim\\limits_{x \\to 0^+} x^x$（$0^0$ 型）<br>
+                    指数化：$I = e^{\\;\\lim_{x \\to 0^+} x \\ln x}$<br>
+                    指数上就是 2.6 的例题，极限为 0，故 $I = e^0 = \\boxed{1}$
+                </div>
+            </div>
+        </div>
+    `;
+
+    // === Tab 3: 极限·方法汇总 ===
+    const limit2Body = `
+        <div class="detail-section" id="fn-limit2">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-toolbox"></i> 极限 · 常用方法 + 左右极限 + 反求参数</div>
+            <div class="section-desc">除七种未定式之外，专升本还有 6 大高频技巧、4 种必须分左右极限的场景、以及「已知极限反求参数」这类经典题。</div>
+
+            ${groupTitle('fa-table', '3.1 完整等价无穷小表（来源：B 站 UP·中崎高数 第二章）', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#FF9F0A;">当 $x \\to 0$ 时，以下等价关系成立</div>
+
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">① 基础等价无穷小（6 连等）</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\sin x \\sim \\tan x \\sim \\arcsin x \\sim \\arctan x \\sim e^x-1 \\sim \\ln(1+x) \\sim x$$
+                </div>
+
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">② 二次与指数型</div>
+                <div class="formula-grid" style="margin:0.5rem 0;">
+                    <div style="padding:0.5rem;">$1 - \\cos x \\sim \\dfrac{x^2}{2}$</div>
+                    <div style="padding:0.5rem;">$(1+\\beta x)^\\alpha - 1 \\sim \\alpha \\beta x$</div>
+                    <div style="padding:0.5rem;">$a^x - 1 \\sim x \\ln a$</div>
+                    <div style="padding:0.5rem;">$\\log_a (1+x) \\sim \\dfrac{x}{\\ln a}$</div>
+                </div>
+
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">③ 高阶等价无穷小（$x^3$ 型，带符号！）</div>
+                <div class="formula-grid" style="margin:0.5rem 0;">
+                    <div style="padding:0.5rem;">$x - \\sin x \\sim \\dfrac{1}{6}x^3$（<span style="color:#30D158;">正</span>）</div>
+                    <div style="padding:0.5rem;">$x - \\arcsin x \\sim -\\dfrac{1}{6}x^3$（<span style="color:#FF3B30;">负</span>）</div>
+                    <div style="padding:0.5rem;">$x - \\tan x \\sim -\\dfrac{1}{3}x^3$（<span style="color:#FF3B30;">负</span>）</div>
+                    <div style="padding:0.5rem;">$x - \\arctan x \\sim \\dfrac{1}{3}x^3$（<span style="color:#30D158;">正</span>）</div>
+                </div>
+
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">④ 特殊情况：当 $x \\to 1$ 时</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\ln x \\sim x - 1$$
+                </div>
+            </div>
+            ${memoryBox('等价无穷小使用原则', '<strong>乘除关系</strong>直接等价替换（不用犹豫，大胆用）；<strong>加减关系</strong>一般不能直接替——容易丢高阶项导致出错。加减想稳得分：先通分、先有理化、先处理成乘除，再等价。高阶等价（③中的 4 条）在 0/0 型中直接替换可秒解，无需多次洛必达。')}
+
+            ${groupTitle('fa-check', '3.2 方法：非零因子先算', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    在<strong>乘除关系</strong>中，若某因子的极限 $\\neq 0$，可以先把它求出来再处理剩下部分。这样可以大幅简化表达式。
+                </div>
+                <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $I = \\lim\\limits_{x \\to 0} \\dfrac{(e^x-1) \\cdot \\tan x \\cdot \\cos x}{x^2}$<br>
+                    $\\cos 0 = 1 \\neq 0$，先算：$I = \\lim\\limits_{x \\to 0} \\cos x \\cdot \\lim\\limits_{x \\to 0} \\dfrac{(e^x-1)\\tan x}{x^2} = 1 \\cdot \\lim\\limits_{x \\to 0} \\dfrac{x \\cdot x}{x^2} = 1$
+                </div>
+            </div>
+
+            ${groupTitle('fa-sigma', '3.3 方法：等差/等比数列求和', '#30D158')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <div class="formula-label" style="color:#FF9F0A;">等差数列求和</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">
+                        $$S_n = \\frac{n(a_1 + a_n)}{2} = n a_1 + \\frac{n(n-1)}{2}d$$
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <div class="formula-label" style="color:#30D158;">等比数列求和</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">
+                        $$S_n = \\frac{a_1(1-q^n)}{1-q} \\quad (q \\neq 1)$$
+                    </div>
+                </div>
+            </div>
+            ${memoryBox('例题', '求 $I = \\lim\\limits_{n\\to\\infty} \\dfrac{1+2+\\cdots+n}{n^2}$：<br>分子等差数列求和 = $\\dfrac{n(n+1)}{2}$ → $I = \\lim\\limits_{n\\to\\infty} \\dfrac{n(n+1)}{2n^2} = \\dfrac{1}{2}$')}
+
+            ${groupTitle('fa-object-group', '3.4 方法：夹逼定理（Squeeze Theorem）', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\text{若 } g(x) \\leq f(x) \\leq h(x) \\text{ 且 } \\lim g = \\lim h = A \\implies \\lim f = A$$
+                </div>
+                <div class="formula-label" style="color:#5AC8FA;margin-top:1rem;">夹逼使用口诀</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    <strong>只看分母！</strong>分母越小 → 分式越大；分母越大 → 分式越小。<br>
+                    典型：$\\sum$ 形式且各项分母不同——放缩分母为相同值，然后求和夹。
+                </div>
+                <div class="formula-label" style="color:#5AC8FA;margin-top:1rem;">例题（经典）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $I = \\lim\\limits_{n\\to\\infty}\\left(\\dfrac{1}{\\sqrt{n^2+1}} + \\dfrac{1}{\\sqrt{n^2+2}} + \\cdots + \\dfrac{1}{\\sqrt{n^2+n}}\\right)$<br>
+                    每项分母范围：$\\sqrt{n^2+1} \\sim \\sqrt{n^2+n}$，共 $n$ 项<br>
+                    分母小（$\\sqrt{n^2+1}$）→ 分式大，<strong>上界</strong> = $\\dfrac{n}{\\sqrt{n^2+1}} \\to 1$<br>
+                    分母大（$\\sqrt{n^2+n}$）→ 分式小，<strong>下界</strong> = $\\dfrac{n}{\\sqrt{n^2+n}} \\to 1$<br>
+                    由夹逼定理，$I = \\boxed{1}$
+                </div>
+            </div>
+
+            ${groupTitle('fa-reply', '3.5 高频：已知极限存在 · 反求参数', '#FF3B30')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <div class="formula-label" style="color:#FF3B30;">情形 A：$\\frac{\\infty}{\\infty}$ 型（抓大头思想）</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                        ① 分子最高次 = 分母最高次 → 极限为非零常数<br>
+                        ② 分母最高次更高 → 极限 = 0<br>
+                        ③ 分子最高次更高 → 极限不存在（∞）
+                    </div>
+                    <div class="formula-label" style="color:#FF3B30;margin-top:1rem;">例题（2024 四川专升本难度）</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        已知 $\\lim\\limits_{x\\to\\infty} \\dfrac{ax^3 + x^2 + 1}{2x^3 - x + 1} = 3$，求 $a$。<br>
+                        抓大头：分子分母最高次<strong>同为 3 次</strong> → 极限 = 最高次系数之比。<br>
+                        $\\dfrac{a}{2} = 3 \\implies \\boldsymbol{a = 6}$<br><br>
+                        <span style="color:#30D158;">✅ 口诀：次同系数比，次分低→0，次分高→∞（不存在）。</span>
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:${C};">
+                    <div class="formula-label" style="color:var(--accent-yellow-text);">情形 B：$\\frac{0}{0}$ 型</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                        $$\\boxed{\\lim \\frac{f}{g} = C \\text{（有限非零常数）且 } \\lim g = 0 \\implies \\lim f = 0}$$
+                    </div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;line-height:1.7;">
+                        分母趋于 0 而极限仍存在（有限） → 分子必须也趋于 0。抓住「分母=0 ⇒ 分子=0」可列方程。
+                    </div>
+                    <div class="formula-label" style="color:var(--accent-yellow-text);margin-top:1rem;">例题（经典）</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        已知 $\\lim\\limits_{x \\to 1} \\dfrac{x^2 + ax + b}{x - 1} = 3$，求 $a, b$。<br>
+                        分母 $x-1 \\to 0$，极限存在 → 分子 $\\to 0$：$1 + a + b = 0$（方程一）<br>
+                        用洛必达或因式分解：$x^2+ax+b = (x-1)(x-c)$，展开对比 $a = -1-c$，$b = c$；代入极限 $\\dfrac{(x-1)(x-c)}{x-1} \\to 1-c = 3 \\Rightarrow c = -2$ → $a = 1$，$b = -2$。
+                    </div>
+                </div>
+            </div>
+
+            ${groupTitle('fa-wind', '3.6 无穷小与无穷大', '#30D158')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <div class="formula-label" style="color:#30D158;">定义</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                        无穷小量：极限结果为 0（不是很小的数！）<br>
+                        无穷大量：极限结果为 ∞（不是很大的数！）<br>
+                        <strong>互倒关系</strong>：<br>
+                        $\\dfrac{C}{\\infty}$ 是无穷小量（$C$ 为常数）<br>
+                        $\\dfrac{C}{\\text{无穷小}}$ 是无穷大量（$C \\neq 0$）
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <div class="formula-label" style="color:#0A84FF;">重要性质 ⭐⭐</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                        $$\\boxed{\\text{无穷小量} \\times \\text{有界变量} = \\text{无穷小量}}$$
+                    </div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;">
+                        <strong>例题（必考经典）</strong>：$\\lim\\limits_{x \\to 0} x \\cdot \\sin\\!\\left(\\dfrac{1}{x}\\right)$<br>
+                        $x \\to 0$ 是无穷小，$\\sin\\!\\left(\\dfrac{1}{x}\\right)$ 有界（$|\\sin| \\leq 1$）<br>
+                        → 乘积是无穷小量 = $\\boxed{0}$<br>
+                        <span style="color:#FF3B30;">⚠ 注意：此处 <strong>不能</strong> 写成 $\\lim x \\cdot \\lim \\sin(1/x)$，因为 $\\sin(1/x)$ 极限不存在。</span>
+                    </div>
+                </div>
+            </div>
+            ${memoryBox('无穷小其他性质', '有限个无穷小量的和（或积）仍是无穷小量。⚠ 「无限个」无穷小量之和不一定是无穷小（例如 n 个 1/n 相加等于 1）。')}
+
+            ${groupTitle('fa-layer-group', '3.7 无穷小量的比较', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    设 $\\alpha \\to 0$，$\\beta \\to 0$（$\\alpha \\neq 0$），考察 $\\boldsymbol{\\lim \\dfrac{\\beta}{\\alpha}}$：
+                </div>
+            </div>
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <div class="formula-label" style="color:#0A84FF;">同阶无穷小</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$\\lim \\frac{\\beta}{\\alpha} = C \\neq 0$$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">趋于 0 的速度相当。<br>例：$\\lim_{x\\to 0} \\dfrac{1-\\cos x}{x^2} = \\dfrac{1}{2}$，故 $1-\\cos x$ 与 $x^2$ 同阶。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <div class="formula-label" style="color:#30D158;">等价无穷小</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$\\lim \\frac{\\beta}{\\alpha} = 1$$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">趋于 0 的速度相同，记 $\\beta \\sim \\alpha$。<br>例：$\\lim_{x\\to 0} \\dfrac{\\sin x}{x} = 1$，$\\sin x \\sim x$。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <div class="formula-label" style="color:#FF9F0A;">高阶无穷小</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$\\lim \\frac{\\beta}{\\alpha} = 0$$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">分子 $\\beta$ 更快跑到 0 → $\\beta$ 是 $\\alpha$ 的高阶，记 $\\beta = o(\\alpha)$。<br>例：$\\lim_{x\\to 0} \\dfrac{x^2}{x} = 0$，$x^2$ 比 $x$ 快，$x^2 = o(x)$。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <div class="formula-label" style="color:#FF3B30;">低阶无穷小</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$\\lim \\frac{\\beta}{\\alpha} = \\infty$$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">分子 $\\beta$ 跑到 0 更慢 → $\\beta$ 是 $\\alpha$ 的低阶。<br>例：$\\lim_{x\\to 0} \\dfrac{x}{x^2} = \\infty$，$x$ 慢，$x$ 是 $x^2$ 的低阶。</div>
+                </div>
+            </div>
+            ${memoryBox('友好记忆：分子快 = 高阶，分子慢 = 低阶', '速度赛跑：分子更快归零 → 结果 0 → 高阶；分子归零更慢 → 结果 ∞ → 低阶。比较「谁更快到 0」即可。<br>常考题型：① 比较阶；② 指出某无穷小的阶数（与 $x^k$ 比较定 $k$）；③ 已知阶反求参数。')}
+
+            ${memoryBox('💡 专升本真题（2024 四川专升本·第2题）· 等价无穷小选择题', '当 $x \\to 0$ 时，下列与 $\\dfrac{x^3}{2}$ 等价的是（ ）。<br>A. $x \\sin x^2$　B. $x(1 - \\cos x)$　C. $\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right)$　D. $e^{x^2} - 1$<br><br><strong>逐项化简（$x \\to 0$ 时用等价）</strong>：<br>| 选项 | 等价化简 | 是否等于 $x^3/2$ |<br>|:---:|:---|:---:|<br>| A | $x \\cdot \\sin x^2 \\sim x \\cdot x^2 = x^3$ | ✗（缺 $\\frac{1}{2}$） |<br>| B | $x(1 - \\cos x) \\sim x \\cdot \\dfrac{x^2}{2} = \\dfrac{x^3}{2}$ | ✓ |<br>| C | $\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right) \\sim \\dfrac{x^2}{2}$ | ✗（$x^2$ 级，非 $x^3$） |<br>| D | $e^{x^2} - 1 \\sim x^2$ | ✗（$x^2$ 级，非 $x^3$） |<br>∴ 选 <strong>B</strong>。<br><br><span style="color:#30D158;">✅ 真题启示：等价无穷小选择题关键 = 逐项化简到最简幂次，再对比「阶数 + 系数」，两者都要对上才叫等价。</span>')}
+
+            ${groupTitle('fa-left-right', '3.8 专升本仅以下 4 种情况需要分左右极限', '#5AC8FA')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <div class="formula-label" style="color:#0A84FF;">① 分段函数的分段点</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">分段点处左右表达式不同，必须分别求 $x \\to x_0^-$ 和 $x \\to x_0^+$。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <div class="formula-label" style="color:#30D158;">② $\\arctan \\infty$ 型</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">
+                        $$\\lim_{x \\to +\\infty} \\arctan x = \\frac{\\pi}{2} \\quad \\lim_{x \\to -\\infty} \\arctan x = -\\frac{\\pi}{2}$$
+                    </div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);">正负无穷结果不同，必须分。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <div class="formula-label" style="color:#FF9F0A;">③ $e^\\infty$ 型</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">
+                        $$\\lim_{x \\to +\\infty} e^x = +\\infty \\quad \\lim_{x \\to -\\infty} e^x = 0$$
+                    </div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);">一边无穷一边为 0，必须分。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <div class="formula-label" style="color:#FF3B30;">④ 含 $|x|$ 的表达式</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        $|x|$ 在 $x=0$ 处左边 $=-x$，右边 $=x$，必须分。<br>
+                        同样 $|x-x_0|$ 在 $x_0$ 点要分。
+                    </div>
+                </div>
+            </div>
+            ${memoryBox('极限存在的充要条件', '函数极限存在 ⟺ 左右极限都存在 <strong>且相等</strong>。判断分段点连续也靠这条——先看左右极限存不存在且相等，再和函数值比。')}
+        </div>
+    `;
+
+    // === Tab 4: 连续·间断·渐近线 ===
+    const contBody = `
+        <div class="detail-section" id="fn-cont">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-link"></i> 连续 · 间断点 · 渐近线</div>
+            <div class="section-desc">连续是函数的良好性质——间断点分类、渐近线计算都是专升本高频考点。四川考纲不考斜渐近线，只需掌握水平和垂直两种。</div>
+
+            ${groupTitle('fa-circle-check', '4.1 函数在某点连续（三条同时满足）', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                    $$\\boxed{f(x) \\text{ 在 } x_0 \\text{ 连续} \\iff \\begin{cases} (1) \\; f(x_0) \\text{ 有定义} \\\\ (2) \\; \\lim\\limits_{x \\to x_0} f(x) \\text{ 存在（左右极限相等）} \\\\ (3) \\; \\lim\\limits_{x \\to x_0} f(x) = f(x_0) \\end{cases}}$$
+                </div>
+                <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $f(x) = \\begin{cases} \\dfrac{\\sin 2x}{x}, & x \\neq 0 \\\\ a, & x = 0 \\end{cases}$，要在 $x=0$ 连续，求 $a$。<br>
+                    $\\lim_{x\\to 0} f(x) = \\lim \\dfrac{\\sin 2x}{x} = 2$，由连续条件 (3)：$a = \\boxed{2}$
+                </div>
+            </div>
+
+            ${groupTitle('fa-list-tree', '4.2 间断点分类总表', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1.5rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    <strong>第一类间断点</strong>：左右极限<strong>都存在</strong><br>
+                    ├─ <span style="color:#0A84FF;">可去间断点</span>：左右极限<strong>相等</strong>，但 ≠ $f(x_0)$ 或 $f(x_0)$ 无定义<br>
+                    └─ <span style="color:#30D158;">跳跃间断点</span>：左右极限<strong>不相等</strong><br><br>
+                    <strong>第二类间断点</strong>：左右极限至少有一个<strong>不存在</strong><br>
+                    ├─ <span style="color:#FF9F0A;">无穷间断点</span>：至少一侧极限 = ∞<br>
+                    └─ <span style="color:#BF5AF2;">震荡间断点</span>：至少一侧极限在某区间震荡（如 $\\sin(1/x)$ 当 $x\\to 0$）
+                </div>
+            </div>
+
+            ${groupTitle('fa-1', '4.3 可去间断点', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    核心特征：<strong>左右极限相等</strong>，只是不等于函数值或函数无定义。可以通过「重新定义该点函数值」把它修补成连续点，所以叫「可去」。
+                </div>
+                <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $f(x) = \\dfrac{x^2 - 1}{x - 1}$，求间断点并判类型。<br>
+                    $x=1$ 处无定义 → 间断点。<br>
+                    $\\lim_{x\\to 1} \\dfrac{x^2-1}{x-1} = \\lim (x+1) = 2$（左右极限都存在且相等）→ <strong>可去间断点</strong>。
+                </div>
+            </div>
+
+            ${groupTitle('fa-2', '4.4 跳跃间断点', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    核心特征：<strong>左右极限不相等</strong>——图像上看起来像「跳了一步」，无法通过重新定义修补。
+                </div>
+                <div class="formula-label" style="color:#30D158;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $f(x) = \\begin{cases} x-1, & x < 0 \\\\ 0, & x = 0 \\\\ x+1, & x > 0 \\end{cases}$<br>
+                    $\\lim_{x\\to 0^-} f(x) = -1$，$\\lim_{x\\to 0^+} f(x) = +1$ → 左右不相等 → <strong>跳跃间断点</strong>。
+                </div>
+            </div>
+
+            ${groupTitle('fa-3', '4.5 无穷间断点', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    核心特征：至少一侧极限 = ∞。通常出现在「分母为 0 的点」——且分子在该点不为 0。
+                </div>
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $f(x) = \\dfrac{1}{x-2}$，在 $x=2$：<br>
+                    $\\lim_{x\\to 2^+} = +\\infty$，$\\lim_{x\\to 2^-} = -\\infty$，至少一侧为 ∞ → <strong>无穷间断点</strong>。
+                </div>
+            </div>
+
+            ${groupTitle('fa-4', '4.6 震荡间断点', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    核心特征：至少一侧极限「震荡不收敛」——不是 ∞，而是在某区间内来回跳动不趋近定值。
+                </div>
+                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">经典例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $f(x) = \\sin\\!\\left(\\dfrac{1}{x}\\right)$ 在 $x=0$：<br>
+                    $x\\to 0$ 时 $1/x \\to \\infty$，$\\sin(1/x)$ 在 $[-1, 1]$ 内无限震荡，极限不存在 → <strong>震荡间断点</strong>。
+                </div>
+            </div>
+            ${memoryBox('间断点判断题步骤', 'Step 1：找「嫌疑点」——分母为 0 的点 / 分段函数分段点 / ln 真数为 0 的点 / arcsin/arccos 定义域边界；<br>Step 2：依次计算每个嫌疑点的左右极限；<br>Step 3：按分类表判类型——都存在且相等→可去，都存在不等→跳跃，至少一个不存在→无穷/震荡。')}
+
+            ${groupTitle('fa-arrows-alt-h', '4.7 水平渐近线（四川考纲要求）', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                    $$\\lim_{x \\to +\\infty} f(x) = A \\quad \\text{或} \\quad \\lim_{x \\to -\\infty} f(x) = A \\;\\Longrightarrow\\; \\boxed{y = A} \\text{ 是 } f(x) \\text{ 的水平渐近线}$$
+                </div>
+                <div class="formula-label" style="color:#5AC8FA;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    求 $f(x) = \\dfrac{2x^2 - x + 3}{x^2 + 1}$ 的水平渐近线。<br>
+                    $x \\to \\infty$ 抓大头：分子分母最高次均为 2，系数比 = $\\dfrac{2}{1} = 2$ → $y = \\boxed{2}$ 是水平渐近线。
+                </div>
+            </div>
+
+            ${groupTitle('fa-arrows-alt-v', '4.8 垂直渐近线（四川考纲要求）', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                    $$\\lim_{x \\to x_0^-} f(x) = \\infty \\text{ 或 } \\lim_{x \\to x_0^+} f(x) = \\infty \\;\\Longrightarrow\\; \\boxed{x = x_0} \\text{ 是垂直渐近线}$$
+                </div>
+                <div class="formula-label" style="color:#FF3B30;margin-top:1rem;">找垂直渐近线的步骤</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    ① 先找「嫌疑点 $x_0$」：$f(x)$ 无定义的点（通常是分母为 0 的点）<br>
+                    ② 计算 $x \\to x_0^+$ 或 $x \\to x_0^-$ 时，只要有一侧 → ∞ 就判定为垂直渐近线
+                </div>
+                <div class="formula-label" style="color:#FF3B30;margin-top:1rem;">💡 专升本真题（2024 四川专升本·第4题）· 约分陷阱</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    曲线 $y = \\dfrac{x^2 - 1}{x^2 - 4x - 5}$ 的铅直（垂直）渐近线有（ ）条。<br>
+                    A. 0　B. 1　C. 2　D. 3<br><br>
+                    <strong>Step 1</strong>：找分母为 0 的点。<br>
+                    $x^2 - 4x - 5 = (x-5)(x+1) = 0 \\implies x = 5$ 或 $x = -1$<br><br>
+                    <strong>Step 2</strong>：分子也因式分解，逐点检验（<span style="color:#FF3B30;">⚠ 约分陷阱！</span>）<br>
+                    分子：$x^2 - 1 = (x-1)(x+1)$<br><br>
+                    <strong>检验 $x = -1$</strong>：<br>
+                    $y = \\dfrac{(x-1)(x+1)}{(x-5)(x+1)} = \\dfrac{x-1}{x-5}$（约去 $x+1$）<br>
+                    $\\lim\\limits_{x \\to -1} \\dfrac{x - 1}{x - 5} = \\dfrac{-2}{-6} = \\dfrac{1}{3}$（有限值，<strong>不是</strong>渐近线）<br><br>
+                    <strong>检验 $x = 5$</strong>：<br>
+                    $\\lim\\limits_{x \\to 5} \\dfrac{x^2 - 1}{x^2 - 4x - 5} = \\dfrac{25 - 1}{0} = \\infty$（<strong>是</strong>垂直渐近线）<br><br>
+                    综上，垂直渐近线只有 $x = 5$ 一条 → 选 <strong>B</strong>。<br><br>
+                    <span style="color:#FF3B30;">⚠ 高频易错点：分母为 0 的点<strong>必须逐个约分检验</strong>！分子也为 0 的点，约分后极限为有限值的<strong>不是</strong>垂直渐近线！这是专升本最经典的坑题之一。</span>
+                </div>
+            </div>
+            ${memoryBox('四川考纲友好提醒', '四川专升本高数不考斜渐近线！遇到判断渐近线题目只算水平（x→±∞ 求极限得 A）和垂直（分母 0 点，看是否 ∞）。别多算斜的！')}
+        </div>
+    `;
+
+    // === Tab 5: 速查总表 ===
+    const summaryBody = `
+        <div class="detail-section" id="fn-summary">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-table-list"></i> 速查总表与口诀</div>
+            <div class="section-desc">本章所有考点一表打包，配合口诀考前 5 分钟刷一遍即可。</div>
+
+            ${groupTitle('fa-list-ol', '① 定义域四大规则速查', '#0A84FF')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <div class="formula-label" style="color:#0A84FF;">分数</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$B \\neq 0$$</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <div class="formula-label" style="color:#30D158;">偶次根式</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$A \\geq 0$$</div>
+                </div>
+                <div class="formula-card" style="--card-accent:${C};">
+                    <div class="formula-label" style="color:var(--accent-yellow-text);">对数</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$B > 0$$</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <div class="formula-label" style="color:#FF9F0A;">反正弦/余弦</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$A \\in [-1, 1]$$</div>
+                </div>
+            </div>
+
+            ${groupTitle('fa-infinity', '② 七种未定式解法速查', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:2;">
+                    $\\frac{0}{0}$ → 等价 / 洛必达 / 因式分解<br>
+                    $\\frac{\\infty}{\\infty}$ → 抓大头 / 洛必达 / 除以最大次<br>
+                    $\\infty - \\infty$ → 有根号 → 有理化；分式减 → 通分；兜底 → 倒代换<br>
+                    $0 \\cdot \\infty$ → 下放简单的（不放 ln x），转 0/0 或 ∞/∞<br>
+                    $1^\\infty$ ⭐ → $e^{\\lim (u-1)v}$（有 1+ 直接乘，无 1+ 减 1 再乘）<br>
+                    $0^0$ / $\\infty^0$ → 统一：$u^v = e^{v \\ln u}$，指数上变 $0 \\cdot \\infty$
+                </div>
+            </div>
+
+            ${groupTitle('fa-magic', '③ 等价无穷小核心口诀（x→0）', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:2;">
+                    基础 6 连等：sin ~ tan ~ arcsin ~ arctan ~ eˣ−1 ~ ln(1+x) ~ x<br>
+                    二次与指数：1−cos ~ x²/2；(1+βx)^α − 1 ~ αβx；aˣ−1 ~ x·ln a；log_a(1+x) ~ x/ln a<br>
+                    高阶 x³：sin 负 1/6、arcsin 正 1/6、tan 负 1/3、arctan 正 1/3 —— 记：「sin 反 sin，一负一正 1/6；tan 反 tan，一负一正 1/3」<br>
+                    特例 x→1：ln x ~ x−1
+                </div>
+            </div>
+
+            ${groupTitle('fa-left-right', '④ 必须分左右极限的 4 种情况', '#5AC8FA')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <div class="formula-label" style="color:#0A84FF;">分段点</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <div class="formula-label" style="color:#30D158;">arctan ∞</div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);">+∞→π/2, −∞→−π/2</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <div class="formula-label" style="color:#FF9F0A;">e^∞</div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);">+∞→∞, −∞→0</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <div class="formula-label" style="color:#FF3B30;">|x|</div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);">左 −x，右 +x</div>
+                </div>
+            </div>
+
+            ${groupTitle('fa-diagram-next', '⑤ 间断点分类决策树', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:2;">
+                    Step 1：算 $\\lim_{x\\to x_0^-}$ 与 $\\lim_{x\\to x_0^+}$<br>
+                    Step 2：<br>
+                    ① 左右极限<strong>都存在</strong> → 第一类：<br>
+                    &nbsp;&nbsp;&nbsp;相等 → 可去间断点<br>
+                    &nbsp;&nbsp;&nbsp;不等 → 跳跃间断点<br>
+                    ② 至少一个<strong>不存在</strong> → 第二类：<br>
+                    &nbsp;&nbsp;&nbsp;= ∞ → 无穷间断点<br>
+                    &nbsp;&nbsp;&nbsp;震荡不收敛 → 震荡间断点
+                </div>
+            </div>
+
+            ${groupTitle('fa-arrows-alt', '⑥ 渐近线口诀', '#30D158')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#5AC8FA;">
+                    <div class="formula-label" style="color:#5AC8FA;">水平</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$x\\to\\pm\\infty$ 得 $A$ → $y = A$</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <div class="formula-label" style="color:#FF3B30;">垂直</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$x\\to x_0$ 得 ∞ → $x = x_0$（找分母 0 点）</div>
+                </div>
+            </div>
+            ${memoryBox('四川不考斜渐近线！', '再次强调——四川专升本高数大纲<strong>不考</strong>斜渐近线，判断渐近线时别算多余的。如果其他省份考生参考本资料：斜渐近线 $y=kx+b$，$k=\\lim\\frac{f(x)}{x}$，$b=\\lim(f(x)-kx)$，但四川考生完全跳过此条即可。')}
+
+            ${groupTitle('fa-lightbulb', '⑦ 本章核心记忆口诀汇总', '#FFD60A')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <div class="formula-label" style="color:#0A84FF;">1^∞ 公式</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">有 1+ 直接 e^{αβ}，没有先减 1 再乘</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#30D158;">
+                    <div class="formula-label" style="color:#30D158;">抓大头</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">次同系数比，次分低→0，次分高→∞</div>
+                </div>
+                <div class="formula-card" style="--card-accent:${C};">
+                    <div class="formula-label" style="color:var(--accent-yellow-text);">反求参数 0/0</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">分母 0 → 分子也必须 0</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <div class="formula-label" style="color:#FF9F0A;">反函数四步</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">求值域→反解 x→换字母→写定义域</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#BF5AF2;">
+                    <div class="formula-label" style="color:#BF5AF2;">夹逼</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">只看分母，分母小则分数大</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <div class="formula-label" style="color:#FF3B30;">连续三条件</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">有定义、极限存在、两者相等</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#5AC8FA;">
+                    <div class="formula-label" style="color:#5AC8FA;">无穷小×有界</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">还是无穷小（x·sin(1/x)=0）</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <div class="formula-label" style="color:#FF3B30;">等价使用规则</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">乘除直接替，加减不要替</div>
+                </div>
+            </div>
+            ${memoryBox('考前必背', '这 8 条口诀覆盖第一章 80% 以上的分值。其中 1^∞ 公式、抓大头、0/0 型反求参数、等价无穷小表，这四条必须做到秒反应、不出错。')}
+        </div>
+    `;
+
+    return { title: '第一章 · 函数·极限·连续', color: C, tabs, body: mapBody + limit1Body + limit2Body + contBody + summaryBody };
+}
+
 // ---------- 总览详情 ----------
 function buildOverviewDetail() {
     const C = '#BF5AF2';
@@ -2178,9 +3043,20 @@ function buildOverviewDetail() {
     const body = `
         <div class="detail-section active" id="over-all">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-sitemap"></i> 高数框架全景</div>
-            <div class="section-desc">六大模块构成完整的四川专升本高数知识网络。导数是核心枢纽，微分是导数的延伸，积分是导数的逆运算，微分方程是导数与积分的综合应用，三角函数贯穿所有模块，行列式是线性代数的基础工具。</div>
+            <div class="section-desc">七大模块构成完整的四川专升本高数知识网络。<strong>函数·极限·连续</strong>是一切的地基；导数是核心枢纽，微分是导数的延伸，积分是导数的逆运算，微分方程是导数与积分的综合应用，三角函数贯穿所有模块，行列式是线性代数的基础工具。</div>
 
             <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#FFD60A;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('function'),450)">
+                    <div class="formula-label" style="color:var(--accent-yellow-text);"><i class="fa-solid fa-building-columns"></i> 第一章·函数·极限·连续</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        <strong>函数</strong>：定义域 · 四大特性 · 反函数<br>
+                        <strong>极限</strong>：七种未定式 · 洛必达 · 等价 · 夹逼 · 反求参数<br>
+                        <strong>连续</strong>：间断点分类 · 水平/垂直渐近线<br>
+                        <strong>地位</strong>：高数地基，一切后续模块的前提
+                    </div>
+                    <div style="margin-top:0.75rem;color:var(--accent-yellow-text);font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
+                </div>
+
                 <div class="formula-card" style="--card-accent:#0A84FF;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('derivative'),450)">
                     <div class="formula-label" style="color:#0A84FF;"><i class="fa-solid fa-chart-line"></i> 导数模块</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
@@ -2260,6 +3136,7 @@ function buildOverviewDetail() {
 function buildDetailContent(type) {
     switch(type) {
         case 'overview': return buildOverviewDetail();
+        case 'function': return buildFunctionDetail();
         case 'derivative': return buildDerivativeDetail();
         case 'differential': return buildDifferentialDetail();
         case 'integral': return buildIntegralDetail();
