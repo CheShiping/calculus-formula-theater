@@ -1065,18 +1065,23 @@ const detailTabs = document.getElementById('detail-tabs');
 const detailHeaderTitle = document.getElementById('detail-header-title');
 
 function enterDetail(type) {
-    const content = buildDetailContent(type);
-    detailHeaderTitle.innerText = content.title;
-    detailHeaderTitle.style.color = content.color;
-    detailTabs.innerHTML = content.tabs;
-    detailBody.innerHTML = content.body;
-    // 默认激活第一个 tab
-    const firstTab = detailTabs.querySelector('.detail-tab');
-    if (firstTab) firstTab.click();
-    mainView.classList.add('hidden-view');
-    detailView.classList.add('active');
-    detailView.scrollTop = 0;
-    setTimeout(renderMath, 50);
+    try {
+        const content = buildDetailContent(type);
+        detailHeaderTitle.innerText = content.title;
+        detailHeaderTitle.style.color = content.color;
+        detailTabs.innerHTML = content.tabs;
+        detailBody.innerHTML = content.body;
+        // 默认激活第一个 tab
+        const firstTab = detailTabs.querySelector('.detail-tab');
+        if (firstTab) firstTab.click();
+        mainView.classList.add('hidden-view');
+        detailView.classList.add('active');
+        detailView.scrollTop = 0;
+        setTimeout(renderMath, 50);
+    } catch (e) {
+        console.error('[enterDetail] 出错：', e);
+        detailBody.innerHTML = `<div style="padding:2rem;color:#FF3B30;font-size:1.1rem;"><strong>❌ 页面加载出错：</strong><br><pre style="background:#00000010;padding:0.8rem;border-radius:8px;margin-top:0.8rem;font-size:0.85rem;white-space:pre-wrap;word-break:break-all;">${e.message || String(e)}</pre><br>请联系开发者或刷新重试。</div>`;
+    }
 }
 
 function exitDetail() {
@@ -1085,12 +1090,21 @@ function exitDetail() {
 }
 
 function switchTab(tabId, btn) {
-    document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.detail-section').forEach(s => s.classList.remove('active'));
-    btn.classList.add('active');
-    const section = document.getElementById(tabId);
-    if (section) section.classList.add('active');
-    setTimeout(renderMath, 50);
+    try {
+        // 只在当前详情容器内切换，防止全局匹配造成错乱
+        detailTabs.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+        detailBody.querySelectorAll('.detail-section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        const section = document.getElementById(tabId);
+        if (section) {
+            section.classList.add('active');
+        } else {
+            console.warn('[switchTab] 找不到 section:', tabId);
+        }
+        setTimeout(renderMath, 50);
+    } catch (e) {
+        console.error('[switchTab] 出错：', e);
+    }
 }
 
 // ============================================================
@@ -2741,7 +2755,7 @@ function buildFunctionDetail() {
             </div>
             ${memoryBox('友好记忆：分子快 = 高阶，分子慢 = 低阶', '速度赛跑：分子更快归零 → 结果 0 → 高阶；分子归零更慢 → 结果 ∞ → 低阶。比较「谁更快到 0」即可。<br>常考题型：① 比较阶；② 指出某无穷小的阶数（与 $x^k$ 比较定 $k$）；③ 已知阶反求参数。')}
 
-            ${memoryBox('💡 专升本真题（2024 四川专升本·第2题）· 等价无穷小选择题', '当 $x \\to 0$ 时，下列与 $\\dfrac{x^3}{2}$ 等价的是（ ）。<br>A. $x \\sin x^2$　B. $x(1 - \\cos x)$　C. $\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right)$　D. $e^{x^2} - 1$<br><br><strong>逐项化简（$x \\to 0$ 时用等价）</strong>：<br>| 选项 | 等价化简 | 是否等于 $x^3/2$ |<br>|:---:|:---|:---:|<br>| A | $x \\cdot \\sin x^2 \\sim x \\cdot x^2 = x^3$ | ✗（缺 $\\frac{1}{2}$） |<br>| B | $x(1 - \\cos x) \\sim x \\cdot \\dfrac{x^2}{2} = \\dfrac{x^3}{2}$ | ✓ |<br>| C | $\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right) \\sim \\dfrac{x^2}{2}$ | ✗（$x^2$ 级，非 $x^3$） |<br>| D | $e^{x^2} - 1 \\sim x^2$ | ✗（$x^2$ 级，非 $x^3$） |<br>∴ 选 <strong>B</strong>。<br><br><span style="color:#30D158;">✅ 真题启示：等价无穷小选择题关键 = 逐项化简到最简幂次，再对比「阶数 + 系数」，两者都要对上才叫等价。</span>')}
+            ${memoryBox('💡 专升本真题（2024 四川专升本·第2题）· 等价无穷小选择题', '当 $x \\to 0$ 时，下列与 $\\dfrac{x^3}{2}$ 等价的是（ ）。<br>A. $x \\sin x^2$　B. $x(1 - \\cos x)$　C. $\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right)$　D. $e^{x^2} - 1$<br><br><strong>逐项化简（$x \\to 0$ 时用等价）：</strong><br><table style="width:100%;border-collapse:collapse;margin:0.5rem 0;font-size:0.85rem;color:var(--text-secondary);"><thead><tr style="border-bottom:1px solid var(--border-medium);"><th style="padding:0.35rem 0.5rem;text-align:left;width:12%;">选项</th><th style="padding:0.35rem 0.5rem;text-align:left;">等价化简</th><th style="padding:0.35rem 0.5rem;text-align:center;width:28%;">是否等于 $\\dfrac{x^3}{2}$</th></tr></thead><tbody><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>A</strong></td><td style="padding:0.35rem 0.5rem;">$x \\cdot \\sin x^2 \\sim x \\cdot x^2 = x^3$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（缺 $\\dfrac{1}{2}$）</td></tr><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>B</strong></td><td style="padding:0.35rem 0.5rem;">$x(1 - \\cos x) \\sim x \\cdot \\dfrac{x^2}{2} = \\dfrac{x^3}{2}$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#30D158;"><strong>✓</strong></td></tr><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>C</strong></td><td style="padding:0.35rem 0.5rem;">$\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right) \\sim \\dfrac{x^2}{2}$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（$x^2$ 级，非 $x^3$）</td></tr><tr><td style="padding:0.35rem 0.5rem;"><strong>D</strong></td><td style="padding:0.35rem 0.5rem;">$e^{x^2} - 1 \\sim x^2$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（$x^2$ 级，非 $x^3$）</td></tr></tbody></table>∴ 选 <strong>B</strong>。<br><br><span style="color:#30D158;">✅ 真题启示：等价无穷小选择题关键 = 逐项化简到最简幂次，再对比「阶数 + 系数」，两者都要对上才叫等价。</span>')}
 
             ${groupTitle('fa-left-right', '3.8 专升本仅以下 4 种情况需要分左右极限', '#5AC8FA')}
             <div class="formula-grid">
@@ -3268,7 +3282,8 @@ function generateHexagonSVG() {
 //  KaTeX 渲染
 // ============================================================
 function renderMath() {
-    if (typeof renderMathInElement === 'function') {
+    if (typeof renderMathInElement !== 'function') return;
+    try {
         renderMathInElement(document.body, {
             delimiters: [
                 {left: '$$', right: '$$', display: true},
@@ -3278,6 +3293,8 @@ function renderMath() {
             ],
             throwOnError: false
         });
+    } catch (e) {
+        console.warn('[KaTeX] 渲染报错（已忽略）：', e);
     }
 }
 
