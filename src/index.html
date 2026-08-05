@@ -391,6 +391,19 @@
         }
         .formula-card .katex { font-size: 1.05em; }
         .formula-card .katex-display { margin: 0.3rem 0; }
+        .chapter-flow-card { margin-bottom: 1rem; }
+        .chapter-flow-step {
+            display: grid;
+            grid-template-columns: 5.5rem minmax(0, 1fr);
+            gap: 0.75rem;
+            padding: 0.8rem 0;
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.75;
+        }
+        .chapter-flow-step + .chapter-flow-step { border-top: 1px solid var(--border-soft); }
+        .chapter-flow-step strong { color: #5AC8FA; font-family: 'JetBrains Mono', monospace; }
+        .chapter-example-card { margin-bottom: 1rem; }
         .formula-num {
             position: absolute; top: 0.5rem; right: 0.75rem;
             font-size: 0.65rem; font-family: 'JetBrains Mono', monospace;
@@ -431,6 +444,10 @@
         .memory-box-title { font-weight: 700; color: #C88800; font-size: 0.9rem; margin-bottom: 0.25rem; }
         [data-theme="light"] .memory-box-title { color: #8a5e00; }
         .memory-box-text { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; }
+
+        @media (max-width: 520px) {
+            .chapter-flow-step { grid-template-columns: 1fr; gap: 0.2rem; }
+        }
 
         /* 特殊值表格 */
         .special-table {
@@ -1071,16 +1088,29 @@ function enterDetail(type) {
         detailHeaderTitle.style.color = content.color;
         detailTabs.innerHTML = content.tabs;
         detailBody.innerHTML = content.body;
-        // 默认激活第一个 tab
+
+        // ============= 【终极修复】直接激活第一个 Tab，不通过 click() 模拟 =============
         const firstTab = detailTabs.querySelector('.detail-tab');
-        if (firstTab) firstTab.click();
+        const firstSections = detailBody.querySelectorAll('.detail-section');
+        // 先把所有 section display:none，防止 CSS class 不生效
+        firstSections.forEach((s, idx) => {
+            s.style.display = idx === 0 ? 'block' : 'none';
+            s.classList.toggle('active', idx === 0);
+        });
+        if (firstTab) firstTab.classList.add('active');
+        console.debug('[enterDetail] 注入完成。type=', type, 'section数量=', firstSections.length,
+            '首个section id=', firstSections[0]?.id, '首个section高度=', firstSections[0]?.clientHeight);
+
         mainView.classList.add('hidden-view');
         detailView.classList.add('active');
         detailView.scrollTop = 0;
-        setTimeout(renderMath, 50);
+
+        // 延迟渲染 KaTeX，等待浏览器完成 layout
+        setTimeout(renderMath, 120);
+        setTimeout(renderMath, 500); // 二次保险
     } catch (e) {
-        console.error('[enterDetail] 出错：', e);
-        detailBody.innerHTML = `<div style="padding:2rem;color:#FF3B30;font-size:1.1rem;"><strong>❌ 页面加载出错：</strong><br><pre style="background:#00000010;padding:0.8rem;border-radius:8px;margin-top:0.8rem;font-size:0.85rem;white-space:pre-wrap;word-break:break-all;">${e.message || String(e)}</pre><br>请联系开发者或刷新重试。</div>`;
+        console.error('[enterDetail] 致命错误：', e);
+        detailBody.innerHTML = `<div style="padding:2rem;color:#FF3B30;font-size:1.1rem;"><strong>❌ 页面加载出错：</strong><br><pre style="background:#00000010;padding:0.8rem;border-radius:8px;margin-top:0.8rem;font-size:0.85rem;white-space:pre-wrap;word-break:break-all;">${e.stack || e.message || String(e)}</pre><br>请截图反馈给开发者。</div>`;
     }
 }
 
@@ -1091,17 +1121,42 @@ function exitDetail() {
 
 function switchTab(tabId, btn) {
     try {
-        // 只在当前详情容器内切换，防止全局匹配造成错乱
+        console.debug('[switchTab] 开始切换, tabId=', tabId);
+        // 1. 处理 tab 按钮高亮
         detailTabs.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
-        detailBody.querySelectorAll('.detail-section').forEach(s => s.classList.remove('active'));
-        btn.classList.add('active');
-        const section = document.getElementById(tabId);
-        if (section) {
-            section.classList.add('active');
-        } else {
-            console.warn('[switchTab] 找不到 section:', tabId);
+        if (btn) btn.classList.add('active');
+
+        // 2. 【终极修复】对所有 section：直接操作 style.display（不靠 CSS 类 .active）
+        const allSections = detailBody.querySelectorAll('.detail-section');
+        let targetHit = false;
+        allSections.forEach(s => {
+            const isTarget = s.id === tabId;
+            s.style.display = isTarget ? 'block' : 'none';   // ← 关键：硬写 style，覆盖一切 CSS 异常
+            s.classList.toggle('active', isTarget);
+            s.style.width = '100%';   // 额外保险，防止因为 flex/grid 子元素宽度变 0
+            s.style.minHeight = '200px'; // 防塌陷
+            if (isTarget) {
+                targetHit = true;
+                console.debug('[switchTab] 找到 section, id=', s.id, 'clientHeight=', s.clientHeight,
+                    'innerHTML.length=', s.innerHTML.length);
+                setTimeout(() => s.scrollIntoView({ block: 'start', behavior: 'instant' }), 20);
+            }
+        });
+        if (!targetHit) {
+            // 兜底：用 getElementById 再找一次（万一 section 不在 detailBody 里？）
+            const s2 = document.getElementById(tabId);
+            if (s2) {
+                s2.style.display = 'block';
+                s2.classList.add('active');
+                console.warn('[switchTab] 通过 document.getElementById 兜底找到并激活');
+            } else {
+                console.error('[switchTab] 完全找不到 section id=', tabId);
+            }
         }
-        setTimeout(renderMath, 50);
+
+        // 3. 二次 KaTeX 渲染（延迟 80ms 确保 layout）
+        setTimeout(renderMath, 80);
+        setTimeout(renderMath, 400);
     } catch (e) {
         console.error('[switchTab] 出错：', e);
     }
@@ -2352,7 +2407,7 @@ function buildFunctionDetail() {
                 <div class="formula-card" style="--card-accent:${C};">
                     <div class="formula-label" style="color:var(--accent-yellow-text);">特性 4：单调性</div>
                     <div class="formula-block" style="border:none;background:none;padding:0;">
-                        $$x_1>x_2 \\implies \\begin{cases} f(x_1)>f(x_2) \\;\\text{（增）} \\\\ f(x_1)<f(x_2) \\;\\text{（减）} \\end{cases}$$
+                        \\(x_1 > x_2\\) 时：\\(f(x_1) > f(x_2)\\) 为递增；\\(f(x_1) < f(x_2)\\) 为递减。
                     </div>
                     <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);">后续会学：导数 $f'(x)>0$ 函数递增，$f'(x)<0$ 函数递减。</div>
                 </div>
@@ -2362,19 +2417,31 @@ function buildFunctionDetail() {
             ${memoryBox('💡 专升本真题（2024 四川专升本·第1题）· 奇偶性+有界性综合', '函数 $y = \\dfrac{1}{1 + x^2}$ 是（ ）。<br>A. 有界奇函数　B. 有界偶函数　C. 无界奇函数　D. 无界偶函数<br><br><strong>解</strong>：<br>① <strong>判奇偶</strong>：$f(-x) = \\dfrac{1}{1+(-x)^2} = \\dfrac{1}{1+x^2} = f(x)$ → 偶函数。<br>② <strong>判有界</strong>：$1 + x^2 \\geq 1$，故 $0 < \\dfrac{1}{1+x^2} \\leq 1$ → 有界。<br>∴ 选 <strong>B</strong>。<br><br><span style="color:#30D158;">✅ 真题启示：四川专升本第 1 题常考「四大特性综合判断」，先判奇偶再判有界，两步走稳拿分。</span>')}
 
             ${groupTitle('fa-rotate', '1.5 反函数求解四步走', '#5AC8FA')}
-            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
-                    <strong>Step 1</strong> 求原函数 $y=f(x)$ 的<strong>值域</strong>（即反函数的定义域）<br>
-                    <strong>Step 2</strong> 反解 $x = \\varphi(y)$：把式子移动直到只剩一个 $x$（有多个 $x$ 就提公因子）<br>
-                    <strong>Step 3</strong> 交换字母：$y = \\varphi(x)$<br>
-                    <strong>Step 4</strong> 写出定义域（即 Step 1 求出的值域）
+            <div class="formula-card chapter-flow-card" style="--card-accent:#5AC8FA;">
+                <div class="chapter-flow-step">
+                    <strong>STEP 1</strong>
+                    <span>求原函数 $y=f(x)$ 的<strong>值域</strong>，它就是反函数的定义域。</span>
                 </div>
-                <div class="formula-label" style="color:#5AC8FA;margin-top:1rem;">例题（提公因子演示）</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    求 $y = \\dfrac{1-x}{1+x}$ 的反函数：<br>
-                    反解：$y(1+x) = 1-x \\implies y + xy = 1 - x \\implies xy + x = 1 - y$<br>
-                    <strong>提公因子 x</strong>：$x(y+1) = 1-y \\implies x = \\dfrac{1-y}{1+y}$<br>
-                    交换字母得：$y = \\dfrac{1-x}{1+x}$，即该函数的反函数就是它自己！
+                <div class="chapter-flow-step">
+                    <strong>STEP 2</strong>
+                    <span>反解 $x = \\varphi(y)$：把式子整理到只剩一个 $x$；有多个含 $x$ 项时先提公因子。</span>
+                </div>
+                <div class="chapter-flow-step">
+                    <strong>STEP 3</strong>
+                    <span>交换字母，写成 $y = \\varphi(x)$。</span>
+                </div>
+                <div class="chapter-flow-step">
+                    <strong>STEP 4</strong>
+                    <span>写出定义域，即 STEP 1 中求得的原函数值域。</span>
+                </div>
+            </div>
+            <div class="formula-card chapter-example-card" style="--card-accent:#5AC8FA;">
+                <div class="formula-label" style="color:#5AC8FA;">例题：提公因子反解</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    求 $y = \\dfrac{1-x}{1+x}$ 的反函数。<br>
+                    $y(1+x)=1-x \\implies y+xy=1-x \\implies xy+x=1-y$<br>
+                    提取 $x$：$x(y+1)=1-y \\implies x=\\dfrac{1-y}{1+y}$<br>
+                    交换字母：$y=\\dfrac{1-x}{1+x}$，所以该函数的反函数就是它自己。
                 </div>
             </div>
             ${memoryBox('分段函数反函数', '分段函数分别对每个式子求反函数，再对应拼起来写定义域即可。')}
@@ -2684,16 +2751,18 @@ function buildFunctionDetail() {
                 <div class="formula-card" style="--card-accent:${C};">
                     <div class="formula-label" style="color:var(--accent-yellow-text);">情形 B：$\\frac{0}{0}$ 型</div>
                     <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
-                        $$\\boxed{\\lim \\frac{f}{g} = C \\text{（有限非零常数）且 } \\lim g = 0 \\implies \\lim f = 0}$$
+                        $$\\boxed{\\text{分母 } \\to 0 \\quad\\Longrightarrow\\quad \\text{分子也必须 } \\to 0}$$
                     </div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;line-height:1.7;">
                         分母趋于 0 而极限仍存在（有限） → 分子必须也趋于 0。抓住「分母=0 ⇒ 分子=0」可列方程。
                     </div>
-                    <div class="formula-label" style="color:var(--accent-yellow-text);margin-top:1rem;">例题（经典）</div>
-                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                        已知 $\\lim\\limits_{x \\to 1} \\dfrac{x^2 + ax + b}{x - 1} = 3$，求 $a, b$。<br>
-                        分母 $x-1 \\to 0$，极限存在 → 分子 $\\to 0$：$1 + a + b = 0$（方程一）<br>
-                        用洛必达或因式分解：$x^2+ax+b = (x-1)(x-c)$，展开对比 $a = -1-c$，$b = c$；代入极限 $\\dfrac{(x-1)(x-c)}{x-1} \\to 1-c = 3 \\Rightarrow c = -2$ → $a = 1$，$b = -2$。
+                    <div class="formula-label" style="color:var(--accent-yellow-text);margin-top:1rem;">例题（专升本难度）</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                        已知 $\\lim\\limits_{x \\to 1} \\dfrac{x^2+ax-2}{x-1}=3$，求 $a$。<br>
+                        当 $x\\to1$ 时，分母 $x-1\\to0$；要使极限存在，分子也必须趋于 0：<br>
+                        $1^2+a\\cdot1-2=0 \\implies \\boldsymbol{a=1}$。<br>
+                        <strong>验证</strong>：$x^2+x-2=(x+2)(x-1)$，所以<br>
+                        $\\lim\\limits_{x\\to1}\\dfrac{(x+2)(x-1)}{x-1}=\\lim\\limits_{x\\to1}(x+2)=3\\;\\checkmark$
                     </div>
                 </div>
             </div>
@@ -3045,7 +3114,8 @@ function buildFunctionDetail() {
         </div>
     `;
 
-    return { title: '第一章 · 函数·极限·连续', color: C, tabs, body: mapBody + limit1Body + limit2Body + contBody + summaryBody };
+    // mapBody contains the knowledge-map wrapper; close it before appending sibling tab sections.
+    return { title: '第一章 · 函数·极限·连续', color: C, tabs, body: `${mapBody}</div>` + limit1Body + limit2Body + contBody + summaryBody };
 }
 
 // ---------- 总览详情 ----------
