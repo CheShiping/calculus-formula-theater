@@ -1,9 +1,11 @@
 /**
  * Chapter metadata source.
- * The actual note files are kept in `notes/*.md` at the repository root.
- * We use Vite's import.meta.glob to enumerate them at build time so the SPA
- * stays type-safe without pulling in a markdown parser for this phase.
+ *
+ * 章节清单直接由 `chapterContent.ts` 派生，避免在运行时 glob 父目录的 notes/*.md
+ * （Vite 根目录是 app/，外层 notes/ 读不到）。章节正文仍然由 chapterContent.ts 提供。
  */
+import { ALL_CHAPTERS } from '../data/chapterContent';
+
 export interface ChapterMeta {
   /** url slug, e.g. "01-函数、极限、连续" */
   slug: string;
@@ -13,13 +15,9 @@ export interface ChapterMeta {
   desc: string;
   /** accent color used in the card border / icon */
   color: string;
+  /** 章节引言（短） */
+  intro: string;
 }
-
-const RAW_FILES = import.meta.glob('/notes/*.md', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-}) as Record<string, string>;
 
 const SLUG_TO_DESC: Record<string, string> = {
   '01-函数、极限、连续': '高数开篇第一章：函数、极限、连续，含四川 2024、山东 2023 等专升本真题。',
@@ -41,27 +39,17 @@ const SLUG_TO_COLOR: Record<string, string> = {
   '07-线性代数-行列式': '#FF3B30',
 };
 
-function filenameToSlug(path: string): string {
-  const file = path.split('/').pop() ?? '';
-  return file.replace(/\.md$/, '');
-}
-
 function filenameToTitle(slug: string): string {
-  // Strip leading number prefix like "01-" for display
   return slug.replace(/^\d+-/, '');
 }
 
-export const CHAPTERS: ChapterMeta[] = Object.keys(RAW_FILES)
-  .map((path) => {
-    const slug = filenameToSlug(path);
-    return {
-      slug,
-      title: filenameToTitle(slug),
-      desc: SLUG_TO_DESC[slug] ?? '点击查看章节详情',
-      color: SLUG_TO_COLOR[slug] ?? '#0A84FF',
-    } satisfies ChapterMeta;
-  })
-  .sort((a, b) => a.slug.localeCompare(b.slug));
+export const CHAPTERS: ChapterMeta[] = ALL_CHAPTERS.map((c) => ({
+  slug: c.slug,
+  title: filenameToTitle(c.slug),
+  desc: SLUG_TO_DESC[c.slug] ?? '点击查看章节详情',
+  color: SLUG_TO_COLOR[c.slug] ?? '#0A84FF',
+  intro: c.intro,
+}));
 
 export function getChapterBySlug(slug: string): ChapterMeta | undefined {
   return CHAPTERS.find((c) => c.slug === slug);

@@ -13,6 +13,16 @@ export default function HomePage() {
         <ThemeToggle />
       </header>
 
+      <section className="quick-access">
+        <Link to="/review" className="quick-card quick-review">
+          <span className="quick-icon">🎴</span>
+          <div>
+            <strong>翻卡记忆</strong>
+            <span>3D 翻面 · 7 模块 120 条公式</span>
+          </div>
+        </Link>
+      </section>
+
       <section className="chapter-grid">
         {CHAPTERS.map((ch) => (
           <Link
@@ -26,12 +36,13 @@ export default function HomePage() {
             </span>
             <span className="chapter-card-title">{ch.title}</span>
             <span className="chapter-card-desc">{ch.desc}</span>
+            {ch.intro && <span className="chapter-card-intro">{ch.intro}</span>}
           </Link>
         ))}
       </section>
 
-      <div className="placeholder-banner">
-        ⚠️ 占位首页：阶段 1 仅展示章节列表 + 主题切换。后续阶段按 calculus-formula-prd 增量升级（3D 卡片剧场 / 公式详情 / 真题搜索等）。
+      <div className="phase-hint">
+        💡 Phase 1+2 已完成：120 条公式 + 7 章正文已接入。下一阶段加入翻卡记忆剧场与真题自测。
       </div>
     </div>
   );

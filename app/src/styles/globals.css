@@ -136,6 +136,17 @@ body {
   line-height: 1.5;
 }
 
+.chapter-card-intro {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-top: 0.4rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .chapter-card-tag {
   display: inline-block;
   padding: 0.2rem 0.6rem;
@@ -182,7 +193,8 @@ body {
   overflow-x: auto;
 }
 
-.placeholder-banner {
+.placeholder-banner,
+.phase-hint {
   padding: 1rem 1.2rem;
   border-radius: 10px;
   background: var(--bg-elevated);
@@ -190,4 +202,289 @@ body {
   color: var(--text-secondary);
   font-size: 0.9rem;
   margin-top: 1rem;
+}
+
+.phase-hint {
+  border-left-color: var(--accent);
+}
+
+/* ========== Review · 翻卡记忆 ========== */
+.review-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+}
+
+.review-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.review-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+}
+
+.review-header p {
+  margin: 0.3rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  max-width: 60ch;
+}
+
+.review-controls {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.module-seg {
+  display: inline-flex;
+  padding: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  gap: 2px;
+}
+
+.module-seg button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: background 200ms, color 200ms;
+}
+
+.module-seg button:hover {
+  color: var(--text-primary);
+}
+
+.module-seg button.active {
+  background: var(--text-primary);
+  color: var(--bg-body);
+  font-weight: 600;
+}
+
+.btn-flip-all {
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+  transition: filter 200ms, transform 200ms;
+}
+
+.btn-flip-all:hover {
+  filter: brightness(1.1);
+}
+
+.btn-flip-all:active {
+  transform: scale(0.97);
+}
+
+.review-group {
+  margin-top: 1.8rem;
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--border-soft);
+}
+
+.review-group-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.review-group-head h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.review-group-head .meta {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.review-group .pill {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-soft);
+}
+
+.flip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .flip-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.flip-card {
+  perspective: 1200px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+.flip-card:focus-visible .flip-card-inner {
+  box-shadow: 0 0 0 3px var(--accent);
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  transform-style: preserve-3d;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 16px;
+}
+
+.flip-card.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+  padding: 1rem 1.1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: border-color 200ms, box-shadow 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.flip-card-face:hover {
+  border-color: var(--accent);
+}
+
+.flip-card-front {
+  /* 默认朝前 */
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  /* 背面背景由组件 inline 注入渐变 */
+}
+
+.flip-card-tag {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: transparent;
+  border: 1px solid;
+  letter-spacing: 0.02em;
+}
+
+.flip-card-tex {
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 0.5rem 0;
+  color: var(--text-primary);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flip-card-tex .katex {
+  font-size: 1.05em;
+}
+
+.flip-card-hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.flip-card-hint.katex-hint .katex {
+  font-size: 0.85em;
+  color: var(--text-secondary);
+}
+
+[data-theme='light'] .flip-card-face {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* ========== Home · Quick Access ========== */
+.quick-access {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.9rem;
+  margin: 1.2rem 0;
+}
+
+.quick-card {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  transition: border-color 200ms, transform 200ms, box-shadow 200ms;
+}
+
+.quick-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.10);
+}
+
+.quick-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.quick-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.quick-card strong {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.quick-card span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.quick-review {
+  background: linear-gradient(135deg, var(--bg-card), rgba(79, 107, 255, 0.06));
 }
