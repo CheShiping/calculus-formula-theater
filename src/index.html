@@ -2679,6 +2679,17 @@ function buildFunctionDetail() {
                 <div class="formula-block" style="border:none;background:none;padding:0;">
                     $$\\ln x \\sim x - 1$$
                 </div>
+
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">⑤ 对数 / 根号 / 带参数型（$x \\to 0$ 时）</div>
+                <div class="formula-grid" style="margin:0.5rem 0;">
+                    <div style="padding:0.5rem;">$x - \\ln(1+x) \\sim \\dfrac{1}{2}x^2$（<span style="color:#30D158;">正</span>，对数二次型）</div>
+                    <div style="padding:0.5rem;">$\\ln(1+x) - x \\sim -\\dfrac{1}{2}x^2$（<span style="color:#FF3B30;">负</span>，对数二次型）</div>
+                    <div style="padding:0.5rem;">$(1+\\beta x)^\\alpha - 1 \\sim \\alpha \\beta x$（幂指型，与 ② 重复汇总）</div>
+                    <div style="padding:0.5rem;">$1 - \\sqrt{1+\\alpha x} \\sim -\\dfrac{\\alpha}{2}x$（<span style="color:#FF3B30;">负</span>，根号型）</div>
+                </div>
+                <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);line-height:1.8;margin-top:0.4rem;">
+                    💡 记忆口诀：对数二次型 — 「$x$ 减对数 <strong>正</strong> $\\dfrac{x^2}{2}$；对数减 $x$ <strong>负</strong> $\\dfrac{x^2}{2}$」；根号型 — $1-\\sqrt{1+u} \\sim -\\dfrac{u}{2}$，代入 $u=\\alpha x$ 即得。
+                </div>
             </div>
             ${memoryBox('等价无穷小使用原则', '<strong>乘除关系</strong>直接等价替换（不用犹豫，大胆用）；<strong>加减关系</strong>一般不能直接替——容易丢高阶项导致出错。加减想稳得分：先通分、先有理化、先处理成乘除，再等价。高阶等价（③中的 4 条）在 0/0 型中直接替换可秒解，无需多次洛必达。')}
 
@@ -3025,6 +3036,8 @@ function buildFunctionDetail() {
                     基础 6 连等：sin ~ tan ~ arcsin ~ arctan ~ eˣ−1 ~ ln(1+x) ~ x<br>
                     二次与指数：1−cos ~ x²/2；(1+βx)^α − 1 ~ αβx；aˣ−1 ~ x·ln a；log_a(1+x) ~ x/ln a<br>
                     高阶 x³：sin 负 1/6、arcsin 正 1/6、tan 负 1/3、arctan 正 1/3 —— 记：「sin 反 sin，一负一正 1/6；tan 反 tan，一负一正 1/3」<br>
+                    对数二次型：x − ln(1+x) ~ ½x²（正）；ln(1+x) − x ~ −½x²（负）<br>
+                    根号型：1 − √(1+αx) ~ −αx/2<br>
                     特例 x→1：ln x ~ x−1
                 </div>
             </div>
