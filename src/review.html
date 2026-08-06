@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>翻卡记忆 · 四川专升本高数公式</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <link href="https://fonts.font.im/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+SC:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans SC', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { box-sizing: border-box; }
+
+        /* ========== 主题变量（与 index.html 一致） ========== */
+        :root {
+            --bg-body: #000;
+            --bg-main-stage: radial-gradient(ellipse at center, #0f1117 0%, #000 70%);
+            --bg-sidebar: rgba(15, 15, 20, 0.7);
+            --bg-card: rgba(30, 32, 40, 0.5);
+            --bg-card-active: rgba(40, 45, 55, 0.7);
+            --bg-elevated: rgba(255,255,255,0.03);
+            --bg-elevated-hover: rgba(255,255,255,0.06);
+            --bg-elevated-strong: rgba(255,255,255,0.04);
+            --bg-formula: rgba(0,0,0,0.3);
+            --bg-detail: #06070a;
+            --border-soft: rgba(255,255,255,0.08);
+            --border-medium: rgba(255,255,255,0.12);
+            --border-strong: rgba(255,255,255,0.25);
+            --text-primary: #fff;
+            --text-secondary: #d1d5db;
+            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
+            --text-faint: rgba(255,255,255,0.5);
+            --text-ghost: rgba(255,255,255,0.2);
+            --shadow-card: 0 20px 50px rgba(0,0,0,0.6);
+            --shadow-active: 0 0 50px rgba(10, 132, 255, 0.15);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.3);
+            --accent-yellow: #FFD60A;
+        }
+        [data-theme="light"] {
+            --bg-body: #f5f6f8;
+            --bg-main-stage: radial-gradient(ellipse at center, #ffffff 0%, #eef0f4 70%);
+            --bg-sidebar: rgba(255, 255, 255, 0.75);
+            --bg-card: rgba(255, 255, 255, 0.7);
+            --bg-card-active: rgba(255, 255, 255, 0.95);
+            --bg-elevated: rgba(0,0,0,0.03);
+            --bg-elevated-hover: rgba(0,0,0,0.06);
+            --bg-elevated-strong: rgba(0,0,0,0.04);
+            --bg-formula: rgba(0,0,0,0.04);
+            --bg-detail: #f7f8fa;
+            --border-soft: rgba(0,0,0,0.08);
+            --border-medium: rgba(0,0,0,0.12);
+            --border-strong: rgba(0,0,0,0.2);
+            --text-primary: #1a1d24;
+            --text-secondary: #2d3139;
+            --text-muted: #5a6172;
+            --text-dim: #767d8c;
+            --text-faint: rgba(0,0,0,0.55);
+            --text-ghost: rgba(0,0,0,0.25);
+            --shadow-card: 0 20px 50px rgba(0,0,0,0.15);
+            --shadow-active: 0 0 50px rgba(10, 132, 255, 0.2);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.1);
+            --accent-yellow: #FFD60A;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* ========== 顶部导航（与 index.html 的 .top-actions 同款） ========== */
+        .top-bar {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.5rem;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .top-bar a, .top-bar button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border-medium);
+            background: var(--bg-sidebar);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: var(--text-primary);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-card);
+            text-decoration: none;
+        }
+        .top-bar a:hover, .top-bar button:hover {
+            transform: scale(1.1);
+            border-color: var(--border-strong);
+            color: #0A84FF;
+        }
+        .top-bar .icon-sun { display: none; }
+        .top-bar .icon-moon { display: block; }
+        [data-theme="light"] .top-bar .icon-sun { display: block; }
+        [data-theme="light"] .top-bar .icon-moon { display: none; }
+
+        /* Current-page indicator follows the home entry's green route color. */
+        .top-bar .top-action-review {
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border-radius: 50%;
+            background: var(--bg-sidebar);
+            border-color: rgba(48,209,88,0.45);
+            color: #30D158;
+        }
+        .top-bar .top-action-review:hover {
+            background: var(--bg-elevated-hover);
+            color: #30D158;
+            border-color: #30D158;
+        }
+
+        /* ========== 主容器 ========== */
+        #main-view {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar-container {
+            width: 380px;
+            flex-shrink: 0;
+            background: var(--bg-sidebar);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-right: 1px solid var(--border-soft);
+            padding: 2.5rem 2rem;
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            z-index: 20;
+        }
+        .sidebar-container::-webkit-scrollbar,
+        .main-stage::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+        .main-stage {
+            flex: 1;
+            min-width: 0;
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            background: var(--bg-main-stage);
+            padding: 6.75rem 2rem 3rem;
+            transition: background 0.4s ease;
+        }
+        .review-board {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ========== 页面标题：沿用详情页的紧凑信息层级 ========== */
+        .hero {
+            text-align: left;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.1rem;
+            border-bottom: 1px solid var(--border-soft);
+        }
+        .hero h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin: 0 0 0.4rem;
+            letter-spacing: 0;
+            color: var(--text-primary);
+        }
+        .hero p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* ========== 模块筛选：对齐详情页 Tab 的低饱和状态 ========== */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            padding: 0 0 1.25rem;
+            margin-bottom: 0.75rem;
+            justify-content: flex-start;
+        }
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1.1rem;
+            border-radius: 22px;
+            background: var(--bg-chip);
+            border: 1px solid var(--border-soft);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+            user-select: none;
+        }
+        .chip:hover {
+            background: var(--bg-elevated-hover);
+            transform: translateY(-1px);
+            border-color: var(--border-medium);
+        }
+        .chip.active {
+            background: rgba(48,209,88,0.13);
+            border-color: rgba(48,209,88,0.45);
+            color: #30D158;
+            box-shadow: none;
+        }
+        [data-theme="light"] .chip.active { color: #1a7a36; border-color: rgba(48,209,88,0.6); }
+        .chip .count {
+            display: inline-flex;
+            min-width: 22px;
+            height: 18px;
+            padding: 0 0.45rem;
+            border-radius: 9px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: rgba(255,255,255,0.08);
+            color: var(--text-muted);
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .chip.active .count {
+            background: rgba(48,209,88,0.18);
+            color: #30D158;
+        }
+        [data-theme="light"] .chip .count { background: rgba(0,0,0,0.06); }
+        [data-theme="light"] .chip.active .count { background: rgba(48,209,88,0.18); color: #1a7a36; }
+
+        /* ========== 工具栏 ========== */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding: 0.75rem 0;
+            border-top: 1px solid var(--border-soft);
+            border-bottom: 1px solid var(--border-soft);
+        }
+        .toolbar .stats {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+        .toolbar .stats b { color: var(--text-primary); }
+        .toolbar .actions { display: inline-flex; gap: 0.5rem; flex-wrap: wrap; }
+        .toolbar button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.55rem 1.05rem;
+            border-radius: 22px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-soft);
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-family: inherit;
+        }
+        .toolbar button:hover {
+            background: var(--bg-elevated-hover);
+            color: #30D158;
+            border-color: rgba(48,209,88,0.5);
+            transform: translateY(-1px);
+        }
+        .toolbar button.primary {
+            background: rgba(48,209,88,0.13);
+            border-color: rgba(48,209,88,0.45);
+            color: #30D158;
+        }
+        .toolbar button.primary:hover {
+            background: rgba(48,209,88,0.22);
+            color: #30D158;
+            border-color: #30D158;
+            box-shadow: none;
+        }
+        [data-theme="light"] .toolbar button.primary { color: #1a7a36; }
+        [data-theme="light"] .toolbar button.primary:hover { color: #1a7a36; border-color: #30D158; }
+
+        /* ========== 进度条 ========== */
+        .progress-wrap {
+            margin: 0.75rem 0 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--bg-elevated);
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-bar > div {
+            height: 100%;
+            background: linear-gradient(90deg, #0A84FF, #BF5AF2);
+            transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 3px;
+            box-shadow: 0 0 12px rgba(10,132,255,0.4);
+        }
+        .progress-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            min-width: 50px;
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .reset-feedback {
+            min-height: 1.2rem;
+            margin-top: 0.75rem;
+            color: #30D158;
+            font-size: 0.78rem;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(-2px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .reset-feedback.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== 翻卡网格 ========== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+        .empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* ========== 翻卡本体（与 index.html 公式卡同款：左侧色条 + 公式独立背景） ========== */
+        .flip-card {
+            position: relative;
+            perspective: 1400px;
+            height: 240px;
+            cursor: pointer;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner { transform: rotateY(var(--rot, 0deg)) translateY(-2px); }
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card.flipped:hover .flip-card-inner { transform: rotateY(180deg) translateY(-2px); }
+        .flip-face {
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            border: 1px solid var(--border-soft);
+            background: var(--bg-elevated);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-card);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 1.1rem 1.2rem;
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+        /* 左侧色条：与 index.html 的 .formula-card::before 完全同款 */
+        .flip-face::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 100%;
+            background: var(--accent, #0A84FF);
+            opacity: 0.7;
+        }
+        .flip-card:hover .flip-face {
+            box-shadow: var(--shadow-hover), var(--shadow-card);
+            border-color: var(--border-medium);
+            background: var(--bg-elevated-hover);
+        }
+
+        .flip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .flip-header .num {
+            color: var(--text-ghost);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+        }
+        .flip-header .label { color: var(--accent, #0A84FF); font-family: 'JetBrains Mono', monospace; }
+
+        /* 公式展示区：与 index.html 的 .formula-block 同款独立背景 */
+        .flip-body {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0.4rem 0.5rem;
+            margin: 0.4rem 0;
+            background: var(--bg-formula);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+        }
+        .flip-body .katex { font-size: 1.15em; color: var(--text-primary); }
+        .flip-body .katex-display { margin: 0; }
+
+        .flip-footer {
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            letter-spacing: 0.05em;
+        }
+
+        .question-formula { width: 100%; overflow-x: auto; overflow-y: hidden; }
+        .question-formula .katex { color: var(--text-primary); font-size: 1.2em; }
+        .question-formula .katex-display { margin: 0; }
+
+        /* 翻面后：答案沿用主页公式卡的模块色，不使用额外的蓝紫渐变。 */
+        .flip-face.back {
+            transform: rotateY(180deg);
+            background: var(--bg-elevated-strong);
+            border-color: color-mix(in srgb, var(--accent, #0A84FF) 55%, var(--border-medium));
+            box-shadow: var(--shadow-card);
+        }
+        .flip-face.back::before { opacity: 1; }
+        .flip-face.back .flip-header { margin-bottom: 0.4rem; }
+        .flip-face.back .flip-body {
+            flex-direction: column;
+            gap: 0.6rem;
+            text-align: center;
+            background: rgba(0,0,0,0.25);
+        }
+        [data-theme="light"] .flip-face.back .flip-body { background: rgba(0,0,0,0.05); }
+        .flip-face.back .note {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .answer-formula { width: 100%; overflow-x: auto; overflow-y: hidden; }
+        .answer-formula .katex { color: var(--text-primary); font-size: 1.2em; }
+        .answer-formula .katex-display { margin: 0; }
+
+        /* ========== 掌握标记 ========== */
+        .flip-card.known .flip-face.front { border-color: rgba(48, 209, 88, 0.55); }
+        .flip-card.known::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #30D158;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            z-index: 5;
+            box-shadow: 0 4px 12px rgba(48, 209, 88, 0.4);
+        }
+        .know-btn {
+            all: unset;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 700;
+            transition: color 0.2s;
+        }
+        .know-btn:hover { color: #30D158; }
+        .know-btn.is-known { color: #30D158; }
+
+        /* ========== 移动端适配（与 index.html 同款） ========== */
+        /* Main-page shell alignment for the review theater. */
+        .sidebar-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .hero {
+            margin-bottom: 1.75rem;
+            padding: 0 0 1.5rem;
+            border-bottom: 1px solid var(--border-soft);
+        }
+        .page-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        .page-eyebrow i { color: #30D158; }
+        .hero h1 {
+            font-size: 2rem;
+            line-height: 1.15;
+            margin-bottom: 0.25rem;
+        }
+        .hero-subtitle {
+            color: #30D158;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+        .hero p { font-size: 0.86rem; line-height: 1.7; }
+        .side-section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.65rem;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .side-section-heading span:last-child {
+            color: var(--text-dim);
+            font-size: 0.68rem;
+            font-weight: 500;
+        }
+        .filter-bar {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.5rem;
+            padding: 0;
+            margin-bottom: 1.75rem;
+        }
+        .chip {
+            width: 100%;
+            justify-content: space-between;
+            padding: 0.4rem 0.7rem;
+            border-radius: 8px;
+            background: var(--bg-elevated);
+            font-size: 0.78rem;
+        }
+        .chip:first-child { grid-column: span 2; }
+        .chip.active { color: var(--text-primary); }
+        .chip.active .count { color: #30D158; }
+        .side-progress-heading {
+            margin-top: 0.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border-soft);
+        }
+        .toolbar {
+            display: block;
+            padding: 1rem 0;
+            border-bottom: 0;
+            border-top: 0;
+            margin: 0;
+        }
+        .toolbar .stats { font-size: 0.82rem; }
+        .toolbar .actions {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.5rem;
+            width: 100%;
+            margin-top: 0.8rem;
+        }
+        .toolbar button {
+            width: 100%;
+            justify-content: center;
+            gap: 0.35rem;
+            padding: 0.6rem 0.35rem;
+            border-radius: 8px;
+            font-size: 0.72rem;
+        }
+        .toolbar button:hover,
+        .toolbar button.primary { color: #30D158; }
+        .progress-wrap { margin: 0 0 0.2rem; }
+        .progress-bar > div {
+            background: #30D158;
+            box-shadow: none;
+        }
+        .card-grid { gap: 1rem; }
+        .flip-face {
+            background: var(--bg-elevated);
+            box-shadow: none;
+        }
+        .flip-card:hover .flip-face { box-shadow: var(--shadow-hover); }
+        .flip-face.back { box-shadow: none; }
+
+        @media (max-width: 640px) {
+            body { height: auto; overflow: auto; }
+            #main-view { height: auto; min-height: 100vh; flex-direction: column; }
+            .sidebar-container { width: 100%; padding: 5rem 1rem 1.5rem; overflow: visible; }
+            .main-stage { padding: 1.25rem 1rem 3rem; overflow: visible; }
+            .top-bar { top: 0.6rem; right: 0.75rem; }
+            .top-bar a, .top-bar button { width: 36px; height: 36px; font-size: 0.85rem; }
+            .top-bar .top-action-review { width: 36px; height: 36px; padding: 0; }
+            .card-grid { grid-template-columns: 1fr; }
+            .flip-card { height: 220px; }
+            .toolbar { flex-direction: column; align-items: stretch; }
+            .toolbar .actions { justify-content: center; }
+            .hero h1 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== 顶部导航（与 index.html 完全同款） ========== -->
+<div class="top-bar">
+    <a href="review.html" class="top-action-review" title="翻卡记忆（当前页）">
+        <i class="fa-solid fa-clone"></i>
+    </a>
+    <a href="index.html" title="返回主页（四川专升本高数 · 框架梳理）">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+    <a href="https://github.com/CheShiping/calculus-formula-theater" target="_blank" rel="noopener" title="查看 GitHub 源码仓库">
+        <i class="fa-brands fa-github"></i>
+    </a>
+    <button onclick="toggleTheme()" title="切换深色/浅色主题">
+        <i class="fa-solid fa-sun icon-sun"></i>
+        <i class="fa-solid fa-moon icon-moon"></i>
+    </button>
+</div>
+
+<main id="main-view">
+    <aside class="sidebar-container">
+
+    <!-- ========== Hero ========== -->
+    <div class="hero">
+        <div class="page-eyebrow"><i class="fa-solid fa-layer-group"></i>四川专升本高数</div>
+        <h1>翻卡记忆</h1>
+        <div class="hero-subtitle">公式回忆训练</div>
+        <p>点开看公式 → 翻面验证 → 标记掌握。103 张卡，覆盖导数/微分/积分/三角函数/微分方程</p>
+    </div>
+
+    <!-- ========== 模块筛选 ========== -->
+    <div class="side-section-heading">
+        <span>选择章节</span>
+        <span>公式范围</span>
+    </div>
+    <div class="filter-bar" id="filterBar">
+        <!-- chips 由 JS 渲染 -->
+    </div>
+
+    <!-- ========== 工具栏 ========== -->
+    <div class="side-section-heading side-progress-heading">
+        <span>学习进度</span>
+        <span>随时可重置</span>
+    </div>
+    <div class="toolbar">
+        <div class="stats" id="stats">已加载 ...</div>
+        <div class="actions">
+            <button onclick="shuffleCards()" title="打乱顺序">
+                <i class="fa-solid fa-shuffle"></i>洗牌
+            </button>
+            <button onclick="flipAll()" title="翻面所有卡片" class="primary">
+                <i class="fa-solid fa-rotate"></i>全部翻面
+            </button>
+            <button onclick="resetProgress()" title="重置掌握进度">
+                <i class="fa-solid fa-rotate-left"></i>重置进度
+            </button>
+        </div>
+    </div>
+
+    <!-- 进度条 -->
+    <div class="progress-wrap">
+        <div class="progress-bar"><div id="progressFill" style="width:0%"></div></div>
+        <div class="progress-text" id="progressText">0%</div>
+    </div>
+    <div class="reset-feedback" id="resetFeedback" role="status" aria-live="polite"></div>
+
+    <!-- ========== 翻卡网格 ========== -->
+    </aside>
+
+    <section class="main-stage" aria-label="公式翻卡舞台">
+        <div class="review-board">
+    <div class="card-grid" id="cardGrid">
+        <div class="empty">正在加载公式…</div>
+    </div>
+        </div>
+    </section>
+</main>
+
+<script type="module">
+    import { FORMULAS, MODULES } from './data/formulas.js';
+
+    // ========== 状态 ==========
+    const state = {
+        activeModule: 'all',
+        flipped: new Set(),
+        known: new Set(loadProgress()),
+        order: FORMULAS.map((_, i) => i),
+    };
+
+    // ========== 主题 ==========
+    function applyTheme(theme) {
+        const html = document.documentElement;
+        if (theme === 'light') html.setAttribute('data-theme', 'light');
+        else html.removeAttribute('data-theme');
+        try { localStorage.setItem('formula-theme', theme); } catch (e) {}
+    }
+    function toggleTheme() {
+        const current = document.documentElement.getAttribute('data-theme');
+        applyTheme(current === 'light' ? 'dark' : 'light');
+    }
+    function loadTheme() {
+        try {
+            const saved = localStorage.getItem('formula-theme');
+            if (saved) applyTheme(saved);
+        } catch (e) {}
+    }
+
+    // ========== 进度持久化 ==========
+    function loadProgress() {
+        try {
+            const raw = localStorage.getItem('review-known');
+            return raw ? JSON.parse(raw) : [];
+        } catch (e) { return []; }
+    }
+    function saveProgress() {
+        try {
+            localStorage.setItem('review-known', JSON.stringify([...state.known]));
+        } catch (e) {}
+    }
+    function resetProgress() {
+        const resetCount = state.known.size;
+        state.known.clear();
+        state.flipped.clear();
+        saveProgress();
+        renderAll();
+        showResetFeedback(resetCount ? `已重置 ${resetCount} 张卡片的掌握进度` : '当前进度已是初始状态');
+    }
+
+    let resetFeedbackTimer;
+    function showResetFeedback(message) {
+        const feedback = document.getElementById('resetFeedback');
+        feedback.textContent = message;
+        feedback.classList.add('visible');
+        clearTimeout(resetFeedbackTimer);
+        resetFeedbackTimer = setTimeout(() => feedback.classList.remove('visible'), 2400);
+    }
+
+    // ========== 计算可见公式 ==========
+    function getVisibleFormulas() {
+        if (state.activeModule === 'all') return FORMULAS;
+        return FORMULAS.filter(f => f.module === state.activeModule);
+    }
+
+    // ========== 渲染：模块 chips ==========
+    function renderFilterBar() {
+        const bar = document.getElementById('filterBar');
+        const total = FORMULAS.length;
+        const items = [
+            { id: 'all', label: '全部', count: total, color: '#0A84FF' },
+            ...MODULES,
+        ];
+        bar.innerHTML = items.map(m => {
+            const active = state.activeModule === m.id;
+            return `<div class="chip ${active ? 'active' : ''}" data-module="${m.id}">
+                <span>${m.label || m.title}</span>
+                <span class="count">${m.count}</span>
+            </div>`;
+        }).join('');
+        bar.querySelectorAll('.chip').forEach(el => {
+            el.addEventListener('click', () => {
+                state.activeModule = el.dataset.module;
+                renderFilterBar();
+                renderGrid();
+                updateStats();
+            });
+        });
+    }
+
+    // ========== 渲染：翻卡网格 ==========
+    function renderGrid() {
+        const grid = document.getElementById('cardGrid');
+        const list = getVisibleFormulas();
+        if (!list.length) {
+            grid.innerHTML = '<div class="empty">该模块下暂无公式</div>';
+            return;
+        }
+        grid.innerHTML = state.order
+            .map(idx => FORMULAS[idx])
+            .filter(f => f && (state.activeModule === 'all' || f.module === state.activeModule))
+            .map(f => {
+                const isFlipped = state.flipped.has(f.id);
+                const isKnown = state.known.has(f.id);
+                const accent = f.color || '#0A84FF';
+                return `
+                <div class="flip-card ${isFlipped ? 'flipped' : ''} ${isKnown ? 'known' : ''}"
+                     data-id="${f.id}" style="--accent:${accent}">
+                    <div class="flip-card-inner">
+                        <div class="flip-face front">
+                            <div class="flip-header">
+                                <span class="num">${escapeHtml(f.num || '')}</span>
+                                <span class="label">${escapeHtml(f.label || '')}</span>
+                            </div>
+                            <div class="flip-body">
+                                <div class="question-formula" data-formula="${escapeHtml(toQuestionFormula(f.formula))}" aria-label="公式右侧答案未显示"></div>
+                            </div>
+                            <div class="flip-footer">
+                                <span>点击翻面</span>
+                                <span>${escapeHtml(f.module || '')}</span>
+                            </div>
+                        </div>
+                        <div class="flip-face back">
+                            <div class="flip-header">
+                                <span class="num">${escapeHtml(f.num || '')}</span>
+                                <span class="label">${escapeHtml(f.label || '')}</span>
+                            </div>
+                            <div class="flip-body">
+                                <div class="answer-formula" data-formula="${escapeHtml(toKatexSource(f.formula))}"></div>
+                                <div class="note">${escapeHtml(f.note || '（暂无记忆提示）')}</div>
+                            </div>
+                            <div class="flip-footer">
+                                <button class="know-btn ${isKnown ? 'is-known' : ''}" data-id="${f.id}">
+                                    ${isKnown ? '✓ 已掌握' : '○ 标记掌握'}
+                                </button>
+                                <span>点击翻回</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+
+        // 绑定翻卡事件
+        grid.querySelectorAll('.flip-card').forEach(card => {
+            const id = card.dataset.id;
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.know-btn')) return;
+                if (state.flipped.has(id)) state.flipped.delete(id);
+                else state.flipped.add(id);
+                card.classList.toggle('flipped');
+            });
+            const knowBtn = card.querySelector('.know-btn');
+            if (knowBtn) {
+                knowBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (state.known.has(id)) state.known.delete(id);
+                    else state.known.add(id);
+                    saveProgress();
+                    renderGrid();
+                    updateStats();
+                });
+            }
+        });
+
+        waitForKatex(grid);
+    }
+
+    function renderAll() {
+        renderFilterBar();
+        renderGrid();
+        updateStats();
+    }
+
+    // ========== 全部翻面 ==========
+    function flipAll() {
+        const list = getVisibleFormulas();
+        const allFlipped = list.every(f => state.flipped.has(f.id));
+        list.forEach(f => {
+            if (allFlipped) state.flipped.delete(f.id);
+            else state.flipped.add(f.id);
+        });
+        renderGrid();
+    }
+
+    // ========== 洗牌 ==========
+    function shuffleCards() {
+        for (let i = state.order.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [state.order[i], state.order[j]] = [state.order[j], state.order[i]];
+        }
+        renderGrid();
+    }
+
+    // ========== 统计/进度 ==========
+    function updateStats() {
+        const total = FORMULAS.length;
+        const visible = getVisibleFormulas().length;
+        const knownVisible = getVisibleFormulas().filter(f => state.known.has(f.id)).length;
+        const knownAll = state.known.size;
+        document.getElementById('stats').innerHTML =
+            `当前 <b>${visible}</b> 张 / 共 <b>${total}</b> 张 · 已掌握 <b>${knownVisible}</b> / <b>${knownAll}</b>`;
+        const pct = total ? Math.round((knownAll / total) * 100) : 0;
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('progressText').textContent = pct + '%';
+    }
+
+    // ========== 工具函数 ==========
+    function escapeHtml(s) {
+        return String(s == null ? '' : s)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+    // LaTeX 兼容：src/index.html 部分公式是 \(x)\' = 0 写法，KaTeX 数学模式不认 \'
+    function sanitizeTex(tex) {
+        return String(tex || '').replace(/\\'/g, "'");
+    }
+    function toKatexSource(formula) {
+        return sanitizeTex(formula).replace(/^\s*\$\$?|\$\$?\s*$/g, '').trim();
+    }
+    function toQuestionFormula(formula) {
+        const tex = toKatexSource(formula);
+        const equalsIndex = tex.indexOf('=');
+        return equalsIndex === -1 ? `${tex} = ?` : `${tex.slice(0, equalsIndex + 1)} ?`;
+    }
+    function renderCardMath(grid) {
+        if (!window.katex) return false;
+        grid.querySelectorAll('[data-formula]').forEach(el => {
+            try {
+                window.katex.render(el.dataset.formula || '', el, {
+                    displayMode: true,
+                    throwOnError: false,
+                });
+            } catch (e) {
+                el.textContent = el.dataset.formula || '';
+            }
+        });
+        return true;
+    }
+    function waitForKatex(grid, attempts = 0) {
+        if (renderCardMath(grid) || attempts >= 20) return;
+        setTimeout(() => waitForKatex(grid, attempts + 1), 50);
+    }
+
+    // ========== 初始化 ==========
+    loadTheme();
+    renderAll();
+
+    // 把按钮需要的全局函数挂到 window（onclick 用）
+    window.toggleTheme = toggleTheme;
+    window.shuffleCards = shuffleCards;
+    window.flipAll = flipAll;
+    window.resetProgress = resetProgress;
+
+</script>
+
+</body>
+</html>

@@ -150,6 +150,26 @@
         [data-theme="light"] .top-actions .icon-sun { display: block; }
         [data-theme="light"] .top-actions .icon-moon { display: none; }
 
+        /* 翻卡按钮（带文字的胶囊样式，区别于纯圆形图标按钮） */
+        .top-actions .top-action-review {
+            width: auto;
+            height: 44px;
+            padding: 0 1rem 0 0.9rem;
+            border-radius: 22px;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(48,209,88,0.13);
+            border-color: rgba(48,209,88,0.45);
+            color: #30D158;
+        }
+        .top-actions .top-action-review:hover {
+            background: rgba(48,209,88,0.22);
+            color: #30D158;
+            border-color: #30D158;
+        }
+        .top-actions .top-action-review i { font-size: 0.95rem; }
+
         /* ========== 主视图 ========== */
         #main-view {
             display: flex;
@@ -690,8 +710,12 @@
 </head>
 <body>
 
-<!-- ========== 右上角操作区：GitHub 源码 + 主题切换 ========== -->
+<!-- ========== 右上角操作区：翻卡记忆 + GitHub 源码 + 主题切换 ========== -->
 <div class="top-actions">
+    <a href="review.html" class="top-action-review" title="进入翻卡记忆页（专注背公式）">
+        <i class="fa-solid fa-clone"></i>
+        <span>翻卡记忆</span>
+    </a>
     <a href="https://github.com/CheShiping/calculus-formula-theater" target="_blank" rel="noopener" title="查看 GitHub 源码仓库">
         <i class="fa-brands fa-github"></i>
     </a>
