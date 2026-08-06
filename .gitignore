@@ -1,10 +1,12 @@
 # Dependencies
 node_modules/
 */node_modules/
+app/node_modules/
 
 # Production builds
 dist/
 */dist/
+app/dist/
 build/
 */build/
 
@@ -62,3 +64,9 @@ pnpm-lock.yaml
 
 # Agent files
 .agent/
+
+# Data extraction temp files
+_all_formulas.json
+app/src/data/_chapter_dump.txt
+app/src/data/_formulas_dump.txt
+app/src/data/_formulas_extracted.json

@@ -21,19 +21,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install
+        run: cd app && npm ci || npm install
 
       - name: Build
-        run: |
-          # 单文件 HTML 应用，直接把 src/ 内容作为 Pages 根目录
-          mkdir -p _site
-          cp -r src/* _site/
+        run: cd app && npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        with:
+          # Vite base 已经是 ./，dist 直接当 Pages 根目录即可
+          static_site_generator: vite
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: app/dist
 
   deploy:
     needs: build

@@ -1,0 +1,193 @@
+/* ========== Reset ========== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Inter', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ========== Theme variables ========== */
+:root {
+  --bg-body: #000;
+  --bg-card: rgba(30, 32, 40, 0.5);
+  --bg-card-hover: rgba(40, 45, 55, 0.7);
+  --bg-elevated: rgba(255, 255, 255, 0.03);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --text-primary: #fff;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --accent: #0a84ff;
+  --accent-warm: #ff9f0a;
+  --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.6);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.3);
+  --transition: 0.25s ease;
+}
+
+[data-theme='light'] {
+  --bg-body: #f5f6f8;
+  --bg-card: rgba(255, 255, 255, 0.75);
+  --bg-card-hover: rgba(255, 255, 255, 0.9);
+  --bg-elevated: rgba(0, 0, 0, 0.03);
+  --border-soft: rgba(0, 0, 0, 0.08);
+  --border-medium: rgba(0, 0, 0, 0.12);
+  --text-primary: #1a1d24;
+  --text-secondary: #2d3139;
+  --text-muted: #6b7280;
+  --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.12);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+body {
+  background: var(--bg-body);
+  color: var(--text-primary);
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ========== Layout primitives ========== */
+.page-shell {
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+}
+
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.chapter-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  border-radius: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition), border-color var(--transition), background var(--transition);
+  cursor: pointer;
+}
+
+.chapter-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  background: var(--bg-card-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+.chapter-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.chapter-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.chapter-card-tag {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--border-soft);
+  width: fit-content;
+}
+
+.btn {
+  padding: 0.6rem 1.1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.btn:hover {
+  border-color: var(--accent);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: transparent;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.formula-block {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.placeholder-banner {
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  background: var(--bg-elevated);
+  border-left: 3px solid var(--accent-warm);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}

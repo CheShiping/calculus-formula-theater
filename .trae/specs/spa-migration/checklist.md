@@ -1,0 +1,21 @@
+# Checklist
+
+- [x] `app/package.json` 存在并声明 `react` / `react-dom` / `vite` / `@vitejs/plugin-react` / `typescript` / `react-router-dom` / `katex` 等依赖
+- [x] `app/vite.config.ts` 存在并使用 `@vitejs/plugin-react`
+- [x] `app/tsconfig.json` 与 `app/tsconfig.node.json` 存在
+- [x] `app/index.html` 存在且 `<div id="root"></div>` 正确
+- [x] `app/src/main.tsx` 挂载 React 并使用 `BrowserRouter`
+- [x] `app/src/App.tsx` 至少定义 `/` 与 `/chapter/:slug` 两条路由
+- [x] `app/src/pages/HomePage.tsx` 渲染 7 张章节占位卡片 + 主题切换按钮
+- [x] `app/src/pages/ChapterPage.tsx` 渲染占位内容 + 至少一个 KaTeX 公式演示
+- [x] `app/src/components/ThemeToggle/ThemeToggle.tsx` 存在并通过 Context 修改主题
+- [x] `app/src/lib/theme.tsx` 提供 ThemeProvider / useTheme 且持久化到 localStorage
+- [x] `app/src/lib/katex.ts` 封装 `katex.render` 并能处理 `$...$` 与 `$$...$$`
+- [x] `app/src/lib/content.ts` 使用 `import.meta.glob` 读取 `notes/*.md` 文件名清单
+- [x] `app/src/styles/globals.css` 定义 `--bg-body` / `--text-primary` 等主题变量
+- [x] 根目录 `.gitignore` 包含 `app/dist/` 与 `app/node_modules/`
+- [x] `app/` 下 `npm install` 成功
+- [x] `app/` 下 `npm run dev` 启动成功，访问首页可见占位内容
+- [x] `app/` 下 `npm run build` 成功，输出 `app/dist/index.html`
+- [x] `edgeone.json` 存在，buildCommand 指向 `app/`，outputDir 指向 `app/dist`
+- [x] `.github/workflows/edgeone.yml` 存在并能触发 EdgeOne Pages 构建

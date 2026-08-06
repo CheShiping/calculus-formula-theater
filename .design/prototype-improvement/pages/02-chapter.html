@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang='zh-CN' data-theme='light' class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导数 · 章节详情原型</title>
+    <style id="theme-vars">
+:root {
+  --background: #F9FAFB;
+  --foreground: #18181B;
+  --card: #FFFFFF;
+  --card-foreground: #18181B;
+  --popover: #FFFFFF;
+  --popover-foreground: #18181B;
+  --primary: #4F6BFF;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F4F4F5;
+  --secondary-foreground: #18181B;
+  --muted: #71717A;
+  --muted-foreground: #3F3F46;
+  --accent: #4F6BFF;
+  --accent-foreground: #FFFFFF;
+  --destructive: #FF4D6D;
+  --destructive-foreground: #FFFFFF;
+  --border: rgba(24, 24, 27, 0.08);
+  --input: rgba(24, 24, 27, 0.08);
+  --ring: #4F6BFF;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 22px;
+
+  /* Project-specific aliases used by the existing custom CSS */
+  --canvas: #F9FAFB;
+  --surface: #FFFFFF;
+  --ink: #18181B;
+  --ink-2: #3F3F46;
+  --line: rgba(24, 24, 27, 0.08);
+  --brand-accent: #4F6BFF;
+  --brand-accent-2: #B14BFF;
+  --accent-deep: #0A84FF;
+  --accent-deep-soft: rgba(10, 132, 255, 0.10);
+  --accent-soft: rgba(79, 107, 255, 0.08);
+  --accent-2: #B14BFF;
+  --success: #00C48C;
+  --success-soft: rgba(0, 196, 140, 0.10);
+  --success-ink: #007a55;
+  --warn: #FFB800;
+  --danger: #FF4D6D;
+  --danger-soft: rgba(255, 77, 109, 0.10);
+  --danger-ink: #b1223a;
+
+  --m-limit: #FFD60A;
+  --m-deriv: #0A84FF;
+  --m-diff: #5AC8FA;
+  --m-integral: #30D158;
+  --m-trig: #FF9F0A;
+  --m-diffEq: #BF5AF2;
+  --m-linalg: #FF3B30;
+
+  --font-sans: 'Geist', 'Inter Tight', system-ui, -apple-system, 'Noto Sans SC', sans-serif;
+  --font-mono: 'Geist Mono', 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
+
+  --shadow-1: 0 1px 2px rgba(24, 24, 27, .04), 0 1px 1px rgba(24, 24, 27, .03);
+  --shadow-2: 0 6px 24px rgba(24, 24, 27, .06), 0 1px 2px rgba(24, 24, 27, .04);
+  --shadow-3: 0 24px 60px rgba(24, 24, 27, .10);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast: 200ms;
+  --t-base: 360ms;
+  --t-slow: 600ms;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --radius-sm: var(--radius-sm);
+    --radius-md: var(--radius-md);
+    --radius-lg: var(--radius-lg);
+    --radius-xl: var(--radius-xl);
+  }
+  @layer base {
+    body { background: var(--background); color: var(--foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--background); }
+      .text-background { color: var(--background); }
+      .border-background { border-color: var(--background); }
+      .ring-background { --tw-ring-color: var(--background); }
+      .bg-foreground { background-color: var(--foreground); }
+      .text-foreground { color: var(--foreground); }
+      .border-foreground { border-color: var(--foreground); }
+      .ring-foreground { --tw-ring-color: var(--foreground); }
+      .bg-card { background-color: var(--card); }
+      .text-card { color: var(--card); }
+      .border-card { border-color: var(--card); }
+      .ring-card { --tw-ring-color: var(--card); }
+      .bg-card-foreground { background-color: var(--card-foreground); }
+      .text-card-foreground { color: var(--card-foreground); }
+      .border-card-foreground { border-color: var(--card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--card-foreground); }
+      .bg-popover { background-color: var(--popover); }
+      .text-popover { color: var(--popover); }
+      .border-popover { border-color: var(--popover); }
+      .ring-popover { --tw-ring-color: var(--popover); }
+      .bg-popover-foreground { background-color: var(--popover-foreground); }
+      .text-popover-foreground { color: var(--popover-foreground); }
+      .border-popover-foreground { border-color: var(--popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--popover-foreground); }
+      .bg-primary { background-color: var(--primary); }
+      .text-primary { color: var(--primary); }
+      .border-primary { border-color: var(--primary); }
+      .ring-primary { --tw-ring-color: var(--primary); }
+      .bg-primary-foreground { background-color: var(--primary-foreground); }
+      .text-primary-foreground { color: var(--primary-foreground); }
+      .border-primary-foreground { border-color: var(--primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--primary-foreground); }
+      .bg-secondary { background-color: var(--secondary); }
+      .text-secondary { color: var(--secondary); }
+      .border-secondary { border-color: var(--secondary); }
+      .ring-secondary { --tw-ring-color: var(--secondary); }
+      .bg-secondary-foreground { background-color: var(--secondary-foreground); }
+      .text-secondary-foreground { color: var(--secondary-foreground); }
+      .border-secondary-foreground { border-color: var(--secondary-foreground); }
+      .ring-secondary-foreground { --tw-ring-color: var(--secondary-foreground); }
+      .bg-muted { background-color: var(--muted); }
+      .text-muted { color: var(--muted); }
+      .border-muted { border-color: var(--muted); }
+      .ring-muted { --tw-ring-color: var(--muted); }
+      .bg-muted-foreground { background-color: var(--muted-foreground); }
+      .text-muted-foreground { color: var(--muted-foreground); }
+      .border-muted-foreground { border-color: var(--muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--muted-foreground); }
+      .bg-accent { background-color: var(--accent); }
+      .text-accent { color: var(--accent); }
+      .border-accent { border-color: var(--accent); }
+      .ring-accent { --tw-ring-color: var(--accent); }
+      .bg-accent-foreground { background-color: var(--accent-foreground); }
+      .text-accent-foreground { color: var(--accent-foreground); }
+      .border-accent-foreground { border-color: var(--accent-foreground); }
+      .ring-accent-foreground { --tw-ring-color: var(--accent-foreground); }
+      .bg-destructive { background-color: var(--destructive); }
+      .text-destructive { color: var(--destructive); }
+      .border-destructive { border-color: var(--destructive); }
+      .ring-destructive { --tw-ring-color: var(--destructive); }
+      .bg-destructive-foreground { background-color: var(--destructive-foreground); }
+      .text-destructive-foreground { color: var(--destructive-foreground); }
+      .border-destructive-foreground { border-color: var(--destructive-foreground); }
+      .ring-destructive-foreground { --tw-ring-color: var(--destructive-foreground); }
+      .bg-border { background-color: var(--border); }
+      .text-border { color: var(--border); }
+      .border-border { border-color: var(--border); }
+      .ring-border { --tw-ring-color: var(--border); }
+      .bg-input { background-color: var(--input); }
+      .text-input { color: var(--input); }
+      .border-input { border-color: var(--input); }
+      .ring-input { --tw-ring-color: var(--input); }
+      .bg-ring { background-color: var(--ring); }
+      .text-ring { color: var(--ring); }
+      .border-ring { border-color: var(--ring); }
+      .ring-ring { --tw-ring-color: var(--ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body>
+
+<nav class='nav' aria-label='顶部导航'>
+  <div class='nav-inner'>
+    <a href='01-home.html' class='brand'>
+      <span class='brand-mark'></span>
+      <span>calculus-formula-theater</span>
+    </a>
+    <div class='nav-links'>
+      <a data-dom-id="nav-home" href='01-home.html'>章节</a>
+      <a data-dom-id="nav-review" href='03-review.html'>翻卡</a>
+      <a data-dom-id="nav-quiz" href='04-quiz.html'>自测</a>
+      <a data-dom-id="nav-search" href='05-search.html'>搜索</a>
+    </div>
+    <div class='nav-right'>
+      <a href='05-search.html' class='icon-btn' aria-label='搜索公式 /'>
+        <svg viewBox='0 0 24 24' aria-hidden='true'>
+          <circle cx='11' cy='11' r='8'></circle>
+          <path d='m21 21-4.35-4.35'></path>
+        </svg>
+      </a>
+      <button class='icon-btn theme-btn' id='theme-toggle' aria-label='切换主题'>
+        <svg class='sun' viewBox='0 0 24 24' aria-hidden='true'>
+          <circle cx='12' cy='12' r='5'></circle>
+          <path d='M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42'></path>
+        </svg>
+        <svg class='moon' viewBox='0 0 24 24' aria-hidden='true'>
+          <path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class='layout'>
+
+  <aside class='sidebar' aria-label='章节侧边栏'>
+    <div class='crumb'>CHAPTER 02 · 导数</div>
+    <h1>导数</h1>
+    <div class='meta'>18 条公式 · 4 类函数分组 · 5 条口诀 · 2 道真题</div>
+    <div class='toc-title'>本页导览</div>
+    <nav class='toc' aria-label='章节目录'>
+      <a href='#definition' class='active' aria-current='true'>一、定义</a>
+      <a href='#formulas'>二、18 条导数公式</a>
+      <a href='#memory'>三、核心记忆口诀汇总</a>
+      <a href='#examples'>四、专升本真题</a>
+    </nav>
+    <div class='stats'>
+      <div class='row'><span>公式总数</span><strong>18</strong></div>
+      <div class='row'><span>类函数分组</span><strong>4</strong></div>
+      <div class='row'><span>记忆口诀</span><strong>5</strong></div>
+      <div class='row'><span>真题例题</span><strong>2</strong></div>
+    </div>
+  </aside>
+
+  <main class='main' id='main-content'>
+
+    <section class='anchor' id='definition'>
+      <h2>一、定义</h2>
+      <p class='lead'>导数 = 切线斜率 = 瞬时变化率。可导一定连续，连续不一定可导（典型反例：尖点）。</p>
+      <p>导数的严格定义是一个极限：函数 \(f(x)\) 在点 \(x\) 处的导数记作 \(f'(x)\)，它刻画了函数值随自变量变化的瞬时快慢。</p>
+      <div class='tex-display' style='margin:20px 0;'>
+        \[ f'(x)=\lim_{\Delta x\to 0}\frac{f(x+\Delta x)-f(x)}{\Delta x} \]
+      </div>
+      <p>几何上，导数是曲线在该点切线的斜率；物理上，它是位移对时间的瞬时变化率。掌握这个锚点，后续所有求导公式都可以被理解为「某一类函数变化率的统一表达式」。</p>
+      <div class='callout'>
+        <p><strong>记忆锚点：</strong>导数 = 切线斜率 = 瞬时变化率。这是整个导数模块的根。</p>
+      </div>
+    </section>
+
+    <section class='anchor' id='formulas'>
+      <h2>二、18 条导数公式</h2>
+      <p>以下公式按函数类型分为四组。建议先记通用形式，再把 \(x\)、\(\sqrt{x}\)、\(e^x\)、\(\ln x\) 等特例串成一条记忆链。</p>
+
+      <h3>2.1 常数与幂函数 <span class='link-chip'>4 条</span></h3>
+      <p>这一组的核心是幂函数求导法则：指数提到前面做系数，然后指数减 1；常数、一次函数与根式都是它的特例。</p>
+      <div class='formula-grid'>
+        <div class='fcard'>
+          <div class='head'><span class='name'>常数</span><span class='tag'>(1)</span></div>
+          <div class='tex'>\( (c)' = 0 \)</div>
+          <div class='note'>常数不变化，导数为零。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>幂函数</span><span class='tag'>(2)</span></div>
+          <div class='tex'>\( (x^\mu)' = \mu x^{\mu-1} \)</div>
+          <div class='note'>核心口诀：指数降一次做系数。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>线性</span><span class='tag'>(17)</span></div>
+          <div class='tex'>\( (x)' = 1 \)</div>
+          <div class='note'>幂函数 \(\mu=1\) 的特例。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>根式</span><span class='tag'>(18)</span></div>
+          <div class='tex'>\( (\sqrt{x})' = \dfrac{1}{2\sqrt{x}} \)</div>
+          <div class='note'>幂函数 \(\mu=\frac12\) 的特例，专升本高频考点。</div>
+        </div>
+      </div>
+      <p><strong>小结：</strong>所有幂函数求导都可以先化为 \(x^\mu\) 形式，再套用「指数降一次做系数」。</p>
+
+      <h3>2.2 三角函数 <span class='link-chip'>6 条</span></h3>
+      <p>三角函数导数有规律：带「正」字的（\(\sin\)、\(\tan\)、\(\sec\)）结果为正；带「余」字的（\(\cos\)、\(\cot\)、\(\csc\)）结果为负。</p>
+      <div class='formula-grid'>
+        <div class='fcard'>
+          <div class='head'><span class='name'>正弦</span><span class='tag'>(3)</span></div>
+          <div class='tex'>\( (\sin x)' = \cos x \)</div>
+          <div class='note'>正变余。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>余弦</span><span class='tag'>(4)</span></div>
+          <div class='tex'>\( (\cos x)' = -\sin x \)</div>
+          <div class='note'>余变负。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>正切</span><span class='tag'>(5)</span></div>
+          <div class='tex'>\( (\tan x)' = \sec^2 x \)</div>
+          <div class='note'>积分高频：\(\int \sec^2 x\,dx = \tan x + C\)。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>余切</span><span class='tag'>(6)</span></div>
+          <div class='tex'>\( (\cot x)' = -\csc^2 x \)</div>
+          <div class='note'>带「余」字的导数都带负号。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>正割</span><span class='tag'>(7)</span></div>
+          <div class='tex'>\( (\sec x)' = \sec x \cdot \tan x \)</div>
+          <div class='note'>积分高频：\(\int \sec x \tan x\,dx = \sec x + C\)。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>余割</span><span class='tag'>(8)</span></div>
+          <div class='tex'>\( (\csc x)' = -\csc x \cdot \cot x \)</div>
+          <div class='note'>同样带负号。</div>
+        </div>
+      </div>
+      <p><strong>小结：</strong>\(\sin\to\cos\to-\sin\to-\cos\to\sin\) 形成四步循环；\(\sec^2x\) 与 \(\sec x\tan x\) 是两个积分高频结果，值得单独记忆。</p>
+
+      <h3>2.3 指数与对数 <span class='link-chip'>4 条</span></h3>
+      <p>指数函数求导后仍保留自身，只是多出一个系数；对数函数求导后变为倒数形式。把 \(e^x\)、\(a^x\)、\(\ln x\) 串成链会更牢。</p>
+      <div class='formula-grid'>
+        <div class='fcard'>
+          <div class='head'><span class='name'>自然指数</span><span class='tag'>(9)</span></div>
+          <div class='tex'>\( (e^x)' = e^x \)</div>
+          <div class='note'>唯一一个求导后不变形的初等函数。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>一般指数</span><span class='tag'>(10)</span></div>
+          <div class='tex'>\( (a^x)' = a^x \ln a \)</div>
+          <div class='note'>多出一个 \(\ln a\) 因子。\(e^x\) 是 \(a=e\) 的特例。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>自然对数</span><span class='tag'>(11)</span></div>
+          <div class='tex'>\( (\ln x)' = \dfrac{1}{x} \)</div>
+          <div class='note'>对数变倒数。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>一般对数</span><span class='tag'>(12)</span></div>
+          <div class='tex'>\( (\log_a x)' = \dfrac{1}{x \ln a} \)</div>
+          <div class='note'>分母多一个 \(\ln a\)。</div>
+        </div>
+      </div>
+      <p><strong>小结：</strong>记忆链：\(e^x\to e^x\)（不变），\(a^x\to a^x\ln a\)（多因子），\(\ln x\to \frac1x\)（变倒数）。</p>
+
+      <h3>2.4 反三角函数 <span class='link-chip'>4 条</span></h3>
+      <p>反三角函数导数可以两两配对：\(\arcsin\) 与 \(\arccos\) 共享同一个分母结构，\(\arctan\) 与 \(\operatorname{arccot}\) 共享另一个；带「余」字的整体多一个负号。</p>
+      <div class='formula-grid'>
+        <div class='fcard'>
+          <div class='head'><span class='name'>反正弦</span><span class='tag'>(13)</span></div>
+          <div class='tex'>\( (\arcsin x)' = \dfrac{1}{\sqrt{1-x^2}} \)</div>
+          <div class='note'>分子为正。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>反余弦</span><span class='tag'>(14)</span></div>
+          <div class='tex'>\( (\arccos x)' = -\dfrac{1}{\sqrt{1-x^2}} \)</div>
+          <div class='note'>和 \(\arcsin\) 只差一个负号。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>反正切</span><span class='tag'>(15)</span></div>
+          <div class='tex'>\( (\arctan x)' = \dfrac{1}{1+x^2} \)</div>
+          <div class='note'>分子为正。</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>反余切</span><span class='tag'>(16)</span></div>
+          <div class='tex'>\( (\operatorname{arccot} x)' = -\dfrac{1}{1+x^2} \)</div>
+          <div class='note'>和 \(\arctan\) 只差一个负号。</div>
+        </div>
+      </div>
+      <p><strong>小结：</strong>分母含 \(1-x^2\) 对应 \(\sin/\cos\)；分母含 \(1+x^2\) 对应 \(\tan/\cot\)。记住配对，就能一次性记牢 4 条。</p>
+    </section>
+
+    <section class='anchor' id='memory'>
+      <h2>三、核心记忆口诀汇总</h2>
+      <p>口诀的价值不是替代推导，而是在考场上快速唤醒公式。下面 5 条分别对应四组函数，最后一条反三角口诀把配对关系也包了进去。</p>
+      <div class='formula-grid' style='grid-template-columns: 1fr;'>
+        <div class='fcard'>
+          <div class='head'><span class='name'>幂函数</span></div>
+          <div class='memo-text'>指数降一次做系数</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>三角函数</span></div>
+          <div class='memo-text'>正变余，余变负</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>指数函数</span></div>
+          <div class='memo-text'>\(e^x\) 不变，\(a^x\) 多 \(\ln a\)</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>对数函数</span></div>
+          <div class='memo-text'>对数变倒数</div>
+        </div>
+        <div class='fcard'>
+          <div class='head'><span class='name'>反三角函数</span></div>
+          <div class='memo-text'>正弦正、余弦负；正切正、余切负</div>
+        </div>
+      </div>
+    </section>
+
+    <section class='anchor' id='examples'>
+      <h2>四、专升本真题</h2>
+      <p>下面两道题分别来自四川与山东的专升本回忆版真题，覆盖「导数几何意义」与「复合函数求导」两个高频考点。</p>
+
+      <div class='ex'>
+        <div class='src'>四川 2024 专升本 · 选择题</div>
+        <p class='problem'>曲线 \(y=e^{2x}\) 在点 \((0,1)\) 处的切线方程是？</p>
+        <p class='answer'>解：\(y'=2e^{2x}\)，代入 \(x=0\) 得 \(y'(0)=2\)，由点斜式得切线方程 \(y=2x+1\)。</p>
+        <p class='keypoint'>考点：导数的几何意义、指数函数求导公式 (9)。</p>
+      </div>
+
+      <div class='ex'>
+        <div class='src'>山东 2023 专升本 · 填空题</div>
+        <p class='problem'>设 \(f(x)=\ln(\cos x)\)，求 \(f'(x)\)。</p>
+        <p class='answer'>解：\(f'(x)=\dfrac{1}{\cos x}\cdot(-\sin x)=-\tan x\)。</p>
+        <p class='keypoint'>考点：链式法则 + 基本求导公式 (4)(11)。</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<button class='back-to-top' id='back-to-top' aria-label='返回顶部' title='返回顶部'>
+  <svg viewBox='0 0 24 24' aria-hidden='true'>
+    <path d='M12 19V5'></path>
+    <path d='m5 12 7-7 7 7'></path>
+  </svg>
+</button>
+
+<script>
+  /* Theme toggle */
+  (function () {
+    const root = document.documentElement;
+    const btn = document.getElementById('theme-toggle');
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      btn.setAttribute('aria-label', theme === 'dark' ? '切换到浅色主题' : '切换到深色主题');
+      try { localStorage.setItem('theme', theme); } catch (e) {}
+    }
+    const saved = (function () { try { return localStorage.getItem('theme'); } catch (e) { return null; } })();
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(saved || (prefersDark ? 'dark' : 'light'));
+    btn.addEventListener('click', function () {
+      applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+  })();
+
+  /* TOC active state + aria-current */
+  (function () {
+    const tocLinks = Array.from(document.querySelectorAll('.toc a'));
+    const anchors = tocLinks.map(function (a) { return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+    if (!anchors.length) return;
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          tocLinks.forEach(function (link) {
+            const active = link.getAttribute('href') === '#' + id;
+            link.classList.toggle('active', active);
+            if (active) link.setAttribute('aria-current', 'true');
+            else link.removeAttribute('aria-current');
+          });
+        }
+      });
+    }, { rootMargin: '-88px 0px -70% 0px', threshold: 0 });
+    anchors.forEach(function (anchor) { observer.observe(anchor); });
+  })();
+
+  /* Back to top */
+  (function () {
+    const btn = document.getElementById('back-to-top');
+    function toggle() { btn.classList.toggle('visible', window.scrollY > 400); }
+    window.addEventListener('scroll', toggle, { passive: true });
+    toggle();
+    btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  })();
+</script>
+
+
+    <style>
+  :root {
+    --canvas: #F9FAFB;
+    --surface: #FFFFFF;
+    --ink: #18181B;
+    --ink-2: #3F3F46;
+    --muted: #71717A;
+    --line: rgba(24,24,27,0.08);
+    --brand-accent: #4F6BFF;
+    --brand-accent-2: #B14BFF;
+    --accent-deep: #0A84FF;
+    --accent-deep-soft: rgba(10,132,255,0.10);
+    --success: #00C48C;
+    --warn: #FFB800;
+    --danger: #FF4D6D;
+    --shadow-1: 0 1px 2px rgba(24,24,27,.04), 0 1px 1px rgba(24,24,27,.03);
+    --shadow-2: 0 6px 24px rgba(24,24,27,.06), 0 1px 2px rgba(24,24,27,.04);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --t-fast: 200ms;
+    --t-base: 360ms;
+  }
+  [data-theme='dark'] {
+    --canvas: #0B0B0F;
+    --surface: #13131A;
+    --ink: #F4F4F5;
+    --ink-2: #A1A1AA;
+    --muted: #71717A;
+    --line: rgba(244,244,245,0.10);
+    --accent-deep-soft: rgba(10,132,255,0.15);
+    --shadow-1: 0 1px 2px rgba(0,0,0,.20), 0 1px 1px rgba(0,0,0,.15);
+    --shadow-2: 0 6px 24px rgba(0,0,0,.30), 0 1px 2px rgba(0,0,0,.20);
+  }
+
+  html { scroll-behavior: smooth; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: 'Geist', 'Inter Tight', system-ui, -apple-system, 'Noto Sans SC', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* Focus-visible */
+  a:focus-visible,
+  button:focus-visible,
+  .fcard:focus-within,
+  .ex:focus-within {
+    outline: 2px solid var(--accent-deep);
+    outline-offset: 2px;
+  }
+
+  /* Nav */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    background: color-mix(in srgb, var(--canvas) 72%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    height: 64px;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: conic-gradient(from 210deg, var(--brand-accent), var(--brand-accent-2), var(--brand-accent));
+    position: relative;
+  }
+  .brand-mark::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 5px;
+    background: var(--canvas);
+  }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--ink-2);
+    transition: background var(--t-fast), color var(--t-fast);
+  }
+  .nav-links a:hover,
+  .nav-links a[aria-current='page'] {
+    background: var(--accent-deep-soft);
+    color: var(--accent-deep);
+  }
+  .nav-right { display: flex; justify-content: flex-end; gap: 8px; }
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: border-color var(--t-fast), color var(--t-fast), transform var(--t-fast);
+  }
+  .icon-btn:hover {
+    border-color: var(--accent-deep);
+    color: var(--accent-deep);
+    transform: translateY(-1px);
+  }
+  .icon-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .theme-btn .sun { display: block; }
+  .theme-btn .moon { display: none; }
+  [data-theme='dark'] .theme-btn .sun { display: none; }
+  [data-theme='dark'] .theme-btn .moon { display: block; }
+
+  /* Layout */
+  .layout {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    min-height: calc(100dvh - 64px);
+  }
+
+  /* Sidebar */
+  .sidebar {
+    border-right: 1px solid var(--line);
+    padding: 32px 24px;
+    position: sticky;
+    top: 64px;
+    align-self: start;
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+  }
+  .sidebar .crumb {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+  .sidebar h1 {
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0 0 8px;
+  }
+  .sidebar .meta {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .toc-title {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    margin: 24px 0 12px;
+    text-transform: uppercase;
+  }
+  .toc { display: flex; flex-direction: column; gap: 2px; }
+  .toc a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    border-left: 2px solid transparent;
+    transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+  }
+  .toc a:hover,
+  .toc a.active {
+    background: var(--accent-deep-soft);
+    color: var(--accent-deep);
+    border-left-color: var(--accent-deep);
+  }
+  .sidebar .stats {
+    margin-top: 24px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+  .sidebar .stats .row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 4px 0;
+  }
+  .sidebar .stats .row strong { font-weight: 700; }
+
+  /* Main */
+  .main { padding: 32px 48px 96px; max-width: 880px; }
+  .anchor { scroll-margin-top: 88px; }
+  h2 {
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 56px 0 16px;
+  }
+  h3 {
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    margin: 32px 0 8px;
+    color: var(--ink);
+  }
+  p { color: var(--ink-2); font-size: 15.5px; line-height: 1.6; }
+  .lead {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.65;
+    margin: 0 0 16px;
+    max-width: 52ch;
+  }
+  .callout {
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent-deep);
+    border-radius: 10px;
+    background: var(--surface);
+    margin: 24px 0;
+  }
+  .callout strong { color: var(--ink); }
+  .callout p { margin: 0; color: var(--ink-2); }
+
+  /* Formula grid */
+  .formula-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .fcard {
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+    transition: border-color var(--t-fast), transform var(--t-base) var(--ease-out), box-shadow var(--t-base) var(--ease-out);
+    position: relative;
+    overflow: hidden;
+  }
+  .fcard:hover {
+    border-color: var(--accent-deep);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2);
+  }
+  .fcard .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .fcard .name { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .fcard .tag { font-size: 11px; color: var(--muted); font-family: 'Geist Mono', 'JetBrains Mono', 'SF Mono', monospace; }
+  .fcard .tex { font-size: 18px; color: var(--accent-deep); margin: 6px 0 8px; }
+  .fcard .note { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .fcard .memo-text { font-size: 16px; color: var(--accent-deep); font-weight: 500; }
+
+  /* Link chip */
+  .link-chip {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--accent-deep-soft);
+    color: var(--accent-deep);
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+
+  /* Examples */
+  .ex {
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+    margin: 12px 0;
+  }
+  .ex .src { font-size: 12px; color: var(--muted); }
+  .ex .problem { font-size: 16px; margin: 6px 0 10px; color: var(--ink); }
+  .ex .answer { color: var(--accent-deep); font-weight: 600; font-size: 15.5px; }
+  .ex .keypoint { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+  /* Back to top */
+  .back-to-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--accent-deep);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
+    z-index: 40;
+  }
+  .back-to-top.visible { opacity: 1; pointer-events: auto; }
+  .back-to-top:hover { border-color: var(--accent-deep); transform: translateY(-2px); }
+  .back-to-top svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; border-right: 0; border-bottom: 1px solid var(--line); max-height: none; }
+    .main { padding: 24px; }
+    .formula-grid { grid-template-columns: 1fr; }
+    .nav-inner { grid-template-columns: auto 1fr auto; }
+    .nav-links { display: none; }
+  }
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
+</body>
+</html>
