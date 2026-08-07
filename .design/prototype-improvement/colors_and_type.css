@@ -1,41 +1,59 @@
 :root {
+  /* Semantic tokens (single primary hue) */
   --background: #F9FAFB;
   --foreground: #18181B;
   --card: #FFFFFF;
   --card-foreground: #18181B;
   --popover: #FFFFFF;
   --popover-foreground: #18181B;
+
   --primary: #4F6BFF;
   --primary-foreground: #FFFFFF;
-  --secondary: #F4F4F5;
-  --secondary-foreground: #18181B;
+  --primary-soft: rgba(79, 107, 255, 0.08);
+  --primary-deep: #0A84FF;
+  --primary-deep-soft: rgba(10, 132, 255, 0.10);
+  --primary-deep-soft-dark: rgba(10, 132, 255, 0.15);
+  --primary-glow: #B14BFF;
+  --primary-glow-soft: rgba(177, 75, 255, 0.10);
+  --primary-soft-2: rgba(79, 107, 255, 0.12);
+
+  /* Compatibility aliases for existing page CSS (single-hue policy preserved) */
+  --accent: var(--primary);
+  --accent-foreground: var(--primary-foreground);
+  --accent-soft: var(--primary-soft);
+  --accent-soft-2: var(--primary-soft-2);
+  --accent-deep: var(--primary-deep);
+  --accent-deep-soft: var(--primary-deep-soft);
+  --accent-2: var(--primary-glow);
+  --secondary: var(--subtle);
+  --secondary-foreground: var(--subtle-foreground);
+
+  --subtle: #F4F4F5;
+  --subtle-foreground: #18181B;
+
   --muted: #71717A;
   --muted-foreground: #3F3F46;
-  --accent: #4F6BFF;
-  --accent-foreground: #FFFFFF;
   --destructive: #FF4D6D;
   --destructive-foreground: #FFFFFF;
   --border: rgba(24, 24, 27, 0.08);
   --input: rgba(24, 24, 27, 0.08);
   --ring: #4F6BFF;
 
+  --radius-xs: 4px;
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 14px;
-  --radius-xl: 22px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
 
-  /* Project-specific aliases used by the existing custom CSS */
+  /* Project surface & text aliases */
   --canvas: #F9FAFB;
   --surface: #FFFFFF;
   --ink: #18181B;
   --ink-2: #3F3F46;
   --line: rgba(24, 24, 27, 0.08);
-  --brand-accent: #4F6BFF;
-  --brand-accent-2: #B14BFF;
-  --accent-deep: #0A84FF;
-  --accent-deep-soft: rgba(10, 132, 255, 0.10);
-  --accent-soft: rgba(79, 107, 255, 0.08);
-  --accent-2: #B14BFF;
+
+  /* State colors */
   --success: #00C48C;
   --success-soft: rgba(0, 196, 140, 0.10);
   --success-ink: #007a55;
@@ -44,14 +62,22 @@
   --danger-soft: rgba(255, 77, 109, 0.10);
   --danger-ink: #b1223a;
 
-  --m-limit: #FFD60A;
-  --m-deriv: #0A84FF;
-  --m-diff: #5AC8FA;
-  --m-integral: #30D158;
-  --m-trig: #FF9F0A;
-  --m-diffEq: #BF5AF2;
-  --m-linalg: #FF3B30;
+  /* Module palette */
+  --m-limit: #FFD60A; --m-limit-soft: rgba(255, 214, 10, 0.15); --m-limit-ink: #8a5e00;
+  --m-deriv: #0A84FF; --m-deriv-soft: rgba(10, 132, 255, 0.12); --m-deriv-ink: var(--m-deriv);
+  --m-diff: #5AC8FA; --m-diff-soft: rgba(90, 200, 250, 0.18); --m-diff-ink: #0e6e90;
+  --m-integral: #30D158; --m-integral-soft: rgba(48, 209, 88, 0.15); --m-integral-ink: #1a7a36;
+  --m-trig: #FF9F0A; --m-trig-soft: rgba(255, 159, 10, 0.15); --m-trig-ink: #9a5a00;
+  --m-diffEq: #BF5AF2; --m-diffEq-soft: rgba(191, 90, 242, 0.15); --m-diffEq-ink: #6e21a3;
+  --m-linalg: #FF3B30; --m-linalg-soft: rgba(255, 59, 48, 0.12); --m-linalg-ink: #a31810;
 
+  /* Component-specific tokens */
+  --nav-bg: rgba(249, 250, 251, 0.72);
+  --nav-bg-dark: rgba(11, 11, 14, 0.72);
+  --shadow-hover: 0 12px 40px rgba(24, 24, 27, 0.10);
+  --shadow-hover-dark: 0 12px 40px rgba(0, 0, 0, 0.35);
+
+  /* Typography & motion */
   --font-sans: 'Geist', 'Inter Tight', system-ui, -apple-system, 'Noto Sans SC', sans-serif;
   --font-mono: 'Geist Mono', 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
 
@@ -65,4 +91,39 @@
   --t-fast: 200ms;
   --t-base: 360ms;
   --t-slow: 600ms;
+}
+
+.dark,
+[data-theme='dark'] {
+  --background: #0B0B0E;
+  --foreground: #F4F4F5;
+  --card: #141418;
+  --card-foreground: #F4F4F5;
+  --popover: #141418;
+  --popover-foreground: #F4F4F5;
+
+  --primary: #4F6BFF;
+  --primary-foreground: #FFFFFF;
+  --primary-soft: rgba(79, 107, 255, 0.12);
+  --primary-deep-soft: rgba(10, 132, 255, 0.15);
+  --primary-glow-soft: rgba(177, 75, 255, 0.14);
+  --primary-soft-2: rgba(79, 107, 255, 0.16);
+
+  --subtle: #27272A;
+  --subtle-foreground: #F4F4F5;
+
+  --muted: #A1A1AA;
+  --muted-foreground: #D4D4D8;
+  --border: rgba(244, 244, 245, 0.10);
+  --input: rgba(244, 244, 245, 0.10);
+
+  --canvas: #0B0B0E;
+  --surface: #141418;
+  --ink: #F4F4F5;
+  --ink-2: #A1A1AA;
+  --line: rgba(244, 244, 245, 0.10);
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, .30), 0 1px 1px rgba(0, 0, 0, .20);
+  --shadow-2: 0 6px 24px rgba(0, 0, 0, .35), 0 1px 2px rgba(0, 0, 0, .25);
+  --shadow-3: 0 24px 60px rgba(0, 0, 0, .40);
 }

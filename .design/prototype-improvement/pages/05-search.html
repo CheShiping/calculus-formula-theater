@@ -4,77 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>公式搜索 · calculus-formula-theater</title>
-    <style id="theme-vars">
-:root {
-  --background: #F9FAFB;
-  --foreground: #18181B;
-  --card: #FFFFFF;
-  --card-foreground: #18181B;
-  --popover: #FFFFFF;
-  --popover-foreground: #18181B;
-  --primary: #4F6BFF;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F4F4F5;
-  --secondary-foreground: #18181B;
-  --muted: #71717A;
-  --muted-foreground: #3F3F46;
-  --accent: #4F6BFF;
-  --accent-foreground: #FFFFFF;
-  --destructive: #FF4D6D;
-  --destructive-foreground: #FFFFFF;
-  --border: rgba(24, 24, 27, 0.08);
-  --input: rgba(24, 24, 27, 0.08);
-  --ring: #4F6BFF;
+        <link rel="stylesheet" href="../colors_and_type.css">
 
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 14px;
-  --radius-xl: 22px;
-
-  /* Project-specific aliases used by the existing custom CSS */
-  --canvas: #F9FAFB;
-  --surface: #FFFFFF;
-  --ink: #18181B;
-  --ink-2: #3F3F46;
-  --line: rgba(24, 24, 27, 0.08);
-  --brand-accent: #4F6BFF;
-  --brand-accent-2: #B14BFF;
-  --accent-deep: #0A84FF;
-  --accent-deep-soft: rgba(10, 132, 255, 0.10);
-  --accent-soft: rgba(79, 107, 255, 0.08);
-  --accent-2: #B14BFF;
-  --success: #00C48C;
-  --success-soft: rgba(0, 196, 140, 0.10);
-  --success-ink: #007a55;
-  --warn: #FFB800;
-  --danger: #FF4D6D;
-  --danger-soft: rgba(255, 77, 109, 0.10);
-  --danger-ink: #b1223a;
-
-  --m-limit: #FFD60A;
-  --m-deriv: #0A84FF;
-  --m-diff: #5AC8FA;
-  --m-integral: #30D158;
-  --m-trig: #FF9F0A;
-  --m-diffEq: #BF5AF2;
-  --m-linalg: #FF3B30;
-
-  --font-sans: 'Geist', 'Inter Tight', system-ui, -apple-system, 'Noto Sans SC', sans-serif;
-  --font-mono: 'Geist Mono', 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
-
-  --shadow-1: 0 1px 2px rgba(24, 24, 27, .04), 0 1px 1px rgba(24, 24, 27, .03);
-  --shadow-2: 0 6px 24px rgba(24, 24, 27, .06), 0 1px 2px rgba(24, 24, 27, .04);
-  --shadow-3: 0 24px 60px rgba(24, 24, 27, .10);
-
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --t-fast: 200ms;
-  --t-base: 360ms;
-  --t-slow: 600ms;
-}
-
-    </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
     <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
     <style type="text/tailwindcss">
@@ -436,37 +367,6 @@
 
 
     <style>
-  :root {
-    --canvas: #F9FAFB;
-    --surface: #FFFFFF;
-    --ink: #18181B;
-    --ink-2: #3F3F46;
-    --muted: #71717A;
-    --line: rgba(24,24,27,0.08);
-    --accent: #4F6BFF;
-    --accent-soft: rgba(79,107,255,0.08);
-    --accent-2: #B14BFF;
-    --accent-deep: #0A84FF;
-    --success: #00C48C;
-    --warn: #FFB800;
-    --danger: #FF4D6D;
-    --font-sans: 'Geist', 'Inter Tight', system-ui, -apple-system, 'Noto Sans SC', sans-serif;
-    --font-mono: 'Geist Mono', 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
-    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-    --t-fast: 200ms;
-    --t-base: 360ms;
-    --shadow-1: 0 1px 2px rgba(24,24,27,.04), 0 1px 1px rgba(24,24,27,.03);
-    --shadow-2: 0 6px 24px rgba(24,24,27,.06), 0 1px 2px rgba(24,24,27,.04);
-  }
-  [data-theme="dark"] {
-    --canvas: #0B0B0F;
-    --surface: #15151A;
-    --ink: #F4F4F5;
-    --ink-2: #A1A1AA;
-    --muted: #71717A;
-    --line: rgba(244,244,245,0.10);
-    --accent-soft: rgba(79,107,255,0.18);
-  }
   *, *::before, *::after { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
@@ -719,13 +619,13 @@
     font-weight: 600;
     white-space: nowrap;
   }
-  .mod-deriv { background: rgba(10,132,255,0.12); color: #0A84FF; }
-  .mod-integral { background: rgba(48,209,88,0.15); color: #1a7a36; }
-  .mod-trig { background: rgba(255,159,10,0.15); color: #9a5a00; }
-  .mod-limit { background: rgba(255,214,10,0.15); color: #8a5e00; }
-  .mod-diff { background: rgba(90,200,250,0.18); color: #0e6e90; }
-  .mod-diffEq { background: rgba(191,90,242,0.15); color: #6e21a3; }
-  .mod-linalg { background: rgba(255,59,48,0.12); color: #a31810; }
+  .mod-deriv { background: var(--m-deriv-soft); color: var(--m-deriv-ink); }
+  .mod-integral { background: var(--m-integral-soft); color: var(--m-integral-ink); }
+  .mod-trig { background: var(--m-trig-soft); color: var(--m-trig-ink); }
+  .mod-limit { background: var(--m-limit-soft); color: var(--m-limit-ink); }
+  .mod-diff { background: var(--m-diff-soft); color: var(--m-diff-ink); }
+  .mod-diffEq { background: var(--m-diffEq-soft); color: var(--m-diffEq-ink); }
+  .mod-linalg { background: var(--m-linalg-soft); color: var(--m-linalg-ink); }
 
   /* Empty state */
   .empty {

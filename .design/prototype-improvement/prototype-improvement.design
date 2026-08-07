@@ -7,7 +7,7 @@
       "version": 1,
       "createdAt": 1722936000000,
       "canvasData": {
-        "x": 620,
+        "x": 776,
         "y": 0,
         "group": 0,
         "layoutSnapshot": {
@@ -72,10 +72,10 @@
         "group": 0,
         "layoutSnapshot": {
           "version": 1,
-          "contentHeight": 3814,
-          "viewportWidth": 1440,
+          "contentHeight": 4887,
+          "viewportWidth": 1975,
           "sourceHash": "fnv1a-e6b291a5",
-          "measuredAt": 1786019873893
+          "measuredAt": 1786022023005
         },
         "deviceType": "freeSize",
         "windowSize": {
@@ -112,7 +112,7 @@
       "version": 1,
       "createdAt": 1722936000002,
       "canvasData": {
-        "x": 620,
+        "x": 776,
         "y": 878,
         "group": 0,
         "layoutSnapshot": {
@@ -148,7 +148,7 @@
       "version": 1,
       "createdAt": 1722936000003,
       "canvasData": {
-        "x": 620,
+        "x": 776,
         "y": 1667,
         "group": 0,
         "layoutSnapshot": {
@@ -184,7 +184,7 @@
       "version": 1,
       "createdAt": 1722936000004,
       "canvasData": {
-        "x": 620,
+        "x": 776,
         "y": 1974,
         "group": 0,
         "layoutSnapshot": {
@@ -215,7 +215,7 @@
     }
   ],
   "config": {
-    "autoLayout": false,
+    "autoLayout": true,
     "deviceType": "desktop",
     "showEdge": false,
     "visualEditorEnabled": false

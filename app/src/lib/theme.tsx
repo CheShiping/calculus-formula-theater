@@ -21,11 +21,11 @@ const STORAGE_KEY = 'cft.theme';
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'dark';
+  if (typeof window === 'undefined') return 'light';
   const stored = window.localStorage.getItem(STORAGE_KEY);
   if (stored === 'dark' || stored === 'light') return stored;
-  const prefersLight = window.matchMedia?.('(prefers-color-scheme: light)').matches;
-  return prefersLight ? 'light' : 'dark';
+  // 设计系统默认浅色主题
+  return 'light';
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {

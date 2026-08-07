@@ -4,77 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>calculus-formula-theater · 首页原型</title>
-    <style id="theme-vars">
-:root {
-  --background: #F9FAFB;
-  --foreground: #18181B;
-  --card: #FFFFFF;
-  --card-foreground: #18181B;
-  --popover: #FFFFFF;
-  --popover-foreground: #18181B;
-  --primary: #4F6BFF;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F4F4F5;
-  --secondary-foreground: #18181B;
-  --muted: #71717A;
-  --muted-foreground: #3F3F46;
-  --accent: #4F6BFF;
-  --accent-foreground: #FFFFFF;
-  --destructive: #FF4D6D;
-  --destructive-foreground: #FFFFFF;
-  --border: rgba(24, 24, 27, 0.08);
-  --input: rgba(24, 24, 27, 0.08);
-  --ring: #4F6BFF;
+        <link rel="stylesheet" href="../colors_and_type.css">
 
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 14px;
-  --radius-xl: 22px;
-
-  /* Project-specific aliases used by the existing custom CSS */
-  --canvas: #F9FAFB;
-  --surface: #FFFFFF;
-  --ink: #18181B;
-  --ink-2: #3F3F46;
-  --line: rgba(24, 24, 27, 0.08);
-  --brand-accent: #4F6BFF;
-  --brand-accent-2: #B14BFF;
-  --accent-deep: #0A84FF;
-  --accent-deep-soft: rgba(10, 132, 255, 0.10);
-  --accent-soft: rgba(79, 107, 255, 0.08);
-  --accent-2: #B14BFF;
-  --success: #00C48C;
-  --success-soft: rgba(0, 196, 140, 0.10);
-  --success-ink: #007a55;
-  --warn: #FFB800;
-  --danger: #FF4D6D;
-  --danger-soft: rgba(255, 77, 109, 0.10);
-  --danger-ink: #b1223a;
-
-  --m-limit: #FFD60A;
-  --m-deriv: #0A84FF;
-  --m-diff: #5AC8FA;
-  --m-integral: #30D158;
-  --m-trig: #FF9F0A;
-  --m-diffEq: #BF5AF2;
-  --m-linalg: #FF3B30;
-
-  --font-sans: 'Geist', 'Inter Tight', system-ui, -apple-system, 'Noto Sans SC', sans-serif;
-  --font-mono: 'Geist Mono', 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
-
-  --shadow-1: 0 1px 2px rgba(24, 24, 27, .04), 0 1px 1px rgba(24, 24, 27, .03);
-  --shadow-2: 0 6px 24px rgba(24, 24, 27, .06), 0 1px 2px rgba(24, 24, 27, .04);
-  --shadow-3: 0 24px 60px rgba(24, 24, 27, .10);
-
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --t-fast: 200ms;
-  --t-base: 360ms;
-  --t-slow: 600ms;
-}
-
-    </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
     <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
     <style type="text/tailwindcss">
@@ -302,49 +233,49 @@
     </div>
     <div class="ch-grid">
       <a data-dom-id="ch-card" class="ch-card" href="02-chapter.html" style="border-color:var(--m-limit);">
-        <span class="tag" style="background:rgba(255,214,10,0.15);color:#8a5e00;">01</span>
+        <span class="tag" style="background:var(--m-limit-soft);color:var(--m-limit-ink);">01</span>
         <h3>函数、极限、连续</h3>
         <p>定义域、四大特性、七种未定式、等价无穷小、间断点、渐近线。</p>
         <div class="kpi"><strong>12</strong> 公式 · 8 例题</div>
         <div class="swatch" style="background:var(--m-limit);"></div>
       </a>
       <a class="ch-card" href="02-chapter.html" style="border-color:var(--m-deriv);">
-        <span class="tag" style="background:rgba(10,132,255,0.12);color:var(--m-deriv);">02</span>
+        <span class="tag" style="background:var(--m-deriv-soft);color:var(--m-deriv-ink);">02</span>
         <h3>导数</h3>
         <p>定义、求导法则、隐函数与参数方程、高阶导数。</p>
         <div class="kpi"><strong>18</strong> 公式</div>
         <div class="swatch" style="background:var(--m-deriv);"></div>
       </a>
       <a class="ch-card" href="02-chapter.html" style="border-color:var(--m-diff);">
-        <span class="tag" style="background:rgba(90,200,250,0.18);color:#0e6e90;">03</span>
+        <span class="tag" style="background:var(--m-diff-soft);color:var(--m-diff-ink);">03</span>
         <h3>微分</h3>
         <p>导数 × dx。</p>
         <div class="kpi"><strong>16</strong></div>
         <div class="swatch" style="background:var(--m-diff);"></div>
       </a>
       <a class="ch-card" href="02-chapter.html" style="border-color:var(--m-integral);">
-        <span class="tag" style="background:rgba(48,209,88,0.15);color:#1a7a36;">04</span>
+        <span class="tag" style="background:var(--m-integral-soft);color:var(--m-integral-ink);">04</span>
         <h3>积分</h3>
         <p>导数的逆运算。</p>
         <div class="kpi"><strong>19</strong></div>
         <div class="swatch" style="background:var(--m-integral);"></div>
       </a>
       <a class="ch-card" href="02-chapter.html" style="border-color:var(--m-trig);">
-        <span class="tag" style="background:rgba(255,159,10,0.15);color:#9a5a00;">05</span>
+        <span class="tag" style="background:var(--m-trig-soft);color:var(--m-trig-ink);">05</span>
         <h3>三角函数</h3>
         <p>关系、特殊值、降幂、六边形记忆法。</p>
         <div class="kpi"><strong>18</strong></div>
         <div class="swatch" style="background:var(--m-trig);"></div>
       </a>
       <a class="ch-card" href="02-chapter.html" style="border-color:var(--m-diffEq);">
-        <span class="tag" style="background:rgba(191,90,242,0.15);color:#6e21a3;">06</span>
+        <span class="tag" style="background:var(--m-diffEq-soft);color:var(--m-diffEq-ink);">06</span>
         <h3>微分方程</h3>
         <p>一阶 3 种 + 二阶齐次/非齐次。</p>
         <div class="kpi"><strong>3</strong></div>
         <div class="swatch" style="background:var(--m-diffEq);"></div>
       </a>
       <a class="ch-card" href="02-chapter.html" style="border-color:var(--m-linalg);">
-        <span class="tag" style="background:rgba(255,59,48,0.12);color:#a31810;">07</span>
+        <span class="tag" style="background:var(--m-linalg-soft);color:var(--m-linalg-ink);">07</span>
         <h3>线性代数 · 行列式</h3>
         <p>克拉默法则、拉普拉斯展开。</p>
         <div class="kpi"><strong>5</strong></div>
@@ -387,36 +318,6 @@
 
     <style>
   /* ====== Design System Tokens ====== */
-  :root {
-    --canvas: #F9FAFB;
-    --surface: #FFFFFF;
-    --ink: #18181B;
-    --ink-2: #3F3F46;
-    --muted: #71717A;
-    --line: rgba(24,24,27,0.08);
-    --accent: #4F6BFF;        /* 主色：稳重的电光蓝 */
-    --accent-soft: rgba(79,107,255,0.08);
-    --accent-2: #B14BFF;      /* 次色：仅用于渐变收尾 */
-    --m-limit: #FFD60A;
-    --m-deriv: #0A84FF;
-    --m-diff: #5AC8FA;
-    --m-integral: #30D158;
-    --m-trig: #FF9F0A;
-    --m-diffEq: #BF5AF2;
-    --m-linalg: #FF3B30;
-    --font-sans: 'Geist', 'Inter Tight', system-ui, -apple-system, 'Noto Sans SC', sans-serif;
-    --font-mono: 'Geist Mono', 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
-    --radius-xs: 4px;
-    --radius-sm: 8px;
-    --radius-md: 14px;
-    --radius-lg: 22px;
-    --shadow-1: 0 1px 2px rgba(24,24,27,.04), 0 1px 1px rgba(24,24,27,.03);
-    --shadow-2: 0 6px 24px rgba(24,24,27,.06), 0 1px 2px rgba(24,24,27,.04);
-    --shadow-3: 0 24px 60px rgba(24,24,27,.10);
-    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-    --t-fast: 200ms;
-    --t-base: 360ms;
-  }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
