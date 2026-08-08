@@ -14,3 +14,13 @@
 [0807/122722.498:INFO:aha\components\metrics\metrics_base.cc:64] [startup] metric: crashReporterStartup, end, latency: 48ms
 [0807/122736.356:INFO:gin\isolate_holder.cc:169] SetPartitionAllocOomCallback and RegisterIsolateHolder
 [0807/122738.229:INFO:gin\isolate_holder.cc:169] SetPartitionAllocOomCallback and RegisterIsolateHolder
+[0807/123744.440:INFO:gin\isolate_holder.cc:169] SetPartitionAllocOomCallback and RegisterIsolateHolder
+[0807/125000.066:INFO:gin\isolate_holder.cc:169] SetPartitionAllocOomCallback and RegisterIsolateHolder
+[0807/125003.176:INFO:gin\isolate_holder.cc:169] SetPartitionAllocOomCallback and RegisterIsolateHolder
+[37012:22228:0808/102314.187:WARNING:t_skinfilemap.cpp(56)] SGRenderLog:CheckUpdate newMem.OpenMem failed, szNewMem:Local\sgime_skin.v8.filemap.sogouime err:系统错误2: 系统找不到指定的文件。  
+打开Filemap失败: Local\sgime_skin.v8.filemap.sogouime4673bb69347
+[37012:22228:0808/102314.187:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
+[37012:22228:0808/102314.187:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:8
+[37012:22228:0808/102314.207:WARNING:t_skinfilemap.cpp(63)] SGRenderLog:CheckUpdate newMem.OpenMem Suc, szNewMem:Local\sgime_skin.Dpi192.v8.filemap.sogouime
+[37012:22228:0808/102314.207:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:8
+[37012:22228:0808/102314.207:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:8

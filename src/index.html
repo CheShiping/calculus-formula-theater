@@ -757,6 +757,225 @@
             .card-title { font-size: 1.05rem; }
             .formula-list { font-size: 0.68rem; }
         }
+
+        /* ========== 知识路径首页 ========== */
+        body { height:auto; overflow:auto; background:#fbf9f2; }
+        #main-view { min-height: 100vh; height: auto; background: #fbf9f2; }
+        #main-view > .sidebar-container,
+        #main-view > .main-stage { display: none; }
+        .path-home {
+            --path-paper: #fbf9f2;
+            --path-ink: #1e201d;
+            --path-muted: #77786f;
+            --path-line: rgba(30,32,29,.14);
+            --path-green: #5f9977;
+            --path-violet: #a192ba;
+            --path-blue: #7d9eb3;
+            --path-amber: #b89a65;
+            --path-coral: #bd8b84;
+            width: 100%; min-height: 100vh; padding: 2rem 3.4rem 2.5rem;
+            color: var(--path-ink);
+            background:
+                radial-gradient(circle at 78% 0%, rgba(220,236,225,.64), transparent 24rem),
+                radial-gradient(circle at 8% 96%, rgba(232,226,242,.52), transparent 26rem),
+                var(--path-paper);
+        }
+        .path-nav { display:flex; align-items:center; justify-content:space-between; min-height:42px; margin-right: 190px; }
+        .path-brand { display:inline-flex; align-items:center; gap:9px; font-size:.78rem; font-weight:800; letter-spacing:.08em; }
+        .path-brand::before { content:''; width:10px; height:10px; border-radius:50%; background:var(--path-green); box-shadow:0 0 0 5px #e4f0e6; }
+        .path-nav-copy { color:var(--path-muted); font: 700 .72rem 'JetBrains Mono', monospace; letter-spacing:.07em; }
+        .path-intro { display:grid; grid-template-columns: minmax(0,1fr) auto; gap:2rem; align-items:end; max-width:1120px; margin:5.5rem auto 1.6rem; }
+        .path-eyebrow { margin:0 0 .7rem; color:var(--path-green); font-size:.72rem; font-weight:800; letter-spacing:.14em; }
+        .path-intro h1 { max-width:10em; margin:0; color:var(--path-ink); font-size:clamp(2.7rem,5.2vw,4.8rem); font-weight:800; letter-spacing:-.075em; line-height:1.05; }
+        .path-intro p:not(.path-eyebrow) { max-width:42rem; margin:1rem 0 0; color:var(--path-muted); font-size:.92rem; line-height:1.85; }
+        .path-count { padding-bottom:.4rem; color:var(--path-muted); font:.76rem/1.8 'JetBrains Mono', monospace; text-align:right; }
+        .learning-path { position:relative; max-width:1040px; margin:0 auto; padding:1rem 0 .4rem; }
+        .learning-path::before { content:''; position:absolute; top:5.5rem; bottom:4.8rem; left:calc(50% - .5px); border-left:1px solid var(--path-line); }
+        .path-row { position:relative; display:grid; grid-template-columns:1fr 120px 1fr; align-items:center; min-height:8.8rem; }
+        .path-row::after { content:''; position:absolute; top:50%; left:calc(50% - 5px); width:10px; height:10px; border:2px solid var(--path-paper); border-radius:50%; background:var(--path-ink); }
+        .path-node { grid-column:1; position:relative; max-width:25rem; padding:1.2rem 0; border:0; border-top:1px solid currentColor; color:var(--node-color); background:transparent; text-align:right; transition:transform .25s ease; }
+        .path-node:hover { transform:translateX(-5px); }
+        .path-node:focus-visible { outline:2px solid var(--path-ink); outline-offset:5px; }
+        .path-row:nth-child(even) .path-node { grid-column:3; text-align:left; }
+        .path-row:nth-child(even) .path-node:hover { transform:translateX(5px); }
+        .path-node::after { content:''; position:absolute; top:-1px; width:55px; border-top:1px solid currentColor; opacity:.45; }
+        .path-row:nth-child(odd) .path-node::after { right:-55px; }
+        .path-row:nth-child(even) .path-node::after { left:-55px; }
+        .path-node h2 { margin:0 0 .35rem; color:var(--path-ink); font-size:1.05rem; font-weight:800; }
+        .path-node p { margin:0; color:var(--path-muted); font-size:.78rem; line-height:1.7; }
+        .path-meta { display:inline-flex; align-items:center; gap:.42rem; margin-top:.65rem; color:var(--node-color); font:.68rem 'JetBrains Mono', monospace; font-weight:700; }
+        .path-meta::before { content:''; width:6px; height:6px; border-radius:50%; background:currentColor; }
+        .path-footer { display:flex; align-items:center; justify-content:space-between; gap:1rem; max-width:1040px; margin:1.5rem auto 0; padding:1.25rem 0 0; border-top:1px solid var(--path-line); }
+        .path-footer span { color:var(--path-muted); font-size:.78rem; }
+        .path-review { border:0; border-radius:999px; padding:.78rem 1.15rem; background:var(--path-ink); color:var(--path-paper); font-size:.82rem; font-weight:800; text-decoration:none; box-shadow:0 10px 24px rgba(30,32,29,.16); }
+        .top-actions { top:1.25rem; right:3.4rem; }
+        .top-actions a, .top-actions button { background:rgba(255,255,255,.52); color:var(--path-ink); box-shadow:none; }
+        .top-actions .top-action-review { background:#e4f0e6; border-color:#a9cbb3; color:#437957; }
+        @media (max-width: 1200px) {
+            .path-nav-copy { display:none; }
+        }
+        @media (max-width: 768px) {
+            .path-home { padding:1.15rem 1.2rem 2rem; }
+            .path-nav { margin-right:0; padding-right:9rem; }
+            .path-nav-copy { display:none; }
+            .top-actions { top:.72rem; right:1rem; }
+            .top-actions a, .top-actions button { width:36px; height:36px; }
+            .top-actions .top-action-review { width:36px; padding:0; }
+            .top-actions .top-action-review span { display:none; }
+            .path-intro { grid-template-columns:1fr; margin:4.3rem 0 1.1rem; }
+            .path-count { padding:0; text-align:left; }
+            .learning-path::before { top:4rem; bottom:4rem; left:5px; }
+            .path-row { display:block; min-height:0; padding:0 0 .2rem 1.65rem; }
+            .path-row::after { top:2.65rem; left:0; }
+            .path-node, .path-row:nth-child(even) .path-node { max-width:none; text-align:left; }
+            .path-node:hover, .path-row:nth-child(even) .path-node:hover { transform:none; }
+            .path-node::after { display:none; }
+            .path-footer { align-items:flex-start; flex-direction:column; }
+        }
+
+        /* ========== 顶栏：纸张主题（全局覆盖深色基础样式） ========== */
+        .top-actions { top: 1.25rem; right: 3.4rem; }
+        .top-actions a, .top-actions button {
+            background: rgba(255, 255, 255, .52);
+            color: var(--path-ink, #1e201d);
+            box-shadow: none;
+            border-color: rgba(30, 32, 29, .22);
+        }
+        .top-actions a:hover, .top-actions button:hover { border-color: rgba(30, 32, 29, .34); }
+        .top-actions .top-action-review { background: #e4f0e6; border-color: #a9cbb3; color: #437957; }
+        .top-actions .top-action-review:hover { background: #d6e8da; color: #3f704d; border-color: #8eae95; }
+        @media (max-width: 768px) {
+            .top-actions { top: .72rem; right: 1rem; }
+            .top-actions a, .top-actions button { width: 36px; height: 36px; }
+            .top-actions .top-action-review { width: 36px; padding: 0; }
+            .top-actions .top-action-review span { display: none; }
+        }
+
+        /* 进入章节详情后隐藏首页顶部栏（全视口生效，不再仅限移动端） */
+        body:has(#detail-view.active) .top-actions { display: none; }
+
+        /* 回到顶部浮动按钮：纸张主题（与顶栏一致） */
+        .back-to-top-btn {
+            background: rgba(255, 255, 255, .52);
+            color: #1e201d;
+            border-color: rgba(30, 32, 29, .22);
+            box-shadow: none;
+        }
+        .back-to-top-btn:hover {
+            border-color: #8eae95;
+            color: #437957;
+        }
+
+        /* ========== 知识路径：章节详情的纸张层级 ========== */
+        #detail-view {
+            --detail-paper: #fbf9f2;
+            --detail-ink: #1e201d;
+            --detail-muted: #74766e;
+            --detail-line: rgba(30, 32, 29, .14);
+            --detail-wash: rgba(255, 255, 255, .58);
+            /* 重写继承自 :root 的深色变量，使详情内容（特殊值表 / 六边形 / 步骤 / 公式编号）在纸张主题下统一 */
+            --text-ghost: rgba(30, 32, 29, .22);
+            --text-muted: #74766e;
+            --text-dim: #767d8c;
+            --text-secondary: #50524c;
+            --border-soft: rgba(30, 32, 29, .14);
+            --border-medium: rgba(30, 32, 29, .22);
+            --bg-elevated: rgba(255, 255, 255, .58);
+            --bg-elevated-hover: rgba(255, 255, 255, .84);
+            --bg-elevated-strong: #f2f0e8;
+            --hex-vertex-fill: #ffffff;
+            --hex-label-color: #8a5e00;
+            background:
+                radial-gradient(circle at 88% 3%, rgba(220, 236, 225, .56), transparent 25rem),
+                radial-gradient(circle at 6% 78%, rgba(232, 226, 242, .42), transparent 27rem),
+                var(--detail-paper);
+            color: var(--detail-ink);
+        }
+        .detail-header {
+            min-height: 76px;
+            padding: .9rem max(1.5rem, calc((100vw - 1200px) / 2));
+            background: rgba(251, 249, 242, .86);
+            border-bottom-color: var(--detail-line);
+            box-shadow: none;
+        }
+        .back-btn {
+            border-radius: 999px;
+            background: transparent;
+            border-color: var(--detail-line);
+            color: var(--detail-ink);
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            font-weight: 700;
+        }
+        .back-btn:hover { background: #f0eee5; border-color: rgba(30, 32, 29, .32); }
+        .detail-tabs { gap: .38rem; }
+        .detail-tab {
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .44);
+            border-color: var(--detail-line);
+            color: var(--detail-muted);
+            padding: .46rem .8rem;
+        }
+        .detail-tab:hover { color: var(--detail-ink); background: #f0eee5; }
+        .detail-tab.active {
+            color: var(--detail-ink);
+            background: color-mix(in srgb, var(--tab-color, #b8cbbb) 32%, #fbf9f2);
+            border-color: color-mix(in srgb, var(--tab-border, #719a7a) 46%, #a6a69d);
+            box-shadow: none;
+        }
+        .back-btn:focus-visible,
+        .detail-tab:focus-visible {
+            outline: 2px solid #527b5c;
+            outline-offset: 3px;
+        }
+        .detail-body { max-width: 1160px; padding: 3rem 2rem 4rem; }
+        .section-title { color: var(--detail-ink) !important; font-size: clamp(1.8rem, 3.2vw, 2.55rem); letter-spacing: -.045em; }
+        .section-title i { color: #6a9775; }
+        .section-desc, .swipe-hint { color: var(--detail-muted); }
+        .formula-grid { gap: 1.05rem; }
+        .formula-card {
+            background: var(--detail-wash);
+            border-radius: 2px;
+            border-color: var(--detail-line);
+            box-shadow: none;
+        }
+        .formula-card::before {
+            width: 2px;
+            background: color-mix(in srgb, var(--card-accent, #6a9775) 54%, #77786f);
+            opacity: .85;
+        }
+        .formula-card:hover {
+            background: rgba(255, 255, 255, .8);
+            border-color: rgba(30, 32, 29, .28);
+            box-shadow: 0 10px 24px rgba(45, 49, 43, .06);
+            transform: translateY(-2px);
+        }
+        .detail-header h2, .formula-name, .formula-card h3, .formula-card h4 { color: var(--detail-ink) !important; }
+        .formula-label { color: color-mix(in srgb, var(--card-accent, #6a9775) 48%, #565850) !important; }
+        .formula-desc, .formula-note, .formula-card p, .formula-card li { color: var(--detail-muted); }
+        .formula-display, .formula-block, .formula-card .formula-display {
+            background: rgba(246, 244, 237, .72);
+            border-color: var(--detail-line);
+            border-radius: 2px;
+        }
+        .formula-card .katex, .formula-display .katex { color: var(--detail-ink); }
+        .memory-box {
+            background: transparent;
+            border-color: var(--detail-line);
+            border-radius: 0;
+            box-shadow: none;
+        }
+        .memory-box::before { background: #93b79b; opacity: .75; }
+        .memory-box-title { color: var(--detail-ink); }
+        .memory-box-text { color: var(--detail-muted); }
+        .group-title { color: color-mix(in srgb, var(--group-color, #6a9775) 60%, #4d4f49); }
+        .detail-section .katex { color: var(--detail-ink); }
+        @media (max-width: 768px) {
+            .detail-header { padding: .7rem 1rem; gap: .75rem; }
+            .detail-tabs { flex-wrap: nowrap; overflow-x: auto; padding: .1rem 0; }
+            .detail-tab { flex: 0 0 auto; }
+            .detail-body { padding: 2rem 1rem 3rem; }
+            .formula-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -778,6 +997,30 @@
 
 <!-- ========== 主视图：卡片剧场 ========== -->
 <div id="main-view">
+    <main class="path-home" aria-label="高数知识路径首页">
+        <header class="path-nav">
+            <span class="path-brand">四川专升本高数</span>
+            <span class="path-nav-copy">KNOWLEDGE PATH · 7 MODULES</span>
+        </header>
+        <section class="path-intro" aria-labelledby="path-title">
+            <div>
+                <p class="path-eyebrow">KNOWLEDGE PATH · 7 MODULES</p>
+                <h1 id="path-title">从地基开始，<br>每一步都有来处。</h1>
+                <p>公式不是散点。沿着知识路径复习，可以看到章节之间如何相互支撑；需要巩固时，随时进入你原来的公式详情和简洁翻卡。</p>
+            </div>
+            <p class="path-count">103 FORMULAS<br>按章节建立联动记忆</p>
+        </section>
+        <section class="learning-path" aria-label="高数知识路径">
+            <article class="path-row"><button class="path-node" style="--node-color:var(--path-blue)" onclick="enterDetail('function')"><h2>函数 · 极限 · 连续</h2><p>定义域、极限方法、连续与间断点，是后续变化的坐标系。</p><span class="path-meta">22 条内容 · 先修模块</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:var(--path-violet)" onclick="enterDetail('derivative')"><h2>导数</h2><p>从瞬时变化率到切线斜率，建立“变化”的基本语言。</p><span class="path-meta">18 条公式 · 核心工具</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:#a887ad" onclick="enterDetail('differential')"><h2>微分</h2><p>导数乘上 dx。把变化率延伸为一阶近似的表达。</p><span class="path-meta">16 条公式 · 导数联动</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:var(--path-green)" onclick="enterDetail('integral')"><h2>积分</h2><p>把导数倒过来读。基本公式与三角积分是复习主干。</p><span class="path-meta">19 条公式 · 导数的逆运算</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:var(--path-coral)" onclick="enterDetail('trigonometric')"><h2>三角函数</h2><p>关系式贯穿导数和积分，用主干公式组织而不是零散背诵。</p><span class="path-meta">41 条公式 · 关系网络</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:var(--path-amber)" onclick="enterDetail('equation')"><h2>微分方程</h2><p>将导数与积分放进同一道题，进入一阶与二阶方程训练。</p><span class="path-meta">9 条公式 · 综合应用</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:#759ba1" onclick="enterDetail('linear')"><h2>行列式</h2><p>计算、性质与展开，是线性代数部分的基础工具。</p><span class="path-meta">4 个专题 · 线性代数</span></button></article>
+        </section>
+        <footer class="path-footer"><span>选一条路径进入章节，或直接开始你熟悉的翻卡记忆。</span><a class="path-review" href="review.html">进入翻卡记忆&nbsp; →</a></footer>
+    </main>
     <aside class="sidebar-container">
         <div class="mb-auto">
             <h5 class="text-xs font-bold text-gray-500 tracking-[4px] uppercase mb-2">四川专升本高数</h5>
