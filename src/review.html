@@ -21,34 +21,48 @@
                 }
             }
         }
+        document.documentElement.classList.add('js');
+        // 尽早应用主题（与 loadTheme 逻辑保持一致），避免首屏闪烁
+        try {
+            const t = localStorage.getItem('formula-theme');
+            if (t === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else if (t === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        } catch (e) {}
     </script>
     <style>
         * { box-sizing: border-box; }
 
-        /* ========== 主题变量（与 index.html 一致） ========== */
+        /* ========== 主题变量（暖暗色 · 非纯黑） ========== */
         :root {
-            --bg-body: #000;
-            --bg-main-stage: radial-gradient(ellipse at center, #0f1117 0%, #000 70%);
-            --bg-sidebar: rgba(15, 15, 20, 0.7);
-            --bg-card: rgba(30, 32, 40, 0.5);
-            --bg-card-active: rgba(40, 45, 55, 0.7);
-            --bg-elevated: rgba(255,255,255,0.03);
-            --bg-elevated-hover: rgba(255,255,255,0.06);
-            --bg-elevated-strong: rgba(255,255,255,0.04);
-            --bg-formula: rgba(0,0,0,0.3);
-            --bg-detail: #06070a;
-            --border-soft: rgba(255,255,255,0.08);
-            --border-medium: rgba(255,255,255,0.12);
-            --border-strong: rgba(255,255,255,0.25);
-            --text-primary: #fff;
-            --text-secondary: #d1d5db;
-            --text-muted: #9ca3af;
-            --text-dim: #6b7280;
-            --text-faint: rgba(255,255,255,0.5);
-            --text-ghost: rgba(255,255,255,0.2);
-            --shadow-card: 0 20px 50px rgba(0,0,0,0.6);
+            --bg-body: #17140f;
+            --bg-main-stage: radial-gradient(ellipse at center, #241e15 0%, #17140f 72%);
+            --bg-sidebar: rgba(32, 27, 19, 0.72);
+            --bg-card: rgba(52, 44, 32, 0.5);
+            --bg-card-active: rgba(66, 56, 41, 0.72);
+            --bg-elevated: rgba(255, 242, 220, 0.045);
+            --bg-elevated-hover: rgba(255, 242, 220, 0.09);
+            --bg-elevated-strong: rgba(255, 242, 220, 0.06);
+            --bg-formula: rgba(0, 0, 0, 0.28);
+            --bg-detail: #12100b;
+            --border-soft: rgba(255, 238, 210, 0.10);
+            --border-medium: rgba(255, 238, 210, 0.16);
+            --border-strong: rgba(255, 238, 210, 0.28);
+            --text-primary: #f2ecdf;
+            --text-secondary: #ddd5c3;
+            --text-muted: #aca391;
+            --text-dim: #7f7663;
+            --text-faint: rgba(242, 236, 223, 0.55);
+            --text-ghost: rgba(242, 236, 223, 0.22);
+            --shadow-card: 0 20px 50px rgba(0,0,0,0.55);
             --shadow-active: 0 0 50px rgba(10, 132, 255, 0.15);
-            --shadow-hover: 0 8px 30px rgba(0,0,0,0.3);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.35);
             --accent-yellow: #FFD60A;
         }
         [data-theme="light"] {
@@ -142,40 +156,32 @@
             color: #30D158;
             border-color: #30D158;
         }
+        /* 按下反馈（Part 1 #6） */
+        .top-bar a:active, .top-bar button:active { transform: scale(0.95); }
 
-        /* ========== 顶栏：纸张主题（全局覆盖深色基础样式，与 index.html 一致） ========== */
-        .top-bar a, .top-bar button {
+        /* ========== 顶栏：浅色模式纸张主题（同步 index.html；深色沿用默认深色表面） ========== */
+        [data-theme="light"] .top-bar a, [data-theme="light"] .top-bar button {
             background: rgba(255, 255, 255, .52);
             color: #1e201d;
             border-color: rgba(30, 32, 29, .22);
             box-shadow: none;
         }
-        .top-bar a:hover, .top-bar button:hover {
+        [data-theme="light"] .top-bar a:hover, [data-theme="light"] .top-bar button:hover {
             border-color: rgba(30, 32, 29, .34);
             color: #1e201d;
             transform: scale(1.06);
         }
-        .top-bar .top-action-review {
+        [data-theme="light"] .top-bar .top-action-review {
             background: #e4f0e6;
             border-color: #a9cbb3;
             color: #437957;
         }
-        .top-bar .top-action-review:hover {
+        [data-theme="light"] .top-bar .top-action-review:hover {
             background: #d6e8da;
             color: #3f704d;
             border-color: #8eae95;
         }
-        /* 回到顶部按钮：纸张主题（全局覆盖，与 index.html 一致） */
-        .back-to-top-btn {
-            background: rgba(255, 255, 255, .52);
-            color: #1e201d;
-            border-color: rgba(30, 32, 29, .22);
-            box-shadow: none;
-        }
-        .back-to-top-btn:hover {
-            border-color: #8eae95;
-            color: #437957;
-        }
+        /* 回到顶部按钮：主题感知。深色用 .back-to-top-btn 默认深色表面；浅色见下方 [data-theme="light"] 覆盖 */
 
         /* ========== 主容器 ========== */
         #main-view {
@@ -423,6 +429,24 @@
         .flip-card:hover .flip-card-inner { transform: rotateY(var(--rot, 0deg)) translateY(-2px); }
         .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
         .flip-card.flipped:hover .flip-card-inner { transform: rotateY(180deg) translateY(-2px); }
+
+        /* ========== 翻卡：成组错峰进入（Part 1 #4） ========== */
+        .js .flip-card {
+            opacity: 0;
+            transform: translateY(18px) scale(.98);
+            transition: opacity .4s cubic-bezier(0.25, 0.8, 0.25, 1), transform .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .js .flip-card.enter { opacity: 1; transform: none; }
+
+        /* ========== 头部区：载入上浮（Part 1 #5） ========== */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .hero { animation: fadeUp .5s ease both; }
+
+        /* ========== 降低动态偏好 ========== */
+        @media (prefers-reduced-motion: reduce) {
+            .js .flip-card { opacity: 1 !important; transform: none !important; transition: none !important; }
+            .hero { animation: none !important; opacity: 1 !important; transform: none !important; }
+        }
         .flip-face {
             position: absolute;
             inset: 0;
@@ -784,9 +808,8 @@
                 padding: 3.75rem 1rem 1.5rem;
                 overflow: visible;
             }
-            /* 移动端隐藏侧边栏中的分类栏和工具栏，改用粘性顶栏 */
-            .sidebar-container .filter-bar { display: none; }
-            .sidebar-container .side-section-heading:has(+ .filter-bar) { display: none; }
+            /* 移动端保留侧边栏中的分类栏显示（在描述文字下方），同时粘性顶栏作为辅助 */
+            /* .sidebar-container .filter-bar 不再隐藏，移动端用户可直接在侧栏选择章节 */
             .main-stage { padding: 3.5rem 1rem 3rem; overflow: visible; }
             .mobile-category-bar {
                 display: block;
@@ -805,8 +828,8 @@
             .hero h1 { font-size: 1.4rem; }
         }
 
-        /* ========== 知识路径：复习页的纸张舞台 ========== */
-        body {
+        /* ========== 复习页：浅色（纸张）舞台；深色沿用 :root 暖暗基座 ========== */
+        [data-theme="light"] body {
             --bg-body: #fbf9f2;
             --bg-main-stage:
                 radial-gradient(circle at 78% 8%, rgba(220, 236, 225, .72), transparent 28rem),
@@ -833,12 +856,8 @@
             color: var(--text-primary);
             background: var(--bg-body);
         }
-        .top-bar {
-            top: 1.1rem;
-            right: 2rem;
-            gap: .45rem;
-        }
-        .top-bar a, .top-bar button {
+        [data-theme="light"] .top-bar { top: 1.1rem; right: 2rem; gap: .45rem; }
+        [data-theme="light"] .top-bar a, [data-theme="light"] .top-bar button {
             width: 40px;
             height: 40px;
             background: rgba(255, 255, 255, .54);
@@ -846,13 +865,13 @@
             color: var(--text-primary);
             box-shadow: none;
         }
-        .top-bar a:hover, .top-bar button:hover { transform: translateY(-2px); border-color: var(--border-strong); }
-        .top-bar .top-action-review {
+        [data-theme="light"] .top-bar a:hover, [data-theme="light"] .top-bar button:hover { transform: translateY(-2px); border-color: var(--border-strong); }
+        [data-theme="light"] .top-bar .top-action-review {
             background: #e4f0e6;
             border-color: #a9cbb3;
             color: #437957;
         }
-        .sidebar-container {
+        [data-theme="light"] .sidebar-container {
             width: 350px;
             justify-content: flex-start;
             padding: 7rem 2.2rem 2rem;
@@ -860,28 +879,28 @@
             border-right-color: var(--border-soft);
             box-shadow: none;
         }
-        .hero { padding-bottom: 1.8rem; border-bottom: 1px solid var(--border-soft); }
-        .page-eyebrow { color: #5d8969; }
-        .hero h1 { color: var(--text-primary); letter-spacing: -.05em; }
-        .hero-subtitle, .hero p { color: var(--text-muted); }
-        .side-section-heading { color: var(--text-muted); }
-        .filter-bar { gap: .48rem; }
-        .chip {
+        [data-theme="light"] .hero { padding-bottom: 1.8rem; border-bottom: 1px solid var(--border-soft); }
+        [data-theme="light"] .page-eyebrow { color: #5d8969; }
+        [data-theme="light"] .hero h1 { color: var(--text-primary); letter-spacing: -.05em; }
+        [data-theme="light"] .hero-subtitle, [data-theme="light"] .hero p { color: var(--text-muted); }
+        [data-theme="light"] .side-section-heading { color: var(--text-muted); }
+        [data-theme="light"] .filter-bar { gap: .48rem; }
+        [data-theme="light"] .chip {
             min-height: 36px;
             border-radius: 999px;
             background: transparent;
             border-color: var(--border-soft);
             color: var(--text-secondary);
         }
-        .chip:hover { background: #f0eee5; border-color: var(--border-medium); }
-        .chip.active, [data-theme="light"] .chip.active {
+        [data-theme="light"] .chip:hover { background: #f0eee5; border-color: var(--border-medium); }
+        [data-theme="light"] .chip.active {
             background: #e4f0e6;
             border-color: #a9cbb3;
             color: #3f704d;
             box-shadow: none;
         }
-        .chip .count, [data-theme="light"] .chip .count { background: #efede6; color: var(--text-muted); }
-        .chip.active .count, [data-theme="light"] .chip.active .count { background: #cfe3d3; color: #3f704d; }
+        [data-theme="light"] .chip .count { background: #efede6; color: var(--text-muted); }
+        [data-theme="light"] .chip.active .count { background: #cfe3d3; color: #3f704d; }
         .toolbar {
             padding: .85rem 0;
             border-top: 1px solid var(--border-soft);
@@ -894,13 +913,13 @@
             border-radius: 999px;
             color: var(--text-secondary);
         }
-        .toolbar button:hover { background: #f0eee5; border-color: var(--border-medium); color: var(--text-primary); }
-        .toolbar button.primary, [data-theme="light"] .toolbar button.primary {
+        [data-theme="light"] .toolbar button:hover { background: #f0eee5; border-color: var(--border-medium); color: var(--text-primary); }
+        [data-theme="light"] .toolbar button.primary {
             background: var(--text-primary);
             border-color: var(--text-primary);
             color: #fbf9f2;
         }
-        .toolbar button.primary:hover { background: #343631; color: #fbf9f2; }
+        [data-theme="light"] .toolbar button.primary:hover { background: #343631; color: #fbf9f2; }
         .know-btn {
             display: inline-flex;
             align-items: center;
@@ -915,12 +934,12 @@
             font-weight: 700;
             line-height: 1;
         }
-        .know-btn:hover {
+        [data-theme="light"] .know-btn:hover {
             background: #e4f0e6;
             border-color: #a9cbb3;
             color: #3f704d;
         }
-        .know-btn.is-known {
+        [data-theme="light"] .know-btn.is-known {
             background: #e4f0e6;
             border-color: #8eae95;
             color: #3f704d;
@@ -934,13 +953,13 @@
             outline-offset: 3px;
         }
         .progress-wrap { gap: .65rem; }
-        .progress-bar { height: 5px; background: #e3e1d8; }
-        .progress-bar > div { background: #779e80; box-shadow: none; }
-        .progress-text, .reset-feedback { color: #527b5c; }
+        [data-theme="light"] .progress-bar { height: 5px; background: #e3e1d8; }
+        [data-theme="light"] .progress-bar > div { background: #779e80; box-shadow: none; }
+        [data-theme="light"] .progress-text, [data-theme="light"] .reset-feedback { color: #527b5c; }
         .main-stage { background: var(--bg-main-stage); }
         .review-board { width: min(100%, 1120px); padding: 5.7rem 2.5rem 3.5rem; }
         .card-grid { gap: 1rem; }
-        .flip-face {
+        [data-theme="light"] .flip-face {
             border-radius: 2px;
             background: rgba(255, 255, 255, .64);
             border-color: var(--border-soft);
@@ -953,7 +972,7 @@
             background: color-mix(in srgb, var(--accent, #779e80) 54%, #77786f);
             opacity: .85;
         }
-        .flip-card:hover .flip-face { background: rgba(255, 255, 255, .9); border-color: var(--border-medium); box-shadow: var(--shadow-hover); }
+        [data-theme="light"] .flip-card:hover .flip-face { background: rgba(255, 255, 255, .9); border-color: var(--border-medium); box-shadow: var(--shadow-hover); }
         .flip-header .label { color: color-mix(in srgb, var(--accent, #779e80) 62%, #4d4f49); }
         .flip-body {
             border-radius: 2px;
@@ -961,29 +980,56 @@
             border-color: var(--border-soft);
         }
         .flip-body .katex, .question-formula .katex, .answer-formula .katex { color: var(--text-primary); }
-        .flip-face.back {
+        [data-theme="light"] .flip-face.back {
             background: #f5f3ec;
             border-color: color-mix(in srgb, var(--accent, #779e80) 34%, #aaa99f);
             box-shadow: var(--shadow-card);
         }
-        .flip-face.back .flip-body, [data-theme="light"] .flip-face.back .flip-body { background: rgba(237, 235, 225, .78); }
+        [data-theme="light"] .flip-face.back .flip-body { background: rgba(237, 235, 225, .78); }
         .flip-face.back .note { color: var(--text-secondary); }
-        .flip-card.known .flip-face.front { border-color: #8eae95; }
-        .mobile-category-bar {
+        [data-theme="light"] .flip-card.known .flip-face.front { border-color: #8eae95; }
+        [data-theme="light"] .mobile-category-bar {
             background: rgba(251, 249, 242, .93);
             border-color: var(--border-soft);
             box-shadow: 0 8px 22px rgba(45, 49, 43, .08);
         }
         .mobile-category-bar .mchip { border-color: var(--border-soft); color: var(--text-secondary); }
-        .mobile-category-bar .mchip.active, [data-theme="light"] .mobile-category-bar .mchip.active { background: #e4f0e6; border-color: #a9cbb3; color: #3f704d; }
-        .back-to-top-btn { background: rgba(255, 255, 255, .78); border-color: var(--border-medium); color: var(--text-primary); box-shadow: var(--shadow-card); }
-        .back-to-top-btn:hover { border-color: #8eae95; color: #527b5c; box-shadow: 0 7px 18px rgba(45, 49, 43, .1); }
+        [data-theme="light"] .mobile-category-bar .mchip.active { background: #e4f0e6; border-color: #a9cbb3; color: #3f704d; }
+        [data-theme="light"] .back-to-top-btn { background: rgba(255, 255, 255, .78); border-color: var(--border-medium); color: var(--text-primary); box-shadow: var(--shadow-card); }
+        [data-theme="light"] .back-to-top-btn:hover { border-color: #8eae95; color: #527b5c; box-shadow: 0 7px 18px rgba(45, 49, 43, .1); }
         @media (max-width: 640px) {
-            .sidebar-container { padding: 4.4rem 1rem 1.4rem; }
+            /* 侧栏占满宽度，文字描述平铺（修复纸张块 350px 覆盖移动端 100% 的问题） */
+            .sidebar-container { width: 100%; padding: 4.4rem 1rem 1.4rem; }
+            [data-theme="light"] .sidebar-container { width: 100%; }
             .main-stage { padding: 2.9rem 1rem 3rem; }
             .review-board { padding: 1.25rem 0 0; }
-            .mobile-category-bar { box-shadow: 0 6px 18px rgba(45, 49, 43, .1); }
             .know-btn { min-height: 27px; padding: .28rem .5rem; }
+
+            /* 顶栏：移动端保留返回/源码/主题（缩小版），与 index.html 一致 */
+            /* Keep the utility rail aligned with index.html in both themes. */
+            .top-bar,
+            [data-theme="light"] .top-bar {
+                display: flex;
+                top: .72rem;
+                right: 1rem;
+                gap: .4rem;
+            }
+            .top-bar a, .top-bar button { width: 36px; height: 36px; font-size: 0.9rem; }
+            .top-bar .top-action-review { display: none; } /* 当前页指示，移动端冗余，隐藏 */
+
+            /* 分类栏：默认隐藏，滚动超过首个公式卡后才淡入显示；置于顶栏下方避免重叠 */
+            .mobile-category-bar {
+                top: .72rem; left: 1rem; right: 1rem;
+                opacity: 0; transform: translateY(-10px); pointer-events: none;
+                transition: opacity .3s ease, transform .3s ease;
+                box-shadow: 0 6px 18px rgba(45, 49, 43, .1);
+            }
+            .mobile-category-bar.show { opacity: 1; transform: none; pointer-events: auto; }
+
+            /* The category rail replaces the utility rail once it becomes sticky. */
+            body:has(.mobile-category-bar.show) .top-bar {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -1086,7 +1132,7 @@
         order: FORMULAS.map((_, i) => i),
     };
 
-    // ========== 主题 ==========
+    // ========== 主题（与 index.html 共享 formula-theme key，跨页统一） ==========
     function applyTheme(theme) {
         const html = document.documentElement;
         if (theme === 'light') html.setAttribute('data-theme', 'light');
@@ -1101,8 +1147,16 @@
         try {
             const saved = localStorage.getItem('formula-theme');
             if (saved) applyTheme(saved);
+            else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyTheme('dark');
+            else applyTheme('light'); // 默认纸张/浅色，与 index.html 一致
         } catch (e) {}
     }
+    // 监听跨页面的 storage 事件：在另一个标签页切换主题时自动同步
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'formula-theme' && e.newValue) {
+            applyTheme(e.newValue);
+        }
+    });
 
     // ========== 进度持久化 ==========
     function loadProgress() {
@@ -1225,6 +1279,22 @@
         });
     }
 
+    // ========== 移动端分类栏：滚动超过首个公式卡后才显示 ==========
+    function initMobileCategoryBarScroll() {
+        const bar = document.getElementById('mobileCategoryBar');
+        if (!bar) return;
+        const mq = window.matchMedia('(max-width: 640px)');
+        function update() {
+            if (!mq.matches) { bar.classList.remove('show'); return; }
+            const firstCard = document.querySelector('#cardGrid .flip-card');
+            if (!firstCard) { bar.classList.remove('show'); return; }
+            bar.classList.toggle('show', firstCard.getBoundingClientRect().top < 0);
+        }
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+    }
+
     // ========== 左右滑动切换分类 ==========
     function initSwipeNavigation() {
         const mainStage = document.querySelector('.main-stage');
@@ -1345,13 +1415,24 @@
             if (knowBtn) {
                 knowBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    if (state.known.has(id)) state.known.delete(id);
-                    else state.known.add(id);
+                    const isNowKnown = !state.known.has(id);
+                    if (isNowKnown) state.known.add(id);
+                    else state.known.delete(id);
                     saveProgress();
-                    renderGrid();
+                    // 局部更新：只更新当前卡片和统计，避免整页刷新
+                    card.classList.toggle('known', isNowKnown);
+                    knowBtn.classList.toggle('is-known', isNowKnown);
+                    knowBtn.textContent = isNowKnown ? '✓ 已掌握' : '○ 标记掌握';
                     updateStats();
                 });
             }
+        });
+
+        // 成组错峰进入动画（Part 1 #4）：渲染后下一帧加 .enter 触发过渡，stagger 上限 12 张
+        const cards = grid.querySelectorAll('.flip-card');
+        cards.forEach((card, i) => {
+            card.style.transitionDelay = Math.min(i, 12) * 45 + 'ms';
+            requestAnimationFrame(() => requestAnimationFrame(() => card.classList.add('enter')));
         });
 
         waitForKatex(grid);
@@ -1441,6 +1522,7 @@
     renderAll();
     initBackToTop();
     initSwipeNavigation();
+    initMobileCategoryBarScroll();
 
     // 把按钮需要的全局函数挂到 window（onclick 用）
     window.toggleTheme = toggleTheme;

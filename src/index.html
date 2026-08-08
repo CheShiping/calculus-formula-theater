@@ -31,6 +31,20 @@
                 }
             }
         }
+        document.documentElement.classList.add('js');
+        // 尽早应用主题（与 initTheme 逻辑保持一致），避免首屏闪烁
+        try {
+            const t = localStorage.getItem('formula-theme');
+            if (t === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else if (t === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        } catch (e) {}
     </script>
     <style>
         * { box-sizing: border-box; }
@@ -169,6 +183,8 @@
             border-color: #30D158;
         }
         .top-actions .top-action-review i { font-size: 0.95rem; }
+        /* 按下反馈（Part 1 #3） */
+        .top-actions a:active, .top-actions button:active { transform: scale(0.95); }
 
         /* ========== 主视图 ========== */
         #main-view {
@@ -759,11 +775,33 @@
         }
 
         /* ========== 知识路径首页 ========== */
-        body { height:auto; overflow:auto; background:#fbf9f2; }
-        #main-view { min-height: 100vh; height: auto; background: #fbf9f2; }
+        body { height:auto; overflow:auto; background:#1b1a16; }
+        [data-theme="light"] body { background:#fbf9f2; }
+        #main-view { min-height: 100vh; height: auto; background: #1b1a16; }
+        [data-theme="light"] #main-view { background: #fbf9f2; }
         #main-view > .sidebar-container,
         #main-view > .main-stage { display: none; }
         .path-home {
+            /* 深色主题（CSS 默认） */
+            --path-paper: #1b1a16;
+            --path-ink: #ecebe2;
+            --path-muted: #9b9a8d;
+            --path-line: rgba(236,235,226,.12);
+            --path-green: #6fae87;
+            --path-violet: #b3a4cc;
+            --path-blue: #8fb0c4;
+            --path-amber: #c9ab74;
+            --path-coral: #cd9b94;
+            width: 100%; min-height: 100vh; padding: 2rem 3.4rem 2.5rem;
+            color: var(--path-ink);
+            background:
+                radial-gradient(circle at 78% 0%, rgba(111,174,135,.10), transparent 24rem),
+                radial-gradient(circle at 8% 96%, rgba(179,164,204,.08), transparent 26rem),
+                var(--path-paper);
+            transition: background .4s ease, color .4s ease;
+        }
+        /* 浅色（纸张）主题 */
+        [data-theme="light"] .path-home {
             --path-paper: #fbf9f2;
             --path-ink: #1e201d;
             --path-muted: #77786f;
@@ -773,8 +811,6 @@
             --path-blue: #7d9eb3;
             --path-amber: #b89a65;
             --path-coral: #bd8b84;
-            width: 100%; min-height: 100vh; padding: 2rem 3.4rem 2.5rem;
-            color: var(--path-ink);
             background:
                 radial-gradient(circle at 78% 0%, rgba(220,236,225,.64), transparent 24rem),
                 radial-gradient(circle at 8% 96%, rgba(232,226,242,.52), transparent 26rem),
@@ -807,6 +843,24 @@
         .path-meta::before { content:''; width:6px; height:6px; border-radius:50%; background:currentColor; }
         .path-footer { display:flex; align-items:center; justify-content:space-between; gap:1rem; max-width:1040px; margin:1.5rem auto 0; padding:1.25rem 0 0; border-top:1px solid var(--path-line); }
         .path-footer span { color:var(--path-muted); font-size:.78rem; }
+
+        /* ========== 章节路径：滚动渐显（Part 1 #1） ========== */
+        .js .path-row {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .55s cubic-bezier(0.25, 0.8, 0.25, 1), transform .55s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .js .path-row.reveal { opacity: 1; transform: translateY(0); }
+
+        /* ========== 头部区：载入上浮（Part 1 #2） ========== */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .path-intro { animation: fadeUp .5s ease both; }
+
+        /* ========== 降低动态偏好 ========== */
+        @media (prefers-reduced-motion: reduce) {
+            .js .path-row { opacity: 1 !important; transform: none !important; transition: none !important; }
+            .path-intro { animation: none !important; opacity: 1 !important; transform: none !important; }
+        }
         .path-review { border:0; border-radius:999px; padding:.78rem 1.15rem; background:var(--path-ink); color:var(--path-paper); font-size:.82rem; font-weight:800; text-decoration:none; box-shadow:0 10px 24px rgba(30,32,29,.16); }
         .top-actions { top:1.25rem; right:3.4rem; }
         .top-actions a, .top-actions button { background:rgba(255,255,255,.52); color:var(--path-ink); box-shadow:none; }
@@ -833,17 +887,17 @@
             .path-footer { align-items:flex-start; flex-direction:column; }
         }
 
-        /* ========== 顶栏：纸张主题（全局覆盖深色基础样式） ========== */
+        /* ========== 顶栏：跟随主题（深色用默认深色表面，浅色纸张） ========== */
         .top-actions { top: 1.25rem; right: 3.4rem; }
-        .top-actions a, .top-actions button {
+        [data-theme="light"] .top-actions a, [data-theme="light"] .top-actions button {
             background: rgba(255, 255, 255, .52);
             color: var(--path-ink, #1e201d);
             box-shadow: none;
             border-color: rgba(30, 32, 29, .22);
         }
-        .top-actions a:hover, .top-actions button:hover { border-color: rgba(30, 32, 29, .34); }
-        .top-actions .top-action-review { background: #e4f0e6; border-color: #a9cbb3; color: #437957; }
-        .top-actions .top-action-review:hover { background: #d6e8da; color: #3f704d; border-color: #8eae95; }
+        [data-theme="light"] .top-actions a:hover, [data-theme="light"] .top-actions button:hover { border-color: rgba(30, 32, 29, .34); color: var(--path-ink, #1e201d); transform: scale(1.06); }
+        [data-theme="light"] .top-actions .top-action-review { background: #e4f0e6; border-color: #a9cbb3; color: #437957; }
+        [data-theme="light"] .top-actions .top-action-review:hover { background: #d6e8da; color: #3f704d; border-color: #8eae95; }
         @media (max-width: 768px) {
             .top-actions { top: .72rem; right: 1rem; }
             .top-actions a, .top-actions button { width: 36px; height: 36px; }
@@ -854,20 +908,20 @@
         /* 进入章节详情后隐藏首页顶部栏（全视口生效，不再仅限移动端） */
         body:has(#detail-view.active) .top-actions { display: none; }
 
-        /* 回到顶部浮动按钮：纸张主题（与顶栏一致） */
-        .back-to-top-btn {
+        /* 回到顶部浮动按钮：跟随主题（深色用默认深色表面，浅色纸张，与顶栏一致） */
+        [data-theme="light"] .back-to-top-btn {
             background: rgba(255, 255, 255, .52);
             color: #1e201d;
             border-color: rgba(30, 32, 29, .22);
             box-shadow: none;
         }
-        .back-to-top-btn:hover {
+        [data-theme="light"] .back-to-top-btn:hover {
             border-color: #8eae95;
             color: #437957;
         }
 
-        /* ========== 知识路径：章节详情的纸张层级 ========== */
-        #detail-view {
+        /* ========== 知识路径：章节详情的纸张层级（浅色/纸张主题；深色沿用 :root 深色基础） ========== */
+        [data-theme="light"] #detail-view {
             --detail-paper: #fbf9f2;
             --detail-ink: #1e201d;
             --detail-muted: #74766e;
@@ -891,14 +945,14 @@
                 var(--detail-paper);
             color: var(--detail-ink);
         }
-        .detail-header {
+        [data-theme="light"] .detail-header {
             min-height: 76px;
             padding: .9rem max(1.5rem, calc((100vw - 1200px) / 2));
             background: rgba(251, 249, 242, .86);
             border-bottom-color: var(--detail-line);
             box-shadow: none;
         }
-        .back-btn {
+        [data-theme="light"] .back-btn {
             border-radius: 999px;
             background: transparent;
             border-color: var(--detail-line);
@@ -906,69 +960,69 @@
             font-family: 'Inter', 'Noto Sans SC', sans-serif;
             font-weight: 700;
         }
-        .back-btn:hover { background: #f0eee5; border-color: rgba(30, 32, 29, .32); }
-        .detail-tabs { gap: .38rem; }
-        .detail-tab {
+        [data-theme="light"] .back-btn:hover { background: #f0eee5; border-color: rgba(30, 32, 29, .32); }
+        [data-theme="light"] .detail-tabs { gap: .38rem; }
+        [data-theme="light"] .detail-tab {
             border-radius: 999px;
             background: rgba(255, 255, 255, .44);
             border-color: var(--detail-line);
             color: var(--detail-muted);
             padding: .46rem .8rem;
         }
-        .detail-tab:hover { color: var(--detail-ink); background: #f0eee5; }
-        .detail-tab.active {
+        [data-theme="light"] .detail-tab:hover { color: var(--detail-ink); background: #f0eee5; }
+        [data-theme="light"] .detail-tab.active {
             color: var(--detail-ink);
             background: color-mix(in srgb, var(--tab-color, #b8cbbb) 32%, #fbf9f2);
             border-color: color-mix(in srgb, var(--tab-border, #719a7a) 46%, #a6a69d);
             box-shadow: none;
         }
-        .back-btn:focus-visible,
-        .detail-tab:focus-visible {
+        [data-theme="light"] .back-btn:focus-visible,
+        [data-theme="light"] .detail-tab:focus-visible {
             outline: 2px solid #527b5c;
             outline-offset: 3px;
         }
-        .detail-body { max-width: 1160px; padding: 3rem 2rem 4rem; }
-        .section-title { color: var(--detail-ink) !important; font-size: clamp(1.8rem, 3.2vw, 2.55rem); letter-spacing: -.045em; }
-        .section-title i { color: #6a9775; }
-        .section-desc, .swipe-hint { color: var(--detail-muted); }
-        .formula-grid { gap: 1.05rem; }
-        .formula-card {
+        [data-theme="light"] .detail-body { max-width: 1160px; padding: 3rem 2rem 4rem; }
+        [data-theme="light"] .section-title { color: var(--detail-ink) !important; font-size: clamp(1.8rem, 3.2vw, 2.55rem); letter-spacing: -.045em; }
+        [data-theme="light"] .section-title i { color: #6a9775; }
+        [data-theme="light"] .section-desc, [data-theme="light"] .swipe-hint { color: var(--detail-muted); }
+        [data-theme="light"] .formula-grid { gap: 1.05rem; }
+        [data-theme="light"] .formula-card {
             background: var(--detail-wash);
             border-radius: 2px;
             border-color: var(--detail-line);
             box-shadow: none;
         }
-        .formula-card::before {
+        [data-theme="light"] .formula-card::before {
             width: 2px;
             background: color-mix(in srgb, var(--card-accent, #6a9775) 54%, #77786f);
             opacity: .85;
         }
-        .formula-card:hover {
+        [data-theme="light"] .formula-card:hover {
             background: rgba(255, 255, 255, .8);
             border-color: rgba(30, 32, 29, .28);
             box-shadow: 0 10px 24px rgba(45, 49, 43, .06);
             transform: translateY(-2px);
         }
-        .detail-header h2, .formula-name, .formula-card h3, .formula-card h4 { color: var(--detail-ink) !important; }
-        .formula-label { color: color-mix(in srgb, var(--card-accent, #6a9775) 48%, #565850) !important; }
-        .formula-desc, .formula-note, .formula-card p, .formula-card li { color: var(--detail-muted); }
-        .formula-display, .formula-block, .formula-card .formula-display {
+        [data-theme="light"] .detail-header h2, [data-theme="light"] .formula-name, [data-theme="light"] .formula-card h3, [data-theme="light"] .formula-card h4 { color: var(--detail-ink) !important; }
+        [data-theme="light"] .formula-label { color: color-mix(in srgb, var(--card-accent, #6a9775) 48%, #565850) !important; }
+        [data-theme="light"] .formula-desc, [data-theme="light"] .formula-note, [data-theme="light"] .formula-card p, [data-theme="light"] .formula-card li { color: var(--detail-muted); }
+        [data-theme="light"] .formula-display, [data-theme="light"] .formula-block, [data-theme="light"] .formula-card .formula-display {
             background: rgba(246, 244, 237, .72);
             border-color: var(--detail-line);
             border-radius: 2px;
         }
-        .formula-card .katex, .formula-display .katex { color: var(--detail-ink); }
-        .memory-box {
+        [data-theme="light"] .formula-card .katex, [data-theme="light"] .formula-display .katex { color: var(--detail-ink); }
+        [data-theme="light"] .memory-box {
             background: transparent;
             border-color: var(--detail-line);
             border-radius: 0;
             box-shadow: none;
         }
-        .memory-box::before { background: #93b79b; opacity: .75; }
-        .memory-box-title { color: var(--detail-ink); }
-        .memory-box-text { color: var(--detail-muted); }
-        .group-title { color: color-mix(in srgb, var(--group-color, #6a9775) 60%, #4d4f49); }
-        .detail-section .katex { color: var(--detail-ink); }
+        [data-theme="light"] .memory-box::before { background: #93b79b; opacity: .75; }
+        [data-theme="light"] .memory-box-title { color: var(--detail-ink); }
+        [data-theme="light"] .memory-box-text { color: var(--detail-muted); }
+        [data-theme="light"] .group-title { color: color-mix(in srgb, var(--group-color, #6a9775) 60%, #4d4f49); }
+        [data-theme="light"] .detail-section .katex { color: var(--detail-ink); }
         @media (max-width: 768px) {
             .detail-header { padding: .7rem 1rem; gap: .75rem; }
             .detail-tabs { flex-wrap: nowrap; overflow-x: auto; padding: .1rem 0; }
@@ -3746,10 +3800,37 @@ function applyTheme(theme) {
     try { saved = localStorage.getItem('formula-theme'); } catch(e) {}
     if (saved) {
         applyTheme(saved);
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-        applyTheme('light');
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        applyTheme('dark');
+    } else {
+        applyTheme('light'); // 默认纸张/浅色
     }
 })();
+
+// 监听跨页面的 storage 事件：在另一个标签页切换主题时自动同步
+window.addEventListener('storage', (e) => {
+    if (e.key === 'formula-theme' && e.newValue) {
+        applyTheme(e.newValue);
+    }
+});
+
+    // ========== 章节路径：滚动渐显（Part 1 #1） ==========
+    function initScrollReveal() {
+        const rows = document.querySelectorAll('.path-row');
+        if (!rows.length) return;
+        if (!('IntersectionObserver' in window)) {
+            rows.forEach(r => r.classList.add('reveal'));
+            return;
+        }
+        // 双向滚动：进入可读区加 .reveal（淡入上移），离开即移除（淡出），上下滚动动画对称
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                e.target.classList.toggle('reveal', e.isIntersecting);
+            });
+        }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+        rows.forEach(r => io.observe(r));
+    }
+    initScrollReveal();
 
     // ========== 回到顶部浮动按钮 ==========
     const getBackToTopBtn = () => document.getElementById('backToTopBtn');
