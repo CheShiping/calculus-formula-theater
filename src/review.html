@@ -64,6 +64,18 @@
             --shadow-active: 0 0 50px rgba(10, 132, 255, 0.15);
             --shadow-hover: 0 8px 30px rgba(0,0,0,0.35);
             --accent-yellow: #FFD60A;
+            --color-green: #6fae87;
+            --color-green-06: rgba(111,174,135,0.06);
+            --color-green-13: rgba(111,174,135,0.13);
+            --color-green-15: rgba(111,174,135,0.15);
+            --color-green-18: rgba(111,174,135,0.18);
+            --color-green-20: rgba(111,174,135,0.20);
+            --color-green-22: rgba(111,174,135,0.22);
+            --color-green-40: rgba(111,174,135,0.40);
+            --color-green-45: rgba(111,174,135,0.45);
+            --color-green-50: rgba(111,174,135,0.50);
+            --color-green-55: rgba(111,174,135,0.55);
+            --color-green-60: rgba(111,174,135,0.60);
         }
         [data-theme="light"] {
             --bg-body: #f5f6f8;
@@ -89,6 +101,18 @@
             --shadow-active: 0 0 50px rgba(10, 132, 255, 0.2);
             --shadow-hover: 0 8px 30px rgba(0,0,0,0.1);
             --accent-yellow: #FFD60A;
+            --color-green: #5f9977;
+            --color-green-06: rgba(95,153,119,0.06);
+            --color-green-13: rgba(95,153,119,0.13);
+            --color-green-15: rgba(95,153,119,0.15);
+            --color-green-18: rgba(95,153,119,0.18);
+            --color-green-20: rgba(95,153,119,0.20);
+            --color-green-22: rgba(95,153,119,0.22);
+            --color-green-40: rgba(95,153,119,0.40);
+            --color-green-45: rgba(95,153,119,0.45);
+            --color-green-50: rgba(95,153,119,0.50);
+            --color-green-55: rgba(95,153,119,0.55);
+            --color-green-60: rgba(95,153,119,0.60);
         }
 
         body {
@@ -134,7 +158,7 @@
         .top-bar a:hover, .top-bar button:hover {
             transform: scale(1.1);
             border-color: var(--border-strong);
-            color: #0A84FF;
+            color: var(--text-primary);
         }
         .top-bar .icon-sun { display: none; }
         .top-bar .icon-moon { display: block; }
@@ -148,18 +172,18 @@
             padding: 0;
             border-radius: 50%;
             background: var(--bg-sidebar);
-            border-color: rgba(48,209,88,0.45);
-            color: #30D158;
+            border-color: var(--color-green-45);
+            color: var(--color-green);
         }
         .top-bar .top-action-review:hover {
             background: var(--bg-elevated-hover);
-            color: #30D158;
-            border-color: #30D158;
+            color: var(--color-green);
+            border-color: var(--color-green);
         }
         /* 按下反馈（Part 1 #6） */
         .top-bar a:active, .top-bar button:active { transform: scale(0.95); }
 
-        /* ========== 顶栏：浅色模式纸张主题（同步 index.html；深色沿用默认深色表面） ========== */
+        /* ========== 顶栏：主题只改颜色，不改布局 ========== */
         [data-theme="light"] .top-bar a, [data-theme="light"] .top-bar button {
             background: rgba(255, 255, 255, .52);
             color: #1e201d;
@@ -169,7 +193,6 @@
         [data-theme="light"] .top-bar a:hover, [data-theme="light"] .top-bar button:hover {
             border-color: rgba(30, 32, 29, .34);
             color: #1e201d;
-            transform: scale(1.06);
         }
         [data-theme="light"] .top-bar .top-action-review {
             background: #e4f0e6;
@@ -257,7 +280,7 @@
             gap: 0.5rem;
             padding: 0.55rem 1.1rem;
             border-radius: 22px;
-            background: var(--bg-chip);
+            background: var(--bg-elevated);
             border: 1px solid var(--border-soft);
             color: var(--text-secondary);
             font-size: 0.85rem;
@@ -272,12 +295,12 @@
             border-color: var(--border-medium);
         }
         .chip.active {
-            background: rgba(48,209,88,0.13);
-            border-color: rgba(48,209,88,0.45);
-            color: #30D158;
+            background: var(--color-green-13);
+            border-color: var(--color-green-45);
+            color: var(--color-green);
             box-shadow: none;
         }
-        [data-theme="light"] .chip.active { color: #1a7a36; border-color: rgba(48,209,88,0.6); }
+        [data-theme="light"] .chip.active { color: var(--color-green); border-color: var(--color-green-60); }
         .chip .count {
             display: inline-flex;
             min-width: 22px;
@@ -286,18 +309,17 @@
             border-radius: 9px;
             font-size: 0.7rem;
             font-weight: 700;
-            background: rgba(255,255,255,0.08);
+            background: var(--bg-elevated-hover);
             color: var(--text-muted);
             align-items: center;
             justify-content: center;
             font-family: 'JetBrains Mono', monospace;
         }
         .chip.active .count {
-            background: rgba(48,209,88,0.18);
-            color: #30D158;
+            background: var(--color-green-18);
+            color: var(--color-green);
         }
-        [data-theme="light"] .chip .count { background: rgba(0,0,0,0.06); }
-        [data-theme="light"] .chip.active .count { background: rgba(48,209,88,0.18); color: #1a7a36; }
+        [data-theme="light"] .chip.active .count { background: var(--color-green-18); color: var(--color-green); }
 
         /* ========== 工具栏 ========== */
         .toolbar {
@@ -335,23 +357,23 @@
         }
         .toolbar button:hover {
             background: var(--bg-elevated-hover);
-            color: #30D158;
-            border-color: rgba(48,209,88,0.5);
+            color: var(--color-green);
+            border-color: var(--color-green-50);
             transform: translateY(-1px);
         }
         .toolbar button.primary {
-            background: rgba(48,209,88,0.13);
-            border-color: rgba(48,209,88,0.45);
-            color: #30D158;
+            background: var(--color-green-13);
+            border-color: var(--color-green-45);
+            color: var(--color-green);
         }
         .toolbar button.primary:hover {
-            background: rgba(48,209,88,0.22);
-            color: #30D158;
-            border-color: #30D158;
+            background: var(--color-green-22);
+            color: var(--color-green);
+            border-color: var(--color-green);
             box-shadow: none;
         }
-        [data-theme="light"] .toolbar button.primary { color: #1a7a36; }
-        [data-theme="light"] .toolbar button.primary:hover { color: #1a7a36; border-color: #30D158; }
+        [data-theme="light"] .toolbar button.primary { color: var(--color-green); }
+        [data-theme="light"] .toolbar button.primary:hover { color: var(--color-green); border-color: var(--color-green); }
 
         /* ========== 进度条 ========== */
         .progress-wrap {
@@ -386,7 +408,7 @@
         .reset-feedback {
             min-height: 1.2rem;
             margin-top: 0.75rem;
-            color: #30D158;
+            color: var(--color-green);
             font-size: 0.78rem;
             font-weight: 600;
             opacity: 0;
@@ -562,7 +584,7 @@
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            background: #30D158;
+            background: var(--color-green);
             color: #000;
             display: flex;
             align-items: center;
@@ -580,8 +602,8 @@
             font-weight: 700;
             transition: color 0.2s;
         }
-        .know-btn:hover { color: #30D158; }
-        .know-btn.is-known { color: #30D158; }
+        .know-btn:hover { color: var(--color-green); }
+        .know-btn.is-known { color: var(--color-green); }
 
         /* ========== 移动端适配（与 index.html 同款） ========== */
         /* Main-page shell alignment for the review theater. */
@@ -605,14 +627,14 @@
             font-size: 0.72rem;
             font-weight: 700;
         }
-        .page-eyebrow i { color: #30D158; }
+        .page-eyebrow i { color: var(--color-green); }
         .hero h1 {
             font-size: 2rem;
             line-height: 1.15;
             margin-bottom: 0.25rem;
         }
         .hero-subtitle {
-            color: #30D158;
+            color: var(--color-green);
             font-size: 1rem;
             font-weight: 700;
             margin-bottom: 0.8rem;
@@ -650,7 +672,7 @@
         }
         .chip:first-child { grid-column: span 2; }
         .chip.active { color: var(--text-primary); }
-        .chip.active .count { color: #30D158; }
+        .chip.active .count { color: var(--color-green); }
         .side-progress-heading {
             margin-top: 0.25rem;
             padding-top: 1.25rem;
@@ -680,10 +702,10 @@
             font-size: 0.72rem;
         }
         .toolbar button:hover,
-        .toolbar button.primary { color: #30D158; }
+        .toolbar button.primary { color: var(--color-green); }
         .progress-wrap { margin: 0 0 0.2rem; }
         .progress-bar > div {
-            background: #30D158;
+            background: var(--color-green);
             box-shadow: none;
         }
         .card-grid { gap: 1rem; }
@@ -736,11 +758,11 @@
         }
         .mobile-category-bar .mchip:last-child { margin-right: 0.5rem; }
         .mobile-category-bar .mchip.active {
-            background: rgba(48,209,88,0.13);
-            border-color: rgba(48,209,88,0.45);
-            color: #30D158;
+            background: var(--color-green-13);
+            border-color: var(--color-green-45);
+            color: var(--color-green);
         }
-        [data-theme="light"] .mobile-category-bar .mchip.active { color: #1a7a36; border-color: rgba(48,209,88,0.6); }
+        [data-theme="light"] .mobile-category-bar .mchip.active { color: var(--color-green); border-color: var(--color-green-60); }
         .mobile-category-bar .mchip .mcount {
             display: inline-flex;
             min-width: 20px;
@@ -749,18 +771,17 @@
             border-radius: 8px;
             font-size: 0.65rem;
             font-weight: 700;
-            background: rgba(255,255,255,0.08);
+            background: var(--bg-elevated-hover);
             color: var(--text-muted);
             align-items: center;
             justify-content: center;
             font-family: 'JetBrains Mono', monospace;
         }
         .mobile-category-bar .mchip.active .mcount {
-            background: rgba(48,209,88,0.18);
-            color: #30D158;
+            background: var(--color-green-18);
+            color: var(--color-green);
         }
-        [data-theme="light"] .mobile-category-bar .mchip .mcount { background: rgba(0,0,0,0.06); }
-        [data-theme="light"] .mobile-category-bar .mchip.active .mcount { background: rgba(48,209,88,0.18); color: #1a7a36; }
+        [data-theme="light"] .mobile-category-bar .mchip.active .mcount { background: var(--color-green-18); color: var(--color-green); }
 
         /* ========== 回到顶部按钮 ========== */
         .back-to-top-btn {
@@ -793,9 +814,9 @@
             pointer-events: auto;
         }
         .back-to-top-btn:hover {
-            border-color: rgba(48,209,88,0.6);
-            color: #30D158;
-            box-shadow: 0 4px 20px rgba(48,209,88,0.2);
+            border-color: var(--color-green-60);
+            color: var(--color-green);
+            box-shadow: 0 4px 20px var(--color-green-20);
         }
 
         @media (max-width: 640px) {
@@ -856,21 +877,19 @@
             color: var(--text-primary);
             background: var(--bg-body);
         }
-        [data-theme="light"] .top-bar { top: 1.25rem; right: 1.5rem; gap: 0.6rem; }
         [data-theme="light"] .top-bar a, [data-theme="light"] .top-bar button {
             background: rgba(255, 255, 255, .54);
             border-color: var(--border-soft);
             color: var(--text-primary);
             box-shadow: none;
         }
-        [data-theme="light"] .top-bar a:hover, [data-theme="light"] .top-bar button:hover { transform: translateY(-2px); border-color: var(--border-strong); }
+        [data-theme="light"] .top-bar a:hover, [data-theme="light"] .top-bar button:hover { border-color: var(--border-strong); }
         [data-theme="light"] .top-bar .top-action-review {
             background: #e4f0e6;
             border-color: #a9cbb3;
             color: #437957;
         }
         [data-theme="light"] .sidebar-container {
-            justify-content: flex-start;
             background: var(--bg-sidebar);
             border-right-color: var(--border-soft);
             box-shadow: none;
@@ -880,20 +899,7 @@
         [data-theme="light"] .hero h1 { color: var(--text-primary); }
         [data-theme="light"] .hero-subtitle, [data-theme="light"] .hero p { color: var(--text-muted); }
         [data-theme="light"] .side-section-heading { color: var(--text-muted); }
-        [data-theme="light"] .chip {
-            background: transparent;
-            border-color: var(--border-soft);
-            color: var(--text-secondary);
-        }
-        [data-theme="light"] .chip:hover { background: #f0eee5; border-color: var(--border-medium); }
-        [data-theme="light"] .chip.active {
-            background: #e4f0e6;
-            border-color: #a9cbb3;
-            color: #3f704d;
-            box-shadow: none;
-        }
-        [data-theme="light"] .chip .count { background: #efede6; color: var(--text-muted); }
-        [data-theme="light"] .chip.active .count { background: #cfe3d3; color: #3f704d; }
+        [data-theme="light"] .chip:hover { border-color: var(--border-medium); }
         .toolbar {
             padding: .85rem 0;
             border-top: 1px solid var(--border-soft);
@@ -984,23 +990,19 @@
             box-shadow: 0 8px 22px rgba(45, 49, 43, .08);
         }
         .mobile-category-bar .mchip { border-color: var(--border-soft); color: var(--text-secondary); }
-        [data-theme="light"] .mobile-category-bar .mchip.active { background: #e4f0e6; border-color: #a9cbb3; color: #3f704d; }
         [data-theme="light"] .back-to-top-btn { background: rgba(255, 255, 255, .78); border-color: var(--border-medium); color: var(--text-primary); box-shadow: var(--shadow-card); }
         [data-theme="light"] .back-to-top-btn:hover { border-color: #8eae95; color: #527b5c; box-shadow: 0 7px 18px rgba(45, 49, 43, .1); }
 
         /* Keep the review shell aligned with the knowledge-path homepage. */
-        .sidebar-container,
-        [data-theme="light"] .sidebar-container {
+        .sidebar-container {
             width: 380px;
         }
-        .top-bar,
-        [data-theme="light"] .top-bar {
+        .top-bar {
             top: 1.25rem;
             right: 1.5rem;
             gap: 0.6rem;
         }
-        .top-bar a, .top-bar button,
-        [data-theme="light"] .top-bar a, [data-theme="light"] .top-bar button {
+        .top-bar a, .top-bar button {
             font-size: 1rem;
         }
         .top-bar .top-action-review {
@@ -1011,18 +1013,14 @@
             gap: .45rem;
             font-size: .85rem;
             font-weight: 600;
-            background: rgba(48, 209, 88, .13);
-            border-color: rgba(48, 209, 88, .45);
-            color: #30D158;
+            background: var(--color-green-13);
+            border-color: var(--color-green-45);
+            color: var(--color-green);
         }
         [data-theme="light"] .top-bar .top-action-review {
             background: #e4f0e6;
             border-color: #a9cbb3;
             color: #437957;
-        }
-        [data-theme="light"] .top-bar a:hover,
-        [data-theme="light"] .top-bar button:hover {
-            transform: scale(1.06);
         }
         /* Theme changes color only; the sidebar's content rhythm stays shared. */
         [data-theme="light"] .chip {
@@ -1031,18 +1029,12 @@
         @media (max-width: 640px) {
             /* 侧栏占满宽度，文字描述平铺（修复纸张块 350px 覆盖移动端 100% 的问题） */
             .sidebar-container { width: 100%; padding: 4.4rem 1rem 1.4rem; }
-            [data-theme="light"] .sidebar-container {
-                width: 100%;
-                padding: 4.4rem 1rem 1.4rem;
-            }
             .main-stage { padding: 2.9rem 1rem 3rem; }
             .review-board { padding: 1.25rem 0 0; }
             .know-btn { min-height: 27px; padding: .28rem .5rem; }
 
             /* 顶栏：移动端保留返回/源码/主题（缩小版），与 index.html 一致 */
-            /* Keep the utility rail aligned with index.html in both themes. */
-            .top-bar,
-            [data-theme="light"] .top-bar {
+            .top-bar {
                 display: flex;
                 top: .72rem;
                 right: 1rem;

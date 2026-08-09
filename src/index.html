@@ -21,7 +21,7 @@
                     },
                     colors: {
                         primary: '#0A84FF',
-                        accent: '#30D158',
+                        accent: 'var(--color-green)',
                         warning: '#FFD60A',
                         danger: '#FF3B30',
                         purple: '#BF5AF2',
@@ -82,6 +82,17 @@
             --hex-label-color: #FFD60A;
             --accent-yellow: #FFD60A;
             --accent-yellow-text: #FFD60A;
+            --color-green: #6fae87;
+            --color-green-06: rgba(111,174,135,0.06);
+            --color-green-13: rgba(111,174,135,0.13);
+            --color-green-15: rgba(111,174,135,0.15);
+            --color-green-20: rgba(111,174,135,0.20);
+            --color-green-22: rgba(111,174,135,0.22);
+            --color-green-40: rgba(111,174,135,0.40);
+            --color-green-45: rgba(111,174,135,0.45);
+            --color-green-60: rgba(111,174,135,0.60);
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
         }
         [data-theme="light"] {
             --bg-body: #f5f6f8;
@@ -115,6 +126,15 @@
             --hex-label-color: #8a5e00;
             --accent-yellow: #C88800;
             --accent-yellow-text: #8a5e00;
+            --color-green: #5f9977;
+            --color-green-06: rgba(95,153,119,0.06);
+            --color-green-13: rgba(95,153,119,0.13);
+            --color-green-15: rgba(95,153,119,0.15);
+            --color-green-20: rgba(95,153,119,0.20);
+            --color-green-22: rgba(95,153,119,0.22);
+            --color-green-40: rgba(95,153,119,0.40);
+            --color-green-45: rgba(95,153,119,0.45);
+            --color-green-60: rgba(95,153,119,0.60);
         }
 
         body {
@@ -158,7 +178,7 @@
             transform: scale(1.1);
             border-color: var(--border-strong);
         }
-        .top-actions a:hover { color: #0A84FF; }
+        .top-actions a:hover { color: var(--text-primary); }
         .top-actions .icon-sun { display: none; }
         .top-actions .icon-moon { display: block; }
         [data-theme="light"] .top-actions .icon-sun { display: block; }
@@ -173,14 +193,14 @@
             gap: 0.5rem;
             font-size: 0.85rem;
             font-weight: 600;
-            background: rgba(48,209,88,0.13);
-            border-color: rgba(48,209,88,0.45);
-            color: #30D158;
+            background: var(--color-green-13);
+            border-color: var(--color-green-45);
+            color: var(--color-green);
         }
         .top-actions .top-action-review:hover {
-            background: rgba(48,209,88,0.22);
-            color: #30D158;
-            border-color: #30D158;
+            background: var(--color-green-22);
+            color: var(--color-green);
+            border-color: var(--color-green);
         }
         .top-actions .top-action-review i { font-size: 0.95rem; }
         /* 按下反馈（Part 1 #3） */
@@ -331,7 +351,7 @@
             width: 100%; text-align: center;
         }
         .progress-bar { width: 100%; height: 4px; background: var(--bg-elevated-hover); border-radius: 2px; overflow: hidden; margin-top: 1.5rem; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #0A84FF, #30D158); border-radius: 2px; transition: width 0.4s ease; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #0A84FF, var(--color-green)); border-radius: 2px; transition: width 0.4s ease; }
         .module-tag {
             display: inline-block; padding: 4px 12px; border-radius: 20px;
             font-size: 0.7rem; font-weight: 700; letter-spacing: 1px;
@@ -482,7 +502,7 @@
 
         /* 记忆提示框 */
         .memory-box {
-            background: linear-gradient(135deg, rgba(255,214,10,0.1), rgba(48,209,88,0.06));
+            background: linear-gradient(135deg, rgba(255,214,10,0.1), var(--color-green-06));
             border: 1px solid rgba(255,214,10,0.2);
             border-radius: 16px; padding: 1.25rem 1.5rem;
             margin: 1.5rem 0;
@@ -556,7 +576,7 @@
             transition: opacity 0.3s ease;
         }
         .hex-line.reciprocal { stroke: #FFD60A; stroke-dasharray: 5 4; }
-        .hex-line.pythagorean { stroke: #30D158; opacity: 0.2; }
+        .hex-line.pythagorean { stroke: var(--color-green); opacity: 0.2; }
         .hex-center {
             font-family: 'Inter', sans-serif;
             font-weight: 900;
@@ -619,9 +639,9 @@
             pointer-events: auto;
         }
         .back-to-top-btn:hover {
-            border-color: rgba(48,209,88,0.6);
-            color: #30D158;
-            box-shadow: 0 4px 20px rgba(48,209,88,0.2);
+            border-color: var(--color-green-60);
+            color: var(--color-green);
+            box-shadow: 0 4px 20px var(--color-green-20);
         }
 
         /* 主题切换时的过渡：KaTeX 文字颜色 */
@@ -861,10 +881,20 @@
             .js .path-row { opacity: 1 !important; transform: none !important; transition: none !important; }
             .path-intro { animation: none !important; opacity: 1 !important; transform: none !important; }
         }
-        .path-review { border:0; border-radius:999px; padding:.78rem 1.15rem; background:var(--path-ink); color:var(--path-paper); font-size:.82rem; font-weight:800; text-decoration:none; box-shadow:0 10px 24px rgba(30,32,29,.16); }
+        .path-review { border:0; border-radius:999px; padding:.78rem 1.15rem; background:var(--path-ink); color:var(--path-paper); font-size:.82rem; font-weight:800; text-decoration:none; box-shadow:0 10px 24px rgba(30,32,29,.16); animation: ctaBreathe 2.5s var(--ease-in-out) infinite; }
+        @keyframes ctaBreathe {
+            0%, 100% { transform: translateX(0); box-shadow: 0 10px 24px rgba(30,32,29,.16); }
+            50% { transform: translateX(6px); box-shadow: 0 12px 28px rgba(30,32,29,.22); }
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .path-review:hover { animation-play-state: paused; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .path-review { animation: none; }
+        }
         .top-actions { top:1.25rem; right:3.4rem; }
         .top-actions a, .top-actions button { background:rgba(255,255,255,.52); color:var(--path-ink); box-shadow:none; }
-        .top-actions .top-action-review { background:#e4f0e6; border-color:#a9cbb3; color:#437957; }
+        .top-actions .top-action-review { background:var(--color-green-13); border-color:var(--color-green-45); color:var(--color-green); }
         @media (max-width: 1200px) {
             .path-nav-copy { display:none; }
         }
@@ -895,7 +925,7 @@
             box-shadow: none;
             border-color: rgba(30, 32, 29, .22);
         }
-        [data-theme="light"] .top-actions a:hover, [data-theme="light"] .top-actions button:hover { border-color: rgba(30, 32, 29, .34); color: var(--path-ink, #1e201d); transform: scale(1.06); }
+        [data-theme="light"] .top-actions a:hover, [data-theme="light"] .top-actions button:hover { border-color: rgba(30, 32, 29, .34); color: var(--path-ink, #1e201d); }
         [data-theme="light"] .top-actions .top-action-review { background: #e4f0e6; border-color: #a9cbb3; color: #437957; }
         [data-theme="light"] .top-actions .top-action-review:hover { background: #d6e8da; color: #3f704d; border-color: #8eae95; }
         @media (max-width: 768px) {
@@ -981,8 +1011,8 @@
             outline: 2px solid #527b5c;
             outline-offset: 3px;
         }
-        [data-theme="light"] .detail-body { max-width: 1160px; padding: 3rem 2rem 4rem; }
-        [data-theme="light"] .section-title { color: var(--detail-ink) !important; font-size: clamp(1.8rem, 3.2vw, 2.55rem); letter-spacing: -.045em; }
+        [data-theme="light"] .detail-body { max-width: 1200px; padding: 2rem; }
+        [data-theme="light"] .section-title { color: var(--detail-ink) !important; font-size: 1.75rem; letter-spacing: -.045em; }
         [data-theme="light"] .section-title i { color: #6a9775; }
         [data-theme="light"] .section-desc, [data-theme="light"] .swipe-hint { color: var(--detail-muted); }
         [data-theme="light"] .formula-grid { gap: 1.05rem; }
@@ -1228,18 +1258,18 @@
                         </div>
                         <div class="module-tag bg-accent/20 text-accent">积分模块</div>
                         <h3 class="card-title">积分的定义</h3>
-                        <p class="card-subtitle" style="--sub-color: #30D158;">Integral · 常见+特殊</p>
+                        <p class="card-subtitle" style="--sub-color: var(--color-green);">Integral · 常见+特殊</p>
                         <div class="formula-block">
                             $$\int f(x) \, dx = F(x) + C$$
                             $$F'(x) = f(x)$$
                         </div>
-                        <div class="formula-list" style="--dot-color: #30D158;">
+                        <div class="formula-list" style="--dot-color: var(--color-green);">
                             <li>不定积分 = 一族函数（+C）</li>
                             <li>定积分 = 曲线下面积</li>
                             <li>常见11条 + 特殊8条</li>
                         </div>
                         <div class="memory-tip">
-                            <span class="highlight-text" style="--hl-color: #30D158;">点击查看全部积分公式</span>
+                            <span class="highlight-text" style="--hl-color: var(--color-green);">点击查看全部积分公式</span>
                         </div>
                         <div class="enter-hint">⟜ 点击进入积分公式详情 ⟝</div>
                     </div>
@@ -1371,7 +1401,7 @@ const sidebarData = [
         note: "⭐ 微分公式 = 导数公式 × dx。点击进入16条微分公式详情"
     },
     {
-        module: "积分模块", moduleColor: "#30D158",
+        module: "积分模块", moduleColor: "var(--color-green)",
         title: "积分的定义",
         desc: "积分是导数的逆运算——从导函数找回原函数。基本积分公式就是导数公式倒过来看，联动记忆效率翻倍。常见11条 + 特殊8条，覆盖专升本全部考点。",
         note: "⭐⭐⭐ 导数↔积分联动记忆，记住一边等于记住两边。点击进入全部积分公式"
@@ -1580,14 +1610,14 @@ function buildDerivativeDetail() {
                 ${formulaCard('(18)', '根式', '$$(\\sqrt{x})\' = \\frac{1}{2\\sqrt{x}}$$', '幂函数 μ=1/2 的特例，高频考点', '#FFD60A')}
             </div>
 
-            ${groupTitle('fa-wave-square', '三角函数', '#30D158')}
+            ${groupTitle('fa-wave-square', '三角函数', 'var(--color-green)')}
             <div class="formula-grid">
-                ${formulaCard('(3)', '正弦', '$$(\\sin x)\' = \\cos x$$', 'sin → cos，正变余', '#30D158')}
-                ${formulaCard('(4)', '余弦', '$$(\\cos x)\' = -\\sin x$$', 'cos → -sin，余变负', '#30D158')}
-                ${formulaCard('(5)', '正切', '$$(\\tan x)\' = \\sec^2 x$$', '积分高频：∫sec²x dx = tan x + C', '#30D158')}
-                ${formulaCard('(6)', '余切', '$$(\\cot x)\' = -\\csc^2 x$$', '带「余」字的导数都带负号', '#30D158')}
-                ${formulaCard('(7)', '正割', '$$(\\sec x)\' = \\sec x \\cdot \\tan x$$', '积分高频：∫sec x tan x dx = sec x + C', '#30D158')}
-                ${formulaCard('(8)', '余割', '$$(\\csc x)\' = -\\csc x \\cdot \\cot x$$', '同样带负号', '#30D158')}
+                ${formulaCard('(3)', '正弦', '$$(\\sin x)\' = \\cos x$$', 'sin → cos，正变余', 'var(--color-green)')}
+                ${formulaCard('(4)', '余弦', '$$(\\cos x)\' = -\\sin x$$', 'cos → -sin，余变负', 'var(--color-green)')}
+                ${formulaCard('(5)', '正切', '$$(\\tan x)\' = \\sec^2 x$$', '积分高频：∫sec²x dx = tan x + C', 'var(--color-green)')}
+                ${formulaCard('(6)', '余切', '$$(\\cot x)\' = -\\csc^2 x$$', '带「余」字的导数都带负号', 'var(--color-green)')}
+                ${formulaCard('(7)', '正割', '$$(\\sec x)\' = \\sec x \\cdot \\tan x$$', '积分高频：∫sec x tan x dx = sec x + C', 'var(--color-green)')}
+                ${formulaCard('(8)', '余割', '$$(\\csc x)\' = -\\csc x \\cdot \\cot x$$', '同样带负号', 'var(--color-green)')}
             </div>
             ${memoryBox('三角求导口诀', '正变余，余变负。sin→cos→(-sin)→(-cos)→sin 形成四步循环。带「正」字的（sin, tan, sec）求导不带负号；带「余」字的（cos, cot, csc）都带负号。记住 sec²x 和 sec x tan x 这两个积分高频结果。')}
 
@@ -1630,14 +1660,14 @@ function buildDifferentialDetail() {
                 ${formulaCard('(2)', '幂函数', '$$d(x^\\mu) = \\mu x^{\\mu-1} \\, dx$$', '导数公式 × dx', '#FFD60A')}
             </div>
 
-            ${groupTitle('fa-wave-square', '三角函数', '#30D158')}
+            ${groupTitle('fa-wave-square', '三角函数', 'var(--color-green)')}
             <div class="formula-grid">
-                ${formulaCard('(3)', '正弦', '$$d(\\sin x) = \\cos x \\, dx$$', '', '#30D158')}
-                ${formulaCard('(4)', '余弦', '$$d(\\cos x) = -\\sin x \\, dx$$', '', '#30D158')}
-                ${formulaCard('(5)', '正切', '$$d(\\tan x) = \\sec^2 x \\, dx$$', '', '#30D158')}
-                ${formulaCard('(6)', '余切', '$$d(\\cot x) = -\\csc^2 x \\, dx$$', '', '#30D158')}
-                ${formulaCard('(7)', '正割', '$$d(\\sec x) = \\sec x \\cdot \\tan x \\, dx$$', '', '#30D158')}
-                ${formulaCard('(8)', '余割', '$$d(\\csc x) = -\\csc x \\cdot \\cot x \\, dx$$', '', '#30D158')}
+                ${formulaCard('(3)', '正弦', '$$d(\\sin x) = \\cos x \\, dx$$', '', 'var(--color-green)')}
+                ${formulaCard('(4)', '余弦', '$$d(\\cos x) = -\\sin x \\, dx$$', '', 'var(--color-green)')}
+                ${formulaCard('(5)', '正切', '$$d(\\tan x) = \\sec^2 x \\, dx$$', '', 'var(--color-green)')}
+                ${formulaCard('(6)', '余切', '$$d(\\cot x) = -\\csc^2 x \\, dx$$', '', 'var(--color-green)')}
+                ${formulaCard('(7)', '正割', '$$d(\\sec x) = \\sec x \\cdot \\tan x \\, dx$$', '', 'var(--color-green)')}
+                ${formulaCard('(8)', '余割', '$$d(\\csc x) = -\\csc x \\cdot \\cot x \\, dx$$', '', 'var(--color-green)')}
             </div>
 
             ${groupTitle('fa-superscript', '指数 & 对数', '#FF9F0A')}
@@ -1665,10 +1695,10 @@ function buildDifferentialDetail() {
 
 // ---------- 积分详情 ----------
 function buildIntegralDetail() {
-    const C = '#30D158';
+    const C = 'var(--color-green)';
     const tabs = `
-        <div class="detail-tab active" style="--tab-color:rgba(48,209,88,0.2);--tab-border:rgba(48,209,88,0.4);" onclick="switchTab('int-common', this)">常见积分公式</div>
-        <div class="detail-tab" style="--tab-color:rgba(48,209,88,0.2);--tab-border:rgba(48,209,88,0.4);" onclick="switchTab('int-special', this)">特殊积分公式</div>
+        <div class="detail-tab active" style="--tab-color:var(--color-green-20);--tab-border:var(--color-green-40);" onclick="switchTab('int-common', this)">常见积分公式</div>
+        <div class="detail-tab" style="--tab-color:var(--color-green-20);--tab-border:var(--color-green-40);" onclick="switchTab('int-special', this)">特殊积分公式</div>
     `;
     const commonBody = `
         <div class="detail-section active" id="int-common">
@@ -1688,12 +1718,12 @@ function buildIntegralDetail() {
                 ${formulaCard('(5)', '自然指数', '$$\\int e^x \\, dx = e^x + c$$', '⭐ eˣ 积分还是 eˣ，最特殊', '#FF9F0A')}
             </div>
 
-            ${groupTitle('fa-wave-square', '三角函数', '#30D158')}
+            ${groupTitle('fa-wave-square', '三角函数', 'var(--color-green)')}
             <div class="formula-grid">
-                ${formulaCard('(6)', '余弦→正弦', '$$\\int \\cos x \\, dx = \\sin x + c$$', '导数 (sin x)\'=cos x 的逆运算', '#30D158')}
-                ${formulaCard('(7)', '正弦→负余弦', '$$\\int \\sin x \\, dx = -\\cos x + c$$', '导数 (-cos x)\'=sin x 的逆运算', '#30D158')}
-                ${formulaCard('(8)', '正割平方', '$$\\int \\frac{1}{\\cos^2 x} \\, dx = \\int \\sec^2 x \\, dx = \\tan x + c$$', '导数 (tan x)\'=sec²x 的逆运算。高频', '#30D158')}
-                ${formulaCard('(9)', '余割平方', '$$\\int \\frac{1}{\\sin^2 x} \\, dx = \\int \\csc^2 x \\, dx = -\\cot x + c$$', '导数 (-cot x)\'=csc²x 的逆运算', '#30D158')}
+                ${formulaCard('(6)', '余弦→正弦', '$$\\int \\cos x \\, dx = \\sin x + c$$', '导数 (sin x)\'=cos x 的逆运算', 'var(--color-green)')}
+                ${formulaCard('(7)', '正弦→负余弦', '$$\\int \\sin x \\, dx = -\\cos x + c$$', '导数 (-cos x)\'=sin x 的逆运算', 'var(--color-green)')}
+                ${formulaCard('(8)', '正割平方', '$$\\int \\frac{1}{\\cos^2 x} \\, dx = \\int \\sec^2 x \\, dx = \\tan x + c$$', '导数 (tan x)\'=sec²x 的逆运算。高频', 'var(--color-green)')}
+                ${formulaCard('(9)', '余割平方', '$$\\int \\frac{1}{\\sin^2 x} \\, dx = \\int \\csc^2 x \\, dx = -\\cot x + c$$', '导数 (-cot x)\'=csc²x 的逆运算', 'var(--color-green)')}
             </div>
 
             ${groupTitle('fa-rotate', '反三角型', '#BF5AF2')}
@@ -1711,12 +1741,12 @@ function buildIntegralDetail() {
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-star"></i> 特殊积分公式</div>
             <div class="section-desc">这些积分公式不是基本导数的直接逆运算，需要通过换元或分部积分推导。但在考试中经常出现，建议直接记住结果——尤其是 ∫tan x、∫sec x 以及含 a² 的三类公式。</div>
 
-            ${groupTitle('fa-wave-square', '三角函数特殊积分', '#30D158')}
+            ${groupTitle('fa-wave-square', '三角函数特殊积分', 'var(--color-green)')}
             <div class="formula-grid">
-                ${formulaCard('', '正切', '$$\\int \\tan x \\, dx = -\\ln|\\cos x| + c$$', '等价于 ln|sec x|+C，因为 sec x=1/cos x', '#30D158')}
-                ${formulaCard('', '余切', '$$\\int \\cot x \\, dx = \\ln|\\sin x| + c$$', '等价于 -ln|csc x|+C', '#30D158')}
-                ${formulaCard('', '正割', '$$\\int \\sec x \\, dx = \\ln|\\sec x + \\tan x| + c$$', '⭐ 高频考点，结果很有特色', '#30D158')}
-                ${formulaCard('', '余割', '$$\\int \\csc x \\, dx = \\ln|\\csc x - \\cot x| + c$$', '与 ∫sec x 配对记忆', '#30D158')}
+                ${formulaCard('', '正切', '$$\\int \\tan x \\, dx = -\\ln|\\cos x| + c$$', '等价于 ln|sec x|+C，因为 sec x=1/cos x', 'var(--color-green)')}
+                ${formulaCard('', '余切', '$$\\int \\cot x \\, dx = \\ln|\\sin x| + c$$', '等价于 -ln|csc x|+C', 'var(--color-green)')}
+                ${formulaCard('', '正割', '$$\\int \\sec x \\, dx = \\ln|\\sec x + \\tan x| + c$$', '⭐ 高频考点，结果很有特色', 'var(--color-green)')}
+                ${formulaCard('', '余割', '$$\\int \\csc x \\, dx = \\ln|\\csc x - \\cot x| + c$$', '与 ∫sec x 配对记忆', 'var(--color-green)')}
             </div>
 
             ${groupTitle('fa-square-root-variable', '含 a² 的积分', '#FF9F0A')}
@@ -1811,13 +1841,13 @@ function buildTrigonometricDetail() {
                 ${formulaCard('', '余切换商', '$$\\cot x = \\frac{\\cos x}{\\sin x}$$', 'cos 除以 sin', '#0A84FF')}
             </div>
 
-            ${groupTitle('fa-square', '平方关系', '#30D158')}
+            ${groupTitle('fa-square', '平方关系', 'var(--color-green)')}
             <div class="formula-grid">
-                ${formulaCard('', '核心平方', '$$\\sin^2 x + \\cos^2 x = 1$$', '⭐ 三角函数的根基公式', '#30D158')}
-                ${formulaCard('', '正切平方', '$$\\tan^2 x = \\sec^2 x - 1$$', '等价于 1 + tan²x = sec²x', '#30D158')}
-                ${formulaCard('', '余切平方', '$$\\cot^2 x = \\csc^2 x - 1$$', '等价于 1 + cot²x = csc²x', '#30D158')}
-                ${formulaCard('', '正切变形', '$$1 + \\tan^2 x = \\sec^2 x = \\frac{1}{\\cos^2 x}$$', '两边除以 cos² 得到', '#30D158')}
-                ${formulaCard('', '余切变形', '$$1 + \\cot^2 x = \\csc^2 x = \\frac{1}{\\sin^2 x}$$', '两边除以 sin² 得到', '#30D158')}
+                ${formulaCard('', '核心平方', '$$\\sin^2 x + \\cos^2 x = 1$$', '⭐ 三角函数的根基公式', 'var(--color-green)')}
+                ${formulaCard('', '正切平方', '$$\\tan^2 x = \\sec^2 x - 1$$', '等价于 1 + tan²x = sec²x', 'var(--color-green)')}
+                ${formulaCard('', '余切平方', '$$\\cot^2 x = \\csc^2 x - 1$$', '等价于 1 + cot²x = csc²x', 'var(--color-green)')}
+                ${formulaCard('', '正切变形', '$$1 + \\tan^2 x = \\sec^2 x = \\frac{1}{\\cos^2 x}$$', '两边除以 cos² 得到', 'var(--color-green)')}
+                ${formulaCard('', '余切变形', '$$1 + \\cot^2 x = \\csc^2 x = \\frac{1}{\\sin^2 x}$$', '两边除以 sin² 得到', 'var(--color-green)')}
             </div>
 
             ${memoryBox('一个公式衍生所有', '所有三角恒等式的根基只有一个：sin²x + cos²x = 1。两边除以 cos²x → 1 + tan²x = sec²x；两边除以 sin²x → 1 + cot²x = csc²x。再加上倒数关系和商数关系，全部恒等式都能推出来。')}
@@ -1848,10 +1878,10 @@ function buildTrigonometricDetail() {
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-arrow-down-1-9"></i> 降幂扩角公式</div>
             <div class="section-desc">降幂公式从二倍角余弦公式反解得到——把 cos2α 的公式倒过来解出 cos²α 和 sin²α。幂次降低（²→¹），角度扩大（α→2α）。这是积分中处理 sin²x、cos²x 的标准工具。</div>
 
-            ${groupTitle('fa-arrow-down', '降幂公式', '#30D158')}
+            ${groupTitle('fa-arrow-down', '降幂公式', 'var(--color-green)')}
             <div class="formula-grid">
-                ${formulaCard('', 'sin² 降幂', '$$\\sin^2 x = \\frac{1 - \\cos 2x}{2}$$', '由 cos2x = 1-2sin²x 反解', '#30D158')}
-                ${formulaCard('', 'cos² 降幂', '$$\\cos^2 x = \\frac{1 + \\cos 2x}{2}$$', '由 cos2x = 2cos²x-1 反解', '#30D158')}
+                ${formulaCard('', 'sin² 降幂', '$$\\sin^2 x = \\frac{1 - \\cos 2x}{2}$$', '由 cos2x = 1-2sin²x 反解', 'var(--color-green)')}
+                ${formulaCard('', 'cos² 降幂', '$$\\cos^2 x = \\frac{1 + \\cos 2x}{2}$$', '由 cos2x = 2cos²x-1 反解', 'var(--color-green)')}
             </div>
 
             ${memoryBox('积分遇平方 → 先降幂', '⭐ 积分高频考点：遇到 sin²x 或 cos²x 没法直接积分，但降幂后变成 cos2x 的形式，就能直接积分了。标准套路：sin²x/cos²x → 降幂 → ∫cos2x dx → (1/2)sin2x + C。降幂公式不是新公式，是二倍角公式的逆变形。')}
@@ -1878,8 +1908,8 @@ function buildTrigonometricDetail() {
                     $$\\cos x \\cdot \\sec x = 1$$
                     $$\\tan x \\cdot \\cot x = 1$$</div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
-                    <div class="formula-label" style="color:#30D158;">规则二：平方关系</div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <div class="formula-label" style="color:var(--color-green);">规则二：平方关系</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">三个阴影三角形各给出一个平方恒等式：<br>
                     顶部三角（sin, cos）→ sin²+cos²=1<br>
                     左侧三角（tan, sec）→ tan²+1=sec²<br>
@@ -1893,11 +1923,11 @@ function buildTrigonometricDetail() {
                 </div>
             </div>
 
-            ${groupTitle('fa-square', '平方关系汇总', '#30D158')}
+            ${groupTitle('fa-square', '平方关系汇总', 'var(--color-green)')}
             <div class="formula-grid">
-                ${formulaCard('', 'sin² + cos²', '$$\\sin^2 x + \\cos^2 x = 1$$', '顶部三角形', '#30D158')}
-                ${formulaCard('', 'tan² + 1', '$$\\tan^2 x + 1 = \\sec^2 x$$', '左侧三角形', '#30D158')}
-                ${formulaCard('', '1 + cot²', '$$1 + \\cot^2 x = \\csc^2 x$$', '右侧三角形', '#30D158')}
+                ${formulaCard('', 'sin² + cos²', '$$\\sin^2 x + \\cos^2 x = 1$$', '顶部三角形', 'var(--color-green)')}
+                ${formulaCard('', 'tan² + 1', '$$\\tan^2 x + 1 = \\sec^2 x$$', '左侧三角形', 'var(--color-green)')}
+                ${formulaCard('', '1 + cot²', '$$1 + \\cot^2 x = \\csc^2 x$$', '右侧三角形', 'var(--color-green)')}
             </div>
 
             ${groupTitle('fa-link', '导数与积分配对', '#BF5AF2')}
@@ -1944,14 +1974,14 @@ function buildTrigonometricDetail() {
                 </div>
             </div>
 
-            ${groupTitle('fa-check', '典型诱导公式', '#30D158')}
+            ${groupTitle('fa-check', '典型诱导公式', 'var(--color-green)')}
             <div class="formula-grid">
-                ${formulaCard('', 'π - x', '$$\\sin(\\pi - x) = \\sin x$$', '第二象限，sin 为正', '#30D158')}
-                ${formulaCard('', 'π - x', '$$\\cos(\\pi - x) = -\\cos x$$', '第二象限，cos 为负', '#30D158')}
-                ${formulaCard('', '负角', '$$\\sin(-x) = -\\sin x$$', 'sin 为奇函数', '#30D158')}
-                ${formulaCard('', '负角', '$$\\cos(-x) = \\cos x$$', 'cos 为偶函数', '#30D158')}
-                ${formulaCard('', 'π + x', '$$\\sin(\\pi + x) = -\\sin x$$', '第三象限，sin 为负', '#30D158')}
-                ${formulaCard('', 'π + x', '$$\\cos(\\pi + x) = -\\cos x$$', '第三象限，cos 为负', '#30D158')}
+                ${formulaCard('', 'π - x', '$$\\sin(\\pi - x) = \\sin x$$', '第二象限，sin 为正', 'var(--color-green)')}
+                ${formulaCard('', 'π - x', '$$\\cos(\\pi - x) = -\\cos x$$', '第二象限，cos 为负', 'var(--color-green)')}
+                ${formulaCard('', '负角', '$$\\sin(-x) = -\\sin x$$', 'sin 为奇函数', 'var(--color-green)')}
+                ${formulaCard('', '负角', '$$\\cos(-x) = \\cos x$$', 'cos 为偶函数', 'var(--color-green)')}
+                ${formulaCard('', 'π + x', '$$\\sin(\\pi + x) = -\\sin x$$', '第三象限，sin 为负', 'var(--color-green)')}
+                ${formulaCard('', 'π + x', '$$\\cos(\\pi + x) = -\\cos x$$', '第三象限，cos 为负', 'var(--color-green)')}
             </div>
 
             ${memoryBox('八字口诀 = 全部诱导公式', '诱导公式不用死记！八字口诀记住了，所有诱导公式都能现场推。步骤：① 判断 k 是奇还是偶 → 决定函数名变不变；② 把 α 当锐角，判断角在第几象限 → 决定正负号。例如 sin(3π/2 + x)：k=3 奇数 → 函数名变（sin→cos）；3π/2+x 在第四象限 → sin 为负 → 结果 = -cos x。')}
@@ -1986,9 +2016,9 @@ function buildEquationDetail() {
                     <div class="formula-label" style="color:#0A84FF;">方程中出现的最高阶导数的阶数</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$y'$ 是一阶，$y''$ 是二阶。看最高阶导数即可。</div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
+                <div class="formula-card" style="--card-accent:var(--color-green);">
                     <span class="formula-num">通解</span>
-                    <div class="formula-label" style="color:#30D158;">含有任意常数的解</div>
+                    <div class="formula-label" style="color:var(--color-green);">含有任意常数的解</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">几阶就有几个任意常数 $C$。一阶一个 $C$，二阶两个 $C_1, C_2$。</div>
                 </div>
                 <div class="formula-card" style="--card-accent:#FFD60A;">
@@ -2034,15 +2064,15 @@ function buildEquationDetail() {
             </div>
             ${memoryBox('三个易错点', '① $e^{\\ln(\\text{框})} = \\text{框}$ — 指数对抵，别多写一步<br>② $\\int \\frac{1}{x}\\,dx = \\ln|x|$ — 绝对值不能丢<br>③ 加加减减混在一起的一般不可分离，别硬分')}
 
-            ${groupTitle('fa-2', '3.2 一阶线性微分方程（公式法）', '#30D158')}
-            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
-                <div class="formula-label" style="color:#30D158;">识别特征</div>
+            ${groupTitle('fa-2', '3.2 一阶线性微分方程（公式法）', 'var(--color-green)')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
+                <div class="formula-label" style="color:var(--color-green);">识别特征</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$y$ 和 $y'$ 都是一次的，右边有自由项。</div>
-                <div class="formula-label" style="color:#30D158;margin-top:1rem;">标准型</div>
+                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">标准型</div>
                 <div class="formula-block" style="border:none;background:none;padding:0;">
                     $$y' + P(x)\\,y = Q(x)$$
                 </div>
-                <div class="formula-label" style="color:#30D158;margin-top:1rem;">通解公式</div>
+                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">通解公式</div>
                 <div class="formula-block" style="border:none;background:none;padding:0;">
                     $$y = e^{-\\int P(x)\\,dx}\\left[\\int Q(x)\\,e^{\\int P(x)\\,dx}\\,dx + C\\right]$$
                 </div>
@@ -2092,8 +2122,8 @@ function buildEquationDetail() {
                 </div>
             </div>
 
-            ${groupTitle('fa-link', '线性无关性', '#30D158')}
-            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+            ${groupTitle('fa-link', '线性无关性', 'var(--color-green)')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     两个解 $y_1, y_2$ 若 $\\frac{y_1}{y_2} \\neq C$（常数）→ <strong>线性无关</strong>，可组合成通解<br>
                     若 $\\frac{y_1}{y_2} = C$ → <strong>线性相关</strong>，不能直接相加
@@ -2136,12 +2166,12 @@ function buildEquationDetail() {
                 </div>
             </div>
 
-            ${groupTitle('fa-star', '关键：k 值怎么定', '#30D158')}
+            ${groupTitle('fa-star', '关键：k 值怎么定', 'var(--color-green)')}
             <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:1rem;">把右端指数里的 $\\alpha$ 拿去和特征根 $r_1, r_2$ 比较：</div>
             <div class="formula-grid">
-                ${formulaCard('', 'α 不是特征根', '$$k = 0$$', '不重', '#30D158')}
-                ${formulaCard('', 'α 是单根（等于其中一个）', '$$k = 1$$', '重一次', '#30D158')}
-                ${formulaCard('', 'α 是重根（等于两个）', '$$k = 2$$', '重两次', '#30D158')}
+                ${formulaCard('', 'α 不是特征根', '$$k = 0$$', '不重', 'var(--color-green)')}
+                ${formulaCard('', 'α 是单根（等于其中一个）', '$$k = 1$$', '重一次', 'var(--color-green)')}
+                ${formulaCard('', 'α 是重根（等于两个）', '$$k = 2$$', '重两次', 'var(--color-green)')}
             </div>
             ${memoryBox('记忆口诀', '看 $\\alpha$ 对根，$k$ 定 0/1/2；不重 0，单重 1，双重 2。')}
 
@@ -2177,8 +2207,8 @@ function buildEquationDetail() {
                 </div>
             </div>
 
-            ${groupTitle('fa-1', 'Step 1 — 求齐次通解 Y', '#30D158')}
-            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+            ${groupTitle('fa-1', 'Step 1 — 求齐次通解 Y', 'var(--color-green)')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
                 <div class="formula-block" style="border:none;background:none;padding:0;">
                     $$r^2 - 2r - 3 = 0 \\;\\Rightarrow\\; (r-3)(r+1) = 0 \\;\\Rightarrow\\; r_1 = 3,\\; r_2 = -1$$
                     <p style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin:0.5rem 0;">两个不相等实根 → 齐次通解：</p>
@@ -2221,7 +2251,7 @@ function buildEquationDetail() {
                     <tr><td style="padding:0.3rem;">$y''$</td><td style="padding:0.3rem;">$9a$</td><td style="padding:0.3rem;">$12a+9b$</td><td style="padding:0.3rem;">$2a+6b$</td></tr>
                     <tr><td style="padding:0.3rem;">$-2y'$</td><td style="padding:0.3rem;">$-6a$</td><td style="padding:0.3rem;">$-4a-6b$</td><td style="padding:0.3rem;">$-2b$</td></tr>
                     <tr><td style="padding:0.3rem;">$-3y^*$</td><td style="padding:0.3rem;">$-3a$</td><td style="padding:0.3rem;">$-3b$</td><td style="padding:0.3rem;">$0$</td></tr>
-                    <tr style="border-top:1px solid var(--border-medium);font-weight:bold;"><td style="padding:0.3rem;">合计</td><td style="padding:0.3rem;color:#30D158;">$0$ ✓</td><td style="padding:0.3rem;">$8a$</td><td style="padding:0.3rem;">$2a+4b$</td></tr>
+                    <tr style="border-top:1px solid var(--border-medium);font-weight:bold;"><td style="padding:0.3rem;">合计</td><td style="padding:0.3rem;color:var(--color-green);">$0$ ✓</td><td style="padding:0.3rem;">$8a$</td><td style="padding:0.3rem;">$2a+4b$</td></tr>
                     <tr style="font-weight:bold;"><td style="padding:0.3rem;">右端</td><td style="padding:0.3rem;">$0$</td><td style="padding:0.3rem;">$2$</td><td style="padding:0.3rem;">$1$</td></tr>
                 </table>
                 <div class="formula-note" style="font-size:0.85rem;color:var(--accent-yellow-text);margin-top:0.5rem;">$x^2$ 项自动消为 0，说明设对了（否则说明 $k$ 设错）。</div>
@@ -2234,13 +2264,13 @@ function buildEquationDetail() {
                 </div>
             </div>
 
-            ${groupTitle('fa-6', 'Step 6 — 写出特解并组合通解', '#30D158')}
-            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
-                <div class="formula-label" style="color:#30D158;">特解</div>
+            ${groupTitle('fa-6', 'Step 6 — 写出特解并组合通解', 'var(--color-green)')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
+                <div class="formula-label" style="color:var(--color-green);">特解</div>
                 <div class="formula-block" style="border:none;background:none;padding:0;">
                     $$y^* = \\left(\\frac{1}{4}x^2 + \\frac{1}{8}x\\right)e^{3x} = \\frac{x(2x+1)}{8}\\,e^{3x}$$
                 </div>
-                <div class="formula-label" style="color:#30D158;margin-top:0.75rem;">非齐通解 = 齐通解 + 特解</div>
+                <div class="formula-label" style="color:var(--color-green);margin-top:0.75rem;">非齐通解 = 齐通解 + 特解</div>
                 <div class="formula-block" style="border:none;background:none;padding:0;">
                     $$\\boxed{\\,y = C_1 e^{3x} + C_2 e^{-x} + \\frac{x(2x+1)}{8}\\,e^{3x}\\,}$$
                 </div>
@@ -2304,8 +2334,8 @@ function buildEquationDetail() {
                     <div class="formula-label" style="color:#0A84FF;">基础概念</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">通解含 $C$，特解不含 $C$；阶数 = $C$ 的个数</div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
-                    <div class="formula-label" style="color:#30D158;">一阶线性公式</div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <div class="formula-label" style="color:var(--color-green);">一阶线性公式</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">先积 $P$ 得中间量，前负后正套括号，里面积分再加 $C$</div>
                 </div>
                 <div class="formula-card" style="--card-accent:#FFD60A;">
@@ -2361,8 +2391,8 @@ function buildLinearDetail() {
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">口诀：<strong>主对角相乘减副对角相乘</strong>。</div>
             </div>
 
-            ${groupTitle('fa-3', '1.2 三阶行列式（沙路法）', '#30D158')}
-            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+            ${groupTitle('fa-3', '1.2 三阶行列式（沙路法）', 'var(--color-green)')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
                 <div class="formula-block" style="border:none;background:none;padding:0;">
                     $$\\begin{vmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{vmatrix}$$
                 </div>
@@ -2406,9 +2436,9 @@ function buildLinearDetail() {
                     <div class="formula-block" style="border:none;background:none;padding:0;">$$D^T = D$$</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">行与列等价，对行成立的性质对列也成立。</div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
+                <div class="formula-card" style="--card-accent:var(--color-green);">
                     <span class="formula-num">性质 2</span>
-                    <div class="formula-label" style="color:#30D158;">互换变号</div>
+                    <div class="formula-label" style="color:var(--color-green);">互换变号</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">任意两行（列）互换，行列式<strong>变号</strong>。</div>
                 </div>
                 <div class="formula-card" style="--card-accent:#FFD60A;">
@@ -2459,11 +2489,11 @@ function buildLinearDetail() {
                 </div>
             </div>
 
-            ${groupTitle('fa-equals', '3.2 行和相同的行列式', '#30D158')}
-            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
-                <div class="formula-label" style="color:#30D158;">特征</div>
+            ${groupTitle('fa-equals', '3.2 行和相同的行列式', 'var(--color-green)')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
+                <div class="formula-label" style="color:var(--color-green);">特征</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">每一行（或每一列）元素之和为同一常数。</div>
-                <div class="formula-label" style="color:#30D158;margin-top:1rem;">通用解法（5 步）</div>
+                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">通用解法（5 步）</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
                     <strong>Step 1</strong> 把其余各列加到第 1 列<br>
                     <strong>Step 2</strong> 提取第 1 列公因式，该列全变 1<br>
@@ -2471,7 +2501,7 @@ function buildLinearDetail() {
                     <strong>Step 4</strong> 得到接近上三角的形式<br>
                     <strong>Step 5</strong> 必要时调换行序；若出现两列全为 1，重新提公因式
                 </div>
-                <div class="formula-label" style="color:#30D158;margin-top:1rem;">例题</div>
+                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">例题</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     $D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 2 & 3 & 1 \\\\ 3 & 1 & 2 \\end{vmatrix}$（行和均为 6）<br>
                     加列 → 提 6 → 消行 → 展开：<br>
@@ -2526,25 +2556,25 @@ function buildLinearDetail() {
                     <div class="formula-label" style="color:#0A84FF;">$M_{ij}$</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">划去第 $i$ 行第 $j$ 列后剩下的 $(n-1)$ 阶行列式。</div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
+                <div class="formula-card" style="--card-accent:var(--color-green);">
                     <span class="formula-num">代数余子式</span>
-                    <div class="formula-label" style="color:#30D158;">$A_{ij} = (-1)^{i+j} M_{ij}$</div>
+                    <div class="formula-label" style="color:var(--color-green);">$A_{ij} = (-1)^{i+j} M_{ij}$</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$i+j$ 偶数取正，奇数取负（棋盘格）。</div>
                 </div>
             </div>
 
-            ${groupTitle('fa-list-ol', '4.2 拉普拉斯展开定理', '#30D158')}
-            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
-                <div class="formula-label" style="color:#30D158;">按第 $i$ 行展开</div>
+            ${groupTitle('fa-list-ol', '4.2 拉普拉斯展开定理', 'var(--color-green)')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
+                <div class="formula-label" style="color:var(--color-green);">按第 $i$ 行展开</div>
                 <div class="formula-block" style="border:none;background:none;padding:0;">
                     $$D = a_{i1}A_{i1} + a_{i2}A_{i2} + \\cdots + a_{in}A_{in}$$
                 </div>
-                <div class="formula-label" style="color:#30D158;margin-top:1rem;">按第 $j$ 列展开</div>
+                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">按第 $j$ 列展开</div>
                 <div class="formula-block" style="border:none;background:none;padding:0;">
                     $$D = a_{1j}A_{1j} + a_{2j}A_{2j} + \\cdots + a_{nj}A_{nj}$$
                 </div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;">选择策略：优先选 <strong>0 元素最多</strong>的行/列展开，减少计算量。</div>
-                <div class="formula-label" style="color:#30D158;margin-top:1rem;">专升本真题（2025 重庆 · 第 19 题）</div>
+                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">专升本真题（2025 重庆 · 第 19 题）</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
                     求 $D = \\begin{vmatrix} 1 & 2025 & 2025 & 2025 \\\\ 2025 & 1 & 2025 & 2025 \\\\ 2025 & 2025 & 1 & 2025 \\\\ 2025 & 2025 & 2025 & 1 \\end{vmatrix}$<br><br>
                     <strong>Step 1</strong> 行和相同（均为 6076）：加列 → 提公因式 6076<br>
@@ -2606,9 +2636,9 @@ function buildLinearDetail() {
                     <div class="formula-label" style="color:#0A84FF;">二阶三阶</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">主减副</div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
+                <div class="formula-card" style="--card-accent:var(--color-green);">
                     <span class="formula-num">2</span>
-                    <div class="formula-label" style="color:#30D158;">范德蒙德</div>
+                    <div class="formula-label" style="color:var(--color-green);">范德蒙德</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">大下标减小下标，所有差乘起来</div>
                 </div>
                 <div class="formula-card" style="--card-accent:var(--accent-yellow);">
@@ -2684,9 +2714,9 @@ function buildFunctionDetail() {
                     <div class="formula-block" style="border:none;background:none;padding:0;">$$\\frac{A}{B} \\implies B \\neq 0$$</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">分母不能为零</div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
+                <div class="formula-card" style="--card-accent:var(--color-green);">
                     <span class="formula-num">规则 2</span>
-                    <div class="formula-label" style="color:#30D158;">偶次根式</div>
+                    <div class="formula-label" style="color:var(--color-green);">偶次根式</div>
                     <div class="formula-block" style="border:none;background:none;padding:0;">$$\\sqrt[2k]{A} \\implies A \\geq 0$$</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">平方根、四次方根等</div>
                 </div>
@@ -2703,11 +2733,11 @@ function buildFunctionDetail() {
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">sin x, cos x 的值域是 [-1,1]</div>
                 </div>
             </div>
-            ${memoryBox('💡 定义域·专升本真题（2023 山东专升本·高数Ⅰ·第1题）', '求函数 $y = \\ln(1 - 3x)$ 的定义域。<br><br><strong>解</strong>：对数的真数必须严格大于 0：<br>$$1 - 3x > 0 \\implies x < \\frac{1}{3}$$<br>故定义域为 $\\boldsymbol{\\left(-\\infty,\\, \\dfrac{1}{3}\\right)}$。<br><br><span style="color:#30D158;">✅ 真题启示：定义域题是专升本选择题高频第 1 题，逐条列限制条件取交集即可，属于送分题不能丢！</span>')}
+            ${memoryBox('💡 定义域·专升本真题（2023 山东专升本·高数Ⅰ·第1题）', '求函数 $y = \\ln(1 - 3x)$ 的定义域。<br><br><strong>解</strong>：对数的真数必须严格大于 0：<br>$$1 - 3x > 0 \\implies x < \\frac{1}{3}$$<br>故定义域为 $\\boldsymbol{\\left(-\\infty,\\, \\dfrac{1}{3}\\right)}$。<br><br><span style="color:var(--color-green);">✅ 真题启示：定义域题是专升本选择题高频第 1 题，逐条列限制条件取交集即可，属于送分题不能丢！</span>')}
 
             ${memoryBox('💡 多条件交集·进阶例题（四川专升本难度）', '求 $f(x) = \\dfrac{\\sqrt{x+2}}{\\ln(1-x)}$ 的定义域：<br>① 根式：x+2 ≥ 0 → x ≥ -2<br>② 分母 ln(1-x) ≠ 0 → 1-x ≠ 1 → x ≠ 0<br>③ 对数真数：1-x > 0 → x < 1<br>三者取交集：<strong>[-2, 0) ∪ (0, 1)</strong><br><br><span style="color:#FF9F0A;">⚠ 易错点：对数同时有「真数>0」和「做分母时≠1」两个约束，别漏了 ≠0！</span>')}
 
-            ${groupTitle('fa-2', '1.2 求函数的表达式（两类方法）', '#30D158')}
+            ${groupTitle('fa-2', '1.2 求函数的表达式（两类方法）', 'var(--color-green)')}
             <div class="formula-grid">
                 <div class="formula-card" style="--card-accent:#0A84FF;">
                     <div class="formula-label" style="color:#0A84FF;">方法一：换元法</div>
@@ -2722,12 +2752,12 @@ function buildFunctionDetail() {
                         故 $f(x) = \\dfrac{(x+1)^2}{4}$
                     </div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
-                    <div class="formula-label" style="color:#30D158;">方法二：配凑法</div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <div class="formula-label" style="color:var(--color-green);">方法二：配凑法</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
                         本质是凑：$f(\\square) = A$，想办法把右边的 $A$ 写成含 $\\square$ 的式子，直接看出 $f(x)$ 的形式。
                     </div>
-                    <div class="formula-label" style="color:#30D158;margin-top:1rem;">例题</div>
+                    <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">例题</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                         已知 $f\\!\\left(x + \\dfrac{1}{x}\\right) = x^2 + \\dfrac{1}{x^2}$：<br>
                         配凑：右边 $= \\left(x+\\dfrac{1}{x}\\right)^2 - 2$<br>
@@ -2769,8 +2799,8 @@ function buildFunctionDetail() {
                         $|\\sin x| \\leq 1$，$|\\cos x| \\leq 1$，$|\\arctan x| < \\dfrac{\\pi}{2}$
                     </div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
-                    <div class="formula-label" style="color:#30D158;">特性 3：周期性</div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <div class="formula-label" style="color:var(--color-green);">特性 3：周期性</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
                         $f(x+T) = f(x)$，$T$ 为周期。<br>
                         $\sin x, \\cos x$ 周期 $2\\pi$；$\tan x, \\cot x$ 周期 $\\pi$。
@@ -2786,7 +2816,7 @@ function buildFunctionDetail() {
             </div>
             ${memoryBox('奇偶性友好提醒', '判断奇偶性第一步永远是先看定义域是否关于原点对称！如果定义域不对称（比如 [0, +∞)），直接非奇非偶。经典：$f(x)=x^2$ 在 $[0,+\\infty)$ 上非奇非偶，在 $\\mathbb{R}$ 上才是偶函数。')}
 
-            ${memoryBox('💡 专升本真题（2024 四川专升本·第1题）· 奇偶性+有界性综合', '函数 $y = \\dfrac{1}{1 + x^2}$ 是（ ）。<br>A. 有界奇函数　B. 有界偶函数　C. 无界奇函数　D. 无界偶函数<br><br><strong>解</strong>：<br>① <strong>判奇偶</strong>：$f(-x) = \\dfrac{1}{1+(-x)^2} = \\dfrac{1}{1+x^2} = f(x)$ → 偶函数。<br>② <strong>判有界</strong>：$1 + x^2 \\geq 1$，故 $0 < \\dfrac{1}{1+x^2} \\leq 1$ → 有界。<br>∴ 选 <strong>B</strong>。<br><br><span style="color:#30D158;">✅ 真题启示：四川专升本第 1 题常考「四大特性综合判断」，先判奇偶再判有界，两步走稳拿分。</span>')}
+            ${memoryBox('💡 专升本真题（2024 四川专升本·第1题）· 奇偶性+有界性综合', '函数 $y = \\dfrac{1}{1 + x^2}$ 是（ ）。<br>A. 有界奇函数　B. 有界偶函数　C. 无界奇函数　D. 无界偶函数<br><br><strong>解</strong>：<br>① <strong>判奇偶</strong>：$f(-x) = \\dfrac{1}{1+(-x)^2} = \\dfrac{1}{1+x^2} = f(x)$ → 偶函数。<br>② <strong>判有界</strong>：$1 + x^2 \\geq 1$，故 $0 < \\dfrac{1}{1+x^2} \\leq 1$ → 有界。<br>∴ 选 <strong>B</strong>。<br><br><span style="color:var(--color-green);">✅ 真题启示：四川专升本第 1 题常考「四大特性综合判断」，先判奇偶再判有界，两步走稳拿分。</span>')}
 
             ${groupTitle('fa-rotate', '1.5 反函数求解四步走', '#5AC8FA')}
             <div class="formula-card chapter-flow-card" style="--card-accent:#5AC8FA;">
@@ -2834,8 +2864,8 @@ function buildFunctionDetail() {
                         $$\\lim_{x \\to x_0} f(x) = A \\iff \\lim_{x \\to x_0^-} f(x) = \\lim_{x \\to x_0^+} f(x) = A$$
                     </div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
-                    <div class="formula-label" style="color:#30D158;">四则运算法则</div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <div class="formula-label" style="color:var(--color-green);">四则运算法则</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
                         设 $\\lim f = A$，$\\lim g = B$（极限都存在）：<br>
                         $\\lim(f \\pm g) = A \\pm B$<br>
@@ -2859,7 +2889,7 @@ function buildFunctionDetail() {
                         <td style="padding:0.5rem;">洛必达 / 等价无穷小 / 因式分解</td>
                     </tr>
                     <tr style="border-bottom:1px solid var(--border-soft);">
-                        <td style="padding:0.5rem;font-weight:700;color:#30D158;">$\\dfrac{\\infty}{\\infty}$ 型</td>
+                        <td style="padding:0.5rem;font-weight:700;color:var(--color-green);">$\\dfrac{\\infty}{\\infty}$ 型</td>
                         <td style="padding:0.5rem;">分子分母都 → ∞</td>
                         <td style="padding:0.5rem;">抓大头 / 洛必达 / 除以最大次</td>
                     </tr>
@@ -2912,16 +2942,16 @@ function buildFunctionDetail() {
             </div>
             ${memoryBox('友好提醒：加减关系慎用等价！', '等价无穷小在「乘除关系」可以直接替换；「加减关系」一般不能直接替——除非你非常熟练，知道高阶项抵消后没问题。专升本稳拿分建议：加减不要直接等价，先处理成乘除形式再替。')}
 
-            ${groupTitle('fa-2', '2.4 $\\dfrac{\\infty}{\\infty}$ 型：抓大头', '#30D158')}
-            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
-                <div class="formula-label" style="color:#30D158;">抓大头口诀</div>
+            ${groupTitle('fa-2', '2.4 $\\dfrac{\\infty}{\\infty}$ 型：抓大头', 'var(--color-green)')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
+                <div class="formula-label" style="color:var(--color-green);">抓大头口诀</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
                     $x \\to \\infty$ 时，只看分子分母最高次项：<br>
                     ① 分子最高次 <strong>=</strong> 分母最高次 → 极限 = <strong>最高次系数之比</strong><br>
                     ② 分子最高次 <strong><</strong> 分母最高次 → 极限 = <strong>0</strong><br>
                     ③ 分子最高次 <strong>></strong> 分母最高次 → 极限 = <strong>∞（不存在）</strong>
                 </div>
-                <div class="formula-label" style="color:#30D158;margin-top:1rem;">例题（2023 山东专升本难度）</div>
+                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">例题（2023 山东专升本难度）</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     $I = \\lim\\limits_{x \\to \\infty} \\dfrac{3x^3 - 2x + 1}{5x^3 + x^2 - 7}$<br>
                     分子最高次 $x^3$ 系数 3，分母最高次 $x^3$ 系数 5 → 抓大头：<br>
@@ -3041,10 +3071,10 @@ function buildFunctionDetail() {
 
                 <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">③ 高阶等价无穷小（$x^3$ 型，带符号！）</div>
                 <div class="formula-grid" style="margin:0.5rem 0;">
-                    <div style="padding:0.5rem;">$x - \\sin x \\sim \\dfrac{1}{6}x^3$（<span style="color:#30D158;">正</span>）</div>
+                    <div style="padding:0.5rem;">$x - \\sin x \\sim \\dfrac{1}{6}x^3$（<span style="color:var(--color-green);">正</span>）</div>
                     <div style="padding:0.5rem;">$x - \\arcsin x \\sim -\\dfrac{1}{6}x^3$（<span style="color:#FF3B30;">负</span>）</div>
                     <div style="padding:0.5rem;">$x - \\tan x \\sim -\\dfrac{1}{3}x^3$（<span style="color:#FF3B30;">负</span>）</div>
-                    <div style="padding:0.5rem;">$x - \\arctan x \\sim \\dfrac{1}{3}x^3$（<span style="color:#30D158;">正</span>）</div>
+                    <div style="padding:0.5rem;">$x - \\arctan x \\sim \\dfrac{1}{3}x^3$（<span style="color:var(--color-green);">正</span>）</div>
                 </div>
 
                 <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">④ 特殊情况：当 $x \\to 1$ 时</div>
@@ -3054,7 +3084,7 @@ function buildFunctionDetail() {
 
                 <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">⑤ 对数 / 根号型（$x \\to 0$ 时）</div>
                 <div class="formula-grid" style="margin:0.5rem 0;">
-                    <div style="padding:0.5rem;">$x - \\ln(1+x) \\sim \\dfrac{1}{2}x^2$（<span style="color:#30D158;">正</span>，对数二次型）</div>
+                    <div style="padding:0.5rem;">$x - \\ln(1+x) \\sim \\dfrac{1}{2}x^2$（<span style="color:var(--color-green);">正</span>，对数二次型）</div>
                     <div style="padding:0.5rem;">$\\ln(1+x) - x \\sim -\\dfrac{1}{2}x^2$（<span style="color:#FF3B30;">负</span>，对数二次型）</div>
                     <div style="padding:0.5rem;">$1 - \\sqrt{1+\\alpha x} \\sim -\\dfrac{\\alpha}{2}x$（<span style="color:#FF3B30;">负</span>，根号型）</div>
                 </div>
@@ -3076,7 +3106,7 @@ function buildFunctionDetail() {
                 </div>
             </div>
 
-            ${groupTitle('fa-sigma', '3.3 方法：等差/等比数列求和', '#30D158')}
+            ${groupTitle('fa-sigma', '3.3 方法：等差/等比数列求和', 'var(--color-green)')}
             <div class="formula-grid">
                 <div class="formula-card" style="--card-accent:#FF9F0A;">
                     <div class="formula-label" style="color:#FF9F0A;">等差数列求和</div>
@@ -3084,8 +3114,8 @@ function buildFunctionDetail() {
                         $$S_n = \\frac{n(a_1 + a_n)}{2} = n a_1 + \\frac{n(n-1)}{2}d$$
                     </div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
-                    <div class="formula-label" style="color:#30D158;">等比数列求和</div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <div class="formula-label" style="color:var(--color-green);">等比数列求和</div>
                     <div class="formula-block" style="border:none;background:none;padding:0;">
                         $$S_n = \\frac{a_1(1-q^n)}{1-q} \\quad (q \\neq 1)$$
                     </div>
@@ -3127,7 +3157,7 @@ function buildFunctionDetail() {
                         已知 $\\lim\\limits_{x\\to\\infty} \\dfrac{ax^3 + x^2 + 1}{2x^3 - x + 1} = 3$，求 $a$。<br>
                         抓大头：分子分母最高次<strong>同为 3 次</strong> → 极限 = 最高次系数之比。<br>
                         $\\dfrac{a}{2} = 3 \\implies \\boldsymbol{a = 6}$<br><br>
-                        <span style="color:#30D158;">✅ 口诀：次同系数比，次分低→0，次分高→∞（不存在）。</span>
+                        <span style="color:var(--color-green);">✅ 口诀：次同系数比，次分低→0，次分高→∞（不存在）。</span>
                     </div>
                 </div>
                 <div class="formula-card" style="--card-accent:${C};">
@@ -3149,10 +3179,10 @@ function buildFunctionDetail() {
                 </div>
             </div>
 
-            ${groupTitle('fa-wind', '3.6 无穷小与无穷大', '#30D158')}
+            ${groupTitle('fa-wind', '3.6 无穷小与无穷大', 'var(--color-green)')}
             <div class="formula-grid">
-                <div class="formula-card" style="--card-accent:#30D158;">
-                    <div class="formula-label" style="color:#30D158;">定义</div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <div class="formula-label" style="color:var(--color-green);">定义</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
                         无穷小量：极限结果为 0（不是很小的数！）<br>
                         无穷大量：极限结果为 ∞（不是很大的数！）<br>
@@ -3188,8 +3218,8 @@ function buildFunctionDetail() {
                     <div class="formula-block" style="border:none;background:none;padding:0;">$$\\lim \\frac{\\beta}{\\alpha} = C \\neq 0$$</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">趋于 0 的速度相当。<br>例：$\\lim_{x\\to 0} \\dfrac{1-\\cos x}{x^2} = \\dfrac{1}{2}$，故 $1-\\cos x$ 与 $x^2$ 同阶。</div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
-                    <div class="formula-label" style="color:#30D158;">等价无穷小</div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <div class="formula-label" style="color:var(--color-green);">等价无穷小</div>
                     <div class="formula-block" style="border:none;background:none;padding:0;">$$\\lim \\frac{\\beta}{\\alpha} = 1$$</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">趋于 0 的速度相同，记 $\\beta \\sim \\alpha$。<br>例：$\\lim_{x\\to 0} \\dfrac{\\sin x}{x} = 1$，$\\sin x \\sim x$。</div>
                 </div>
@@ -3206,7 +3236,7 @@ function buildFunctionDetail() {
             </div>
             ${memoryBox('友好记忆：分子快 = 高阶，分子慢 = 低阶', '速度赛跑：分子更快归零 → 结果 0 → 高阶；分子归零更慢 → 结果 ∞ → 低阶。比较「谁更快到 0」即可。<br>常考题型：① 比较阶；② 指出某无穷小的阶数（与 $x^k$ 比较定 $k$）；③ 已知阶反求参数。')}
 
-            ${memoryBox('💡 专升本真题（2024 四川专升本·第2题）· 等价无穷小选择题', '当 $x \\to 0$ 时，下列与 $\\dfrac{x^3}{2}$ 等价的是（ ）。<br>A. $x \\sin x^2$　B. $x(1 - \\cos x)$　C. $\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right)$　D. $e^{x^2} - 1$<br><br><strong>逐项化简（$x \\to 0$ 时用等价）：</strong><br><table style="width:100%;border-collapse:collapse;margin:0.5rem 0;font-size:0.85rem;color:var(--text-secondary);"><thead><tr style="border-bottom:1px solid var(--border-medium);"><th style="padding:0.35rem 0.5rem;text-align:left;width:12%;">选项</th><th style="padding:0.35rem 0.5rem;text-align:left;">等价化简</th><th style="padding:0.35rem 0.5rem;text-align:center;width:28%;">是否等于 $\\dfrac{x^3}{2}$</th></tr></thead><tbody><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>A</strong></td><td style="padding:0.35rem 0.5rem;">$x \\cdot \\sin x^2 \\sim x \\cdot x^2 = x^3$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（缺 $\\dfrac{1}{2}$）</td></tr><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>B</strong></td><td style="padding:0.35rem 0.5rem;">$x(1 - \\cos x) \\sim x \\cdot \\dfrac{x^2}{2} = \\dfrac{x^3}{2}$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#30D158;"><strong>✓</strong></td></tr><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>C</strong></td><td style="padding:0.35rem 0.5rem;">$\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right) \\sim \\dfrac{x^2}{2}$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（$x^2$ 级，非 $x^3$）</td></tr><tr><td style="padding:0.35rem 0.5rem;"><strong>D</strong></td><td style="padding:0.35rem 0.5rem;">$e^{x^2} - 1 \\sim x^2$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（$x^2$ 级，非 $x^3$）</td></tr></tbody></table>∴ 选 <strong>B</strong>。<br><br><span style="color:#30D158;">✅ 真题启示：等价无穷小选择题关键 = 逐项化简到最简幂次，再对比「阶数 + 系数」，两者都要对上才叫等价。</span>')}
+            ${memoryBox('💡 专升本真题（2024 四川专升本·第2题）· 等价无穷小选择题', '当 $x \\to 0$ 时，下列与 $\\dfrac{x^3}{2}$ 等价的是（ ）。<br>A. $x \\sin x^2$　B. $x(1 - \\cos x)$　C. $\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right)$　D. $e^{x^2} - 1$<br><br><strong>逐项化简（$x \\to 0$ 时用等价）：</strong><br><table style="width:100%;border-collapse:collapse;margin:0.5rem 0;font-size:0.85rem;color:var(--text-secondary);"><thead><tr style="border-bottom:1px solid var(--border-medium);"><th style="padding:0.35rem 0.5rem;text-align:left;width:12%;">选项</th><th style="padding:0.35rem 0.5rem;text-align:left;">等价化简</th><th style="padding:0.35rem 0.5rem;text-align:center;width:28%;">是否等于 $\\dfrac{x^3}{2}$</th></tr></thead><tbody><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>A</strong></td><td style="padding:0.35rem 0.5rem;">$x \\cdot \\sin x^2 \\sim x \\cdot x^2 = x^3$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（缺 $\\dfrac{1}{2}$）</td></tr><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>B</strong></td><td style="padding:0.35rem 0.5rem;">$x(1 - \\cos x) \\sim x \\cdot \\dfrac{x^2}{2} = \\dfrac{x^3}{2}$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:var(--color-green);"><strong>✓</strong></td></tr><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>C</strong></td><td style="padding:0.35rem 0.5rem;">$\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right) \\sim \\dfrac{x^2}{2}$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（$x^2$ 级，非 $x^3$）</td></tr><tr><td style="padding:0.35rem 0.5rem;"><strong>D</strong></td><td style="padding:0.35rem 0.5rem;">$e^{x^2} - 1 \\sim x^2$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（$x^2$ 级，非 $x^3$）</td></tr></tbody></table>∴ 选 <strong>B</strong>。<br><br><span style="color:var(--color-green);">✅ 真题启示：等价无穷小选择题关键 = 逐项化简到最简幂次，再对比「阶数 + 系数」，两者都要对上才叫等价。</span>')}
 
             ${groupTitle('fa-left-right', '3.8 专升本仅以下 4 种情况需要分左右极限', '#5AC8FA')}
             <div class="formula-grid">
@@ -3214,8 +3244,8 @@ function buildFunctionDetail() {
                     <div class="formula-label" style="color:#0A84FF;">① 分段函数的分段点</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">分段点处左右表达式不同，必须分别求 $x \\to x_0^-$ 和 $x \\to x_0^+$。</div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
-                    <div class="formula-label" style="color:#30D158;">② $\\arctan \\infty$ 型</div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <div class="formula-label" style="color:var(--color-green);">② $\\arctan \\infty$ 型</div>
                     <div class="formula-block" style="border:none;background:none;padding:0;">
                         $$\\lim_{x \\to +\\infty} \\arctan x = \\frac{\\pi}{2} \\quad \\lim_{x \\to -\\infty} \\arctan x = -\\frac{\\pi}{2}$$
                     </div>
@@ -3263,7 +3293,7 @@ function buildFunctionDetail() {
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
                     <strong>第一类间断点</strong>：左右极限<strong>都存在</strong><br>
                     ├─ <span style="color:#0A84FF;">可去间断点</span>：左右极限<strong>相等</strong>，但 ≠ $f(x_0)$ 或 $f(x_0)$ 无定义<br>
-                    └─ <span style="color:#30D158;">跳跃间断点</span>：左右极限<strong>不相等</strong><br><br>
+                    └─ <span style="color:var(--color-green);">跳跃间断点</span>：左右极限<strong>不相等</strong><br><br>
                     <strong>第二类间断点</strong>：左右极限至少有一个<strong>不存在</strong><br>
                     ├─ <span style="color:#FF9F0A;">无穷间断点</span>：至少一侧极限 = ∞<br>
                     └─ <span style="color:#BF5AF2;">震荡间断点</span>：至少一侧极限在某区间震荡（如 $\\sin(1/x)$ 当 $x\\to 0$）
@@ -3283,12 +3313,12 @@ function buildFunctionDetail() {
                 </div>
             </div>
 
-            ${groupTitle('fa-2', '4.4 跳跃间断点', '#30D158')}
-            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+            ${groupTitle('fa-2', '4.4 跳跃间断点', 'var(--color-green)')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     核心特征：<strong>左右极限不相等</strong>——图像上看起来像「跳了一步」，无法通过重新定义修补。
                 </div>
-                <div class="formula-label" style="color:#30D158;margin-top:1rem;">例题</div>
+                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">例题</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     $f(x) = \\begin{cases} x-1, & x < 0 \\\\ 0, & x = 0 \\\\ x+1, & x > 0 \\end{cases}$<br>
                     $\\lim_{x\\to 0^-} f(x) = -1$，$\\lim_{x\\to 0^+} f(x) = +1$ → 左右不相等 → <strong>跳跃间断点</strong>。
@@ -3375,8 +3405,8 @@ function buildFunctionDetail() {
                     <div class="formula-label" style="color:#0A84FF;">分数</div>
                     <div class="formula-block" style="border:none;background:none;padding:0;">$$B \\neq 0$$</div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
-                    <div class="formula-label" style="color:#30D158;">偶次根式</div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <div class="formula-label" style="color:var(--color-green);">偶次根式</div>
                     <div class="formula-block" style="border:none;background:none;padding:0;">$$A \\geq 0$$</div>
                 </div>
                 <div class="formula-card" style="--card-accent:${C};">
@@ -3418,8 +3448,8 @@ function buildFunctionDetail() {
                 <div class="formula-card" style="--card-accent:#0A84FF;">
                     <div class="formula-label" style="color:#0A84FF;">分段点</div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
-                    <div class="formula-label" style="color:#30D158;">arctan ∞</div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <div class="formula-label" style="color:var(--color-green);">arctan ∞</div>
                     <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);">+∞→π/2, −∞→−π/2</div>
                 </div>
                 <div class="formula-card" style="--card-accent:#FF9F0A;">
@@ -3446,7 +3476,7 @@ function buildFunctionDetail() {
                 </div>
             </div>
 
-            ${groupTitle('fa-arrows-alt', '⑥ 渐近线口诀', '#30D158')}
+            ${groupTitle('fa-arrows-alt', '⑥ 渐近线口诀', 'var(--color-green)')}
             <div class="formula-grid">
                 <div class="formula-card" style="--card-accent:#5AC8FA;">
                     <div class="formula-label" style="color:#5AC8FA;">水平</div>
@@ -3465,8 +3495,8 @@ function buildFunctionDetail() {
                     <div class="formula-label" style="color:#0A84FF;">1^∞ 公式</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">有 1+ 直接 e^{αβ}，没有先减 1 再乘</div>
                 </div>
-                <div class="formula-card" style="--card-accent:#30D158;">
-                    <div class="formula-label" style="color:#30D158;">抓大头</div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <div class="formula-label" style="color:var(--color-green);">抓大头</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">次同系数比，次分低→0，次分高→∞</div>
                 </div>
                 <div class="formula-card" style="--card-accent:${C};">
@@ -3547,15 +3577,15 @@ function buildOverviewDetail() {
                     <div style="margin-top:0.75rem;color:#BF5AF2;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
                 </div>
 
-                <div class="formula-card" style="--card-accent:#30D158;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('integral'),450)">
-                    <div class="formula-label" style="color:#30D158;"><i class="fa-solid fa-infinity"></i> 积分模块</div>
+                <div class="formula-card" style="--card-accent:var(--color-green);cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('integral'),450)">
+                    <div class="formula-label" style="color:var(--color-green);"><i class="fa-solid fa-infinity"></i> 积分模块</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                         <strong>定义</strong>：∫f(x)dx = F(x)+C<br>
                         <strong>公式数</strong>：常见11条 + 特殊8条<br>
                         <strong>核心</strong>：导数的逆运算，联动记忆<br>
                         <strong>方法</strong>：凑微分、换元、分部积分
                     </div>
-                    <div style="margin-top:0.75rem;color:#30D158;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
+                    <div style="margin-top:0.75rem;color:var(--color-green);font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
                 </div>
 
                 <div class="formula-card" style="--card-accent:#FF3B30;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('trigonometric'),450)">
@@ -3635,7 +3665,7 @@ function generateHexagonSVG() {
     // 6个顶点位置 (flat-top hexagon)
     const vertices = [
         { name: 'sin',  x: cx - r * 0.866, y: cy - r * 0.5,  color: '#0A84FF' },  // 左上
-        { name: 'cos',  x: cx + r * 0.866, y: cy - r * 0.5,  color: '#30D158' },  // 右上
+        { name: 'cos',  x: cx + r * 0.866, y: cy - r * 0.5,  color: 'var(--color-green)' },  // 右上
         { name: 'cot',  x: cx + r * 0.866, y: cy + r * 0.5,  color: '#FFD60A' },  // 右下
         { name: 'csc',  x: cx,             y: cy + r,        color: '#FF9F0A' },  // 正下
         { name: 'sec',  x: cx - r * 0.866, y: cy + r * 0.5,  color: '#BF5AF2' },  // 左下
@@ -3687,11 +3717,11 @@ function generateHexagonSVG() {
 
     // 阴影三角形（平方关系）
     // 顶部三角: sin(0), cos(1), 中心
-    svg += `<polygon points="${vertices[0].x},${vertices[0].y} ${vertices[1].x},${vertices[1].y} ${cx},${cy}" fill="rgba(48,209,88,0.06)" stroke="rgba(48,209,88,0.15)" stroke-width="1"/>`;
+    svg += `<polygon points="${vertices[0].x},${vertices[0].y} ${vertices[1].x},${vertices[1].y} ${cx},${cy}" fill="var(--color-green-06)" stroke="var(--color-green-15)" stroke-width="1"/>`;
     // 左侧三角: tan(5), sec(4), 中心
-    svg += `<polygon points="${vertices[5].x},${vertices[5].y} ${vertices[4].x},${vertices[4].y} ${cx},${cy}" fill="rgba(48,209,88,0.06)" stroke="rgba(48,209,88,0.15)" stroke-width="1"/>`;
+    svg += `<polygon points="${vertices[5].x},${vertices[5].y} ${vertices[4].x},${vertices[4].y} ${cx},${cy}" fill="var(--color-green-06)" stroke="var(--color-green-15)" stroke-width="1"/>`;
     // 右侧三角: cot(2), csc(3), 中心
-    svg += `<polygon points="${vertices[2].x},${vertices[2].y} ${vertices[3].x},${vertices[3].y} ${cx},${cy}" fill="rgba(48,209,88,0.06)" stroke="rgba(48,209,88,0.15)" stroke-width="1"/>`;
+    svg += `<polygon points="${vertices[2].x},${vertices[2].y} ${vertices[3].x},${vertices[3].y} ${cx},${cy}" fill="var(--color-green-06)" stroke="var(--color-green-15)" stroke-width="1"/>`;
 
     // 六边形边框
     let hexPath = '';
