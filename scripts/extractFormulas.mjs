@@ -100,17 +100,20 @@ function inferModule(color) {
   return 'unknown';
 }
 
+// 章节顺序（用于 MODULES 输出排序，按学习路径）
+const MODULE_ORDER = ['limit', 'deriv', 'integral', 'trig', 'diffEq', 'linalg'];
+
 // 用 buildXxxDetail 的位置切分 cards
 function splitBySection(src, cards) {
   // 找每个 buildXxxDetail 函数的开始位置
+  // 注：导数与微分已合并为 buildDerivativeDetail，微分公式归入 deriv 模块
   const sections = [
-    { name: 'derivative', title: '导数', module: 'deriv', color: '#0A84FF' },
-    { name: 'differential', title: '微分', module: 'diff', color: '#BF5AF2' },
+    { name: 'function', title: '函数·极限·连续', module: 'limit', color: '#FFD60A' },
+    { name: 'derivative', title: '导数与微分', module: 'deriv', color: '#0A84FF' },
     { name: 'integral', title: '积分', module: 'integral', color: '#30D158' },
     { name: 'trigonometric', title: '三角函数', module: 'trig', color: '#FF3B30' },
     { name: 'equation', title: '微分方程', module: 'diffEq', color: '#FF9F0A' },
     { name: 'linear', title: '线性代数', module: 'linalg', color: '#5AC8FA' },
-    { name: 'function', title: '函数·极限·连续', module: 'limit', color: '#FFD60A' },
   ];
 
   // 找每个 formulaCard 在 src 中的位置（排除函数定义行）
@@ -180,12 +183,18 @@ const formulaList = Object.values(byModule).flatMap((m) =>
   }))
 );
 
-const modulesList = Object.values(byModule).map((m) => ({
-  id: m.id,
-  title: m.title,
-  color: m.color,
-  count: m.formulas.length,
-}));
+const modulesList = Object.values(byModule)
+  .map((m) => ({
+    id: m.id,
+    title: m.title,
+    color: m.color,
+    count: m.formulas.length,
+  }))
+  .sort((a, b) => {
+    const ia = MODULE_ORDER.indexOf(a.id);
+    const ib = MODULE_ORDER.indexOf(b.id);
+    return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+  });
 
 // JS 字符串字面量转义：用单引号包裹字符串，转义反斜杠 / 单引号 / 控制字符
 // 这样 KaTeX 拿到的就是原始的 LaTeX 文本，不会被双重转义
@@ -203,7 +212,7 @@ const lines = [];
 lines.push('// 公式数据（自动从 src/index.html 抽提，勿手改）');
 lines.push('// 由 scripts/extractFormulas.mjs 生成');
 lines.push('// 字段：module / id / num / label / formula / note / color');
-lines.push('// module ∈ { deriv, diff, integral, trig, diffEq, linalg, limit }');
+lines.push('// module ∈ { limit, deriv, integral, trig, diffEq, linalg }');
 lines.push('');
 lines.push('export const FORMULAS = [');
 for (const f of formulaList) {

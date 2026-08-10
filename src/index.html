@@ -515,6 +515,164 @@
         [data-theme="light"] .memory-box-title { color: #8a5e00; }
         .memory-box-text { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; }
 
+        /* 例题展示框 */
+        /* ========== 例题翻转卡片 ========== */
+        .ex-flip-card {
+            position: relative;
+            perspective: 1600px;
+            margin: 1.25rem 0;
+            min-height: 180px;
+            cursor: pointer;
+        }
+        .ex-flip-inner {
+            position: relative;
+            width: 100%;
+            min-height: 180px;
+            transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
+        }
+        .ex-flip-card.flipped .ex-flip-inner { transform: rotateY(180deg); }
+        .ex-flip-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-soft);
+            border-left: 3px solid #0A84FF;
+        }
+        .ex-flip-face::-webkit-scrollbar { width: 0; height: 0; }
+        .ex-flip-back {
+            transform: rotateY(180deg);
+            border-left-color: #30D158;
+            background: var(--bg-elevated-strong);
+        }
+        .ex-flip-card .ex-title {
+            font-weight: 700;
+            font-size: 0.88rem;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .ex-flip-front .ex-title { color: #0A84FF; }
+        .ex-flip-back .ex-title { color: #30D158; }
+        .ex-flip-card .ex-content {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.75;
+        }
+        .ex-flip-card .ex-content p { margin: 0.4rem 0; }
+        .ex-flip-card .ex-content .ex-answer {
+            color: var(--color-green);
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+        .ex-flip-card .ex-content blockquote {
+            border-left: 3px solid rgba(255,214,10,0.4);
+            background: rgba(255,214,10,0.06);
+            padding: 0.5rem 0.9rem;
+            margin: 0.6rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .ex-flip-hint {
+            text-align: right;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 0.8rem;
+            font-style: italic;
+        }
+        [data-theme="light"] .ex-flip-face { background: rgba(0,0,0,0.02); }
+        [data-theme="light"] .ex-flip-back { background: rgba(0,0,0,0.04); }
+
+        /* 全部翻转工具栏 */
+        .ex-flip-toolbar {
+            display: flex;
+            justify-content: flex-end;
+            margin: 0.5rem 0 1rem;
+        }
+        .ex-flip-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1.1rem;
+            border-radius: 22px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-soft);
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .ex-flip-btn:hover {
+            background: var(--bg-elevated-hover);
+            border-color: var(--border-medium);
+            transform: translateY(-1px);
+        }
+        .ex-flip-btn:active { transform: scale(0.96); }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .ex-flip-card, .ex-flip-inner { min-height: 150px; }
+            .ex-flip-face { padding: 1rem; }
+            .ex-flip-card .ex-content { font-size: 0.82rem; line-height: 1.7; }
+            .ex-flip-toolbar { justify-content: center; }
+        }
+
+        /* 知识地图关系图 */
+        .knowledge-map, .diff-geometry {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 1.5rem 1rem;
+            margin: 1.5rem 0;
+        }
+        .km-node {
+            opacity: 0;
+            animation: kmAppear 0.6s ease forwards;
+        }
+        @keyframes kmAppear {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .km-flow {
+            stroke-dashoffset: 20;
+            animation: kmFlow 1.5s linear infinite;
+        }
+        @keyframes kmFlow {
+            to { stroke-dashoffset: 0; }
+        }
+        .km-bi-flow {
+            stroke-dasharray: 8 4;
+            animation: kmBiFlow 1s linear infinite;
+        }
+        @keyframes kmBiFlow {
+            to { stroke-dashoffset: -12; }
+        }
+        .dg-curve {
+            stroke-dasharray: 600;
+            stroke-dashoffset: 600;
+            animation: dgDraw 2s ease forwards 0.3s;
+        }
+        @keyframes dgDraw {
+            to { stroke-dashoffset: 0; }
+        }
+        .dg-tangent {
+            opacity: 0;
+            animation: dgFadeIn 0.8s ease forwards 1.8s;
+        }
+        @keyframes dgFadeIn {
+            to { opacity: 1; }
+        }
+
         @media (max-width: 520px) {
             .chapter-flow-step { grid-template-columns: 1fr; gap: 0.2rem; }
         }
@@ -1096,8 +1254,7 @@
         </section>
         <section class="learning-path" aria-label="高数知识路径">
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-blue)" onclick="enterDetail('function')"><h2>函数 · 极限 · 连续</h2><p>定义域、极限方法、连续与间断点，是后续变化的坐标系。</p><span class="path-meta">22 条内容 · 先修模块</span></button></article>
-            <article class="path-row"><button class="path-node" style="--node-color:var(--path-violet)" onclick="enterDetail('derivative')"><h2>导数</h2><p>从瞬时变化率到切线斜率，建立“变化”的基本语言。</p><span class="path-meta">18 条公式 · 核心工具</span></button></article>
-            <article class="path-row"><button class="path-node" style="--node-color:#a887ad" onclick="enterDetail('differential')"><h2>微分</h2><p>导数乘上 dx。把变化率延伸为一阶近似的表达。</p><span class="path-meta">16 条公式 · 导数联动</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:var(--path-violet)" onclick="enterDetail('derivative')"><h2>导数与微分</h2><p>从瞬时变化率到切线斜率，可导 ⟺ 可微，一元函数中二者本质相通。</p><span class="path-meta">34 条公式 · 核心工具</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-green)" onclick="enterDetail('integral')"><h2>积分</h2><p>把导数倒过来读。基本公式与三角积分是复习主干。</p><span class="path-meta">19 条公式 · 导数的逆运算</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-coral)" onclick="enterDetail('trigonometric')"><h2>三角函数</h2><p>关系式贯穿导数和积分，用主干公式组织而不是零散背诵。</p><span class="path-meta">41 条公式 · 关系网络</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-amber)" onclick="enterDetail('equation')"><h2>微分方程</h2><p>将导数与积分放进同一道题，进入一阶与二阶方程训练。</p><span class="path-meta">9 条公式 · 综合应用</span></button></article>
@@ -1198,60 +1355,35 @@
                     </div>
                 </div>
 
-                <!-- 卡片 03：导数定义 -->
+                <!-- 卡片 03：导数与微分 -->
                 <div class="swiper-slide" onclick="enterDetail('derivative')">
                     <span class="bg-number">03</span>
                     <div class="card-content">
                         <div class="card-icon text-primary" style="--icon-glow: rgba(10, 132, 255, 0.4);">
                             <i class="fa-solid fa-chart-line"></i>
                         </div>
-                        <div class="module-tag bg-primary/20 text-primary">导数模块</div>
-                        <h3 class="card-title">导数的定义</h3>
-                        <p class="card-subtitle" style="--sub-color: #0A84FF;">Derivative · 18条公式</p>
+                        <div class="module-tag bg-primary/20 text-primary">导数与微分</div>
+                        <h3 class="card-title">导数与微分</h3>
+                        <p class="card-subtitle" style="--sub-color: #0A84FF;">Derivative &amp; Differential · 34条公式</p>
                         <div class="formula-block">
                             $$f'(x) = \lim_{\Delta x \to 0} \frac{f(x+\Delta x) - f(x)}{\Delta x}$$
+                            $$dy = f'(x) \, dx \quad (\text{可导} \iff \text{可微})$$
                         </div>
                         <div class="formula-list" style="--dot-color: #0A84FF;">
-                            <li>几何意义：切线斜率</li>
-                            <li>物理意义：瞬时变化率</li>
-                            <li>可导 ⟹ 连续（反之不成立）</li>
+                            <li>导数：切线斜率 / 瞬时变化率</li>
+                            <li>微分：导数 × dx，一阶近似</li>
+                            <li>含参数方程、变限积分求导</li>
                         </div>
                         <div class="memory-tip">
-                            <span class="highlight-text" style="--hl-color: #0A84FF;">点击查看全部18条导数公式</span>
+                            <span class="highlight-text" style="--hl-color: #0A84FF;">点击查看导数18条 + 微分16条</span>
                         </div>
-                        <div class="enter-hint">⟜ 点击进入导数公式详情 ⟝</div>
+                        <div class="enter-hint">⟜ 点击进入导数与微分详情 ⟝</div>
                     </div>
                 </div>
 
-                <!-- 卡片 04：微分定义 -->
-                <div class="swiper-slide" onclick="enterDetail('differential')">
-                    <span class="bg-number">04</span>
-                    <div class="card-content">
-                        <div class="card-icon text-purple" style="--icon-glow: rgba(191, 90, 242, 0.4);">
-                            <i class="fa-solid fa-arrows-left-right"></i>
-                        </div>
-                        <div class="module-tag bg-purple/20 text-purple">微分模块</div>
-                        <h3 class="card-title">微分的定义</h3>
-                        <p class="card-subtitle" style="--sub-color: #BF5AF2;">Differential · 16条公式</p>
-                        <div class="formula-block">
-                            $$dy = f'(x) \, dx$$
-                            $$\text{可导} \iff \text{可微}$$
-                        </div>
-                        <div class="formula-list" style="--dot-color: #BF5AF2;">
-                            <li>微分 = 导数 × dx</li>
-                            <li>一阶微分形式不变性</li>
-                            <li>与导数公式一一对应</li>
-                        </div>
-                        <div class="memory-tip">
-                            <span class="highlight-text" style="--hl-color: #BF5AF2;">点击查看16条微分公式</span>
-                        </div>
-                        <div class="enter-hint">⟜ 点击进入微分公式详情 ⟝</div>
-                    </div>
-                </div>
-
-                <!-- 卡片 05：积分定义 -->
+                <!-- 卡片 04：积分定义 -->
                 <div class="swiper-slide" onclick="enterDetail('integral')">
-                    <span class="bg-number">05</span>
+                    <span class="bg-number">04</span>
                     <div class="card-content">
                         <div class="card-icon text-accent" style="--icon-glow: rgba(48, 209, 88, 0.4);">
                             <i class="fa-solid fa-infinity"></i>
@@ -1275,9 +1407,9 @@
                     </div>
                 </div>
 
-                <!-- 卡片 06：三角函数定义 -->
+                <!-- 卡片 05：三角函数定义 -->
                 <div class="swiper-slide" onclick="enterDetail('trigonometric')">
-                    <span class="bg-number">06</span>
+                    <span class="bg-number">05</span>
                     <div class="card-content">
                         <div class="card-icon text-danger" style="--icon-glow: rgba(255, 59, 48, 0.4);">
                             <i class="fa-solid fa-wave-square"></i>
@@ -1301,9 +1433,9 @@
                     </div>
                 </div>
 
-                <!-- 卡片 07：微分方程 -->
+                <!-- 卡片 06：微分方程 -->
                 <div class="swiper-slide" onclick="enterDetail('equation')">
-                    <span class="bg-number">07</span>
+                    <span class="bg-number">06</span>
                     <div class="card-content">
                         <div class="card-icon text-orange" style="--icon-glow: rgba(255, 159, 10, 0.4);">
                             <i class="fa-solid fa-square-root-variable"></i>
@@ -1327,9 +1459,9 @@
                     </div>
                 </div>
 
-                <!-- 卡片 08：线性代数-行列式 -->
+                <!-- 卡片 07：线性代数-行列式 -->
                 <div class="swiper-slide" onclick="enterDetail('linear')">
-                    <span class="bg-number">08</span>
+                    <span class="bg-number">07</span>
                     <div class="card-content">
                         <div class="card-icon text-cyan" style="--icon-glow: rgba(90, 200, 250, 0.4);">
                             <i class="fa-solid fa-table-cells"></i>
@@ -1591,16 +1723,379 @@ function memoryBox(title, text) {
     </div>`;
 }
 
+function exampleBox(title, body) {
+    // 尝试拆分题目和解析：找「解」「解析」等分界点
+    let question = body;
+    let solution = '';
+    const splitFlags = ['<strong>解</strong>', '<strong>解析</strong>', '<p>解：', '<p>解 '];
+    let splitIdx = -1;
+    for (const flag of splitFlags) {
+        const idx = body.indexOf(flag);
+        if (idx >= 0) { splitIdx = idx; break; }
+    }
+    if (splitIdx >= 0) {
+        question = body.substring(0, splitIdx);
+        solution = body.substring(splitIdx);
+    } else {
+        solution = body;
+    }
+    return `<div class="ex-flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="ex-flip-inner">
+            <div class="ex-flip-face ex-flip-front">
+                <div class="ex-title"><i class="fa-solid fa-pen-to-square"></i> ${title}</div>
+                <div class="ex-content">${question}</div>
+                <div class="ex-flip-hint">点击翻转查看解析 →</div>
+            </div>
+            <div class="ex-flip-face ex-flip-back">
+                <div class="ex-title"><i class="fa-solid fa-lightbulb"></i> 解析</div>
+                <div class="ex-content">${solution}</div>
+                <div class="ex-flip-hint">← 点击返回题目</div>
+            </div>
+        </div>
+    </div>`;
+}
+
+// 翻转当前 tab 下全部例题卡片
+function flipAllExamples(btn) {
+    const activeSection = document.querySelector('.detail-section.active');
+    if (!activeSection) return;
+    const cards = activeSection.querySelectorAll('.ex-flip-card');
+    if (!cards.length) return;
+    const allFlipped = Array.from(cards).every(c => c.classList.contains('flipped'));
+    cards.forEach(c => c.classList.toggle('flipped', !allFlipped));
+    const span = btn.querySelector('span');
+    if (span) span.textContent = allFlipped ? '翻转全部解析' : '收起全部解析';
+}
+
+// 知识地图关系图：菱形结构 极限⇄连续⇄可导⇄可微
+function knowledgeMapGraph() {
+    return `
+    <div class="knowledge-map">
+        <svg viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;margin:0 auto;display:block;">
+            <defs>
+                <!-- 箭头 marker -->
+                <marker id="km-ar-b" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <path d="M0,0 L9,3 L0,6" fill="#0A84FF"/>
+                </marker>
+                <marker id="km-ar-g" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <path d="M0,0 L9,3 L0,6" fill="#6fae87"/>
+                </marker>
+                <marker id="km-ar-o" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <path d="M0,0 L9,3 L0,6" fill="#FF9F0A"/>
+                </marker>
+                <marker id="km-ar-p" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <path d="M0,0 L9,3 L0,6" fill="#BF5AF2"/>
+                </marker>
+                <marker id="km-al-b" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto">
+                    <path d="M9,0 L0,3 L9,6" fill="#0A84FF"/>
+                </marker>
+                <marker id="km-al-g" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto">
+                    <path d="M9,0 L0,3 L9,6" fill="#6fae87"/>
+                </marker>
+                <marker id="km-al-o" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto">
+                    <path d="M9,0 L0,3 L9,6" fill="#FF9F0A"/>
+                </marker>
+                <marker id="km-al-p" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto">
+                    <path d="M9,0 L0,3 L9,6" fill="#BF5AF2"/>
+                </marker>
+                <filter id="km-glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+
+            <!-- ========== 顶层：极限存在（左） ========== -->
+            <g class="km-node" style="animation-delay:0.1s">
+                <rect x="40" y="40" width="150" height="56" rx="14" fill="rgba(10,132,255,0.12)" stroke="#0A84FF" stroke-width="2"/>
+                <text x="115" y="68" text-anchor="middle" fill="#0A84FF" font-size="17" font-weight="700">极限存在</text>
+                <text x="115" y="86" text-anchor="middle" fill="var(--text-muted)" font-size="11">最弱条件</text>
+            </g>
+
+            <!-- ========== 中层：连续（右） ========== -->
+            <g class="km-node" style="animation-delay:0.3s">
+                <rect x="490" y="40" width="150" height="56" rx="14" fill="rgba(111,174,135,0.12)" stroke="#6fae87" stroke-width="2"/>
+                <text x="565" y="68" text-anchor="middle" fill="#6fae87" font-size="17" font-weight="700">连续</text>
+                <text x="565" y="86" text-anchor="middle" fill="var(--text-muted)" font-size="11">中间条件</text>
+            </g>
+
+            <!-- ========== 底层：可导（左下） ========== -->
+            <g class="km-node" style="animation-delay:0.5s">
+                <rect x="40" y="280" width="150" height="56" rx="14" fill="rgba(255,159,10,0.12)" stroke="#FF9F0A" stroke-width="2"/>
+                <text x="115" y="308" text-anchor="middle" fill="#FF9F0A" font-size="17" font-weight="700">可导</text>
+                <text x="115" y="326" text-anchor="middle" fill="var(--text-muted)" font-size="11">变化率</text>
+            </g>
+
+            <!-- ========== 底层：可微（右下） ========== -->
+            <g class="km-node" style="animation-delay:0.5s">
+                <rect x="490" y="280" width="150" height="56" rx="14" fill="rgba(191,90,242,0.12)" stroke="#BF5AF2" stroke-width="2"/>
+                <text x="565" y="308" text-anchor="middle" fill="#BF5AF2" font-size="17" font-weight="700">可微</text>
+                <text x="565" y="326" text-anchor="middle" fill="var(--text-muted)" font-size="11">增量近似</text>
+            </g>
+
+            <!-- ========== 横向：极限存在 ⇄ 连续（顶层） ========== -->
+            <!-- 正向：连续 ⟹ 极限存在（从左指向右的右端点箭头，加反向虚箭头说明） -->
+            <line x1="192" y1="68" x2="488" y2="68" stroke="#0A84FF" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#km-ar-b)" marker-start="url(#km-al-b)" class="km-flow"/>
+            <text x="340" y="55" text-anchor="middle" fill="#0A84FF" font-size="11" font-weight="600">连续 ⟹ 极限存在</text>
+            <text x="340" y="85" text-anchor="middle" fill="var(--text-dim)" font-size="11">逆向❌：极限存在 ⇏ 连续</text>
+
+            <!-- ========== 横向：可导 ⇄ 可微（底层）双向等价 ========== -->
+            <line x1="192" y1="308" x2="488" y2="308" stroke="#BF5AF2" stroke-width="2.5" marker-end="url(#km-ar-p)" marker-start="url(#km-al-p)" filter="url(#km-glow)" class="km-bi-flow"/>
+            <text x="340" y="300" text-anchor="middle" fill="#BF5AF2" font-size="11" font-weight="600">⟺ 等价</text>
+            <text x="340" y="318" text-anchor="middle" fill="var(--text-muted)" font-size="10">可导 ⟺ 可微（一元函数）</text>
+
+            <!-- ========== 左斜：可导 ⟹ 极限存在（左下→左上） ========== -->
+            <line x1="115" y1="276" x2="115" y2="100" stroke="#FF9F0A" stroke-width="2" marker-end="url(#km-ar-o)" stroke-dasharray="6 4" class="km-flow"/>
+            <text x="78" y="190" fill="#FF9F0A" font-size="11" font-weight="600">可导 ⟹ 极限</text>
+            <text x="60" y="206" fill="var(--text-dim)" font-size="11">存在</text>
+            <text x="135" y="210" fill="var(--text-dim)" font-size="10">❌ 逆不成立</text>
+
+            <!-- ========== 右斜：可导 ⟹ 连续（左下→右上） ========== -->
+            <line x1="158" y1="284" x2="512" y2="100" stroke="#6fae87" stroke-width="2" marker-end="url(#km-ar-g)" stroke-dasharray="6 4" class="km-flow"/>
+            <text x="310" y="190" fill="#6fae87" font-size="11" font-weight="600">可导 ⟹ 连续</text>
+            <text x="340" y="208" fill="var(--text-dim)" font-size="10">❌ 逆不成立（y=|x| 反例）</text>
+
+            <!-- ========== 右斜：可微 ⟹ 连续（右下→右上） ========== -->
+            <line x1="522" y1="284" x2="568" y2="100" stroke="#6fae87" stroke-width="2" marker-end="url(#km-ar-g)" stroke-dasharray="6 4" class="km-flow"/>
+            <text x="495" y="190" fill="#6fae87" font-size="11" font-weight="600">可微 ⟹ 连续</text>
+            <text x="500" y="206" fill="var(--text-dim)" font-size="10">❌ 逆不成立</text>
+
+            <!-- ========== 反例提示 ========== -->
+            <text x="340" y="395" text-anchor="middle" fill="var(--text-dim)" font-size="11">⚠ 反例：y=|x| 在 x=0 处连续但不可导（尖点，左右导数不相等）</text>
+            <text x="340" y="415" text-anchor="middle" fill="var(--text-dim)" font-size="11">⚠ 反例：f(x)=sin(1/x)·x 在 x=0 处极限存在（可补为连续），但原函数在 x=0 处不连续</text>
+            <text x="340" y="435" text-anchor="middle" fill="var(--text-muted)" font-size="11">记忆锚点：导数是「变化率」，微分是「增量近似」</text>
+        </svg>
+    </div>`;
+}
+
+// 微分几何意义增量图：Δy = dy + o(Δx)
+function differentialGeometryDiagram() {
+    return `
+    <div class="diff-geometry">
+        <svg viewBox="0 0 560 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;margin:0 auto;display:block;">
+            <defs>
+                <marker id="dg-ax" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+                    <path d="M0,0 L7,3 L0,6" fill="var(--text-muted)"/>
+                </marker>
+                <marker id="dg-ay" markerWidth="8" markerHeight="8" refX="3" refY="1" orient="auto">
+                    <path d="M6,7 L3,0 L0,7" fill="var(--text-muted)"/>
+                </marker>
+                <!-- 双向小箭头 marker -->
+                <marker id="dg-al-vm" markerWidth="7" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <path d="M6,0 L0,3.5 L6,7" fill="var(--text-muted)"/>
+                </marker>
+                <marker id="dg-ar-vm" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                    <path d="M0,0 L6,3.5 L0,7" fill="var(--text-muted)"/>
+                </marker>
+                <marker id="dg-al-b" markerWidth="7" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <path d="M6,0 L0,3.5 L6,7" fill="#0A84FF"/>
+                </marker>
+                <marker id="dg-ar-b" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                    <path d="M0,0 L6,3.5 L0,7" fill="#0A84FF"/>
+                </marker>
+                <marker id="dg-al-r" markerWidth="7" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <path d="M6,0 L0,3.5 L6,7" fill="#FF3B30"/>
+                </marker>
+                <marker id="dg-ar-r" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                    <path d="M0,0 L6,3.5 L0,7" fill="#FF3B30"/>
+                </marker>
+            </defs>
+
+            <!-- 坐标轴 -->
+            <line x1="60" y1="350" x2="520" y2="350" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#dg-ax)"/>
+            <line x1="60" y1="350" x2="60" y2="30" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#dg-ay)"/>
+            <text x="528" y="355" fill="var(--text-muted)" font-size="13">x</text>
+            <text x="52" y="24" fill="var(--text-muted)" font-size="13">y</text>
+            <text x="48" y="365" fill="var(--text-muted)" font-size="11">O</text>
+
+            <!-- 公式标注 -->
+            <text x="160" y="48" fill="var(--text-secondary)" font-size="15" font-weight="700">Δy = dy + o(Δx)</text>
+            <text x="160" y="68" fill="#0A84FF" font-size="11">dy：切线增量（线性部分）</text>
+            <text x="160" y="83" fill="#FF3B30" font-size="11">Δy：曲线真实增量</text>
+            <text x="160" y="98" fill="#FFD60A" font-size="11">o(Δx)：高阶无穷小（缝隙）</text>
+            <!-- 高阶无穷小补充说明 -->
+            <text x="160" y="118" fill="var(--text-dim)" font-size="10">Δx→0 时，o(Δx) 会远小于 Δx，缝隙快速收缩</text>
+
+            <!-- 函数曲线 y=f(x) -->
+            <path d="M 80 320 Q 180 290 220 240 Q 270 185 330 145 T 480 85" fill="none" stroke="var(--text-primary)" stroke-width="2.5" class="dg-curve"/>
+            <text x="458" y="78" fill="var(--text-primary)" font-size="12" font-weight="600">y=f(x)</text>
+
+            <!-- 切点 x0 -->
+            <circle cx="220" cy="240" r="4" fill="#0A84FF"/>
+            <line x1="220" y1="350" x2="220" y2="354" stroke="var(--text-muted)" stroke-width="1"/>
+            <text x="208" y="365" fill="var(--text-muted)" font-size="11">x₀</text>
+
+            <!-- x0+Δx -->
+            <line x1="330" y1="350" x2="330" y2="354" stroke="var(--text-muted)" stroke-width="1"/>
+            <text x="300" y="365" fill="var(--text-muted)" font-size="11">x₀+Δx</text>
+
+            <!-- Δx 标注（双向箭头） -->
+            <line x1="220" y1="335" x2="330" y2="335" stroke="var(--text-muted)" stroke-width="1.5" marker-start="url(#dg-al-vm)" marker-end="url(#dg-ar-vm)"/>
+            <text x="262" y="330" fill="var(--text-muted)" font-size="11">Δx</text>
+
+            <!-- 切线（蓝色虚线），对齐切线左下角"切线"文字 -->
+            <line x1="130" y1="320" x2="410" y2="85" stroke="#0A84FF" stroke-width="2" stroke-dasharray="5 3" class="dg-tangent"/>
+            <text x="132" y="315" fill="#0A84FF" font-size="11" font-weight="600">↗ 切线</text>
+
+            <!-- 切线上的点 (x0+Δx 处切线值) -->
+            <circle cx="330" cy="143" r="3.5" fill="#0A84FF"/>
+            <!-- 曲线上的点 (x0+Δx 处真实值) -->
+            <circle cx="330" cy="115" r="3.5" fill="#FF3B30"/>
+
+            <!-- dy 标注（切线增量，蓝色，双向箭头） -->
+            <line x1="340" y1="143" x2="340" y2="240" stroke="#0A84FF" stroke-width="2.5" marker-start="url(#dg-al-b)" marker-end="url(#dg-ar-b)"/>
+            <text x="350" y="195" fill="#0A84FF" font-size="13" font-weight="700">dy</text>
+
+            <!-- Δy 标注（曲线真实增量，红色，双向箭头） -->
+            <line x1="315" y1="115" x2="315" y2="240" stroke="#FF3B30" stroke-width="2.5" marker-start="url(#dg-al-r)" marker-end="url(#dg-ar-r)"/>
+            <text x="288" y="180" fill="#FF3B30" font-size="13" font-weight="700">Δy</text>
+
+            <!-- o(Δx) 缝隙 -->
+            <line x1="330" y1="115" x2="330" y2="143" stroke="#FFD60A" stroke-width="2" stroke-dasharray="2 2"/>
+            <text x="340" y="134" fill="#FFD60A" font-size="11">o(Δx)</text>
+
+            <!-- 水平虚线 -->
+            <line x1="220" y1="240" x2="330" y2="240" stroke="var(--text-muted)" stroke-width="0.5" stroke-dasharray="2 2"/>
+        </svg>
+    </div>`;
+}
+
 // ---------- 导数详情 ----------
 function buildDerivativeDetail() {
     const C = '#0A84FF';
+    const exToolbar = `<div class="ex-flip-toolbar"><button class="ex-flip-btn" onclick="flipAllExamples(this)"><i class="fa-solid fa-rotate"></i> <span>翻转全部解析</span></button></div>`;
     const tabs = `
-        <div class="detail-tab active" style="--tab-color:rgba(10,132,255,0.2);--tab-border:rgba(10,132,255,0.4);" onclick="switchTab('deriv-all', this)">全部公式</div>
+        <div class="detail-tab active" style="--tab-color:rgba(10,132,255,0.2);--tab-border:rgba(10,132,255,0.4);" onclick="switchTab('deriv-map', this)">知识地图</div>
+        <div class="detail-tab" style="--tab-color:rgba(10,132,255,0.2);--tab-border:rgba(10,132,255,0.4);" onclick="switchTab('deriv-all', this)">导数公式</div>
+        <div class="detail-tab" style="--tab-color:rgba(191,90,242,0.2);--tab-border:rgba(191,90,242,0.4);" onclick="switchTab('deriv-methods', this)">求导法</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('deriv-high', this)">高阶导数</div>
+        <div class="detail-tab" style="--tab-color:rgba(191,90,242,0.2);--tab-border:rgba(191,90,242,0.4);" onclick="switchTab('deriv-diff', this)">微分公式</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('deriv-app', this)">导数应用</div>
     `;
     const body = `
-        <div class="detail-section active" id="deriv-all">
+        <div class="detail-section active" id="deriv-map">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-map-location-dot"></i> 知识地图</div>
+            <div class="section-desc">导数与微分章节的核心逻辑链：可导 ⟹ 连续 ⟹ 极限存在（单向逐级加强），可导 ⟺ 可微（一元函数等价）。理解这张图，就理解了整个章节的概念骨架。</div>
+
+            ${knowledgeMapGraph()}
+
+            ${memoryBox('逻辑链三句话', '① 可导 ⟹ 连续 ⟹ 极限存在（单向，逐级加强，逆向均不成立）。② 可导 ⟺ 可微（一元函数中两者完全等价，求出导数乘 dx 即得微分）。③ 连续不一定可导：典型反例 y=|x| 在 x=0 处连续但不可导（尖点，左右导数不相等）。')}
+
+            ${groupTitle('fa-list-tree', '本章知识结构', '#FF9F0A')}
+            <div class="formula-grid" style="grid-template-columns:1fr;gap:0.4rem;">
+                ${formulaCard('', '导数定义', '$$f\'(x_0) = \\lim_{\\square \\to 0} \\frac{f(x_0+\\square)-f(x_0)}{\\square}$$', '两种定义式 + 推广公式 + 左右导数 + 可导充要', '#0A84FF')}
+                ${formulaCard('', '求导法', '$$\\frac{d}{dx}f[g(x)] = f\'[g(x)] \\cdot g\'(x)$$', '四则运算 + 链式法则 + 分段/隐函数/幂指/参数方程/变限积分', '#BF5AF2')}
+                ${formulaCard('', '高阶导数', '$$(e^x)^{(n)} = e^x,\\ (\\sin x)^{(n)} = \\sin\\!\\left(x+\\frac{n\\pi}{2}\\right)$$', '9 条常用公式 + 找规律思想', '#FF9F0A')}
+                ${formulaCard('', '微分', '$$dy = f\'(x)\\,dx$$', '定义 + 几何意义（Δy=dy+o(Δx)）+ 16 条公式 + 形式不变性', '#BF5AF2')}
+                ${formulaCard('', '导数应用', '$$y-y_0 = f\'(x_0)(x-x_0)$$', '洛必达 + 切线法线 + 单调极值 + 最值 + 凹凸拐点', '#FF3B30')}
+            </div>
+        </div>
+
+        <div class="detail-section" id="deriv-all">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-chart-line"></i> 导数公式大全</div>
-            <div class="section-desc">导数 f'(x) 是函数在某点的瞬时变化率，几何意义为切线斜率。以下 18 条公式覆盖了专升本全部考点——按函数类型分组记忆，效率最高。</div>
+            <div class="section-desc">导数 f'(x) 是函数在某点的瞬时变化率，几何意义为切线斜率。本 tab 覆盖导数定义（两种定义式 + 推广公式 + 左右导数）、四则运算与链式法则、18 条基本导数公式——按函数类型分组记忆，效率最高。</div>
+            ${exToolbar}
+
+            ${groupTitle('fa-flag', '导数定义', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('定1', '定义式一', '$$f\'(x_0) = \\lim_{\\square \\to x_0} \\frac{f(\\square) - f(x_0)}{\\square - x_0}$$', '自变量趋于 x0 型；前面是 □，后面减函数值 f(x0)', '#0A84FF')}
+                ${formulaCard('定2', '定义式二', '$$f\'(x_0) = \\lim_{\\square \\to 0} \\frac{f(x_0 + \\square) - f(x_0)}{\\square}$$', '增量趋于 0 型；令 □=Δx，上 □ 与下 □ 必须一致', '#0A84FF')}
+                ${formulaCard('定3', '推广公式', '$$\\lim_{\\square \\to 0} \\frac{f(x_0 + a\\square) - f(x_0 + b\\square)}{c\\square} = \\frac{a-b}{c}\\, f\'(x_0)$$', '分子增量系数差 a-b，除以分母系数 c，再乘 f\'(x0)', '#0A84FF')}
+                ${formulaCard('定4', '右导数', '$$f\'_+(x_0) = \\lim_{\\square \\to 0^+} \\frac{f(x_0 + \\square) - f(x_0)}{\\square}$$', '增量从正向趋于 0', '#0A84FF')}
+                ${formulaCard('定5', '左导数', '$$f\'_-(x_0) = \\lim_{\\square \\to 0^-} \\frac{f(x_0 + \\square) - f(x_0)}{\\square}$$', '增量从负向趋于 0', '#0A84FF')}
+                ${formulaCard('定6', '可导充要', '$$f \\text{ 可导} \\iff f\'_-(x_0) = f\'_+(x_0)$$', '左右导数存在且相等；分段点必用定义求左右导数', '#0A84FF')}
+            </div>
+            ${memoryBox('导数定义核心', '口诀：前面是 □，后面减函数值 f(x0)，上 □ 与下 □ 一致。若题目没有 f(x0) 这一项，就「加一个减一个」凑出含函数值的标准定义式。可导 ⟹ 连续（反之不成立，如 y=|x| 在 x=0 处连续但不可导）。')}
+
+            ${exampleBox('专升本真题（2003 年江苏专转本 · 选择题）', `
+                <p>已知 $f'(x_0)=2$，则 $\\lim_{h\\to 0}\\dfrac{f(x_0+h)-f(x_0-h)}{h}=$（　）。</p>
+                <p>A. $2$　B. $4$　C. $0$　D. $-2$</p>
+                <p><strong>解</strong>：用「加一减一」拆开：</p>
+                <p>$$\\lim_{h\\to 0}\\frac{f(x_0+h)-f(x_0-h)}{h}=\\lim_{h\\to 0}\\frac{f(x_0+h)-f(x_0)}{h}+\\lim_{h\\to 0}\\frac{f(x_0)-f(x_0-h)}{h}$$</p>
+                <p>$$=f'(x_0)+f'(x_0)=2f'(x_0)=2\\times 2=4$$</p>
+                <p class="ex-answer">选 B。</p>
+            `)}
+
+            ${exampleBox('专升本真题（2011 年江苏专转本 · 第 2 题）', `
+                <p>设 $f(x)$ 在 $x_0$ 处可导，且 $\\lim_{h\\to 0}\\dfrac{f(x_0-h)-f(x_0+h)}{h}=4$，则 $f'(x_0)=$（　）。</p>
+                <p>A. $-4$　B. $-2$　C. $2$　D. $4$</p>
+                <p><strong>解</strong>：注意分子顺序与上题相反，会引入负号：</p>
+                <p>$$\\lim_{h\\to 0}\\frac{f(x_0-h)-f(x_0+h)}{h}=\\lim_{h\\to 0}\\frac{f(x_0-h)-f(x_0)}{h}-\\lim_{h\\to 0}\\frac{f(x_0+h)-f(x_0)}{h}$$</p>
+                <p>$$=-f'(x_0)-f'(x_0)=-2f'(x_0)$$</p>
+                <p>由 $-2f'(x_0)=4$，得 $f'(x_0)=-2$。</p>
+                <p class="ex-answer">选 B。</p>
+                <blockquote>凑导数定义题最易丢分的就是分子中 $f$ 的自变量增量符号（$+h$ 还是 $-h$）——它决定最终是 $+f'(x_0)$ 还是 $-f'(x_0)$。务必逐项拆开看符号。</blockquote>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 三角函数复合凑定义）', `
+                <p>设 $f'(0)$ 存在，求 $\\lim_{x\\to 0}\\dfrac{f(\\sin^2 x)-f(0)}{x\\cdot \\tan x}$。</p>
+                <p><strong>解</strong>：分子分母同乘 $\\sin^2 x$，把「复合增量」凑成 $f(0+\\square)-f(0)$：</p>
+                <p>$$\\lim_{x\\to 0}\\frac{f(\\sin^2 x)-f(0)}{x\\tan x}=\\lim_{x\\to 0}\\frac{f(\\sin^2 x)-f(0)}{\\sin^2 x}\\cdot \\frac{\\sin^2 x}{x\\tan x}$$</p>
+                <p>第一部分令 $\\square=\\sin^2 x\\to 0$：$\\lim_{x\\to 0}\\dfrac{f(0+\\sin^2 x)-f(0)}{\\sin^2 x}=f'(0)$。</p>
+                <p>第二部分用等价无穷小 $\\sin x\\sim x,\\,\\tan x\\sim x$：$\\lim_{x\\to 0}\\dfrac{\\sin^2 x}{x\\tan x}=\\lim_{x\\to 0}\\dfrac{x^2}{x\\cdot x}=1$。</p>
+                <p>故原式 $=f'(0)\\cdot 1=f'(0)$。</p>
+                <blockquote>套路：分子是 $f(\\text{含 }x\\text{ 的式子})-f(0)$ 型，就把含 $x$ 的式子整体当作 $\\square$，凑 $\\dfrac{f(\\square)-f(0)}{\\square}$ 再乘一个修正因子。</blockquote>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 判断可导性）', `
+                <p>讨论 $f(x)=|x|$ 在 $x=0$ 处的可导性。</p>
+                <p><strong>解</strong>：</p>
+                <p>$$f'_+(0)=\\lim_{h\\to 0^+}\\frac{|h|-0}{h}=\\lim_{h\\to 0^+}\\frac{h}{h}=1,\\quad f'_-(0)=\\lim_{h\\to 0^-}\\frac{|h|-0}{h}=\\lim_{h\\to 0^-}\\frac{-h}{h}=-1$$</p>
+                <p>$f'_+(0)\\neq f'_-(0)$，故 $f(x)=|x|$ 在 $x=0$ 处<strong>不可导</strong>（但连续，是典型尖点）。</p>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 已知可导定参数）', `
+                <p>设 $f(x)=\\begin{cases}\\sin 2x, & x>0 \\\\ a+bx, & x\\le 0\\end{cases}$ 在 $x=0$ 处可导，求 $a+b$。</p>
+                <p><strong>解</strong>：</p>
+                <p><strong>① 连续性</strong>：$\\lim_{x\\to 0^-}f(x)=a$，$\\lim_{x\\to 0^+}f(x)=0$，故 $a=0$，$f(0)=0$。</p>
+                <p><strong>② 可导性</strong>（分段点用定义）：</p>
+                <p>$$f'_-(0)=\\lim_{h\\to 0^-}\\frac{a+bh-0}{h}=\\lim_{h\\to 0^-}\\frac{bh}{h}=b$$</p>
+                <p>$$f'_+(0)=\\lim_{h\\to 0^+}\\frac{\\sin 2h-0}{h}=\\lim_{h\\to 0^+}\\frac{\\sin 2h}{2h}\\cdot 2=2$$</p>
+                <p>由 $f'_-(0)=f'_+(0)$ 得 $b=2$。故 $a+b=0+2=2$。</p>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 两段都可分别求导）', `
+                <p>设 $f(x)=\\begin{cases}x^2+3x+a, & x\\le 1 \\\\ bx+2, & x>1\\end{cases}$ 在 $x=1$ 处可导，求 $a, b$。</p>
+                <p><strong>解</strong>：</p>
+                <p><strong>① 连续性</strong>：$\\lim_{x\\to 1^-}f(x)=4+a$，$\\lim_{x\\to 1^+}f(x)=b+2$，故 $4+a=b+2$，即 $a-b=-2$。</p>
+                <p><strong>② 可导性</strong>（两段在 $x=1$ 处都可分别求导，直接比较导数值）：</p>
+                <p>$$f'_-(1)=(2x+3)\\big|_{x=1}=5,\\quad f'_+(1)=b$$</p>
+                <p>由 $b=5$，代入方程 1 得 $a=3$。</p>
+                <blockquote>分段点两段都可分别求导时，可直接比较导函数值；若某段含分段特征（如绝对值、分段表达），仍需用定义求左右导数。</blockquote>
+            `)}
+
+            ${groupTitle('fa-code-branch', '四则运算与链式法则', '#30D158')}
+            <div class="formula-grid">
+                ${formulaCard('则1', '加法', '$$(u+v)\' = u\' + v\'$$', '分别求导再相加', '#30D158')}
+                ${formulaCard('则2', '减法', '$$(u-v)\' = u\' - v\'$$', '分别求导再相减', '#30D158')}
+                ${formulaCard('则3', '乘法', '$$(uv)\' = u\'v + uv\'$$', '前导后不导 + 前不导后导', '#30D158')}
+                ${formulaCard('则4', '除法', '$$\\left(\\frac{u}{v}\\right)\' = \\frac{u\'v - uv\'}{v^2}$$', '分母平方，上导下不导 − 下导上不导（v≠0）', '#30D158')}
+                ${formulaCard('则5', '链式法则', '$$\\frac{d}{dx}f[g(x)] = f\'[g(x)] \\cdot g\'(x)$$', '由外向内，逐层求导，相乘串联，不漏层', '#30D158')}
+            </div>
+
+            ${exampleBox('链式法则 · 例 1（单层复合）', `
+                <p>求 $y=\\sin(2x+1)$ 的导数。</p>
+                <p><strong>解</strong>：$y'=\\cos(2x+1)\\cdot (2x+1)'=\\cos(2x+1)\\cdot 2=2\\cos(2x+1)$。</p>
+            `)}
+
+            ${exampleBox('链式法则 · 例 2（双层复合）', `
+                <p>求 $y=e^{\\sin x}$ 的导数。</p>
+                <p><strong>解</strong>：$y'=e^{\\sin x}\\cdot(\\sin x)'=e^{\\sin x}\\cos x$。</p>
+            `)}
+
+            ${exampleBox('链式法则 · 例 3（含幂函数 + 三角复合）', `
+                <p>求 $y=\\ln(1+x^2)$ 的导数。</p>
+                <p><strong>解</strong>：$y'=\\dfrac{1}{1+x^2}\\cdot(1+x^2)'=\\dfrac{2x}{1+x^2}$。</p>
+            `)}
+
+            ${exampleBox('链式法则 · 例 4（三层复合 + 乘积）', `
+                <p>求 $y=x^2\\cdot e^{\\cos x}$ 的导数。</p>
+                <p><strong>解</strong>：先用乘法法则，再对 $e^{\\cos x}$ 用链式法则：</p>
+                <p>$$y'=2x\\cdot e^{\\cos x}+x^2\\cdot e^{\\cos x}\\cdot(-\\sin x)=e^{\\cos x}\\big(2x-x^2\\sin x\\big)$$</p>
+            `)}
+
+            ${exampleBox('链式法则 · 例 5（综合 · 对数 + 三角 + 幂嵌套）', `
+                <p>求 $y=\\tan\\!\\big(\\ln(1+\\sqrt{x})\\big)$ 的导数。</p>
+                <p><strong>解</strong>：三层复合，由外向内：</p>
+                <p>$$y'=\\sec^2\\!\\big(\\ln(1+\\sqrt{x})\\big)\\cdot \\frac{1}{1+\\sqrt{x}}\\cdot \\frac{1}{2\\sqrt{x}}=\\frac{\\sec^2\\!\\big(\\ln(1+\\sqrt{x})\\big)}{2\\sqrt{x}(1+\\sqrt{x})}$$</p>
+                <blockquote>复合函数求导的关键是分层不漏层。专升本常考 2~3 层复合，建议先在脑中拆出中间变量 $u=\\dots,\\,v=\\dots$，再逐层相乘。</blockquote>
+            `)}
 
             ${groupTitle('fa-calculator', '常数 & 幂函数', '#FFD60A')}
             <div class="formula-grid">
@@ -1639,20 +2134,206 @@ function buildDerivativeDetail() {
             </div>
             ${memoryBox('反三角求导配对记忆', 'arcsin 和 arccos 共享同一个导数结构，只差正负号——「正弦正，余弦负」。arctan 和 arccot 同理。记忆：分母含 1-x² → 对应 sin/cos；分母含 1+x² → 对应 tan/cot。')}
         </div>
-    `;
-    return { title: '导数公式详情', color: C, tabs, body };
-}
 
-// ---------- 微分详情 ----------
-function buildDifferentialDetail() {
-    const C = '#BF5AF2';
-    const tabs = `
-        <div class="detail-tab active" style="--tab-color:rgba(191,90,242,0.2);--tab-border:rgba(191,90,242,0.4);" onclick="switchTab('diff-formula', this)">微分公式</div>
-    `;
-    const formulaBody = `
-        <div class="detail-section active" id="diff-formula">
-            <div class="section-title" style="color:${C};"><i class="fa-solid fa-arrows-left-right"></i> 微分公式大全</div>
+        <div class="detail-section" id="deriv-methods">
+            <div class="section-title" style="color:#BF5AF2;"><i class="fa-solid fa-puzzle-piece"></i> 各类函数求导法</div>
+            <div class="section-desc">分段函数、隐函数、幂指函数、参数方程、变限积分——专升本求导法的五大题型。分段点用定义，隐函数两边求导或公式法，幂指函数取对数或指数化，参数方程分母不变，变限积分"上减下"。</div>
+            ${exToolbar}
+
+            ${groupTitle('fa-puzzle-piece', '分段函数求导', '#FF9F0A')}
+            ${memoryBox('分段函数求导步骤', '① 各段开区间内用公式求导；② 分段点用定义求左右导数；③ 相等则可导，不等则不可导。')}
+            ${exampleBox('例题（专升本难度 · 分段函数求导）', `
+                <p>设 $f(x)=\\begin{cases}x^2, & x\\ge 0 \\\\ x, & x<0\\end{cases}$，讨论 $f(x)$ 在 $x=0$ 处的可导性，并求 $x>0$ 时的 $f'(x)$。</p>
+                <p><strong>解</strong>：</p>
+                <p><strong>① 各段开区间内用公式</strong>：$x>0$ 时 $f(x)=x^2$，$f'(x)=2x$；$x<0$ 时 $f(x)=x$，$f'(x)=1$。</p>
+                <p><strong>② 分段点 $x=0$ 处用定义求左右导数</strong>（注意 $f(0)=0^2=0$）：</p>
+                <p>$$f'_+(0)=\\lim_{h\\to 0^+}\\frac{f(0+h)-f(0)}{h}=\\lim_{h\\to 0^+}\\frac{h^2-0}{h}=\\lim_{h\\to 0^+}h=0$$</p>
+                <p>$$f'_-(0)=\\lim_{h\\to 0^-}\\frac{f(0+h)-f(0)}{h}=\\lim_{h\\to 0^-}\\frac{h-0}{h}=1$$</p>
+                <p><strong>③ 判断</strong>：$f'_+(0)=0\\neq 1=f'_-(0)$，故 $f(x)$ 在 $x=0$ 处<strong>不可导</strong>（但连续，因 $\\lim_{x\\to 0}f(x)=0=f(0)$）。</p>
+                <blockquote>分段点处不能直接对分段表达式求导比较，必须用定义算左右导数。各段开区间内才用公式法。</blockquote>
+            `)}
+
+            ${groupTitle('fa-eye-slash', '隐函数 & 幂指函数求导', '#BF5AF2')}
+            <div class="formula-grid">
+                ${formulaCard('隐1', '隐函数法一', '$$\\text{两边对 } x \\text{ 求导，遇 } y \\text{ 用链式法则}$$', 'd/dx[g(y)] = g\'(y)·dy/dx；适合求具体点 y\'(x0)', '#BF5AF2')}
+                ${formulaCard('隐2', '隐函数法二', '$$\\frac{dy}{dx} = -\\frac{F\'_x(x,y)}{F\'_y(x,y)}$$', '公式法：对谁求导谁在分子；F\'_x 把 y 当常数，F\'_y 把 x 当常数', '#BF5AF2')}
+                ${formulaCard('幂1', '幂指·指数化', '$$u^v = e^{v \\ln u}$$', '化为指数函数后求导，结果还原为 u^v 形式', '#BF5AF2')}
+                ${formulaCard('幂2', '幂指·取对数', '$$\\ln y = v \\ln u \\Rightarrow \\frac{y\'}{y} = \\frac{v\'}{v} + \\frac{u\'}{u}$$', '连乘连除先取 ln 再对 x 求导', '#BF5AF2')}
+            </div>
+            ${memoryBox('隐函数求导法一法二对照', '法二把 x、y 视为独立变量分别求偏导（无需链式法则），适合求 y\' 的一般表达式；法一需把 y 视为 x 的函数用链式法则，适合求具体点 y\'(x0)。两者结果一致，按题目要求选用。')}
+
+            ${exampleBox('专升本真题（2020 年山东专升本 · 高数三 第 9 题）', `
+                <p>设 $y=y(x)$ 由方程 $e^y=x-y$ 确定，则 $y'=$（　）。</p>
+                <p>A. $e^y+1$　B. $1-e^y$　C. $\\dfrac{1}{e^y+1}$　D. $\\dfrac{1}{1-e^y}$</p>
+                <p><strong>解</strong>（法一）：两边对 $x$ 求导，$y$ 视为 $x$ 的函数：</p>
+                <p>$$e^y\\cdot y'=1-y' \\implies y'(e^y+1)=1 \\implies y'=\\frac{1}{e^y+1}$$</p>
+                <p class="ex-answer">选 C。</p>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 法二公式法）', `
+                <p>设 $y=y(x)$ 由方程 $x^2+y^2=1$ 确定，用公式法求 $\\dfrac{dy}{dx}$。</p>
+                <p><strong>解</strong>（法二）：令 $F(x,y)=x^2+y^2-1=0$，分别对 $x$、$y$ 求偏导（对 $x$ 求偏导时把 $y$ 当常数，对 $y$ 求偏导时把 $x$ 当常数）：</p>
+                <p>$$F'_x=2x,\\qquad F'_y=2y$$</p>
+                <p>代入公式 $\\dfrac{dy}{dx}=-\\dfrac{F'_x}{F'_y}$：</p>
+                <p>$$\\frac{dy}{dx}=-\\frac{2x}{2y}=-\\frac{x}{y}$$</p>
+                <blockquote>法二把 $x$、$y$ 视为独立变量分别求偏导（无需链式法则），适合求 $y'$ 的一般表达式；法一需把 $y$ 视为 $x$ 的函数用链式法则，适合求具体点 $y'(x_0)$。两者结果一致，按题目要求选用。</blockquote>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 隐函数二阶导）', `
+                <p>设 $y=y(x)$ 由 $e^y+xy=e$ 确定，求 $y''(0)$。</p>
+                <p><strong>解</strong>：</p>
+                <p><strong>① 定初值</strong>：代入 $x=0$，$e^{y(0)}+0=e\\Rightarrow y(0)=1$。</p>
+                <p><strong>② 求一阶导</strong>（两边对 $x$ 求导）：</p>
+                <p>$$e^y\\cdot y'+y+xy'=0 \\implies y'=-\\frac{y}{e^y+x}$$</p>
+                <p>代入 $x=0,\\,y=1$：$y'(0)=-\\dfrac{1}{e}$。</p>
+                <p><strong>③ 求二阶导</strong>（对一阶导方程 $e^y y'+y+xy'=0$ 两边再求导）：</p>
+                <p>$$e^y(y')^2+e^y y''+y'+y'+xy''=0 \\implies y''=-\\frac{e^y(y')^2+2y'}{e^y+x}$$</p>
+                <p>代入 $x=0,\\,y=1,\\,y'=-\\dfrac{1}{e}$：</p>
+                <p>$$y''(0)=-\\frac{e\\cdot\\frac{1}{e^2}+2\\cdot(-\\frac{1}{e})}{e}=-\\frac{\\frac{1}{e}-\\frac{2}{e}}{e}=\\frac{1}{e^2}$$</p>
+                <blockquote>隐函数二阶导务必对一阶导方程再求导，并将 $y'$ 用已求表达式回代；先代入数值可大大简化计算。</blockquote>
+            `)}
+
+            ${groupTitle('fa-diagram-project', '参数方程求导', '#5AC8FA')}
+            <div class="formula-grid">
+                ${formulaCard('参1', '一阶导', '$$\\frac{dy}{dx} = \\frac{y\'(t)}{x\'(t)}$$', '参数方程 x=x(t), y=y(t)：分子分母分别对参数 t 求导', '#5AC8FA')}
+                ${formulaCard('参2', '二阶导', '$$\\frac{d^2y}{dx^2} = \\frac{\\dfrac{d}{dt}\\!\\left(\\dfrac{dy}{dx}\\right)}{x\'(t)}$$', '分母沿用一阶导分母 x\'(t)，分子为一阶导整体对 t 求导', '#5AC8FA')}
+            </div>
+
+            ${exampleBox('例题（专升本难度 · 参数方程一阶导）', `
+                <p>设 $\\begin{cases}x=\\ln(1+t^2)\\\\ y=t-\\arctan t\\end{cases}$，求 $\\dfrac{dy}{dx}$。</p>
+                <p><strong>解</strong>：</p>
+                <p>$$\\frac{dx}{dt}=\\frac{2t}{1+t^2},\\qquad \\frac{dy}{dt}=1-\\frac{1}{1+t^2}=\frac{t^2}{1+t^2}$$</p>
+                <p>$$\\frac{dy}{dx}=\\frac{t^2/(1+t^2)}{2t/(1+t^2)}=\\frac{t}{2}$$</p>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 参数方程二阶导，摆线）', `
+                <p>设 $\\begin{cases}x=a(t-\\sin t)\\\\ y=a(1-\\cos t)\\end{cases}$（$a>0$），求 $\\dfrac{d^2y}{dx^2}$。</p>
+                <p><strong>解</strong>：</p>
+                <p>$$\\frac{dx}{dt}=a(1-\\cos t),\\qquad \\frac{dy}{dt}=a\\sin t$$</p>
+                <p>一阶导：</p>
+                <p>$$\\frac{dy}{dx}=\\frac{\\sin t}{1-\\cos t}$$</p>
+                <p>二阶导（先对 $t$ 求导，注意 $\\sin^2 t$ 与 $(\\sin t)^2$ 相同，求导用 $2\\sin t\\cos t$）：</p>
+                <p>$$\\frac{d}{dt}\\!\\left(\\frac{\\sin t}{1-\\cos t}\\right)=\\frac{\\cos t(1-\\cos t)-\\sin t\\cdot\\sin t}{(1-\\cos t)^2}=\\frac{\\cos t-\\cos^2 t-\\sin^2 t}{(1-\\cos t)^2}=\\frac{\\cos t-1}{(1-\\cos t)^2}=-\\frac{1}{1-\\cos t}$$</p>
+                <p>$$\\frac{d^2y}{dx^2}=\\frac{d}{dt}\\!\\left(\\frac{dy}{dx}\\right)\\cdot\\frac{dt}{dx}=\\left(-\\frac{1}{1-\\cos t}\\right)\\cdot\\frac{1}{a(1-\\cos t)}=-\\frac{1}{a(1-\\cos t)^2}$$</p>
+                <blockquote>注意区分：$\\sin^3 t$ 与 $(\\sin t)^3$ 是同一个东西（都等于 $\\sin t$ 的立方），但与 $\\sin(t^3)$ 完全不同。求导时务必看清「三次方在 $\\sin$ 上」还是「在 $t$ 上」。</blockquote>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 参数方程混杂隐函数）', `
+                <p>设 $y=y(x)$ 由参数方程 $\\begin{cases}x=3t^2\\\\ y+\\ln y=t\\end{cases}$ 确定（$y$ 是 $t$ 的隐函数），求 $\\dfrac{dy}{dx}$。</p>
+                <p><strong>解</strong>：</p>
+                <p><strong>① 求 $\\dfrac{dx}{dt}$</strong>：$x=3t^2$，故 $\\dfrac{dx}{dt}=6t$。</p>
+                <p><strong>② 求 $\\dfrac{dy}{dt}$</strong>（$y$ 是 $t$ 的隐函数，对 $y+\\ln y=t$ 两边对 $t$ 求导，用链式法则把 $y$ 视为 $t$ 的函数）：</p>
+                <p>$$\\frac{dy}{dt}+\\frac{1}{y}\\cdot\\frac{dy}{dt}=1 \\implies \\frac{dy}{dt}\\left(1+\\frac{1}{y}\\right)=1 \\implies \\frac{dy}{dt}=\\frac{y}{y+1}$$</p>
+                <p><strong>③ 代入参数方程求导公式</strong>：</p>
+                <p>$$\\frac{dy}{dx}=\\frac{\\dfrac{dy}{dt}}{\\dfrac{dx}{dt}}=\\frac{\\dfrac{y}{y+1}}{6t}=\\frac{y}{6t(y+1)}$$</p>
+                <blockquote>参数方程中 $y$（或 $x$）由隐函数给出时，先用隐函数求导法（两边对参数 $t$ 求导，$y$ 视为 $t$ 的函数用链式法则）解出 $\\dfrac{dy}{dt}$，再套参数方程公式 $\\dfrac{dy}{dx}=\\dfrac{y'(t)}{x'(t)}$。注意此处对 $t$ 求导，不是对 $x$ 求导。</blockquote>
+            `)}
+
+            ${groupTitle('fa-arrow-up-right-dots', '变限积分求导', '#FF3B30')}
+            <div class="formula-grid">
+                ${formulaCard('变1', '基本公式', '$$\\frac{d}{dx}\\int_a^x f(t)\\,dt = f(x)$$', '变上限直接代入', '#FF3B30')}
+                ${formulaCard('变2', '变下限', '$$\\frac{d}{dx}\\int_{\\psi(x)}^b f(t)\\,dt = -f\\!\\big(\\psi(x)\\big)\\psi\'(x)$$', '变下限多一个负号', '#FF3B30')}
+                ${formulaCard('变3', '上限复合', '$$\\frac{d}{dx}\\int_a^{\\varphi(x)} f(t)\\,dt = f\\!\\big(\\varphi(x)\\big)\\varphi\'(x)$$', '上限是 x 的函数：代入乘以上限导', '#FF3B30')}
+                ${formulaCard('变4', '上下限都变', '$$\\frac{d}{dx}\\int_{\\psi(x)}^{\\varphi(x)} f(t)\\,dt = f(\\varphi)\\varphi\' - f(\\psi)\\psi\'$$', '口诀「上减下」：上限代入乘上限导，减下限代入乘下限导', '#FF3B30')}
+            </div>
+
+            ${exampleBox('专升本真题（2015 年河南专升本 · 第 17 题）', `
+                <p>设 $f(x)=\\int_0^x t\\sin t\\,dt$，则 $f'(x)=$（　）。</p>
+                <p>A. $\\sin x$　B. $x\\cos x$　C. $-x\\cos x$　D. $x\\sin x$</p>
+                <p><strong>解</strong>：直接套公式，被积函数 $f(t)=t\\sin t$，上限 $x$：</p>
+                <p>$$f'(x)=x\\sin x$$</p>
+                <p class="ex-answer">选 D。</p>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 上限复合）', `
+                <p>设 $\\int_1^{x^2} f(t)\\,dt=\\ln x$，求 $f(x)$。</p>
+                <p><strong>解</strong>：两边对 $x$ 求导，左边用复合变限公式（$\\varphi(x)=x^2$）：</p>
+                <p>$$f(x^2)\\cdot 2x=\\frac{1}{x}\\implies f(x^2)=\\frac{1}{2x^2}$$</p>
+                <p>令 $u=x^2$（$x=\\sqrt{u}$），得 $f(u)=\\dfrac{1}{2u}$，故 $f(x)=\\dfrac{1}{2x}$。</p>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 被积函数含 $x$）', `
+                <p>设 $F(x)=\\int_0^x x\\cos t\\,dt$，求 $F'(x)$。</p>
+                <p><strong>解</strong>：被积函数里的 $x$ 相对积分变量 $t$ 是常数，先提出 $x$：</p>
+                <p>$$F(x)=x\\int_0^x \\cos t\\,dt$$</p>
+                <p>用乘法法则 + 变限公式：</p>
+                <p>$$F'(x)=1\\cdot\\int_0^x \\cos t\\,dt+x\\cdot\\cos x=\\sin x+x\\cos x$$</p>
+            `)}
+
+            ${memoryBox('变限积分两类处理', '① 被积函数含 x → 先把 x 提出（相对 t 是常数），用乘法法则；② x 不好提出 → 换元 u=x-t，注意换元时上下限同步换。')}
+        </div>
+
+        <div class="detail-section" id="deriv-high">
+            <div class="section-title" style="color:#FF9F0A;"><i class="fa-solid fa-layer-group"></i> 高阶导数</div>
+            <div class="section-desc">专升本范围内的 n 阶导数本质是找规律——先求前 3~4 阶，观察符号、阶乘、幂次的规律，归纳通项。含 (ax+b) 的结构每求一阶导都带出系数 a，故多乘 a^n。</div>
+            ${exToolbar}
+
+            ${groupTitle('fa-layer-group', '高阶导数（9 条）', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('高1', '自然指数', '$$(e^x)^{(n)} = e^x$$', '求导不变形，任意阶都是 e^x', '#FF9F0A')}
+                ${formulaCard('高2', '正弦', '$$(\\sin x)^{(n)} = \\sin\\!\\left(x + \\frac{n\\pi}{2}\\right)$$', '每求 1 阶相位前移 π/2，每 4 阶循环', '#FF9F0A')}
+                ${formulaCard('高3', '余弦', '$$(\\cos x)^{(n)} = \\cos\\!\\left(x + \\frac{n\\pi}{2}\\right)$$', '与正弦同理，相位前移', '#FF9F0A')}
+                ${formulaCard('高4', '幂函数', '$$(x^n)^{(n)} = n!$$', '刚好求导次数等于次数时结果为阶乘', '#FF9F0A')}
+                ${formulaCard('高5', '低次幂', '$$(x^m)^{(n)} = 0 \\quad (m < n)$$', '求导阶数超过次数时高阶导数为 0', '#FF9F0A')}
+                ${formulaCard('高6', '自然对数', '$$(\\ln x)^{(n)} = \\frac{(-1)^{n-1}(n-1)!}{x^n}$$', '符号 (−1)^(n-1)，系数 (n-1)!，分母 x^n', '#FF9F0A')}
+                ${formulaCard('高7', '倒数', '$$\\left(\\frac{1}{x}\\right)^{(n)} = \\frac{(-1)^n n!}{x^{n+1}}$$', '与 ln x 配套记忆，只差 n 与 n-1', '#FF9F0A')}
+                ${formulaCard('高8', '线性分式', '$$\\left(\\frac{1}{ax+b}\\right)^{(n)} = \\frac{(-1)^n a^n n!}{(ax+b)^{n+1}}$$', '含 (ax+b) 多乘 a^n，最易丢分', '#FF9F0A')}
+                ${formulaCard('高9', '对数线性', '$$\\left[\\ln(ax+b)\\right]^{(n)} = \\frac{(-1)^{n-1} a^n (n-1)!}{(ax+b)^n}$$', '与 1/(ax+b) 配套，多乘 a^n', '#FF9F0A')}
+            </div>
+            ${memoryBox('高阶导数找规律', '专升本范围内的 n 阶导数本质是找规律——先求前 3~4 阶，观察符号、阶乘、幂次的规律，归纳通项。含 (ax+b) 的结构每求一阶导都带出系数 a，故多乘 a^n。')}
+
+            ${exampleBox('专升本真题（2011 年河南专升本 · 第 8 题）', `
+                <p>函数 $\\sin x$ 的三阶导数是（　）。</p>
+                <p>A. $\\sin x$　B. $-\\sin x$　C. $\\cos x$　D. $-\\cos x$</p>
+                <p><strong>解</strong>：套公式 2，取 $n=3$：$y'''=\\sin\\!\\left(x+\\dfrac{3\\pi}{2}\\right)=-\\cos x$。</p>
+                <p class="ex-answer">选 D。</p>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 含 $(ax+b)$ 结构）', `
+                <p>设 $y=\\dfrac{1}{2x+1}$，求 $y^{(n)}$。</p>
+                <p><strong>解</strong>：由公式 8，$a=2,\\,b=1$：</p>
+                <p>$$y^{(n)}=\\frac{(-1)^n\\cdot 2^n\\cdot n!}{(2x+1)^{n+1}}$$</p>
+                <blockquote>含 $(ax+b)$ 的高阶导数，千万别忘了多乘 $a^n$——这是专升本最易丢分的细节。</blockquote>
+            `)}
+        </div>
+
+        <div class="detail-section" id="deriv-diff">
+            <div class="section-title" style="color:#BF5AF2;"><i class="fa-solid fa-arrows-left-right"></i> 微分公式大全</div>
             <div class="section-desc">微分 dy = f'(x) dx。求出导数后乘以 dx 就是微分——16条微分公式与导数公式一一对应，不用单独背。核心记住「一阶微分形式不变性」：无论 u 是自变量还是中间变量，dy = f'(u) du 的形式都不变。</div>
+            ${exToolbar}
+
+            ${groupTitle('fa-chart-area', '微分的几何意义（增量图）', '#FF3B30')}
+            ${differentialGeometryDiagram()}
+            ${memoryBox('微分几何理解', 'dy 是切线纵坐标的增量（线性部分），Δy 是曲线纵坐标的真实增量。二者之差 Δy−dy=o(Δx) 是比 Δx 高阶的无穷小，即 Δx 很小时 Δy≈dy，这是微分做近似计算的理论依据。')}
+
+            ${groupTitle('fa-bookmark', '微分定义', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('定义', '微分', '$$dy = f\'(x)\\,dx$$', '可导 ⟺ 可微；自变量微分 dx = Δx，故 dy = f\'(x)Δx', '#0A84FF')}
+            </div>
+
+            ${groupTitle('fa-chart-area', '几何意义 & 高阶无穷小', '#FF3B30')}
+            <div class="formula-grid">
+                ${formulaCard('几1', '增量分解', '$$\\Delta y = dy + o(\\Delta x)$$', '函数增量 = 切线增量（线性部分）+ 高阶无穷小', '#FF3B30')}
+                ${formulaCard('几2', '高阶无穷小', '$$\\Delta y - dy = o(\\Delta x)$$', '函数增量与微分之差是关于 Δx 的高阶无穷小（高频选择题）', '#FF3B30')}
+                ${formulaCard('几3', '自变量微分', '$$dx = \\Delta x$$', '自变量的微分就是它的增量', '#FF3B30')}
+                ${formulaCard('几4', '形式不变性', '$$d(f(u)) = f\'(u)\\,du$$', '一阶微分形式不变性：u 是自变量或中间变量都成立', '#FF3B30')}
+            </div>
+            ${memoryBox('微分几何理解', 'dy 是切线纵坐标的增量（线性部分），Δy 是曲线纵坐标的真实增量。二者之差 Δy−dy=o(Δx) 是比 Δx 高阶的无穷小，即 Δx 很小时 Δy≈dy，这是微分做近似计算的理论依据。')}
+
+            ${exampleBox('例题（专升本难度 · 高阶无穷小）', `
+                <p>若 $f(x)$ 可微，当 $\\Delta x\\to 0$ 时，$\\Delta y-dy$ 是关于 $\\Delta x$ 的（　）。</p>
+                <p>A. 高阶无穷小　B. 等价无穷小　C. 低阶无穷小　D. 不可比较</p>
+                <p><strong>解</strong>：由可微定义 $\\Delta y=f'(x)\\Delta x+\\alpha\\Delta x$（$\\alpha\\to 0$），而 $dy=f'(x)\\Delta x$，故 $\\Delta y-dy=\\alpha\\Delta x$，$\\lim\\limits_{\\Delta x\\to 0}\\dfrac{\\Delta y-dy}{\\Delta x}=\\lim\\alpha=0$，即 $\\Delta y-dy=o(\\Delta x)$。</p>
+                <p class="ex-answer">选 A。</p>
+            `)}
+
+            ${exampleBox('专升本真题（四川省专升本真题库 · $o(x)$ 运算）', `
+                <p>当 $x\\to 0$ 时，用 $o(x)$ 表示比 $x$ 高阶的无穷小量，下列式子中错误的是（　）。</p>
+                <p>A. $x\\cdot o(x^2)=o(x^3)$　B. $o(x)\\cdot o(x^2)=o(x^3)$　C. $o(x^2)+o(x^2)=o(x^2)$　D. $o(x)+o(x^2)=o(x^2)$</p>
+                <p><strong>解</strong>：逐项判断——A、B、C 均正确；D 中 $o(x)+o(x^2)$ 的主部是较低阶的 $o(x)$，结果应为 $o(x)$，<strong>不是</strong> $o(x^2)$。</p>
+                <p class="ex-answer">选 D。</p>
+                <blockquote>$o(\\cdot)$ 运算看最低阶——和的主部由最低阶项决定；积的阶数等于阶数相加。</blockquote>
+            `)}
 
             ${groupTitle('fa-calculator', '常数 & 幂函数', '#FFD60A')}
             <div class="formula-grid">
@@ -1688,9 +2369,179 @@ function buildDifferentialDetail() {
 
             ${memoryBox('微分 = 导数 × dx', '微分公式完全不用单独记！只需在导数公式右边乘以 dx 即可。例如：(sin x)\' = cos x → d(sin x) = cos x dx。核心概念：一阶微分形式不变性——无论 u 是自变量还是中间变量，d(f(u)) = f\'(u) du 的形式始终不变。')}
         </div>
-    `;
 
-    return { title: '微分公式详情', color: C, tabs, body: formulaBody };
+        <div class="detail-section" id="deriv-app">
+            <div class="section-title" style="color:#FF3B30;"><i class="fa-solid fa-rocket"></i> 导数的应用</div>
+            <div class="section-desc">导数应用是专升本解答题的重灾区——洛必达求极限、切线法线方程、单调区间与极值、最值、凹凸区间与拐点，核心都是把导数算出来后用于几何或极限分析。</div>
+            ${exToolbar}
+
+            ${groupTitle('fa-ladder-water', '洛必达法则', '#FF3B30')}
+            <div class="formula-grid">
+                ${formulaCard('洛1', '适用条件', '$$\\frac{0}{0} \\text{ 或 } \\frac{\\infty}{\\infty} \\text{ 型}$$', '只有这两种未定式才能直接用洛必达；其他类型需先转化', '#FF3B30')}
+                ${formulaCard('洛2', '法则公式', '$$\\lim \\frac{f(x)}{g(x)} = \\lim \\frac{f\'(x)}{g\'(x)}$$', '极限存在或为无穷才能用；失效时换方法，并非万能', '#FF3B30')}
+            </div>
+            ${memoryBox('洛必达使用要点', '① 只有 0/0 或 ∞/∞ 型才能用；② 极限存在或为无穷才能用，若用后极限不存在（震荡型）不能断言原极限不存在；③ 一般要和等价无穷小、化简结合使用，能大大减少求导次数。加减项不能直接等价替换！')}
+
+            ${exampleBox('例题（专升本难度 · 2023 年成人高考专升本《高数一》第 6 题 · 含变限积分）', `
+                <p>求 $\\lim_{x\\to 0}\\dfrac{\\int_0^x t\\,dt}{x^2}$。</p>
+                <p><strong>解</strong>：$\\dfrac{0}{0}$ 型，洛必达（分子用变限积分求导 $\\dfrac{d}{dx}\\int_0^x t\\,dt=x$）：</p>
+                <p>$$\\lim_{x\\to 0}\\frac{\\int_0^x t\\,dt}{x^2}=\\lim_{x\\to 0}\\frac{x}{2x}=\\frac{1}{2}$$</p>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 湖南专升本高数二 · 含 $e^x$）', `
+                <p>求 $\\lim_{x\\to 0}\\!\\left(\\dfrac{1}{x}-\\dfrac{1}{e^x-1}\\right)$。</p>
+                <p><strong>解</strong>：$\\infty-\\infty$ 型，先通分化为 $\\dfrac{0}{0}$ 型，再用等价无穷小 + 洛必达：</p>
+                <p>$$\\lim_{x\\to 0}\\frac{e^x-1-x}{x(e^x-1)}\\xlongequal{e^x-1\\sim x}\\lim_{x\\to 0}\\frac{e^x-1-x}{x^2}\\xlongequal{\\text{洛}}\\lim_{x\\to 0}\\frac{e^x-1}{2x}\\xlongequal{e^x-1\\sim x}\\frac{1}{2}$$</p>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 含三角函数）', `
+                <p>求 $\\lim_{x\\to 0}\\dfrac{\\tan x-\\sin x}{x^3}$。</p>
+                <p><strong>解</strong>：$\\dfrac{0}{0}$ 型。纯洛必达需三次求导很繁琐，结合等价无穷小化简更优：</p>
+                <p>$$\\tan x-\\sin x=\\frac{\\sin x(1-\\cos x)}{\\cos x}\\sim \\frac{x\\cdot \\frac{x^2}{2}}{1}=\\frac{x^3}{2}$$</p>
+                <p>故 $\\lim_{x\\to 0}\\dfrac{\\tan x-\\sin x}{x^3}=\\dfrac{1}{2}$。</p>
+                <blockquote>加减项不能直接等价替换：$\\tan x-\\sin x$ 不能换成 $x-x=0$！必须先因式分解化为乘除关系再替换。</blockquote>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 含根号）', `
+                <p>求 $\\lim_{x\\to 0}\\dfrac{\\sqrt{1+x}-1}{x}$。</p>
+                <p><strong>解</strong>：$\\dfrac{0}{0}$ 型，洛必达或等价无穷小 $(1+x)^\\alpha-1\\sim\\alpha x$：</p>
+                <p>$$\\lim_{x\\to 0}\\frac{\\sqrt{1+x}-1}{x}=\\lim_{x\\to 0}\\frac{\\frac{x}{2}}{x}=\\frac{1}{2}$$</p>
+                <blockquote>洛必达法则可用但不一定最优。遇到三角、根号、变限积分，优先结合等价无穷小化简，能大大减少求导次数。</blockquote>
+            `)}
+
+            ${groupTitle('fa-pen-ruler', '切线与法线方程', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('切1', '切线方程', '$$y - y_0 = f\'(x_0)(x - x_0)$$', '点斜式：切线斜率 k切 = f\'(x0)', '#0A84FF')}
+                ${formulaCard('切2', '法线方程', '$$y - y_0 = -\\frac{1}{f\'(x_0)}(x - x_0)$$', '法线斜率 k法 = −1/f\'(x0)（f\'(x0)≠0）；两线垂直斜率乘积=−1', '#0A84FF')}
+                ${formulaCard('切3', '两曲线相切', '$$\\begin{cases} f(x_0) = g(x_0) \\\\ f\'(x_0) = g\'(x_0) \\end{cases}$$', '公共切点：函数值相等 + 导数值相等', '#0A84FF')}
+            </div>
+            ${memoryBox('切线法线核心', '盯住两点——点（坐标）与斜率（导数值）。若 f\'(x0)=0，切线水平（y=y0），法线竖直（x=x0）。未知切点型：设切点 (t, f(t)) 列方程，切线条数 = 方程实根个数。')}
+
+            ${exampleBox('专升本真题（2024 年四川专升本 · 第 13 题 · 极值点切线）', `
+                <p>设 $y=f(x)$ 可导，$x_0=2$ 为 $f(x)$ 的极小值点，且 $f(2)=3$，求曲线在 $(2,3)$ 处的切线方程。</p>
+                <p><strong>解</strong>：极值点 + 可导 $\\implies f'(2)=0$。代入点斜式：$y-3=0\\cdot(x-2)$，即 $y=3$。</p>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 法线斜率）', `
+                <p>曲线 $y=\\dfrac{1}{x}$ 在点 $(1,1)$ 处法线的斜率为（　）。</p>
+                <p>A. $-1$　B. $-\\dfrac{1}{2}$　C. $\\dfrac{1}{2}$　D. $1$</p>
+                <p><strong>解</strong>：$y'=-\\dfrac{1}{x^2}$，$k_{\\text{切}}=y'(1)=-1$，$k_{\\text{法}}=-\\dfrac{1}{k_{\\text{切}}}=1$。</p>
+                <p class="ex-answer">选 D。</p>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 两曲线相切）', `
+                <p>若抛物线 $y=ax^2$（$a>0$）与曲线 $y=\\ln x$ 相切，求 $a$。</p>
+                <p><strong>解</strong>：设公共切点 $(x_0,y_0)$（$x_0>0$），相切需函数值与导数值都相等：</p>
+                <p>$$\\begin{cases}ax_0^2=\\ln x_0 \\\\ 2ax_0=\\dfrac{1}{x_0}\\end{cases}$$</p>
+                <p>由第二式 $ax_0^2=\\dfrac{1}{2}$，代入第一式 $\\dfrac{1}{2}=\\ln x_0$，得 $x_0=\\sqrt{e}$。代回 $ax_0^2=\\dfrac{1}{2}$：$a\\cdot e=\\dfrac{1}{2}$，故 $a=\\dfrac{1}{2e}$。</p>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 未知切点型）', `
+                <p>求过点 $P(0,-1)$ 且与抛物线 $y=x^2$ 相切的直线方程，并说明有几条切线。</p>
+                <p><strong>解</strong>：</p>
+                <p><strong>① 判断 $P$ 是否在曲线上</strong>：$0^2=0\\neq -1$，$P$ 在曲线外，需设切点。</p>
+                <p><strong>② 设切点 $(t,t^2)$</strong>，切线斜率 $y'(t)=2t$，切线方程 $y-t^2=2t(x-t)$，即 $y=2tx-t^2$。</p>
+                <p><strong>③ 切线过 $P(0,-1)$</strong>：$-1=2t\\cdot 0-t^2$，即 $t^2=1$，$t=\\pm 1$。</p>
+                <p>• $t=1$：切点 $(1,1)$，切线 $y=2x-1$；</p>
+                <p>• $t=-1$：切点 $(-1,1)$，切线 $y=-2x-1$。</p>
+                <p>方程 $t^2=1$ 有两个不同实根，故<strong>有 2 条切线</strong>。</p>
+                <blockquote>判别式求参数范围：若把外点改为 $P(0,a)$，则方程 $t^2=a$。当 $a>0$ 有 2 条切线，$a=0$ 有 1 条，$a<0$ 无切线。这就是「存在几条切线 / 求参数 $a$ 的范围」的通用思路——关于 $x_0$ 的方程实根个数。</blockquote>
+            `)}
+
+            ${exampleBox('专升本真题（2024 年河南专升本 · 第 29 题 · 已知斜率反求切点）', `
+                <p>已知曲线 $y=x^2$ 上点 $P$ 处的切线平行于直线 $y=2x-1$，求 $P$ 的坐标。</p>
+                <p><strong>解</strong>：切线斜率 $y'(x_0)=2x_0=2$（已知直线斜率），故 $x_0=1$，$y_0=1$，切点为 $(1,1)$。</p>
+                <blockquote>「切线平行于已知直线」$\\iff$「切线斜率 = 已知直线斜率」，这是「已知斜率反求切点」的典型入口。</blockquote>
+            `)}
+
+            ${groupTitle('fa-chart-line', '单调区间与极值', '#30D158')}
+            <div class="formula-grid">
+                ${formulaCard('极1', '单调递增', '$$f\'(x) > 0 \\Rightarrow f(x) \\text{ 单调递增}$$', '一阶导符号判单调', '#30D158')}
+                ${formulaCard('极2', '单调递减', '$$f\'(x) < 0 \\Rightarrow f(x) \\text{ 单调递减}$$', '一阶导为负则递减', '#30D158')}
+                ${formulaCard('极3', '极值判别一', '$$\\text{先增后减} \\Rightarrow \\text{极大值}$$', '一阶导由 + 变 −；反之先减后增为极小值', '#30D158')}
+                ${formulaCard('极4', '极值判别二', '$$f\'(x_0) = 0,\\ f\'\'(x_0) < 0 \\Rightarrow \\text{极大值}$$', 'f\'\'(x0)>0 为极小值；f\'\'(x0)=0 时法二失效', '#30D158')}
+            </div>
+            ${memoryBox('极值判别法二何时用', '当 f\'(x)=0 求出多个驻点且 f\'\'(x) 计算简单时用法二更高效（避免分区间判断符号）。如 f(x)=x³−3x²，驻点 x=0,2，f\'\'(0)=−6<0（极大），f\'\'(2)=6>0（极小）。若 f\'\'(x0)=0（如 x⁴ 在 x=0），法二失效，需用一阶导符号变化判断。')}
+
+            ${exampleBox('专升本真题（2025 年河南专升本 · 高数一 · 解答题）', `
+                <p>求函数 $f(x)=x^3-3x+1$ 的单调区间和极值。</p>
+                <p><strong>解</strong>（列表法，法一标准呈现）：</p>
+                <p><strong>① 求导</strong>：$f'(x)=3x^2-3=3(x+1)(x-1)$。</p>
+                <p><strong>② 求驻点</strong>：令 $f'(x)=0$ 得 $x_1=-1,\\,x_2=1$。两驻点将定义域 $(-\\infty,+\\infty)$ 分成三个子区间。</p>
+                <p><strong>③ 列表判符号</strong>（把驻点和子区间列成表格，每个子区间任取一点代入 $f'(x)$ 判正负）：</p>
+                <p>• $(-\\infty,-1)$ 取 $x=-2$，$f'(-2)=3\\cdot4-3=9>0$，递增；</p>
+                <p>• $(-1,1)$ 取 $x=0$，$f'(0)=-3<0$，递减；</p>
+                <p>• $(1,+\\infty)$ 取 $x=2$，$f'(2)=9>0$，递增。</p>
+                <p><strong>④ 定极值</strong>：</p>
+                <p>• $x=-1$ 处 $f'(x)$ 由 $+$ 变 $-$（先增后减）$\\implies$ 极大值 $f(-1)=(-1)^3-3(-1)+1=3$；</p>
+                <p>• $x=1$ 处 $f'(x)$ 由 $-$ 变 $+$（先减后增）$\\implies$ 极小值 $f(1)=1^3-3\\cdot1+1=-1$。</p>
+                <p class="ex-answer">单调增区间 $(-\\infty,-1)$、$(1,+\\infty)$；单调减区间 $(-1,1)$；极大值 $f(-1)=3$，极小值 $f(1)=-1$。</p>
+                <blockquote>表格法要点：① 第一行列出所有驻点与不可导点作为分界；② 第二行在每个子区间任取一点代入 $f'(x)$ 判符号；③ 第三行用 $\\nearrow/\\searrow$ 直观标示增减，分界点处写极值类型。表格法是法一的标准呈现方式，专升本解答题务必这样写。</blockquote>
+            `)}
+
+            ${exampleBox('专升本真题（2023 年河北专升本 · 高数一 第 16 题 · 第 1 问）', `
+                <p>已知 $y=2x^3-6x^2+7$，求单调区间和极值。</p>
+                <p><strong>解（第 1 问）</strong>：</p>
+                <p>$$y'=6x^2-12x=6x(x-2)$$</p>
+                <p>令 $y'=0$ 得 $x_1=0,\\,x_2=2$。用二阶导判别 $y''=12x-12$：</p>
+                <p>• $y''(0)=-12<0$ $\\implies$ $x=0$ 为极大值点，极大值 $y(0)=7$；</p>
+                <p>• $y''(2)=12>0$ $\\implies$ $x=2$ 为极小值点，极小值 $y(2)=-1$。</p>
+                <p>单调性：$x\\in(-\\infty,0)\\cup(2,+\\infty)$ 时 $y'>0$，单调递增；$x\\in(0,2)$ 时 $y'<0$，单调递减。</p>
+                <p class="ex-answer">单调增区间 $(-\\infty,0)$、$(2,+\\infty)$；单调减区间 $(0,2)$；极大值 $y(0)=7$，极小值 $y(2)=-1$。</p>
+            `)}
+
+            ${exampleBox('专升本真题（2025 年河南专升本 · 高数二 填空题）', `
+                <p>函数 $f(x)=x^3-3x$ 的单调递增区间为______。</p>
+                <p><strong>解</strong>：$f'(x)=3x^2-3=3(x+1)(x-1)$，令 $f'(x)>0$ 得 $x<-1$ 或 $x>1$。</p>
+                <p class="ex-answer">答案：$(-\\infty,-1)$ 和 $(1,+\\infty)$。</p>
+                <blockquote>单调区间与极值常在同一题出现（"求单调区间和极值"是高频描述），务必两步都写完整。</blockquote>
+            `)}
+
+            ${groupTitle('fa-trophy', '求最值', '#FFD60A')}
+            <div class="formula-grid">
+                ${formulaCard('最1', '最值比较', '$$\\max = \\max\\{f(x_i),\\, f(a),\\, f(b)\\}$$', '驻点 + 不可导点 + 端点全比较；极值不一定是最值', '#FFD60A')}
+            </div>
+
+            ${exampleBox('专升本真题（2025 年河南专升本 · 高数二 · 求最值）', `
+                <p>求 $f(x)=x^2-2x+3$ 在 $[0,3]$ 上的最大值和最小值。</p>
+                <p><strong>解</strong>：$f'(x)=2x-2$，令 $f'(x)=0$ 得 $x=1\\in[0,3]$（唯一驻点）。比较：</p>
+                <p>• $f(1)=1-2+3=2$（驻点）</p>
+                <p>• $f(0)=3$（左端点）</p>
+                <p>• $f(3)=9-6+3=6$（右端点）</p>
+                <p class="ex-answer">最大值 $f(3)=6$，最小值 $f(1)=2$。</p>
+            `)}
+
+            ${groupTitle('fa-wave', '凹凸区间与拐点', '#BF5AF2')}
+            <div class="formula-grid">
+                ${formulaCard('凹1', '凹曲线', '$$f\'\'(x) > 0 \\Rightarrow \\text{凹（开口向上）}$$', '二阶导符号判凹凸', '#BF5AF2')}
+                ${formulaCard('凹2', '凸曲线', '$$f\'\'(x) < 0 \\Rightarrow \\text{凸（开口向下）}$$', '二阶导为负则凸', '#BF5AF2')}
+                ${formulaCard('凹3', '拐点判别', '$$f\'\'(x_0) = 0 \\text{ 且两侧 } f\'\' \\text{ 符号相反} \\Rightarrow \\text{拐点}$$', '拐点必写坐标 (x0, f(x0))！两侧符号相同则不是拐点', '#BF5AF2')}
+            </div>
+            ${memoryBox('凹凸与极值区别', '二阶导 f\'\'(x) 反映曲线的凹凸性，而 f\'(x0)=0 且 f\'\'(x0) 正负反映的是极值。两者都用二阶导，但判别对象不同，务必区别记忆！拐点必须写成坐标形式 (x0, f(x0))，不能只写 x=x0——这是阅卷高频扣分点。')}
+
+            ${exampleBox('专升本真题（2025 年福建专升本 · 高数二 第 12 题）', `
+                <p>设 $f(x)=x^2 e^x$，求凹凸区间及拐点。</p>
+                <p><strong>解</strong>：</p>
+                <p>$$f'(x)=(x^2+2x)e^x,\\qquad f''(x)=(x^2+4x+2)e^x$$</p>
+                <p>因 $e^x>0$ 恒成立，令 $x^2+4x+2=0$，解得 $x_{1,2}=-2\\pm\\sqrt{2}$。</p>
+                <p>• $(-\\infty,-2-\\sqrt{2})$：$f''(x)>0$，凹；</p>
+                <p>• $(-2-\\sqrt{2},-2+\\sqrt{2})$：$f''(x)<0$，凸；</p>
+                <p>• $(-2+\\sqrt{2},+\\infty)$：$f''(x)>0$，凹。</p>
+                <p class="ex-answer">凹区间 $(-\\infty,-2-\\sqrt{2})$、$(-2+\\sqrt{2},+\\infty)$；凸区间 $(-2-\\sqrt{2},-2+\\sqrt{2})$；拐点为 $\\bigl(-2-\\sqrt{2},\\,f(-2-\\sqrt{2})\\bigr)$ 和 $\\bigl(-2+\\sqrt{2},\\,f(-2+\\sqrt{2})\\bigr)$（两个拐点，均写成坐标形式）。</p>
+                <blockquote>求 $f''(x)=0$ 的点后，必须验证两侧 $f''(x)$ 符号是否相反——相反才是拐点，相同则不是。</blockquote>
+            `)}
+
+            ${exampleBox('专升本真题（2023 年河北专升本 · 高数一 第 16 题第 2 问 · 凹凸拐点）', `
+                <p>求曲线 $y=2x^3-6x^2+7$ 的凹凸区间和拐点。</p>
+                <p><strong>解</strong>：$y''=12x-12=12(x-1)$，令 $y''=0$ 得 $x=1$。</p>
+                <p>• $x<1$ 时 $y''<0$，曲线凸；</p>
+                <p>• $x>1$ 时 $y''>0$，曲线凹。</p>
+                <p>$y''$ 在 $x=1$ 两侧异号，故 $(1,y(1))=(1,3)$ 为拐点。</p>
+                <p class="ex-answer">凸区间 $(-\\infty,1)$；凹区间 $(1,+\\infty)$；拐点 $(1,3)$。</p>
+            `)}
+        </div>
+    `;
+    return { title: '导数与微分公式详情', color: C, tabs, body };
 }
 
 // ---------- 积分详情 ----------
@@ -2667,6 +3518,17 @@ function buildLinearDetail() {
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">主对角分块直接乘</div>
                 </div>
             </div>
+
+            ${groupTitle('fa-square-root-variable', '核心公式卡（翻卡记忆）', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('行1', '二阶', '$$\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc$$', '主对角相乘减副对角相乘', '#0A84FF')}
+                ${formulaCard('行2', '转置不变', '$$D^T = D$$', '行与列等价，对行成立的性质对列也成立', 'var(--color-green)')}
+                ${formulaCard('行3', '代数余子式', '$$A_{ij} = (-1)^{i+j} M_{ij}$$', 'i+j 偶数取正，奇数取负（棋盘格）', '#FFD60A')}
+                ${formulaCard('行4', '拉普拉斯展开', '$$D = \\sum_{k=1}^{n} a_{ik} A_{ik}$$', '按第 i 行展开：同行元素 × 自己的代数余子式 = D', '#FF9F0A')}
+                ${formulaCard('行5', '异行为 0', '$$\\sum_{k=1}^{n} a_{ik} A_{jk} = 0 \\quad (i \\neq j)$$', '异行元素 × 代数余子式 = 0（替别人得 0）', '#BF5AF2')}
+                ${formulaCard('行6', '范德蒙德', '$$V_n = \\prod_{1 \\le i < j \\le n} (x_j - x_i)$$', '大下标减小下标，所有差乘起来', '#FF3B30')}
+                ${formulaCard('行7', '分块三角', '$$\\begin{vmatrix} A & O \\\\ O & B \\end{vmatrix} = |A| \\cdot |B|$$', '分块上/下三角 = 主对角分块行列式之积', '#5AC8FA')}
+            </div>
             ${memoryBox('考前必背', '这 7 条口诀覆盖了行列式全部考点。遇到题目先识别类型，再套对应口诀，最后按流程求解。')}
         </div>
     `;
@@ -2677,6 +3539,7 @@ function buildLinearDetail() {
 // ---------- 第一章·函数·极限·连续详情 ----------
 function buildFunctionDetail() {
     const C = '#FFD60A';
+    const exToolbar = `<div class="ex-flip-toolbar"><button class="ex-flip-btn" onclick="flipAllExamples(this)"><i class="fa-solid fa-rotate"></i> <span>翻转全部解析</span></button></div>`;
     const tabs = `
         <div class="detail-tab active" style="--tab-color:rgba(255,214,10,0.2);--tab-border:rgba(255,214,10,0.4);" onclick="switchTab('fn-map', this)">知识地图 · 函数</div>
         <div class="detail-tab" style="--tab-color:rgba(255,214,10,0.2);--tab-border:rgba(255,214,10,0.4);" onclick="switchTab('fn-limit1', this)">极限·七种未定式</div>
@@ -2690,6 +3553,7 @@ function buildFunctionDetail() {
         <div class="detail-section active" id="fn-map">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-building-columns"></i> 第一章 · 函数</div>
             <div class="section-desc">函数是高数的研究对象，极限是核心工具，连续是函数的良好性质。本章是一切后续模块的地基——先把函数搞懂，极限才有意义，导数、积分、微分方程才有落脚点。</div>
+            ${exToolbar}
 
             ${groupTitle('fa-sitemap', '知识地图与学习路径', '#BF5AF2')}
             <div class="formula-card" style="--card-accent:#BF5AF2;">
@@ -2733,9 +3597,9 @@ function buildFunctionDetail() {
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">sin x, cos x 的值域是 [-1,1]</div>
                 </div>
             </div>
-            ${memoryBox('💡 定义域·专升本真题（2023 山东专升本·高数Ⅰ·第1题）', '求函数 $y = \\ln(1 - 3x)$ 的定义域。<br><br><strong>解</strong>：对数的真数必须严格大于 0：<br>$$1 - 3x > 0 \\implies x < \\frac{1}{3}$$<br>故定义域为 $\\boldsymbol{\\left(-\\infty,\\, \\dfrac{1}{3}\\right)}$。<br><br><span style="color:var(--color-green);">✅ 真题启示：定义域题是专升本选择题高频第 1 题，逐条列限制条件取交集即可，属于送分题不能丢！</span>')}
+            ${exampleBox('💡 定义域·专升本真题（2023 山东专升本·高数Ⅰ·第1题）', '求函数 $y = \\ln(1 - 3x)$ 的定义域。<br><br><strong>解</strong>：对数的真数必须严格大于 0：<br>$$1 - 3x > 0 \\implies x < \\frac{1}{3}$$<br>故定义域为 $\\boldsymbol{\\left(-\\infty,\\, \\dfrac{1}{3}\\right)}$。<br><br><span style="color:var(--color-green);">✅ 真题启示：定义域题是专升本选择题高频第 1 题，逐条列限制条件取交集即可，属于送分题不能丢！</span>')}
 
-            ${memoryBox('💡 多条件交集·进阶例题（四川专升本难度）', '求 $f(x) = \\dfrac{\\sqrt{x+2}}{\\ln(1-x)}$ 的定义域：<br>① 根式：x+2 ≥ 0 → x ≥ -2<br>② 分母 ln(1-x) ≠ 0 → 1-x ≠ 1 → x ≠ 0<br>③ 对数真数：1-x > 0 → x < 1<br>三者取交集：<strong>[-2, 0) ∪ (0, 1)</strong><br><br><span style="color:#FF9F0A;">⚠ 易错点：对数同时有「真数>0」和「做分母时≠1」两个约束，别漏了 ≠0！</span>')}
+            ${exampleBox('💡 多条件交集·进阶例题（四川专升本难度）', '求 $f(x) = \\dfrac{\\sqrt{x+2}}{\\ln(1-x)}$ 的定义域。<br><br><strong>解</strong>：① 根式：x+2 ≥ 0 → x ≥ -2<br>② 分母 ln(1-x) ≠ 0 → 1-x ≠ 1 → x ≠ 0<br>③ 对数真数：1-x > 0 → x < 1<br>三者取交集：<strong>[-2, 0) ∪ (0, 1)</strong><br><br><span style="color:#FF9F0A;">⚠ 易错点：对数同时有「真数>0」和「做分母时≠1」两个约束，别漏了 ≠0！</span>')}
 
             ${groupTitle('fa-2', '1.2 求函数的表达式（两类方法）', 'var(--color-green)')}
             <div class="formula-grid">
@@ -2744,27 +3608,16 @@ function buildFunctionDetail() {
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
                         已知 $f(\\square) = A$，令 $t = \\square$，反解出 $\\square$ 中的 $x = \\varphi(t)$，再代入右边把 $A$ 变成关于 $t$ 的表达式，最后把 $t$ 换回 $x$。
                     </div>
-                    <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">例题</div>
-                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                        已知 $f(2x-1) = x^2$，求 $f(x)$：<br>
-                        令 $t = 2x-1 \\implies x = \\dfrac{t+1}{2}$，代入得：<br>
-                        $f(t) = \\left(\\dfrac{t+1}{2}\\right)^2 = \\dfrac{(t+1)^2}{4}$，<br>
-                        故 $f(x) = \\dfrac{(x+1)^2}{4}$
-                    </div>
                 </div>
                 <div class="formula-card" style="--card-accent:var(--color-green);">
                     <div class="formula-label" style="color:var(--color-green);">方法二：配凑法</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
                         本质是凑：$f(\\square) = A$，想办法把右边的 $A$ 写成含 $\\square$ 的式子，直接看出 $f(x)$ 的形式。
                     </div>
-                    <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">例题</div>
-                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                        已知 $f\\!\\left(x + \\dfrac{1}{x}\\right) = x^2 + \\dfrac{1}{x^2}$：<br>
-                        配凑：右边 $= \\left(x+\\dfrac{1}{x}\\right)^2 - 2$<br>
-                        $\\therefore f(\\square) = \\square^2 - 2$，即 $f(x) = x^2 - 2$
-                    </div>
                 </div>
             </div>
+            ${exampleBox('换元法例题：已知 f(2x-1)=x² 求 f(x)', '已知 $f(2x-1) = x^2$，求 $f(x)$。<br><br><strong>解</strong>：令 $t = 2x-1 \\implies x = \\dfrac{t+1}{2}$，代入得：$f(t) = \\left(\\dfrac{t+1}{2}\\right)^2 = \\dfrac{(t+1)^2}{4}$，故 $f(x) = \\dfrac{(x+1)^2}{4}$')}
+            ${exampleBox('配凑法例题：已知 f(x+1/x)=x²+1/x² 求 f(x)', '已知 $f\\!\\left(x + \\dfrac{1}{x}\\right) = x^2 + \\dfrac{1}{x^2}$，求 $f(x)$。<br><br><strong>解</strong>：配凑：右边 $= \\left(x+\\dfrac{1}{x}\\right)^2 - 2$，$\\therefore f(\\square) = \\square^2 - 2$，即 $f(x) = x^2 - 2$')}
             ${memoryBox('选择建议', '题目能换元就先换元——普适性最强，不容易错。配凑法需要数感，凑不出就老老实实换元。')}
 
             ${groupTitle('fa-check-double', '1.3 判断两个函数是否相同', '#BF5AF2')}
@@ -2772,11 +3625,8 @@ function buildFunctionDetail() {
                 <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
                     $$\\text{两函数相同} \\iff \\begin{cases} \\text{定义域相同} \\\\ \\text{对应法则相同（即对相同输入，输出相同）} \\end{cases}$$
                 </div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;">
-                    例题：$f(x)=x$ 与 $g(x) = (\\sqrt{x})^2$ 是否相同？<br>
-                    定义域：$f(x)$ 为 $\\mathbb{R}$，$g(x)$ 为 $[0, +\\infty)$ → <strong>定义域不同</strong> → <strong>不是同一函数</strong>。
-                </div>
             </div>
+            ${exampleBox('例题 · 判断两函数是否相同', '$f(x)=x$ 与 $g(x) = (\\sqrt{x})^2$ 是否相同？<br><br><strong>解</strong>：定义域：$f(x)$ 为 $\\mathbb{R}$，$g(x)$ 为 $[0, +\\infty)$ → <strong>定义域不同</strong> → <strong>不是同一函数</strong>。')}
 
             ${groupTitle('fa-star', '1.4 函数四大特性', '#FF9F0A')}
             <div class="formula-grid">
@@ -2816,7 +3666,7 @@ function buildFunctionDetail() {
             </div>
             ${memoryBox('奇偶性友好提醒', '判断奇偶性第一步永远是先看定义域是否关于原点对称！如果定义域不对称（比如 [0, +∞)），直接非奇非偶。经典：$f(x)=x^2$ 在 $[0,+\\infty)$ 上非奇非偶，在 $\\mathbb{R}$ 上才是偶函数。')}
 
-            ${memoryBox('💡 专升本真题（2024 四川专升本·第1题）· 奇偶性+有界性综合', '函数 $y = \\dfrac{1}{1 + x^2}$ 是（ ）。<br>A. 有界奇函数　B. 有界偶函数　C. 无界奇函数　D. 无界偶函数<br><br><strong>解</strong>：<br>① <strong>判奇偶</strong>：$f(-x) = \\dfrac{1}{1+(-x)^2} = \\dfrac{1}{1+x^2} = f(x)$ → 偶函数。<br>② <strong>判有界</strong>：$1 + x^2 \\geq 1$，故 $0 < \\dfrac{1}{1+x^2} \\leq 1$ → 有界。<br>∴ 选 <strong>B</strong>。<br><br><span style="color:var(--color-green);">✅ 真题启示：四川专升本第 1 题常考「四大特性综合判断」，先判奇偶再判有界，两步走稳拿分。</span>')}
+            ${exampleBox('💡 专升本真题（2024 四川专升本·第1题）· 奇偶性+有界性综合', '函数 $y = \\dfrac{1}{1 + x^2}$ 是（ ）。<br>A. 有界奇函数　B. 有界偶函数　C. 无界奇函数　D. 无界偶函数<br><br><strong>解</strong>：<br>① <strong>判奇偶</strong>：$f(-x) = \\dfrac{1}{1+(-x)^2} = \\dfrac{1}{1+x^2} = f(x)$ → 偶函数。<br>② <strong>判有界</strong>：$1 + x^2 \\geq 1$，故 $0 < \\dfrac{1}{1+x^2} \\leq 1$ → 有界。<br>∴ 选 <strong>B</strong>。<br><br><span style="color:var(--color-green);">✅ 真题启示：四川专升本第 1 题常考「四大特性综合判断」，先判奇偶再判有界，两步走稳拿分。</span>')}
 
             ${groupTitle('fa-rotate', '1.5 反函数求解四步走', '#5AC8FA')}
             <div class="formula-card chapter-flow-card" style="--card-accent:#5AC8FA;">
@@ -2837,15 +3687,7 @@ function buildFunctionDetail() {
                     <span>写出定义域，即 STEP 1 中求得的原函数值域。</span>
                 </div>
             </div>
-            <div class="formula-card chapter-example-card" style="--card-accent:#5AC8FA;">
-                <div class="formula-label" style="color:#5AC8FA;">例题：提公因子反解</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
-                    求 $y = \\dfrac{1-x}{1+x}$ 的反函数。<br>
-                    $y(1+x)=1-x \\implies y+xy=1-x \\implies xy+x=1-y$<br>
-                    提取 $x$：$x(y+1)=1-y \\implies x=\\dfrac{1-y}{1+y}$<br>
-                    交换字母：$y=\\dfrac{1-x}{1+x}$，所以该函数的反函数就是它自己。
-                </div>
-            </div>
+            ${exampleBox('例题 · 提公因子反解求反函数', '求 $y = \\dfrac{1-x}{1+x}$ 的反函数。<br><br><strong>解</strong>：$y(1+x)=1-x \\implies y+xy=1-x \\implies xy+x=1-y$，提取 $x$：$x(y+1)=1-y \\implies x=\\dfrac{1-y}{1+y}$，交换字母：$y=\\dfrac{1-x}{1+x}$，所以该函数的反函数就是它自己。')}
             ${memoryBox('分段函数反函数', '分段函数分别对每个式子求反函数，再对应拼起来写定义域即可。')}
         </div>
     `;
@@ -2855,6 +3697,7 @@ function buildFunctionDetail() {
         <div class="detail-section" id="fn-limit1">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-infinity"></i> 极限 · 七种未定式全题型</div>
             <div class="section-desc">极限是整个高数的灵魂——导数定义、定积分定义、无穷小比较、级数收敛都是极限。专升本必考 1~2 道计算大题，核心是识别七种未定式类型、选对方法。</div>
+            ${exToolbar}
 
             ${groupTitle('fa-key', '2.1 极限基础', '#0A84FF')}
             <div class="formula-grid">
@@ -2934,12 +3777,8 @@ function buildFunctionDetail() {
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     核心：$x \\to 0$ 时，$\\sin x \\sim x$，$\\tan x \\sim x$，$e^x-1 \\sim x$，$\\ln(1+x) \\sim x$，$1-\\cos x \\sim \\dfrac{x^2}{2}$ 等（完整等价表见 Tab 3）。
                 </div>
-                <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">例题（2024 四川专升本难度）</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    求 $I = \\lim\\limits_{x \\to 0} \\dfrac{\\sin 3x}{\\tan 2x}$（$\\frac{0}{0}$ 型）<br><br>
-                    <strong>等价法</strong>：$\\sin 3x \\sim 3x$，$\\tan 2x \\sim 2x$ → $I = \\lim\\limits_{x\\to 0} \\dfrac{3x}{2x} = \\dfrac{3}{2}$
-                </div>
             </div>
+            ${exampleBox('例题（2024 四川专升本难度）· 0/0 型等价法', '求 $I = \\lim\\limits_{x \\to 0} \\dfrac{\\sin 3x}{\\tan 2x}$（$\\frac{0}{0}$ 型）<br><br><strong>解</strong>：<strong>等价法</strong>：$\\sin 3x \\sim 3x$，$\\tan 2x \\sim 2x$ → $I = \\lim\\limits_{x\\to 0} \\dfrac{3x}{2x} = \\dfrac{3}{2}$')}
             ${memoryBox('友好提醒：加减关系慎用等价！', '等价无穷小在「乘除关系」可以直接替换；「加减关系」一般不能直接替——除非你非常熟练，知道高阶项抵消后没问题。专升本稳拿分建议：加减不要直接等价，先处理成乘除形式再替。')}
 
             ${groupTitle('fa-2', '2.4 $\\dfrac{\\infty}{\\infty}$ 型：抓大头', 'var(--color-green)')}
@@ -2951,13 +3790,8 @@ function buildFunctionDetail() {
                     ② 分子最高次 <strong><</strong> 分母最高次 → 极限 = <strong>0</strong><br>
                     ③ 分子最高次 <strong>></strong> 分母最高次 → 极限 = <strong>∞（不存在）</strong>
                 </div>
-                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">例题（2023 山东专升本难度）</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    $I = \\lim\\limits_{x \\to \\infty} \\dfrac{3x^3 - 2x + 1}{5x^3 + x^2 - 7}$<br>
-                    分子最高次 $x^3$ 系数 3，分母最高次 $x^3$ 系数 5 → 抓大头：<br>
-                    $I = \\dfrac{3}{5}$
-                </div>
             </div>
+            ${exampleBox('例题（2023 山东专升本难度）· ∞/∞ 型抓大头', '$I = \\lim\\limits_{x \\to \\infty} \\dfrac{3x^3 - 2x + 1}{5x^3 + x^2 - 7}$<br><br><strong>解</strong>：分子最高次 $x^3$ 系数 3，分母最高次 $x^3$ 系数 5 → 抓大头：$I = \\dfrac{3}{5}$')}
 
             ${groupTitle('fa-3', '2.5 $\\infty - \\infty$ 型：有理化 / 通分 / 倒代换', '#FF9F0A')}
             <div class="formula-grid">
@@ -2966,26 +3800,16 @@ function buildFunctionDetail() {
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;">
                         $\\sqrt{A} - \\sqrt{B}$ 乘 $\\frac{\\sqrt{A}+\\sqrt{B}}{\\sqrt{A}+\\sqrt{B}}$ 化为 $\\frac{A-B}{\\sqrt{A}+\\sqrt{B}}$，通常变为 $\\frac{\\infty}{\\infty}$ 再抓大头。
                     </div>
-                    <div class="formula-label" style="color:#FF9F0A;margin-top:0.75rem;">例题</div>
-                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                        $I = \\lim\\limits_{n \\to \\infty} (\\sqrt{n^2+n} - n)$<br>
-                        有理化：$I = \\lim\\limits_{n \\to \\infty} \\dfrac{n}{\\sqrt{n^2+n}+n}$<br>
-                        抓大头（分子 n 次 1，分母 n 次 1）→ $\\dfrac{1}{1+1} = \\dfrac{1}{2}$
-                    </div>
                 </div>
                 <div class="formula-card" style="--card-accent:#BF5AF2;">
                     <div class="formula-label" style="color:#BF5AF2;">分式 - 分式 → 直接通分</div>
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;">
                         左右分母相乘为公分母，分子交叉相乘并相减。通分后通常成为 $\\frac{0}{0}$ 型，再洛必达或等价。
                     </div>
-                    <div class="formula-label" style="color:#BF5AF2;margin-top:0.75rem;">例题</div>
-                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                        $I = \\lim\\limits_{x \\to 0} \\left(\\dfrac{1}{x} - \\dfrac{1}{e^x-1}\\right)$<br>
-                        通分：$I = \\lim\\limits_{x \\to 0} \\dfrac{e^x-1-x}{x(e^x-1)}$<br>
-                        分母：$x(e^x-1) \\sim x \\cdot x = x^2$，分子用泰勒或两次洛必达 → $I = \\dfrac{1}{2}$
-                    </div>
                 </div>
             </div>
+            ${exampleBox('例题 · ∞−∞ 型有理化', '$I = \\lim\\limits_{n \\to \\infty} (\\sqrt{n^2+n} - n)$<br><br><strong>解</strong>：有理化：$I = \\lim\\limits_{n \\to \\infty} \\dfrac{n}{\\sqrt{n^2+n}+n}$，抓大头（分子 n 次 1，分母 n 次 1）→ $\\dfrac{1}{1+1} = \\dfrac{1}{2}$')}
+            ${exampleBox('例题 · ∞−∞ 型通分', '$I = \\lim\\limits_{x \\to 0} \\left(\\dfrac{1}{x} - \\dfrac{1}{e^x-1}\\right)$<br><br><strong>解</strong>：通分：$I = \\lim\\limits_{x \\to 0} \\dfrac{e^x-1-x}{x(e^x-1)}$，分母：$x(e^x-1) \\sim x \\cdot x = x^2$，分子用泰勒或两次洛必达 → $I = \\dfrac{1}{2}$')}
             ${memoryBox('兜底工具：倒代换', '当上面两种方法都难处理时（比如 x→∞ 出现复杂分式-分式），设 $x = \\dfrac{1}{t}$（即 $t = \\dfrac{1}{x}$），转为 $t \\to 0$ 的问题，此时可做等价或洛必达。本质：把 ∞→0 好处理。')}
 
             ${groupTitle('fa-4', '2.6 $0 \\cdot \\infty$ 型：下放简单的那个', '#5AC8FA')}
@@ -2993,13 +3817,8 @@ function buildFunctionDetail() {
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
                     核心：把其中一个挪到分母，转为 $\\frac{0}{0}$ 或 $\\frac{\\infty}{\\infty}$。<strong>下放「简单」的那个</strong>——指多项式、简单因子，不要下放 $\\ln x$、复杂三角函数。
                 </div>
-                <div class="formula-label" style="color:#5AC8FA;margin-top:1rem;">例题</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    $I = \\lim\\limits_{x \\to 0^+} x \\ln x$（$0 \\cdot (-\\infty)$ 型）<br>
-                    下放简单的 $x$：$I = \\lim\\limits_{x \\to 0^+} \\dfrac{\\ln x}{1/x}$（现为 $\\frac{-\\infty}{+\\infty}$ 型）<br>
-                    洛必达：$\\lim\\limits_{x \\to 0^+} \\dfrac{1/x}{-1/x^2} = \\lim\\limits_{x \\to 0^+} (-x) = 0$
-                </div>
             </div>
+            ${exampleBox('例题 · 0·∞ 型下放', '$I = \\lim\\limits_{x \\to 0^+} x \\ln x$（$0 \\cdot (-\\infty)$ 型）<br><br><strong>解</strong>：下放简单的 $x$：$I = \\lim\\limits_{x \\to 0^+} \\dfrac{\\ln x}{1/x}$（现为 $\\frac{-\\infty}{+\\infty}$ 型），洛必达：$\\lim\\limits_{x \\to 0^+} \\dfrac{1/x}{-1/x^2} = \\lim\\limits_{x \\to 0^+} (-x) = 0$')}
 
             ${groupTitle('fa-star', '2.7 $1^\\infty$ 型 ⭐⭐⭐ 最高频必考题', '#FF3B30')}
             <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
@@ -3011,21 +3830,9 @@ function buildFunctionDetail() {
                     <strong>情况 A（题目里已经有 $1+$ 形式）</strong>：直接 $e^{\\lim \\alpha \\cdot \\beta}$，其中 $u = 1 + \\alpha$，$v = \\beta$。<br>
                     <strong>情况 B（题目里没有明显 $1+$）</strong>：先写成 $[1 + (u-1)]^v$，然后 $e^{\\;\\lim (u-1) \\cdot v}$。上面的方框公式两种都适用。
                 </div>
-                <div class="formula-label" style="color:#FF3B30;margin-top:1rem;">例题一（2023 河南专升本真题难度 · 情况 A：有 1+）</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    $I = \\lim\\limits_{x \\to \\infty} \\left(1 + \\dfrac{3}{x}\\right)^{2x}$<br>
-                    识别：$1^\\infty$，其中 $\\alpha = \\dfrac{3}{x}$，$\\beta = 2x$<br>
-                    直接用：$I = e^{\\;\\lim \\alpha \\cdot \\beta} = e^{\\;\\lim \\frac{3}{x} \\cdot 2x} = e^{\\;\\lim 6} = \\boxed{e^6}$
-                </div>
-                <div class="formula-label" style="color:#FF3B30;margin-top:1rem;">例题二（2024 四川专升本难度 · 情况 B：没有 1+，先减 1）</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    $I = \\lim\\limits_{x \\to 0} (\\cos x)^{\\frac{1}{x^2}}$<br>
-                    识别：底 $\\cos x \\to 1$，指 $1/x^2 \\to \\infty$，属 $1^\\infty$ 型。用方框公式：<br>
-                    $I = e^{\\;\\lim (\\cos x - 1) \\cdot \\frac{1}{x^2}}$<br>
-                    其中 $\\cos x - 1 \\sim -\\dfrac{x^2}{2}$，代入：<br>
-                    $I = e^{\\;\\lim \\frac{-x^2/2}{x^2}} = e^{-1/2} = \\boxed{\\dfrac{1}{\\sqrt{e}}}$
-                </div>
             </div>
+            ${exampleBox('例题一（2023 河南专升本真题难度 · 情况 A：有 1+）', '$I = \\lim\\limits_{x \\to \\infty} \\left(1 + \\dfrac{3}{x}\\right)^{2x}$<br><br><strong>解</strong>：识别：$1^\\infty$，其中 $\\alpha = \\dfrac{3}{x}$，$\\beta = 2x$，直接用：$I = e^{\\;\\lim \\alpha \\cdot \\beta} = e^{\\;\\lim \\frac{3}{x} \\cdot 2x} = e^{\\;\\lim 6} = \\boxed{e^6}$')}
+            ${exampleBox('例题二（2024 四川专升本难度 · 情况 B：没有 1+，先减 1）', '$I = \\lim\\limits_{x \\to 0} (\\cos x)^{\\frac{1}{x^2}}$<br><br><strong>解</strong>：识别：底 $\\cos x \\to 1$，指 $1/x^2 \\to \\infty$，属 $1^\\infty$ 型。用方框公式：$I = e^{\\;\\lim (\\cos x - 1) \\cdot \\frac{1}{x^2}}$，其中 $\\cos x - 1 \\sim -\\dfrac{x^2}{2}$，代入：$I = e^{\\;\\lim \\frac{-x^2/2}{x^2}} = e^{-1/2} = \\boxed{\\dfrac{1}{\\sqrt{e}}}$')}
             ${memoryBox('1^∞ 友好提醒', '① 看到「底 → 1，指 → ∞」立刻触发此公式；② 有 1+ 直接乘指数，没有先减 1 再乘指数；③ 专升本考 1^∞ 的概率是所有未定式里最高的，必须练到不假思索就能套公式。')}
 
             ${groupTitle('fa-5', '2.8 $0^0$ 型 与 $\\infty^0$ 型：统一指数化', '#BF5AF2')}
@@ -3036,13 +3843,8 @@ function buildFunctionDetail() {
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;line-height:1.8;">
                     指对恒等式把幂指函数拆成指数函数，再看指数上的 $v \\cdot \\ln u$ 通常变为 $0 \\cdot \\infty$，再下放（见 2.6）。
                 </div>
-                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">例题（$0^0$ 型）</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    $I = \\lim\\limits_{x \\to 0^+} x^x$（$0^0$ 型）<br>
-                    指数化：$I = e^{\\;\\lim_{x \\to 0^+} x \\ln x}$<br>
-                    指数上就是 2.6 的例题，极限为 0，故 $I = e^0 = \\boxed{1}$
-                </div>
             </div>
+            ${exampleBox('例题 · 0⁰ 型指数化', '$I = \\lim\\limits_{x \\to 0^+} x^x$（$0^0$ 型）<br><br><strong>解</strong>：指数化：$I = e^{\\;\\lim_{x \\to 0^+} x \\ln x}$，指数上就是 2.6 的例题，极限为 0，故 $I = e^0 = \\boxed{1}$')}
         </div>
     `;
 
@@ -3051,60 +3853,53 @@ function buildFunctionDetail() {
         <div class="detail-section" id="fn-limit2">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-toolbox"></i> 极限 · 常用方法 + 左右极限 + 反求参数</div>
             <div class="section-desc">除七种未定式之外，专升本还有 6 大高频技巧、4 种必须分左右极限的场景、以及「已知极限反求参数」这类经典题。</div>
+            ${exToolbar}
 
             ${groupTitle('fa-table', '3.1 完整等价无穷小表（来源：B 站 UP·中崎高数 第二章）', '#FF9F0A')}
-            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
-                <div class="formula-label" style="color:#FF9F0A;">当 $x \\to 0$ 时，以下等价关系成立</div>
 
-                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">① 基础等价无穷小（6 连等）</div>
-                <div class="formula-block" style="border:none;background:none;padding:0;">
-                    $$\\sin x \\sim \\tan x \\sim \\arcsin x \\sim \\arctan x \\sim e^x-1 \\sim \\ln(1+x) \\sim x$$
-                </div>
+            ${groupTitle('fa-1', '① 基础等价无穷小（x→0，6 连等）', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('等1', '6 连等', '$$\\sin x \\sim \\tan x \\sim \\arcsin x \\sim \\arctan x \\sim e^x-1 \\sim \\ln(1+x) \\sim x$$', '专升本最核心的 6 连等，乘除关系直接替换', '#FF9F0A')}
+            </div>
 
-                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">② 二次与指数型</div>
-                <div class="formula-grid" style="margin:0.5rem 0;">
-                    <div style="padding:0.5rem;">$1 - \\cos x \\sim \\dfrac{x^2}{2}$</div>
-                    <div style="padding:0.5rem;">$(1+\\beta x)^\\alpha - 1 \\sim \\alpha \\beta x$</div>
-                    <div style="padding:0.5rem;">$a^x - 1 \\sim x \\ln a$</div>
-                    <div style="padding:0.5rem;">$\\log_a (1+x) \\sim \\dfrac{x}{\\ln a}$</div>
-                </div>
+            ${groupTitle('fa-2', '② 二次与指数型（x→0）', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('等2', '余弦', '$$1 - \\cos x \\sim \\dfrac{x^2}{2}$$', '二次型，高频', '#FF9F0A')}
+                ${formulaCard('等3', '幂指型', '$$(1+\\beta x)^\\alpha - 1 \\sim \\alpha \\beta x$$', '带比例常数的通用形式', '#FF9F0A')}
+                ${formulaCard('等4', '指数', '$$a^x - 1 \\sim x \\ln a$$', '一般指数；e^x-1 ~ x 是 a=e 特例', '#FF9F0A')}
+                ${formulaCard('等5', '对数', '$$\\log_a (1+x) \\sim \\dfrac{x}{\\ln a}$$', '一般对数；ln(1+x) ~ x 是 a=e 特例', '#FF9F0A')}
+            </div>
 
-                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">③ 高阶等价无穷小（$x^3$ 型，带符号！）</div>
-                <div class="formula-grid" style="margin:0.5rem 0;">
-                    <div style="padding:0.5rem;">$x - \\sin x \\sim \\dfrac{1}{6}x^3$（<span style="color:var(--color-green);">正</span>）</div>
-                    <div style="padding:0.5rem;">$x - \\arcsin x \\sim -\\dfrac{1}{6}x^3$（<span style="color:#FF3B30;">负</span>）</div>
-                    <div style="padding:0.5rem;">$x - \\tan x \\sim -\\dfrac{1}{3}x^3$（<span style="color:#FF3B30;">负</span>）</div>
-                    <div style="padding:0.5rem;">$x - \\arctan x \\sim \\dfrac{1}{3}x^3$（<span style="color:var(--color-green);">正</span>）</div>
-                </div>
+            ${groupTitle('fa-3', '③ 高阶等价无穷小（x³ 型，带符号！）', '#FF3B30')}
+            <div class="formula-grid">
+                ${formulaCard('等6', 'x−sin', '$$x - \\sin x \\sim \\dfrac{1}{6}x^3$$', '正号', 'var(--color-green)')}
+                ${formulaCard('等7', 'x−arcsin', '$$x - \\arcsin x \\sim -\\dfrac{1}{6}x^3$$', '负号', '#FF3B30')}
+                ${formulaCard('等8', 'x−tan', '$$x - \\tan x \\sim -\\dfrac{1}{3}x^3$$', '负号', '#FF3B30')}
+                ${formulaCard('等9', 'x−arctan', '$$x - \\arctan x \\sim \\dfrac{1}{3}x^3$$', '正号', 'var(--color-green)')}
+            </div>
 
-                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">④ 特殊情况：当 $x \\to 1$ 时</div>
-                <div class="formula-block" style="border:none;background:none;padding:0;">
-                    $$\\ln x \\sim x - 1$$
-                </div>
+            ${groupTitle('fa-4', '④ 特殊情况（x→1）', '#BF5AF2')}
+            <div class="formula-grid">
+                ${formulaCard('等10', '对数', '$$\\ln x \\sim x - 1 \\quad (x \\to 1)$$', '极限过程是 x→1，不是 x→0', '#BF5AF2')}
+            </div>
 
-                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">⑤ 对数 / 根号型（$x \\to 0$ 时）</div>
-                <div class="formula-grid" style="margin:0.5rem 0;">
-                    <div style="padding:0.5rem;">$x - \\ln(1+x) \\sim \\dfrac{1}{2}x^2$（<span style="color:var(--color-green);">正</span>，对数二次型）</div>
-                    <div style="padding:0.5rem;">$\\ln(1+x) - x \\sim -\\dfrac{1}{2}x^2$（<span style="color:#FF3B30;">负</span>，对数二次型）</div>
-                    <div style="padding:0.5rem;">$1 - \\sqrt{1+\\alpha x} \\sim -\\dfrac{\\alpha}{2}x$（<span style="color:#FF3B30;">负</span>，根号型）</div>
-                </div>
-                <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);line-height:1.8;margin-top:0.4rem;">
-                    💡 记忆口诀：对数二次型 — 「$x$ 减对数 <strong>正</strong> $\\dfrac{x^2}{2}$；对数减 $x$ <strong>负</strong> $\\dfrac{x^2}{2}$」；根号型 — $1-\\sqrt{1+u} \\sim -\\dfrac{u}{2}$，代入 $u=\\alpha x$ 即得。
-                </div>
+            ${groupTitle('fa-5', '⑤ 对数 / 根号型（x→0）', '#5AC8FA')}
+            <div class="formula-grid">
+                ${formulaCard('等11', 'x−ln(1+x)', '$$x - \\ln(1+x) \\sim \\dfrac{1}{2}x^2$$', '对数二次型，正号', 'var(--color-green)')}
+                ${formulaCard('等12', 'ln(1+x)−x', '$$\\ln(1+x) - x \\sim -\\dfrac{1}{2}x^2$$', '对数二次型，负号', '#FF3B30')}
+                ${formulaCard('等13', '根号型', '$$1 - \\sqrt{1+\\alpha x} \\sim -\\dfrac{\\alpha}{2}x$$', '根号型，负号', '#FF3B30')}
             </div>
             ${memoryBox('等价无穷小使用原则', '<strong>乘除关系</strong>直接等价替换（不用犹豫，大胆用）；<strong>加减关系</strong>一般不能直接替——容易丢高阶项导致出错。加减想稳得分：先通分、先有理化、先处理成乘除，再等价。高阶等价（③中的 4 条）在 0/0 型中直接替换可秒解，无需多次洛必达。')}
+
+            ${memoryBox('记忆口诀', '对数二次型 — 「x 减对数 <strong>正</strong> x²/2；对数减 x <strong>负</strong> x²/2」；根号型 — 1−√(1+u) ~ −u/2，代入 u=αx 即得。')}
 
             ${groupTitle('fa-check', '3.2 方法：非零因子先算', '#0A84FF')}
             <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
                     在<strong>乘除关系</strong>中，若某因子的极限 $\\neq 0$，可以先把它求出来再处理剩下部分。这样可以大幅简化表达式。
                 </div>
-                <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">例题</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    $I = \\lim\\limits_{x \\to 0} \\dfrac{(e^x-1) \\cdot \\tan x \\cdot \\cos x}{x^2}$<br>
-                    $\\cos 0 = 1 \\neq 0$，先算：$I = \\lim\\limits_{x \\to 0} \\cos x \\cdot \\lim\\limits_{x \\to 0} \\dfrac{(e^x-1)\\tan x}{x^2} = 1 \\cdot \\lim\\limits_{x \\to 0} \\dfrac{x \\cdot x}{x^2} = 1$
-                </div>
             </div>
+            ${exampleBox('例题 · 非零因子先算', '$I = \\lim\\limits_{x \\to 0} \\dfrac{(e^x-1) \\cdot \\tan x \\cdot \\cos x}{x^2}$<br><br><strong>解</strong>：$\\cos 0 = 1 \\neq 0$，先算：$I = \\lim\\limits_{x \\to 0} \\cos x \\cdot \\lim\\limits_{x \\to 0} \\dfrac{(e^x-1)\\tan x}{x^2} = 1 \\cdot \\lim\\limits_{x \\to 0} \\dfrac{x \\cdot x}{x^2} = 1$')}
 
             ${groupTitle('fa-sigma', '3.3 方法：等差/等比数列求和', 'var(--color-green)')}
             <div class="formula-grid">
@@ -3121,7 +3916,7 @@ function buildFunctionDetail() {
                     </div>
                 </div>
             </div>
-            ${memoryBox('例题', '求 $I = \\lim\\limits_{n\\to\\infty} \\dfrac{1+2+\\cdots+n}{n^2}$：<br>分子等差数列求和 = $\\dfrac{n(n+1)}{2}$ → $I = \\lim\\limits_{n\\to\\infty} \\dfrac{n(n+1)}{2n^2} = \\dfrac{1}{2}$')}
+            ${exampleBox('例题 · n 项等差数列求和求极限', '求 $I = \\lim\\limits_{n\\to\\infty} \\dfrac{1+2+\\cdots+n}{n^2}$。<br><br><strong>解</strong>：分子等差数列求和 = $\\dfrac{n(n+1)}{2}$ → $I = \\lim\\limits_{n\\to\\infty} \\dfrac{n(n+1)}{2n^2} = \\dfrac{1}{2}$')}
 
             ${groupTitle('fa-object-group', '3.4 方法：夹逼定理（Squeeze Theorem）', '#5AC8FA')}
             <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
@@ -3133,15 +3928,8 @@ function buildFunctionDetail() {
                     <strong>只看分母！</strong>分母越小 → 分式越大；分母越大 → 分式越小。<br>
                     典型：$\\sum$ 形式且各项分母不同——放缩分母为相同值，然后求和夹。
                 </div>
-                <div class="formula-label" style="color:#5AC8FA;margin-top:1rem;">例题（经典）</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    $I = \\lim\\limits_{n\\to\\infty}\\left(\\dfrac{1}{\\sqrt{n^2+1}} + \\dfrac{1}{\\sqrt{n^2+2}} + \\cdots + \\dfrac{1}{\\sqrt{n^2+n}}\\right)$<br>
-                    每项分母范围：$\\sqrt{n^2+1} \\sim \\sqrt{n^2+n}$，共 $n$ 项<br>
-                    分母小（$\\sqrt{n^2+1}$）→ 分式大，<strong>上界</strong> = $\\dfrac{n}{\\sqrt{n^2+1}} \\to 1$<br>
-                    分母大（$\\sqrt{n^2+n}$）→ 分式小，<strong>下界</strong> = $\\dfrac{n}{\\sqrt{n^2+n}} \\to 1$<br>
-                    由夹逼定理，$I = \\boxed{1}$
-                </div>
             </div>
+            ${exampleBox('例题（经典）· 夹逼定理', '$I = \\lim\\limits_{n\\to\\infty}\\left(\\dfrac{1}{\\sqrt{n^2+1}} + \\dfrac{1}{\\sqrt{n^2+2}} + \\cdots + \\dfrac{1}{\\sqrt{n^2+n}}\\right)$<br><br><strong>解</strong>：每项分母范围：$\\sqrt{n^2+1} \\sim \\sqrt{n^2+n}$，共 $n$ 项。分母小（$\\sqrt{n^2+1}$）→ 分式大，<strong>上界</strong> = $\\dfrac{n}{\\sqrt{n^2+1}} \\to 1$；分母大（$\\sqrt{n^2+n}$）→ 分式小，<strong>下界</strong> = $\\dfrac{n}{\\sqrt{n^2+n}} \\to 1$。由夹逼定理，$I = \\boxed{1}$')}
 
             ${groupTitle('fa-reply', '3.5 高频：已知极限存在 · 反求参数', '#FF3B30')}
             <div class="formula-grid">
@@ -3152,13 +3940,6 @@ function buildFunctionDetail() {
                         ② 分母最高次更高 → 极限 = 0<br>
                         ③ 分子最高次更高 → 极限不存在（∞）
                     </div>
-                    <div class="formula-label" style="color:#FF3B30;margin-top:1rem;">例题（2024 四川专升本难度）</div>
-                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                        已知 $\\lim\\limits_{x\\to\\infty} \\dfrac{ax^3 + x^2 + 1}{2x^3 - x + 1} = 3$，求 $a$。<br>
-                        抓大头：分子分母最高次<strong>同为 3 次</strong> → 极限 = 最高次系数之比。<br>
-                        $\\dfrac{a}{2} = 3 \\implies \\boldsymbol{a = 6}$<br><br>
-                        <span style="color:var(--color-green);">✅ 口诀：次同系数比，次分低→0，次分高→∞（不存在）。</span>
-                    </div>
                 </div>
                 <div class="formula-card" style="--card-accent:${C};">
                     <div class="formula-label" style="color:var(--accent-yellow-text);">情形 B：$\\frac{0}{0}$ 型</div>
@@ -3168,16 +3949,10 @@ function buildFunctionDetail() {
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;line-height:1.7;">
                         分母趋于 0 而极限仍存在（有限） → 分子必须也趋于 0。抓住「分母=0 ⇒ 分子=0」可列方程。
                     </div>
-                    <div class="formula-label" style="color:var(--accent-yellow-text);margin-top:1rem;">例题（专升本难度）</div>
-                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
-                        已知 $\\lim\\limits_{x \\to 1} \\dfrac{x^2+ax-2}{x-1}=3$，求 $a$。<br>
-                        当 $x\\to1$ 时，分母 $x-1\\to0$；要使极限存在，分子也必须趋于 0：<br>
-                        $1^2+a\\cdot1-2=0 \\implies \\boldsymbol{a=1}$。<br>
-                        <strong>验证</strong>：$x^2+x-2=(x+2)(x-1)$，所以<br>
-                        $\\lim\\limits_{x\\to1}\\dfrac{(x+2)(x-1)}{x-1}=\\lim\\limits_{x\\to1}(x+2)=3\\;\\checkmark$
-                    </div>
                 </div>
             </div>
+            ${exampleBox('例题（2024 四川专升本难度）· 反求参数 ∞/∞型', '已知 $\\lim\\limits_{x\\to\\infty} \\dfrac{ax^3 + x^2 + 1}{2x^3 - x + 1} = 3$，求 $a$。<br><br><strong>解</strong>：抓大头：分子分母最高次<strong>同为 3 次</strong> → 极限 = 最高次系数之比。$\\dfrac{a}{2} = 3 \\implies \\boldsymbol{a = 6}$。<br><br><span style="color:var(--color-green);">✅ 口诀：次同系数比，次分低→0，次分高→∞（不存在）。</span>')}
+            ${exampleBox('例题（专升本难度）· 反求参数 0/0型', '已知 $\\lim\\limits_{x \\to 1} \\dfrac{x^2+ax-2}{x-1}=3$，求 $a$。<br><br><strong>解</strong>：当 $x\\to1$ 时，分母 $x-1\\to0$；要使极限存在，分子也必须趋于 0：$1^2+a\\cdot1-2=0 \\implies \\boldsymbol{a=1}$。<strong>验证</strong>：$x^2+x-2=(x+2)(x-1)$，所以 $\\lim\\limits_{x\\to1}\\dfrac{(x+2)(x-1)}{x-1}=\\lim\\limits_{x\\to1}(x+2)=3\\;\\checkmark$')}
 
             ${groupTitle('fa-wind', '3.6 无穷小与无穷大', 'var(--color-green)')}
             <div class="formula-grid">
@@ -3196,14 +3971,9 @@ function buildFunctionDetail() {
                     <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
                         $$\\boxed{\\text{无穷小量} \\times \\text{有界变量} = \\text{无穷小量}}$$
                     </div>
-                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;">
-                        <strong>例题（必考经典）</strong>：$\\lim\\limits_{x \\to 0} x \\cdot \\sin\\!\\left(\\dfrac{1}{x}\\right)$<br>
-                        $x \\to 0$ 是无穷小，$\\sin\\!\\left(\\dfrac{1}{x}\\right)$ 有界（$|\\sin| \\leq 1$）<br>
-                        → 乘积是无穷小量 = $\\boxed{0}$<br>
-                        <span style="color:#FF3B30;">⚠ 注意：此处 <strong>不能</strong> 写成 $\\lim x \\cdot \\lim \\sin(1/x)$，因为 $\\sin(1/x)$ 极限不存在。</span>
-                    </div>
                 </div>
             </div>
+            ${exampleBox('例题（必考经典）· 无穷小 × 有界', '求 $\\lim\\limits_{x \\to 0} x \\cdot \\sin\\!\\left(\\dfrac{1}{x}\\right)$。<br><br><strong>解</strong>：$x \\to 0$ 是无穷小，$\\sin\\!\\left(\\dfrac{1}{x}\\right)$ 有界（$|\\sin| \\leq 1$），→ 乘积是无穷小量 = $\\boxed{0}$。<br><br><span style="color:#FF3B30;">⚠ 注意：此处 <strong>不能</strong> 写成 $\\lim x \\cdot \\lim \\sin(1/x)$，因为 $\\sin(1/x)$ 极限不存在。</span>')}
             ${memoryBox('无穷小其他性质', '有限个无穷小量的和（或积）仍是无穷小量。⚠ 「无限个」无穷小量之和不一定是无穷小（例如 n 个 1/n 相加等于 1）。')}
 
             ${groupTitle('fa-layer-group', '3.7 无穷小量的比较', '#BF5AF2')}
@@ -3236,7 +4006,7 @@ function buildFunctionDetail() {
             </div>
             ${memoryBox('友好记忆：分子快 = 高阶，分子慢 = 低阶', '速度赛跑：分子更快归零 → 结果 0 → 高阶；分子归零更慢 → 结果 ∞ → 低阶。比较「谁更快到 0」即可。<br>常考题型：① 比较阶；② 指出某无穷小的阶数（与 $x^k$ 比较定 $k$）；③ 已知阶反求参数。')}
 
-            ${memoryBox('💡 专升本真题（2024 四川专升本·第2题）· 等价无穷小选择题', '当 $x \\to 0$ 时，下列与 $\\dfrac{x^3}{2}$ 等价的是（ ）。<br>A. $x \\sin x^2$　B. $x(1 - \\cos x)$　C. $\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right)$　D. $e^{x^2} - 1$<br><br><strong>逐项化简（$x \\to 0$ 时用等价）：</strong><br><table style="width:100%;border-collapse:collapse;margin:0.5rem 0;font-size:0.85rem;color:var(--text-secondary);"><thead><tr style="border-bottom:1px solid var(--border-medium);"><th style="padding:0.35rem 0.5rem;text-align:left;width:12%;">选项</th><th style="padding:0.35rem 0.5rem;text-align:left;">等价化简</th><th style="padding:0.35rem 0.5rem;text-align:center;width:28%;">是否等于 $\\dfrac{x^3}{2}$</th></tr></thead><tbody><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>A</strong></td><td style="padding:0.35rem 0.5rem;">$x \\cdot \\sin x^2 \\sim x \\cdot x^2 = x^3$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（缺 $\\dfrac{1}{2}$）</td></tr><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>B</strong></td><td style="padding:0.35rem 0.5rem;">$x(1 - \\cos x) \\sim x \\cdot \\dfrac{x^2}{2} = \\dfrac{x^3}{2}$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:var(--color-green);"><strong>✓</strong></td></tr><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>C</strong></td><td style="padding:0.35rem 0.5rem;">$\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right) \\sim \\dfrac{x^2}{2}$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（$x^2$ 级，非 $x^3$）</td></tr><tr><td style="padding:0.35rem 0.5rem;"><strong>D</strong></td><td style="padding:0.35rem 0.5rem;">$e^{x^2} - 1 \\sim x^2$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（$x^2$ 级，非 $x^3$）</td></tr></tbody></table>∴ 选 <strong>B</strong>。<br><br><span style="color:var(--color-green);">✅ 真题启示：等价无穷小选择题关键 = 逐项化简到最简幂次，再对比「阶数 + 系数」，两者都要对上才叫等价。</span>')}
+            ${exampleBox('💡 专升本真题（2024 四川专升本·第2题）· 等价无穷小选择题', '当 $x \\to 0$ 时，下列与 $\\dfrac{x^3}{2}$ 等价的是（ ）。<br>A. $x \\sin x^2$　B. $x(1 - \\cos x)$　C. $\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right)$　D. $e^{x^2} - 1$<br><br><strong>解</strong>：<strong>逐项化简（$x \\to 0$ 时用等价）：</strong><br><table style="width:100%;border-collapse:collapse;margin:0.5rem 0;font-size:0.85rem;color:var(--text-secondary);"><thead><tr style="border-bottom:1px solid var(--border-medium);"><th style="padding:0.35rem 0.5rem;text-align:left;width:12%;">选项</th><th style="padding:0.35rem 0.5rem;text-align:left;">等价化简</th><th style="padding:0.35rem 0.5rem;text-align:center;width:28%;">是否等于 $\\dfrac{x^3}{2}$</th></tr></thead><tbody><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>A</strong></td><td style="padding:0.35rem 0.5rem;">$x \\cdot \\sin x^2 \\sim x \\cdot x^2 = x^3$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（缺 $\\dfrac{1}{2}$）</td></tr><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>B</strong></td><td style="padding:0.35rem 0.5rem;">$x(1 - \\cos x) \\sim x \\cdot \\dfrac{x^2}{2} = \\dfrac{x^3}{2}$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:var(--color-green);"><strong>✓</strong></td></tr><tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.35rem 0.5rem;"><strong>C</strong></td><td style="padding:0.35rem 0.5rem;">$\\ln\\!\\left(1 + \\dfrac{x^2}{2}\\right) \\sim \\dfrac{x^2}{2}$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（$x^2$ 级，非 $x^3$）</td></tr><tr><td style="padding:0.35rem 0.5rem;"><strong>D</strong></td><td style="padding:0.35rem 0.5rem;">$e^{x^2} - 1 \\sim x^2$</td><td style="padding:0.35rem 0.5rem;text-align:center;color:#FF3B30;">✗（$x^2$ 级，非 $x^3$）</td></tr></tbody></table>∴ 选 <strong>B</strong>。<br><br><span style="color:var(--color-green);">✅ 真题启示：等价无穷小选择题关键 = 逐项化简到最简幂次，再对比「阶数 + 系数」，两者都要对上才叫等价。</span>')}
 
             ${groupTitle('fa-left-right', '3.8 专升本仅以下 4 种情况需要分左右极限', '#5AC8FA')}
             <div class="formula-grid">
@@ -3275,18 +4045,15 @@ function buildFunctionDetail() {
         <div class="detail-section" id="fn-cont">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-link"></i> 连续 · 间断点 · 渐近线</div>
             <div class="section-desc">连续是函数的良好性质——间断点分类、渐近线计算都是专升本高频考点。四川考纲不考斜渐近线，只需掌握水平和垂直两种。</div>
+            ${exToolbar}
 
             ${groupTitle('fa-circle-check', '4.1 函数在某点连续（三条同时满足）', '#0A84FF')}
             <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
                 <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
                     $$\\boxed{f(x) \\text{ 在 } x_0 \\text{ 连续} \\iff \\begin{cases} (1) \\; f(x_0) \\text{ 有定义} \\\\ (2) \\; \\lim\\limits_{x \\to x_0} f(x) \\text{ 存在（左右极限相等）} \\\\ (3) \\; \\lim\\limits_{x \\to x_0} f(x) = f(x_0) \\end{cases}}$$
                 </div>
-                <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">例题</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    $f(x) = \\begin{cases} \\dfrac{\\sin 2x}{x}, & x \\neq 0 \\\\ a, & x = 0 \\end{cases}$，要在 $x=0$ 连续，求 $a$。<br>
-                    $\\lim_{x\\to 0} f(x) = \\lim \\dfrac{\\sin 2x}{x} = 2$，由连续条件 (3)：$a = \\boxed{2}$
-                </div>
             </div>
+            ${exampleBox('例题 · 连续条件求参数', '$f(x) = \\begin{cases} \\dfrac{\\sin 2x}{x}, & x \\neq 0 \\\\ a, & x = 0 \\end{cases}$，要在 $x=0$ 连续，求 $a$。<br><br><strong>解</strong>：$\\lim_{x\\to 0} f(x) = \\lim \\dfrac{\\sin 2x}{x} = 2$，由连续条件 (3)：$a = \\boxed{2}$')}
 
             ${groupTitle('fa-list-tree', '4.2 间断点分类总表', '#FF3B30')}
             <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1.5rem;">
@@ -3305,49 +4072,32 @@ function buildFunctionDetail() {
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
                     核心特征：<strong>左右极限相等</strong>，只是不等于函数值或函数无定义。可以通过「重新定义该点函数值」把它修补成连续点，所以叫「可去」。
                 </div>
-                <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">例题</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    $f(x) = \\dfrac{x^2 - 1}{x - 1}$，求间断点并判类型。<br>
-                    $x=1$ 处无定义 → 间断点。<br>
-                    $\\lim_{x\\to 1} \\dfrac{x^2-1}{x-1} = \\lim (x+1) = 2$（左右极限都存在且相等）→ <strong>可去间断点</strong>。
-                </div>
             </div>
+            ${exampleBox('例题 · 可去间断点', '$f(x) = \\dfrac{x^2 - 1}{x - 1}$，求间断点并判类型。<br><br><strong>解</strong>：$x=1$ 处无定义 → 间断点。$\\lim_{x\\to 1} \\dfrac{x^2-1}{x-1} = \\lim (x+1) = 2$（左右极限都存在且相等）→ <strong>可去间断点</strong>。')}
 
             ${groupTitle('fa-2', '4.4 跳跃间断点', 'var(--color-green)')}
             <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     核心特征：<strong>左右极限不相等</strong>——图像上看起来像「跳了一步」，无法通过重新定义修补。
                 </div>
-                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">例题</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    $f(x) = \\begin{cases} x-1, & x < 0 \\\\ 0, & x = 0 \\\\ x+1, & x > 0 \\end{cases}$<br>
-                    $\\lim_{x\\to 0^-} f(x) = -1$，$\\lim_{x\\to 0^+} f(x) = +1$ → 左右不相等 → <strong>跳跃间断点</strong>。
-                </div>
             </div>
+            ${exampleBox('例题 · 跳跃间断点', '$f(x) = \\begin{cases} x-1, & x < 0 \\\\ 0, & x = 0 \\\\ x+1, & x > 0 \\end{cases}$，求间断点并判类型。<br><br><strong>解</strong>：$\\lim_{x\\to 0^-} f(x) = -1$，$\\lim_{x\\to 0^+} f(x) = +1$ → 左右不相等 → <strong>跳跃间断点</strong>。')}
 
             ${groupTitle('fa-3', '4.5 无穷间断点', '#FF9F0A')}
             <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     核心特征：至少一侧极限 = ∞。通常出现在「分母为 0 的点」——且分子在该点不为 0。
                 </div>
-                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">例题</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    $f(x) = \\dfrac{1}{x-2}$，在 $x=2$：<br>
-                    $\\lim_{x\\to 2^+} = +\\infty$，$\\lim_{x\\to 2^-} = -\\infty$，至少一侧为 ∞ → <strong>无穷间断点</strong>。
-                </div>
             </div>
+            ${exampleBox('例题 · 无穷间断点', '$f(x) = \\dfrac{1}{x-2}$，在 $x=2$ 判间断点类型。<br><br><strong>解</strong>：$\\lim_{x\\to 2^+} = +\\infty$，$\\lim_{x\\to 2^-} = -\\infty$，至少一侧为 ∞ → <strong>无穷间断点</strong>。')}
 
             ${groupTitle('fa-4', '4.6 震荡间断点', '#BF5AF2')}
             <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     核心特征：至少一侧极限「震荡不收敛」——不是 ∞，而是在某区间内来回跳动不趋近定值。
                 </div>
-                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">经典例题</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    $f(x) = \\sin\\!\\left(\\dfrac{1}{x}\\right)$ 在 $x=0$：<br>
-                    $x\\to 0$ 时 $1/x \\to \\infty$，$\\sin(1/x)$ 在 $[-1, 1]$ 内无限震荡，极限不存在 → <strong>震荡间断点</strong>。
-                </div>
             </div>
+            ${exampleBox('经典例题 · 震荡间断点', '$f(x) = \\sin\\!\\left(\\dfrac{1}{x}\\right)$ 在 $x=0$ 判间断点类型。<br><br><strong>解</strong>：$x\\to 0$ 时 $1/x \\to \\infty$，$\\sin(1/x)$ 在 $[-1, 1]$ 内无限震荡，极限不存在 → <strong>震荡间断点</strong>。')}
             ${memoryBox('间断点判断题步骤', 'Step 1：找「嫌疑点」——分母为 0 的点 / 分段函数分段点 / ln 真数为 0 的点 / arcsin/arccos 定义域边界；<br>Step 2：依次计算每个嫌疑点的左右极限；<br>Step 3：按分类表判类型——都存在且相等→可去，都存在不等→跳跃，至少一个不存在→无穷/震荡。')}
 
             ${groupTitle('fa-arrows-alt-h', '4.7 水平渐近线（四川考纲要求）', '#5AC8FA')}
@@ -3355,12 +4105,8 @@ function buildFunctionDetail() {
                 <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
                     $$\\lim_{x \\to +\\infty} f(x) = A \\quad \\text{或} \\quad \\lim_{x \\to -\\infty} f(x) = A \\;\\Longrightarrow\\; \\boxed{y = A} \\text{ 是 } f(x) \\text{ 的水平渐近线}$$
                 </div>
-                <div class="formula-label" style="color:#5AC8FA;margin-top:1rem;">例题</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    求 $f(x) = \\dfrac{2x^2 - x + 3}{x^2 + 1}$ 的水平渐近线。<br>
-                    $x \\to \\infty$ 抓大头：分子分母最高次均为 2，系数比 = $\\dfrac{2}{1} = 2$ → $y = \\boxed{2}$ 是水平渐近线。
-                </div>
             </div>
+            ${exampleBox('例题 · 水平渐近线', '求 $f(x) = \\dfrac{2x^2 - x + 3}{x^2 + 1}$ 的水平渐近线。<br><br><strong>解</strong>：$x \\to \\infty$ 抓大头：分子分母最高次均为 2，系数比 = $\\dfrac{2}{1} = 2$ → $y = \\boxed{2}$ 是水平渐近线。')}
 
             ${groupTitle('fa-arrows-alt-v', '4.8 垂直渐近线（四川考纲要求）', '#FF3B30')}
             <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
@@ -3372,23 +4118,8 @@ function buildFunctionDetail() {
                     ① 先找「嫌疑点 $x_0$」：$f(x)$ 无定义的点（通常是分母为 0 的点）<br>
                     ② 计算 $x \\to x_0^+$ 或 $x \\to x_0^-$ 时，只要有一侧 → ∞ 就判定为垂直渐近线
                 </div>
-                <div class="formula-label" style="color:#FF3B30;margin-top:1rem;">💡 专升本真题（2024 四川专升本·第4题）· 约分陷阱</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    曲线 $y = \\dfrac{x^2 - 1}{x^2 - 4x - 5}$ 的铅直（垂直）渐近线有（ ）条。<br>
-                    A. 0　B. 1　C. 2　D. 3<br><br>
-                    <strong>Step 1</strong>：找分母为 0 的点。<br>
-                    $x^2 - 4x - 5 = (x-5)(x+1) = 0 \\implies x = 5$ 或 $x = -1$<br><br>
-                    <strong>Step 2</strong>：分子也因式分解，逐点检验（<span style="color:#FF3B30;">⚠ 约分陷阱！</span>）<br>
-                    分子：$x^2 - 1 = (x-1)(x+1)$<br><br>
-                    <strong>检验 $x = -1$</strong>：<br>
-                    $y = \\dfrac{(x-1)(x+1)}{(x-5)(x+1)} = \\dfrac{x-1}{x-5}$（约去 $x+1$）<br>
-                    $\\lim\\limits_{x \\to -1} \\dfrac{x - 1}{x - 5} = \\dfrac{-2}{-6} = \\dfrac{1}{3}$（有限值，<strong>不是</strong>渐近线）<br><br>
-                    <strong>检验 $x = 5$</strong>：<br>
-                    $\\lim\\limits_{x \\to 5} \\dfrac{x^2 - 1}{x^2 - 4x - 5} = \\dfrac{25 - 1}{0} = \\infty$（<strong>是</strong>垂直渐近线）<br><br>
-                    综上，垂直渐近线只有 $x = 5$ 一条 → 选 <strong>B</strong>。<br><br>
-                    <span style="color:#FF3B30;">⚠ 高频易错点：分母为 0 的点<strong>必须逐个约分检验</strong>！分子也为 0 的点，约分后极限为有限值的<strong>不是</strong>垂直渐近线！这是专升本最经典的坑题之一。</span>
-                </div>
             </div>
+            ${exampleBox('💡 专升本真题（2024 四川专升本·第4题）· 约分陷阱', '曲线 $y = \\dfrac{x^2 - 1}{x^2 - 4x - 5}$ 的铅直（垂直）渐近线有（ ）条。<br>A. 0　B. 1　C. 2　D. 3<br><br><strong>解</strong>：<strong>Step 1</strong>：找分母为 0 的点。$x^2 - 4x - 5 = (x-5)(x+1) = 0 \\implies x = 5$ 或 $x = -1$<br><br><strong>Step 2</strong>：分子也因式分解，逐点检验（<span style="color:#FF3B30;">⚠ 约分陷阱！</span>）分子：$x^2 - 1 = (x-1)(x+1)$<br><br><strong>检验 $x = -1$</strong>：$y = \\dfrac{(x-1)(x+1)}{(x-5)(x+1)} = \\dfrac{x-1}{x-5}$（约去 $x+1$），$\\lim\\limits_{x \\to -1} \\dfrac{x - 1}{x - 5} = \\dfrac{-2}{-6} = \\dfrac{1}{3}$（有限值，<strong>不是</strong>渐近线）<br><br><strong>检验 $x = 5$</strong>：$\\lim\\limits_{x \\to 5} \\dfrac{x^2 - 1}{x^2 - 4x - 5} = \\dfrac{25 - 1}{0} = \\infty$（<strong>是</strong>垂直渐近线）<br><br>综上，垂直渐近线只有 $x = 5$ 一条 → 选 <strong>B</strong>。<br><br><span style="color:#FF3B30;">⚠ 高频易错点：分母为 0 的点<strong>必须逐个约分检验</strong>！分子也为 0 的点，约分后极限为有限值的<strong>不是</strong>垂直渐近线！这是专升本最经典的坑题之一。</span>')}
             ${memoryBox('四川考纲友好提醒', '四川专升本高数不考斜渐近线！遇到判断渐近线题目只算水平（x→±∞ 求极限得 A）和垂直（分母 0 点，看是否 ∞）。别多算斜的！')}
         </div>
     `;
@@ -3636,7 +4367,6 @@ function buildDetailContent(type) {
         case 'overview': return buildOverviewDetail();
         case 'function': return buildFunctionDetail();
         case 'derivative': return buildDerivativeDetail();
-        case 'differential': return buildDifferentialDetail();
         case 'integral': return buildIntegralDetail();
         case 'trigonometric': return buildTrigonometricDetail();
         case 'equation': return buildEquationDetail();
