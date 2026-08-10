@@ -391,8 +391,15 @@
         .back-btn:hover { background: var(--bg-elevated-strong); }
 
         .detail-tabs {
-            display: flex; gap: 0.5rem; flex-wrap: wrap; flex: 1;
+            display: flex; gap: 0.5rem; flex-wrap: nowrap; flex: 1;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: smooth;
+            padding: .25rem 0;
         }
+        .detail-tabs::-webkit-scrollbar { display: none; }
         .detail-tab {
             padding: 0.4rem 1rem; border-radius: 8px;
             font-size: 0.8rem; font-weight: 600;
@@ -592,39 +599,11 @@
         [data-theme="light"] .ex-flip-face { background: rgba(0,0,0,0.02); }
         [data-theme="light"] .ex-flip-back { background: rgba(0,0,0,0.04); }
 
-        /* 全部翻转工具栏 */
-        .ex-flip-toolbar {
-            display: flex;
-            justify-content: flex-end;
-            margin: 0.5rem 0 1rem;
-        }
-        .ex-flip-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.5rem 1.1rem;
-            border-radius: 22px;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-soft);
-            color: var(--text-secondary);
-            font-size: 0.82rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-        .ex-flip-btn:hover {
-            background: var(--bg-elevated-hover);
-            border-color: var(--border-medium);
-            transform: translateY(-1px);
-        }
-        .ex-flip-btn:active { transform: scale(0.96); }
-
         /* 移动端适配 */
         @media (max-width: 768px) {
             .ex-flip-card, .ex-flip-inner { min-height: 150px; }
             .ex-flip-face { padding: 1rem; }
             .ex-flip-card .ex-content { font-size: 0.82rem; line-height: 1.7; }
-            .ex-flip-toolbar { justify-content: center; }
         }
 
         /* 知识地图关系图 */
@@ -769,7 +748,7 @@
         /* 回到顶部浮动按钮（内容页右下角） */
         .back-to-top-btn {
             position: fixed;
-            bottom: 1.5rem;
+            bottom: 5.5rem;
             right: 1.25rem;
             z-index: 160;
             width: 46px;
@@ -797,6 +776,42 @@
             pointer-events: auto;
         }
         .back-to-top-btn:hover {
+            border-color: var(--color-green-60);
+            color: var(--color-green);
+            box-shadow: 0 4px 20px var(--color-green-20);
+        }
+
+        /* 翻转全部解析浮动按钮：与回到顶部同款，下方排列 */
+        .flip-all-btn {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.25rem;
+            z-index: 160;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--bg-sidebar);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-medium);
+            color: var(--text-primary);
+            font-size: 1.15rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(12px) scale(0.9);
+            pointer-events: none;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: var(--shadow-card);
+        }
+        .flip-all-btn.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+        .flip-all-btn:hover {
             border-color: var(--color-green-60);
             color: var(--color-green);
             box-shadow: 0 4px 20px var(--color-green-20);
@@ -910,11 +925,8 @@
                 padding: 0.6rem 0.75rem;
                 gap: 0.5rem;
                 flex-wrap: nowrap;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
+                overflow: hidden;
             }
-            .detail-header::-webkit-scrollbar { display: none; }
             .back-btn {
                 padding: 0.35rem 0.5rem;
                 font-size: 0.75rem;
@@ -927,8 +939,14 @@
             .detail-tabs {
                 gap: 0.35rem;
                 flex-wrap: nowrap;
-                flex: 0 0 auto;
+                flex: 1 1 auto;
+                min-width: 0;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
             }
+            .detail-tabs::-webkit-scrollbar { display: none; }
+            .swipe-hint { display: none; }
             .detail-tab {
                 padding: 0.3rem 0.7rem;
                 font-size: 0.7rem;
@@ -1212,9 +1230,10 @@
         [data-theme="light"] .group-title { color: color-mix(in srgb, var(--group-color, #6a9775) 60%, #4d4f49); }
         [data-theme="light"] .detail-section .katex { color: var(--detail-ink); }
         @media (max-width: 768px) {
-            .detail-header { padding: .7rem 1rem; gap: .75rem; }
-            .detail-tabs { flex-wrap: nowrap; overflow-x: auto; padding: .1rem 0; }
+            .detail-header { padding: .7rem 1rem; gap: .75rem; overflow: hidden; }
+            .detail-tabs { flex: 1 1 auto; min-width: 0; flex-wrap: nowrap; overflow-x: auto; padding: .1rem 0; }
             .detail-tab { flex: 0 0 auto; }
+            .swipe-hint { display: none; }
             .detail-body { padding: 2rem 1rem 3rem; }
             .formula-grid { grid-template-columns: 1fr; }
         }
@@ -1621,6 +1640,7 @@ function enterDetail(type) {
         detailHeaderTitle.innerText = content.title;
         detailHeaderTitle.style.color = content.color;
         detailTabs.innerHTML = content.tabs;
+        detailTabs.scrollLeft = 0;
         detailBody.innerHTML = content.body;
 
         // ============= 【终极修复】直接激活第一个 Tab，不通过 click() 模拟 =============
@@ -1653,22 +1673,58 @@ function exitDetail() {
     mainView.classList.remove('hidden-view');
 }
 
+function centerActiveDetailTab(tab) {
+    // 详情页移动端仅由 detail-tabs 横向滚动，避免外层 header 与内层滚动位置相互抵消。
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+        if (!tab || !detailTabs.contains(tab)) return;
+
+        const maxScroll = detailTabs.scrollWidth - detailTabs.clientWidth;
+        if (maxScroll <= 0) return;
+
+        const containerRect = detailTabs.getBoundingClientRect();
+        const tabRect = tab.getBoundingClientRect();
+        const tabCenter = tabRect.left - containerRect.left + tabRect.width / 2;
+        const target = Math.max(0, Math.min(
+            maxScroll,
+            detailTabs.scrollLeft + tabCenter - containerRect.width / 2
+        ));
+
+        if (Math.abs(target - detailTabs.scrollLeft) <= 1) return;
+        try {
+            detailTabs.scrollTo({ left: target, behavior: 'smooth' });
+        } catch (_) {
+            detailTabs.scrollLeft = target;
+        }
+    }));
+}
+
 function switchTab(tabId, btn) {
     try {
         console.debug('[switchTab] 开始切换, tabId=', tabId);
         // 1. 处理 tab 按钮高亮
-        detailTabs.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
-        if (btn) btn.classList.add('active');
+        const allTabs = detailTabs.querySelectorAll('.detail-tab');
+        allTabs.forEach(t => t.classList.remove('active'));
+        let targetBtn = btn || null;
+        if (!targetBtn) {
+            // 左右滑动切换时没传 btn：通过 tabId 找对应按钮
+            allTabs.forEach(t => {
+                if (t.getAttribute('onclick') && t.getAttribute('onclick').indexOf(tabId) >= 0) {
+                    targetBtn = t;
+                }
+            });
+        }
+        if (targetBtn) targetBtn.classList.add('active');
+        if (targetBtn) centerActiveDetailTab(targetBtn);
 
         // 2. 【终极修复】对所有 section：直接操作 style.display（不靠 CSS 类 .active）
         const allSections = detailBody.querySelectorAll('.detail-section');
         let targetHit = false;
         allSections.forEach(s => {
             const isTarget = s.id === tabId;
-            s.style.display = isTarget ? 'block' : 'none';   // ← 关键：硬写 style，覆盖一切 CSS 异常
+            s.style.display = isTarget ? 'block' : 'none';
             s.classList.toggle('active', isTarget);
-            s.style.width = '100%';   // 额外保险，防止因为 flex/grid 子元素宽度变 0
-            s.style.minHeight = '200px'; // 防塌陷
+            s.style.width = '100%';
+            s.style.minHeight = '200px';
             if (isTarget) {
                 targetHit = true;
                 console.debug('[switchTab] 找到 section, id=', s.id, 'clientHeight=', s.clientHeight,
@@ -1677,7 +1733,6 @@ function switchTab(tabId, btn) {
             }
         });
         if (!targetHit) {
-            // 兜底：用 getElementById 再找一次（万一 section 不在 detailBody 里？）
             const s2 = document.getElementById(tabId);
             if (s2) {
                 s2.style.display = 'block';
@@ -1756,15 +1811,16 @@ function exampleBox(title, body) {
 }
 
 // 翻转当前 tab 下全部例题卡片
-function flipAllExamples(btn) {
+function flipAllExamples() {
     const activeSection = document.querySelector('.detail-section.active');
     if (!activeSection) return;
     const cards = activeSection.querySelectorAll('.ex-flip-card');
     if (!cards.length) return;
     const allFlipped = Array.from(cards).every(c => c.classList.contains('flipped'));
     cards.forEach(c => c.classList.toggle('flipped', !allFlipped));
-    const span = btn.querySelector('span');
-    if (span) span.textContent = allFlipped ? '翻转全部解析' : '收起全部解析';
+    // 更新浮动按钮 title
+    const btn = document.getElementById('flipAllBtn');
+    if (btn) btn.title = allFlipped ? '翻转全部解析' : '收起全部解析';
 }
 
 // 知识地图关系图：菱形结构 极限⇄连续⇄可导⇄可微
@@ -1959,7 +2015,6 @@ function differentialGeometryDiagram() {
 // ---------- 导数详情 ----------
 function buildDerivativeDetail() {
     const C = '#0A84FF';
-    const exToolbar = `<div class="ex-flip-toolbar"><button class="ex-flip-btn" onclick="flipAllExamples(this)"><i class="fa-solid fa-rotate"></i> <span>翻转全部解析</span></button></div>`;
     const tabs = `
         <div class="detail-tab active" style="--tab-color:rgba(10,132,255,0.2);--tab-border:rgba(10,132,255,0.4);" onclick="switchTab('deriv-map', this)">知识地图</div>
         <div class="detail-tab" style="--tab-color:rgba(10,132,255,0.2);--tab-border:rgba(10,132,255,0.4);" onclick="switchTab('deriv-all', this)">导数公式</div>
@@ -1990,7 +2045,7 @@ function buildDerivativeDetail() {
         <div class="detail-section" id="deriv-all">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-chart-line"></i> 导数公式大全</div>
             <div class="section-desc">导数 f'(x) 是函数在某点的瞬时变化率，几何意义为切线斜率。本 tab 覆盖导数定义（两种定义式 + 推广公式 + 左右导数）、四则运算与链式法则、18 条基本导数公式——按函数类型分组记忆，效率最高。</div>
-            ${exToolbar}
+
 
             ${groupTitle('fa-flag', '导数定义', '#0A84FF')}
             <div class="formula-grid">
@@ -2138,7 +2193,7 @@ function buildDerivativeDetail() {
         <div class="detail-section" id="deriv-methods">
             <div class="section-title" style="color:#BF5AF2;"><i class="fa-solid fa-puzzle-piece"></i> 各类函数求导法</div>
             <div class="section-desc">分段函数、隐函数、幂指函数、参数方程、变限积分——专升本求导法的五大题型。分段点用定义，隐函数两边求导或公式法，幂指函数取对数或指数化，参数方程分母不变，变限积分"上减下"。</div>
-            ${exToolbar}
+
 
             ${groupTitle('fa-puzzle-piece', '分段函数求导', '#FF9F0A')}
             ${memoryBox('分段函数求导步骤', '① 各段开区间内用公式求导；② 分段点用定义求左右导数；③ 相等则可导，不等则不可导。')}
@@ -2266,7 +2321,7 @@ function buildDerivativeDetail() {
         <div class="detail-section" id="deriv-high">
             <div class="section-title" style="color:#FF9F0A;"><i class="fa-solid fa-layer-group"></i> 高阶导数</div>
             <div class="section-desc">专升本范围内的 n 阶导数本质是找规律——先求前 3~4 阶，观察符号、阶乘、幂次的规律，归纳通项。含 (ax+b) 的结构每求一阶导都带出系数 a，故多乘 a^n。</div>
-            ${exToolbar}
+
 
             ${groupTitle('fa-layer-group', '高阶导数（9 条）', '#FF9F0A')}
             <div class="formula-grid">
@@ -2300,7 +2355,7 @@ function buildDerivativeDetail() {
         <div class="detail-section" id="deriv-diff">
             <div class="section-title" style="color:#BF5AF2;"><i class="fa-solid fa-arrows-left-right"></i> 微分公式大全</div>
             <div class="section-desc">微分 dy = f'(x) dx。求出导数后乘以 dx 就是微分——16条微分公式与导数公式一一对应，不用单独背。核心记住「一阶微分形式不变性」：无论 u 是自变量还是中间变量，dy = f'(u) du 的形式都不变。</div>
-            ${exToolbar}
+
 
             ${groupTitle('fa-chart-area', '微分的几何意义（增量图）', '#FF3B30')}
             ${differentialGeometryDiagram()}
@@ -2373,7 +2428,7 @@ function buildDerivativeDetail() {
         <div class="detail-section" id="deriv-app">
             <div class="section-title" style="color:#FF3B30;"><i class="fa-solid fa-rocket"></i> 导数的应用</div>
             <div class="section-desc">导数应用是专升本解答题的重灾区——洛必达求极限、切线法线方程、单调区间与极值、最值、凹凸区间与拐点，核心都是把导数算出来后用于几何或极限分析。</div>
-            ${exToolbar}
+
 
             ${groupTitle('fa-ladder-water', '洛必达法则', '#FF3B30')}
             <div class="formula-grid">
@@ -3539,7 +3594,6 @@ function buildLinearDetail() {
 // ---------- 第一章·函数·极限·连续详情 ----------
 function buildFunctionDetail() {
     const C = '#FFD60A';
-    const exToolbar = `<div class="ex-flip-toolbar"><button class="ex-flip-btn" onclick="flipAllExamples(this)"><i class="fa-solid fa-rotate"></i> <span>翻转全部解析</span></button></div>`;
     const tabs = `
         <div class="detail-tab active" style="--tab-color:rgba(255,214,10,0.2);--tab-border:rgba(255,214,10,0.4);" onclick="switchTab('fn-map', this)">知识地图 · 函数</div>
         <div class="detail-tab" style="--tab-color:rgba(255,214,10,0.2);--tab-border:rgba(255,214,10,0.4);" onclick="switchTab('fn-limit1', this)">极限·七种未定式</div>
@@ -3553,7 +3607,7 @@ function buildFunctionDetail() {
         <div class="detail-section active" id="fn-map">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-building-columns"></i> 第一章 · 函数</div>
             <div class="section-desc">函数是高数的研究对象，极限是核心工具，连续是函数的良好性质。本章是一切后续模块的地基——先把函数搞懂，极限才有意义，导数、积分、微分方程才有落脚点。</div>
-            ${exToolbar}
+
 
             ${groupTitle('fa-sitemap', '知识地图与学习路径', '#BF5AF2')}
             <div class="formula-card" style="--card-accent:#BF5AF2;">
@@ -3697,7 +3751,7 @@ function buildFunctionDetail() {
         <div class="detail-section" id="fn-limit1">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-infinity"></i> 极限 · 七种未定式全题型</div>
             <div class="section-desc">极限是整个高数的灵魂——导数定义、定积分定义、无穷小比较、级数收敛都是极限。专升本必考 1~2 道计算大题，核心是识别七种未定式类型、选对方法。</div>
-            ${exToolbar}
+
 
             ${groupTitle('fa-key', '2.1 极限基础', '#0A84FF')}
             <div class="formula-grid">
@@ -3853,7 +3907,7 @@ function buildFunctionDetail() {
         <div class="detail-section" id="fn-limit2">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-toolbox"></i> 极限 · 常用方法 + 左右极限 + 反求参数</div>
             <div class="section-desc">除七种未定式之外，专升本还有 6 大高频技巧、4 种必须分左右极限的场景、以及「已知极限反求参数」这类经典题。</div>
-            ${exToolbar}
+
 
             ${groupTitle('fa-table', '3.1 完整等价无穷小表（来源：B 站 UP·中崎高数 第二章）', '#FF9F0A')}
 
@@ -4045,7 +4099,7 @@ function buildFunctionDetail() {
         <div class="detail-section" id="fn-cont">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-link"></i> 连续 · 间断点 · 渐近线</div>
             <div class="section-desc">连续是函数的良好性质——间断点分类、渐近线计算都是专升本高频考点。四川考纲不考斜渐近线，只需掌握水平和垂直两种。</div>
-            ${exToolbar}
+
 
             ${groupTitle('fa-circle-check', '4.1 函数在某点连续（三条同时满足）', '#0A84FF')}
             <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
@@ -4592,15 +4646,39 @@ window.addEventListener('storage', (e) => {
     }
     initScrollReveal();
 
-    // ========== 回到顶部浮动按钮 ==========
+    // ========== 回到顶部 + 翻转全部解析 浮动按钮 ==========
     const getBackToTopBtn = () => document.getElementById('backToTopBtn');
+    const getFlipAllBtn = () => document.getElementById('flipAllBtn');
     detailView.addEventListener('scroll', () => {
-        const btn = getBackToTopBtn();
-        if (btn) btn.classList.toggle('visible', detailView.scrollTop > 400);
+        const show = detailView.scrollTop > 400;
+        const b1 = getBackToTopBtn();
+        const b2 = getFlipAllBtn();
+        if (b1) b1.classList.toggle('visible', show);
+        // 翻转按钮：滚动显示 + 当前 tab 有例题卡片时才显示
+        if (b2) {
+            const activeSec = document.querySelector('.detail-section.active');
+            const hasCards = activeSec && activeSec.querySelectorAll('.ex-flip-card').length > 0;
+            b2.classList.toggle('visible', show && !!hasCards);
+        }
     });
+    // 切换 tab 时重新评估翻转按钮可见性（即使不滚动）
+    const _origSwitchTab = window.switchTab;
+    const refreshFlipBtn = () => {
+        const b2 = getFlipAllBtn();
+        if (!b2) return;
+        const activeSec = document.querySelector('.detail-section.active');
+        const hasCards = activeSec && activeSec.querySelectorAll('.ex-flip-card').length > 0;
+        const scrolled = detailView.scrollTop > 400;
+        b2.classList.toggle('visible', scrolled && !!hasCards);
+    };
+    // 挂载到 detail 渲染后也检查一次
+    setTimeout(refreshFlipBtn, 200);
     document.addEventListener('click', (e) => {
         if (e.target.closest('#backToTopBtn')) {
             detailView.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        if (e.target.closest('.detail-tab')) {
+            setTimeout(refreshFlipBtn, 50);
         }
     });
 
@@ -4629,9 +4707,12 @@ window.addEventListener('storage', (e) => {
     }, { passive: true });
 </script>
 
-<!-- 回到顶部按钮 -->
+<!-- 浮动按钮组：回到顶部（上） + 翻转全部解析（下） -->
 <button class="back-to-top-btn" id="backToTopBtn" title="回到顶部" aria-label="回到顶部">
     <i class="fa-solid fa-arrow-up"></i>
+</button>
+<button class="flip-all-btn" id="flipAllBtn" title="翻转全部解析" aria-label="翻转全部解析" onclick="flipAllExamples()">
+    <i class="fa-solid fa-rotate"></i>
 </button>
 </body>
 </html>
