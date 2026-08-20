@@ -1522,7 +1522,16 @@
     }
     function toQuestionFormula(formula) {
         const tex = toKatexSource(formula);
-        const equalsIndex = tex.indexOf('=');
+        // bracket-depth 扫描：跳过 {...} 和 \...\  内部，避免匹配到下标如 k=1 里的 =
+        let depth = 0, slash = false, equalsIndex = -1;
+        for (let i = 0; i < tex.length; i++) {
+            const c = tex[i];
+            if (slash) { slash = false; continue; }
+            if (c === '\\') { slash = true; continue; }
+            if (c === '{') { depth++; continue; }
+            if (c === '}') { if (depth > 0) depth--; continue; }
+            if (depth === 0 && c === '=') { equalsIndex = i; break; }
+        }
         return equalsIndex === -1 ? `${tex} = ?` : `${tex.slice(0, equalsIndex + 1)} ?`;
     }
     function renderCardMath(grid) {
