@@ -1,0 +1,84 @@
+{
+  "project": "calculus-formula-theater（面容整理）",
+  "description": "四川专升本高数公式联动记忆系统；纯静态 HTML 单页应用，无框架、无打包器。",
+  "sourceOfTruth": "src/index.html 中的 formulaCard(...) 调用；src/data/formulas.js 为派生产物，禁止手改。",
+  "workflow": "notes/ 写风格一致笔记 → 用户审核 → 在 src/index.html 对应 buildXxxDetail() 增量追加 formulaCard → node scripts/extractFormulas.mjs 重新生成 formulas.js → review.html 自动同步 → npm run dev 验证",
+  "invariants": [
+    "只做增量添加，绝不改动现有页面架构 / 设计 / 风格",
+    "公式唯一事实来源 = index.html 的 formulaCard 调用",
+    "formulas.js 永远由脚本生成，禁止手改",
+    "模块集合固定为 {limit, deriv, integral, trig, diffEq, linalg, matrix}，无 diff（微分已并入 deriv）；linalg 与 matrix 同属线性代数但是两个独立章节/入口",
+    "新增模块须同步：buildXxxDetail() + scripts/extractFormulas.mjs 的 sections/MODULE_ORDER + notes/00-笔记索引.md",
+    "改动必须同时适配暗/浅双主题",
+    "review.html 公式为自动同步，禁手动改其公式列表"
+  ],
+  "modules": [
+    {
+      "id": "limit",
+      "title": "函数·极限·连续",
+      "buildFn": "buildFunctionDetail",
+      "themeColor": "#FFD60A",
+      "notes": "notes/01-函数、极限、连续.md",
+      "formulaCount": 13,
+      "status": "done"
+    },
+    {
+      "id": "deriv",
+      "title": "导数与微分（含微分）",
+      "buildFn": "buildDerivativeDetail",
+      "themeColor": "#0A84FF",
+      "notes": "notes/02-导数与微分.md",
+      "formulaCount": 87,
+      "status": "done"
+    },
+    {
+      "id": "integral",
+      "title": "积分",
+      "buildFn": "buildIntegralDetail",
+      "themeColor": "#30D158",
+      "notes": "notes/04-积分.md",
+      "formulaCount": 19,
+      "status": "done"
+    },
+    {
+      "id": "trig",
+      "title": "三角函数",
+      "buildFn": "buildTrigonometricDetail",
+      "themeColor": "#FF3B30",
+      "notes": "notes/05-三角函数.md",
+      "formulaCount": 41,
+      "status": "done"
+    },
+    {
+      "id": "diffEq",
+      "title": "微分方程",
+      "buildFn": "buildEquationDetail",
+      "themeColor": "#FF9F0A",
+      "notes": "notes/06-微分方程.md",
+      "formulaCount": 9,
+      "status": "done"
+    },
+    {
+      "id": "linalg",
+      "title": "线性代数·行列式",
+      "buildFn": "buildLinearDetail",
+      "themeColor": "#5AC8FA",
+      "notes": "notes/07-线性代数-行列式.md",
+      "formulaCount": 7,
+      "subTopics": ["行列式（5 tab：基础计算/六条性质/特殊行列式/展开定理/速查总表）"],
+      "status": "done"
+    },
+    {
+      "id": "matrix",
+      "title": "线性代数·矩阵",
+      "buildFn": "buildMatrixDetail",
+      "themeColor": "#5AC8FA",
+      "notes": "notes/08-矩阵.md",
+      "formulaCount": 29,
+      "subTopics": ["矩阵（5 tab：特殊矩阵/运算/逆·伴随/初等变换与秩/速查，含 29 条公式卡）"],
+      "status": "done"
+    }
+  ],
+  "totals": { "modules": 7, "formulas": 205 },
+  "evidence": "node scripts/extractFormulas.mjs → 抽出 205 条 formulaCard，分 7 个模块（deriv 87 / integral 19 / trig 41 / diffEq 9 / linalg 7 / matrix 29 / limit 13；6 模块基线 176 + 矩阵 29）；矩阵于 2026-08-20 从 linalg 拆分为独立 module=matrix（buildMatrixDetail 独立成章，首页新增 矩阵 入口，抽提脚本 sections/MODULE_ORDER 同步）"
+}
