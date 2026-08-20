@@ -1278,6 +1278,7 @@
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-coral)" onclick="enterDetail('trigonometric')"><h2>三角函数</h2><p>关系式贯穿导数和积分，用主干公式组织而不是零散背诵。</p><span class="path-meta">41 条公式 · 关系网络</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-amber)" onclick="enterDetail('equation')"><h2>微分方程</h2><p>将导数与积分放进同一道题，进入一阶与二阶方程训练。</p><span class="path-meta">9 条公式 · 综合应用</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:#759ba1" onclick="enterDetail('linear')"><h2>行列式</h2><p>计算、性质与展开，是线性代数部分的基础工具。</p><span class="path-meta">4 个专题 · 线性代数</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:#5AC8FA" onclick="enterDetail('matrix')"><h2>矩阵</h2><p>特殊矩阵、运算、逆与伴随、初等变换与秩，是线性代数的核心对象。</p><span class="path-meta">5 个专题 · 线性代数</span></button></article>
         </section>
         <footer class="path-footer"><span>选一条路径进入章节，或直接开始你熟悉的翻卡记忆。</span><a class="path-review" href="review.html">进入翻卡记忆&nbsp; →</a></footer>
     </main>
@@ -1501,6 +1502,32 @@
                             <span class="highlight-text" style="--hl-color: #5AC8FA;">大下标减小下标</span>
                         </div>
                         <div class="enter-hint">⟜ 点击进入行列式详情 ⟝</div>
+                    </div>
+                </div>
+
+                <!-- 卡片 08：线性代数-矩阵 -->
+                <div class="swiper-slide" onclick="enterDetail('matrix')">
+                    <span class="bg-number">08</span>
+                    <div class="card-content">
+                        <div class="card-icon text-cyan" style="--icon-glow: rgba(90, 200, 250, 0.4);">
+                            <i class="fa-solid fa-table-cells"></i>
+                        </div>
+                        <div class="module-tag bg-cyan/20 text-cyan">线性代数</div>
+                        <h3 class="card-title">矩阵</h3>
+                        <p class="card-subtitle" style="--sub-color: #5AC8FA;">特殊阵 + 运算 + 逆伴随 · 含例题</p>
+                        <div class="formula-block">
+                            $$A^{-1}=\\frac{A^*}{|A|}$$
+                        </div>
+                        <div class="formula-list" style="--dot-color: #5AC8FA;">
+                            <li>特殊阵：单位·对角·对称·反称</li>
+                            <li>运算：加减数乘 + 乘法（不满足交换）</li>
+                            <li>逆与伴随：AA* = |A|E</li>
+                            <li>初等变换与秩：行阶梯形</li>
+                        </div>
+                        <div class="memory-tip">
+                            <span class="highlight-text" style="--hl-color: #5AC8FA;">主对调，副变号</span>
+                        </div>
+                        <div class="enter-hint">⟜ 点击进入矩阵详情 ⟝</div>
                     </div>
                 </div>
 
@@ -3591,6 +3618,279 @@ function buildLinearDetail() {
     return { title: '行列式框架详情', color: C, tabs, body: basicBody + propBody + specialBody + expandBody + summaryBody };
 }
 
+function buildMatrixDetail() {
+    const C = '#5AC8FA';
+    const tabs = `
+        <div class="detail-tab active" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('mat-special', this)">特殊矩阵</div>
+        <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('mat-op', this)">矩阵运算</div>
+        <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('mat-inv', this)">逆·伴随</div>
+        <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('mat-elem', this)">初等变换·秩</div>
+        <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('mat-summary', this)">矩阵速查</div>
+    `;
+    // === 矩阵详情（独立章节，模块 id = matrix）===
+    // === 矩阵 Tab 1: 特殊矩阵 ===
+    const matSpecialBody = `
+        <div class="detail-section" id="mat-special">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-shapes"></i> 特殊矩阵</div>
+            <div class="section-desc">四类最基础的方阵：单位阵、对角阵、对称阵、反称阵。先用具体数字形状建立直觉，再记代数条件。</div>
+
+            ${groupTitle('fa-1', '1.1 单位矩阵', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$E = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    主对角线全为 1，其余全为 0，记作 $E$（或 $I$）。任意矩阵乘以单位矩阵仍为自身：<br>
+                    $$EA = AE = A$$
+                </div>
+                <div class="formula-label" style="color:#5AC8FA;margin-top:1rem;">验证（左乘）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    设 $A = \\begin{pmatrix} 2 & 3 \\\\ 4 & 5 \\end{pmatrix}$，则<br>
+                    $EA = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} 2 & 3 \\\\ 4 & 5 \\end{pmatrix} = \\begin{pmatrix} 2 & 3 \\\\ 4 & 5 \\end{pmatrix} = A$
+                </div>
+            </div>
+
+            ${groupTitle('fa-2', '1.2 对角阵', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$A = \\begin{pmatrix} 3 & 0 & 0 \\\\ 0 & -1 & 0 \\\\ 0 & 0 & 5 \\end{pmatrix}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    主对角线元素可为任意常数（<strong>不要求全为 1</strong>），其余全为 0。别和「单位阵」混淆。
+                </div>
+            </div>
+
+            ${groupTitle('fa-3', '1.3 对称矩阵', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 2 & 4 & 5 \\\\ 3 & 5 & 6 \\end{pmatrix},\\quad A^\\mathrm{T} = A$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    满足 $A^\\mathrm{T} = A$，即 $A_{ij} = A_{ji}$。上三角与下三角关于主对角线「镜像相等」（如 2=2、3=3）。<br>
+                    <strong>口诀</strong>：对称矩阵「镜像相等」。
+                </div>
+            </div>
+
+            ${groupTitle('fa-4', '1.4 反称矩阵', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$A = \\begin{pmatrix} 0 & 2 & 3 \\\\ -2 & 0 & 4 \\\\ -3 & -4 & 0 \\end{pmatrix},\\quad A^\\mathrm{T} = -A$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    满足 $A^\\mathrm{T} = -A$，即 $A_{ij} = -A_{ji}$。主对角线之外元素互为相反数，由此推出主对角元 $A_{ii} = -A_{ii} = 0$。<br>
+                    <strong>口诀</strong>：对称是「相等」，反称是「相反」；反称主对角必为 0。
+                </div>
+            </div>
+            ${memoryBox('四类特殊阵', '单位阵=$E$、对角阵（对角任意）、对称阵（$A^\\mathrm{T}=A$）、反称阵（$A^\\mathrm{T}=-A$ 且主对角为 0）。考法常给具体数字矩阵让你判断是哪一类。')}
+        </div>
+    `;
+
+    // === 矩阵 Tab 2: 矩阵运算 ===
+    const matOpBody = `
+        <div class="detail-section" id="mat-op">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-calculator"></i> 矩阵运算</div>
+            <div class="section-desc">加减数乘与中小学一致；乘法有「维数匹配」和「不满足交换律/消去律」两大陷阱。</div>
+
+            ${groupTitle('fa-plus-minus', '2.1 加法 · 减法 · 数乘', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    • <strong>加减法</strong>：仅当两矩阵<strong>同型</strong>（行列数分别相等）时，对应元素相加减。<br>
+                    • <strong>数乘</strong>：常数 $k$ 乘矩阵 = 每个元素都乘 $k$。
+                </div>
+                <div class="formula-label" style="color:#30D158;margin-top:1rem;">例题（加法）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix},\\ B = \\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$，<br>
+                    $A+B = \\begin{pmatrix} 6 & 8 \\\\ 10 & 12 \\end{pmatrix}$
+                </div>
+                <div class="formula-label" style="color:#30D158;margin-top:1rem;">例题（数乘）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $2A = \\begin{pmatrix} 2 & 4 \\\\ 6 & 8 \\end{pmatrix}$
+                </div>
+            </div>
+
+            ${groupTitle('fa-xmark', '2.2 乘法', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    <strong>前提</strong>：前一个矩阵的<strong>列数</strong> = 后一个矩阵的<strong>行数</strong>。<br>
+                    $$A_{m\\times n}\\cdot B_{n\\times p} = C_{m\\times p}$$
+                    计算方式：对应行元素 × 对应列元素，相乘再相加。
+                </div>
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $A = \\begin{pmatrix} 1 & 2 & 0 \\\\ 3 & 4 & 1 \\end{pmatrix}_{2\\times 3},\\ B = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}_{3\\times 2}$<br>
+                    $AB = \\begin{pmatrix} 1\\!\\cdot\\!1+2\\!\\cdot\\!0+0\\!\\cdot\\!1 & 1\\!\\cdot\\!2+2\\!\\cdot\\!1+0\\!\\cdot\\!0 \\\\ 3\\!\\cdot\\!1+4\\!\\cdot\\!0+1\\!\\cdot\\!1 & 3\\!\\cdot\\!2+4\\!\\cdot\\!1+1\\!\\cdot\\!0 \\end{pmatrix} = \\begin{pmatrix} 1 & 4 \\\\ 4 & 10 \\end{pmatrix}_{2\\times 2}$
+                </div>
+            </div>
+
+            ${groupTitle('fa-triangle-exclamation', '2.3 乘法的两个陷阱', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    • <strong>不满足交换律</strong>：$AB \\neq BA$（多数情况）。<br>
+                    • <strong>消去陷阱</strong>：$AB = AC$ 一般推不出 $B = C$，必须确认 $A$ 可逆才能两边约掉。<br>
+                    • 同时 $AB = 0$ 一般推不出 $A = 0$ 或 $B = 0$。
+                </div>
+            </div>
+            ${memoryBox('乘法易错', '乘之前先核「前列=后行」；乘之后别想当然交换或约分。专升本大题常在消去律上设陷阱。')}
+        </div>
+    `;
+
+    // === 矩阵 Tab 3: 逆·伴随·性质 ===
+    const matInvBody = `
+        <div class="detail-section" id="mat-inv">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-arrows-rotate"></i> 逆矩阵 · 伴随矩阵 · 矩阵性质</div>
+            <div class="section-desc">逆与伴随是线代核心。先记定义，再记「主对调副变号」的二阶口诀，最后串起核心等式。</div>
+
+            ${groupTitle('fa-key', '3.1 逆矩阵', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    若 $AB = BA = E$，则称 $A$ 可逆，$B$ 是 $A$ 的逆，记作 $A^{-1}$。<strong>只有方阵可逆</strong>，且 $A$ 与 $A^{-1}$ 可交换。
+                </div>
+                <div class="formula-label" style="color:#FF3B30;margin-top:1rem;">可逆判定</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $$A \\text{ 可逆} \\iff |A| \\neq 0 \\iff A \\text{ 满秩}$$
+                </div>
+            </div>
+
+            ${groupTitle('fa-star', '3.2 伴随矩阵', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    伴随矩阵 $A^*$ 是<strong>代数余子式的转置</strong>；只有方阵才有伴随。二阶口诀「<strong>主对调，副变号</strong>」：<br>
+                    $$A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} \\Rightarrow A^* = \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$
+                </div>
+            </div>
+
+            ${groupTitle('fa-link', '3.3 核心等式与逆伴随关系', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$AA^* = A^*A = |A|E$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;">
+                    由上式两边左乘 $A^{-1}$ 得：<br>
+                    $$A^{-1} = \\frac{A^*}{|A|},\\quad A^* = |A|A^{-1}$$
+                </div>
+            </div>
+
+            ${groupTitle('fa-superscript', '3.4 方阵多项式', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    • 只有方阵的多项式可像数一样因式分解、交换：$f(A)\\varphi(A) = \\varphi(A)f(A)$。<br>
+                    • 矩阵式里的纯数要配单位阵：$5A + 6$ 无意义，应写 $5A + 6E$。
+                </div>
+            </div>
+
+            ${groupTitle('fa-right-left', '3.5 转置', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    $(A^\\mathrm{T})^\\mathrm{T} = A$（行列互换）<br>
+                    $(\\lambda A)^\\mathrm{T} = \\lambda A^\\mathrm{T}$<br>
+                    $(A+B)^\\mathrm{T} = A^\\mathrm{T} + B^\\mathrm{T}$<br>
+                    $(AB)^\\mathrm{T} = B^\\mathrm{T}A^\\mathrm{T}$（<strong>逆序翻跟头</strong>）
+                </div>
+            </div>
+
+            ${groupTitle('fa-border-all', '3.6 方阵的行列式', '#FFD60A')}
+            <div class="formula-card" style="--card-accent:#FFD60A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    $|A^\\mathrm{T}| = |A|$（转置不变）<br>
+                    $|kA| = k^n|A|$（$A$ 为 $n$ 阶方阵，注意是 $k$ 的 $n$ 次方）<br>
+                    $|AB| = |A|\\cdot|B|$
+                </div>
+            </div>
+            ${memoryBox('逆伴随串联', '判定可逆 → 求伴随 $A^*$ → 套 $A^{-1}=A^*/|A|$。二阶直接「主对调副变号除以行列式」，高阶用初等变换或伴随。')}
+        </div>
+    `;
+
+    // === 矩阵 Tab 4: 初等变换与秩 ===
+    const matElemBody = `
+        <div class="detail-section" id="mat-elem">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-table"></i> 初等行变换与矩阵的秩</div>
+            <div class="section-desc">三类初等行变换是求逆、求秩、解方程组的通用工具；秩是矩阵最核心的不变量。</div>
+
+            ${groupTitle('fa-shuffle', '4.1 三类初等行变换', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    • <strong>互换</strong>：两行互换，矩阵性质不变。<br>
+                    • <strong>倍乘</strong>：某行乘 $k\\neq 0$，性质不变（乘 0 会清零整行）。<br>
+                    • <strong>倍加</strong>：某行的 $k$ 倍加到另一行，性质不变。
+                </div>
+            </div>
+
+            ${groupTitle('fa-rotate', '4.2 初等行变换求逆', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$(A\\mid E) \\xrightarrow{\\text{行变换}} (E\\mid A^{-1})$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;">
+                    理解：左乘 $A^{-1}$ 把 $A$ 变 $E$，同时把 $E$ 变 $A^{-1}$。推广：解 $AX=B$ 用 $(A\\mid B)\\rightarrow(E\\mid A^{-1}B)$。
+                </div>
+            </div>
+
+            ${groupTitle('fa-layer-group', '4.3 行阶梯型与行最简型', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    • <strong>行阶梯型</strong>：非零行首位（主元）逐行右移，主元下方全 0。<br>
+                    • <strong>行最简型</strong>：在行阶梯基础上，每个主元为 1，且主元所在列其余元素全 0。
+                </div>
+            </div>
+
+            ${groupTitle('fa-ranking-star', '4.4 矩阵的秩', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    矩阵 $A$ 中最高阶非零子式的阶数称为秩，记作 $R(A)$。<br>
+                    <strong>等价说法</strong>：秩 = 行阶梯形的非零行数。<br>
+                    $$R(A)=n \\iff |A|\\neq 0 \\iff A \\text{ 满秩}$$
+                </div>
+            </div>
+            ${memoryBox('求秩套路', '化行阶梯形 → 数非零行 → 就是秩。满秩 ⟺ |A|≠0；不满秩 ⟺ |A|=0。')}
+        </div>
+    `;
+
+    // === 矩阵 Tab 5: 矩阵速查公式卡（供 review.html 翻卡抽提）===
+    const matSummaryBody = `
+        <div class="detail-section" id="mat-summary">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-table-list"></i> 矩阵速查公式卡</div>
+            <div class="section-desc">矩阵核心公式一表打包，考前速查，也是翻卡记忆卡池。</div>
+
+            <div class="formula-grid">
+                ${formulaCard('单1', '单位矩阵', '$$E = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{pmatrix},\\ EA=AE=A$$', '单位矩阵相当于数乘里的 1，任意矩阵左乘右乘都不变', '#5AC8FA')}
+                ${formulaCard('对1', '对角阵', '$$A = \\operatorname{diag}(a_1,a_2,\\dots,a_n)$$', '主对角可为任意常数，其余为 0；不要求全为 1', '#5AC8FA')}
+                ${formulaCard('对2', '对称矩阵', '$$A^\\mathrm{T}=A,\\quad A_{ij}=A_{ji}$$', '主对角线之外元素关于主对角线对称；镜像相等', '#5AC8FA')}
+                ${formulaCard('对3', '反称矩阵', '$$A^\\mathrm{T}=-A,\\quad A_{ii}=0$$', '主对角之外互为相反数；主对角元必为 0', '#5AC8FA')}
+                ${formulaCard('运1', '加法', '$$A+B=(a_{ij}+b_{ij})$$', '仅同型矩阵可加，对应元素相加', '#30D158')}
+                ${formulaCard('运2', '减法', '$$A-B=(a_{ij}-b_{ij})$$', '仅同型矩阵可减，对应元素相减', '#30D158')}
+                ${formulaCard('运3', '数乘', '$$kA=(k\\,a_{ij})$$', '常数 k 乘矩阵 = 每个元素都乘 k', '#30D158')}
+                ${formulaCard('运4', '乘法条件', '$$A_{m\\times n}\\cdot B_{n\\times p}=C_{m\\times p}$$', '前「列」后「行」维数相等才能乘；结果为 m×p', '#FF9F0A')}
+                ${formulaCard('运5', '不满足交换', '$$AB \\neq BA$$', '一般不能交换；也不满足消去律', '#FF9F0A')}
+                ${formulaCard('运6', '消去陷阱', '$$AB=AC \\text{ 推不出 } B=C$$', '仅当 A 可逆才能两边约掉 A 得 B=C', '#FF9F0A')}
+                ${formulaCard('多1', '方阵多项式', '$$f(A)\\varphi(A)=\\varphi(A)f(A)$$', '方阵的多项式可像数一样因式分解、交换', '#BF5AF2')}
+                ${formulaCard('多2', '纯数配 E', '$$5A+6E,\\ (5A+6E)^{-1}$$', '矩阵式里的纯数必须配单位阵 E 才有意义', '#BF5AF2')}
+                ${formulaCard('转1', '转置·自身', '$$(A^\\mathrm{T})^\\mathrm{T}=A$$', '转置两次回到自身', '#0A84FF')}
+                ${formulaCard('转2', '转置·数乘', '$$(\\lambda A)^\\mathrm{T}=\\lambda A^\\mathrm{T}$$', '常数可提出转置', '#0A84FF')}
+                ${formulaCard('转3', '转置·和', '$$(A+B)^\\mathrm{T}=A^\\mathrm{T}+B^\\mathrm{T}$$', '转置保持加法', '#0A84FF')}
+                ${formulaCard('转4', '转置·积(逆序)', '$$(AB)^\\mathrm{T}=B^\\mathrm{T}A^\\mathrm{T}$$', '转置要「翻跟头」：顺序颠倒', '#0A84FF')}
+                ${formulaCard('行1', '行列式·转置', '$$|A^\\mathrm{T}|=|A|$$', '转置不改变行列式', '#FFD60A')}
+                ${formulaCard('行2', '行列式·数乘', '$$|kA|=k^n|A|$$', 'A 为 n 阶方阵；注意是 k 的 n 次方', '#FFD60A')}
+                ${formulaCard('行3', '行列式·积', '$$|AB|=|A|\\cdot|B|$$', '乘积的行列式 = 行列式之积', '#FFD60A')}
+                ${formulaCard('逆1', '逆矩阵定义', '$$AB=BA=E$$', 'A 与 B 互为逆；只有方阵可逆', '#FF3B30')}
+                ${formulaCard('逆2', '可逆判定', '$$A \\text{ 可逆} \\iff |A| \\neq 0$$', '可逆 ⟺ 行列式非零 ⟺ 满秩', '#FF3B30')}
+                ${formulaCard('伴1', '伴随矩阵', '$$A^*=(A_{ji})_{n\\times n}$$', '代数余子式的转置；只有方阵有伴随', '#BF5AF2')}
+                ${formulaCard('伴2', '二阶伴随口诀', '$$A=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\\Rightarrow A^*=\\begin{pmatrix}d&-b\\\\-c&a\\end{pmatrix}$$', '主对调，副变号', '#BF5AF2')}
+                ${formulaCard('伴3', '核心等式', '$$AA^*=A^*A=|A|E$$', '对角元按行展开=|A|，非对角为 0', '#BF5AF2')}
+                ${formulaCard('伴4', '逆伴随关系', '$$A^{-1}=\\dfrac{A^*}{|A|},\\ A^*=|A|A^{-1}$$', '由 AA*=|A|E 两边左乘 A⁻¹ 得', '#BF5AF2')}
+                ${formulaCard('初1', '初等行变换', '互换 / 倍乘(k≠0) / 倍加', '三类操作都不改变矩阵的可逆性与秩', '#5AC8FA')}
+                ${formulaCard('初2', '初等行变换求逆', '$$(A\\mid E)\\xrightarrow{\\text{行变换}}(E\\mid A^{-1})$$', '左乘 A⁻¹ 理解；推广可解 AX=B', '#5AC8FA')}
+                ${formulaCard('秩1', '秩的定义', '$$R(A)=r$$', '最高阶非零子式的阶数 = 行阶梯形非零行数', '#30D158')}
+                ${formulaCard('秩2', '满秩判定', '$$R(A)=n \\iff |A| \\neq 0$$', '满秩 ⟺ 行列式非零；不满秩 ⟺ |A|=0', '#30D158')}
+            </div>
+            ${memoryBox('考前必背', '这 29 条覆盖了矩阵的几乎全部考点：特殊阵 → 运算 → 逆伴随 → 初等变换与秩。先识别题型，再套对应公式。')}
+        </div>
+    `;
+
+
+    return { title: '矩阵详情（线性代数）', color: C, tabs, body: matSpecialBody + matOpBody + matInvBody + matElemBody + matSummaryBody };
+}
+
+
 // ---------- 第一章·函数·极限·连续详情 ----------
 function buildFunctionDetail() {
     const C = '#FFD60A';
@@ -4405,6 +4705,17 @@ function buildOverviewDetail() {
                     </div>
                     <div style="margin-top:0.75rem;color:#5AC8FA;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
                 </div>
+
+                <div class="formula-card" style="--card-accent:#5AC8FA;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('matrix'),450)">
+                    <div class="formula-label" style="color:#5AC8FA;"><i class="fa-solid fa-table-cells"></i> 矩阵模块</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        <strong>内容</strong>：特殊阵 + 运算 + 逆伴随 + 初等变换与秩<br>
+                        <strong>特殊阵</strong>：单位、对角、对称、反称<br>
+                        <strong>运算</strong>：加减数乘 + 乘法（不满足交换/消去）<br>
+                        <strong>地位</strong>：线性代数核心对象，含完整例题
+                    </div>
+                    <div style="margin-top:0.75rem;color:#5AC8FA;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
+                </div>
             </div>
 
             ${memoryBox('联动记忆四大策略', '① 导数↔积分联动记忆，记住一边等于记住两边；② 微分不用单独背，导数 × dx 就是微分；③ 三角函数抓主干——从一个核心平方公式推导所有恒等式；④ 微分方程 = 导数与积分的综合应用，非齐等于齐加特。')}
@@ -4425,6 +4736,7 @@ function buildDetailContent(type) {
         case 'trigonometric': return buildTrigonometricDetail();
         case 'equation': return buildEquationDetail();
         case 'linear': return buildLinearDetail();
+        case 'matrix': return buildMatrixDetail();
     }
 }
 

@@ -101,7 +101,7 @@ function inferModule(color) {
 }
 
 // 章节顺序（用于 MODULES 输出排序，按学习路径）
-const MODULE_ORDER = ['limit', 'deriv', 'integral', 'trig', 'diffEq', 'linalg'];
+const MODULE_ORDER = ['limit', 'deriv', 'integral', 'trig', 'diffEq', 'linalg', 'matrix'];
 
 // 用 buildXxxDetail 的位置切分 cards
 function splitBySection(src, cards) {
@@ -113,7 +113,8 @@ function splitBySection(src, cards) {
     { name: 'integral', title: '积分', module: 'integral', color: '#30D158' },
     { name: 'trigonometric', title: '三角函数', module: 'trig', color: '#FF3B30' },
     { name: 'equation', title: '微分方程', module: 'diffEq', color: '#FF9F0A' },
-    { name: 'linear', title: '线性代数', module: 'linalg', color: '#5AC8FA' },
+    { name: 'linear', title: '线性代数·行列式', module: 'linalg', color: '#5AC8FA' },
+    { name: 'matrix', title: '线性代数·矩阵', module: 'matrix', color: '#5AC8FA' },
   ];
 
   // 找每个 formulaCard 在 src 中的位置（排除函数定义行）
@@ -212,7 +213,7 @@ const lines = [];
 lines.push('// 公式数据（自动从 src/index.html 抽提，勿手改）');
 lines.push('// 由 scripts/extractFormulas.mjs 生成');
 lines.push('// 字段：module / id / num / label / formula / note / color');
-lines.push('// module ∈ { limit, deriv, integral, trig, diffEq, linalg }');
+lines.push('// module ∈ { limit, deriv, integral, trig, diffEq, linalg, matrix }');
 lines.push('');
 lines.push('export const FORMULAS = [');
 for (const f of formulaList) {
