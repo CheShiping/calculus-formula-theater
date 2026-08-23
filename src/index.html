@@ -11,6 +11,8 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <link href="https://fonts.font.im/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+SC:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.loli.net/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+SC:wght@400;600;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+SC:wght@400;600;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <script>
         tailwind.config = {
             theme: {
@@ -440,6 +442,31 @@
             display: flex; align-items: center; gap: 0.75rem;
         }
         .section-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.7; }
+        .text-note { color: var(--text-primary, inherit); font-size: 0.97rem; line-height: 1.8; margin: 0.4rem 0 1.4rem; padding: 0 0.2rem; }
+        [data-theme="light"] .text-note { color: var(--detail-text); }
+        .doc-table { width: 100%; border-collapse: collapse; margin: 0.6rem 0 1.4rem; font-size: 0.95rem; line-height: 1.6; }
+        .doc-table th, .doc-table td { border: 1px solid var(--border, rgba(255,255,255,.12)); padding: 0.5rem 0.7rem; text-align: left; vertical-align: middle; }
+        [data-theme="light"] .doc-table th, [data-theme="light"] .doc-table td { border-color: var(--detail-border); }
+        .doc-table th { background: color-mix(in srgb, var(--color-purple, #BF5AF2) 14%, transparent); font-weight: 700; }
+        .tri-grid { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 0.6rem 0 1.4rem; align-items: flex-start; }
+        .tri-grid figure { margin: 0; text-align: center; }
+        .tri-grid svg { height: 96px; }
+        .tri-grid figcaption { margin-top: 0.35rem; font-size: 0.85rem; color: var(--text-muted, #999); }
+        [data-theme="light"] .tri-grid figcaption { color: var(--detail-muted); }
+        .diagram-frame { margin: 0.8rem 0 1.6rem; border: 1px solid var(--border, rgba(255,255,255,.12)); border-radius: 16px; overflow: hidden; }
+        .diagram-frame iframe { display: block; width: 100%; height: 560px; border: 0; background: transparent; }
+        [data-theme="light"] .diagram-frame { border-color: var(--detail-border); }
+        .tri-svg svg { color: var(--text-primary, #fff); }
+        .tri-svg .tri-line { stroke: currentColor; stroke-width: 1.5; fill: none; }
+        .tri-svg .tri-right { stroke: currentColor; stroke-width: 1.2; opacity: .8; }
+        .tri-svg .tri-label { fill: var(--text-muted, #999); font-size: 10px; font-family: inherit; }
+        [data-theme="light"] .tri-svg .tri-label { fill: var(--detail-muted); }
+        .tri-svg .tick { stroke: currentColor; stroke-width: 1.4; }
+        .practice-list { display: grid; gap: 0.55rem; margin: 0.5rem 0 1.5rem; }
+        .practice-list .practice-item { font-size: 0.95rem; line-height: 1.7; color: var(--text-primary, inherit); }
+        [data-theme="light"] .practice-list .practice-item { color: var(--detail-text); }
+        .practice-item .hint { color: var(--text-muted, #999); font-size: 0.88rem; }
+        [data-theme="light"] .practice-item .hint { color: var(--detail-muted); }
 
         /* 公式网格 */
         .formula-grid {
@@ -450,9 +477,16 @@
         .formula-card {
             background: var(--bg-elevated);
             border: 1px solid var(--border-soft);
-            border-radius: 16px; padding: 1.25rem;
+            border-radius: 16px; padding: 1.25rem 1.25rem 1.1rem;
             transition: all 0.3s ease;
-            position: relative; overflow: hidden;
+            position: relative;
+            overflow-x: auto;    /* 内容超出时横向滑动 */
+            overflow-y: hidden;  /* 禁止垂直滚动 */
+        }
+        .formula-card::-webkit-scrollbar { height: 8px; }
+        .formula-card::-webkit-scrollbar-thumb {
+            background: var(--card-accent, rgba(0,0,0,.25));
+            border-radius: 4px; opacity: .6;
         }
         .formula-card::before {
             content: ''; position: absolute; top: 0; left: 0;
@@ -467,7 +501,7 @@
             box-shadow: var(--shadow-hover);
         }
         .formula-card .katex { font-size: 1.05em; }
-        .formula-card .katex-display { margin: 0.3rem 0; }
+        .formula-card .katex-display { margin: 0.3rem 0; white-space: nowrap; }
         .chapter-flow-card { margin-bottom: 1rem; }
         .chapter-flow-step {
             display: grid;
@@ -1274,11 +1308,11 @@
         <section class="learning-path" aria-label="高数知识路径">
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-blue)" onclick="enterDetail('function')"><h2>函数 · 极限 · 连续</h2><p>定义域、极限方法、连续与间断点，是后续变化的坐标系。</p><span class="path-meta">22 条内容 · 先修模块</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-violet)" onclick="enterDetail('derivative')"><h2>导数与微分</h2><p>从瞬时变化率到切线斜率，可导 ⟺ 可微，一元函数中二者本质相通。</p><span class="path-meta">34 条公式 · 核心工具</span></button></article>
-            <article class="path-row"><button class="path-node" style="--node-color:var(--path-green)" onclick="enterDetail('integral')"><h2>积分</h2><p>把导数倒过来读。基本公式与三角积分是复习主干。</p><span class="path-meta">19 条公式 · 导数的逆运算</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:var(--path-green)" onclick="enterDetail('integral')"><h2>一元函数积分学</h2><p>把导数倒过来读。不定积分、定积分与反常积分是复习主干。</p><span class="path-meta">46 条公式 · 导数的逆运算</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-coral)" onclick="enterDetail('trigonometric')"><h2>三角函数</h2><p>关系式贯穿导数和积分，用主干公式组织而不是零散背诵。</p><span class="path-meta">41 条公式 · 关系网络</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-amber)" onclick="enterDetail('equation')"><h2>微分方程</h2><p>将导数与积分放进同一道题，进入一阶与二阶方程训练。</p><span class="path-meta">9 条公式 · 综合应用</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:#759ba1" onclick="enterDetail('linear')"><h2>行列式</h2><p>计算、性质与展开，是线性代数部分的基础工具。</p><span class="path-meta">4 个专题 · 线性代数</span></button></article>
-            <article class="path-row"><button class="path-node" style="--node-color:#5AC8FA" onclick="enterDetail('matrix')"><h2>矩阵</h2><p>特殊矩阵、运算、逆与伴随、初等变换与秩，是线性代数的核心对象。</p><span class="path-meta">5 个专题 · 线性代数</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:#8b98ba" onclick="enterDetail('matrix')"><h2>矩阵</h2><p>特殊矩阵、运算、逆与伴随、初等变换与秩，是线性代数的核心对象。</p><span class="path-meta">5 个专题 · 线性代数</span></button></article>
         </section>
         <footer class="path-footer"><span>选一条路径进入章节，或直接开始你熟悉的翻卡记忆。</span><a class="path-review" href="review.html">进入翻卡记忆&nbsp; →</a></footer>
     </main>
@@ -1408,9 +1442,9 @@
                         <div class="card-icon text-accent" style="--icon-glow: rgba(48, 209, 88, 0.4);">
                             <i class="fa-solid fa-infinity"></i>
                         </div>
-                        <div class="module-tag bg-accent/20 text-accent">积分模块</div>
-                        <h3 class="card-title">积分的定义</h3>
-                        <p class="card-subtitle" style="--sub-color: var(--color-green);">Integral · 常见+特殊</p>
+                        <div class="module-tag bg-accent/20 text-accent">一元函数积分学</div>
+                        <h3 class="card-title">一元函数积分学</h3>
+                        <p class="card-subtitle" style="--sub-color: var(--color-green);">Integral · 不定/定/反常</p>
                         <div class="formula-block">
                             $$\int f(x) \, dx = F(x) + C$$
                             $$F'(x) = f(x)$$
@@ -1418,12 +1452,12 @@
                         <div class="formula-list" style="--dot-color: var(--color-green);">
                             <li>不定积分 = 一族函数（+C）</li>
                             <li>定积分 = 曲线下面积</li>
-                            <li>常见11条 + 特殊8条</li>
+                            <li>反常积分 = 区间无穷或函数无界</li>
                         </div>
                         <div class="memory-tip">
-                            <span class="highlight-text" style="--hl-color: var(--color-green);">点击查看全部积分公式</span>
+                            <span class="highlight-text" style="--hl-color: var(--color-green);">点击查看一元函数积分全部公式</span>
                         </div>
-                        <div class="enter-hint">⟜ 点击进入积分公式详情 ⟝</div>
+                        <div class="enter-hint">⟜ 点击进入一元函数积分学详情 ⟝</div>
                     </div>
                 </div>
 
@@ -1579,10 +1613,10 @@ const sidebarData = [
         note: "⭐ 微分公式 = 导数公式 × dx。点击进入16条微分公式详情"
     },
     {
-        module: "积分模块", moduleColor: "var(--color-green)",
-        title: "积分的定义",
-        desc: "积分是导数的逆运算——从导函数找回原函数。基本积分公式就是导数公式倒过来看，联动记忆效率翻倍。常见11条 + 特殊8条，覆盖专升本全部考点。",
-        note: "⭐⭐⭐ 导数↔积分联动记忆，记住一边等于记住两边。点击进入全部积分公式"
+        module: "一元函数积分学", moduleColor: "var(--color-green)",
+        title: "一元函数积分学",
+        desc: "积分是导数的逆运算——从导函数找回原函数。基本积分公式就是导数公式倒过来看，联动记忆效率翻倍。含不定积分（定义/性质/四大方法）、定积分（性质/计算/技巧/应用）与反常积分，覆盖专升本积分学全部考点。",
+        note: "⭐⭐⭐ 导数↔积分联动记忆，记住一边等于记住两边。点击进入一元函数积分学全部公式"
     },
     {
         module: "三角函数", moduleColor: "#FF3B30",
@@ -2630,11 +2664,15 @@ function buildDerivativeDetail() {
 function buildIntegralDetail() {
     const C = 'var(--color-green)';
     const tabs = `
-        <div class="detail-tab active" style="--tab-color:var(--color-green-20);--tab-border:var(--color-green-40);" onclick="switchTab('int-common', this)">常见积分公式</div>
+        <div class="detail-tab active" style="--tab-color:var(--color-green-20);--tab-border:var(--color-green-40);" onclick="switchTab('int-map', this)">知识地图</div>
+        <div class="detail-tab" style="--tab-color:var(--color-green-20);--tab-border:var(--color-green-40);" onclick="switchTab('int-methods', this)">不定积分</div>
+        <div class="detail-tab" style="--tab-color:var(--color-green-20);--tab-border:var(--color-green-40);" onclick="switchTab('int-def', this)">定积分</div>
+        <div class="detail-tab" style="--tab-color:var(--color-green-20);--tab-border:var(--color-green-40);" onclick="switchTab('int-imp', this)">反常积分</div>
+        <div class="detail-tab" style="--tab-color:var(--color-green-20);--tab-border:var(--color-green-40);" onclick="switchTab('int-common', this)">常见积分公式</div>
         <div class="detail-tab" style="--tab-color:var(--color-green-20);--tab-border:var(--color-green-40);" onclick="switchTab('int-special', this)">特殊积分公式</div>
     `;
     const commonBody = `
-        <div class="detail-section active" id="int-common">
+        <div class="detail-section" id="int-common">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-sync-alt"></i> 基本积分公式</div>
             <div class="section-desc">基本积分公式完全不用死记——它们就是导数公式的逆运算！知道 (tan x)' = sec²x，自然就知道 ∫sec²x dx = tan x + C。把导数公式倒过来看，就是积分公式。以下 11 条是积分的基石。</div>
 
@@ -2694,14 +2732,503 @@ function buildIntegralDetail() {
         </div>
     `;
 
-    return { title: '积分公式详情', color: C, tabs, body: commonBody + specialBody };
+    // ---------- 知识地图（第一个 tab） ----------
+    const mapBody = `
+        <div class="detail-section active" id="int-map">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-map-location-dot"></i> 知识地图 · 一元函数积分学</div>
+            <div class="section-desc">积分是导数的逆运算，主线为「原函数 → 不定积分 → 四大方法 → 定积分（计算 + 技巧 + 应用）→ 反常积分」。理解这张图，就能把整个章节串成一条线。</div>
+
+            ${groupTitle('fa-sitemap', '知识地图与学习路径', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>① 不定积分</strong>（导数的逆运算）<br>
+                    ├─ 原函数概念：F'(x)=f(x)  ⇒  ∫f(x)dx=F(x)+C（勿忘 +C）<br>
+                    ├─ 性质四条：常数可提前 · 加减可拆分 · 积导互逆（积导→空手 / 导积→还C）<br>
+                    ├─ 常见积分公式：11 条基石（导数倒过来背）+ 特殊积分公式<br>
+                    └─ 四大方法：直接积分 · 凑微分（第一换元） · 分部积分（反对幂指三） · 换元（根式/三角代换）<br><br>
+                    <strong>② 定积分</strong>（一个数，几何意义 = 曲边梯形面积）<br>
+                    ├─ 八大性质 + 比大小（性质 6）<br>
+                    ├─ 计算：牛顿-莱布尼茨 ★ ║ 分部积分(定积分版) ║ 换元积分(定积分版)·三换<br>
+                    ├─ 三大技巧：偶倍奇零 ⭐ · 四分之一圆面积 ⭐ · 点火公式（华里士）⭐<br>
+                    ├─ 分段函数求定积分（三种类型）· 积分方程 · 可积条件<br>
+                    └─ 应用：平面图形面积 · 旋转体体积 · 椭圆面积 ⭐<br><br>
+                    <strong>③ 反常积分</strong>（广义积分，∞区间 / 无界函数）<br>
+                    ├─ 无穷区间：∫ₐ^∞ 1/xᵖ，p>1 收敛、p≤1 发散<br>
+                    ├─ 无界端点：p 判定方向相反（p<1 收敛）<br>
+                    └─ 数列极限 → 定积分：lim 1/n·Σf(k/n)=∫₀¹f(x)dx
+                </div>
+            </div>
+            ${memoryBox('学习路径一句话', '不积跬步，无以至千里——先背 11 条基本积分公式（导数倒过来），再练四大方法，定积分套牛莱公式，再上三大技巧提速，最后区分反常积分的 ∞区间 与 无界端点。')}
+        </div>
+    `;
+
+    // ---------- 不定积分 ----------
+    const methodsBody = `
+        <div class="detail-section" id="int-methods">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-compass"></i> 不定积分 · 概念性质与四大方法</div>
+            <div class="section-desc">核心一句话：<strong>导数往回逆推就是原函数；记不住就反过来背导数公式！</strong> 总览：先看能不能直接套公式 → 不能就凑微分（第一换元）→ 两类不同函数相乘用分部积分 → 含根式用代换（根式代换 / 三角代换）。</div>
+
+            ${groupTitle('fa-lightbulb', '一、原函数与不定积分的概念', 'var(--color-green)')}
+            <div class="text-note">若 $F\'(x)=f(x)$，则称 $F(x)$ 是 $f(x)$ 的一个<strong>原函数</strong>。</div>
+            <div class="formula-grid">
+                ${formulaCard('', '谁是谁别搞反', '$$F\'(x)=f(x)\\ \\Rightarrow\\ \\begin{cases} F(x)\\ \\text{是}\\ f(x)\\ \\text{的原函数}\\\\ f(x)\\ \\text{是}\\ F(x)\\ \\text{的导数} \\end{cases}$$', '积分求逆推出的才是原函数', 'var(--color-green)')}
+                ${formulaCard('', '不定积分 = 全体原函数', '$$\\boxed{\\;\\int f(x)\\,dx = F(x) + C\\;}$$', '找到一个原函数再加 C。别忘了加 C！丢了直接扣分', 'var(--color-green)')}
+            </div>
+            ${memoryBox('判断小技巧', '求导之后变简单的那个，是被积函数 f(x)（小写的 f）；反过来，求逆推（积分）得到的那个才是原函数。例：$(x^3)\'=3x^2$，$3x^2$ 是被积函数（导数），$x^3$ 是原函数；正例 $(\\sin x)\'=\\cos x$，$\\cos x$ 是被积函数，$\\sin x$ 是原函数。')}
+
+            ${groupTitle('fa-list-check', '二、不定积分的性质（写成公式背）', '#FF9F0A')}
+            <div class="text-note">设 $k$ 为常数，被积函数都可积。</div>
+            <div class="formula-grid">
+                ${formulaCard('1', '常数可提前', '$$\\int k\\,f(x)\\,dx = k\\int f(x)\\,dx$$', 'k 提到积分号外', '#FF9F0A')}
+                ${formulaCard('2', '加减可拆', '$$\\int [f(x)\\pm g(x)]\\,dx = \\int f\\,dx \\pm \\int g\\,dx$$', '拆成多个积分分别做', '#FF9F0A')}
+                ${formulaCard('3', '先积后导 = 本身', '$$\\boxed{\\;\\left(\\int f(x)\\,dx\\right)\' = f(x)\\;}$$', '积分是逆运算，逆完再逆抵消，好比「穿鞋再脱鞋」', '#FF9F0A')}
+                ${formulaCard('4', '先导后积 = 本身 + C', '$$\\boxed{\\;\\int f\'(x)\\,dx = f(x) + C\\;}$$', '多走一个「先求导」的动作，末尾还一个 C', '#FF9F0A')}
+            </div>
+            ${memoryBox('导积互逆 · 性质 3、4 连起来背', '「积导」→ 空手（先积后导抵消）；「导积」→ 还 C（去导补 C）。例：$\\left(\\int x^2\\,dx\\right)\'=(x^3/3+C)\'=x^2$；$\\int (x^2)\'\\,dx=\\int 2x\\,dx=x^2+C$。这两个性质常考选择题。')}
+
+            ${groupTitle('fa-table-list', '三、常见积分公式（背诵清单）', 'var(--color-green)')}
+            <div class="text-note">以下公式全部是「导数公式倒过来」。基本积分公式见"常见积分公式"标签，特殊积分公式见"特殊积分公式"标签，作为背诵底稿逐条对齐同步。</div>
+
+            ${groupTitle('fa-calculator', '四、四大方法总览', '#FFD60A')}
+            <div class="text-note">总览一句话：先看能不能<strong>直接套公式</strong>；不能套就<strong>凑微分</strong>（第一换元）；两类不同函数相乘用<strong>分部积分</strong>；含根式用<strong>代换</strong>（根式代换 / 三角代换）。</div>
+
+            ${groupTitle('fa-calculator', '4.1 直接积分法（套公式，⭐必会）', '#FFD60A')}
+            <div class="text-note"><strong>套路</strong>：对被积函数先做代数恒等变形——<strong>加减同一项、拆项、通分、有理化</strong>——拆成能用基本公式的若干项逐项积分。题目特征：看到「多项式÷多项式」「分子比分母次数高」「三角函数平方」等，先动手拆再套公式。</div>
+            <div class="formula-grid">
+                ${formulaCard('', '加项变形', '$$\\int \\frac{x^2}{1+x^2}\\,dx = \\int\\left(1-\\frac{1}{1+x^2}\\right)dx = x-\\arctan x + C$$', '分子 +1−1 变形，拆成能套公式的两项', '#FFD60A')}
+            </div>
+
+            ${exampleBox('真题（普通专升本常考通式 · 成人高考2022高数二第23题同型）· 直接积分 · 加项', `
+                <p>求 $\\displaystyle\\int \\frac{x^2}{1+x^2}\\,dx$。</p>
+                <p><strong>来源</strong>：普通专升本常考通式，此处作同等难度编制。</p>
+                <p><strong>解</strong>：分子 +1−1 变形：</p>
+                <p>$$\\int \\frac{x^2}{1+x^2}\\,dx = \\int \\left(1 - \\frac{1}{1+x^2}\\right)dx = x - \\arctan x + C$$</p>
+            `)}
+
+            ${exampleBox('真题（同等难度通式）· 直接积分 · 减项', `
+                <p>求 $\\displaystyle\\int \\frac{x}{1+x^2}\\,dx$。</p>
+                <p><strong>来源</strong>：同等难度通式（分子恰好是分母的导数，凑微分即成，顺带示范「减项」思维）。</p>
+                <p><strong>解</strong>：观察到分子是分母的导数（$\\frac12$ 倍）：</p>
+                <p>$$\\int \\frac{x}{1+x^2}\\,dx = \\frac12\\int \\frac{d(1+x^2)}{1+x^2} = \\frac12\\ln(1+x^2)+C$$</p>
+            `)}
+
+            ${exampleBox('真题（四川专升本考试要求第5条 · 有理函数）· 直接积分 · 拆项', `
+                <p>求 $\\displaystyle\\int \\frac{1}{x^2-5x+6}\\,dx$。</p>
+                <p><strong>来源</strong>：四川专升本考试要求明确「会求有理函数的不定积分」，按同等难度编制。</p>
+                <p><strong>解</strong>：因式分解 + 拆项（部分分式）：$x^2-5x+6=(x-2)(x-3)$，设 $\\frac{1}{(x-2)(x-3)}=\\frac{A}{x-2}+\\frac{B}{x-3}$，待定系数 $A=-1,B=1$：</p>
+                <p>$$\\int\\frac{1}{x^2-5x+6}\\,dx = \\int\\left(\\frac{-1}{x-2}+\\frac{1}{x-3}\\right)dx = \\ln\\left|\\frac{x-3}{x-2}\\right|+C$$</p>
+            `)}
+
+            ${exampleBox('真题（同等难度通式）· 直接积分 · 三角函数', `
+                <p>求 $\\displaystyle\\int \\cot^2 x\\,dx$。</p>
+                <p><strong>来源</strong>：同等难度通式（三角函数平方的经典「-1 拆项」变形）。</p>
+                <p><strong>解</strong>：利用 $\\cot^2 x = \\csc^2 x - 1$：</p>
+                <p>$$\\int\\cot^2x\\,dx = \\int(\\csc^2 x-1)\\,dx = -\\cot x - x + C$$</p>
+                <blockquote>🔗 联动三角函数章节：遇到 $\\sin^2x+\\cos^2x=1$、倍角公式 $2\\sin^2x=1-\\cos2x$、$\\cos^2x=\\frac{1+\\cos2x}{2}$ 等降幂恒等式，去三角函数章节单独记忆。</blockquote>
+            `)}
+
+            <div class="practice-list">
+                <div class="practice-title" style="color:var(--color-green);font-weight:700;margin-top:.4rem;">同类练习 5 道（套公式为主）</div>
+                <div class="practice-item">1. $\\displaystyle\\int\\frac{x^2}{x+1}\\,dx$ <span class="hint">（拆项：$=x-1+\\frac1{x+1}$）</span></div>
+                <div class="practice-item">2. $\\displaystyle\\int\\frac{(1+x)^2}{x(1+x^2)}\\,dx$ <span class="hint">（先通分拆三项）</span></div>
+                <div class="practice-item">3. $\\displaystyle\\int\\sin^2\\frac{x}{2}\\,dx$ <span class="hint">（降幂：$=\\frac{1-\\cos x}{2}$）</span></div>
+                <div class="practice-item">4. $\\displaystyle\\int\\frac{1}{x^2(1+x^2)}\\,dx$ <span class="hint">（$= \\frac1{x^2}-\\frac1{1+x^2}$）</span></div>
+                <div class="practice-item">5. $\\displaystyle\\int\\frac{x^3}{x+1}\\,dx$ <span class="hint">（多项式长除）</span></div>
+            </div>
+
+            ${groupTitle('fa-compress', '4.2 凑微分法（第一换元，⭐核心）', 'var(--color-green)')}
+            <div class="formula-grid">
+                ${formulaCard('', '凑微分原理', '$$\\int g(\\varphi(x))\\,\\varphi\'(x)\\,dx = \\int g(u)\\,du,\\quad u=\\varphi(x)$$', '把 φ\'(x)dx 塞进 d 号，化成对 u 的积分', 'var(--color-green)')}
+                ${formulaCard('', '凑微分流行式', '$$dx=\\frac1a\\,d(ax+b),\\quad x\\,dx=\\frac12\\,d(x^2),\\quad \\frac{dx}{x}=d(\\ln x),\\quad e^xdx=d(e^x),\\quad \\cos x\\,dx=d(\\sin x)$$', '看到就换：d 号直接把后面吸进去', 'var(--color-green)')}
+            </div>
+            <div class="text-note"><strong>核心</strong>：把被积函数看成 $g(\\varphi(x))\\cdot\\varphi\'(x)$，于是塞进 <code>d</code> 号，化成对 $\\varphi(x)$ 的积分。⚠️ 凑微分的模版很多，最终凭经验，<strong>多做题就熟</strong>。</div>
+
+            ${exampleBox('真题（成考/专升本填空高频通式）· 凑微分 ①', `
+                <p>求 $\\displaystyle\\int \\frac{dx}{x\\ln x}$。</p>
+                <p><strong>解</strong>：$\\frac{1}{x}dx=d(\\ln x)$：</p>
+                <p>$$\\int\\frac{1}{x\\ln x}\\,dx = \\int \\frac{1}{\\ln x}\\,d(\\ln x)=\\ln|\\ln x|+C$$</p>
+            `)}
+
+            ${exampleBox('真题（同等难度通式）· 凑微分 ②', `
+                <p>求 $\\displaystyle\\int xe^{x^2}\\,dx$。</p>
+                <p><strong>解</strong>：$x\\,dx=\\frac12\\,d(x^2)$：</p>
+                <p>$$\\int xe^{x^2}\\,dx = \\frac12\\int e^{x^2}\\,d(x^2)=\\frac12 e^{x^2}+C$$</p>
+            `)}
+
+            ${exampleBox('真题（同等难度通式）· 凑微分 ③', `
+                <p>求 $\\displaystyle\\int \\frac{e^x}{1+e^x}\\,dx$。</p>
+                <p><strong>解</strong>：$e^xdx=d(e^x)$：</p>
+                <p>$$\\int\\frac{e^x}{1+e^x}\\,dx = \\int\\frac{1}{1+e^x}\\,d(1+e^x)=\\ln(1+e^x)+C$$</p>
+            `)}
+
+            ${exampleBox('真题（同等难度通式）· 凑微分 ④', `
+                <p>求 $\\displaystyle\\int \\frac{\\cos\\sqrt{x}}{\\sqrt{x}}\\,dx$。</p>
+                <p><strong>解</strong>：分母凑 $\\frac1{\\sqrt x}dx = 2d(\\sqrt x)$：</p>
+                <p>$$\\int\\frac{\\cos\\sqrt x}{\\sqrt x}\\,dx = 2\\int\\cos\\sqrt x\\,d(\\sqrt x)=2\\sin\\sqrt x+C$$</p>
+            `)}
+
+            ${exampleBox('真题（同等难度通式 · 含三角降幂）· 凑微分 ⑤', `
+                <p>求 $\\displaystyle\\int \\cos^2 x\\,dx$。</p>
+                <p><strong>解</strong>：先降幂 $\\cos^2x=\\frac{1+\\cos2x}{2}$：</p>
+                <p>$$\\int\\cos^2x\\,dx=\\frac12\\int(1+\\cos2x)\\,dx=\\frac{x}{2}+\\frac{\\sin2x}{4}+C$$</p>
+                <blockquote>遇到 sin²x / cos²x 无法直接积，先降幂——三角恒等变形是积分前的第一反应。</blockquote>
+            `)}
+
+            ${groupTitle('fa-arrows-split-up-and-left', '4.3 分部积分法（⭐核心）', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('', '分部积分公式', '$$\\boxed{\\;\\int u\\,dv = uv - \\int v\\,du\\;}\\quad\\text{或}\\quad \\boxed{\\;\\int u\\,v\'\\,dx = uv - \\int u\'v\\,dx\\;}$$', '⭐ 必背。选 u 的口诀「反对幂指三」', '#0A84FF')}
+                ${formulaCard('', '选 u 的口诀', '$$\\text{反} \\to \\text{对} \\to \\text{幂} \\to \\text{指} \\to \\text{三}$$', '越靠前越难积就让它当 u（求导变简单）；靠后的当 dv（要能积出）', '#0A84FF')}
+            </div>
+            <div class="doc-table-wrap"><table class="doc-table"><thead><tr><th>函数类型</th><th>长啥样</th><th>适合当 u</th></tr></thead><tbody><tr><td>反三角函数</td><td>$\\arcsin x,\\ \\arctan x$</td><td>✅（求导变 $1/\\sqrt{1-x^2}$ 好积）</td></tr><tr><td>对数函数</td><td>$\\ln x,\\ \\log_a x$</td><td>✅（求导变 $1/x$）</td></tr><tr><td>幂函数</td><td>$x,\\ x^2,\\ x^n$</td><td>✅（次数不断降）</td></tr><tr><td>指数函数</td><td>$e^x,\\ a^x$</td><td>当 dv（好积）</td></tr><tr><td>三角函数</td><td>$\\sin x,\\cos x$</td><td>当 dv（好积）</td></tr></tbody></table></div>
+            <div class="text-note">口诀联想：<strong>「反打幂贼三」</strong> → 反正「打」的是幂、最后积「指」「三」。例 $\\int xe^xdx$：幂在指数前，$u=x,\\ dv=e^xdx$，则 $du=dx,\\ v=e^x$：$\\int xe^xdx = xe^x - \\int e^xdx = xe^x - e^x + C$。</div>
+
+            ${exampleBox('易错点 · 凑 dv 的系数', `
+                <p>还原 $\\displaystyle\\int\\cos3x\\,dx$。</p>
+                <p><strong>解</strong>：$\\sin3x$ 是 $\\cos3x$ 的原函数，但 $3x$ 里有个 3，正确是：</p>
+                <p>$$\\int\\cos3x\\,dx = \\frac13\\int\\cos3x\\,d(3x) = \\frac13\\sin3x + C$$</p>
+                <blockquote>口诀：<code>3x</code> 还原成 <code>d(3x)</code> 时前面补 <code>1/3</code>，3 不要忘。</blockquote>
+            `)}
+
+            ${exampleBox('真题（专升本/成考解答题常客）· 题型A 两次分部 · eˣ×sin x', `
+                <p>求 $\\displaystyle\\int e^x\\sin x\\,dx$。</p>
+                <p><strong>解</strong>：按「反对幂指三」取 $u=\\sin x,\\ dv=e^xdx$，分部两次会绕回原积分：</p>
+                <p>$$I = e^x\\sin x - e^x\\cos x - I\\ \\Rightarrow\\ 2I=e^x(\\sin x-\\cos x)$$</p>
+                <p>$$\\boxed{\\int e^x\\sin x\\,dx = \\frac{e^x(\\sin x-\\cos x)}{2}+C}$$</p>
+                <blockquote>规律：指数 × 三角，分部两次回绕，移项除以 2 即得。</blockquote>
+            `)}
+
+            ${exampleBox('真题（解答题通式 · 同等难度求值题）· 题型B 含 f\'\'(x)', `
+                <p>设 $f\'\'(x)$ 连续，已知 $f(0)=0,\\ f(1)=1,\\ f\'(1)=2$，计算 $\\displaystyle\\int_0^1 x\\,f\'\'(x)\\,dx$。</p>
+                <p><strong>来源</strong>：解答题通式，按专升本同等难度编制（只给端点值，考「分部积分 + 代入上下限 + 变号」三步）。</p>
+                <p><strong>解</strong>：令 $u=x,\\ dv=f\'\'(x)dx$，则 $du=dx,\\ v=f\'(x)$：</p>
+                <p>$$\\int_0^1 x f\'\'(x)dx = \\Big[x f\'(x)\\Big]_0^1 - \\int_0^1 f\'(x)\\,dx = (1\\cdot2-0)-\\big(f(1)-f(0)\\big)=2-1=1$$</p>
+                <blockquote>要点：出现 $f\'\'$ 就写成 $d(f\')$；「先导后积 = 还回函数」背熟，直接代端点值即可。</blockquote>
+            `)}
+
+            <div class="text-note"><strong>例（通用教学式）</strong>：$\\int x f\'\'(x)dx$：把 $f\'\'(x)\\,dx = d(f\'(x))$ 当 $dv$，得 $\\displaystyle \\int x f\'\'(x)dx = x f\'(x) - \\int f\'(x)\\,dx = x f\'(x) - f(x) + C$。</div>
+
+            ${groupTitle('fa-square-root-variable', '4.4 根式代换（第二换元①，去根号）', '#FF9F0A')}
+            <div class="text-note"><strong>套路</strong>：被积函数含根号「$\\sqrt{\\text{框框}}$」，令 $\\sqrt{\\text{框框}}=t$，解出里面的 $x$，算出 $dx$，去掉根号化为有理函数再积。<strong>摸到规律</strong>：遇到 $\\sqrt[3]{\\text{框框}}$ 等多重根式，令 $t=\\sqrt[n]{\\text{框框}}$（取各根指数的最小公倍数做分母）。</div>
+            <div class="formula-grid">
+                ${formulaCard('', '单根式换', '$$\\sqrt{x+1}=t\\ \\Rightarrow\\ x=t^2-1,\\ dx=2t\\,dt$$', '令整个根号等于 t，去掉根号化为有理函数', '#FF9F0A')}
+                ${formulaCard('', '多重根式换', '$$\\sqrt{x}=t^3,\\ \\sqrt[3]{x}=t^2,\\ dx=6t^5\\,dt\\quad (x=t^6)$$', '√x 指数 2、∛x 指数 3，取 lcm=6，令 x=t⁶', '#FF9F0A')}
+            </div>
+
+            ${exampleBox('真题（专升本/成考解答题典型 · 同等难度）· 根式代换', `
+                <p>求 $\\displaystyle\\int \\frac{dx}{1+\\sqrt{x+1}}$。</p>
+                <p><strong>解</strong>：令 $\\sqrt{x+1}=t$，则 $x=t^2-1,\\ dx=2t\\,dt$：</p>
+                <p>$$\\int\\frac{dx}{1+\\sqrt{x+1}} = \\int\\frac{2t}{1+t}\\,dt = 2\\int\\left(1-\\frac{1}{1+t}\\right)dt = 2\\big(t-\\ln|1+t|\\big)+C$$</p>
+                <p>代回 $t=\\sqrt{x+1}$：$=2\\sqrt{x+1}-2\\ln\\big(1+\\sqrt{x+1}\\big)+C$。</p>
+            `)}
+
+            ${exampleBox('真题（解答题通式 · 同等难度多根式）· 多重根式', `
+                <p>求 $\\displaystyle\\int \\frac{dx}{\\sqrt{x}+\\sqrt[3]{x}}$。</p>
+                <p><strong>解</strong>：√x 指数 2、∛x 指数 3，取最小公倍数 6，令 $x=t^6$：$\\sqrt x=t^3,\\ \\sqrt[3]x=t^2,\\ dx=6t^5dt$</p>
+                <p>$$\\int \\frac{6t^5}{t^3+t^2}\\,dt = 6\\int\\frac{t^3}{t+1}\\,dt$$</p>
+                <p>分子次数高先长除 $\\frac{t^3}{t+1}=t^2-t+1-\\frac1{t+1}$：$6\\left(\\frac{t^3}3-\\frac{t^2}2+t-\\ln|t+1|\\right)+C$</p>
+                <p>代回 $t=\\sqrt[6]{x}$：$=2\\sqrt{x}-3\\sqrt[3]{x}+6\\sqrt[6]{x}-6\\ln\\big(\\sqrt[6]{x}+1\\big)+C$</p>
+            `)}
+
+            ${groupTitle('fa-shuffle', '4.5 三角代换（第二换元②，去根号）', '#BF5AF2')}
+            <div class="text-note"><strong>什么时候用</strong>：被积函数含「根号下出现<strong>平方的代数式</strong>」$\\sqrt{a^2\\pm x^2}$，用三角代换把根号去掉。记忆口诀（令谁化谁）：$\\sqrt{x^2+a^2}$ 令 $x=a\\tan t$（加法顺序可变，$a^2$ 在前用 tan 更省事）；$\\sqrt{a^2-x^2}$ 令 $x=a\\sin t$；$\\sqrt{x^2-a^2}$ 令 $x=a\\sec t$。画一个直角三角形，把 $x$、$a$ 标到两条直角边，斜边用勾股算出来，「塞进去弹出来」那套反三角立刻能回代。</div>
+            <div class="formula-grid">
+                ${formulaCard('', 'x²+a² 型', '$$\\sqrt{x^2+a^2}\\ \\Rightarrow\\ x=a\\tan t,\\ dx=a\\sec^2t\\,dt,\\ \\sqrt{x^2+a^2}=a\\sec t$$', '设 x=a·tan t', '#BF5AF2')}
+                ${formulaCard('', 'a²−x² 型', '$$\\sqrt{a^2-x^2}\\ \\Rightarrow\\ x=a\\sin t,\\ dx=a\\cos t\\,dt,\\ \\sqrt{a^2-x^2}=a\\cos t$$', '设 x=a·sin t', '#BF5AF2')}
+                ${formulaCard('', 'x²−a² 型', '$$\\sqrt{x^2-a^2}\\ \\Rightarrow\\ x=a\\sec t,\\ dx=a\\tan t\\sec t\\,dt,\\ \\sqrt{x^2-a^2}=a\\tan t$$', '设 x=a·sec t', '#BF5AF2')}
+            </div>
+            <div class="tri-grid tri-svg">
+                <figure>
+                    <svg viewBox="0 0 96 78" role="img" aria-label="x²+a² 直角三角形">
+                        <path class="tri-line" d="M26,66 L84,66 L26,14 Z"/>
+                        <path class="tri-right" d="M26,58 L34,58 L34,66"/>
+                        <text class="tri-label" x="52" y="78">√(x²+a²)：x=a·tan t</text>
+                        <text class="tri-label" x="18" y="60">x(对)</text>
+                        <text class="tri-label" x="30" y="84">a(邻)</text>
+                        <text class="tri-label" x="10" y="16">√(x²+a²)</text>
+                    </svg>
+                    <figcaption>$\\sqrt{x^2+a^2}$：$x=a\\tan t$</figcaption>
+                </figure>
+                <figure>
+                    <svg viewBox="0 0 96 78" role="img" aria-label="a²-x² 直角三角形">
+                        <path class="tri-line" d="M8,66 L84,66 L8,14 Z"/>
+                        <path class="tri-right" d="M8,58 L16,58 L16,66"/>
+                        <text class="tri-label" x="46" y="78">√(a²−x²)：x=a·sin t</text>
+                        <text class="tri-label" x="16" y="60">x(对)</text>
+                        <text class="tri-label" x="30" y="84">√(a²−x²)(邻)</text>
+                        <text class="tri-label" x="30" y="16">a(斜)</text>
+                    </svg>
+                    <figcaption>$\\sqrt{a^2-x^2}$：$x=a\\sin t$</figcaption>
+                </figure>
+                <figure>
+                    <svg viewBox="0 0 96 78" role="img" aria-label="x²-a² 直角三角形">
+                        <path class="tri-line" d="M8,66 L84,66 L84,14 Z"/>
+                        <path class="tri-right" d="M76,66 L76,58 L84,58"/>
+                        <text class="tri-label" x="40" y="78">√(x²−a²)：x=a·sec t</text>
+                        <text class="tri-label" x="20" y="60">√(x²−a²)(对)</text>
+                        <text class="tri-label" x="56" y="84">a(邻)</text>
+                        <text class="tri-label" x="66" y="16">x(斜)</text>
+                    </svg>
+                    <figcaption>$\\sqrt{x^2-a^2}$：$x=a\\sec t$</figcaption>
+                </figure>
+            </div>
+
+            ${exampleBox('真题（经典通式）· 三角代换 a·tan t', `
+                <p>求 $\\displaystyle\\int \\frac{dx}{\\sqrt{x^2+a^2}}$。</p>
+                <p><strong>来源</strong>：经典通式（结果就是 §3.2 的 $\\ln\\|x+\\sqrt{x^2\\pm a^2}\\|+C$），体现「令谁化谁」。</p>
+                <p><strong>解</strong>：令 $x=a\\tan t$，$dx=a\\sec^2t\\,dt$，$\\sqrt{x^2+a^2}=a\\sec t$：</p>
+                <p>$$\\int\\frac{dx}{\\sqrt{x^2+a^2}} = \\int \\frac{a\\sec^2t}{a\\sec t}\\,dt = \\int \\sec t\\,dt = \\ln|\\sec t+\\tan t|+C$$</p>
+                <p>回代 $\\tan t=\\frac xa,\\ \\sec t=\\frac{\\sqrt{x^2+a^2}}a$：$\\boxed{\\ln\\left|x+\\sqrt{x^2+a^2}\\right|+C}$。</p>
+            `)}
+
+            ${memoryBox('四大方法怎么选', '① 能直接套公式 → 直接积分（拆项变形）；② 复合函数乘导数 → 凑微分（吸进 d 号）；③ 两类不同函数相乘 → 分部积分（反对幂指三选 u）；④ 含根号 → 根式代换，根号下含「平方代数式」→ 三角代换。')}
+        </div>
+    `;
+
+    // ---------- 定积分 ----------
+    const defBody = `
+        <div class="detail-section" id="int-def">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-chart-area"></i> 定积分 · 概念性质与计算应用</div>
+            <div class="section-desc">定积分的结果是一个确定的数（不加 C），大小与区间、被积函数有关、与积分变量字母无关。核心是牛莱公式：先找原函数再代上下限相减；再配合分部、换元“三换”、偶倍奇零、点火公式与几何应用，覆盖专升本定积分全部考点。</div>
+
+            ${groupTitle('fa-lightbulb', '一、概念与几何意义', '#FFD60A')}
+            <div class="formula-grid">
+                ${formulaCard('', '定积分定义', '$$\\int_a^b f(x)\\,dx = \\lim_{\\lambda\\to0}\\sum_{i=1}^n f(\\xi_i)\\,\\Delta x_i$$', '结果是一个数，无需要加 C', '#FFD60A')}
+                ${formulaCard('', '与积分变量无关', '$$\\int_a^b f(x)\\,dx = \\int_a^b f(t)\\,dt = \\int_a^b f(u)\\,du$$', 'x、t、u 只是记号，值不变', '#FFD60A')}
+            </div>
+            <div class="text-note">∫ₐᵇ f(x)dx = 曲线 y=f(x)、x 轴及直线 x=a、x=b 所围成的<strong>曲边梯形面积</strong>（x 轴上方取正、下方取负）。</div>
+            <div class="text-note">📱 下面用动态图直观展示：曲边梯形被「切成长条 → 趋向平滑 → 贴合成面积」，帮助你理解<strong>「分割-近似-求和-取极限」四步</strong>。（可切换明暗主题、导出图片/动画）</div>
+            <div class="diagram-frame">
+                <iframe src="diagrams/qubian-mianji.html" loading="lazy" title="曲边梯形面积四步走动画"></iframe>
+            </div>
+
+            ${groupTitle('fa-book-open', '二、定积分八大性质（数学语言）', 'var(--color-green)')}
+            <div class="formula-grid">
+                ${formulaCard('1', '常数可提前', '$$\\int_a^b k f(x)\\,dx = k\\int_a^b f(x)\\,dx$$', 'k 提到积分号外', 'var(--color-green)')}
+                ${formulaCard('2', '加减可拆', '$$\\int_a^b [f\\pm g]\\,dx = \\int_a^b f\\,dx \\pm \\int_a^b g\\,dx$$', '积分对加法线性', 'var(--color-green)')}
+                ${formulaCard('3', '区间可加', '$$\\int_a^b f\\,dx = \\int_a^c f\\,dx + \\int_c^b f\\,dx$$', 'c 可在区间内，分段切', 'var(--color-green)')}
+                ${formulaCard('4', '上下限相同为零', '$$\\int_a^a f(x)\\,dx = 0$$', '区间缩成一点', 'var(--color-green)')}
+                ${formulaCard('5', '上下限互换变号', '$$\\int_a^b f\\,dx = -\\int_b^a f\\,dx$$', '换限要加负号', 'var(--color-green)')}
+                ${formulaCard('6', '比大小', '$$f\\ge g\\Rightarrow \\int_a^b f\\,dx \\ge \\int_a^b g\\,dx$$', '同一区间谁恒大积分就谁大', 'var(--color-green)')}
+                ${formulaCard('7', '保号性/估值', '$$m\\le f\\le M \\Rightarrow m(b-a)\\le \\int_a^b f\\,dx \\le M(b-a)$$', '被积函数有界夹逼', 'var(--color-green)')}
+                ${formulaCard('8', '积分中值定理', '$$\\int_a^b f\\,dx = f(\\xi)\\,(b-a),\\quad \\xi\\in[a,b]$$', '存在某高 f(ξ) × 底宽 (b−a)', 'var(--color-green)')}
+            </div>
+            ${memoryBox('性质 8 的含义', '曲边梯形的面积，恰好等于「某条高 f(ξ) × 底宽 (b−a)」的矩形面积。')}
+
+            ${exampleBox('真题（成都大学 2022 专升本高数）· 6.1 比大小（性质 6）', `
+                <p>比较 $\\displaystyle\\int_0^1 x\\,dx$ 与 $\\displaystyle\\int_0^1 x^2\\,dx$ 的大小。</p>
+                <p><strong>解</strong>：在 $[0,1]$ 上 $x\\ge x^2$（等号仅在 0 与 1 取到），由性质 6：</p>
+                <p>$$\\int_0^1 x\\,dx > \\int_0^1 x^2\\,dx\\qquad(\\tfrac12 > \\tfrac13)$$</p>
+                <blockquote>经验：区间 $(0,1)$ 幂越大值越小，区间 $(1,+\\infty)$ 幂越大值越大——结合函数图像选恒大者。</blockquote>
+            `)}
+
+            ${groupTitle('fa-road', '7.1 牛顿-莱布尼茨公式（★地基）', '#FFD60A')}
+            <div class="formula-grid">
+                ${formulaCard('', '牛莱公式', '$$\\boxed{\\;\\int_a^b f(x)\\,dx = F(b) - F(a)\\;}$$', '其中 F\'(x)=f(x)。永远上限减下限，别反', '#FFD60A')}
+            </div>
+            <div class="text-note"><strong>记法</strong>：F(上限) − F(下限)，先找原函数，再代上下限相减。</div>
+
+            ${exampleBox('真题（成人高考 2022 高数二 24 题同型）· 牛莱直接套', `
+                <p>计算 $\\displaystyle\\int_0^1 e^x\\,dx$。</p>
+                <p><strong>解</strong>：$F(x)=e^x$，代上下限：</p>
+                <p>$$\\int_0^1 e^x\\,dx = e^1 - e^0 = e - 1$$</p>
+            `)}
+
+            ${groupTitle('fa-arrows-split-up-and-left', '7.2 分部积分（定积分版）', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('', '定积分分部', '$$\\boxed{\\;\\int_a^b u\\,dv = \\Big[uv\\Big]_a^b - \\int_a^b v\\,du\\;} \\quad=\\ uv\\Big|_a^b - \\int_a^b u\'v\\,dx$$', '选 u 同样用「反对幂指三」', '#0A84FF')}
+            </div>
+
+            ${exampleBox('真题（专升本解答题最常见）· 7.2 分部积分的定积分版', `
+                <p>计算 $\\displaystyle\\int_0^1 x e^x\\,dx$。</p>
+                <p><strong>解</strong>：幂在指数前，$u=x,\\ dv=e^xdx$，$v=e^x$：</p>
+                <p>$$\\int_0^1 xe^x\\,dx = \\Big[xe^x\\Big]_0^1 - \\int_0^1 e^x\\,dx = e - (e-1) = 1$$</p>
+            `)}
+
+            ${groupTitle('fa-rotate-right', '7.3 换元积分（定积分版，⚠️ 三换）', 'var(--color-green)')}
+            <div class="formula-grid">
+                ${formulaCard('', '三换公式', '$$x=\\varphi(t):\\ \\int_a^b f(x)\\,dx = \\int_\\alpha^\\beta f(\\varphi(t))\\,\\varphi\'(t)\\,dt$$', '同时换上下限、被积函数、积分变量三样', 'var(--color-green)')}
+            </div>
+            ${memoryBox('三换口诀（必背）', '用换元法算定积分，要同时换三样：① 换积分上下限（x 的限 → t 的限）；② 换被积函数；③ 换积分变量（dx→dt）。流程：令“框框”=t → 解出里面的 x → 算 dx → 当 x=原上下限时算出 t 的新上下限。⚠️ 换完上下限后直接代 t 出数值，不用再代回 x。')}
+
+            ${exampleBox('真题（成考/专升本解答题典型）· 7.3 三换', `
+                <p>计算 $\\displaystyle\\int_0^4 \\frac{dx}{1+\\sqrt{x}}$。</p>
+                <p><strong>解</strong>：令 $\\sqrt{x}=t$，则 $x=t^2,\\ dx=2t\\,dt$；当 $x=0\\Rightarrow t=0$，$x=4\\Rightarrow t=2$（<strong>换上下限</strong>）：</p>
+                <p>$$\\int_0^4\\frac{dx}{1+\\sqrt x} = \\int_0^2 \\frac{2t}{1+t}\\,dt = 2\\int_0^2\\Big(1-\\frac{1}{1+t}\\Big)dt = 2\\Big[t-\\ln(1+t)\\Big]_0^2 = 2(2-\\ln3)$$</p>
+                <blockquote>若双换式中出现 $\\sqrt{1-x^2}$ 等，则用三角代换 + 三换一起做，同时把角度的上下限也换好。</blockquote>
+            `)}
+
+            ${groupTitle('fa-wand-magic-sparkles', '8.1 偶倍奇零 ⭐', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('', '偶函数', '$$\\int_{-a}^{a} f(x)\\,dx = 2\\int_0^a f(x)\\,dx\\quad (f\\ \\text{偶})$$', '条件：上下限须为 ±a 对称', '#0A84FF')}
+                ${formulaCard('', '奇函数', '$$\\int_{-a}^{a} f(x)\\,dx = 0\\quad (f\\ \\text{奇})$$', '奇函数对称区间积分为 0', '#0A84FF')}
+            </div>
+            ${memoryBox('偶倍奇零的条件', '上下限须为「正负对称 + 数字一样」，即 ∫₋ₐᵃ；再看 f 的奇偶。')}
+
+            ${exampleBox('真题（成都大学 2022 专升本高数）· 8.1 偶倍奇零', `
+                <p>计算 $\\displaystyle\\int_{-1}^{1} x\\cos x\\,dx$。</p>
+                <p><strong>解</strong>：上下限 $-1,1$ 对称；$f(-x)=-x\\cos(-x)=-x\\cos x=-f(x)$ 为<strong>奇函数</strong> ⇒</p>
+                <p>$$\\int_{-1}^1 x\\cos x\\,dx = 0$$</p>
+            `)}
+
+            ${groupTitle('fa-circle-half-stroke', '8.2 四分之一圆的面积 ⭐', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('', '四分之一圆面积', '$$\\boxed{\\;\\int_0^a \\sqrt{a^2-x^2}\\,dx = \\frac{\\pi a^2}{4}\\;}$$', '半径 a 的圆第一象限那块，直接记', '#0A84FF')}
+            </div>
+            <div class="text-note"><strong>几何含义</strong>：半径 a 的圆，第一象限那四分之一块。直接记，不用算。</div>
+
+            ${groupTitle('fa-fire-flame-curved', '8.3 点火公式（华里士）⭐', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('', '点火公式', '$$\\int_0^{\\frac{\\pi}{2}}\\sin^n x\\,dx = \\int_0^{\\frac{\\pi}{2}}\\cos^n x\\,dx = \\begin{cases} \\frac{(n-1)!!}{n!!}\\cdot\\frac{\\pi}{2}, & n\\ \\text{偶}\\\\[8pt] \\frac{(n-1)!!}{n!!}, & n\\ \\text{奇}>1 \\end{cases}$$', '偶数到底乘 π/2，奇数停 2', '#0A84FF')}
+            </div>
+            ${memoryBox('友好记忆：偶数到底（乘 π/2），奇数停 2', '从 n 开始分子分母各一个数、逐一递减到 1 或 2。偶数（如 6）：$\\frac56\\cdot\\frac34\\cdot\\frac12\\cdot\\frac\\pi2$——递减到 1 再乘 $\\frac\\pi2$；奇数（如 5）：$\\frac45\\cdot\\frac23$——递减到 2 就停（到不了 1），不乘 $\\frac\\pi2$。扩展：$\\int_0^\\pi \\sin^n x\\,dx$ 先化为 $2\\int_0^{\\pi/2}\\sin^n x\\,dx$ 再点火。')}
+
+            ${exampleBox('例题 · 8.3 点火公式 n=4 与 n=3', `
+                <p>$n=4$：$\\displaystyle\\int_0^{\\pi/2}\\sin^4x\\,dx=\\frac34\\cdot\\frac12\\cdot\\frac{\\pi}{2}=\\frac{3\\pi}{16}$</p>
+                <p>$n=3$：$\\displaystyle\\int_0^{\\pi/2}\\sin^3x\\,dx=\\frac23$</p>
+            `)}
+
+            ${groupTitle('fa-scissors', '九、分段函数求定积分（三种类型）', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('', '类型一 · 直接给分段函数', '$$f(x)=\\begin{cases}x^2,&0\\le x<1\\\\ 2-x,&1\\le x\\le2\\end{cases},\\ \\int_0^2 f\\,dx = \\int_0^1 x^2dx + \\int_1^2(2-x)dx$$', '分段点就是积分区间切割的界，各段积再相加', '#FF9F0A')}
+                ${formulaCard('', '类型三 · 绝对值天然分段', '$$|x|=\\begin{cases}x,&x\\ge0\\\\-x,&x<0\\end{cases},\\ \\sqrt{x^2}=|x|$$', '开根号出来是绝对值，天生要拆；拆成两个积分，各段内决定「前面加减后面」，两积分相加', '#FF9F0A')}
+            </div>
+            <div class="text-note"><strong>总原则：分段点就是积分区间切割的界。</strong>多段函数积分 = 各段分别积再相加。</div>
+
+            ${exampleBox('例题 · 类型一 直接给分段函数', `
+                <p>$f(x)=\\begin{cases}x^2,&0\\le x<1\\\\ 2-x,&1\\le x\\le2\\end{cases}$，求 $\\displaystyle\\int_0^2 f(x)\\,dx$。</p>
+                <p><strong>解</strong>：以分段点 $x=1$ 切割：</p>
+                <p>$$\\int_0^2 f(x)\\,dx = \\int_0^1 x^2\\,dx + \\int_1^2 (2-x)\\,dx = \\frac13+\\frac12=\\frac56$$</p>
+            `)}
+
+            ${exampleBox('例题 · 类型二 内层是 f(x−1) → 换元', `
+                <p>设 $\\displaystyle\\int_0^1 f(t)\\,dt=2$，求 $\\displaystyle\\int_1^2 f(x-1)\\,dx$。</p>
+                <p><strong>解</strong>：令 $x-1=u$，则 $dx=du$；当 $x=1\\Rightarrow u=0$，$x=2\\Rightarrow u=1$。本题纯换元：</p>
+                <p>$$\\int_1^2 f(x-1)\\,dx = \\int_0^1 f(u)\\,du = 2$$</p>
+            `)}
+
+            ${exampleBox('例题 · 类型三 带绝对值', `
+                <p>求 $\\displaystyle\\int_{-1}^2 |x-1|\\,dx$。</p>
+                <p><strong>解</strong>：$|x-1|$ 在 $x=1$ 处分段，各段确定符号后去绝对值再积：</p>
+                <p>$$\\int_{-1}^2 |x-1|\\,dx = \\int_{-1}^1 (1-x)\\,dx + \\int_1^2 (x-1)\\,dx = \\frac52$$</p>
+            `)}
+
+            ${groupTitle('fa-shuffle', '十、含定积分/变限积分的积分方程', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('', '题型一 · 变限积分 → 求导', '$$\\frac{d}{dx}\\int_a^{\\varphi(x)} f(t)\\,dt = f(\\varphi(x))\\,\\varphi\'(x)$$', '等式两边求导消掉积分号', '#FF9F0A')}
+                ${formulaCard('', '题型二 · 定积分 → 令 A', '$$\\int\limits_a^b f\\,dx = A,\\ \\ \\text{两边同时对}[a,b]\\text{积分}$$', '令定积分=A，两边积分凑出结构解 A', '#FF9F0A')}
+            </div>
+
+            ${exampleBox('例题 · 题型一 变限积分求导', `
+                <p>求 $\\displaystyle\\int_0^x f(t)\\,dt = x^2\\sin x$ 中的 $f(x)$。</p>
+                <p><strong>解</strong>：等式两边求导，用「变限积分求导」消掉积分号：</p>
+                <p>$$f(x) = (x^2\\sin x)\' = 2x\\sin x + x^2\\cos x$$</p>
+            `)}
+
+            ${exampleBox('例题 · 题型二 令 A 解出', `
+                <p>已知 $f(x)=x-\\displaystyle\\int_0^1 f(x)\\,dx$，求 $f(x)$。</p>
+                <p><strong>解</strong>：令 $A=\\int_0^1 f(x)dx$，则 $f(x)=x-A$。两边对 $[0,1]$ 积分：</p>
+                <p>$$A = \\int_0^1 (x-A)\\,dx = \\Big[\\frac{x^2}{2}-Ax\\Big]_0^1 = \\frac12 - A\\ \\Rightarrow\\ 2A=\\frac12,\\ A=\\frac14$$</p>
+                <p>代回：$f(x)=x-\\frac14$。✅（若等式中含<strong>两个</strong>定积分，分别令为 A、B，先按 A 的上下限算 A，再算 B。）</p>
+            `)}
+
+            ${groupTitle('fa-check-circle', '十一、函数可积的条件（概念）', '#30D158')}
+            ${memoryBox('可积的充分条件', '若 f 在 [a,b] 上有界，且只有<strong>有限个间断点</strong>，则 f 在 [a,b] 上可积。通俗记忆：<strong>有界 + 间断点有限</strong> ⇒ 可积；连续函数当然可积。')}
+
+            ${groupTitle('fa-ruler-combined', '12.1 平面图形的面积', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('X', '面积 · X 型', '$$S=\\int_a^b\\big[\\ \\text{上函数}-\\text{下函数}\\ \\big]\\,dx$$', 'a,b 为交点的较左/右者；x 型=∫〔上减下〕dx', '#FF9F0A')}
+                ${formulaCard('Y', '面积 · Y 型', '$$S=\\int_c^d\\big[\\ \\text{右函数}-\\text{左函数}\\ \\big]\\,dy$$', 'c,d 是竖坐标，靠近 x 轴的是 c（下面）', '#FF9F0A')}
+            </div>
+            ${memoryBox('面积求法通用第一步', '先算交点坐标（解方程组），画出图形定区间；所围面积不只可相减、也可相加；若图形是三角形直接用「底×高/2」。📌 常见函数图像要特殊记忆：一次、二次、指数、对数、三角函数这几种图，要会找点（零点、交点、特殊值）后画出来。')}
+
+            ${exampleBox('真题（西南科技大学/成都信息工程大学专升本通式）· 面积 X 型一次成型', `
+                <p>求由 $y=\\sqrt{x}$ 与 $y=x$ 所围图形的面积。</p>
+                <p><strong>解</strong>：交点 $\\sqrt{x}=x\\Rightarrow x=0,1$；区间 $[0,1]$ 上 $\\sqrt{x}\\ge x$，X 型「上减下」：</p>
+                <p>$$S=\\int_0^1(\\sqrt x - x)\\,dx = \\Big[\\frac23x^{3/2}-\\frac{x^2}{2}\\Big]_0^1 = \\frac23-\\frac12=\\frac16$$</p>
+            `)}
+
+            ${exampleBox('真题 · 面积（拆两段示范）', `
+                <p>求 $y=1$、$y=\\frac1x$、$x=2$ 所围面积。</p>
+                <p><strong>解</strong>：交点 $(1,1)、(2,\\tfrac12)、(2,1)$，区间 $[1,2]$ 上 $1\\ge\\frac1x$：</p>
+                <p>$$S = \\int_1^2\\Big(1-\\frac1x\\Big)dx = 1-\\ln2$$</p>
+                <blockquote>若曲线上下变化需拆两段时，就拆为两个区间分别积再相加。</blockquote>
+            `)}
+
+            ${groupTitle('fa-sync', '12.2 旋转体体积', 'var(--color-green)')}
+            <div class="formula-grid">
+                ${formulaCard('X', '体积 · 绕 x 轴', '$$V=\\pi\\int_a^b\\big[f(x)\\big]^2\\,dx$$', '薄片法，把 f(x) 平方再积', 'var(--color-green)')}
+                ${formulaCard('X', '体积 · 绕 y 轴（柱壳）', '$$V=2\\pi\\int_a^b x\\,f(x)\\,dx$$', '柱壳法，多乘一个半径 x', 'var(--color-green)')}
+                ${formulaCard('Y', '体积 · 绕 y 轴', '$$V=\\pi\\int_c^d\\big[\\varphi(y)\\big]^2\\,dy$$', 'Y 型对 y 积分', 'var(--color-green)')}
+            </div>
+
+            ${exampleBox('真题（成都大学 2022「面积、体积」专项同型）· 绕 x 轴', `
+                <p>设由 $y=x^2,\\ y=0,\\ x=1$ 围成，绕 x 轴旋转所得体积。</p>
+                <p><strong>解</strong>：</p>
+                <p>$$V=\\pi\\int_0^1 (x^2)^2\\,dx = \\pi\\int_0^1 x^4\\,dx = \\pi\\Big[\\frac{x^5}{5}\\Big]_0^1 = \\frac\\pi5$$</p>
+            `)}
+
+            ${groupTitle('fa-circle', '12.3 椭圆面积 ⭐', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('', '椭圆面积', '$$\\boxed{\\;S=\\pi a b\\;}$$', '⭐ 直接用积分算椭圆面积记得除以或×4避免重复', '#FF9F0A')}
+            </div>
+            ${memoryBox('注意重复计算', '用定积分算椭圆面积 $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$，先算第一象限再用对称性 ×4；若用 $\\int_{-a}^a$ 直接积要小心是否重复，不规则图形拆开逐块加总最稳。')}
+
+            ${memoryBox('定积分记忆一气呵成', '牛莱：F(上限)−F(下限)；分段函数按分段点切区间；带绝对值/根号天然分段要拆；偶倍奇零仅限 ±a 对称区间；点火公式记「偶到底乘 π/2、奇停 2」；面积 X 型上减下、Y 型右减左；体积绕 x 轴 π∫f²、绕 y 轴 2π∫x·f。')}
+        </div>
+    `;
+
+    // ---------- 反常积分 ----------
+    const impBody = `
+        <div class="detail-section" id="int-imp">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-infinity"></i> 反常积分（广义积分）</div>
+            <div class="section-desc">把无穷区间/无界端点的积分写成「定积分 + 取极限」：极限存在则收敛，不存在则发散。核心就是代上下限时，把 ±∞ 用极限求出来。记忆锚点：e⁻∞=0，e⁺∞=+∞。</div>
+
+            ${groupTitle('fa-infinity', '十三、无穷区间上的反常积分', '#0A84FF')}
+            <div class="text-note"><strong>思想</strong>：把无穷区间的积分写成「定积分 + 取极限」，极限<strong>存在则收敛，不存在则发散</strong>。考验你会不会求极限。</div>
+            <div class="formula-grid">
+                ${formulaCard('1', '∫ₐ^+∞', '$$\\int_a^{+\\infty}f(x)\\,dx = \\lim_{b\\to+\\infty}\\int_a^b f(x)\\,dx$$', '代入上限时 b→+∞ 用极限求；极限存在则收敛', '#0A84FF')}
+                ${formulaCard('2', '∫_−∞^a', '$$\\int_{-\\infty}^{a} f(x)\\,dx = \\lim_{b\\to-\\infty}\\int_b^{a} f(x)\\,dx$$', '下限取极限 b→−∞，同上判定', '#0A84FF')}
+                ${formulaCard('3', '∫_−∞^+∞', '$$\\int_{-\\infty}^{+\\infty} f(x)\\,dx = \\int_{-\\infty}^{c}f\\,dx + \\int_c^{+\\infty}f\\,dx$$', '拆成两段；且只有当两端极限都存在时该积分才收敛，否则发散', '#0A84FF')}
+            </div>
+            ${memoryBox('记忆锚点', 'e⁻∞=0，e⁺∞=+∞。代对无穷就成功一半。⚠️ <strong>偶倍奇零在反常积分中要谨慎</strong>：只有在区间积分收敛的前提下才可仿照偶倍奇零；发散时不能用（考试一般默认收敛，可直接用）。')}
+
+            ${exampleBox('典型 · 判断收敛性（成人高考 2022 高数二第 24 题同型）', `
+                <p>判断 $\\displaystyle\\int_1^{+\\infty}\\frac{1}{x^2}\\,dx$ 的收敛性。</p>
+                <p><strong>解</strong>：上限用极限求：</p>
+                <p>$$\\int_1^{+\\infty}\\frac{dx}{x^2}=\\lim_{b\\to+\\infty}\\int_1^b x^{-2}dx=\\lim_{b\\to+\\infty}\\left[-\\frac1x\\right]_1^b=\\lim_{b\\to+\\infty}\\left(1-\\frac1b\\right)=1$$</p>
+                <p>极限存在 ⇒ <strong>收敛</strong>，且积分数值 $=1$。</p>
+            `)}
+
+            <div class="formula-grid">
+                ${formulaCard('', 'p 判定 · 无穷区间', '$$\\int_a^{+\\infty}\\frac{dx}{x^p}:\\quad p>1\\ \\text{收敛},\\ p\\le1\\ \\text{发散}$$', '对比 ∫₁^∞(1/x)dx 发散、∫₁^∞(1/x²)dx 收敛', '#0A84FF')}
+            </div>
+
+            ${groupTitle('fa-triangle-exclamation', '十四、无界函数的反常积分（了解）', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('', '无界端点定义', '$$\\int_a^b f(x)\\,dx = \\lim_{\\varepsilon\\to0^+}\\int_a^{b-\\varepsilon}f(x)\\,dx\\quad(f\\ \\text{在端点}b\\ \\text{无界})$$', '极限存在则收敛', '#FF9F0A')}
+                ${formulaCard('', 'p 判定 · 无界端点（相反）', '$$\\int_0^1\\frac{dx}{x^p}:\\quad p<1\\ \\text{收敛},\\ p\\ge1\\ \\text{发散}$$', '与 §13 的 p 判定方向相反，注意对比', '#FF9F0A')}
+            </div>
+            <div class="text-note">若在 $[a,b]$ 的某端点（如 $b$）处 $f$ 无界，则写成上面的极限形式。说明：<strong>四川专升本中，无界函数反常积分与"用定积分定义求数列极限"属低频了解内容</strong>，概念了解即可。</div>
+
+            ${groupTitle('fa-layer-group', '十五、利用定积分定义求数列极限（低频了解）', 'var(--color-green)')}
+            <div class="formula-grid">
+                ${formulaCard('', '数列极限→定积分', '$$\\lim_{n\\to\\infty}\\frac1n\\sum_{k=1}^n f\\!\\left(\\frac{k}{n}\\right)=\\int_0^1 f(x)\\,dx$$', '和式里有 1/n 与 k/n 结构，可转化为定积分', 'var(--color-green)')}
+            </div>
+            <div class="text-note"><strong>识别特征</strong>：和式里有 $\\frac1n$ 与 $\\frac{k}{n}$ 结构，可把 $\\frac{k}{n}$ 看作分割点，转化为 $\\int_0^1 f(x)dx$。了解识别方法即可，四川专升本属低频考点。</div>
+
+            ${memoryBox('反常积分记忆要点', '记忆锚点：e⁻∞=0，e⁺∞=+∞。∞ 区间 p>1 收敛、p≤1 发散；无界端点则相反（p<1 收敛）。⚠️ 偶倍奇零只在「已确认收敛」时才能用，发散区间禁止套用。§15 数列极限：看到 1/n · Σf(k/n) 结构 → 转成 ∫₀¹f(x)dx。')}
+        </div>
+    `;
+
+    return { title: '一元函数积分学', color: C, tabs, body: mapBody + methodsBody + defBody + impBody + commonBody + specialBody };
 }
 
 // ---------- 三角函数详情 ----------
 function buildTrigonometricDetail() {
     const C = '#FF3B30';
     const tabs = `
-        <div class="detail-tab active" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('trig-relation', this)">关系与特殊值</div>
+        <div class="detail-tab active" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('trig-map', this)">知识地图</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('trig-relation', this)">关系与特殊值</div>
         <div class="detail-tab" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('trig-common', this)">常见关系</div>
         <div class="detail-tab" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('trig-up', this)">升幂缩角</div>
         <div class="detail-tab" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('trig-down', this)">降幂扩角</div>
@@ -2709,9 +3236,35 @@ function buildTrigonometricDetail() {
         <div class="detail-tab" style="--tab-color:rgba(255,59,48,0.2);--tab-border:rgba(255,59,48,0.4);" onclick="switchTab('trig-induce', this)">诱导公式</div>
     `;
 
+    // --- 知识地图（第一个 tab） ---
+    const mapBody = `
+        <div class="detail-section active" id="trig-map">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-map-location-dot"></i> 知识地图 · 三角函数</div>
+            <div class="section-desc">三角函数章以「特殊值打底 → 关系串联 → 倍角/降幂变形 → 六边形统一记忆 → 诱导公式化简」为主线。所有公式都是一棵树的叶子，先见树冠，再逐枝记忆。</div>
+
+            ${groupTitle('fa-sitemap', '知识地图与学习路径', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>① 特殊三角函数值</strong>（打底）<br>
+                    ├─ 特殊值表：0°~360° 覆盖全部常考角<br>
+                    └─ 15°=π/12：sin=(√6-√2)/4、cos=(√6+√2)/4、tan=2-√3（需实记）<br><br>
+                    <strong>② 常见关系</strong>（串联）<br>
+                    ├─ 倒数关系：sin·csc=1，cos·sec=1，tan·cot=1<br>
+                    ├─ 商数关系：tan=sin/cos，cot=cos/sin<br>
+                    └─ 平方关系：sin²α+cos²α=1（一个公式衍生所有）<br><br>
+                    <strong>③ 升幂缩角</strong>：sin2α、cos2α（三种形式）、tan2α（二倍角）<br>
+                    <strong>④ 降幂扩角</strong>：cos 二倍角反解出 sin²、cos²（积分高频）<br>
+                    <strong>⑤ 六边形记忆法</strong>：对角之积=1、相邻三个数两侧之积=中间、下方两项平方和<br>
+                    <strong>⑥ 诱导公式</strong>：八字口诀「奇变偶不变，符号看象限」——统一还原所有诱导
+                </div>
+            </div>
+            ${memoryBox('学习路径一句话', '先背特殊值表 → 用平方关系串起 sin/cos/tan → 二倍角（升幂）与半角（降幂）互逆 → 六边形把所有关系装进一张图 → 诱导公式用一个口诀全搞定。')}
+        </div>
+    `;
+
     // --- 关系与特殊值 ---
     const relationBody = `
-        <div class="detail-section active" id="trig-relation">
+        <div class="detail-section" id="trig-relation">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-table"></i> 三角函数关系与特殊值</div>
             <div class="section-desc">三角函数的关系是整个体系的根基。特殊值表覆盖了专升本全部常考角度——从 0° 到 360°，加上 15° 这个「需要实记」的特殊值。</div>
 
@@ -2921,14 +3474,15 @@ function buildTrigonometricDetail() {
         </div>
     `;
 
-    return { title: '三角函数互换公式详情', color: C, tabs, body: relationBody + commonBody + upBody + downBody + hexBody + induceBody };
+    return { title: '三角函数互换公式详情', color: C, tabs, body: mapBody + relationBody + commonBody + upBody + downBody + hexBody + induceBody };
 }
 
 // ---------- 微分方程详情 ----------
 function buildEquationDetail() {
     const C = '#FF9F0A';
     const tabs = `
-        <div class="detail-tab active" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('eq-basic', this)">基础概念</div>
+        <div class="detail-tab active" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('eq-map', this)">知识地图</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('eq-basic', this)">基础概念</div>
         <div class="detail-tab" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('eq-first', this)">一阶方程</div>
         <div class="detail-tab" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('eq-homo', this)">二阶齐次</div>
         <div class="detail-tab" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('eq-nonhomo', this)">二阶非齐次</div>
@@ -2936,9 +3490,34 @@ function buildEquationDetail() {
         <div class="detail-tab" style="--tab-color:rgba(255,159,10,0.2);--tab-border:rgba(255,159,10,0.4);" onclick="switchTab('eq-summary', this)">速查总表</div>
     `;
 
-    // === Tab 1: 基础概念 ===
+    // === 知识地图（第一个 tab） ===
+    const mapBody = `
+        <div class="detail-section active" id="eq-map">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-map-location-dot"></i> 知识地图 · 微分方程</div>
+            <div class="section-desc">微分方程按「阶数 + 齐次性」两大维度展开：一阶是基础，二阶齐次靠特征方程，二阶非齐次 = 齐次通解 + 特解。层层递进，后一个都依赖前一个。</div>
+
+            ${groupTitle('fa-sitemap', '知识地图与学习路径', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>微分方程</strong><br>
+                    ├── 基础概念（阶数 / 通解 / 特解）<br>
+                    ├── <strong>一阶微分方程</strong><br>
+                    │   ├─ 可分离变量型（3.1）← 最基础，先掌握<br>
+                    │   ├─ 一阶线性公式法（3.2）← 最常用，直接套公式<br>
+                    │   └─ 齐次 y/x 型（3.3）← 换元法，由可分离变量转化<br>
+                    └── <strong>二阶线性微分方程</strong><br>
+                        ├─ 齐次（4.1）← 特征方程法，三种根对应三种通解<br>
+                        ├─ 非齐次（4.2）← 齐次通解 + 特解（待定系数法）<br>
+                        └─ 例题（4.3）← 完整计算流程示范
+                </div>
+            </div>
+            ${memoryBox('学习路径一句话', '基础概念 → 可分离变量 → 一阶线性公式 → y/x 型 → 二阶齐次 → 二阶非齐次，层层递进。方法选择顺序：能分就先分离变量，形似 y/x 用换元，一阶线性直接套通解公式。')}
+        </div>
+    `;
+
+    // === Tab: 基础概念 ===
     const basicBody = `
-        <div class="detail-section active" id="eq-basic">
+        <div class="detail-section" id="eq-basic">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-book"></i> 微分方程基础概念</div>
             <div class="section-desc">微分方程是含有未知函数及其导数的方程。四川专升本高数主要考查一阶和二阶线性微分方程。先掌握三个基础概念，再学解法。</div>
 
@@ -3009,6 +3588,7 @@ function buildEquationDetail() {
                 <div class="formula-block" style="border:none;background:none;padding:0;">
                     $$y = e^{-\\int P(x)\\,dx}\\left[\\int Q(x)\\,e^{\\int P(x)\\,dx}\\,dx + C\\right]$$
                 </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:1rem;"><strong>辨析</strong>：$Q(x) = 0$ → 一阶齐次线性（可直接分离变量）；$Q(x) \\neq 0$ → 一阶非齐次线性（用通解公式）</div>
             </div>
             ${memoryBox('记忆口诀：先积 P 得中间量，前负后正套括号，里面积分再加 C', '拆三步：<br>1. 先算 $\\int P(x)\\,dx$ — 记作"中间量"<br>2. 前头 $e^{-\\text{中间量}}$，括号里是 $\\int Q(x) \\cdot e^{\\text{中间量}}\\,dx + C$<br>3. $e^{-\\int}$ 在外面，$e^{+\\int}$ 在里面，一正一负别搞反')}
             ${memoryBox('易错点', '① $P(x)$ 必须是标准型中 $y$ 前面的系数——$y\' - 3y = e^x$ 里 $P(x) = -3$，别漏负号<br>② $\\int P(x)\\,dx$ 不加 $C$（公式里已有一个总的 $C$）<br>③ $e^{-\\int P\\,dx}$ 在最外层，别写到括号里去')}
@@ -3296,23 +3876,44 @@ function buildEquationDetail() {
         </div>
     `;
 
-    return { title: '微分方程框架详情', color: C, tabs, body: basicBody + firstBody + homoBody + nonhomoBody + exampleBody + summaryBody };
+    return { title: '微分方程框架详情', color: C, tabs, body: mapBody + basicBody + firstBody + homoBody + nonhomoBody + exampleBody + summaryBody };
 }
 
 // ---------- 行列式详情 ----------
 function buildLinearDetail() {
     const C = '#5AC8FA';
     const tabs = `
-        <div class="detail-tab active" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('ln-basic', this)">基础计算</div>
+        <div class="detail-tab active" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('ln-map', this)">知识地图</div>
+        <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('ln-basic', this)">基础计算</div>
         <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('ln-prop', this)">六条性质</div>
         <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('ln-special', this)">特殊行列式</div>
         <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('ln-expand', this)">展开定理</div>
         <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('ln-summary', this)">速查总表</div>
     `;
 
-    // === Tab 1: 基础计算 ===
+    // === 知识地图（第一个 tab） ===
+    const mapBody = `
+        <div class="detail-section active" id="ln-map">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-map-location-dot"></i> 知识地图 · 行列式</div>
+            <div class="section-desc">线代开篇模块。行列式是矩阵、线性方程组、特征值的基础工具，务必先把计算与性质吃透。主线：会算 → 用性质化简 → 认出特殊型 → 按行列展开。</div>
+
+            ${groupTitle('fa-sitemap', '知识地图与学习路径', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>行列式</strong><br>
+                    ├── 计算：二阶（对角线法）→ 三阶（沙路法）→ 四阶及以上（降阶法·按行列展开）<br>
+                    ├── <strong>性质（6 条）</strong>：转置不变 · 互换变号 · 倍乘 · 倍加 · 拆分 · 某行为 0 / 两行相同 → D=0<br>
+                    ├── <strong>特殊行列式</strong>：范德蒙德 · 行列和相同 · 爪形 · 分块<br>
+                    └── <strong>展开</strong>：余子式 Mij · 代数余子式 Aij=(-1)^(i+j)·Mij · 拉普拉斯展开 · 展开逆用（引理 + 定理）
+                </div>
+            </div>
+            ${memoryBox('学习路径一句话', '先把二阶、三阶练到秒算 → 用 6 条性质干活（倍加是化简神技）→ 认出四类特殊行列式直接写答案 → 高阶行列式按一行/列展开降阶。')}
+        </div>
+    `;
+
+    // === Tab: 基础计算 ===
     const basicBody = `
-        <div class="detail-section active" id="ln-basic">
+        <div class="detail-section" id="ln-basic">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-table-cells"></i> 行列式基础计算</div>
             <div class="section-desc">行列式是一个方阵对应的标量值。二阶三阶有专门的对角线法，四阶及以上必须用展开降阶。</div>
 
@@ -3421,6 +4022,7 @@ function buildLinearDetail() {
                     $V = (2-1)(3-1)(3-2) = 1 \\times 2 \\times 1 = 2$
                 </div>
             </div>
+            <div class="text-note"><strong>识别技巧</strong>：遇到第一行全为 1、后续各行按某变量升幂排列的行列式，优先识别为范德蒙德形式直接套公式。</div>
 
             ${groupTitle('fa-equals', '3.2 行和相同的行列式', 'var(--color-green)')}
             <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
@@ -3434,6 +4036,7 @@ function buildLinearDetail() {
                     <strong>Step 4</strong> 得到接近上三角的形式<br>
                     <strong>Step 5</strong> 必要时调换行序；若出现两列全为 1，重新提公因式
                 </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;"><strong>提示</strong>：一般加到第 1 列，但也有例外情形需要灵活选择。</div>
                 <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">例题</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     $D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 2 & 3 & 1 \\\\ 3 & 1 & 2 \\end{vmatrix}$（行和均为 6）<br>
@@ -3516,6 +4119,7 @@ function buildLinearDetail() {
                     <strong>结果</strong>：$D = 6076 \\times (-2024)^3$
                 </div>
             </div>
+            <div class="text-note"><strong>真题启示</strong>：专升本行列式大题的标准套路是「<strong>先用性质造 0 → 再用拉普拉斯展开降阶</strong>」。本题综合考查了行和相同技巧、倍加造 0、拉普拉斯展开三个知识点，是典型的专升本难度题。考试时<strong>先观察结构再选方法</strong>——能套公式就套公式，不能套再展开降阶。</div>
 
             ${groupTitle('fa-arrows-rotate', '4.3 展开的逆用', '#FF9F0A')}
             <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
@@ -3524,7 +4128,8 @@ function buildLinearDetail() {
                 <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">例题</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     设 $D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 2 & 1 & 1 \\\\ 3 & 2 & 1 \\end{vmatrix}$，求 $2A_{21} + A_{22} + A_{23}$。<br>
-                    系数 $(2,1,1)$ 恰为第 2 行本身，故：$2A_{21} + A_{22} + A_{23} = D$
+                    系数 $(2,1,1)$ 恰为第 2 行本身，故：$2A_{21} + A_{22} + A_{23} = D$<br>
+                    <span style="opacity:.75;">（此例展示「替换后恰好等于自身」的巧合情形；若把系数换成 $(1,1,1)$，则等于把第 2 行换成 $(1,1,1)$ 后的新行列式。）</span>
                 </div>
             </div>
 
@@ -3615,20 +4220,40 @@ function buildLinearDetail() {
         </div>
     `;
 
-    return { title: '行列式框架详情', color: C, tabs, body: basicBody + propBody + specialBody + expandBody + summaryBody };
+    return { title: '行列式框架详情', color: C, tabs, body: mapBody + basicBody + propBody + specialBody + expandBody + summaryBody };
 }
 
 function buildMatrixDetail() {
     const C = '#5AC8FA';
     const tabs = `
-        <div class="detail-tab active" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('mat-special', this)">特殊矩阵</div>
+        <div class="detail-tab active" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('mat-map', this)">知识地图</div>
+        <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('mat-special', this)">特殊矩阵</div>
         <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('mat-op', this)">矩阵运算</div>
         <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('mat-inv', this)">逆·伴随</div>
         <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('mat-elem', this)">初等变换·秩</div>
         <div class="detail-tab" style="--tab-color:rgba(90,200,250,0.2);--tab-border:rgba(90,200,250,0.4);" onclick="switchTab('mat-summary', this)">矩阵速查</div>
     `;
     // === 矩阵详情（独立章节，模块 id = matrix）===
-    // === 矩阵 Tab 1: 特殊矩阵 ===
+    // === 知识地图（第一个 tab，同时作为默认活动 section）===
+    const mapBody = `
+        <div class="detail-section active" id="mat-map">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-map-location-dot"></i> 知识地图 · 矩阵</div>
+            <div class="section-desc">矩阵是行列式之上的「表格化」工具，主线：先认识特殊矩阵 → 掌握四则运算 → 求逆与伴随 → 用初等变换求秩。矩阵乘法与行列式最不同的地方是「AB≠BA、无消去律」。</div>
+
+            ${groupTitle('fa-sitemap', '知识地图与学习路径', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>矩阵</strong><br>
+                    ├── ① 特殊矩阵：单位阵 E · 对角阵 · 对称阵（Aᵀ=A）· 反称阵（Aᵀ=-A）<br>
+                    ├── ② 矩阵运算：加减 · 数乘 · 乘法（AB≠BA，无消去律）· 转置（(AB)ᵀ=BᵀAᵀ）<br>
+                    ├── ③ 逆矩阵 · 伴随矩阵：A⁻¹ = A* / |A|（A 可逆 ⟺ |A|≠0）· 求逆两法（伴随法 / 初等变换法）<br>
+                    └── ④ 初等变换 · 秩：行最简形 · 三种初等变换（换行/倍乘/倍加）· 秩 r(A)
+                </div>
+            </div>
+            ${memoryBox('学习路径一句话', '先记住四类特殊矩阵的形状 → 练熟矩阵乘法（注意不满足交换律与消去律）→ 用 |A|≠0 判断可逆，伴随法或初等变换法求逆 → 用初等行变换把矩阵化行最简求秩。')}
+        </div>
+    `;
+    // === 矩阵 Tab: 特殊矩阵 ===
     const matSpecialBody = `
         <div class="detail-section" id="mat-special">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-shapes"></i> 特殊矩阵</div>
@@ -3911,7 +4536,7 @@ ${memoryBox('求秩套路', '化行阶梯形 → 数非零行 → 就是秩。�
     `;
 
 
-    return { title: '矩阵详情（线性代数）', color: C, tabs, body: matSpecialBody + matOpBody + matInvBody + matElemBody + matSummaryBody };
+    return { title: '矩阵详情（线性代数）', color: C, tabs, body: mapBody + matSpecialBody + matOpBody + matInvBody + matElemBody + matSummaryBody };
 }
 
 

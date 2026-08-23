@@ -274,6 +274,24 @@
             margin-bottom: 0.75rem;
             justify-content: flex-start;
         }
+        /* 桌面端：单行横向吸顶 tab 栏，与 index 详情页 detail-tabs 行为一致（激活项溢出时自动回中） */
+        @media (min-width: 641px) {
+            .filter-bar {
+                position: sticky;
+                top: 0;
+                z-index: 30;
+                flex-wrap: nowrap;
+                padding: 0.6rem 0;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                scroll-behavior: smooth;
+                background: var(--bg-sidebar);
+                border-bottom: 1px solid var(--border-soft);
+            }
+            .filter-bar::-webkit-scrollbar { display: none; }
+        }
         .chip {
             display: inline-flex;
             align-items: center;
@@ -288,6 +306,8 @@
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
             user-select: none;
+            flex-shrink: 0;
+            white-space: nowrap;
         }
         .chip:hover {
             background: var(--bg-elevated-hover);
@@ -1243,10 +1263,38 @@
                 renderMobileCategoryBar();
                 renderGrid();
                 updateStats();
+                // 桌面端筛选条若发生横向溢出，同样将激活 chip 回中
+                const activeChip = bar.querySelector('.chip.active');
+                centerActiveChip(bar, activeChip);
+                const mobileBar = document.getElementById('mobileCategoryBar');
+                if (mobileBar) centerActiveChip(mobileBar, mobileBar.querySelector('.mchip.active'));
             });
         });
         // 移动端同步渲染粘性分类栏
         renderMobileCategoryBar();
+    }
+
+    // ========== 激活 tab 居中（与 index 详情页 behavior 一致）==========
+    // 高亮 tab 若超出可视区，则自动横向滚动到容器正中间
+    function centerActiveChip(bar, activeChip) {
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+            if (!bar || !activeChip) return;
+            const maxScroll = bar.scrollWidth - bar.clientWidth;
+            if (maxScroll <= 0) return;
+            const barRect = bar.getBoundingClientRect();
+            const chipRect = activeChip.getBoundingClientRect();
+            const chipCenter = chipRect.left - barRect.left + chipRect.width / 2;
+            const target = Math.max(0, Math.min(
+                maxScroll,
+                bar.scrollLeft + chipCenter - barRect.width / 2
+            ));
+            if (Math.abs(target - bar.scrollLeft) <= 1) return;
+            try {
+                bar.scrollTo({ left: target, behavior: 'smooth' });
+            } catch (_) {
+                bar.scrollLeft = target;
+            }
+        }));
     }
 
     // ========== 移动端粘性分类栏 ==========
@@ -1272,8 +1320,9 @@
                 renderMobileCategoryBar();
                 renderGrid();
                 updateStats();
-                // 激活的chip滚动到可视区域
-                el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                // 渲染重建 DOM 后，重新定位激活的 chip 并居中（跟随页面、超出即回中）
+                const activeChip = bar.querySelector('.mchip.active');
+                centerActiveChip(bar, activeChip);
             });
         });
     }
@@ -1304,6 +1353,22 @@
                 mainStage.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
+    }
+
+    // ========== 内容驱动：同步两侧 tab 栏居中 ==========
+    // 无论用户点击 chip 还是滑动内容切换章节，激活 chip 若超出可视区都要自动回中
+    function centerAllBars() {
+        const bar = document.getElementById('filterBar');
+        if (bar) centerActiveChip(bar, bar.querySelector('.chip.active'));
+        const mbar = document.getElementById('mobileCategoryBar');
+        if (mbar) centerActiveChip(mbar, mbar.querySelector('.mchip.active'));
+    }
+
+    // ========== 校验激活模块是否有效（数据载入前用 'all' 兜底） ==========
+    function ensureActiveModuleValid() {
+        const ids = ['all', ...MODULES.map(m => m.id)];
+        if (ids.indexOf(state.activeModule) === -1) state.activeModule = 'all';
+        return ids;
     }
 
     // ========== 移动端分类栏：滚动超过首个公式卡后才显示 ==========
@@ -1373,6 +1438,8 @@
                 renderMobileCategoryBar();
                 renderGrid();
                 updateStats();
+                // 内容滑动切换章节后，激活 chip 同步回中（对应 index 详情页 tab 跟随效果）
+                centerAllBars();
             }
         }
     }

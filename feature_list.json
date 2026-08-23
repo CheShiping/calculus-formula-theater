@@ -33,10 +33,10 @@
     },
     {
       "id": "integral",
-      "title": "积分",
+      "title": "一元函数积分学",
       "buildFn": "buildIntegralDetail",
       "themeColor": "#30D158",
-      "notes": "notes/04-积分.md",
+      "notes": "notes/04-一元函数积分学.md",
       "formulaCount": 19,
       "status": "done"
     },

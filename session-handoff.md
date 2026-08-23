@@ -28,7 +28,7 @@
 |---|---|---|---|
 | limit | buildFunctionDetail | notes/01-函数、极限、连续.md | #FFD60A |
 | deriv | buildDerivativeDetail | notes/02-导数与微分.md | #0A84FF |
-| integral | buildIntegralDetail | notes/04-积分.md | #30D158 |
+| integral | buildIntegralDetail | notes/04-一元函数积分学.md | #30D158 |
 | trig | buildTrigonometricDetail | notes/05-三角函数.md | #FF3B30 |
 | diffEq | buildEquationDetail | notes/06-微分方程.md | #FF9F0A |
 | linalg | buildLinearDetail | notes/07-线性代数-行列式.md | #5AC8FA |
