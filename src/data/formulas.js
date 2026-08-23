@@ -1,7 +1,7 @@
 // 公式数据（自动从 src/index.html 抽提，勿手改）
 // 由 scripts/extractFormulas.mjs 生成
 // 字段：module / id / num / label / formula / note / color
-// module ∈ { limit, deriv, integral, trig, diffEq, linalg, matrix }
+// module ∈ { limit, deriv, integral, trig, diffEq, multivar, linalg, matrix }
 
 export const FORMULAS = [
   {
@@ -1859,6 +1859,96 @@ export const FORMULAS = [
     color: '#FF9F0A',
   },
   {
+    id: 'multivar_001',
+    module: 'multivar',
+    num: '多1',
+    label: '二元极限的四大方法',
+    formula: '$$\\lim_{(x,y)\\to(x_0,y_0)} f(x,y)=A$$',
+    note: '直接代 / 等价替换 / 夹逼 / 找路径否定（二元不能用洛必达）',
+    color: '#FF9F0A',
+  },
+  {
+    id: 'multivar_002',
+    module: 'multivar',
+    num: '多2',
+    label: '全微分',
+    formula: '$$dz=\\frac{\\partial z}{\\partial x}\\,dx+\\frac{\\partial z}{\\partial y}\\,dy$$',
+    note: '先求两个偏导，再分别乘 dx、dy 后相加',
+    color: '#FFD60A',
+  },
+  {
+    id: 'multivar_003',
+    module: 'multivar',
+    num: '多4',
+    label: '复合链式（两框分路）',
+    formula: '$$z_x=f_1\'\\cdot\\frac{\\partial\\square}{\\partial x}+f_2\'\\cdot\\frac{\\partial\\triangle}{\\partial x}$$',
+    note: '把第 1 框记为 1、第 2 框记为 2，分路求和逐层相乘',
+    color: '#FFD60A',
+  },
+  {
+    id: 'multivar_004',
+    module: 'multivar',
+    num: '多5',
+    label: '隐函数一阶偏导',
+    formula: '$$\\frac{\\partial z}{\\partial x}=-\\frac{F_x}{F_z},\\qquad \\frac{\\partial z}{\\partial y}=-\\frac{F_y}{F_z}$$',
+    note: '求谁谁在分子，交叉带负号，分母是 F_z',
+    color: '#FF9F0A',
+  },
+  {
+    id: 'multivar_005',
+    module: 'multivar',
+    num: '多6',
+    label: '无条件极值判别',
+    formula: '$$\\begin{cases}AC-B^2>0：\\text{极值点，}A<0\\ \\text{极大，}A>0\\ \\text{极小}\\\\AC-B^2<0：\\text{一定不是极值点（鞍点）}\\\\AC-B^2=0：\\text{方法失效（专升本了解即可）}\\end{cases}$$',
+    note: '求驻、算 ABC、比 AC-B²；>0 有极值（看 A 正负），<0 无，=0 失效',
+    color: 'var(--color-green)',
+  },
+  {
+    id: 'multivar_006',
+    module: 'multivar',
+    num: '多7',
+    label: '条件极值（拉格朗日）',
+    formula: '$$L(x,y,\\lambda)=f(x,y)+\\lambda\\,\\varphi(x,y)$$',
+    note: '目标 + 拉姆达 × 约束，三偏导置零，解出驻点',
+    color: '#FF9F0A',
+  },
+  {
+    id: 'multivar_007',
+    module: 'multivar',
+    num: '多8',
+    label: '空间曲线切线方程',
+    formula: '$$\\frac{x-x_0}{\\varphi\'(t_0)}=\\frac{y-y_0}{\\psi\'(t_0)}=\\frac{z-z_0}{\\omega\'(t_0)}$$',
+    note: '分子是切点、分母是切向量',
+    color: '#0A84FF',
+  },
+  {
+    id: 'multivar_008',
+    module: 'multivar',
+    num: '多9',
+    label: '空间曲线法平面方程',
+    formula: '$$\\varphi\'(t_0)(x-x_0)+\\psi\'(t_0)(y-y_0)+\\omega\'(t_0)(z-z_0)=0$$',
+    note: '由分式变乘法再相加，等于 0',
+    color: '#0A84FF',
+  },
+  {
+    id: 'multivar_009',
+    module: 'multivar',
+    num: '多10',
+    label: '曲面切平面方程',
+    formula: '$$F_x(M_0)(x-x_0)+F_y(M_0)(y-y_0)+F_z(M_0)(z-z_0)=0$$',
+    note: '法向量 × 各坐标差 相加等于 0',
+    color: 'var(--color-green)',
+  },
+  {
+    id: 'multivar_010',
+    module: 'multivar',
+    num: '多11',
+    label: '曲面法线方程',
+    formula: '$$\\frac{x-x_0}{F_x(M_0)}=\\frac{y-y_0}{F_y(M_0)}=\\frac{z-z_0}{F_z(M_0)}$$',
+    note: '由乘积变分式（与切平面互逆）',
+    color: 'var(--color-green)',
+  },
+  {
     id: 'linalg_001',
     module: 'linalg',
     num: '行1',
@@ -2331,6 +2421,12 @@ export const MODULES = [
     title: '微分方程',
     color: '#FF9F0A',
     count: 9,
+  },
+  {
+    id: 'multivar',
+    title: '多元函数微分学',
+    color: '#2BB8A3',
+    count: 10,
   },
   {
     id: 'linalg',

@@ -1022,6 +1022,7 @@
             --path-blue: #8fb0c4;
             --path-amber: #c9ab74;
             --path-coral: #cd9b94;
+            --path-teal: #7fb8a8;
             width: 100%; min-height: 100vh; padding: 2rem 3.4rem 2.5rem;
             color: var(--path-ink);
             background:
@@ -1041,6 +1042,7 @@
             --path-blue: #7d9eb3;
             --path-amber: #b89a65;
             --path-coral: #bd8b84;
+            --path-teal: #6aa392;
             background:
                 radial-gradient(circle at 78% 0%, rgba(220,236,225,.64), transparent 24rem),
                 radial-gradient(circle at 8% 96%, rgba(232,226,242,.52), transparent 26rem),
@@ -1295,15 +1297,15 @@
     <main class="path-home" aria-label="高数知识路径首页">
         <header class="path-nav">
             <span class="path-brand">四川专升本高数</span>
-            <span class="path-nav-copy">KNOWLEDGE PATH · 7 MODULES</span>
+            <span class="path-nav-copy">KNOWLEDGE PATH · 8 MODULES</span>
         </header>
         <section class="path-intro" aria-labelledby="path-title">
             <div>
-                <p class="path-eyebrow">KNOWLEDGE PATH · 7 MODULES</p>
+                <p class="path-eyebrow">KNOWLEDGE PATH · 8 MODULES</p>
                 <h1 id="path-title">从地基开始，<br>每一步都有来处。</h1>
                 <p>公式不是散点。沿着知识路径复习，可以看到章节之间如何相互支撑；需要巩固时，随时进入你原来的公式详情和简洁翻卡。</p>
             </div>
-            <p class="path-count">103 FORMULAS<br>按章节建立联动记忆</p>
+            <p class="path-count">265 FORMULAS<br>按章节建立联动记忆</p>
         </section>
         <section class="learning-path" aria-label="高数知识路径">
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-blue)" onclick="enterDetail('function')"><h2>函数 · 极限 · 连续</h2><p>定义域、极限方法、连续与间断点，是后续变化的坐标系。</p><span class="path-meta">22 条内容 · 先修模块</span></button></article>
@@ -1311,6 +1313,7 @@
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-green)" onclick="enterDetail('integral')"><h2>一元函数积分学</h2><p>把导数倒过来读。不定积分、定积分与反常积分是复习主干。</p><span class="path-meta">46 条公式 · 导数的逆运算</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-coral)" onclick="enterDetail('trigonometric')"><h2>三角函数</h2><p>关系式贯穿导数和积分，用主干公式组织而不是零散背诵。</p><span class="path-meta">41 条公式 · 关系网络</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-amber)" onclick="enterDetail('equation')"><h2>微分方程</h2><p>将导数与积分放进同一道题，进入一阶与二阶方程训练。</p><span class="path-meta">9 条公式 · 综合应用</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:var(--path-teal)" onclick="enterDetail('multivar')"><h2>多元函数微分学</h2><p>把一元函数微分学的每一把刀都搬进多维空间：偏导、全微分、链式与隐函数、无条件极值。</p><span class="path-meta">多元模块 · 全新章节</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:#759ba1" onclick="enterDetail('linear')"><h2>行列式</h2><p>计算、性质与展开，是线性代数部分的基础工具。</p><span class="path-meta">4 个专题 · 线性代数</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:#8b98ba" onclick="enterDetail('matrix')"><h2>矩阵</h2><p>特殊矩阵、运算、逆与伴随、初等变换与秩，是线性代数的核心对象。</p><span class="path-meta">5 个专题 · 线性代数</span></button></article>
         </section>
@@ -1977,6 +1980,80 @@ function knowledgeMapGraph() {
             <text x="340" y="395" text-anchor="middle" fill="var(--text-dim)" font-size="11">⚠ 反例：y=|x| 在 x=0 处连续但不可导（尖点，左右导数不相等）</text>
             <text x="340" y="415" text-anchor="middle" fill="var(--text-dim)" font-size="11">⚠ 反例：f(x)=sin(1/x)·x 在 x=0 处极限存在（可补为连续），但原函数在 x=0 处不连续</text>
             <text x="340" y="435" text-anchor="middle" fill="var(--text-muted)" font-size="11">记忆锚点：导数是「变化率」，微分是「增量近似」</text>
+        </svg>
+    </div>`;
+}
+
+// 多元：函数连续、偏导存在、可微的三角关系（口诀「偏司令、微军长、连续可导两士兵」）
+function partialDerivRelationGraph() {
+    return `
+    <div class="knowledge-map">
+        <svg viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;margin:0 auto;display:block;">
+            <defs>
+                <!-- 箭头 marker -->
+                <marker id="mv-ar-t" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <path d="M0,0 L9,3 L0,6" fill="#2BB8A3"/>
+                </marker>
+                <marker id="mv-ar-b" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <path d="M0,0 L9,3 L0,6" fill="#0A84FF"/>
+                </marker>
+                <marker id="mv-ar-g" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <path d="M0,0 L9,3 L0,6" fill="#6fae87"/>
+                </marker>
+                <marker id="mv-ar-y" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <path d="M0,0 L9,3 L0,6" fill="#FF9F0A"/>
+                </marker>
+                <filter id="mv-glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+
+            <!-- ========== 顶层：偏导存在且连续（司令） ========== -->
+            <g class="km-node" style="animation-delay:0.1s">
+                <rect x="255" y="34" width="170" height="58" rx="14" fill="rgba(43,184,163,0.12)" stroke="#2BB8A3" stroke-width="2"/>
+                <text x="340" y="60" text-anchor="middle" fill="#2BB8A3" font-size="15" font-weight="700">偏导存在且连续</text>
+                <text x="340" y="80" text-anchor="middle" fill="var(--text-muted)" font-size="11">「司令」·最强补给包</text>
+            </g>
+
+            <!-- ========== 中层：可微（军长） ========== -->
+            <g class="km-node" style="animation-delay:0.3s">
+                <rect x="270" y="185" width="140" height="56" rx="14" fill="rgba(10,132,255,0.12)" stroke="#0A84FF" stroke-width="2"/>
+                <text x="340" y="211" text-anchor="middle" fill="#0A84FF" font-size="16" font-weight="700">可微</text>
+                <text x="340" y="228" text-anchor="middle" fill="var(--text-muted)" font-size="11">「军长」</text>
+            </g>
+
+            <!-- ========== 底层：连续（士兵1，左） ========== -->
+            <g class="km-node" style="animation-delay:0.5s">
+                <rect x="90" y="315" width="150" height="56" rx="14" fill="rgba(111,174,135,0.12)" stroke="#6fae87" stroke-width="2"/>
+                <text x="165" y="341" text-anchor="middle" fill="#6fae87" font-size="16" font-weight="700">连续</text>
+                <text x="165" y="358" text-anchor="middle" fill="var(--text-muted)" font-size="11">士兵 1</text>
+            </g>
+
+            <!-- ========== 底层：偏导存在（士兵2，右） ========== -->
+            <g class="km-node" style="animation-delay:0.5s">
+                <rect x="440" y="315" width="150" height="56" rx="14" fill="rgba(255,159,10,0.12)" stroke="#FF9F0A" stroke-width="2"/>
+                <text x="515" y="341" text-anchor="middle" fill="#FF9F0A" font-size="16" font-weight="700">偏导存在</text>
+                <text x="515" y="358" text-anchor="middle" fill="var(--text-muted)" font-size="11">士兵 2</text>
+            </g>
+
+            <!-- ========== 司令 ⟹ 军长（顶层 → 中层） ========== -->
+            <line x1="340" y1="94" x2="340" y2="181" stroke="#2BB8A3" stroke-width="2.5" marker-end="url(#mv-ar-t)" filter="url(#mv-glow)" class="km-flow"/>
+            <text x="352" y="140" fill="#2BB8A3" font-size="11" font-weight="600">充分条件</text>
+            <text x="352" y="155" fill="var(--text-muted)" font-size="11">偏导存在且连续 ⟹ 可微</text>
+
+            <!-- ========== 军长 ⟹ 士兵1（可微 ⟹ 连续，中层 → 左下） ========== -->
+            <line x1="300" y1="241" x2="190" y2="310" stroke="#6fae87" stroke-width="2" marker-end="url(#mv-ar-g)" class="km-flow"/>
+            <text x="205" y="276" fill="#6fae87" font-size="11" font-weight="600">可微 ⟹ 连续</text>
+
+            <!-- ========== 军长 ⟹ 士兵2（可微 ⟹ 偏导存在，中层 → 右下） ========== -->
+            <line x1="380" y1="241" x2="492" y2="310" stroke="#FF9F0A" stroke-width="2" marker-end="url(#mv-ar-y)" class="km-flow"/>
+            <text x="438" y="277" fill="#FF9F0A" font-size="11" font-weight="600">可微 ⟹ 偏导存在</text>
+
+            <!-- ========== 士兵1 ⇸ 士兵2：互不推出 ========== -->
+            <line x1="242" y1="350" x2="438" y2="350" stroke="var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <text x="340" y="345" text-anchor="middle" fill="var(--text-dim)" font-size="11">⇸ 连续 与 偏导存在 互不推出</text>
+
+            <!-- ========== 反例 + 口诀 ========== -->
+            <text x="340" y="410" text-anchor="middle" fill="var(--text-dim)" font-size="11">⚠ 两个偏导都存在，函数也可能不连续：$\\frac{xy}{x^2+y^2}$ 在 (0,0) 处偏导为 0 但不连续</text>
+            <text x="340" y="432" text-anchor="middle" fill="var(--text-muted)" font-size="11">记忆口诀：偏司令、微军长、连续可导两士兵（命令向下传导，逆向不成立）</text>
         </svg>
     </div>`;
 }
@@ -3879,6 +3956,299 @@ function buildEquationDetail() {
     return { title: '微分方程框架详情', color: C, tabs, body: mapBody + basicBody + firstBody + homoBody + nonhomoBody + exampleBody + summaryBody };
 }
 
+// ---------- 多元函数微分学详情（与一元微分学联动） ----------
+function buildMultivarDetail() {
+    const C = '#2BB8A3';
+
+    const tabs = `
+        <div class="detail-tab active" style="--tab-color:rgba(43,184,163,0.2);--tab-border:rgba(43,184,163,0.4);" onclick="switchTab('mv-map', this)">知识地图</div>
+        <div class="detail-tab" style="--tab-color:rgba(43,184,163,0.2);--tab-border:rgba(43,184,163,0.4);" onclick="switchTab('mv-basic', this)">基本概念·极限</div>
+        <div class="detail-tab" style="--tab-color:rgba(43,184,163,0.2);--tab-border:rgba(43,184,163,0.4);" onclick="switchTab('mv-partial', this)">偏导与全微分</div>
+        <div class="detail-tab" style="--tab-color:rgba(43,184,163,0.2);--tab-border:rgba(43,184,163,0.4);" onclick="switchTab('mv-chain', this)">链式与隐函数</div>
+        <div class="detail-tab" style="--tab-color:rgba(43,184,163,0.2);--tab-border:rgba(43,184,163,0.4);" onclick="switchTab('mv-extrema', this)">极值与最值</div>
+        <div class="detail-tab" style="--tab-color:rgba(43,184,163,0.2);--tab-border:rgba(43,184,163,0.4);" onclick="switchTab('mv-space', this)">空间曲线与曲面</div>
+        <div class="detail-tab" style="--tab-color:rgba(43,184,163,0.2);--tab-border:rgba(43,184,163,0.4);" onclick="switchTab('mv-summary', this)">速查总表</div>
+    `;
+
+    // === 知识地图（第一个 tab） ===
+    const mapBody = `
+        <div class="detail-section active" id="mv-map">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-map-location-dot"></i> 知识地图 · 多元函数微分学</div>
+            <div class="section-desc">本章是把第二章「一元函数微分学」从一条线（一元函数 $y=f(x)$）推广到一个面（二元函数 $z=f(x,y)$）。它不是全新的知识，而是旧知识的长高：导数的一切工具在这里全部再演一遍。传统教程常把它们割裂，本页把每一处都与一元微分学对标，触类旁通、联动记忆。</div>
+
+            ${groupTitle('fa-sitemap', '知识地图与学习路径', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>多元函数微分学</strong><br>
+                    ├── 多元函数的基本概念<br>
+                    │   ├─ 二元函数 $z=f(x,y)$（定义域）<br>
+                    │   ├─ 二元极限（等价替换 / 无穷小乘有界 / 找路径）<br>
+                    │   └─ 连续、偏导、可微三角关系<br>
+                    ├── 偏导数与全微分<br>
+                    │   ├─ 一阶偏导（$\\frac{\\partial z}{\\partial x},\\frac{\\partial z}{\\partial y}$）<br>
+                    │   ├─ 二阶偏导（四个公式）<br>
+                    │   ├─ 全微分 $dz$　└─ 先代后求省力法<br>
+                    ├── 链式求导与隐函数<br>
+                    │   ├─ 复合链式（具体 / 单框 / 两框）<br>
+                    │   └─ 隐函数（一阶 / 二阶）<br>
+                    ├── 多元函数极值与最值<br>
+                    │   ├─ 无条件极值（驻点 + $A,B,C$）<br>
+                    │   └─ 条件极值（拉格朗日）<br>
+                    └── 空间曲线与空间曲面<br>
+                        ├─ 切线 / 法平面<br>
+                        └─ 切平面 / 法线
+                </div>
+            </div>
+            ${memoryBox('升维总纲一句话', '一元求导是「一把刀」，多元求导是「同一把刀，一次只切一个变量」。把多元里新学的每一招，都想成「在第二章的招式上加了个变量」。')}
+        </div>
+    `;
+
+    // === Tab: 基本概念·极限 ===
+    const basicBody = `
+        <div class="detail-section" id="mv-basic">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-shapes"></i> 多元函数的基本概念与极限</div>
+            <div class="section-desc">联动定义域：一元定义域是数轴上的区间，二元定义域是平面上的点集 $\\{(x,y)\\mid\\cdots\\}$。求定义域的规则完全照搬第一章，只是把「区间」写成「平面区域」。</div>
+
+            ${groupTitle('fa-border-all', '1.1 二元函数 z=f(x,y) 的定义域', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <table style="width:100%;font-size:0.9rem;">
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">约束</td><td style="padding:0.3rem 0;">要求</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">分式</td><td style="padding:0.3rem 0;">分母 $\\neq 0$</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">根式（偶次）</td><td style="padding:0.3rem 0;">被开方数 $\\ge 0$</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">对数</td><td style="padding:0.3rem 0;">真数 $>0$</td></tr>
+                        <tr><td style="padding:0.3rem 0;color:var(--text-muted);">$\\arcsin,\\arccos$</td><td style="padding:0.3rem 0;">自变量 $\\in[-1,1]$</td></tr>
+                    </table>
+                </div>
+            </div>
+            ${memoryBox('联动提醒', '这些不正是第一章定义域的三条铁律吗？核心区别只有一点：二元函数定义域是「平面区域」，最终写成 $\\{(x,y)\\mid\\cdots\\}$ 集合形式，不能只写不等式。')}
+            ${exampleBox('专升本真题（2015 河南专升本 · 第 5 题）', '函数 $z=\\sqrt{4-x^2-y^2}$ 的定义域为（　）。<br>A. $x^2+y^2<4$　B. $x^2+y^2\\le 4$　C. $x^2+y^2>4$　D. $x^2+y^2\\ge4$<br><br><strong>解</strong>：偶次根式被开方数 $\\ge0$，即 $x^2+y^2\\le 4$（含边界，闭圆盘）。选 B。')}
+            ${exampleBox('例题（专升本难度，复合约束）', '求函数 $z=\\dfrac{1}{\\ln(x+2y)}$ 的定义域。<br><br><strong>解</strong>：需同时满足——① 对数真数 $x+2y>0$；② 分母 $\\ln(x+2y)\\neq 0 \\Rightarrow x+2y\\neq 1$。<br>$D=\\{(x,y)\\mid x+2y>0,\\ x+2y\\neq 1\\}$<br><br>💡 别漏掉「分母不为 0」这一步（即 $\\ln(\\cdot)\\neq 0$），这是专升本填空最爱挖的坑。')}
+
+            ${groupTitle('fa-infinity', '1.2 二元函数求极限', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#FF9F0A;">极限定义（联动：一元只需看左右，二元需看任意路径）</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\lim_{(x,y)\\to(x_0,y_0)} f(x,y)=A$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">一元极限只需考虑 $x\\to x_0$ 的左右两个方向；二元极限需要 $(x,y)$ 沿任意路径（直线、抛物线、任意曲线）趋于 $(x_0,y_0)$ 时函数值都趋于同一个数 $A$。<strong>路径数从 2 变成无穷多</strong>——这是最本质的区别。</div>
+            </div>
+            ${formulaCard('多1', '二元极限的四大方法', '$$\\lim_{(x,y)\\to(x_0,y_0)} f(x,y)=A$$', '直接代 / 等价替换 / 夹逼 / 找路径否定（二元不能用洛必达）', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin:1rem 0;">
+                <table style="width:100%;color:var(--text-secondary);font-size:0.9rem;">
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">直接代入法</td><td style="padding:0.3rem 0;">初等二元函数在其定义域内某点连续，极限 = 函数值</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">等价替换</td><td style="padding:0.3rem 0;">$\\sin(\\square)\\sim\\square$、$\\ln(1+\\square)\\sim\\square$ 等（$\\square\\to0$）</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">夹逼准则</td><td style="padding:0.3rem 0;">用 $\\left|\\frac{x^2y}{x^2+y^2}\\right|\\le\\cdots$ 放缩（有界量 × 无穷小 = 无穷小）</td></tr>
+                    <tr><td style="padding:0.3rem 0;">找路径否定</td><td style="padding:0.3rem 0;">沿不同路径得不同极限 ⟹ 极限不存在（二元新增、高频）</td></tr>
+                </table>
+            </div>
+            ${memoryBox('联动警示', '二元极限不能直接套洛必达法则！洛必达是一元工具，在「多变量同时变化」下失效。专升本高频判断陷阱题。')}
+            ${exampleBox('专升本真题（河南专升本题库模型 · 填空题）', '$\\lim\\limits_{(x,y)\\to(0,0)}\\dfrac{\\sin(xy)}{x}=$（　）。<br><br><strong>解</strong>：把 $xy$ 整体当框 $\\square\\to0$，用等价无穷小 $\\sin(xy)\\sim xy$：<br>$\\lim\\limits_{(x,y)\\to(0,0)}\\dfrac{\\sin(xy)}{x}=\\lim\\limits_{(x,y)\\to(0,0)}\\dfrac{xy}{x}=\\lim\\limits_{(x,y)\\to(0,0)}y=0$<br><br>答案：$0$。')}
+            ${exampleBox('例题（专升本难度 · 无穷小乘有界）', '$\\lim\\limits_{(x,y)\\to(0,0)}(x^2+y^2)\\sin\\dfrac{1}{xy}=$________。<br><br><strong>解</strong>：当 $(x,y)\\to(0,0)$ 时 $x^2+y^2\\to0$ 是无穷小量；$\\left|\\sin\\frac{1}{xy}\\right|\\le1$ 是有界量。无穷小 × 有界 = 无穷小，故极限 $=0$。')}
+            ${exampleBox('例题（专升本难度 · 证明极限不存在）', '判断 $\\lim\\limits_{(x,y)\\to(0,0)}\\dfrac{xy}{x^2+y^2}$ 是否存在。<br><br><strong>解</strong>：沿 $x$ 轴（令 $y=0$）：$\\lim\\limits_{x\\to0}\\frac{0}{x^2}=0$；沿直线 $y=x$：$\\lim\\limits_{x\\to0}\\frac{x^2}{x^2+x^2}=\\frac12$。两条不同路径得不同极限值，故极限不存在。')}
+            ${memoryBox('联动记忆', '一元「左右极限」是两条路径，二元「任意路径」是无穷多条；只要找出两条不同路径结果不同，就能断言极限不存在。这是把「一元判断极限存在性」推广成「无限路径」后的核心武器。')}
+        </div>
+    `;
+
+    // === Tab: 偏导与全微分 ===
+    const partialBody = `
+        <div class="detail-section" id="mv-partial">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-superscript"></i> 偏导数与全微分</div>
+            <div class="section-desc">联动导数：一元导数是一次动 $x$；多元里有 $x,y$ 两个变量，求 $\\frac{\\partial z}{\\partial x}$ 时把 $y$ 当作常数。偏导 = 对某个变量求导，其余变量当常数。</div>
+
+            ${groupTitle('fa-compress', '2.1 一阶偏导（概念认识）', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\frac{\\partial z}{\\partial x}：\\text{把 } y \\text{ 当常数，对 } x \\text{ 求导}\qquad \\frac{\\partial z}{\\partial y}：\\text{把 } x \\text{ 当常数，对 } y \\text{ 求导}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">口诀：求谁导谁变，其余全当常数。</div>
+            </div>
+            ${exampleBox('专升本真题（2018 成人高考专升本 · 高数二 第 8 题）', '若二元函数 $z=x^2y+3x+2y$，则 $\\dfrac{\\partial z}{\\partial x}=$（　）。<br>A. $2xy+3+2y$　B. $xy+3+2y$　C. $2xy+3$　D. $xy+3$<br><br><strong>解</strong>：对 $x$ 求偏导，$y$ 当常数：$\\frac{\\partial}{\\partial x}(x^2y)=2xy$，$\\frac{\\partial}{\\partial x}(3x)=3$，$\\frac{\\partial}{\\partial x}(2y)=0$。故 $\\frac{\\partial z}{\\partial x}=2xy+3$。选 C。')}
+            ${exampleBox('例题（专升本难度 · 幂指式）', '设 $z=x^y$，求 $\\dfrac{\\partial z}{\\partial x}$、$\\dfrac{\\partial z}{\\partial y}$。<br><br><strong>解</strong>：对 $x$ 求偏导（$y$ 当常数，幂函数）：$\\frac{\\partial z}{\\partial x}=yx^{y-1}$；对 $y$ 求偏导（$x$ 当常数，指数函数）：$\\frac{\\partial z}{\\partial y}=x^y\\ln x$。<br><br>💡 联动记忆：$x^y$ 里，把 $y$ 固定就看它像 $x^\\mu$（用 $yx^{y-1}$），把 $x$ 固定就看它像 $a^x$（用 $x^y\\ln x$）。谁当常数，就套谁的求导公式——和一元里 $u^v$ 幂指函数处理同出一辙。')}
+
+            ${groupTitle('fa-cubes', '2.2 二阶偏导（四个公式，各配一题）', 'var(--color-green)')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    一元二阶导 $f''(x)$ 是「对一阶导再求一次导」；多元同理，对一阶偏导再求一次偏导。因为有两个变量，二阶偏导有<strong>四个</strong>：<br>
+                    $\\frac{\\partial^2 z}{\\partial x^2}=z_{xx}=(z_x)_x$：对 $x$ 求两次<br>
+                    $\\frac{\\partial^2 z}{\\partial y^2}=z_{yy}=(z_y)_y$：对 $y$ 求两次<br>
+                    $\\frac{\\partial^2 z}{\\partial x\\partial y}=z_{xy}=(z_x)_y$：先 $x$ 再 $y$（混合）<br>
+                    $\\frac{\\partial^2 z}{\\partial y\\partial x}=z_{yx}=(z_y)_x$：先 $y$ 再 $x$（混合）
+                </div>
+            </div>
+            ${memoryBox('联动关键（Clairaut 定理）', '若二阶偏导连续，则 $z_{xy}=z_{yx}$。这和一元「二阶可导」的内涵呼应：专升本默认成立，无需纠结求导顺序，先求谁再求谁都行，选计算简单的一条路。')}
+
+            ${exampleBox('例 1（对 x 求两次）', '设 $z=x^3y$，求 $\\dfrac{\\partial^2 z}{\\partial x^2}$。<br><br><strong>解</strong>：$z_x=3x^2y$，$z_{xx}=(3x^2y)_x=6xy$。')}
+            ${exampleBox('例 2（对 y 求两次）', '设 $z=x^3y$，求 $\\dfrac{\\partial^2 z}{\\partial y^2}$。<br><br><strong>解</strong>：$z_y=x^3$，$z_{yy}=(x^3)_y=0$。')}
+            ${exampleBox('例 3（先 x 再 y）', '设 $z=x^3y$，求 $\\dfrac{\\partial^2 z}{\\partial x\\partial y}$。<br><br><strong>解</strong>：$z_x=3x^2y$，$z_{xy}=(3x^2y)_y=3x^2$。')}
+            ${exampleBox('例 4（先 y 再 x）', '设 $z=x^3y$，求 $\\dfrac{\\partial^2 z}{\\partial y\\partial x}$。<br><br><strong>解</strong>：$z_y=x^3$，$z_{yx}=(x^3)_x=3x^2$。<br><br>💡 例 3、例 4 结果相同（都 $=3x^2$），正好验证混合偏导相等。')}
+            ${exampleBox('专升本真题（2018 成人高考专升本 · 高数二 第 20 题）', '若二元函数 $z=x^2y^2$，则 $\\dfrac{\\partial^2 z}{\\partial x\\partial y}=$（　）。<br>A. $4x^2y$　B. $2xy$　C. $4xy$　D. $2x^2y^2$<br><br><strong>解</strong>：$z_x=2xy^2$，$z_{xy}=(2xy^2)_y=4xy$。选 C。')}
+
+            ${groupTitle('fa-signal', '2.3 全微分 dz', '#FFD60A')}
+            ${formulaCard('多2', '全微分', '$$dz=\\frac{\\partial z}{\\partial x}\\,dx+\\frac{\\partial z}{\\partial y}\\,dy$$', '先求两个偏导，再分别乘 dx、dy 后相加', '#FFD60A')}
+            <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin:0.5rem 1rem;">联动微分：一元 $dy=f'(x)dx$ 是「一个偏导乘 $dx$」；多元自变量有 $x,y$ 两个，微分变成「两个偏导分别乘各自微分再相加」。全微分 = 偏导 × 各自微分之和。</div>
+            ${exampleBox('专升本真题（专升本 · 高数一模型，填空）', '设 $z=e^{xy}+\\ln(x^2+y^2)$，则 $dz\\big|_{(1,0)}=$________。<br><br><strong>解</strong>：$z_x=ye^{xy}+\\frac{2x}{x^2+y^2}$，代入 $(1,0)$：$z_x(1,0)=0\\cdot e^0+\\frac{2}{1}=2$；$z_y=xe^{xy}+\\frac{2y}{x^2+y^2}$，代入 $(1,0)$：$z_y(1,0)=1\\cdot e^0+0=1$。<br>$dz=2\\,dx+1\\,dy=2dx+dy$。')}
+            ${exampleBox('例题（专升本难度 · 幂指全微分）', '设 $z=x^y$，求 $dz\\big|_{(3,1)}$。<br><br><strong>解</strong>：由 2.1 例，$z_x=yx^{y-1}$，$z_y=x^y\\ln x$。代入 $(3,1)$：$z_x(3,1)=1\\cdot3^0=1$，$z_y(3,1)=3^1\\ln3=3\\ln3$。故 $dz=dx+3\\ln3\\,dy$。')}
+
+            ${groupTitle('fa-network-wired', '2.4 连续、偏导存在、可微的三角关系（动态图）', '#BF5AF2')}
+            ${partialDerivRelationGraph()}
+            ${memoryBox('口诀：偏司令、微军长、连续可导两士兵', '偏导（司令）地位最高、条件最强；微（军长）其次；连续与可导是「两士兵」。命令向下传导——上层成立能推出下层成立，反之不行。<br><br>① 偏导数存在且连续 ⟹ 可微（可微的充分条件，最常用）<br>② 可微 ⟹ 连续，且可微 ⟹ 偏导存在<br>③ 连续 与 偏导存在：互不推出（两士兵互不相干）——这是与一元最不同的地方')}
+
+            ${groupTitle('fa-gauge-high', '2.5 求具体点偏导：「先代后求」省力法', '#FF3B30')}
+            <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin:0.5rem 1rem;">求 $\\frac{\\partial z}{\\partial x}$ 在某点值 ⟹ 先代入 $y$ 的值（把 $y$ 变常数）；求 $\\frac{\\partial z}{\\partial y}$ 在某点值 ⟹ 先代入 $x$ 的值。先代一个常数，二元变一元，运算量骤降。</div>
+            ${exampleBox('例题（专升本难度 · 先代后求）', '设 $z=x^2y+\\ln y+y\\sin x$，求 $\\dfrac{\\partial z}{\\partial x}\\Big|_{(0,1)}$。<br><br><strong>解（解法一，先代后求）</strong>：在点 $(0,1)$ 处 $y=1$，先代入：$z=x^2\\cdot1+\\ln1+1\\cdot\\sin x=x^2+0+\\sin x$。再对 $x$ 求导：$\\frac{\\partial z}{\\partial x}=2x+\\cos x$，代入 $x=0$：$2\\cdot0+\\cos0=1$。<br><strong>解法二（先求再代）</strong>：$z_x=2xy+0+y\\cos x$，代入 $(0,1)$：$2\\cdot0\\cdot1+1\\cdot\\cos0=1$。结果一致。<br><br>💡 真题启示：给具体点且只求一个偏导，优先「先代后求」。')}
+        </div>
+    `;
+
+    // === Tab: 链式与隐函数 ===
+    const chainBody = `
+        <div class="detail-section" id="mv-chain">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-link"></i> 复合链式求导与隐函数</div>
+            <div class="section-desc">联动链式法则：一元链式 $[f(g(x))]'=f'(g(x))g'(x)$ 是「由外向内逐层相乘」；多元链式是「同一理念，但每条路径都要求和」。</div>
+
+            ${groupTitle('fa-1', '2.6 复合链式求导（三大题型结构）', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#0A84FF;">题型 1：具体复合，先复合再求导</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">题干给了每一层函数 $u=g(x,y),\\ v=h(x,y)$ 和 $z=f(u,v)$，先把 $u,v$ 代入 $f$ 显式复合出 $z=f(x,y)$，再对 $x,y$ 直接求偏导。</div>
+            </div>
+            ${exampleBox('例题（题型 1 · 专升本难度）', '设 $z=u^2+\\sin v$，其中 $u=xy,\\ v=x+y$，求 $\\dfrac{\\partial z}{\\partial x},\\ \\dfrac{\\partial z}{\\partial y}$。<br><br><strong>解</strong>（先复合）：$z=(xy)^2+\\sin(x+y)=x^2y^2+\\sin(x+y)$。<br>$z_x=2xy^2+\\cos(x+y)$，$z_y=2x^2y+\\cos(x+y)$。')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
+                <div class="formula-label" style="color:var(--color-green);">题型 2：抽象复合，一个框</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$z=f(\\square)$，$\\square=g(x,y)$，$f$ 只给抽象形式。只有一个框时，外层导 × 内层导，逐层相乘——完全同第二章一元链式。</div>
+            </div>
+            ${exampleBox('例题（题型 2 · 专升本难度）', '设 $z=f(x^2+y^2)$，$f$ 可微，求 $z_x,\\ z_y$。<br><br><strong>解</strong>：令 $\\square=x^2+y^2$，则 $z_x=f\'(\\square)\\cdot(x^2+y^2)_x=f\'(x^2+y^2)\\cdot 2x$，$z_y=f\'(x^2+y^2)\\cdot 2y$。')}
+            <div class="formula-card" style="--card-accent:#FFD60A;margin-bottom:1rem;">
+                <div class="formula-label" style="color:var(--accent-yellow-text);">题型 3：抽象复合，两框加三角</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$z=f(\\square,\\triangle)$，两个框分别记为 1（$f_1\'$）和 2（$f_2\'$），分路求和。</div>
+                ${formulaCard('多4', '复合链式（两框分路）', '$$z_x=f_1\'\\cdot\\frac{\\partial\\square}{\\partial x}+f_2\'\\cdot\\frac{\\partial\\triangle}{\\partial x}$$', '把第 1 框记为 1、第 2 框记为 2，分路求和逐层相乘', '#FFD60A')}
+            </div>
+            ${exampleBox('专升本真题（2019 陕西专升本 · 高数 第 15 题）', '设 $u=f(x^2-y^2,\\ e^y)$，其中 $f$ 具有连续偏导数，求 $\\dfrac{\\partial^2u}{\\partial y\\partial x}$。<br><br><strong>解</strong>（记第 1 框 $\\square_1=x^2-y^2$、第 2 框 $\\square_2=e^y$，$f_1\',f_2\'$ 表示对各框求偏导）：<br>先对 $y$ 求一阶：$u_y=f_1\'\\cdot(-2y)+f_2\'\\cdot e^y=-2yf_1\'+e^yf_2\'$。<br>再对 $x$ 求偏导（注意 $f_1\',f_2\'$ 仍依赖 $x$，需对 $x$ 继续求导）：<br>$\\frac{\\partial^2u}{\\partial y\\partial x}=-2y\\big(f_{11}\'\'\\cdot2x+0\\big)+e^y\\big(f_{21}\'\'\\cdot2x+0\\big)=-4xy\\,f_{11}\'\'+2x e^y f_{21}\'\'$。<br><br>💡 真题启示：抽象复合二阶偏导是专升本高频解答题。关键是「借框」——$f_1\'$ 对 $x$ 求导时，借 $f_{11}\'\'\\cdot\\frac{\\partial\\square_1}{\\partial x}+f_{12}\'\'\\cdot\\frac{\\partial\\square_2}{\\partial x}$。先把两框记成 1、2，就不容易乱。')}
+
+            ${groupTitle('fa-eye-slash', '2.7 隐函数求偏导', '#FF9F0A')}
+            ${formulaCard('多5', '隐函数一阶偏导', '$$\\frac{\\partial z}{\\partial x}=-\\frac{F_x}{F_z},\\qquad \\frac{\\partial z}{\\partial y}=-\\frac{F_y}{F_z}$$', '求谁谁在分子，交叉带负号，分母是 F_z', '#FF9F0A')}
+            <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin:0.5rem 1rem;">联动隐函数：第二章一元 $F(x,y)=0$ 有 $\\frac{dy}{dx}=-\\frac{F_x}{F_y}$；多元 $F(x,y,z)=0$ 是同一公式多了一个 $z$。$F_x,F_y,F_z$ 分别是 $F$ 对 $x,y,z$ 求偏导（其余当常数）。</div>
+            ${memoryBox('记忆口诀', '求谁谁在分子，交叉带负号（$\\partial z/\\partial x$ 里是 $F_x$ 在分子，并带负号，分母是 $F_z$）。')}
+            ${groupTitle('fa-1', '题型 ①：给具体点，直接代入求值', '#0A84FF')}
+            ${exampleBox('例题（题型 ①）', '设 $x^2+y^2+z^2=4$ 确定隐函数 $z=z(x,y)$，求 $\\dfrac{\\partial z}{\\partial x}\\Big|_{(1,1,\\sqrt2)}$。<br><br><strong>解</strong>：$F=x^2+y^2+z^2-4$，$F_x=2x,\\ F_z=2z$。$\\frac{\\partial z}{\\partial x}=-\\frac{2x}{2z}=-\\frac{x}{z}$。代入 $(1,1,\\sqrt2)$：$-\\frac{1}{\\sqrt2}$。')}
+            ${groupTitle('fa-2', '题型 ②：结果含 z，先代入原式求 z', 'var(--color-green)')}
+            ${exampleBox('例题（题型 ②）', '设 $x^2+y^2+z^2+xyz=8$，求 $\\dfrac{\\partial z}{\\partial x}$ 在 $z=2,\\ y=0$ 的点的值。<br><br><strong>解</strong>：先求 $z$。把 $y=0,\\ z=2$ 代入原式：$x^2+0+4+0=8\\Rightarrow x^2=4\\Rightarrow x=2$（取正）。$F=x^2+y^2+z^2+xyz-8$，$F_x=2x+yz,\\ F_z=2z+xy$。$\\frac{\\partial z}{\\partial x}=-\\frac{2x+yz}{2z+xy}$，代入 $(x,y,z)=(2,0,2)$：$-\\frac{4+0}{4+0}=-1$。<br><br>💡 关键提醒：结果是含 $z$ 的式子时，必须先代入原方程求出 $z$，否则无法算数。')}
+            ${groupTitle('fa-3', '题型 ③：只求隐函数偏导表达式（不给点）', '#FFD60A')}
+            ${exampleBox('例题（题型 ③）', '由方程 $e^z=x^2+y^2+z^2$ 确定 $z=z(x,y)$，求 $\\dfrac{\\partial z}{\\partial x}$。<br><br><strong>解</strong>：$F=e^z-x^2-y^2-z^2$，$F_x=-2x,\\ F_z=e^z-2z$。$\\frac{\\partial z}{\\partial x}=-\\frac{F_x}{F_z}=-\\frac{-2x}{e^z-2z}=\\frac{2x}{e^z-2z}$。')}
+            ${groupTitle('fa-4', '题型 ④：求 dz（隐函数 + 全微分）', '#FF3B30')}
+            ${exampleBox('例题（题型 ④）', '设 $z=z(x,y)$ 由方程 $x^2+y^2+z^2=1$ 确定，求 $dz$。<br><br><strong>解</strong>：$F=x^2+y^2+z^2-1$，$F_x=2x,\\ F_y=2y,\\ F_z=2z$。$\\frac{\\partial z}{\\partial x}=-\\frac{x}{z}$，$\\frac{\\partial z}{\\partial y}=-\\frac{y}{z}$ ⟹ $dz=-\\frac{x}{z}dx-\\frac{y}{z}dy$。<br><br>💡 这是全微分与隐函数的联动：隐函数也能算偏导，算完照样拼全微分。')}
+
+            ${groupTitle('fa-flag-checkered', '2.8 / 2.9 隐函数一、二阶偏导（满分冲刺）', '#BF5AF2')}
+            ${memoryBox('给满分冲刺的建议', '本章「隐函数求一阶偏导」常与复合结构结合考（即 $z$ 里面还嵌着 $x,y$），属偏难题。目标是满分、愿意考前 1-2 个月提前啃再看这里；一般掌握 2.7 的四种题型即可。')}
+            ${exampleBox('例题（复合隐函数一阶）', '设 $z=f(x+y,\\ xy)$，其中 $f$ 可微，求 $\\dfrac{\\partial z}{\\partial x}$。<br><br><strong>解</strong>（显式抽象复合，先按 2.6 处理）：令 $\\square_1=x+y,\\ \\square_2=xy$：$\\frac{\\partial z}{\\partial x}=f_1\'\\cdot1+f_2\'\\cdot y=f_1\'(x+y,xy)+y\\,f_2\'(x+y,xy)$。')}
+            ${exampleBox('例题（隐函数二阶）', '设 $x^2+y^2+z^2=1$ 确定 $z=z(x,y)$，求 $\\dfrac{\\partial^2 z}{\\partial x^2}$。<br><br><strong>解</strong>：由 2.7，$\\frac{\\partial z}{\\partial x}=-\\frac{x}{z}$。再对 $x$ 求偏导（注意 $z$ 是 $x$ 的函数，用商的求导 + 链式）：<br>$\\frac{\\partial^2 z}{\\partial x^2}=\\frac{\\partial}{\\partial x}\\Big(-\\frac{x}{z}\\Big)=-\\frac{z-x\\cdot z_x}{z^2}=-\\frac{z-x\\left(-\\frac{x}{z}\\right)}{z^2}=-\\frac{z^2+x^2}{z^3}$<br><br>💡 联动记忆：这是第二章「隐函数二阶导」思路的多元版——把已求出的 $z_x$ 保留，遇到 $z$ 回代 $z_x=-\\frac{x}{z}$，阶梯式求导。')}
+        </div>
+    `;
+
+    // === Tab: 极值与最值 ===
+    const extremaBody = `
+        <div class="detail-section" id="mv-extrema">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-chart-line"></i> 多元函数求极值与最值</div>
+            <div class="section-desc">联动极值：第二章一元极值靠 $f'(x)=0$ 找驻点、$f''(x)$ 判大小；多元几乎照搬——一阶偏导统统置零找驻点、二阶偏导组合判别。</div>
+
+            ${groupTitle('fa-circle-question', '3.0 无条件极值还是条件极值？', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;">
+                <table style="width:100%;color:var(--text-secondary);font-size:0.9rem;border-collapse:collapse;">
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">题型</td><td style="padding:0.3rem 0;">特征关键字</td><td style="padding:0.3rem 0;">方法</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">无条件极值</td><td style="padding:0.3rem 0;">直接给 $z=f(x,y)$，无附加等式</td><td style="padding:0.3rem 0;">驻点 + $A,B,C$</td></tr>
+                    <tr><td style="padding:0.3rem 0;">条件极值</td><td style="padding:0.3rem 0;">出现「条件」$\varphi(x,y)=0$ 或实际问题</td><td style="padding:0.3rem 0;">拉格朗日</td></tr>
+                </table>
+            </div>
+            ${memoryBox('判断口诀', '有约束就用拉格朗日，没约束就走 $A,B,C$。题目出现「求 $f(x,y)$ 在 $\\varphi(x,y)=0$ 条件下的最值/极值」，或「XXX 达到最大/最小」的实际建模，多半是条件极值。')}
+
+            ${groupTitle('fa-calculator', '3.1 无条件极值', 'var(--color-green)')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    四步法：① 求驻点：令 $f_x=0,\\ f_y=0$ 联立解出全部驻点；② 求二阶偏导：$A=f_{xx},\\ B=f_{xy},\\ C=f_{yy}$；③ 驻点代入得 $A,B,C$ 数值；④ 用 $AC-B^2$ 判别。
+                </div>
+                ${formulaCard('多6', '无条件极值判别', '$$\\begin{cases}AC-B^2>0：\\text{极值点，}A<0\\ \\text{极大，}A>0\\ \\text{极小}\\\\AC-B^2<0：\\text{一定不是极值点（鞍点）}\\\\AC-B^2=0：\\text{方法失效（专升本了解即可）}\\end{cases}$$', '求驻、算 ABC、比 AC-B²；>0 有极值（看 A 正负），<0 无，=0 失效', 'var(--color-green)')}
+            </div>
+            ${exampleBox('专升本真题（概念选择题）', '函数 $f(x,y)$ 在驻点 $(x_0,y_0)$ 处满足 $AC-B^2<0$，则 $(x_0,y_0)$（　）。<br>A. 是极大值点　B. 是极小值点　C. 不是极值点　D. 无法判定<br><br><strong>解</strong>：$AC-B^2<0$ ⟹ 该点一定不是极值点。选 C。')}
+            ${exampleBox('例题（专升本难度 · 完整求解）', '求 $f(x,y)=x^2+y^2-2x+4y$ 的极值。<br><br><strong>解</strong>：① 求驻点：$f_x=2x-2=0,\\ f_y=2y+4=0$，得驻点 $(1,-2)$。<br>② 求二阶偏导：$A=f_{xx}=2,\\ B=f_{xy}=0,\\ C=f_{yy}=2$（均为常数）。<br>③ 判别：$AC-B^2=2\\cdot2-0=4>0$，且 $A=2>0$ ⟹ 极小值。<br>④ $f(1,-2)=1+4-2-8=-5$，故唯一极小值 $f(1,-2)=-5$。')}
+
+            ${groupTitle('fa-lambda', '3.2 条件极值（拉格朗日乘数法）', '#FF9F0A')}
+            ${memoryBox('考前冲刺提醒', '本科目难点，常出解答题/应用题。传统教材略讲，这里讲透。满分目标 + 考前 1-2 个月想冲高分的必看。')}
+            ${formulaCard('多7', '条件极值（拉格朗日）', '$$L(x,y,\\lambda)=f(x,y)+\\lambda\\,\\varphi(x,y)$$', '目标 + 拉姆达 × 约束，三偏导置零，解出驻点', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin:1rem 0;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    步骤：① 找目标 $z=f(x,y)$、约束 $\varphi(x,y)=0$（先把右边挪到 0）；② 构造 $L=f+\\lambda\\varphi$（$\\lambda$ 读「拉姆达」）；③ 对 $x,y,\\lambda$ 求偏导并令其 $=0$（$L_x=0,L_y=0,L_\\lambda=0$）；④ 解出驻点 $(x,y)$；⑤ 由实际意义（或比较函数值）决定最值。
+                </div>
+            </div>
+            ${exampleBox('专升本真题（2018 成人高考专升本 · 高数二 第 28 题）', '求函数 $f(x,y)=x^3+y^3$ 在条件 $x^2+2y^2=1$ 下的最值。<br><br><strong>解</strong>：① 约束化为 $\\varphi=x^2+2y^2-1=0$；目标 $f=x^3+y^3$。<br>② 构造 $L=x^3+y^3+\\lambda(x^2+2y^2-1)$。<br>③ 令偏导为 0：$L_x=3x^2+2\\lambda x=0,\\ L_y=3y^2+4\\lambda y=0,\\ L_\\lambda=x^2+2y^2-1=0$。<br>④ 由 $x(3x+2\\lambda)=0$、$y(3y+4\\lambda)=0$，结合 $x^2+2y^2=1$ 解出候选驻点，逐一比较 $f=x^3+y^3$ 得最值。（展示「目标 + 拉格朗日 + 三偏导置零」的完整套路）')}
+            ${exampleBox('例题（专升本难度 · 标准套路）', '求函数 $f(x,y)=x^2+y^2$ 在条件 $x+y=1$ 下的最小值。<br><br><strong>解</strong>：① 约束 $\\varphi=x+y-1$；目标 $f=x^2+y^2$。<br>② $L=x^2+y^2+\\lambda(x+y-1)$。<br>③ $L_x=2x+\\lambda=0,\\ L_y=2y+\\lambda=0,\\ L_\\lambda=x+y-1=0$。<br>④ 由前两式 $2x=2y=-\\lambda\\Rightarrow x=y$；代入 $x+y-1=0$：$x=y=\\frac12$。<br>⑤ 比较可知最小值为 $f(\\frac12,\\frac12)=\\frac12$。<br><br>💡 联动记忆：拉格朗日函数把「条件极值」转化成「无条件极值」——本质是用 $\\lambda$ 把约束塞进目标函数。')}
+        </div>
+    `;
+
+    // === Tab: 空间曲线与曲面 ===
+    const spaceBody = `
+        <div class="detail-section" id="mv-space">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-cube"></i> 空间曲线与空间曲面</div>
+            <div class="section-desc">联动切线/向量：这是第二章「切线方程」的空间升级。一座关键桥梁是：对 $F(x,y,z)$ 求偏导得到三维向量 $(F_x,F_y,F_z)$——曲线用它是切向，曲面用它是法向，它同时就是梯度。这几个名字本质是同一个量在不同场合的称呼。</div>
+
+            ${groupTitle('fa-route', '4.1 空间曲线的切线与法平面', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    曲线参数方程 $\\Gamma:\\begin{cases}x=\\varphi(t)\\\\y=\\psi(t)\\\\z=\\omega(t)\\end{cases}$ 在点 $M_0(x_0,y_0,z_0)$（对应 $t=t_0$）处：<br>
+                    切点 $(x_0,y_0,z_0)=(\\varphi(t_0),\\psi(t_0),\\omega(t_0))$（参数 $t=t_0$ 代入方程）；<br>
+                    切向量 $\\vec T=(\\varphi\'(t_0),\\psi\'(t_0),\\omega\'(t_0))$（参数方程分别求导再代 $t_0$）。
+                </div>
+                ${formulaCard('多8', '空间曲线切线方程', '$$\\frac{x-x_0}{\\varphi\'(t_0)}=\\frac{y-y_0}{\\psi\'(t_0)}=\\frac{z-z_0}{\\omega\'(t_0)}$$', '分子是切点、分母是切向量', '#0A84FF')}
+                ${formulaCard('多9', '空间曲线法平面方程', '$$\\varphi\'(t_0)(x-x_0)+\\psi\'(t_0)(y-y_0)+\\omega\'(t_0)(z-z_0)=0$$', '由分式变乘法再相加，等于 0', '#0A84FF')}
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">口诀：切线 = 切点在上、切向量在下；法平面 = 切向量内积 $(x-x_0,y-y_0,z-z_0)$ 等于 0。</div>
+            </div>
+            ${exampleBox('例题（专升本难度 · 参数式）', '求曲线 $\\Gamma:\\begin{cases}x=t\\\\y=t^2\\\\z=t^3\\end{cases}$ 在点 $(1,1,1)$ 处的切线与法平面方程。<br><br><strong>解</strong>：① 定 $t$：$(1,1,1)$ 对应 $t=1$（因 $x=t$）。<br>② 求导得切向量 $\\vec T=(1,2t,3t^2)\\big|_{t=1}=(1,2,3)$。<br>③ 切线方程：$\\frac{x-1}{1}=\\frac{y-1}{2}=\\frac{z-1}{3}$。<br>④ 法平面方程：$1(x-1)+2(y-1)+3(z-1)=0$，即 $x+2y+3z-6=0$。<br><br>💡 关键：切向量恰是法平面的法向量，与曲面法向量概念呼应。')}
+
+            ${groupTitle('fa-globe', '4.2 空间曲面的切平面与法线', 'var(--color-green)')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    曲面隐式 $F(x,y,z)=0$ 在 $M_0(x_0,y_0,z_0)$ 处：法向量（梯度）$\\vec n=(F_x(M_0),F_y(M_0),F_z(M_0))$。<br>
+                    若曲面显式 $z=f(x,y)$：化成 $F=f(x,y)-z=0$，法向量为 $(f_x,f_y,-1)$。
+                </div>
+                ${formulaCard('多10', '曲面切平面方程', '$$F_x(M_0)(x-x_0)+F_y(M_0)(y-y_0)+F_z(M_0)(z-z_0)=0$$', '法向量 × 各坐标差 相加等于 0', 'var(--color-green)')}
+                ${formulaCard('多11', '曲面法线方程', '$$\\frac{x-x_0}{F_x(M_0)}=\\frac{y-y_0}{F_y(M_0)}=\\frac{z-z_0}{F_z(M_0)}$$', '由乘积变分式（与切平面互逆）', 'var(--color-green)')}
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">口诀：切平面 = 分式变乘积加和等于 0；法线 = 乘积变回分式。联动记忆：显式曲面的法向量 $(f_x,f_y,-1)$ 正是全微分 $dz=f_x\\,dx+f_y\\,dy$ 的几何化身。</div>
+            </div>
+            ${exampleBox('例题（显式曲面）', '求曲面 $z=x^2+y^2$ 在点 $(1,1,2)$ 处的切平面方程。<br><br><strong>解</strong>：化 $F(x,y,z)=x^2+y^2-z=0$。$F_x=2x,\\ F_y=2y,\\ F_z=-1$，代入 $(1,1,2)$ 得法向量 $\\vec n=(2,2,-1)$。<br>切平面方程：$2(x-1)+2(y-1)+(-1)(z-2)=0$，即 $2x+2y-z=2$。')}
+            ${exampleBox('例题（隐式曲面 + 法线）', '求曲面 $x^2+y^2+z^2=1$（球面）在点 $(0,0,1)$ 处的切平面与法线方程。<br><br><strong>解</strong>：化 $F=x^2+y^2+z^2-1=0$。$F_x=2x,\\ F_y=2y,\\ F_z=2z$，代入 $(0,0,1)$：$\\vec n=(0,0,2)$（可约成 $(0,0,1)$）。<br>切平面方程：$0(x-0)+0(y-0)+1(z-1)=0$，即 $z=1$。<br>法线方程（分母是法向量分量，除零处理：相应分子也为零）：$\\frac{x-0}{0}=\\frac{y-0}{0}=\\frac{z-1}{1}$ ⟺ $x=0,\\ y=0$（即 $z$ 轴）。<br><br>💡 联动记忆：球面北极点的切平面就是水平面 $z=1$，法线就是 $z$ 轴——和第二章「水平切线/竖直法线」同一逻辑。')}
+        </div>
+    `;
+
+    // === Tab: 速查总表 ===
+    const summaryBody = `
+        <div class="detail-section" id="mv-summary">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-table"></i> 多元函数微分学·速查总表</div>
+            <div class="section-desc">覆盖本页全部考点的一句话速查。</div>
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <table style="width:100%;color:var(--text-secondary);font-size:0.85rem;border-collapse:collapse;">
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">知识点</td><td style="padding:0.3rem 0;">核心方法</td><td style="padding:0.3rem 0;">关键口诀 / 易错点</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">二元定义域</td><td style="padding:0.3rem 0;">分式≠0 / 根式≥0 / 对数>0 / arcsin∈[-1,1]</td><td style="padding:0.3rem 0;">定义域是平面点集，写 $\\{(x,y)\\mid\\cdots\\}$</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">二元极限</td><td style="padding:0.3rem 0;">直接代 / 等价替换 / 夹逼 / 找路径否定</td><td style="padding:0.3rem 0;">不能用洛必达；两路径不同值 ⟹ 不存在</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">一阶偏导</td><td style="padding:0.3rem 0;">对某变量求导，其余当常数</td><td style="padding:0.3rem 0;">求谁导谁变，其余全当常数</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">二阶偏导</td><td style="padding:0.3rem 0;">对一阶偏导再求一次</td><td style="padding:0.3rem 0;">四式 $z_{xx},z_{yy},z_{xy},z_{yx}$；连续时 $z_{xy}=z_{yx}$</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">全微分</td><td style="padding:0.3rem 0;">$dz=\\frac{\\partial z}{\\partial x}dx+\\frac{\\partial z}{\\partial y}dy$</td><td style="padding:0.3rem 0;">偏导 × 各自微分之和</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">连续/偏导/可微</td><td style="padding:0.3rem 0;">偏导存在且连续 ⟹ 可微 ⟹ 连续+偏导存在</td><td style="padding:0.3rem 0;">偏司令、微军长、连续可导两士兵</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">具体点偏导</td><td style="padding:0.3rem 0;">先代后求</td><td style="padding:0.3rem 0;">求 $z_x$ 先代 $y$，求 $z_y$ 先代 $x$</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">复合链式</td><td style="padding:0.3rem 0;">两框记 1、2 分路求和</td><td style="padding:0.3rem 0;">$z_x=f_1\'\\cdot\\square_{1x}+f_2\'\\cdot\\square_{2x}$</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">隐函数</td><td style="padding:0.3rem 0;">$\\frac{\\partial z}{\\partial x}=-\\frac{F_x}{F_z}$</td><td style="padding:0.3rem 0;">求谁谁在分子，交叉带负号</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">无条件极值</td><td style="padding:0.3rem 0;">驻点 + $A,B,C$，判 $AC-B^2$</td><td style="padding:0.3rem 0;">$>0$ 有极值（看 $A$），$<0$ 无，$=0$ 失效</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">条件极值</td><td style="padding:0.3rem 0;">拉格朗日 $L=f+\\lambda\\varphi$</td><td style="padding:0.3rem 0;">有约束就用拉格朗日</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">空间曲线切线</td><td style="padding:0.3rem 0;">分式（分子切点、分母切向量）</td><td style="padding:0.3rem 0;">切点代 $t_0$，切向量求导代 $t_0$</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">法平面</td><td style="padding:0.3rem 0;">分式变乘法加和 $=0$</td><td style="padding:0.3rem 0;">切向量就是法平面法向量</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">曲面切平面</td><td style="padding:0.3rem 0;">$F_x(x-x_0)+F_y(y-y_0)+F_z(z-z_0)=0$</td><td style="padding:0.3rem 0;">法向量就是梯度 $(F_x,F_y,F_z)$</td></tr>
+                    <tr><td style="padding:0.3rem 0;">曲面法线</td><td style="padding:0.3rem 0;">分式形式（乘积退回分式）</td><td style="padding:0.3rem 0;">分母为零则分子也为零</td></tr>
+                </table>
+            </div>
+            ${memoryBox('核心记忆口诀汇总', '① 升维总纲：一元是「一把刀」，多元是「同一把刀，一次只切一个变量」<br>② 二元极限：不能用洛必达；找两条不同路径得不同值 ⟹ 不存在<br>③ 偏导：求谁导谁变，其余全当常数<br>④ 二阶偏导：连续时 $z_{xy}=z_{yx}$<br>⑤ 全微分：$dz=$（对 $x$ 偏导）$dx$＋（对 $y$ 偏导）$dy$<br>⑥ 连续/偏导/可微：偏司令、微军长、连续可导两士兵<br>⑦ 先代后求：求 $z_x$ 先代 $y$，求 $z_y$ 先代 $x$<br>⑧ 复合链式：两框记 1、2，分路求和<br>⑨ 隐函数：求谁谁在分子，交叉带负号<br>⑩ 无条件极值：求驻算 $ABC$，$AC-B^2>0$ 有极值（$A$ 正极小、$A$ 负极大）<br>⑪ 条件极值：有约束就用拉格朗日<br>⑫ 升维锚点：$(F_x,F_y,F_z)$ 一个量，曲线叫切向、曲面叫法向、本质叫梯度')}
+        </div>
+    `;
+
+    return { title: '多元函数微分学详情', color: C, tabs, body: mapBody + basicBody + partialBody + chainBody + extremaBody + spaceBody + summaryBody };
+}
+
 // ---------- 行列式详情 ----------
 function buildLinearDetail() {
     const C = '#5AC8FA';
@@ -5384,6 +5754,7 @@ function buildDetailContent(type) {
         case 'integral': return buildIntegralDetail();
         case 'trigonometric': return buildTrigonometricDetail();
         case 'equation': return buildEquationDetail();
+        case 'multivar': return buildMultivarDetail();
         case 'linear': return buildLinearDetail();
         case 'matrix': return buildMatrixDetail();
     }

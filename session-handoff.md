@@ -10,9 +10,11 @@
 1. **只增量、不改架构**：加内容就在既有结构里追加，绝不重构页面/改设计/改风格。
 2. **公式唯一事实来源 = `src/index.html` 的 `formulaCard(...)` 调用**。
 3. `src/data/formulas.js` 是派生产物，永远由 `scripts/extractFormulas.mjs` 生成，**禁止手改**。
-4. 模块固定 `{ limit, deriv, integral, trig, diffEq, linalg }`，**没有 `diff`**（微分已并入 deriv）。
+4. 模块固定 `{ limit, deriv, integral, trig, diffEq, linalg, matrix }`，**没有 `diff`**（微分已并入 deriv）；`linalg`(行列式) 与 `matrix`(矩阵) 同属线性代数但为**两个独立章节/入口**，切勿再合并。
 5. `review.html` 的公式列表是自动同步的，禁手动改。
 6. 所有改动必须同时适配暗/浅双主题。
+7. 每个章节 tab 导航的**第一个 tab 必须是「知识地图」**。
+8. review 翻卡页的筛选 tab 栏需与 index 详情页 `detail-tabs` 行为一致：**激活 tab 溢出可视区时自动回中**，且是通过**滑动内容**（章节切换）驱动，而非手动滑 bar 本身。
 
 ## 加新内容的标准流程（必须按序）
 1. 在 `notes/` 写笔记——**人工先给初版（要覆盖哪些内容/公式），AI 再按用户个性化要求润色成风格一致的 Markdown**，并在 `00-笔记索引.md` 登记。偏好不明时先向用户提问。
@@ -32,9 +34,12 @@
 | trig | buildTrigonometricDetail | notes/05-三角函数.md | #FF3B30 |
 | diffEq | buildEquationDetail | notes/06-微分方程.md | #FF9F0A |
 | linalg | buildLinearDetail | notes/07-线性代数-行列式.md | #5AC8FA |
+| matrix | buildMatrixDetail | notes/08-矩阵.md | #8b98ba（首页 node 色；详情页细节沿用模块色） |
+
+> 注：矩阵在**首页 path-home 的 node 主题色**已由亮蓝 `#5AC8FA` 调整为低饱和 `#8b98ba`，与行列式 `#759ba1` 及整体莫兰迪色板协调。详情页 buildMatrixDetail 内部细节仍可能使用模块原色，改色前先确认目标范围是「首页」还是「详情页」。
 
 ## 当前进度
-6 模块全部就位，公式总量 **176 条**（deriv 87 / integral 19 / trig 41 / diffEq 9 / linalg 7 / limit 13）。
+7 模块全部就位，公式总量 **205 条**（deriv 87 / integral 19 / trig 41 / diffEq 9 / linalg 7 / matrix 29 / limit 13；6 模块基线 176 + 矩阵 29）。所有章节首个 tab 均已是「知识地图」。
 详见 `progress.md` 与 `feature_list.json`。
 
 ## 常用命令

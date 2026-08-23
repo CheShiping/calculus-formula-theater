@@ -27,3 +27,12 @@
 - **`review.html` 的 `toQuestionFormula(formula)` 不能用 `indexOf('=')` 截答案**——会撞到下标里的 `=`（如 `\sum_{k=1}^{n}` 的 `k=1`），导致前侧公式变成 `\sum_{k= ?`（主式被错误截断），触发 KaTeX `Expected '}'` 错，整张卡片显示红色错误。
 - **修复**（已落到 `src/review.html` line 1523–）：改用 **bracket-depth 扫描**，跳过 `{...}` 与 `\X` 控制序列内部的 `=`，只把 depth=0 的「主等号」当分界点。
 - **教训**：处理 LaTeX 字符串时，**别用 regex/朴素字符串操作假设 token 边界**——尤其 `=` 经常出现在花括号参数里。后续若加新公式出现类似「问侧变红」症状，先怀疑 `toQuestionFormula` / `toKatexSource`，再排查 KaTeX。
+
+## review 翻卡页 tab 居中（2026-08-23）
+- 用户要求 review 筛选 tab 栏与 index `detail-tabs` 一致：**激活 tab 溢出自动回中**，由**滑动内容**驱动（非手动滑 bar）。
+- 实现：`centerActiveChip(bar,activeChip)`（rAF 双层 + 按 chip 中心算 scrollLeft + clamp 到 [0,maxScroll]）+ `centerAllBars()`；桌面 `.filter-bar` 改为仅 `(min-width:641px)` 的单行横向滚动吸顶栏（nowrap+overflow-x:auto+sticky）；`handleSwipe` 切章节后调用 `centerAllBars()`。
+- **根因/教训**：`.filter-bar` 原 `flex-wrap:wrap` 永不横向溢出 → `maxScroll<=0` → 居中永不触发，必须改 `nowrap` 单行滚动。tab 居中逻辑必须覆盖**所有**变更激活模块的路径（点击 chip + 内容横滑），不是只修 bar 本身。
+
+## 首页 path-home 主题色（2026-08-23）
+- 首页模块 node 用的是**低饱和莫兰迪色板**（行列式 `#759ba1`、矩阵改前是亮蓝 `#5AC8FA`）。矩阵 node 已改为低饱和 `#8b98ba` 与行列式协调。
+- **注意**：详情页 buildMatrixDetail 内部细节仍用模块原色/细节色，改色前先确认目标是「首页 node」还是「详情页内部」。
