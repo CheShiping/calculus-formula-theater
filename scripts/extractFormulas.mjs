@@ -101,7 +101,7 @@ function inferModule(color) {
 }
 
 // 章节顺序（用于 MODULES 输出排序，按学习路径）
-const MODULE_ORDER = ['limit', 'deriv', 'integral', 'trig', 'diffEq', 'multivar', 'linalg', 'matrix'];
+const MODULE_ORDER = ['limit', 'deriv', 'integral', 'trig', 'diffEq', 'multivar', 'dblint', 'linalg', 'matrix'];
 
 // 用 buildXxxDetail 的位置切分 cards
 function splitBySection(src, cards) {
@@ -114,6 +114,7 @@ function splitBySection(src, cards) {
     { name: 'trigonometric', title: '三角函数', module: 'trig', color: '#FF3B30' },
     { name: 'equation', title: '微分方程', module: 'diffEq', color: '#FF9F0A' },
     { name: 'multivar', title: '多元函数微分学', module: 'multivar', color: '#2BB8A3' },
+    { name: 'doubleInt', title: '多元函数积分学·二重积分', module: 'dblint', color: '#A06CD5' },
     { name: 'linear', title: '线性代数·行列式', module: 'linalg', color: '#5AC8FA' },
     { name: 'matrix', title: '线性代数·矩阵', module: 'matrix', color: '#5AC8FA' },
   ];

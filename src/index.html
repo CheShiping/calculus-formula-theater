@@ -503,6 +503,15 @@
         .formula-card .katex { font-size: 1.05em; }
         .formula-card .katex-display { margin: 0.3rem 0; white-space: nowrap; }
         .chapter-flow-card { margin-bottom: 1rem; }
+        .chapter-flow-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+        @media (max-width: 768px) {
+            .chapter-flow-grid { grid-template-columns: 1fr; }
+        }
         .chapter-flow-step {
             display: grid;
             grid-template-columns: 5.5rem minmax(0, 1fr);
@@ -537,9 +546,10 @@
             margin: 1.5rem 0 1rem; padding-bottom: 0.5rem;
             border-bottom: 1px solid var(--border-soft);
             display: flex; align-items: center; gap: 0.5rem;
+            flex-wrap: wrap; min-width: 0;
             color: var(--group-color, var(--text-primary));
         }
-        .group-title i { font-size: 0.9rem; }
+        .group-title i { font-size: 0.9rem; flex-shrink: 0; }
 
         /* 记忆提示框 */
         .memory-box {
@@ -1297,15 +1307,15 @@
     <main class="path-home" aria-label="高数知识路径首页">
         <header class="path-nav">
             <span class="path-brand">四川专升本高数</span>
-            <span class="path-nav-copy">KNOWLEDGE PATH · 8 MODULES</span>
+            <span class="path-nav-copy">KNOWLEDGE PATH · 9 MODULES</span>
         </header>
         <section class="path-intro" aria-labelledby="path-title">
             <div>
-                <p class="path-eyebrow">KNOWLEDGE PATH · 8 MODULES</p>
+                <p class="path-eyebrow">KNOWLEDGE PATH · 9 MODULES</p>
                 <h1 id="path-title">从地基开始，<br>每一步都有来处。</h1>
                 <p>公式不是散点。沿着知识路径复习，可以看到章节之间如何相互支撑；需要巩固时，随时进入你原来的公式详情和简洁翻卡。</p>
             </div>
-            <p class="path-count">265 FORMULAS<br>按章节建立联动记忆</p>
+            <p class="path-count">283 FORMULAS<br>按章节建立联动记忆</p>
         </section>
         <section class="learning-path" aria-label="高数知识路径">
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-blue)" onclick="enterDetail('function')"><h2>函数 · 极限 · 连续</h2><p>定义域、极限方法、连续与间断点，是后续变化的坐标系。</p><span class="path-meta">22 条内容 · 先修模块</span></button></article>
@@ -1314,6 +1324,7 @@
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-coral)" onclick="enterDetail('trigonometric')"><h2>三角函数</h2><p>关系式贯穿导数和积分，用主干公式组织而不是零散背诵。</p><span class="path-meta">41 条公式 · 关系网络</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-amber)" onclick="enterDetail('equation')"><h2>微分方程</h2><p>将导数与积分放进同一道题，进入一阶与二阶方程训练。</p><span class="path-meta">9 条公式 · 综合应用</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-teal)" onclick="enterDetail('multivar')"><h2>多元函数微分学</h2><p>把一元函数微分学的每一把刀都搬进多维空间：偏导、全微分、链式与隐函数、无条件极值。</p><span class="path-meta">多元模块 · 全新章节</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:var(--path-violet)" onclick="enterDetail('doubleInt')"><h2>多元函数积分学（二重积分）</h2><p>定积分的升维：一元算面积，二重算体积。直角坐标(X/Y型)、交换次序、对称性、极坐标，四招解二重积分。</p><span class="path-meta">多元模块 · 体积工具</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:#759ba1" onclick="enterDetail('linear')"><h2>行列式</h2><p>计算、性质与展开，是线性代数部分的基础工具。</p><span class="path-meta">4 个专题 · 线性代数</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:#8b98ba" onclick="enterDetail('matrix')"><h2>矩阵</h2><p>特殊矩阵、运算、逆与伴随、初等变换与秩，是线性代数的核心对象。</p><span class="path-meta">5 个专题 · 线性代数</span></button></article>
         </section>
@@ -4249,6 +4260,571 @@ function buildMultivarDetail() {
     return { title: '多元函数微分学详情', color: C, tabs, body: mapBody + basicBody + partialBody + chainBody + extremaBody + spaceBody + summaryBody };
 }
 
+// ---------- 二重积分详情 ----------
+function buildDoubleIntDetail() {
+    const C = '#A06CD5';
+    const red = '#FF3B30', yellow = '#FFD60A', blue = '#0A84FF', green = '#6fae87', orange = '#FF9F0A', purple = '#A06CD5';
+
+    const tabs = `
+        <div class="detail-tab active" style="--tab-color:rgba(160,108,213,0.2);--tab-border:rgba(160,108,213,0.4);" onclick="switchTab('di-map', this)">知识地图</div>
+        <div class="detail-tab" style="--tab-color:rgba(160,108,213,0.2);--tab-border:rgba(160,108,213,0.4);" onclick="switchTab('di-def', this)">定义与性质</div>
+        <div class="detail-tab" style="--tab-color:rgba(160,108,213,0.2);--tab-border:rgba(160,108,213,0.4);" onclick="switchTab('di-rect', this)">直角坐标</div>
+        <div class="detail-tab" style="--tab-color:rgba(160,108,213,0.2);--tab-border:rgba(160,108,213,0.4);" onclick="switchTab('di-swap', this)">交换次序</div>
+        <div class="detail-tab" style="--tab-color:rgba(160,108,213,0.2);--tab-border:rgba(160,108,213,0.4);" onclick="switchTab('di-sym', this)">对称性</div>
+        <div class="detail-tab" style="--tab-color:rgba(160,108,213,0.2);--tab-border:rgba(160,108,213,0.4);" onclick="switchTab('di-pol', this)">极坐标</div>
+        <div class="detail-tab" style="--tab-color:rgba(160,108,213,0.2);--tab-border:rgba(160,108,213,0.4);" onclick="switchTab('di-summary', this)">速查总表</div>
+    `;
+
+    // === 知识地图 ===
+    const mapBody = `
+        <div class="detail-section active" id="di-map">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-map-location-dot"></i> 知识地图 · 二重积分</div>
+            <div class="section-desc">本章是「多元函数积分学」，只讲二重积分：它把第四章「一元函数积分学」里的定积分从「一条线上的积分」推广到「一个面上的积分」，是定积分的长高——被积函数从一元的 $f(x)$ 变成二元的 $f(x,y)$，积分区间从数轴上的 $[a,b]$ 变成平面上的闭区域 $D$。<strong>不是新知识，而是旧知识升了一维</strong>——定积分的所有技巧（偶倍奇零、点火公式、$\\frac14$ 圆面积）在这里全部沿用。</div>
+
+            ${groupTitle('fa-arrow-up-right-dots', '升维对照：定积分 → 二重积分', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <table style="width:100%;font-size:0.9rem;">
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;" colspan="2"><strong>二重积分 $\\iint_D f(x,y)\\,dx\\,dy$ ＝ 曲顶柱体体积</strong></td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">对象</td><td style="padding:0.3rem 0;">$y=f(x)$ 一条曲线 → $z=f(x,y)$ 一张曲面</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">意义</td><td style="padding:0.3rem 0;">一块面积 → 一个体积</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">积分区间</td><td style="padding:0.3rem 0;">直线 $[a,b]$ → 平面区域 $D$</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">写法</td><td style="padding:0.3rem 0;">$\\int_a^b f\\,dx$ → $\\iint_D f\\,dx\\,dy$（一个积分号 → 两个）</td></tr>
+                        <tr><td style="padding:0.3rem 0;color:var(--text-muted);">技巧</td><td style="padding:0.3rem 0;">偶倍奇零 / 点火公式 / $\\frac14$ 圆面积——<strong>照搬</strong></td></tr>
+                    </table>
+                </div>
+            </div>
+            ${memoryBox('一句话记忆', '一元定积分算「一块面积」，二重积分算「一堆面积叠起来的体积」；而「叠起来」的每一步，都还是做定积分。你只要会算定积分，再会「画区域、定上下限、决定先积谁」，二重积分就全会了。')}
+
+            ${groupTitle('fa-diagram-project', '知识地图与三条路', '#BF5AF2')}
+            <div class="knowledge-map">
+                <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:720px;margin:0 auto;display:block;">
+                    <defs>
+                        <marker id="di-ar-p" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6" fill="${purple}"/></marker>
+                        <marker id="di-ar-b" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6" fill="#0A84FF"/></marker>
+                        <filter id="di-glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    </defs>
+
+                    <text x="70" y="30" text-anchor="middle" fill="var(--text-muted)" font-size="12" font-family="JetBrains Mono,monospace" font-weight="700">定积分（第四章）</text>
+                    <g class="km-node">
+                        <rect x="10" y="40" width="120" height="52" rx="14" fill="rgba(48,209,88,0.12)" stroke="#30D158" stroke-width="2"/>
+                        <text x="70" y="62" text-anchor="middle" fill="#30D158" font-size="14" font-weight="700">定积分</text>
+                        <text x="70" y="80" text-anchor="middle" fill="var(--text-muted)" font-size="10">一条线上的积分</text>
+                    </g>
+
+                    <line x1="130" y1="66" x2="210" y2="66" stroke="${purple}" stroke-width="2" marker-end="url(#di-ar-p)"/>
+                    <text x="170" y="52" text-anchor="middle" fill="${purple}" font-size="11" font-weight="700">升维</text>
+                    <text x="170" y="84" text-anchor="middle" fill="var(--text-muted)" font-size="10">面积 → 体积</text>
+
+                    <g class="km-node">
+                        <rect x="210" y="40" width="160" height="52" rx="14" fill="rgba(160,108,213,0.14)" stroke="${purple}" stroke-width="2" filter="url(#di-glow)"/>
+                        <text x="290" y="62" text-anchor="middle" fill="${purple}" font-size="15" font-weight="800">二重积分</text>
+                        <text x="290" y="80" text-anchor="middle" fill="var(--text-muted)" font-size="10">$\\iint_D f\\,dx\\,dy$＝体积</text>
+                    </g>
+
+                    <text x="290" y="118" text-anchor="middle" fill="${purple}" font-size="12" font-weight="700">三条算法路径</text>
+
+                    <line x1="300" y1="105" x2="120" y2="170" stroke="${blue}" stroke-width="2" marker-end="url(#di-ar-b)"/>
+                    <g class="km-node" style="animation-delay:0.2s">
+                        <rect x="10" y="170" width="200" height="56" rx="14" fill="rgba(10,132,255,0.12)" stroke="#0A84FF" stroke-width="2"/>
+                        <text x="110" y="192" text-anchor="middle" fill="#0A84FF" font-size="14" font-weight="700">直角坐标（X型 / Y型）</text>
+                        <text x="110" y="212" text-anchor="middle" fill="var(--text-muted)" font-size="10">先积谁的上下限是函数</text>
+                    </g>
+
+                    <line x1="320" y1="105" x2="430" y2="170" stroke="${green}" stroke-width="2" marker-end="url(#di-ar-p)"/>
+                    <g class="km-node" style="animation-delay:0.35s">
+                        <rect x="410" y="170" width="210" height="56" rx="14" fill="rgba(111,174,135,0.12)" stroke="#6fae87" stroke-width="2"/>
+                        <text x="515" y="192" text-anchor="middle" fill="#6fae87" font-size="14" font-weight="700">极坐标（圆相关）</text>
+                        <text x="515" y="212" text-anchor="middle" fill="var(--text-muted)" font-size="10">$x^2+y^2$ 出现 → $r\\,dr\\,d\\theta$</text>
+                    </g>
+
+                    <line x1="290" y1="130" x2="290" y2="244" stroke="${yellow}" stroke-width="2" marker-end="url(#di-ar-p)"/>
+                    <g class="km-node" style="animation-delay:0.5s">
+                        <rect x="220" y="246" width="150" height="50" rx="14" fill="rgba(255,214,10,0.12)" stroke="#FFD60A" stroke-width="2"/>
+                        <text x="295" y="268" text-anchor="middle" fill="${yellow}" font-size="12" font-weight="700">交换次序</text>
+                        <text x="295" y="286" text-anchor="middle" fill="var(--text-muted)" font-size="10">救出积不出来的函数</text>
+                    </g>
+                    <line x1="370" y1="271" x2="380" y2="271" stroke="var(--border-soft)" stroke-width="2"/>
+                    <rect x="380" y="246" width="150" height="50" rx="14" fill="rgba(255,63,52,0.12)" stroke="#FF3B30" stroke-width="2"/>
+                    <text x="455" y="268" text-anchor="middle" fill="#FF3B30" font-size="12" font-weight="700">对称性</text>
+                    <text x="455" y="286" text-anchor="middle" fill="var(--text-muted)" font-size="10">偶数翻倍、奇数归零</text>
+                    <line x1="530" y1="271" x2="540" y2="271" stroke="var(--border-soft)" stroke-width="2"/>
+                    <rect x="540" y="246" width="170" height="50" rx="14" fill="rgba(111,174,135,0.10)" stroke="var(--border-soft)" stroke-width="1.5"/>
+                    <text x="625" y="268" text-anchor="middle" fill="var(--text-secondary)" font-size="12" font-weight="700">区域可加性</text>
+                    <text x="625" y="286" text-anchor="middle" fill="var(--text-muted)" font-size="10">拆绝对值 / 拆分区域</text>
+                </svg>
+            </div>
+
+            ${groupTitle('fa-list-tree', '本章知识结构', '#FF9F0A')}
+            <div class="formula-grid" style="grid-template-columns:1fr;gap:0.4rem;">
+                ${formulaCard('', '二重积分意义', '$$\\iint_D f(x,y)\\,dx\\,dy=\\int_a^b dx\\int_{\\varphi_1(x)}^{\\varphi_2(x)} f(x,y)\\,dy$$', '定积分算面积，二重积分算体积；依旧先内层后外层', `${purple}`)}
+                ${formulaCard('', '直角坐标', '$$\\iint_D f\\,dx\\,dy=\\int_a^b dx\\int_{\\varphi_1(x)}^{\\varphi_2(x)} f\\,dy=\\int_\\alpha^\\beta dy\\int_{\\psi_1(y)}^{\\psi_2(y)}f\\,dx$$', 'X型（竖线）/ Y型（横线）两种次序', '#0A84FF')}
+                ${formulaCard('', '极坐标', '$$x=r\\cos\\theta,\\ y=r\\sin\\theta,\\ dx\\,dy=r\\,dr\\,d\\theta$$', '圆相关 → 极坐标；rdr 不分家，r 别漏', '#6fae87')}
+                ${formulaCard('', '对称性', '$$\\iint_D f\\,dx\\,dy=0\\ \\text{（奇）},\\quad =2\\iint_{D_1} f\\ \\text{（偶）}$$', '偶数翻倍、奇数归零，定积分偶倍奇零的二维版', '#FF3B30')}
+                ${formulaCard('', '面积', '$$S=\\iint_D 1\\,dx\\,dy$$', '求面积令被积函数为 1', '#FFD60A')}
+            </div>
+        </div>
+    `;
+
+    // === 定义与性质 ===
+    const defBody = `
+        <div class="detail-section" id="di-def">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-shapes"></i> 二重积分的定义与性质</div>
+            <div class="section-desc">二重积分的性质几乎是一元定积分性质的「逐条升级」。唯一要特别记住的是<strong>区域可加性</strong>——它是「拆分区域」「去掉绝对值」的数学依据，专升本解答题第一步常常就是拆区域。</div>
+
+            ${groupTitle('fa-sliders', '二重积分的性质（数学语言）', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('性1', '线性性', '$$\\iint_D[\\alpha f+\\beta g]\\,d\\sigma=\\alpha\\iint_Df\\,d\\sigma+\\beta\\iint_Dg\\,d\\sigma$$', '常数出积分号，可拆和差，与定积分一致', '#0A84FF')}
+                ${formulaCard('性2', '区域可加性', '$$D=D_1\\cup D_2\\ (D_1\\cap D_2\\ \\text{无内点}) \\implies \\iint_D f=\\iint_{D_1}f+\\iint_{D_2}f$$', '拆绝对值、拆分段函数就靠它', '#FF3B30')}
+                ${formulaCard('性3', '保号性', '$$f(x,y)\\le g(x,y)\\ \\text{于 }D \\implies \\iint_D f\\le\\iint_D g$$', '大曲面体积大', '#6fae87')}
+                ${formulaCard('性4', '绝对值不等式', '$$\\Big|\\iint_D f\\,d\\sigma\\Big|\\le\\iint_D |f|\\,d\\sigma$$', '先积分论大小 ≤ 绝对值再积分', '#FF9F0A')}
+                ${formulaCard('性5', '估值定理', '$$mS\\le\\iint_D f\\,d\\sigma\\le MS,\\quad S=\\text{区域面积}$$', '被最小/最大值夹住', '#FFD60A')}
+                ${formulaCard('性6', '中值定理', '$$\\exists(\\xi,\\eta)\\in D:\\ \\iint_D f\\,d\\sigma=f(\\xi,\\eta)\\,S$$', '定积分中值定理的二维版', '#BF5AF2')}
+                ${formulaCard('性7', '被积函数为 1', '$$\\iint_D 1\\,d\\sigma=S\\ (\\text{区域面积})$$', '算面积时最常用', '#30D158')}
+            </div>
+            ${memoryBox('性质一句话', '除区域可加性外基本都是「逐条照搬」：线性 / 保号 / 估值 / 中值，和定积分长得一模一样。真正值钱的是<strong>区域可加性</strong>——去绝对值、拆分段函数、拆复杂区域都靠它。')}
+
+            ${groupTitle('fa-layer-group', '为什么是「体积」？先求面积再堆叠', `${C}`)}
+            <div class="formula-card" style="--card-accent:${C};margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.92rem;color:var(--text-secondary);line-height:1.9;">
+                    $\\iint_D f(x,y)\\,d\\sigma$＝以平面区域 $D$ 为底、曲面 $z=f(x,y)$ 为顶的<strong>曲顶柱体体积</strong>。做法和定积分求面积一样「先切条、再累加」：<br>
+                    ① 固定一个方向，把 $D$ 切成一沓平行薄片；<br>
+                    ② 每个薄片先沿另一方向做一次<strong>定积分</strong>，得一片「薄面积」；<br>
+                    ③ 再把一沓薄片对「薄面积」做一次<strong>定积分</strong>，就是体积。<br>
+                    <strong>一句话：二重积分 = 先积一次（得截面），再积一次（堆体积），两次都是定积分。</strong>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // === 直角坐标 ===
+    // === 直角坐标：X 型 / Y 型几何图 ===
+    // 坐标系：左下原点(40,210)，x 轴向右至 320，y 轴向上至 20
+    // X 型：两条曲线 y=φ₂(x)(上，橙) 与 y=φ₁(x)(下，蓝) 两端 x=a(60) 与 x=b(260) 处闭合，填充中间
+    //     竖线 x=x₀(160) 穿过区域，落点分别在 φ₁(x₀) 与 φ₂(x₀) 上
+    const xTypeFigure = `
+        <div class="knowledge-map">
+            <svg viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:340px;margin:0 auto;display:block;">
+                <!-- 坐标轴 -->
+                <line x1="40" y1="210" x2="328" y2="210" stroke="var(--text-muted)" stroke-width="1.5"/>
+                <polygon points="328,210 320,206 320,214" fill="var(--text-muted)"/>
+                <line x1="40" y1="218" x2="40" y2="14" stroke="var(--text-muted)" stroke-width="1.5"/>
+                <polygon points="40,14 36,22 44,22" fill="var(--text-muted)"/>
+                <text x="332" y="214" fill="var(--text-muted)" font-size="11">x</text>
+                <text x="32" y="20" fill="var(--text-muted)" font-size="11">y</text>
+                <text x="38" y="224" fill="var(--text-muted)" font-size="10" text-anchor="end">O</text>
+
+                <!-- x 轴端点 a=60, b=260 -->
+                <line x1="60" y1="210" x2="60" y2="215" stroke="var(--text-muted)" stroke-width="1.2"/>
+                <text x="60" y="226" fill="var(--text-muted)" font-size="10" text-anchor="middle">$a$</text>
+                <line x1="260" y1="210" x2="260" y2="215" stroke="var(--text-muted)" stroke-width="1.2"/>
+                <text x="260" y="226" fill="var(--text-muted)" font-size="10" text-anchor="middle">$b$</text>
+
+                <!-- 上边界 φ₂(x)：橙  (60,80) -> (160,40) -> (260,70) 开口向上的"弧顶"-->
+                <path d="M60,80 Q160,30 260,70" fill="none" stroke="#FF9F0A" stroke-width="2.2"/>
+                <!-- 下边界 φ₁(x)：蓝  (60,180) -> (160,150) -> (260,170) -->
+                <path d="M60,180 Q160,140 260,170" fill="none" stroke="#0A84FF" stroke-width="2.2"/>
+
+                <!-- 填充区域 D：严格沿 φ₂(x) 从 a→b，再沿 φ₁(x) 从 b→a 闭合 -->
+                <path d="M60,80 Q160,30 260,70 L260,170 Q160,140 60,180 Z"
+                      fill="rgba(160,108,213,0.18)" stroke="${C}" stroke-width="1"/>
+
+                <!-- 竖线穿域示例（X 型核心）：x=x₀=160，从 φ₁(x₀)=150 到 φ₂(x₀)=55 -->
+                <line x1="160" y1="210" x2="160" y2="55" stroke="${C}" stroke-width="2" stroke-dasharray="5 3"/>
+                <circle cx="160" cy="150" r="3.2" fill="#0A84FF" stroke="#fff" stroke-width="0.8"/>
+                <circle cx="160" cy="55" r="3.2" fill="#FF9F0A" stroke="#fff" stroke-width="0.8"/>
+
+                <!-- 标注 -->
+                <text x="168" y="218" fill="${C}" font-size="10">$x_0$</text>
+                <text x="166" y="154" fill="#0A84FF" font-size="11">$\\varphi_1(x_0)$</text>
+                <text x="166" y="50" fill="#FF9F0A" font-size="11">$\\varphi_2(x_0)$</text>
+                <text x="270" y="62" fill="#FF9F0A" font-size="11">$y=\\varphi_2(x)$</text>
+                <text x="270" y="182" fill="#0A84FF" font-size="11">$y=\\varphi_1(x)$</text>
+
+                <!-- 箭头提示：竖线的 y 范围 -->
+                <path d="M156,125 Q146,130 146,150" fill="none" stroke="#0A84FF" stroke-width="1" marker-end="url(#x-arrow-b)"/>
+                <path d="M156,80 Q146,75 146,55" fill="none" stroke="#FF9F0A" stroke-width="1" marker-end="url(#x-arrow-o)"/>
+
+                <defs>
+                    <marker id="x-arrow-b" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6" fill="#0A84FF"/></marker>
+                    <marker id="x-arrow-o" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6" fill="#FF9F0A"/></marker>
+                </defs>
+
+                <text x="170" y="236" fill="var(--text-muted)" font-size="10" text-anchor="middle">X 型：固定 $x$，竖线从 $\\varphi_1(x)$ 穿到 $\\varphi_2(x)$</text>
+            </svg>
+        </div>`;
+
+    // Y 型：两条曲线 x=ψ₂(y)(右，橙) 与 x=ψ₁(y)(左，蓝) 在 y=α 与 y=β 处闭合，填充中间
+    //     横线 y=y₀ 穿过区域，落点在 ψ₁(y₀) 与 ψ₂(y₀) 上
+    const yTypeFigure = `
+        <div class="knowledge-map">
+            <svg viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:340px;margin:0 auto;display:block;">
+                <!-- 坐标轴 -->
+                <line x1="40" y1="210" x2="328" y2="210" stroke="var(--text-muted)" stroke-width="1.5"/>
+                <polygon points="328,210 320,206 320,214" fill="var(--text-muted)"/>
+                <line x1="40" y1="218" x2="40" y2="14" stroke="var(--text-muted)" stroke-width="1.5"/>
+                <polygon points="40,14 36,22 44,22" fill="var(--text-muted)"/>
+                <text x="332" y="214" fill="var(--text-muted)" font-size="11">x</text>
+                <text x="32" y="20" fill="var(--text-muted)" font-size="11">y</text>
+                <text x="38" y="224" fill="var(--text-muted)" font-size="10" text-anchor="end">O</text>
+
+                <!-- y 轴端点 α(下)=180, β(上)=50 -->
+                <line x1="40" y1="180" x2="35" y2="180" stroke="var(--text-muted)" stroke-width="1.2"/>
+                <text x="32" y="184" fill="var(--text-muted)" font-size="10" text-anchor="end">$\\alpha$</text>
+                <line x1="40" y1="50" x2="35" y2="50" stroke="var(--text-muted)" stroke-width="1.2"/>
+                <text x="32" y="54" fill="var(--text-muted)" font-size="10" text-anchor="end">$\\beta$</text>
+
+                <!-- 右边界 x=ψ₂(y)：橙 (60,180) -> (220,115) -> (260,50) -->
+                <path d="M60,180 Q220,120 260,50" fill="none" stroke="#FF9F0A" stroke-width="2.2"/>
+                <!-- 左边界 x=ψ₁(y)：蓝 (60,180) -> (130,115) -> (110,50) -->
+                <path d="M60,180 Q130,120 110,50" fill="none" stroke="#0A84FF" stroke-width="2.2"/>
+
+                <!-- 填充区域 D：沿 ψ₂ 从 α→β，再沿 ψ₁ 从 β→α 闭合 -->
+                <path d="M60,180 Q220,120 260,50 L110,50 Q130,120 60,180 Z"
+                      fill="rgba(160,108,213,0.18)" stroke="${C}" stroke-width="1"/>
+
+                <!-- 横线穿域示例（Y 型核心）：y=y₀=115，从 ψ₁(y₀) 到 ψ₂(y₀) -->
+                <line x1="40" y1="115" x2="220" y2="115" stroke="${C}" stroke-width="2" stroke-dasharray="5 3"/>
+                <circle cx="156" cy="115" r="3.2" fill="#0A84FF" stroke="#fff" stroke-width="0.8"/>
+                <circle cx="220" cy="115" r="3.2" fill="#FF9F0A" stroke="#fff" stroke-width="0.8"/>
+
+                <!-- 标注 -->
+                <text x="34" y="111" fill="${C}" font-size="10" text-anchor="end">$y_0$</text>
+                <text x="146" y="109" fill="#0A84FF" font-size="11">$\\psi_1(y_0)$</text>
+                <text x="224" y="109" fill="#FF9F0A" font-size="11">$\\psi_2(y_0)$</text>
+                <text x="272" y="48" fill="#FF9F0A" font-size="11">$x=\\psi_2(y)$</text>
+                <text x="78" y="48" fill="#0A84FF" font-size="11">$x=\\psi_1(y)$</text>
+
+                <!-- 箭头提示：横线的 x 范围 -->
+                <path d="M180,111 Q180,100 160,100" fill="none" stroke="#0A84FF" stroke-width="1" marker-end="url(#y-arrow-b)"/>
+                <path d="M215,111 Q218,100 220,100" fill="none" stroke="#FF9F0A" stroke-width="1" marker-end="url(#y-arrow-o)"/>
+
+                <defs>
+                    <marker id="y-arrow-b" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6" fill="#0A84FF"/></marker>
+                    <marker id="y-arrow-o" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6" fill="#FF9F0A"/></marker>
+                </defs>
+
+                <text x="170" y="236" fill="var(--text-muted)" font-size="10" text-anchor="middle">Y 型：固定 $y$，横线从 $\\psi_1(y)$ 穿到 $\\psi_2(y)$</text>
+            </svg>
+        </div>`;
+
+    const rectBody = `
+        <div class="detail-section" id="di-rect">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-border-all"></i> 直角坐标系中的计算</div>
+            <div class="section-desc">定积分写成 $\\int_a^b f(x)dx$ 只有一种顺序；二重积分因为有两个变量，<strong>谁先积、谁后积有两种选择</strong>——这就是 X 型 / Y 型。本质都是「先积内层（把另一个变量当常数），再积外层」。</div>
+
+            ${groupTitle('fa-arrows-up-down', 'X 型区域（先积 y，后积 x）', '#0A84FF')}
+            <div class="chapter-flow-card"><div class="chapter-flow-grid">
+                <div>
+                    <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:0.6rem;">
+                        <span class="formula-num">型X</span>
+                        <div class="formula-label" style="color:#0A84FF;">X 型</div>
+                        <div class="formula-block" style="border:none;background:none;padding:0;">$$D=\\{(x,y)\\mid a\\le x\\le b,\\ \\varphi_1(x)\\le y\\le\\varphi_2(x)\\}\\ ;\\ \\iint_D f\\,dx\\,dy=\\int_a^b dx\\int_{\\varphi_1(x)}^{\\varphi_2(x)} f\\,dy$$</div>
+                    </div>
+                    <div class="section-desc">固定 $x$，画竖线穿过区域，落在下边界 $y=\\varphi_1(x)$ 与上边界 $y=\\varphi_2(x)$ 上 ⟹ 得一条「线」；沿线沿 $x$ 方向移动扫出「<strong>线到面</strong> $S$」；再把一沓面片沿 $y$ 方向堆叠成体积。<strong>口诀：竖线上下为 $y$ 限，$x$ 从两边常数到常数。</strong></div>
+                </div>
+                <div>${xTypeFigure}</div>
+            </div></div>
+
+            ${groupTitle('fa-arrows-left-right', 'Y 型区域（先积 x，后积 y）', '#30D158')}
+            <div class="chapter-flow-card"><div class="chapter-flow-grid">
+                <div>
+                    <div class="formula-card" style="--card-accent:#30D158;margin-bottom:0.6rem;">
+                        <span class="formula-num">型Y</span>
+                        <div class="formula-label" style="color:#30D158;">Y 型</div>
+                        <div class="formula-block" style="border:none;background:none;padding:0;">$$D=\\{(x,y)\\mid \\alpha\\le y\\le\\beta,\\ \\psi_1(y)\\le x\\le\\psi_2(y)\\}\\ ;\\ \\iint_D f\\,dx\\,dy=\\int_\\alpha^\\beta dy\\int_{\\psi_1(y)}^{\\psi_2(y)} f\\,dx$$</div>
+                    </div>
+                    <div class="section-desc">固定 $y$，画横线穿过区域，落在左边界 $x=\\psi_1(y)$ 与右边界 $x=\\psi_2(y)$ 上 ⟹ 得一条「线」；沿线沿 $y$ 方向移动扫出「<strong>线到面</strong> $S$」；再沿 $x$ 方向堆叠成体积。<strong>口诀：横线左右为 $x$ 限，$y$ 从两边常数到常数。</strong></div>
+                </div>
+                <div>${yTypeFigure}</div>
+            </div></div>
+            ${memoryBox('选型记忆', 'X 型「竖着切」、Y 型「横着切」。<strong>先积谁，谁就是「竖线/横线穿过去的那个变量」</strong>；最后积的变量，上下限一定是常数。先画图、看哪个方向不需要拆区域，就选哪个型。')}
+
+            ${groupTitle('fa-pencil-ruler', '例题 · X 型（专升本难度）', '#0A84FF')}
+            ${exampleBox('例题（专升本难度 · X 型计算）', `
+                <p>计算 $\\iint_D (x^2+y)\\,dx\\,dy$，其中 $D$ 由曲线 $y=x^2$ 与 $y=\\sqrt{x}$ 所围成的闭区域。</p>
+                <p><strong>解</strong>：① 画图（两曲线交于 $(0,0)$ 与 $(1,1)$），区域为 $0\\le x\\le1,\\ x^2\\le y\\le\\sqrt{x}$（X 型）。</p>
+                <p>$$\\iint_D(x^2+y)dx\\,dy=\\int_0^1 dx\\int_{x^2}^{\\sqrt{x}}(x^2+y)\\,dy=\\int_0^1\\Big[x^2y+\\frac12y^2\\Big]_{x^2}^{\\sqrt{x}}dx$$</p>
+                <p>$$=\\int_0^1\\Big(x^{\\frac52}+\\frac12x-\\frac32x^4\\Big)dx=\\Big[\\frac27x^{\\frac72}+\\frac14x^2-\\frac3{10}x^5\\Big]_0^1=\\frac27+\\frac14-\\frac3{10}=\\frac{33}{140}$$</p>
+                <blockquote>这题若反过来用 Y 型，要把 $y=x^2$ 改写 $x=\\pm\\sqrt y$、$y=\\sqrt{x}$ 改写 $x=y^2$，会拆成两块更麻烦。<strong>先画图、看哪个方向不需要拆区域，就选哪个型。</strong></blockquote>
+            `)}
+
+            ${groupTitle('fa-pencil-ruler', '例题 · Y 型（专升本难度）', '#30D158')}
+            ${exampleBox('例题（专升本难度 · Y 型计算）', `
+                <p>计算 $\\iint_D x^2y\\,dx\\,dy$，其中 $D$ 由直线 $y=\\sqrt{x}$、曲线 $xy=1$ 与直线 $x=2$ 所围成的闭区域。</p>
+                <p><strong>解</strong>：① 画图：$xy=1\\Rightarrow y=\\frac1x$，与 $y=\\sqrt{x}$ 交于 $(1,1)$。区域 $1\\le x\\le2$，$\\frac1x\\le y\\le\\sqrt{x}$（X 型即可直接算）：</p>
+                <p>$$\\iint_D x^2y\\,dx\\,dy=\\int_1^2 dx\\int_{\\frac1x}^{\\sqrt{x}}x^2y\\,dy=\\int_1^2\\Big[\\frac12x^2y^2\\Big]_{\\frac1x}^{\\sqrt{x}}dx=\\int_1^2\\frac12\\Big(x^3-\\frac1x\\Big)dx$$</p>
+                <p>$$=\\frac12\\Big[\\frac14x^4-\\ln x\\Big]_1^2=\\frac12\\Big(4-\\ln2-\\frac14\\Big)=\\frac{15}{8}-\\frac12\\ln2$$</p>
+                <blockquote>本题按区域用 X 型即可直接算；示范「Y 型先积 $x$」时，同理把 $x$ 写成 $\\psi_1(y)\\le x\\le\\psi_2(y)$ 即可。<strong>做题先画图，选更简单的型。</strong></blockquote>
+            `)}
+
+            ${groupTitle('fa-location-dot', '画图求闭区域面积', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:0.6rem;">
+                <span class="formula-num">面1</span>
+                <div class="formula-label" style="color:#FF9F0A;">求面积（被积为 1）</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">$$S=\\iint_D 1\\,dx\\,dy=\\int_a^b\\big[f(x)-g(x)\\big]dx$$</div>
+            </div>
+            <div class="section-desc">一元求曲线与直线围的面积是 $\\int_a^b[f(x)-g(x)]dx$；二重积分求面积更简单——令被积函数为 $1$。但前提是能<strong>画出区域</strong>。<strong>画图三招：</strong>① 认形——用指数 / 对数 / 直线 / 二次函数的标准图形打底；② 联立求<strong>交点坐标</strong>＝新积分上下限；③ 校验边界、定上下限。</div>
+            <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <table style="width:100%;font-size:0.9rem;">
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">类型</td><td style="padding:0.3rem 0;color:var(--text-muted);">标准形</td><td style="padding:0.3rem 0;color:var(--text-muted);">关键特征</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">直线</td><td style="padding:0.3rem 0;">$y=ax+b$</td><td style="padding:0.3rem 0;">两点定线</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">抛物线</td><td style="padding:0.3rem 0;">$y=x^2$</td><td style="padding:0.3rem 0;">开口由二次项系数正负决定</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">指数</td><td style="padding:0.3rem 0;">$y=e^x$</td><td style="padding:0.3rem 0;">过 $(0,1)$，单调上升</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">对数</td><td style="padding:0.3rem 0;">$y=\\ln x$</td><td style="padding:0.3rem 0;">过 $(1,0)$，$x>0$</td></tr>
+                        <tr><td style="padding:0.3rem 0;">反比例</td><td style="padding:0.3rem 0;">$y=\\frac1x$</td><td style="padding:0.3rem 0;">过 $(1,1)$，两支曲线</td></tr>
+                    </table>
+                </div>
+            </div>
+            ${exampleBox('例题（专升本难度 · 画图求面积）', `
+                <p>求由曲线 $y=x^2$ 与直线 $y=2x$ 所围成的平面图形的面积。</p>
+                <p><strong>解</strong>：① 画图：$y=x^2$ 开口向上，$y=2x$ 过原点；联立 $x^2=2x\\Rightarrow x(x-2)=0$，交点 $(0,0)$、$(2,2)$，区域内下方是 $x^2$，上方是 $2x$。</p>
+                <p>② 令被积函数为 $1$，用 X 型，$0\\le x\\le2$，$x^2\\le y\\le2x$：</p>
+                <p>$$S=\\iint_D 1\\,dx\\,dy=\\int_0^2 dx\\int_{x^2}^{2x}dy=\\int_0^2 (2x-x^2)dx=\\Big[x^2-\\frac13x^3\\Big]_0^2=4-\\frac83=\\frac43$$</p>
+                <blockquote>这和一元定积分 $\\int_0^2(2x-x^2)dx=\\frac43$ 一模一样——<strong>求面积时，二重积分只是把一元定积分「写长」了</strong>（多套了一个 $\\int dy$）。</blockquote>
+            `)}
+
+            ${groupTitle('fa-scissors', '需要拆分的区域 + 绝对值', '#FF3B30')}
+            <div class="section-desc">有的区域不能只用一种 X 型或 Y 型一次写到底，必须<strong>按曲线拆成几块</strong>再分别积——「拆分区域」。最常见触发条件是：<strong>被积函数含绝对值</strong>（在 $|f|=0$ 分界线两侧正负不同）或区域本身。步骤：① 令绝对值内式子 $=0$ 解分界线；② 画图用分界线把 $D$ 拆成 $D_1,D_2,\\dots$；③ 各子区域去绝对值（正则保留、负则加负号）；④ 用<strong>区域可加性</strong>加总。</div>
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    $$\\iint_D|f(x,y)|\\,dx\\,dy=\\iint_{D_1}f\\,dx\\,dy+\\iint_{D_2}(-f)\\,dx\\,dy+\\cdots$$
+                </div>
+            </div>
+            ${exampleBox('例题（专升本难度 · 绝对值拆区域）', `
+                <p>计算 $\\iint_D |x|\\,dx\\,dy$，其中 $D:\\ x^2+y^2\\le1$（单位圆）。</p>
+                <p><strong>解</strong>：① 令 $|x|=0$ 得分界线 $x=0$（$y$ 轴），把单位圆拆成左右两半：右半 $|x|=x$，左半 $|x|=-x$。由对称性两半相等：</p>
+                <p>$$\\iint_D|x|\\,dx\\,dy=2\\iint_{D_{\\text{右}}}x\\,dx\\,dy$$</p>
+                <p>② 右半圆（$0\\le x\\le1$，$-\\sqrt{1-x^2}\\le y\\le\\sqrt{1-x^2}$）：</p>
+                <p>$$2\\int_0^1 dx\\int_{-\\sqrt{1-x^2}}^{\\sqrt{1-x^2}}x\\,dy=2\\int_0^1 x\\cdot2\\sqrt{1-x^2}\\,dx=4\\cdot\\frac13=\\frac43$$</p>
+                <blockquote>偶倍奇零在这里「暗度陈仓」——$|x|$ 是偶函数，积分等于对称一侧（右半）的两倍，拆区域后只需算一半。</blockquote>
+            `)}
+            ${exampleBox('例题（专升本模型 · 拆分尖子题）', `
+                <p>计算 $\\iint_D |xy-1|\\,dx\\,dy$，$D:\\{0\\le x\\le2,\\ 0\\le y\\le2\\}$。</p>
+                <p><strong>解</strong>：① 令 $xy=1$，用双曲线 $y=\\frac1x$ 把正方形拆成 $D_1$（$xy\\ge1$）与 $D_2$（$xy\\le1$）两块（正方形被双曲线斜捅成两块，需拆）。</p>
+                <p>② 去绝对值：$D_1$ 内 $xy-1\\ge0$ 保留 $xy-1$；$D_2$ 内 $xy-1<0$ 取 $1-xy$。用区域可加性加总：</p>
+                <p>$$\\iint_D|xy-1|=\\iint_{D_1}(xy-1)+\\iint_{D_2}(1-xy)=\\frac32+\\ln2$$</p>
+                <blockquote>难度达压轴水平：核心还是「去绝对值 + 拆区域 + 加总」。此类题的分界线就是 $xy=1$ 双曲线。</blockquote>
+            `)}
+
+            ${groupTitle('fa-fire', '用圆、偶倍奇零、点火公式、¼圆面积简化', '#FFD60A')}
+            <div class="section-desc">二重积分的<strong>本质还是定积分</strong>，所以定积分攒下的技巧一个都不用丢：逢对称用<strong>偶倍奇零</strong>；逢三角用<strong>点火公式</strong> $\\int_0^{\\frac\\pi2}\\sin^nx\\,dx=\\int_0^{\\frac\\pi2}\\cos^nx\\,dx$；逢根号圆直接用<strong>$\\frac14$ 圆面积</strong> $\\int_0^a\\sqrt{a^2-x^2}\\,dx=\\frac{\\pi a^2}{4}$。</div>
+            ${exampleBox('例题（专升本难度 · ¼圆面积）', `
+                <p>计算 $\\iint_D \\sqrt{1-x^2}\\,dx\\,dy$，$D:\\{0\\le x\\le1,\\ 0\\le y\\le1\\}$。</p>
+                <p><strong>解</strong>：</p>
+                <p>$$\\iint_D\\sqrt{1-x^2}\\,dx\\,dy=\\int_0^1\\Big(\\int_0^1 dy\\Big)\\sqrt{1-x^2}\\,dx=\\int_0^1\\sqrt{1-x^2}\\,dx=\\frac\\pi4$$</p>
+                <blockquote>$\\int_0^1\\sqrt{1-x^2}dx$ 正是第一象限 $\\frac14$ 单位圆面积 $=\\frac\\pi4$，直接写答案，不用去换元。</blockquote>
+            `)}
+        </div>
+    `;
+
+    // === 交换次序 ===
+    const swapBody = `
+        <div class="detail-section" id="di-swap">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-right-left"></i> 交换积分次序</div>
+            <div class="section-desc">有时按给定次序积分很麻烦甚至积不出来，那就<strong>换一种次序</strong>。三步：① <strong>画图</strong>——由原上下限复原出积分区域 $D$；② <strong>找区域</strong>——只有符合原上下限范围的点才是区域里的点（一坨或两坨都可能）；③ <strong>换次序</strong>——X 型 ↔ Y 型互换，把图形「换一个角度看」。</div>
+
+            ${groupTitle('fa-sort', '题型 1：上下限确定的（一坨积分）', '#0A84FF')}
+            ${exampleBox('例题（专升本难度 · 交换次序）', `
+                <p>交换 $I=\\int_0^1 dx\\int_{\\sqrt{x}}^1 f(x,y)\\,dy$ 的积分次序。</p>
+                <p><strong>解</strong>：① 画图：原积分 $x:0\\to1,\\ y:\\sqrt{x}\\to1$，区域由 $y=\\sqrt{x}$、$y=1$、$x=0$ 围成。</p>
+                <p>② 换序看：$y$ 从 $0\\to1$，固定 $y$，$x$ 从 $0$ 到 $x=y^2$（由 $y=\\sqrt{x}$ 反解）：</p>
+                <p>$$I=\\int_0^1 dy\\int_0^{y^2}f(x,y)\\,dx$$</p>
+            `)}
+
+            ${groupTitle('fa-split-cells', '题型 2：上下限含变量的（拆成两坨）', '#FF9F0A')}
+            ${exampleBox('例题（专升本难度 · 两坨积分交换）', `
+                <p>交换 $I=\\int_0^1 dx\\int_x^{2-x} f(x,y)\\,dy$ 的积分次序。</p>
+                <p><strong>解</strong>：① 画图：$0\\le x\\le1$，$x\\le y\\le2-x$；两边界 $y=x$ 与 $y=2-x$ 交于 $(1,1)$；区域为三角形 $(0,0),(1,1),(0,2)$。</p>
+                <p>② 换序要<strong>拆成两坨</strong>：$0\\le y\\le2$，但 $x$ 的左右边界要按 $y$ 分段：$0\\le y\\le1$ 时 $x:0\\to y$（由 $y=x$）；$1\\le y\\le2$ 时 $x:0\\to 2-y$（由 $y=2-x$）。</p>
+                <p>$$I=\\int_0^1 dy\\int_0^y f\\,dx+\\int_1^2 dy\\int_0^{2-y}f\\,dx$$</p>
+                <blockquote>关键：<strong>一条边界线在两个区域的分界点（拐点）处要「分段反解」</strong>。画图后盯住交点 $(1,1)$，就知道要在 $y=1$ 处拆。</blockquote>
+            `)}
+
+            ${groupTitle('fa-ban', '题型 3：只能固定顺序（积不出来的函数）', '#FF3B30')}
+            <div class="section-desc">有些被积函数<strong>没有初等原函数</strong>（积不出来），但只要<strong>交换次序</strong>，就能把积不出来的那个变量放到「后积」的位置（当成常数被带出去）。<strong>规律：哪个变量单独出现在「积不出来」的函数里，就先积另一个变量。</strong></div>
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <table style="width:100%;font-size:0.9rem;">
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">只能看作 X 型（先积 $y$，含 $x$ 的留最后）</td><td style="padding:0.3rem 0;">$e^{x^2},\\ e^{-x^2},\\ \\dfrac{\\sin x}{x},\\ \\dfrac{\\cos x}{x},\\ \\dfrac{\\arctan x}{x},\\ \\sin x^2,\\ \\cos x^2$</td></tr>
+                        <tr><td style="padding:0.3rem 0;">只能看作 Y 型（先积 $x$，含 $y$ 的留最后）</td><td style="padding:0.3rem 0;">$e^{y^2},\\ e^{-y^2},\\ \\dfrac{\\sin y}{y},\\ \\dfrac{\\cos y}{y},\\ \\dfrac{\\arctan y}{y},\\ \\sin y^2,\\ \\cos y^2$</td></tr>
+                    </table>
+                </div>
+            </div>
+            ${exampleBox('专升本经典（交换次序救出生天）', `
+                <p>计算 $I=\\int_0^1 dx\\int_x^1 e^{-y^2}\\,dy$。</p>
+                <p><strong>解</strong>：① 被积函数只含 $y$（$e^{-y^2}$ 积不出来）→ 应该<strong>先积 $x$（Y 型）</strong>，把 $e^{-y^2}$ 留到外层当常数。</p>
+                <p>② 画图：区域 $0\\le x\\le1$，$x\\le y\\le1$（三角形：直线 $y=x$ 与 $y=1$ 围成）。换 Y 型：</p>
+                <p>$$I=\\int_0^1 dy\\int_0^y e^{-y^2}\\,dx=\\int_0^1 e^{-y^2}\\cdot y\\,dy$$</p>
+                <p>③ 凑微分（内层 $\\int_0^y dx=y$）：</p>
+                <p>$$I=\\int_0^1 y\\,e^{-y^2}dy=-\\frac12 e^{-y^2}\\Big|_0^1=\\frac12\\Big(1-\\frac1e\\Big)$$</p>
+                <blockquote>专升本/考研必考「交换次序」代表作。看见 $e^{-y^2}$、$\\frac{\\sin y}{y}$ 这一类，第一反应就是「换次序，让难函数当常数被带出去」。</blockquote>
+            `)}
+        </div>
+    `;
+
+    // === 对称性 ===
+    const symBody = `
+        <div class="detail-section" id="di-sym">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-arrows-to-dot"></i> 普通对称性（奇偶性）</div>
+            <div class="section-desc">一元定积分有「偶倍奇零」$\\int_{-a}^a$（偶 2 倍、奇 0）；二重积分把它<strong>推广到平面区域</strong>上——<strong>区域关于哪条轴对称，就看被积函数对哪个变量是奇是偶</strong>。<strong>口诀：对轴的那一变量，偶数翻倍、奇数归零。</strong></div>
+
+            ${groupTitle('fa-clone', '规则（普通对称性）', '#FF3B30')}
+            <div class="formula-grid">
+                ${formulaCard('对1', '关于 y 轴对称', '$$f(-x,y)=f(x,y)\\Rightarrow\\iint_D f=2\\iint_{D_{\\text{右}}}f;\\quad f(-x,y)=-f(x,y)\\Rightarrow\\iint_D f=0$$', '左右对称，看对 x 的奇偶：偶翻倍、奇归零', '#FF3B30')}
+                ${formulaCard('对2', '关于 x 轴对称', '$$f(x,-y)=f(x,y)\\Rightarrow\\iint_D f=2\\iint_{D_{\\text{上}}}f;\\quad f(x,-y)=-f(x,y)\\Rightarrow\\iint_D f=0$$', '上下对称，看对 y 的奇偶：偶翻倍、奇归零', '#0A84FF')}
+                ${formulaCard('对3', '两轴都对称', '$$f\\ \\text{对 }x,y\\ \\text{都为偶}\\Rightarrow\\iint_D f=4\\iint_{D_{I}}f;\\quad \\text{对某变量为奇}\\Rightarrow 0$$', '圆 / 以原点为中心矩形：4 倍第一象限', '#6fae87')}
+            </div>
+            ${memoryBox('口诀', '先看区域对称轴，再看被积函数奇偶；对轴的那一变量：<strong>偶数翻倍、奇数归零</strong>。看到区域对称、被积函数「单独一个变量」或「含奇数次那个变量」时，别急着算——先想对称性，多数直接归零。')}
+            ${exampleBox('例题（专升本难度 · 对称性）', `
+                <p>设 $D:\\ x^2+y^2\\le1$，求 $\\iint_D\\left(x+xy^2\\right)dx\\,dy$。</p>
+                <p><strong>解</strong>：① 区域是单位圆，关于 $x$ 轴、$y$ 轴都对称。</p>
+                <p>② 拆开两项分别看：</p>
+                <p>$$\\iint_D x\\,dx\\,dy=0 \\quad(\\text{对 }y\\text{ 轴为奇函数});\\qquad \\iint_D xy^2\\,dx\\,dy=0 \\quad(\\text{对 }x\\text{ 为奇})$$</p>
+                <p class="ex-answer">$$\\iint_D\\left(x+xy^2\\right)dx\\,dy=0+0=0$$</p>
+                <blockquote>这是定积分「偶倍奇零」在二重积分里的二维版：区域对称 + 被积函数含奇数次该变量 → 直接归零。</blockquote>
+            `)}
+        </div>
+    `;
+
+    // === 极坐标 ===
+    const polBody = `
+        <div class="detail-section" id="di-pol">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-circle-dot"></i> 极坐标系中的计算</div>
+            <div class="section-desc">二重积分不只靠直角坐标，还能用<strong>极坐标</strong>（本质是换元）。遇到<strong>圆 / 圆环 / 扇形</strong>和<strong>被积函数含 $x^2+y^2$</strong> 时，极坐标往往一步出结果。核心转换式一个都不能漏，尤其 $dx\\,dy=r\\,dr\\,d\\theta$ 里的 $r$。</div>
+
+            ${groupTitle('fa-retweet', '转换三件套（必背）', '#6fae87')}
+            <div class="formula-grid">
+                ${formulaCard('极1', '直角 ⟶ 极坐标', '$$x=r\\cos\\theta,\\qquad y=r\\sin\\theta,\\qquad x^2+y^2=r^2$$', '三个等式，圆相关就换', '#6fae87')}
+                ${formulaCard('极2', '面积元', '$$dx\\,dy=r\\,dr\\,d\\theta$$', 'rdr 不分家，换元必带 r（最容易漏 r）', '#FF3B30')}
+                ${formulaCard('极3', '极坐标二重积分形式', '$$\\iint_D f\\,dx\\,dy=\\int_\\alpha^\\beta d\\theta\\int_{r_1(\\theta)}^{r_2(\\theta)} f\\big(r\\cos\\theta,r\\sin\\theta\\big)\\,r\\,dr$$', '专升本 θ 前 r 后；先积 r，θ 当常数', '#0A84FF')}
+            </div>
+            ${memoryBox('极坐标换元三连', '① 根据题干<strong>画图</strong>，判断是否圆相关；② <strong>定限</strong>：$\\theta$ 从几条射线到几条，$r$ 从内侧 $r_1(\\theta)$ 到外侧 $r_2(\\theta)$；③ <strong>套公式</strong>：$x=r\\cos\\theta,\\ y=r\\sin\\theta$ 代入，$dx\\,dy\\to r\\,dr\\,d\\theta$。')}
+
+            ${groupTitle('fa-compress', '例题 1：直角转极坐标（专升本难度）', '#6fae87')}
+            ${exampleBox('例题（专升本难度 · 极坐标）', `
+                <p>计算 $\\iint_D (x^2+y^2)\\,dx\\,dy$，其中 $D:\\ x^2+y^2\\le4$。</p>
+                <p><strong>解</strong>：① 区域是圆、被积含 $x^2+y^2$ → 用极坐标。</p>
+                <p>② 极径 $r$：$0\\to2$；极角 $\\theta$：$0\\to2\\pi$（整圆）。</p>
+                <p>$$\\iint_D(x^2+y^2)dx\\,dy=\\int_0^{2\\pi}d\\theta\\int_0^2 r^2\\cdot r\\,dr=\\int_0^{2\\pi}d\\theta\\,\\frac{r^4}{4}\\Big|_0^2=2\\pi\\cdot4=8\\pi$$</p>
+            `)}
+
+            ${groupTitle('fa-expand', '例题 2：极坐标转直角（专升本难度）', '#0A84FF')}
+            ${exampleBox('例题（专升本难度 · 极坐标转直角）', `
+                <p>把 $\\int_0^{\\frac\\pi2}d\\theta\\int_0^1 f\\big(r\\cos\\theta,r\\sin\\theta\\big)r\\,dr$ 化为直角坐标下的累次积分。</p>
+                <p><strong>解</strong>：① 这是第一象限「四分之一圆」：$\\theta:0\\to\\frac\\pi2$，$r:0\\to1$ ⟹ 直角区域 $0\\le x\\le1$，$0\\le y\\le\\sqrt{1-x^2}$。</p>
+                <p>$$\\text{原式}=\\int_0^1 dx\\int_0^{\\sqrt{1-x^2}}f(x,y)\\,dy$$</p>
+                <blockquote>极坐标能转直角、直角也能转极坐标，互转关键都在「画图定限」。</blockquote>
+            `)}
+
+            ${groupTitle('fa-circle', '圆的不同形式（化标准形 + sin/cos 上下限）', '#FF9F0A')}
+            <div class="section-desc">极坐标最多见的区域是圆，但圆有各种「变体」：上圆、右圆、扇形、环形。<strong>上下限出现 $\\sin\\theta,\\cos\\theta$，说明圆的方程不是以原点为圆心</strong>（如 $x^2+y^2=2y$）——要先配方化成标准形再定限。破题：$x^2+y^2=2y\\ \\Rightarrow\\ x^2+(y-1)^2=1$；代极坐标 $r^2=2r\\sin\\theta\\Rightarrow r=2\\sin\\theta$（此时 $r$ 上限是函数不再常数，$\\theta\\in[0,\\pi]$）。</div>
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <table style="width:100%;font-size:0.9rem;">
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">形态</td><td style="padding:0.3rem 0;color:var(--text-muted);">直角方程示例</td><td style="padding:0.3rem 0;color:var(--text-muted);">极坐标定限</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">整圆</td><td style="padding:0.3rem 0;">$x^2+y^2\\le a^2$</td><td style="padding:0.3rem 0;">$0\\le r\\le a,\\ 0\\le\\theta\\le2\\pi$</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">上圆</td><td style="padding:0.3rem 0;">$y\\ge0$</td><td style="padding:0.3rem 0;">$0\\le r\\le a,\\ 0\\le\\theta\\le\\pi$</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">右圆</td><td style="padding:0.3rem 0;">$x\\ge0$</td><td style="padding:0.3rem 0;">$0\\le r\\le a,\\ -\\frac\\pi2\\le\\theta\\le\\frac\\pi2$</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">扇形</td><td style="padding:0.3rem 0;">极角受限</td><td style="padding:0.3rem 0;">$\\theta_1\\le\\theta\\le\\theta_2,\\ 0\\le r\\le a$</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">环形</td><td style="padding:0.3rem 0;">$a^2\\le x^2+y^2\\le b^2$</td><td style="padding:0.3rem 0;">$a\\le r\\le b,\\ 0\\le\\theta\\le2\\pi$</td></tr>
+                        <tr><td style="padding:0.3rem 0;">偏心圆</td><td style="padding:0.3rem 0;">$x^2+y^2=2y,\\ 2x$ 等</td><td style="padding:0.3rem 0;">$r=2\\sin\\theta,\\ 2\\cos\\theta$（先配方化标准形）</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="knowledge-map">
+                <svg viewBox="0 0 720 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:720px;margin:0 auto;display:block;">
+                    <g transform="translate(50,60)">
+                        <circle r="40" fill="rgba(160,108,213,0.15)" stroke="${C}" stroke-width="2"/>
+                        <text y="-52" text-anchor="middle" fill="var(--text-muted)" font-size="11">整圆</text>
+                    </g>
+                    <g transform="translate(190,60)">
+                        <path d="M0,-40 A40,40 0 0 1 0,40 Z" fill="rgba(255,159,10,0.15)" stroke="#FF9F0A" stroke-width="2"/>
+                        <line x1="0" y1="-40" x2="0" y2="40" stroke="#FF9F0A" stroke-width="2"/>
+                        <text y="-52" text-anchor="middle" fill="var(--text-muted)" font-size="11">右圆</text>
+                    </g>
+                    <g transform="translate(330,60)">
+                        <path d="M0,0 L0,-40 A40,40 0 0 1 40,0 Z" fill="rgba(10,132,255,0.15)" stroke="#0A84FF" stroke-width="2"/>
+                        <line x1="0" y1="0" x2="0" y2="-40" stroke="#0A84FF" stroke-width="2"/>
+                        <line x1="0" y1="0" x2="40" y2="0" stroke="#0A84FF" stroke-width="2"/>
+                        <text y="-52" text-anchor="middle" fill="var(--text-muted)" font-size="11">扇形</text>
+                    </g>
+                    <g transform="translate(470,60)">
+                        <circle r="48" fill="none" stroke="#FF3B30" stroke-width="2"/>
+                        <circle r="22" fill="none" stroke="#FF3B30" stroke-width="2"/>
+                        <line y1="-48" y2="48" stroke="var(--text-muted)" stroke-width="0.5" stroke-dasharray="2 2"/>
+                        <text y="-60" text-anchor="middle" fill="var(--text-muted)" font-size="11">环形</text>
+                    </g>
+                    <g transform="translate(640,60)">
+                        <circle cx="0" cy="-14" r="40" fill="rgba(48,209,88,0.15)" stroke="#30D158" stroke-width="2"/>
+                        <text y="-62" text-anchor="middle" fill="var(--text-muted)" font-size="11">偏心圆</text>
+                    </g>
+                </svg>
+            </div>
+
+            ${groupTitle('fa-shield', '真题（环形 · 2008 河南专升本 第 41 题）', '#0A84FF')}
+            ${exampleBox('专升本真题（2008 年河南专升本 · 第 41 题）', `
+                <p>直角坐标系下二重积分 $\\iint_D f(x,y)\\,dx\\,dy$（其中 $D$ 为环域 $\\{1\\le x^2+y^2\\le9\\}$）化为极坐标形式为____。</p>
+                <p><strong>解</strong>：环域 $1\\le r\\le3$，整圈 $\\theta:0\\to2\\pi$：</p>
+                <p>$$\\iint_D f\\,dx\\,dy=\\int_0^{2\\pi}d\\theta\\int_1^3 f\\big(r\\cos\\theta,\\ r\\sin\\theta\\big)\\,r\\,dr$$</p>
+                <p class="ex-answer">答案：$\\int_0^{2\\pi}d\\theta\\int_1^3 f\\big(r\\cos\\theta,r\\sin\\theta\\big)r\\,dr$。</p>
+            `)}
+
+            ${exampleBox('例题（专升本难度 · 偏心圆）', `
+                <p>计算 $\\iint_D x\\,dx\\,dy$，其中 $D:\\ x^2+y^2\\le2y$。</p>
+                <p><strong>解</strong>：① 配方：$x^2+(y-1)^2\\le1$——偏心圆，圆心 $(0,1)$、半径 $1$。</p>
+                <p>② 极坐标：$x^2+y^2=2y\\Rightarrow r^2=2r\\sin\\theta\\Rightarrow r=2\\sin\\theta$（$0\\le\\theta\\le\\pi$）。</p>
+                <p>$$\\iint_D x\\,dx\\,dy=\\int_0^\\pi d\\theta\\int_0^{2\\sin\\theta}r\\cos\\theta\\cdot r\\,dr=\\int_0^\\pi\\cos\\theta\\,\\frac{r^3}{3}\\Big|_0^{2\\sin\\theta}d\\theta=\\frac83\\int_0^\\pi\\cos\\theta\\sin^3\\theta\\,d\\theta=0$$</p>
+                <blockquote>$\\cos\\theta\\sin^3\\theta$ 在 $[0,\\pi]$ 上关于 $\\theta=\\frac\\pi2$ 对称、为奇，故为 $0$；几何上偏心圆关于 $y$ 轴对称，形心横坐标 $x=0$，故成立。<strong>看见圆的方程里出现单独的 $y$（或 $x$）项，一定是偏心圆，先配方再用 $r=2\\sin\\theta$（或 $2\\cos\\theta$）。</strong></blockquote>
+            `)}
+
+            ${groupTitle('fa-volcano', '含绝对值的极坐标（冲刺 150 看）', '#FF3B30')}
+            <div class="section-desc">满分级压轴内容，一般掌握上式即可；冲 150 再看这里。<strong>极坐标里拆绝对值：先找 $r=$ 常数分界线（$x^2+y^2=r^2$），再用区域可加性拆环域。</strong></div>
+            ${exampleBox('冲刺例题（极坐标绝对值）', `
+                <p>计算 $\\iint_D |x^2+y^2-1|\\,dx\\,dy$，其中 $D:\\ x^2+y^2\\le4$。</p>
+                <p><strong>解</strong>：① 令 $x^2+y^2-1=0$ 得分界线 $x^2+y^2=1$（$r=1$），把大圆拆成内圆（$r\\le1$）与外环（$1\\le r\\le2$）两块。</p>
+                <p>② 内：$|r^2-1|=1-r^2\\ (r\\le1)$；外：$|r^2-1|=r^2-1\\ (r\\ge1)$。</p>
+                <p>$$\\iint_D|x^2+y^2-1|=\\int_0^{2\\pi}d\\theta\\int_0^1(1-r^2)r\\,dr+\\int_0^{2\\pi}d\\theta\\int_1^2(r^2-1)r\\,dr$$</p>
+                <p>$$=2\\pi\\Big[\\frac12-\\frac14\\Big]+2\\pi\\Big[\\Big(4-2\\Big)-\\Big(\\frac14-\\frac12\\Big)\\Big]=2\\pi\\cdot\\frac14+2\\pi\\cdot\\frac{25}{12}=\\frac\\pi2+\\frac{25\\pi}{6}=\\frac{14\\pi}{3}$$</p>
+                <blockquote>极坐标里的绝对值，分界线就是「等 $r$ 的圆」。拆成内圆 + 外环各自去绝对值再算，用的还是<strong>区域可加性</strong>——和直角里拆区域同道理，只是分界线从直线变成了圆。</blockquote>
+            `)}
+        </div>
+    `;
+
+    // === 速查总表 ===
+    const summaryBody = `
+        <div class="detail-section" id="di-summary">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-table-list"></i> 速查总表与记忆口诀</div>
+            <div class="formula-card" style="--card-accent:${C};margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <table style="width:100%;font-size:0.88rem;">
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">知识点</td><td style="padding:0.3rem 0;color:var(--text-muted);">核心方法</td><td style="padding:0.3rem 0;color:var(--text-muted);">关键口诀/易错点</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">二重积分含义</td><td style="padding:0.3rem 0;">$\\iint_D f\\,d\\sigma$＝曲顶柱体体积</td><td style="padding:0.3rem 0;">定积分算面积，二重积分算体积</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">性质</td><td style="padding:0.3rem 0;">线性 / 拆区域 / 保号 / 估值 / 中值</td><td style="padding:0.3rem 0;">拆区域是去绝对值、拆分段的依据</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">被积为 1</td><td style="padding:0.3rem 0;">$\\iint_D1\\,dx\\,dy=S$</td><td style="padding:0.3rem 0;">求面积就用它</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">X 型</td><td style="padding:0.3rem 0;">$\\int_a^b dx\\int_{\\varphi_1(x)}^{\\varphi_2(x)}f\\,dy$</td><td style="padding:0.3rem 0;">竖线上下为 y 限，先积 y</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">Y 型</td><td style="padding:0.3rem 0;">$\\int_\\alpha^\\beta dy\\int_{\\psi_1(y)}^{\\psi_2(y)}f\\,dx$</td><td style="padding:0.3rem 0;">横线左右为 x 限，先积 x</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">画图求面积</td><td style="padding:0.3rem 0;">认形→求交点→定限→被积为 1</td><td style="padding:0.3rem 0;">交点是新上下限，图形不牢画不出</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">拆绝对值</td><td style="padding:0.3rem 0;">令 $|f|=0$ 画分界线，区域可加性加总</td><td style="padding:0.3rem 0;">分界线内减号、外加号</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">定积分技巧</td><td style="padding:0.3rem 0;">偶倍奇零 / 点火 / $\\frac14$ 圆面积</td><td style="padding:0.3rem 0;">二重积分本质还是定积分，技巧照搬</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">交换次序</td><td style="padding:0.3rem 0;">画图→找区域（一坨或两坨）→换序</td><td style="padding:0.3rem 0;">边界拐点处拆成两坨</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">积不出来的函数</td><td style="padding:0.3rem 0;">只含 x 走 X 型；只含 y 走 Y 型</td><td style="padding:0.3rem 0;">$e^{x^2},\\frac{\\sin x}{x}$ 等，换序让它当常数</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">普通对称性</td><td style="padding:0.3rem 0;">对称轴 ↔ 变量奇偶</td><td style="padding:0.3rem 0;">偶数翻倍、奇数归零</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">极坐标三件套</td><td style="padding:0.3rem 0;">$x=r\\cos\\theta,\\ y=r\\sin\\theta,\\ x^2+y^2=r^2$</td><td style="padding:0.3rem 0;">$dx\\,dy=r\\,dr\\,d\\theta$，r 千万别漏</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">极坐标形式</td><td style="padding:0.3rem 0;">$\\int_\\alpha^\\beta d\\theta\\int_{r_1}^{r_2}f\\,r\\,dr$</td><td style="padding:0.3rem 0;">专升本 θ 前 r 后</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">圆的形式</td><td style="padding:0.3rem 0;">整圆/上圆/右圆/扇形/环形/偏心圆</td><td style="padding:0.3rem 0;">偏心圆先配方，$r=2\\sin\\theta,2\\cos\\theta$</td></tr>
+                        <tr><td style="padding:0.3rem 0;">极坐标绝对值</td><td style="padding:0.3rem 0;">$r=$ 常数分界线，拆内圆+外环</td><td style="padding:0.3rem 0;">冲刺用，分界线是圆</td></tr>
+                    </table>
+                </div>
+            </div>
+            ${memoryBox('核心记忆口诀汇总', '① 升维总纲：一元定积分算面积，二重积分算体积；一切每一步还是定积分。<br>② 性质：会拆区域的「区域可加性」最值钱。<br>③ X/Y 型：谁穿线先积谁，最后积的变量上下限是常数。<br>④ 画图：认形(指数/对数/直线/二次)→求交点→定上下限；图形不牢题做不了。<br>⑤ 求面积：令被积函数为 1，$S=\\iint_D1\\,dx\\,dy$。<br>⑥ 拆绝对值：$|f|=0$ 画分界线，分界线一内一外加(区域可加性)。<br>⑦ 定积分技巧：偶倍奇零、点火公式、$\\frac14$ 圆面积——照样秒算。<br>⑧ 交换次序：画图找区域，拐点处拆两坨，换一种次序再来一遍。<br>⑨ 积不出来的函数：被积只含 $x$ 走 X 型，只含 $y$ 走 Y 型——让难函数当常数被带出去。<br>⑩ 普通对称性：对轴的那个变量，偶数翻倍、奇数归零。<br>⑪ 极坐标三件套：$x=r\\cos\\theta,\\ y=r\\sin\\theta,\\ x^2+y^2=r^2$。<br>⑫ 极坐标面积元：$dx\\,dy=r\\,dr\\,d\\theta$——<strong>rdr 不分家，换元必带 r</strong>。<br>⑬ 定限顺序：$\\theta$ 前 $r$ 后；$r$ 从内侧曲线到外侧曲线。<br>⑭ 偏心圆：先配方化标准形，$r=2\\sin\\theta$（或 $2\\cos\\theta$）。<br>⑮ 极坐标绝对值(冲刺)：$r=$ 常数画分界线，拆内圆+外环。')}
+        </div>
+    `;
+
+    return { title: '多元函数积分学（二重积分）详情', color: C, tabs, body: mapBody + defBody + rectBody + swapBody + symBody + polBody + summaryBody };
+}
+
 // ---------- 行列式详情 ----------
 function buildLinearDetail() {
     const C = '#5AC8FA';
@@ -5755,6 +6331,7 @@ function buildDetailContent(type) {
         case 'trigonometric': return buildTrigonometricDetail();
         case 'equation': return buildEquationDetail();
         case 'multivar': return buildMultivarDetail();
+        case 'doubleInt': return buildDoubleIntDetail();
         case 'linear': return buildLinearDetail();
         case 'matrix': return buildMatrixDetail();
     }
