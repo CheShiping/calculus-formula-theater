@@ -1033,6 +1033,7 @@
             --path-amber: #c9ab74;
             --path-coral: #cd9b94;
             --path-teal: #7fb8a8;
+            --path-rose: #c497a3;
             width: 100%; min-height: 100vh; padding: 2rem 3.4rem 2.5rem;
             color: var(--path-ink);
             background:
@@ -1307,15 +1308,15 @@
     <main class="path-home" aria-label="高数知识路径首页">
         <header class="path-nav">
             <span class="path-brand">四川专升本高数</span>
-            <span class="path-nav-copy">KNOWLEDGE PATH · 9 MODULES</span>
+            <span class="path-nav-copy">KNOWLEDGE PATH · 10 MODULES</span>
         </header>
         <section class="path-intro" aria-labelledby="path-title">
             <div>
-                <p class="path-eyebrow">KNOWLEDGE PATH · 9 MODULES</p>
+                <p class="path-eyebrow">KNOWLEDGE PATH · 10 MODULES</p>
                 <h1 id="path-title">从地基开始，<br>每一步都有来处。</h1>
                 <p>公式不是散点。沿着知识路径复习，可以看到章节之间如何相互支撑；需要巩固时，随时进入你原来的公式详情和简洁翻卡。</p>
             </div>
-            <p class="path-count">283 FORMULAS<br>按章节建立联动记忆</p>
+            <p class="path-count">312 FORMULAS<br>按章节建立联动记忆</p>
         </section>
         <section class="learning-path" aria-label="高数知识路径">
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-blue)" onclick="enterDetail('function')"><h2>函数 · 极限 · 连续</h2><p>定义域、极限方法、连续与间断点，是后续变化的坐标系。</p><span class="path-meta">22 条内容 · 先修模块</span></button></article>
@@ -1325,6 +1326,7 @@
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-amber)" onclick="enterDetail('equation')"><h2>微分方程</h2><p>将导数与积分放进同一道题，进入一阶与二阶方程训练。</p><span class="path-meta">9 条公式 · 综合应用</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-teal)" onclick="enterDetail('multivar')"><h2>多元函数微分学</h2><p>把一元函数微分学的每一把刀都搬进多维空间：偏导、全微分、链式与隐函数、无条件极值。</p><span class="path-meta">多元模块 · 全新章节</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:var(--path-violet)" onclick="enterDetail('doubleInt')"><h2>多元函数积分学（二重积分）</h2><p>定积分的升维：一元算面积，二重算体积。直角坐标(X/Y型)、交换次序、对称性、极坐标，四招解二重积分。</p><span class="path-meta">多元模块 · 体积工具</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:#E91E63" onclick="enterDetail('series')"><h2>无穷级数</h2><p>从有限项求和走向无限：常数项级数判敛（定义/性质/三大基准/莱布尼茨/三大判别法/绝对与条件收敛）+ 幂级数（收敛半径与收敛域、展开、和函数）。</p><span class="path-meta">无穷模块 · 判敛与求和</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:#759ba1" onclick="enterDetail('linear')"><h2>行列式</h2><p>计算、性质与展开，是线性代数部分的基础工具。</p><span class="path-meta">4 个专题 · 线性代数</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:#8b98ba" onclick="enterDetail('matrix')"><h2>矩阵</h2><p>特殊矩阵、运算、逆与伴随、初等变换与秩，是线性代数的核心对象。</p><span class="path-meta">5 个专题 · 线性代数</span></button></article>
         </section>
@@ -1830,25 +1832,38 @@ function switchTab(tabId, btn) {
 //  详情内容构建器
 // ============================================================
 
+function escHtml(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// 转义非白名单 HTML 标签的 <，保留 <p>/<strong>/<br> 等允许的标签
+function escHtmlText(s) {
+    const allowed = ['p', 'strong', 'br', 'em', 'b', 'i', 'u', 'sub', 'sup', 'span', 'div', 'a', 'ul', 'ol', 'li', 'table', 'tr', 'td', 'th'];
+    return String(s).replace(/<(\/?)([a-zA-Z][a-zA-Z0-9-]*)/g, (match, slash, tag) => {
+        if (allowed.includes(tag.toLowerCase())) return match;
+        return '&lt;' + match.slice(1);
+    });
+}
+
 function formulaCard(num, label, formula, note, color) {
     return `<div class="formula-card" style="--card-accent:${color};">
         <span class="formula-num">${num}</span>
         <div class="formula-label" style="color:${color};">${label}</div>
-        <div class="formula-block" style="border:none;background:none;padding:0;">${formula}</div>
-        ${note ? `<div class="formula-note">${note}</div>` : ''}
+        <div class="formula-block" style="border:none;background:none;padding:0;">${escHtml(formula)}</div>
+        ${note ? `<div class="formula-note">${escHtml(note)}</div>` : ''}
     </div>`;
 }
 
 function groupTitle(icon, text, color) {
-    return `<div class="group-title" style="--group-color:${color};"><i class="fa-solid ${icon}"></i> ${text}</div>`;
+    return `<div class="group-title" style="--group-color:${color};"><i class="fa-solid ${icon}"></i> ${escHtml(text)}</div>`;
 }
 
 function memoryBox(title, text) {
     return `<div class="memory-box">
         <i class="fa-solid fa-lightbulb"></i>
         <div class="memory-box-content">
-            <div class="memory-box-title">${title}</div>
-            <div class="memory-box-text">${text}</div>
+            <div class="memory-box-title">${escHtml(title)}</div>
+            <div class="memory-box-text">${escHtmlText(text)}</div>
         </div>
     </div>`;
 }
@@ -1872,13 +1887,13 @@ function exampleBox(title, body) {
     return `<div class="ex-flip-card" onclick="this.classList.toggle('flipped')">
         <div class="ex-flip-inner">
             <div class="ex-flip-face ex-flip-front">
-                <div class="ex-title"><i class="fa-solid fa-pen-to-square"></i> ${title}</div>
-                <div class="ex-content">${question}</div>
+                <div class="ex-title"><i class="fa-solid fa-pen-to-square"></i> ${escHtml(title)}</div>
+                <div class="ex-content">${escHtmlText(question)}</div>
                 <div class="ex-flip-hint">点击翻转查看解析 →</div>
             </div>
             <div class="ex-flip-face ex-flip-back">
                 <div class="ex-title"><i class="fa-solid fa-lightbulb"></i> 解析</div>
-                <div class="ex-content">${solution}</div>
+                <div class="ex-content">${escHtmlText(solution)}</div>
                 <div class="ex-flip-hint">← 点击返回题目</div>
             </div>
         </div>
@@ -4825,6 +4840,473 @@ function buildDoubleIntDetail() {
     return { title: '多元函数积分学（二重积分）详情', color: C, tabs, body: mapBody + defBody + rectBody + swapBody + symBody + polBody + summaryBody };
 }
 
+// ---------- 无穷级数详情 ----------
+function buildSeriesDetail() {
+    const C = '#FF375F';
+    const tabs = `
+        <div class="detail-tab active" style="--tab-color:rgba(217,99,124,0.2);--tab-border:rgba(217,99,124,0.4);" onclick="switchTab('se-map', this)">知识地图</div>
+        <div class="detail-tab" style="--tab-color:rgba(217,99,124,0.2);--tab-border:rgba(217,99,124,0.4);" onclick="switchTab('se-basic', this)">收敛定义与性质</div>
+        <div class="detail-tab" style="--tab-color:rgba(217,99,124,0.2);--tab-border:rgba(217,99,124,0.4);" onclick="switchTab('se-bench', this)">三大基准级数</div>
+        <div class="detail-tab" style="--tab-color:rgba(217,99,124,0.2);--tab-border:rgba(217,99,124,0.4);" onclick="switchTab('se-alt', this)">交错级数·莱布尼茨</div>
+        <div class="detail-tab" style="--tab-color:rgba(217,99,124,0.2);--tab-border:rgba(217,99,124,0.4);" onclick="switchTab('se-pos', this)">正项级数判别法</div>
+        <div class="detail-tab" style="--tab-color:rgba(217,99,124,0.2);--tab-border:rgba(217,99,124,0.4);" onclick="switchTab('se-abs', this)">绝对与条件收敛</div>
+        <div class="detail-tab" style="--tab-color:rgba(217,99,124,0.2);--tab-border:rgba(217,99,124,0.4);" onclick="switchTab('se-domain', this)">幂级数·收敛域</div>
+        <div class="detail-tab" style="--tab-color:rgba(217,99,124,0.2);--tab-border:rgba(217,99,124,0.4);" onclick="switchTab('se-expand', this)">幂级数·展开</div>
+        <div class="detail-tab" style="--tab-color:rgba(217,99,124,0.2);--tab-border:rgba(217,99,124,0.4);" onclick="switchTab('se-sum', this)">幂级数·和函数</div>
+    `;
+
+    // === 知识地图 ===
+    const mapBody = `
+        <div class="detail-section active" id="se-map">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-map-location-dot"></i> 知识地图 · 无穷级数</div>
+            <div class="section-desc">无穷级数把"有限项相加"推广到"无穷多项相加"。核心问题只有两个：<strong>这个无穷和存不存在</strong>（敛散性）与<strong>存在的话等于多少</strong>（求和）。先把常数项级数的判敛方法学透，再用它们去研究幂级数的收敛域、展开与和函数。</div>
+
+            ${groupTitle('fa-sitemap', '知识地图与学习路径', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>无穷级数</strong><br>
+                    ├── 常数项级数（判敛）<br>
+                    │   ├── 定义：部分和 $S_n$ 的极限<br>
+                    │   ├── 五条基本性质（线性/数乘/改有限项/加括号/必要条件）<br>
+                    │   ├── 三大基准级数：等比 · p级数 · 交错p级数<br>
+                    │   ├── 交错级数 → 莱布尼茨判别法<br>
+                    │   ├── 正项级数 → 比较 / 比值 / 根值 判别法<br>
+                    │   └── 任意项级数 → 绝对收敛 / 条件收敛<br>
+                    └── 幂级数（求和与展开）<br>
+                        ├── 收敛半径 R、收敛区间、收敛域<br>
+                        ├── 五大展开式（分式/指数/三角/对数）<br>
+                        └── 和函数（先积后导 / 先导后积）
+                </div>
+            </div>
+            ${memoryBox('一句话记忆', '判敛先看通项极限——≠0 直接发散；=0 再用等价/抓大头/放缩对标四大天王（等比、p级数、交错p、比较）。幂级数先求收敛域，再用逐项求导/积分把它凑成五大展开式，最后还原。')}
+        </div>
+    `;
+
+    // === 收敛定义与性质 ===
+    const basicBody = `
+        <div class="detail-section" id="se-basic">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-infinity"></i> 收敛与发散的定义</div>
+            <div class="section-desc">级数 $\\sum_{n=1}^{\\infty}u_n$ 的敛散性由它的<strong>前 n 项部分和</strong> $S_n$ 的极限决定。</div>
+
+            ${groupTitle('fa-1', '1.1 收敛与发散的定义', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('收1', '收敛定义', '$$\\sum_{n=1}^{\\infty}u_n\\text{ 收敛 }\\iff\\lim_{n\\to\\infty}S_n=S\\text{（有限值）}$$', '先算部分和 S_n=u_1+…+u_n，再令 n→∞ 取极限', '#0A84FF')}
+                ${formulaCard('收2', '发散定义', '$$\\lim_{n\\to\\infty}S_n\\text{ 不存在（含 }\\pm\\infty\\text{）}\\Rightarrow\\sum_{n=1}^{\\infty}u_n\\text{ 发散}$$', '部分和数列极限不存在即为发散', '#0A84FF')}
+            </div>
+            ${memoryBox('判敛第一招', '先求通项极限 $\\lim u_n$：结果 ≠ 0 ⇒ 必发散（秒杀）；结果 = 0 ⇒ 不能判收敛，另谋他法（等价、抓大头、放缩→四大天王）。')}
+
+            ${exampleBox('例题 · 定义法判敛（裂项相消）', `
+                <p>用部分和定义法判断级数 $\\sum_{n=1}^{\\infty}\\dfrac{1}{n(n+1)}$ 的敛散性，若收敛求其和。</p>
+                <p><strong>解</strong>：通项 $\\dfrac{1}{n(n+1)}=\\dfrac{1}{n}-\\dfrac{1}{n+1}$，部分和</p>
+                <p>$$S_n=\\sum_{k=1}^{n}\\left(\\frac{1}{k}-\\frac{1}{k+1}\\right)=1-\\frac{1}{n+1}$$</p>
+                <p>$$\\lim_{n\\to\\infty}S_n=\\lim_{n\\to\\infty}\\left(1-\\frac{1}{n+1}\\right)=1$$</p>
+                <p class="ex-answer">级数收敛，和为 $1$。</p>
+            `)}
+
+            ${groupTitle('fa-list-check', '1.2 级数的五条基本性质', '#30D158')}
+            <div class="formula-grid">
+                ${formulaCard('性1', '线性拆分', '$$\\sum_{n=1}^{\\infty}u_n=S,\\ \\sum_{n=1}^{\\infty}v_n=T\\Rightarrow\\sum_{n=1}^{\\infty}(u_n\\pm v_n)=S\\pm T$$', '收敛±收敛=收敛；收敛±发散=发散；发散±发散=不一定', '#30D158')}
+                ${formulaCard('性2', '数乘', '$$\\sum_{n=1}^{\\infty}u_n=S\\Rightarrow\\sum_{n=1}^{\\infty}ku_n=kS$$', '级数每项乘常数 k，和也乘 k', '#30D158')}
+                ${formulaCard('性3', '改有限项', '$$\\text{增加、减少、改变有限项}\\Rightarrow\\text{敛散性不变}$$', '敛散性不变，但和 S 会变', '#30D158')}
+                ${formulaCard('性4', '加括号', '$$\\text{收敛级数加括号后仍收敛，且和不变}$$', '加括号提高敛散性；加括号收敛≠原级数收敛', '#30D158')}
+                ${formulaCard('性5', '收敛必要条件', '$$\\sum_{n=1}^{\\infty}u_n\\text{ 收敛}\\Rightarrow\\lim_{n\\to\\infty}u_n=0$$', '反之不成立（调和级数反例）；但通项极限≠0 ⇒ 必发散', '#FF3B30')}
+            </div>
+
+            ${groupTitle('fa-pen-to-square', '性质例题（5 道）', '#FF9F0A')}
+            ${exampleBox('性质1 · 线性拆分', `
+                <p>已知 $\\sum_{n=1}^{\\infty}a_n=3$，$\\sum_{n=1}^{\\infty}b_n=-1$，求 $\\sum_{n=1}^{\\infty}(2a_n-5b_n)$ 的和；并判断 $\\sum_{n=1}^{\\infty}(a_n+\\frac1n)$ 的敛散性。</p>
+                <p><strong>解</strong>：$\\sum_{n=1}^{\\infty}(2a_n-5b_n)=2\\sum a_n-5\\sum b_n=2\\times3-5\\times(-1)=11$。</p>
+                <p>$\\sum a_n$ 收敛，$\\sum\\frac1n$（调和级数）发散，收敛±发散=发散 $\\Rightarrow$ $\\sum(a_n+\\frac1n)$ 发散。</p>
+            `)}
+            ${exampleBox('性质2 · 数乘', `
+                <p>设 $\\sum_{n=1}^{\\infty}u_n$ 收敛于 4，求 $\\sum_{n=1}^{\\infty}\\frac32 u_n$ 的和。</p>
+                <p><strong>解</strong>：由数乘性质，和为 $\\frac32\\times4=6$。</p>
+            `)}
+            ${exampleBox('性质3 · 改有限项', `
+                <p>判断 $\\sum_{n=1}^{\\infty}\\frac{1}{n^2}$ 与 $\\sum_{n=100}^{\\infty}\\frac{1}{n^2}$ 敛散性是否相同。</p>
+                <p><strong>解</strong>：去掉前 99 项不改变敛散性。两者都是 $p=2>1$ 的 p 级数，都收敛（和不同）。</p>
+            `)}
+            ${exampleBox('性质4 · 加括号（经典反例）', `
+                <p>举例说明"加括号后收敛"推不出"原级数收敛"。</p>
+                <p><strong>解</strong>：$1-1+1-1+\\cdots$ 的部分和 $1,0,1,0,\\ldots$ 极限不存在 ⇒ 原级数发散。但两两加括号 $(1-1)+(1-1)+\\cdots=0+0+\\cdots$ 收敛到 0。</p>
+                <p class="ex-answer">加括号提高敛散性，反过来不成立。</p>
+            `)}
+            ${exampleBox('性质5 · 必要条件（秒杀发散）', `
+                <p>判断 (1) $\\sum_{n=1}^{\\infty}\\dfrac{2n+1}{3n-1}$；(2) $\\sum_{n=1}^{\\infty}\\sqrt[n]{3}$；(3) $\\sum_{n=1}^{\\infty}\\sin n$ 的敛散性。</p>
+                <p><strong>解</strong>：</p>
+                <p>(1) $\\lim_{n\\to\\infty}\\dfrac{2n+1}{3n-1}=\\dfrac23\\neq0$ ⇒ 发散。</p>
+                <p>(2) $\\lim_{n\\to\\infty}\\sqrt[n]{3}=1\\neq0$ ⇒ 发散。</p>
+                <p>(3) $\\lim_{n\\to\\infty}\\sin n$ 不存在 ⇒ 发散。</p>
+            `)}
+        </div>
+    `;
+
+    // === 三大基准级数 ===
+    const benchBody = `
+        <div class="detail-section" id="se-bench">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-crown"></i> 三大基准级数（四大天王之三）</div>
+            <div class="section-desc">这三类级数是判敛的"标尺"——复杂级数通过等价、抓大头、放缩与它们对比，即可得出结论。</div>
+
+            ${groupTitle('fa-geometric', '1. 等比（几何）级数', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('等1', '等比级数敛散', '$$\\sum_{n=0}^{\\infty}aq^n\\ \\begin{cases}|q|<1\\Rightarrow\\text{收敛，和}=\\dfrac{a}{1-q}\\\\|q|\\geq1\\Rightarrow\\text{发散}\\end{cases}$$', '首项 a，公比 q；|q|<1 才收敛', '#0A84FF')}
+            </div>
+            ${exampleBox('等比级数例题（四川2025真题精选·第九套第8题变形）', `
+                <p>判断 $\\sum_{n=1}^{\\infty}\\dfrac{2^n}{5^n}$ 的敛散性，若收敛求其和。</p>
+                <p><strong>解</strong>：$\\dfrac{2^n}{5^n}=\\left(\\dfrac25\\right)^n$，公比 $q=\\dfrac25$，$|q|<1$ ⇒ 收敛。</p>
+                <p>首项 $=\\dfrac25$，和 $S=\\dfrac{\\frac25}{1-\\frac25}=\\dfrac{\\frac25}{\\frac35}=\\dfrac23$。</p>
+            `)}
+
+            ${groupTitle('fa-chart-column', '2. p 级数', '#30D158')}
+            <div class="formula-grid">
+                ${formulaCard('p1', 'p级数敛散', '$$\\sum_{n=1}^{\\infty}\\frac{1}{n^p}\\ \\begin{cases}p>1\\Rightarrow\\text{收敛}\\\\p\\leq1\\Rightarrow\\text{发散}\\end{cases}$$', 'p>1 收敛，p≤1 发散', '#30D158')}
+                ${formulaCard('p2', '调和级数（p=1）', '$$\\sum_{n=1}^{\\infty}\\frac{1}{n}=1+\\frac12+\\frac13+\\cdots\\Rightarrow\\text{发散}$$', '虽然通项→0，但发散；反例之王', '#FF3B30')}
+            </div>
+            ${exampleBox('p级数例题（四川专升本回忆版同类型）', `
+                <p>判断 (1) $\\sum_{n=1}^{\\infty}\\dfrac{1}{\\sqrt{n}}$；(2) $\\sum_{n=1}^{\\infty}\\dfrac{1}{n^2}$；(3) $\\sum_{n=1}^{\\infty}\\dfrac{1}{n\\sqrt{n}}$；(4) $\\sum_{n=1}^{\\infty}\\dfrac{1}{\\sqrt[3]{n^2}}$。</p>
+                <p><strong>解</strong>：写成 $1/n^p$：</p>
+                <p>(1) $p=\\frac12<1$ 发散；(2) $p=2>1$ 收敛；(3) $p=\\frac32>1$ 收敛；(4) $p=\\frac23<1$ 发散。</p>
+            `)}
+
+            ${groupTitle('fa-wave-square', '3. 交错 p 级数', '#BF5AF2')}
+            <div class="formula-grid">
+                ${formulaCard('交p1', '交错p级数敛散', '$$\\sum_{n=1}^{\\infty}(-1)^n\\frac{1}{n^p}\\ \\begin{cases}p\\leq0\\Rightarrow\\text{发散}\\\\0<p\\leq1\\Rightarrow\\text{条件收敛}\\\\p>1\\Rightarrow\\text{绝对收敛}\\end{cases}$$', 'p>1绝对收敛，0<p≤1条件收敛，p≤0发散', '#BF5AF2')}
+            </div>
+            <div class="memory-box"><i class="fa-solid fa-lightbulb"></i><div class="memory-box-content"><div class="memory-box-title">指数变化的陷阱</div><div class="memory-box-text">$(-1)^{n-1}$、$(-1)^{n+1}$ 与 $(-1)^n$ 敛散性相同（仅首项符号翻）；但 $(-1)^{2n}=1$，就<strong>不是交错级数</strong>了，变成普通 p 级数！</div></div></div>
+            ${exampleBox('交错p级数例题1', `
+                <p>判断 $\\sum_{n=1}^{\\infty}(-1)^{n+1}\\dfrac{1}{\\sqrt[3]{n}}$ 的敛散性，若收敛指出绝对/条件收敛。</p>
+                <p><strong>解</strong>：$p=\\frac13$，$0<p\\leq1$ ⇒ 条件收敛。</p>
+                <p>验证：加绝对值后 $\\sum\\frac{1}{\\sqrt[3]{n}}=\\sum n^{-1/3}$，$p=\\frac13<1$ 发散；原交错级数满足莱布尼茨条件收敛。</p>
+            `)}
+            ${exampleBox('交错p级数例题2 · 指数变化陷阱', `
+                <p>判断 (1) $\\sum_{n=1}^{\\infty}(-1)^{n-1}\\dfrac{1}{n^2}$；(2) $\\sum_{n=1}^{\\infty}(-1)^{2n}\\dfrac{1}{n^2}$。</p>
+                <p><strong>解</strong>：</p>
+                <p>(1) 交错级数，$p=2>1$ ⇒ 绝对收敛。</p>
+                <p>(2) $(-1)^{2n}=1$，原式变为正项 p 级数 $\\sum\\frac{1}{n^2}$，$p=2>1$ ⇒ 收敛（普通收敛），不是交错级数。</p>
+            `)}
+        </div>
+    `;
+
+    // === 交错级数·莱布尼茨 ===
+    const altBody = `
+        <div class="detail-section" id="se-alt">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-wave-square"></i> 交错级数与莱布尼茨判别法</div>
+            <div class="section-desc">若 $u_n>0$，则 $\\sum_{n=1}^{\\infty}(-1)^{n+1}u_n$ 为交错级数（正负交替）。<strong>题眼：通项含 $(-1)^n$。</strong></div>
+
+            ${groupTitle('fa-brain', '莱布尼茨（Leibniz）判别法', '#BF5AF2')}
+            ${formulaCard('莱1', '莱布尼茨定理', '$$u_n>0,\\ \\lim_{n\\to\\infty}u_n=0\\ \\text{且}\\ u_n\\searrow\\ \\Rightarrow\\ \\sum_{n=1}^{\\infty}(-1)^{n+1}u_n\\text{ 收敛}$$', '两个条件：①通项→0 ②通项单调递减', '#BF5AF2')}
+            ${memoryBox('判递减的两种方法', '① 比值法：算 $\\lim u_{n+1}/u_n$，若 <1 则递减；② 导数法：把 n 换成 x 得 f(x)，求导 f\'(x)，若 <0（x足够大时）则递减。条件①求极限一般用等价、抓大头、洛必达。')}
+
+            ${groupTitle('fa-pen-to-square', '莱布尼茨例题（5 道）', '#FF9F0A')}
+            ${exampleBox('莱布尼茨例题1 · 基础', `
+                <p>判断 $\\sum_{n=1}^{\\infty}(-1)^{n+1}\\dfrac{1}{n}$ 的敛散性。</p>
+                <p><strong>解</strong>：$u_n=\\frac1n>0$。① $\\lim\\frac1n=0$；② $\\frac1n>\\frac{1}{n+1}$ 递减。满足莱布尼茨 ⇒ 收敛（条件收敛）。</p>
+            `)}
+            ${exampleBox('莱布尼茨例题2 · 导数法判递减', `
+                <p>判断 $\\sum_{n=2}^{\\infty}(-1)^n\\dfrac{\\ln n}{n}$ 的敛散性。</p>
+                <p><strong>解</strong>：$u_n=\\frac{\\ln n}{n}$。① $\\lim\\frac{\\ln n}{n}\\xlongequal{\\text{洛必达}}0$；② 令 $f(x)=\\frac{\\ln x}{x}$，$f'(x)=\\frac{1-\\ln x}{x^2}<0$（$x>e$），故递减。满足条件 ⇒ 收敛。</p>
+            `)}
+            ${exampleBox('莱布尼茨例题3 · 比值法判递减', `
+                <p>判断 $\\sum_{n=1}^{\\infty}(-1)^{n+1}\\dfrac{n}{3^n}$ 的敛散性。</p>
+                <p><strong>解</strong>：$u_n=\\frac{n}{3^n}$。① $\\lim\\frac{n}{3^n}=0$；② $\\frac{u_{n+1}}{u_n}=\\frac{n+1}{3n}\\to\\frac13<1$，递减。满足 ⇒ 收敛（加绝对值也收敛，故绝对收敛）。</p>
+            `)}
+            ${exampleBox('莱布尼茨例题4 · 必要条件先判发散', `
+                <p>判断 $\\sum_{n=1}^{\\infty}(-1)^n\\dfrac{n}{2n+1}$ 的敛散性。</p>
+                <p><strong>解</strong>：$\\lim\\frac{n}{2n+1}=\\frac12\\neq0$，由收敛必要条件 ⇒ 发散。（不用走莱布尼茨）</p>
+            `)}
+            ${exampleBox('莱布尼茨例题5 · 有理化中等题', `
+                <p>判断 $\\sum_{n=1}^{\\infty}(-1)^{n+1}\\dfrac{1}{\\sqrt{n+1}+\\sqrt{n}}$ 的敛散性。</p>
+                <p><strong>解</strong>：有理化 $u_n=\\frac{1}{\\sqrt{n+1}+\\sqrt{n}}=\\sqrt{n+1}-\\sqrt{n}>0$。</p>
+                <p>① $\\lim(\\sqrt{n+1}-\\sqrt{n})=\\lim\\frac{1}{\\sqrt{n+1}+\\sqrt{n}}=0$；② 分母随 n 增大 ⇒ 递减。满足 ⇒ 收敛。</p>
+            `)}
+        </div>
+    `;
+
+    // === 正项级数判别法 ===
+    const posBody = `
+        <div class="detail-section" id="se-pos">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-scale-balanced"></i> 正项级数敛散性判别法</div>
+            <div class="section-desc">对于复杂通项，直接算部分和很难，用判别法只看通项量级即可。正项级数 $u_n>0$，部分和单调递增，判收敛只需证有上界。</div>
+
+            ${groupTitle('fa-balance-scale-left', '1. 比较判别法', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('比1', '比较法·极限形式', '$$\\lim_{n\\to\\infty}\\frac{u_n}{v_n}=l\\ (0<l<+\\infty)\\Rightarrow\\sum u_n\\text{ 与 }\\sum v_n\\text{ 同敛散}$$', 'n→∞ 时等价 ⇒ 同敛散', '#0A84FF')}
+                ${formulaCard('比2', '比较法·不等式', '$$0<u_n\\leq v_n:\\ \\sum v_n\\text{ 收}\\Rightarrow\\sum u_n\\text{ 收（大收则小收）}$$', '小的发⇒大的发（小发则大发）', '#0A84FF')}
+            </div>
+            ${memoryBox('比较法三手段', '① <strong>等价替换</strong>：$\\sin\\frac an\\sim\\frac an$、$\\ln(1+\\frac an)\\sim\\frac an$、$1-\\cos\\frac an\\sim\\frac{a^2}{2n^2}$；② <strong>抓大头</strong>：多项式只保最高次项；③ <strong>放缩</strong>：要收敛就放大到已知收敛级，要发散就缩小到已知发散级。')}
+
+            ${groupTitle('fa-pen-to-square', '比较法例题（3 手段各 1 道）', '#FF9F0A')}
+            ${exampleBox('手段1 · 等价替换', `
+                <p>判断 $\\sum_{n=1}^{\\infty}\\sin\\dfrac{1}{n}$ 的敛散性。</p>
+                <p><strong>解</strong>：$n\\to\\infty$ 时 $\\sin\\frac1n\\sim\\frac1n$，而 $\\sum\\frac1n$（调和级数）发散 ⇒ 原级数发散。</p>
+            `)}
+            ${exampleBox('手段2 · 抓大头', `
+                <p>判断 $\\sum_{n=1}^{\\infty}\\dfrac{2n^3-n^2+1}{3n^5+n-2}$ 的敛散性。</p>
+                <p><strong>解</strong>：抓大头 $\\sim\\dfrac{2n^3}{3n^5}=\\dfrac{2}{3}\\cdot\\dfrac{1}{n^2}$，而 $\\sum\\frac{1}{n^2}$（$p=2>1$）收敛 ⇒ 原级数收敛。</p>
+            `)}
+            ${exampleBox('手段3 · 大收则小收', `
+                <p>判断 $\\sum_{n=1}^{\\infty}\\dfrac{1}{n^2+1}$ 的敛散性。</p>
+                <p><strong>解</strong>：$0<\\frac{1}{n^2+1}<\\frac{1}{n^2}$，而 $\\sum\\frac{1}{n^2}$ 收敛 ⇒ 大收则小收，原级数收敛。</p>
+            `)}
+
+            ${groupTitle('fa-divide', '2. 比值判别法（达朗贝尔）', '#30D158')}
+            ${formulaCard('比3', '比值判别法', '$$\\rho=\\lim_{n\\to\\infty}\\frac{u_{n+1}}{u_n}\\ \\begin{cases}\\rho<1\\Rightarrow\\text{收敛}\\\\\\rho>1\\Rightarrow\\text{发散}\\\\\\rho=1\\Rightarrow\\text{失效}\\end{cases}$$', '适合含 n!、nⁿ、aⁿ 的级数', '#30D158')}
+            ${memoryBox('比值法约分四步', '① 指数约分：$a^{n+1}/a^n=a$；② 阶乘约分：$(n+1)!/n!=n+1$；③ $n^n$ 用第二重要极限：$(\\frac{n+1}{n})^n\\to e$；④ 量级排序：$n^n\\gg n!\\gg a^n\\gg n^a\\gg\\ln^\\beta n$。')}
+            ${exampleBox('比值法例题1 · 含指数', `
+                <p>判断 $\\sum_{n=1}^{\\infty}\\dfrac{n^2}{3^n}$ 的敛散性。</p>
+                <p><strong>解</strong>：$\\rho=\\lim\\frac{(n+1)^2/3^{n+1}}{n^2/3^n}=\\lim\\frac13\\cdot\\frac{(n+1)^2}{n^2}=\\frac13<1$ ⇒ 收敛。</p>
+            `)}
+            ${exampleBox('比值法例题2 · 含阶乘', `
+                <p>判断 $\\sum_{n=1}^{\\infty}\\dfrac{2^n}{n!}$ 的敛散性。</p>
+                <p><strong>解</strong>：$\\rho=\\lim\\frac{2^{n+1}/(n+1)!}{2^n/n!}=\\lim\\frac{2}{n+1}=0<1$ ⇒ 收敛。</p>
+            `)}
+            ${exampleBox('比值法例题3 · 含 nⁿ（第二重要极限）', `
+                <p>判断 $\\sum_{n=1}^{\\infty}\\dfrac{n!}{n^n}$ 的敛散性。</p>
+                <p><strong>解</strong>：$\\rho=\\lim\\frac{(n+1)!/(n+1)^{n+1}}{n!/n^n}=\\lim\\frac{n^n}{(n+1)^n}=\\lim\\frac{1}{(1+1/n)^n}=\\frac1e<1$ ⇒ 收敛。</p>
+            `)}
+
+            ${groupTitle('fa-root', '3. 根值判别法（柯西）', '#A06CD5')}
+            ${formulaCard('根1', '根值判别法', '$$\\rho=\\lim_{n\\to\\infty}\\sqrt[n]{u_n}\\ \\begin{cases}\\rho<1\\Rightarrow\\text{收敛}\\\\\\rho>1\\Rightarrow\\text{发散}\\\\\\rho=1\\Rightarrow\\text{失效}\\end{cases}$$', '适合通项整体为 n 次方的形式', '#A06CD5')}
+            ${exampleBox('根值法例题', `
+                <p>判断 $\\sum_{n=1}^{\\infty}\\left(\\dfrac{3n}{4n+1}\\right)^n$ 的敛散性。</p>
+                <p><strong>解</strong>：$\\rho=\\lim\\sqrt[n]{\\left(\\frac{3n}{4n+1}\\right)^n}=\\lim\\frac{3n}{4n+1}=\\frac34<1$ ⇒ 收敛。</p>
+            `)}
+            ${memoryBox('综合选择', '见到 $n^n$、$n!$、$a^n$ 等爆炸项，直接用比值或根值判别法。常见极限：$\\sqrt[n]{n}\\to1$，$\\sqrt[n]{n^a}\\to1$，$\\sqrt[n]{C}\\to1$。')}
+        </div>
+    `;
+
+    // === 绝对收敛与条件收敛 ===
+    const absBody = `
+        <div class="detail-section" id="se-abs">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-shield-halved"></i> 绝对收敛与条件收敛</div>
+            <div class="section-desc">任意项级数（可正可负无规律）的处理方法：<strong>加绝对值变成正项级数</strong>，再用正项级数判别法。</div>
+
+            ${groupTitle('fa-arrow-up-right-dots', '核心关系（大收则小收）', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('绝1', '绝对收敛', '$$\\sum_{n=1}^{\\infty}|u_n|\\text{ 收敛}\\Rightarrow\\sum_{n=1}^{\\infty}u_n\\text{ 必收敛（绝对收敛）}$$', '加绝对值变大，大的收则小的必收', '#0A84FF')}
+                ${formulaCard('绝2', '条件收敛', '$$\\sum|u_n|\\text{ 发散，但 }\\sum u_n\\text{ 收敛}\\Rightarrow\\text{条件收敛}$$', '原级数必须先收敛才行', '#FF9F0A')}
+            </div>
+            ${memoryBox('判别四步', '① 加绝对值 $v_n=|u_n|$；② 对 $\\sum v_n$ 用正项判别法：收敛 ⇒ 绝对收敛（结束），发散 ⇒ 转③；③ 判原级数是否收敛（交错用莱布尼茨）；④ 原收敛+绝对值发散 ⇒ 条件收敛。')}
+
+            ${groupTitle('fa-table', '三种加减组合', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    绝对收敛 ± 绝对收敛 = <strong>绝对收敛</strong><br>
+                    绝对收敛 ± 条件收敛 = <strong>条件收敛</strong><br>
+                    条件收敛 ± 条件收敛 = <strong>敛散性不一定</strong>
+                </div>
+            </div>
+
+            ${groupTitle('fa-pen-to-square', '绝对/条件收敛例题（5 道）', '#FF9F0A')}
+            ${exampleBox('例题1 · 绝对收敛（p>1）', `
+                <p>判断 $\\sum_{n=1}^{\\infty}(-1)^{n+1}\\dfrac{1}{n^3}$ 是绝对还是条件收敛。</p>
+                <p><strong>解</strong>：加绝对值 $\\sum\\frac{1}{n^3}$，$p=3>1$ 收敛 ⇒ 绝对收敛。</p>
+            `)}
+            ${exampleBox('例题2 · 条件收敛（交错p,0<p≤1）', `
+                <p>判断 $\\sum_{n=1}^{\\infty}(-1)^n\\dfrac{1}{\\sqrt{n}}$ 是绝对还是条件收敛。</p>
+                <p><strong>解</strong>：加绝对值 $\\sum\\frac{1}{\\sqrt{n}}$，$p=1/2<1$ 发散；原级数交错 p 级数 $p=1/2>0$ 收敛 ⇒ 条件收敛。</p>
+            `)}
+            ${exampleBox('例题3 · 比值法判绝对值', `
+                <p>判断 $\\sum_{n=1}^{\\infty}(-1)^{n+1}\\dfrac{2^n}{n!}$ 是绝对还是条件收敛。</p>
+                <p><strong>解</strong>：加绝对值 $v_n=\\frac{2^n}{n!}$，$\\rho=\\lim\\frac{2}{n+1}=0<1$ 收敛 ⇒ 绝对收敛。</p>
+            `)}
+            ${exampleBox('例题4 · 比较法判|sin|有界', `
+                <p>判断 $\\sum_{n=1}^{\\infty}\\dfrac{\\sin(n^2x)}{n^2}$（x 任意实数）的敛散性。</p>
+                <p><strong>解</strong>：$\\left|\\frac{\\sin(n^2x)}{n^2}\\right|\\leq\\frac{1}{n^2}$，而 $\\sum\\frac{1}{n^2}$ 收敛 ⇒ 绝对值级数收敛 ⇒ 原级数绝对收敛（对任意 x）。</p>
+            `)}
+            ${exampleBox('例题5 · 泰勒展开判绝对收敛（难题）', `
+                <p>判断 $\\sum_{n=1}^{\\infty}(-1)^{n+1}\\left(\\dfrac1n-\\ln(1+\\dfrac1n)\\right)$ 是绝对还是条件收敛。</p>
+                <p><strong>解</strong>：由泰勒展开 $\\ln(1+x)=x-\\frac{x^2}{2}+o(x^2)$，令 $x=\\frac1n$：</p>
+                <p>$$\\frac1n-\\ln(1+\\frac1n)=\\frac1n-\\left(\\frac1n-\\frac{1}{2n^2}+o(\\frac{1}{n^2})\\right)\\sim\\frac{1}{2n^2}$$</p>
+                <p>$\\sum\\frac{1}{n^2}$ 收敛 ⇒ 绝对值级数收敛 ⇒ 绝对收敛。</p>
+            `)}
+        </div>
+    `;
+
+    // === 幂级数·收敛域 ===
+    const domainBody = `
+        <div class="detail-section" id="se-domain">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-circle-radiation"></i> 幂级数的概念与收敛域</div>
+            <div class="section-desc">形如 $\\sum_{n=0}^{\\infty}a_n(x-x_0)^n$ 的级数称为 $(x-x_0)$ 的幂级数，$x_0$ 为收敛中心。$x_0=0$ 时为麦克劳林级数。</div>
+
+            ${groupTitle('fa-ruler', '收敛半径 R / 收敛区间 / 收敛域', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('幂1', '幂级数定义', '$$\\sum_{n=0}^{\\infty}a_n(x-x_0)^n=a_0+a_1(x-x_0)+a_2(x-x_0)^2+\\cdots$$', 'x0 为收敛中心；x0=0 为麦克劳林级数', '#0A84FF')}
+                ${formulaCard('幂2', '收敛半径', '$$\\rho=\\lim_{n\\to\\infty}\\left|\\frac{a_{n+1}}{a_n}\\right|\\Rightarrow R=\\frac1\\rho$$', 'ρ=0⇒R=∞；ρ=∞⇒R=0', '#0A84FF')}
+            </div>
+            ${memoryBox('三名词关系', '收敛半径 R：以 x0 为中心的对称半径；收敛区间：开区间 $(x_0-R,x_0+R)$；收敛域：在收敛区间基础上<strong>单独判两端点</strong>，收敛用 []，发散用 ()。')}
+
+            ${groupTitle('fa-calculator', '方法 1 · 比值法（大题推荐）', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    步骤：① 算 $\\rho=\\lim|a_{n+1}/a_n|$ 得 $R=1/\\rho$，收敛区间 $(x_0-R,x_0+R)$；② 两端点 $x=x_0\\pm R$ 代入原级数，用常数项判敛法判敛；③ 收敛端点用 []，发散用 ()。
+                </div>
+            </div>
+            ${exampleBox('方法1 例题（2023成考专升本·高数一第8题同题型）', `
+                <p>求 $\\sum_{n=1}^{\\infty}\\dfrac{x^n}{n^2}$ 的收敛域。</p>
+                <p><strong>解</strong>：$a_n=\\frac{1}{n^2}$，$\\rho=\\lim\\frac{n^2}{(n+1)^2}=1$，$R=1$，收敛区间 $(-1,1)$。</p>
+                <p>端点：$x=1$ 时 $\\sum\\frac{1}{n^2}$（$p=2>1$）收敛；$x=-1$ 时 $\\sum\\frac{(-1)^n}{n^2}$ 绝对收敛。</p>
+                <p class="ex-answer">收敛域为 $[-1,1]$。</p>
+            `)}
+
+            ${groupTitle('fa-gauge-high', '方法 2 · n 次根号法（选择题提速）', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    对每一项开 n 次根号，利用 $\\sqrt[n]{n}\\to1$、$\\sqrt[n]{n^a}\\to1$、$\\sqrt[n]{C}\\to1$，通常只剩 $|x-x_0|$。令结果 $<1$，右方的值就是 R。<strong>有 n! 用方法 1，没有 n! 用方法 2。</strong>
+                </div>
+            </div>
+            ${exampleBox('方法2 例题（2022成考专升本·高数一第10题同题型）', `
+                <p>求 $\\sum_{n=1}^{\\infty}\\dfrac{x^n}{n+1}$ 的收敛半径。</p>
+                <p><strong>解</strong>：开 n 次根号 $\\sqrt[n]{\\left|\\frac{x^n}{n+1}\\right|}=|x|\\cdot\\frac{1}{\\sqrt[n]{n+1}}\\to|x|$。令 $|x|<1$ ⇒ $R=1$。</p>
+            `)}
+
+            ${groupTitle('fa-arrows-left-right', '抽象幂级数求收敛域', '#A06CD5')}
+            <div class="formula-card" style="--card-accent:#A06CD5;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    ① <strong>系数相同 ⇒ R 相同</strong>：$\\sum a_n(x-x_1)^n$ 与 $\\sum a_n(x-x_2)^n$ 收敛半径相同；② <strong>换元法</strong>：令 $t=x-x_0$，求 $\\sum a_n t^n$ 的收敛范围，再解出 x。
+                </div>
+            </div>
+            ${exampleBox('抽象幂级数例题（阿贝尔定理）', `
+                <p>已知 $\\sum_{n=0}^{\\infty}a_n(x-1)^n$ 在 $x=-1$ 处收敛，判断在 $x=2$ 处的敛散性，并求收敛半径至少为多少。</p>
+                <p><strong>解</strong>：中心 $x_0=1$，$x=-1$ 到中心距离 $=2$。由阿贝尔定理，$R\\geq2$。</p>
+                <p>$x=2$ 到中心距离 $=1<R_{min}=2$，在内部 ⇒ 绝对收敛。</p>
+            `)}
+        </div>
+    `;
+
+    // === 幂级数·展开 ===
+    const expandBody = `
+        <div class="detail-section" id="se-expand">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-flask"></i> 幂级数的展开</div>
+            <div class="section-desc">把初等函数 $f(x)$ 在 $x=x_0$ 处展开成形如 $\\sum_{n=0}^{\\infty}a_n(x-x_0)^n$ 的幂级数。核心是熟记五大展开式并做整体化替换。</div>
+
+            ${groupTitle('fa-star', '★ 五大必考麦克劳林展开式', '#BF5AF2')}
+            <div class="formula-grid">
+                ${formulaCard('展1', '分式型 ⭐ 1/(1-x)', '$$\\frac{1}{1-x}=\\sum_{n=0}^{\\infty}x^n,\\ x\\in(-1,1)$$', '等比级数反向使用', '#BF5AF2')}
+                ${formulaCard('展2', '分式型 ⭐ 1/(1+x)', '$$\\frac{1}{1+x}=\\sum_{n=0}^{\\infty}(-1)^nx^n,\\ x\\in(-1,1)$$', '公比为 -x', '#BF5AF2')}
+                ${formulaCard('展3', '指数型 ⭐ eˣ', '$$e^x=\\sum_{n=0}^{\\infty}\\frac{x^n}{n!},\\ x\\in\\mathbb{R}$$', '遇到 u^v 先取对数 u^v=e^{vlnu}', '#BF5AF2')}
+                ${formulaCard('展4', '三角 sinx（奇函数）', '$$\\sin x=\\sum_{n=0}^{\\infty}\\frac{(-1)^n}{(2n+1)!}x^{2n+1},\\ x\\in\\mathbb{R}$$', '只有奇次幂', '#BF5AF2')}
+                ${formulaCard('展5', '三角 cosx（偶函数）', '$$\\cos x=\\sum_{n=0}^{\\infty}\\frac{(-1)^n}{(2n)!}x^{2n},\\ x\\in\\mathbb{R}$$', '只有偶次幂（含常数项）', '#BF5AF2')}
+                ${formulaCard('展6', '对数型 ⭐ ln(1+x)', '$$\\ln(1+x)=\\sum_{n=1}^{\\infty}\\frac{(-1)^{n-1}}{n}x^n,\\ x\\in(-1,1]$$', '由 1/(1+x) 逐项积分；x=1 收敛 x=-1 发散', '#BF5AF2')}
+            </div>
+
+            ${groupTitle('fa-1', '分式型展开（⭐ 2 道难题）', '#0A84FF')}
+            ${exampleBox('分式型例题1（2024成考专升本·高数一第18题改编）', `
+                <p>将 $f(x)=\\dfrac{1}{1+2x}$ 展开为 x 的幂级数，指出收敛区间。</p>
+                <p><strong>解</strong>：$f(x)=\\frac{1}{1-(-2x)}=\\sum_{n=0}^{\\infty}(-2x)^n=\\sum_{n=0}^{\\infty}(-1)^n2^nx^n$。</p>
+                <p>收敛条件 $|-2x|<1$ ⇒ $|x|<\\frac12$。</p>
+                <p class="ex-answer">$f(x)=\\sum_{n=0}^{\\infty}(-1)^n2^nx^n$，$x\\in(-\\frac12,\\frac12)$。</p>
+            `)}
+            ${exampleBox('分式型例题2 · 部分分式拆分', `
+                <p>将 $f(x)=\\dfrac{1}{x^2-3x+2}$ 展开为 x 的幂级数。</p>
+                <p><strong>解</strong>：$f(x)=\\frac{1}{(x-1)(x-2)}=\\frac{1}{x-2}-\\frac{1}{x-1}$。</p>
+                <p>$\\frac{1}{x-2}=-\\frac12\\cdot\\frac{1}{1-x/2}=-\\frac12\\sum(\\frac x2)^n$（$|x|<2$）</p>
+                <p>$\\frac{1}{x-1}=-\\frac{1}{1-x}=-\\sum x^n$（$|x|<1$）</p>
+                <p>$f(x)=\\sum_{n=0}^{\\infty}\\left(1-\\frac{1}{2^{n+1}}\\right)x^n$，收敛区间 $(-1,1)$。</p>
+            `)}
+
+            ${groupTitle('fa-2', '指数型展开（⭐ 2 道难题）', '#30D158')}
+            ${exampleBox('指数型例题1 · 整体化 x', `
+                <p>将 $f(x)=e^{2x^2}$ 展开为 x 的幂级数。</p>
+                <p><strong>解</strong>：把 $e^t$ 中 t 换成 $2x^2$：$e^{2x^2}=\\sum_{n=0}^{\\infty}\\frac{(2x^2)^n}{n!}=\\sum_{n=0}^{\\infty}\\frac{2^n}{n!}x^{2n}$，$x\\in\\mathbb{R}$。</p>
+            `)}
+            ${exampleBox('指数型例题2 · uᵛ=e^{vlnu}', `
+                <p>将 $f(x)=a^x$（$a>0,a\\neq1$）展开为 x 的幂级数。</p>
+                <p><strong>解</strong>：$a^x=e^{x\\ln a}=\\sum_{n=0}^{\\infty}\\frac{(x\\ln a)^n}{n!}=\\sum_{n=0}^{\\infty}\\frac{(\\ln a)^n}{n!}x^n$，$x\\in\\mathbb{R}$。</p>
+            `)}
+
+            ${groupTitle('fa-3', '三角型展开（降幂→套公式）', '#FF3B30')}
+            ${exampleBox('三角型例题 · 降幂', `
+                <p>将 $f(x)=\\sin^2x$ 展开为 x 的幂级数。</p>
+                <p><strong>解</strong>：降幂 $\\sin^2x=\\frac{1-\\cos2x}{2}=\\frac12-\\frac12\\cos2x$。</p>
+                <p>$\\cos2x=\\sum\\frac{(-1)^n}{(2n)!}(2x)^{2n}=\\sum\\frac{(-1)^n4^n}{(2n)!}x^{2n}$。</p>
+                <p>$f(x)=\\frac12+\\sum_{n=1}^{\\infty}\\frac{(-1)^{n+1}4^n}{2(2n)!}x^{2n}$，$x\\in\\mathbb{R}$。</p>
+            `)}
+
+            ${groupTitle('fa-4', '对数型展开（⭐ 2 道难题）', '#A06CD5')}
+            ${exampleBox('对数型例题1 · ln(2+x) 变形', `
+                <p>将 $f(x)=\\ln(2+x)$ 展开为 x 的幂级数，指出收敛域。</p>
+                <p><strong>解</strong>：$\\ln(2+x)=\\ln2+\\ln(1+\\frac x2)=\\ln2+\\sum_{n=1}^{\\infty}\\frac{(-1)^{n-1}}{n}\\left(\\frac x2\\right)^n$。</p>
+                <p>收敛条件 $-1<\\frac x2\\leq1$ ⇒ $-2<x\\leq2$。</p>
+            `)}
+            ${exampleBox('对数型例题2 · 在 x₀=1 处展开', `
+                <p>将 $f(x)=\\ln x$ 在 $x_0=1$ 处展开为 $(x-1)$ 的幂级数。</p>
+                <p><strong>解</strong>：$\\ln x=\\ln[1+(x-1)]$，令 $u=x-1$：</p>
+                <p>$\\ln(1+u)=\\sum_{n=1}^{\\infty}\\frac{(-1)^{n-1}}{n}u^n$，$u\\in(-1,1]$。</p>
+                <p class="ex-answer">$\\ln x=\\sum_{n=1}^{\\infty}\\frac{(-1)^{n-1}}{n}(x-1)^n$，$x\\in(0,2]$。</p>
+            `)}
+
+            ${groupTitle('fa-lightbulb', '展开思路点拨', '#FF9F0A')}
+            ${memoryBox('展开三步走', '① 熟记五大公式，熟练 x 整体化替换；② "在 x=x₀ 展开"=写成 $\\sum a_n(x-x_0)^n$，凑出 $(x-x_0)$ 整体块；③ 逐项求导/积分：先积后导无常数 C，先导后积有 C（代入 x=x₀ 定 C，通常 $S(x_0)=a_0$）。')}
+            ${memoryBox('下标对齐口诀', '通项多乘一个 x（幂次+1）→ 下标 n 减 1（前移一步）；通项多除以 x（幂次-1）→ 下标 n 加 1（后移一步）。即：<strong>后减一步，前标加一；后加一步，前标减一</strong>。')}
+        </div>
+    `;
+
+    // === 幂级数·和函数 ===
+    const sumBody = `
+        <div class="detail-section" id="se-sum">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-function"></i> 幂级数的和函数</div>
+            <div class="section-desc">先求收敛域，再对级数<strong>逐项求导</strong>或<strong>逐项积分</strong>，把它化成五大公式的形式，求出和函数后反向还原。</div>
+
+            ${groupTitle('fa-times', '1. 乘积型（先积后导）', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('和1', '起步公式', '$$\\sum_{n=0}^{\\infty}x^n=\\frac{1}{1-x},\\ x\\in(-1,1)$$', '等比级数求和', '#0A84FF')}
+                ${formulaCard('和2', '求导得 ∑nx^(n-1)', '$$\\sum_{n=1}^{\\infty}nx^{n-1}=\\frac{1}{(1-x)^2},\\ x\\in(-1,1)$$', '起步公式两边逐项求导', '#0A84FF')}
+            </div>
+            ${exampleBox('乘积型例题 · 先积后导+拆分（难题）', `
+                <p>求 $\\sum_{n=1}^{\\infty}n^2x^{n-1}$ 的和函数。</p>
+                <p><strong>解</strong>：拆 $n^2=n(n-1)+n$。收敛域 $(-1,1)$（端点通项不→0 发散）。</p>
+                <p>$\\sum n(n-1)x^{n-1}$ 积两次得 $\\sum x^n=\\frac{x^2}{1-x}$，求导两次得 $\\frac{2}{(1-x)^3}$。</p>
+                <p>$\\sum nx^{n-1}=\\frac{1}{(1-x)^2}$。</p>
+                <p class="ex-answer">$S(x)=\\frac{2}{(1-x)^3}+\\frac{1}{(1-x)^2}=\\frac{1+x}{(1-x)^3}$，$x\\in(-1,1)$。</p>
+            `)}
+
+            ${groupTitle('fa-divide', '2. 分式型（先导后积）⭐', '#30D158')}
+            ${formulaCard('和3', '∑x^n/n = -ln(1-x)', '$$\\sum_{n=1}^{\\infty}\\frac{x^n}{n}=-\\ln(1-x),\\ x\\in[-1,1)$$', '先导：$\\sum x^{n-1}=1/(1-x)$；后积还原', '#30D158')}
+            ${memoryBox('常数 C 讨论', '先导后积会带常数 C。定 C 方法：代入中心点 $x=x_0$，原级数只留首项 $a_0$，故 $S(x_0)=a_0$（通常为 0）。一般写成从 0 到 x 的定积分 $S(x)-S(0)=\\int_0^x S\'(t)dt$ 可避开 C。')}
+            ${exampleBox('分式型例题 · 先导后积（解答大题必考）', `
+                <p>求 $\\sum_{n=1}^{\\infty}\\dfrac{x^n}{n}$ 的和函数及收敛域。</p>
+                <p><strong>解</strong>：收敛域 $[-1,1)$（$x=1$ 调和发散，$x=-1$ 交错调和收敛）。</p>
+                <p>设 $S(x)=\\sum\\frac{x^n}{n}$，逐项求导 $S'(x)=\\sum x^{n-1}=\\frac{1}{1-x}$。</p>
+                <p>积分还原：$S(x)=S(x)-S(0)=\\int_0^x\\frac{1}{1-t}dt=-\\ln(1-x)$。</p>
+                <p class="ex-answer">$S(x)=-\\ln(1-x)$，$x\\in[-1,1)$。</p>
+            `)}
+
+            ${groupTitle('fa-factorial', '3. 含阶乘型（往 eˣ 公式凑）', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    分母出现 $n!$ 往 $e^x=\\sum\\frac{x^n}{n!}$ 凑；$(2n)!$ 往 $\\cos x$ 凑；$(2n+1)!$ 往 $\\sin x$ 凑。做幂次整体化、系数匹配。
+                </div>
+            </div>
+
+            ${groupTitle('fa-arrow-up-right-from-square', '4. 利用幂级数求常数项级数的和', '#FF9F0A')}
+            ${exampleBox('利用幂级数求和 · 综合大题', `
+                <p>求 $\\sum_{n=1}^{\\infty}\\dfrac{1}{n\\cdot2^n}$ 的和。</p>
+                <p><strong>解</strong>：构造 $S(x)=\\sum\\frac{x^n}{n}=-\\ln(1-x)$（$x\\in[-1,1)$）。</p>
+                <p>取 $x=\\frac12$：$\\sum\\frac{1}{n\\cdot2^n}=S(\\frac12)=-\\ln(1-\\frac12)=-\\ln\\frac12=\\ln2$。</p>
+                <p class="ex-answer">和为 $\\ln 2$。</p>
+            `)}
+
+            ${groupTitle('fa-magic', '5. 利用展开式求和函数', '#A06CD5')}
+            ${exampleBox('利用展开式求和', `
+                <p>求 $\\sum_{n=0}^{\\infty}\\dfrac{(-1)^n}{(2n+1)!}x^{2n+2}$ 的和函数。</p>
+                <p><strong>解</strong>：对照 $\\sin x=\\sum\\frac{(-1)^n}{(2n+1)!}x^{2n+1}$，提出一个 x：</p>
+                <p>$S(x)=x\\cdot\\sum\\frac{(-1)^n}{(2n+1)!}x^{2n+1}=x\\sin x$，$x\\in\\mathbb{R}$。</p>
+            `)}
+
+            ${groupTitle('fa-list-check', '通用解题步骤总结', '#FF3B30')}
+            ${memoryBox('和函数大题一句话', '<strong>第一步永远先求收敛域</strong>，再根据通项形态选先积后导（n·x^(n-1) 型）或先导后积（x^n/n 型）向五大公式靠拢。系数复杂时用幂函数运算性质（乘/除/幂的乘方/积的乘方/零指数/负指数/分数指数互化）化简，必要时拆分。')}
+            <div class="formula-card" style="--card-accent:#FF3B30;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    <strong>幂函数运算性质</strong>：$x^a\\cdot x^b=x^{a+b}$（底数不变指数相加）；$x^a/x^b=x^{a-b}$（指数相减）；$(x^a)^b=x^{ab}$（指数相乘）；$(xy)^a=x^ay^a$（分别乘方）；$x^0=1$；$x^{-a}=1/x^a$；$x^{1/a}=\\sqrt[a]{x}$（根式互化）。
+                </div>
+            </div>
+        </div>
+    `;
+
+    return { title: '无穷级数详情', color: C, tabs, body: mapBody + basicBody + benchBody + altBody + posBody + absBody + domainBody + expandBody + sumBody };
+}
+
 // ---------- 行列式详情 ----------
 function buildLinearDetail() {
     const C = '#5AC8FA';
@@ -6332,6 +6814,7 @@ function buildDetailContent(type) {
         case 'equation': return buildEquationDetail();
         case 'multivar': return buildMultivarDetail();
         case 'doubleInt': return buildDoubleIntDetail();
+        case 'series': return buildSeriesDetail();
         case 'linear': return buildLinearDetail();
         case 'matrix': return buildMatrixDetail();
     }

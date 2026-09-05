@@ -7,10 +7,12 @@
     "只做增量添加，绝不改动现有页面架构 / 设计 / 风格",
     "公式唯一事实来源 = index.html 的 formulaCard 调用",
     "formulas.js 永远由脚本生成，禁止手改",
-    "模块集合固定为 {limit, deriv, integral, trig, diffEq, linalg, matrix}，无 diff（微分已并入 deriv）；linalg 与 matrix 同属线性代数但是两个独立章节/入口",
+    "模块集合固定为 {limit, deriv, integral, trig, diffEq, multivar, dblint, series, linalg, matrix}，无 diff（微分已并入 deriv）；linalg 与 matrix 同属线性代数但是两个独立章节/入口",
     "新增模块须同步：buildXxxDetail() + scripts/extractFormulas.mjs 的 sections/MODULE_ORDER + notes/00-笔记索引.md",
     "改动必须同时适配暗/浅双主题",
-    "review.html 公式为自动同步，禁手动改其公式列表"
+    "review.html 公式为自动同步，禁手动改其公式列表",
+    "章节内容的 tab，第一个一定要是知识地图",
+    "级数符号必须写出完整上下限：常数项级数 \\sum_{n=1}^{\\infty} u_n，幂级数 \\sum_{n=0}^{\\infty} a_n(x-x_0)^n"
   ],
   "modules": [
     {
@@ -37,7 +39,7 @@
       "buildFn": "buildIntegralDetail",
       "themeColor": "#30D158",
       "notes": "notes/04-一元函数积分学.md",
-      "formulaCount": 19,
+      "formulaCount": 69,
       "status": "done"
     },
     {
@@ -59,13 +61,40 @@
       "status": "done"
     },
     {
+      "id": "multivar",
+      "title": "多元函数微分学",
+      "buildFn": "buildMultivarDetail",
+      "themeColor": "#2BB8A3",
+      "notes": "notes/07-多元函数微分学.md",
+      "formulaCount": 10,
+      "status": "done"
+    },
+    {
+      "id": "dblint",
+      "title": "多元函数积分学·二重积分",
+      "buildFn": "buildDoubleIntDetail",
+      "themeColor": "#A06CD5",
+      "notes": "notes/08-多元函数积分学-二重积分.md",
+      "formulaCount": 18,
+      "status": "done"
+    },
+    {
+      "id": "series",
+      "title": "无穷级数",
+      "buildFn": "buildSeriesDetail",
+      "themeColor": "#FF6B9D",
+      "notes": "notes/11-无穷级数.md",
+      "formulaCount": 29,
+      "subTopics": ["知识地图 / 收敛定义与性质 / 三大基准级数 / 交错级数·莱布尼茨 / 正项级数判别法 / 绝对与条件收敛 / 幂级数·收敛域 / 幂级数·展开 / 幂级数·和函数"],
+      "status": "done"
+    },
+    {
       "id": "linalg",
       "title": "线性代数·行列式",
       "buildFn": "buildLinearDetail",
       "themeColor": "#5AC8FA",
-      "notes": "notes/07-线性代数-行列式.md",
+      "notes": "notes/09-线性代数-行列式.md",
       "formulaCount": 7,
-      "subTopics": ["行列式（5 tab：基础计算/六条性质/特殊行列式/展开定理/速查总表）"],
       "status": "done"
     },
     {
@@ -73,12 +102,11 @@
       "title": "线性代数·矩阵",
       "buildFn": "buildMatrixDetail",
       "themeColor": "#5AC8FA",
-      "notes": "notes/08-矩阵.md",
+      "notes": "notes/10-矩阵.md",
       "formulaCount": 29,
-      "subTopics": ["矩阵（5 tab：特殊矩阵/运算/逆·伴随/初等变换与秩/速查，含 29 条公式卡）"],
       "status": "done"
     }
   ],
-  "totals": { "modules": 7, "formulas": 205 },
-  "evidence": "node scripts/extractFormulas.mjs → 抽出 205 条 formulaCard，分 7 个模块（deriv 87 / integral 19 / trig 41 / diffEq 9 / linalg 7 / matrix 29 / limit 13；6 模块基线 176 + 矩阵 29）；矩阵于 2026-08-20 从 linalg 拆分为独立 module=matrix（buildMatrixDetail 独立成章，首页新增 矩阵 入口，抽提脚本 sections/MODULE_ORDER 同步）"
+  "totals": { "modules": 10, "formulas": 312 },
+  "evidence": "node scripts/extractFormulas.mjs → 抽出 312 条 formulaCard，分 10 个模块（deriv 87 / integral 69 / trig 41 / diffEq 9 / multivar 10 / dblint 18 / series 29 / linalg 7 / matrix 29 / limit 13）；无穷级数于 2026-09-05 作为独立 module=series 插入学习路径（二重积分之后、行列式之前），buildSeriesDetail 9 个 tab（首 tab 为知识地图），首页新增无穷级数入口，抽提脚本 sections/MODULE_ORDER 同步；行列式/矩阵顺延"
 }

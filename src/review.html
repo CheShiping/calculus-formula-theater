@@ -1589,15 +1589,35 @@
     }
     function toQuestionFormula(formula) {
         const tex = toKatexSource(formula);
-        // bracket-depth 扫描：跳过 {...} 和 \...\  内部，避免匹配到下标如 k=1 里的 =
-        let depth = 0, slash = false, equalsIndex = -1;
-        for (let i = 0; i < tex.length; i++) {
+        // 扫描第一个顶层 =：需同时跳过 {...} 组、\cmd 命令、以及 \begin{...}...\end{...} 环境内部
+        // （cases/aligned 等环境里的 = 是公式内容，不是「左=右」的答案切分点）
+        let depth = 0, envDepth = 0, slash = false, equalsIndex = -1;
+        let i = 0;
+        while (i < tex.length) {
             const c = tex[i];
-            if (slash) { slash = false; continue; }
-            if (c === '\\') { slash = true; continue; }
-            if (c === '{') { depth++; continue; }
-            if (c === '}') { if (depth > 0) depth--; continue; }
-            if (depth === 0 && c === '=') { equalsIndex = i; break; }
+            if (slash) { slash = false; i++; continue; }
+            if (c === '\\') {
+                // 识别 \begin{env} / \end{env}，整体跳过 token 并维护环境深度
+                if (tex.startsWith('begin{', i + 1)) {
+                    envDepth++;
+                    const close = tex.indexOf('}', i + 7);
+                    i = (close === -1 ? tex.length : close + 1);
+                    continue;
+                }
+                if (tex.startsWith('end{', i + 1)) {
+                    if (envDepth > 0) envDepth--;
+                    const close = tex.indexOf('}', i + 5);
+                    i = (close === -1 ? tex.length : close + 1);
+                    continue;
+                }
+                slash = true;
+                i++;
+                continue;
+            }
+            if (c === '{') { depth++; i++; continue; }
+            if (c === '}') { if (depth > 0) depth--; i++; continue; }
+            if (depth === 0 && envDepth === 0 && c === '=') { equalsIndex = i; break; }
+            i++;
         }
         return equalsIndex === -1 ? `${tex} = ?` : `${tex.slice(0, equalsIndex + 1)} ?`;
     }

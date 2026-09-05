@@ -24,6 +24,20 @@
 - **首页矩阵配色**：path-home 矩阵 `path-node` 亮蓝色 `#5AC8FA` → 低饱和 `#8b98ba`，与行列式 `#759ba1` 及整体莫兰迪色板协调。
 - 验证：用户确认「效果已验证」。
 
+## 更新（2026-09-05）— 新增「无穷级数」章节（二重积分之后、行列式之前）
+
+- **新模块 `series`（无穷级数）独立成章**：插入学习路径 `dblint` 之后、`linalg` 之前，行列式/矩阵顺延。
+- `src/index.html`：
+  - 首页 `.path-home` 新增「无穷级数」行（配色 `#FF6B9D`），位于「多元函数积分学（二重积分）」与「行列式」之间。
+  - `buildDetailContent` 新增 `case 'series': return buildSeriesDetail();`。
+  - 新增 `buildSeriesDetail()`，9 个 tab，**首 tab 为知识地图**：知识地图 / 收敛定义与性质 / 三大基准级数 / 交错级数·莱布尼茨 / 正项级数判别法 / 绝对与条件收敛 / 幂级数·收敛域 / 幂级数·展开 / 幂级数·和函数；知识点与对应例题成对展示，题目使用全国历年专升本/成考真题并标注出处（四川 2025 真题精选、江苏成考 2022、全国成考 2023-2024）。
+  - 级数符号严格写全上下限：常数项 `\sum_{n=1}^{\infty} u_n`，幂级数 `\sum_{n=0}^{\infty} a_n x^n`。
+- `scripts/extractFormulas.mjs`：`sections` 与 `MODULE_ORDER` 均在 `dblint` 与 `linalg` 之间插入 `series`（color `#FF6B9D`）。
+- `notes/11-无穷级数.md`：完整章节笔记，与页面内容一致。
+- `notes/00-笔记索引.md`：新增第 08 章「无穷级数」，行列式/矩阵顺延为 09/10，学习路径图同步。
+- `src/data/formulas.js`：重新生成，共 **312 条公式，10 个模块**（`series: 29`）。
+- 证据：`node scripts/extractFormulas.mjs` 输出 `抽出 312 条 formulaCard` / `共 312 条公式，分 10 个模块`，模块统计 `{ deriv: 87, integral: 69, trig: 41, diffEq: 9, multivar: 10, dblint: 18, series: 29, linalg: 7, matrix: 29, limit: 13 }`。
+
 ## 下一步（按优先级）
 
 1. **加新内容时**：严格走 AGENTS.md 第 4 节五步流程——先写 `notes/` 笔记 → 等用户审核 → 在 `index.html` 对应 `buildXxxDetail()` 增量追加 `formulaCard` → 跑 `extractFormulas.mjs` → `npm run dev` 核对双主题。
