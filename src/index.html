@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -6258,6 +6258,9 @@ function buildFunctionDetail() {
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;">
                     前提：① 确为 $\\frac{0}{0}$ 或 $\\frac{\\infty}{\\infty}$；② 右端极限存在或为 ∞。每用一次必须检查是否还能再用。
                 </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;background:rgba(255,159,10,0.12);border-left:3px solid #FF9F0A;padding:0.6rem 0.9rem;border-radius:8px;">
+                    <strong style="color:#FF9F0A;">「每用一次必查」细则：</strong>这么检查——求导算完之后，先看新的分式是不是仍然是 $\\dfrac{0}{0}$ 或 $\\dfrac{\\infty}{\\infty}$，<strong style="color:#FF9F0A;">是才能再洛</strong>；<strong style="color:#FF3B30;">不是，立刻停止，不能再求导！</strong>
+                </div>
                 <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">方法 2：等价无穷小替换（乘除关系直接用）</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     核心：$x \\to 0$ 时，$\\sin x \\sim x$，$\\tan x \\sim x$，$e^x-1 \\sim x$，$\\ln(1+x) \\sim x$，$1-\\cos x \\sim \\dfrac{x^2}{2}$ 等（完整等价表见 Tab 3）。
@@ -6296,6 +6299,7 @@ function buildFunctionDetail() {
             ${exampleBox('例题 · ∞−∞ 型有理化', '$I = \\lim\\limits_{n \\to \\infty} (\\sqrt{n^2+n} - n)$<br><br><strong>解</strong>：有理化：$I = \\lim\\limits_{n \\to \\infty} \\dfrac{n}{\\sqrt{n^2+n}+n}$，抓大头（分子 n 次 1，分母 n 次 1）→ $\\dfrac{1}{1+1} = \\dfrac{1}{2}$')}
             ${exampleBox('例题 · ∞−∞ 型通分', '$I = \\lim\\limits_{x \\to 0} \\left(\\dfrac{1}{x} - \\dfrac{1}{e^x-1}\\right)$<br><br><strong>解</strong>：通分：$I = \\lim\\limits_{x \\to 0} \\dfrac{e^x-1-x}{x(e^x-1)}$，分母：$x(e^x-1) \\sim x \\cdot x = x^2$，分子用泰勒或两次洛必达 → $I = \\dfrac{1}{2}$')}
             ${memoryBox('兜底工具：倒代换', '当上面两种方法都难处理时（比如 x→∞ 出现复杂分式-分式），设 $x = \\dfrac{1}{t}$（即 $t = \\dfrac{1}{x}$），转为 $t \\to 0$ 的问题，此时可做等价或洛必达。本质：把 ∞→0 好处理。')}
+            ${exampleBox('例题 · ∞−∞ 型倒代换（难度与专升本相当）', '求 $I = \\lim\\limits_{x \\to \\infty} \\left[ x - x^2 \\ln\\left(1 + \\dfrac{1}{x}\\right) \\right]$<br><br><strong>解</strong>：乍看 $\\infty - \\infty$ 型，直接变形成 $\\dfrac{1 - x\\ln(1+1/x)}{1/x}$ 再洛必达运算繁琐。<br><br><strong>倒代换：</strong>令 $t = \\dfrac{1}{x}$，则 $x \\to \\infty$ 时 $t \\to 0^+$，代入：<br>$$I = \\lim\\limits_{t \\to 0} \\left[ \\dfrac{1}{t} - \\dfrac{1}{t^2} \\ln(1+t) \\right] = \\lim\\limits_{t \\to 0} \\dfrac{t - \\ln(1+t)}{t^2}$$<br>化为 $\\dfrac{0}{0}$ 型，<strong>洛必达</strong>：<br>$$= \\lim\\limits_{t \\to 0} \\dfrac{1 - \\dfrac{1}{1+t}}{2t} = \\lim\\limits_{t \\to 0} \\dfrac{t}{2t(1+t)} = \\lim\\limits_{t \\to 0} \\dfrac{1}{2(1+t)} = \\dfrac{1}{2}$$<br><br><span style="color:#FF9F0A;">💡 倒代换本质：把 $x \\to \\infty$ 转为 $t \\to 0$，此时能直接用等价 / 洛必达处理。</span>')}
 
             ${groupTitle('fa-4', '2.6 $0 \\cdot \\infty$ 型：下放简单的那个', '#5AC8FA')}
             <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
