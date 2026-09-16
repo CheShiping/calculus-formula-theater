@@ -1287,7 +1287,7 @@ export const FORMULAS = [
     module: 'integral',
     num: '',
     label: '题型二 · 定积分 → 令 A',
-    formula: '$$\\intlimits_a^b f\\,dx = A,\\ \\ \\text{两边同时对}[a,b]\\text{积分}$$',
+    formula: '$$\\int\\limits_a^b f\\,dx = A,\\ \\ \\text{两边同时对}[a,b]\\text{积分}$$',
     note: '令定积分=A，两边积分凑出结构解 A',
     color: '#FF9F0A',
   },

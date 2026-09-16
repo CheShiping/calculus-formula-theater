@@ -70,3 +70,6 @@ _all_formulas.json
 app/src/data/_chapter_dump.txt
 app/src/data/_formulas_dump.txt
 app/src/data/_formulas_extracted.json
+
+# Runtime logs
+debug.log

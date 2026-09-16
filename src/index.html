@@ -3215,10 +3215,48 @@ function buildIntegralDetail() {
                 <p>$$\\int_{-1}^2 |x-1|\\,dx = \\int_{-1}^1 (1-x)\\,dx + \\int_1^2 (x-1)\\,dx = \\frac52$$</p>
             `)}
 
+            ${exampleBox('难度提升 · 类型一 复合分段函数（分段点 x=0，函数形式跨类型）', `
+                <p>设 $\\displaystyle f(x)=\\begin{cases}\\dfrac{1}{1+\\sin x},&x\\ge 0\\\\ \\dfrac{1}{1+e^x},&x<0\\end{cases}$，求 $\\displaystyle\\int_{-1}^{\\pi/4} f(x)\\,dx$。</p>
+                <p><strong>解</strong>：分段点 $x=0$ 切分区间，两段各自积分：</p>
+                <p>$$\\int_{-1}^0\\frac{dx}{1+e^x}=\\int_{-1}^0\\frac{e^{-x}}{1+e^{-x}}\\,dx=\\Big[-\\ln(1+e^{-x})\\Big]_{-1}^0=-\\ln 2+\\ln(1+e)=\\ln\\frac{1+e}{2}$$</p>
+                <p>$$\\int_0^{\\pi/4}\\frac{dx}{1+\\sin x}=\\int_0^{\\pi/4}\\frac{1-\\sin x}{\\cos^2 x}\\,dx=\\int_0^{\\pi/4}(\\sec^2 x-\\tan x\\,\\sec x)\\,dx=\\Big[\\tan x-\\sec x\\Big]_0^{\\pi/4}=\\sqrt2-1$$</p>
+                <p>两段相加：</p>
+                <p>$$\\int_{-1}^{\\pi/4}f(x)\\,dx=\\ln\\frac{1+e}{2}+\\sqrt2-1$$</p>
+                <blockquote>技巧：分段函数求积分，<strong>每段内</strong>该凑微分就凑微分、该换元就换元，互不影响。指数分母可借 $e^{-x}$ 翻转凑微分 $\\dfrac{1}{1+e^x}=\\dfrac{e^{-x}}{1+e^{-x}}$；三角分母可乘 $\\dfrac{1-\\sin x}{1-\\sin x}$ 有理化。</blockquote>
+            `)}
+
+            ${exampleBox('难度提升 · 类型一变限积分 F(x)=∫₀ˣ f(t)dt 的连续性（分段函数考连续）', `
+                <p>设 $\\displaystyle f(x)=\\begin{cases}3x^2,&0\\le x<1\\\\ 5-2x,&1\\le x\\le 2\\end{cases}$，$F(x)=\\int_0^x f(t)\\,dt,\\ 0\\le x\\le 2$，求 $F(x)$ 并讨论 $F(x)$ 的连续性。</p>
+                <p><strong>解</strong>：分段点 $x=1$ 把定义域切三段讨论：</p>
+                <p>当 $0\\le x<1$ 时，</p>
+                <p>$$F(x)=\\int_0^x 3t^2\\,dt=x^3$$</p>
+                <p>当 $1\\le x\\le 2$ 时，</p>
+                <p>$$F(x)=\\int_0^1 3t^2\\,dt+\\int_1^x(5-2t)\\,dt=1+\\Big[5t-t^2\\Big]_1^x=x-x^2+5$$</p>
+                <p>在 $x=1$ 处：$\\lim\\limits_{x\\to 1^-}F(x)=1$，$\\lim\\limits_{x\\to 1^+}F(x)=1$，$F(1)=1$，三值相等 ⇒ <strong>$F(x)$ 在 $[0,2]$ 上连续</strong>。</p>
+                <blockquote>关键认知：<strong>被积函数不连续 ≠ 积分函数不连续</strong>。分段点处只要左右极限 = 函数值，$F(x)$ 就连续——这是「积分能抹平间断」的经典结论，专升本常考。</blockquote>
+            `)}
+
+            ${exampleBox('难度提升 · 类型三 绝对值+二次型（含完全平方式配凑）', `
+                <p>求 $\\displaystyle\\int_0^2|2x-1|\\,dx$。</p>
+                <p><strong>来源</strong>：山东 2027 专升本高数一第五章定积分章节检测 B 卷第 15 题同型；分界点 $x=\\tfrac12$。</p>
+                <p><strong>解</strong>：分界点 $2x-1=0\\Rightarrow x=\\tfrac12$：</p>
+                <p>$$\\int_0^2|2x-1|\\,dx=\\int_0^{1/2}(1-2x)\\,dx+\\int_{1/2}^2(2x-1)\\,dx$$</p>
+                <p>$$=\\Big[x-x^2\\Big]_0^{1/2}+\\Big[x^2-x\\Big]_{1/2}^2=\\frac14+\\frac94=\\frac52$$</p>
+                <blockquote>口诀：<strong>先找零点、再按号脱绝对值、最后分段积</strong>。系数 $2$ 容易让人忘了分界点是 $x=\\tfrac12$ 而不是 $x=1$，专门练一道避坑。</blockquote>
+            `)}
+
+            ${exampleBox('难度提升 · 类型三 周期性+绝对值+偶倍奇零（三招联动）', `
+                <p>求 $\\displaystyle\\int_{-\\pi}^{\\pi}|\\sin x|\\,dx$。</p>
+                <p><strong>解</strong>：$|\\sin x|$ 是周期 $T=\\pi$ 的<strong>偶函数</strong>，先「偶倍奇零」再用周期性：</p>
+                <p>$$\\int_{-\\pi}^{\\pi}|\\sin x|\\,dx=2\\int_0^{\\pi}|\\sin x|\\,dx=4\\int_0^{\\pi/2}\\sin x\\,dx$$</p>
+                <p>$$=4\\Big[-\\cos x\\Big]_0^{\\pi/2}=4(0-(-1))=4$$</p>
+                <blockquote>三招联动：<strong>① 偶倍奇零</strong>（对称区间）→ <strong>② 周期性</strong>（$|\\sin x|$ 周期 $\\pi$，再 ×2）→ <strong>③ 天然分段</strong>（$|\\sin x|$ 在 $[0,\\pi]$ 内 $[0,\\pi/2]$、$[\\pi/2,\\pi]$ 分段，因 $\\sin(\\pi-x)=\\sin x$ 又可省一半）。三步下来把 $[-\\pi,\\pi]$ 折成半个标准区间。</blockquote>
+            `)}
+
             ${groupTitle('fa-shuffle', '十、含定积分/变限积分的积分方程', '#FF9F0A')}
             <div class="formula-grid">
                 ${formulaCard('', '题型一 · 变限积分 → 求导', '$$\\frac{d}{dx}\\int_a^{\\varphi(x)} f(t)\\,dt = f(\\varphi(x))\\,\\varphi\'(x)$$', '等式两边求导消掉积分号', '#FF9F0A')}
-                ${formulaCard('', '题型二 · 定积分 → 令 A', '$$\\int\limits_a^b f\\,dx = A,\\ \\ \\text{两边同时对}[a,b]\\text{积分}$$', '令定积分=A，两边积分凑出结构解 A', '#FF9F0A')}
+                ${formulaCard('', '题型二 · 定积分 → 令 A', '$$\\int\\limits_a^b f\\,dx = A,\\ \\ \\text{两边同时对}[a,b]\\text{积分}$$', '令定积分=A，两边积分凑出结构解 A', '#FF9F0A')}
             </div>
 
             ${exampleBox('例题 · 题型一 变限积分求导', `
@@ -3232,6 +3270,62 @@ function buildIntegralDetail() {
                 <p><strong>解</strong>：令 $A=\\int_0^1 f(x)dx$，则 $f(x)=x-A$。两边对 $[0,1]$ 积分：</p>
                 <p>$$A = \\int_0^1 (x-A)\\,dx = \\Big[\\frac{x^2}{2}-Ax\\Big]_0^1 = \\frac12 - A\\ \\Rightarrow\\ 2A=\\frac12,\\ A=\\frac14$$</p>
                 <p>代回：$f(x)=x-\\frac14$。✅（若等式中含<strong>两个</strong>定积分，分别令为 A、B，先按 A 的上下限算 A，再算 B。）</p>
+            `)}
+
+            ${exampleBox('难度提升 · 题型一变限积分+洛必达求极限', `
+                <p>求 $\\displaystyle\\lim_{x\\to 0}\\dfrac{\\int_0^x e^{t^2}\\,dt-x}{x^3}$。</p>
+                <p><strong>来源</strong>：云南 2025 专升本高等数学第 17 题同型（真题回忆版）。</p>
+                <p><strong>解</strong>：分子分母在 $x=0$ 处都是 $0$ 型，洛必达：</p>
+                <p>$$\\lim_{x\\to 0}\\frac{\\int_0^x e^{t^2}\\,dt-x}{x^3}=\\lim_{x\\to 0}\\frac{e^{x^2}-1}{3x^2}$$</p>
+                <p>再用一次等价无穷小 $e^{x^2}-1\\sim x^2$（$x\\to 0$）：</p>
+                <p>$$=\\lim_{x\\to 0}\\frac{x^2}{3x^2}=\\frac13$$</p>
+                <blockquote>套路：<strong>变限积分 $\\to$ 洛必达</strong> 化为初等函数；初等函数若是 $0/0$ 还能再等价无穷小一步到位。分子导数后是 $e^{x^2}-1$，直接代公式 $e^u-1\\sim u$ 即可。</blockquote>
+            `)}
+
+            ${exampleBox('难度提升 · 题型一变限积分被积分含 x → 纯化为纯 t', `
+                <p>设 $f(x)$ 连续，$\\displaystyle\\varphi(x)=\\int_0^1 f(xt)\\,dt$，且 $\\displaystyle\\lim_{x\\to 0}\\frac{f(x)}{x}=A$（常数），求 $\\varphi'(x)$ 并讨论 $\\varphi'(x)$ 在 $x=0$ 处的连续性。</p>
+                <p><strong>来源</strong>：科数网「变上限定积分」例 23（专升本通式同型）。</p>
+                <p><strong>解</strong>：先<strong>纯化被积函数</strong>——令 $u=xt$，$du=x\\,dt$，当 $t\\in[0,1]$ 时 $u\\in[0,x]$（$x>0$ 时）：</p>
+                <p>$$\\varphi(x)=\\int_0^x f(u)\\,\\frac{du}{x}=\\frac1x\\int_0^x f(u)\\,du\\quad(x\\neq 0)$$</p>
+                <p>当 $x>0$ 时用「变限积分 + 洛必达」求导：</p>
+                <p>$$\\varphi'(x)=\\frac{x\\,f(x)-\\int_0^x f(u)\\,du}{x^2}$$</p>
+                <p>讨论 $x=0$ 处：$\\varphi(0)=0$，由 $\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x}=A$ 知 $f(0)=0,\\ f'(0)=A$，</p>
+                <p>$$\\lim_{x\\to 0}\\varphi'(x)=\\lim_{x\\to 0}\\frac{f(x)}{x}-\\lim_{x\\to 0}\\frac{\\int_0^x f(u)\\,du}{x^3}\\cdot x^2$$</p>
+                <p>$$=A-\\lim_{x\\to 0}\\frac{f(x)\\cdot x}{3x^2}=A-\\frac A3=\\frac{2A}{3}$$</p>
+                <p>故 $\\varphi'(0)=\\dfrac{2A}{3}$，且 $\\lim\\limits_{x\\to 0}\\varphi'(x)=\\varphi'(0)$ ⇒ <strong>$\\varphi'(x)$ 在 $x=0$ 处连续</strong>。</p>
+                <blockquote>核心动作：<strong>被积分含 $x$ → 先纯化为纯 $t$</strong>（换元 $u=xt$），再正常用「变限积分 + 洛必达」求导。纯化这步是这类题的命门，跳了就做不下去。</blockquote>
+            `)}
+
+            ${exampleBox('难度提升 · 题型二积分方程求 f(x)（含变限积分）', `
+                <p>设 $f(x)$ 连续且满足 $\\displaystyle\\int_0^1 f(xt)\\,dt=f(x)-xe^{-x}$，求 $f(x)$ 的表达式。</p>
+                <p><strong>来源</strong>：科数网「变上限定积分」例 23 第二问（专升本通式同型）。</p>
+                <p><strong>解</strong>：左端含 $xt$，先<strong>纯化</strong>。令 $u=xt$，$du=x\\,dt$：</p>
+                <p>$$\\int_0^1 f(xt)\\,dt=\\frac1x\\int_0^x f(u)\\,du$$</p>
+                <p>原等式变为：</p>
+                <p>$$\\frac1x\\int_0^x f(u)\\,du=f(x)-xe^{-x}\\ \\Rightarrow\\ \\int_0^x f(u)\\,du=x\\,f(x)-x^2e^{-x}$$</p>
+                <p>两边对 $x$ 求导（变限积分 + 乘积求导）：</p>
+                <p>$$f(x)=f(x)+x\\,f'(x)-2xe^{-x}-x^2\\cdot e^{-x}\\cdot(-1)$$</p>
+                <p>化简得：</p>
+                <p>$$x\\,f'(x)=2xe^{-x}-x^2e^{-x}\\ \\Rightarrow\\ f'(x)=2e^{-x}-xe^{-x}=(2-x)e^{-x}$$</p>
+                <p>积分：</p>
+                <p>$$f(x)=\\int(2-x)e^{-x}\\,dx=-(2-x)e^{-x}-\\int e^{-x}\\,dx=-(3-x)e^{-x}+C$$</p>
+                <p>代回原方程定常数：$x=0$ 时 $\\int_0^1 f(0)dt=0$，右端 $f(0)-0=0$，即 $f(0)=0$；由 $-(3-0)e^0+C=0$ 得 $C=3$。</p>
+                <p>$$\\boxed{f(x)=(x-3)e^{-x}+3}$$</p>
+                <blockquote>三步套路：<strong>① 纯化</strong>（$u=xt$ 消掉被积分里的 $x$）→ <strong>② 两端求导</strong>（变限积分 + 乘积求导）→ <strong>③ 积分还原 + 代特值定常数</strong>。其中「代特值定常数」是常被漏掉的一步：求得的 $f(x)$ 必须仍满足原方程。</blockquote>
+            `)}
+
+            ${exampleBox('难度提升 · 题型二含两个未知常数的积分方程', `
+                <p>设 $\\displaystyle f(x)=3x-2\\int_0^1 f(x)\\,dx - 3x\\int_0^1 x\\,f(x)\\,dx$，求 $f(x)$。</p>
+                <p><strong>解</strong>：两个未知定积分，分别令为 $A=\\int_0^1 f(x)dx,\\ B=\\int_0^1 x\\,f(x)dx$，则 $f(x)=3x-2A-3xB$。</p>
+                <p>两边在 $[0,1]$ 上积分求 $A$：</p>
+                <p>$$A=\\int_0^1(3x-2A-3xB)\\,dx=\\frac32-2A-\\frac{3B}{2}$$</p>
+                <p>$$3A=\\frac32-\\frac{3B}{2}\\ \\Rightarrow\\ A=\\frac12-\\frac B2$$</p>
+                <p>两边乘 $x$ 后在 $[0,1]$ 上积分求 $B$：</p>
+                <p>$$B=\\int_0^1 x(3x-2A-3xB)\\,dx=\\int_0^1(3x^2-2Ax-3Bx^2)\\,dx=1-A-B$$</p>
+                <p>$$2B=1-A\\ \\Rightarrow\\ A=1-2B$$</p>
+                <p>联立 $\\begin{cases}A=\\dfrac12-\\dfrac B2\\\\ A=1-2B\\end{cases}$ 解得 $A=\\dfrac13,\\ B=\\dfrac13$。代回：</p>
+                <p>$$f(x)=3x-\\frac23-x=2x-\\frac23$$</p>
+                <blockquote>两个未知常数 ⇒ <strong>列两个积分等式</strong>（一边直接积，一边乘 $x$ 再积）联立成<strong>线性方程组</strong>解出。套路：令 A、B → 等式变形 → 积分建方程组 → 联立解 → 代回。</blockquote>
             `)}
 
             ${groupTitle('fa-check-circle', '十一、函数可积的条件（概念）', '#30D158')}
@@ -3255,6 +3349,51 @@ function buildIntegralDetail() {
                 <p><strong>解</strong>：交点 $(1,1)、(2,\\tfrac12)、(2,1)$，区间 $[1,2]$ 上 $1\\ge\\frac1x$：</p>
                 <p>$$S = \\int_1^2\\Big(1-\\frac1x\\Big)dx = 1-\\ln2$$</p>
                 <blockquote>若曲线上下变化需拆两段时，就拆为两个区间分别积再相加。</blockquote>
+            `)}
+
+            ${exampleBox('难度提升 · Y型 抛物线开口向右 + 直线（X 型算不动时换 Y 型）', `
+                <p>求由抛物线 $y^2=2x$ 和直线 $x+y-4=0$ 所围成的图形的面积。</p>
+                <p><strong>来源</strong>：2024 年成人高等学校招生全国统一考试专升本高等数学（二）第 18 题（真题）。</p>
+                <p><strong>解</strong>：抛物线<strong>开口向右</strong>，对 $y$ 积分直接，否则得拆成两段再 X 型；先<strong>联立</strong>：</p>
+                <p>$$y^2=2x,\\ x+y-4=0\\ \\Rightarrow\\ y^2=2(4-y)\\ \\Rightarrow\\ y^2+2y-8=0$$</p>
+                <p>解得 $y=-4$ 或 $y=2$，对应 $x=8$ 和 $x=2$，交点 $(8,4)、(2,-2)$。</p>
+                <p>Y 型：积分区间 $y\\in[-4,2]$，右曲线 $x=4-y$（直线），左曲线 $x=\\dfrac{y^2}{2}$（抛物线）：</p>
+                <p>$$S=\\int_{-4}^2\\Big(4-y-\\frac{y^2}{2}\\Big)dy=\\Big[4y-\\frac{y^2}{2}-\\frac{y^3}{6}\\Big]_{-4}^2$$</p>
+                <p>$$=\\Big(8-2-\\frac43\\Big)-\\Big(-16-8+\\frac{32}{3}\\Big)=\\frac{14}{3}+\\frac{40}{3}=18$$</p>
+                <blockquote>判断 X / Y 型的<strong>铁律</strong>：抛物线开口方向决定。<strong>开口向右 ($y^2=2px$)</strong>、开口向下且含斜线围成的图形，优先<strong>对 $y$ 积分</strong>（Y 型），因为 $x$ 没办法写成 $y$ 的单值函数，硬上 X 型要拆 N 段；反之开口向上/向下 ($y=ax^2+bx+c$) 才用 X 型。</blockquote>
+            `)}
+
+            ${exampleBox('难度提升 · X 型 多曲线分段围成（上曲线两段切换）', `
+                <p>设 $D$ 为曲线 $y=1-x^2$、直线 $y=x+1$ 及 $x$ 轴所围成的平面区域。求 $D$ 的面积。</p>
+                <p><strong>来源</strong>：专升本高等数学二模拟试卷第 23 题（真题同型）。</p>
+                <p><strong>解</strong>：画图：$y=1-x^2$ 是开口向下的抛物线，顶点在 $(0,1)$；$y=x+1$ 是过 $(-1,0)$、$(0,1)$ 的直线。三个交点 $(-1,0)$、$(0,0)$、$(1,0)$。$x$ 轴将区域分两段：</p>
+                <p><strong>① 区间 $[-1,0]$</strong>：上曲线 $y=x+1$，下曲线 $y=0$；</p>
+                <p><strong>② 区间 $[0,1]$</strong>：上曲线 $y=1-x^2$，下曲线 $y=0$。</p>
+                <p>$$S=\\int_{-1}^0(x+1)dx+\\int_0^1(1-x^2)dx=\\Big[\\frac{x^2}{2}+x\\Big]_{-1}^0+\\Big[x-\\frac{x^3}{3}\\Big]_0^1$$</p>
+                <p>$$=\\Big(0-\\Big(-\\frac12\\Big)\\Big)+\\Big(1-\\frac13\\Big)=\\frac12+\\frac23=\\frac76$$</p>
+                <blockquote>三曲线围成 → <strong>两两联立找所有交点</strong>，交点把 $x$ 轴切成多段，每段里独立判「谁是上曲线」，最后<strong>逐段积分求和</strong>。这是面积题最大坑：把两段当成一段积。</blockquote>
+            `)}
+
+            ${exampleBox('难度提升 · X 型 抛物线+直线（验证开口向上时选 X 型）', `
+                <p>求曲线 $y=2x^2$ 与直线 $y=4x$ 所围图形的面积。</p>
+                <p><strong>来源</strong>：专升本高等数学二模拟试卷第 21 题（真题同型）。</p>
+                <p><strong>解</strong>：联立 $2x^2=4x\\Rightarrow x=0$ 或 $x=2$，交点 $(0,0)、(2,8)$。抛物线<strong>开口向上</strong>，$y$ 可写成 $x$ 的单值函数，X 型直接：</p>
+                <p>区间 $[0,2]$ 上 $4x\\ge 2x^2$（直线在上）：</p>
+                <p>$$S=\\int_0^2(4x-2x^2)dx=\\Big[2x^2-\\frac{2x^3}{3}\\Big]_0^2=8-\\frac{16}{3}=\\frac83$$</p>
+                <blockquote>「开口向上 + 直线」X 型直接上，「开口向右 + 直线」Y 型直接上——这是 X/Y 型二选一的<strong>开口判据</strong>。本题如果用 Y 型，则 $y\\in[0,8]$ 上 $x=y/4$ 与 $x=\\sqrt{y/2}$，要拆 $x=\\sqrt{y/2}$ 还得讨论正负号，反而复杂。</blockquote>
+            `)}
+
+            ${exampleBox('难度提升 · 综合 抛物线+直线（X / Y 型均可验证）', `
+                <p>求抛物线 $y^2=x$ 与直线 $y=x-2$ 所围图形的面积。</p>
+                <p><strong>解（Y 型）</strong>：把两曲线都写成 $x$ 关于 $y$ 的函数，$x=y^2$ 与 $x=y+2$。联立 $y^2=y+2\\Rightarrow y^2-y-2=0\\Rightarrow y=-1$ 或 $y=2$，交点 $(1,-1)、(4,2)$。</p>
+                <p>区间 $[-1,2]$ 上直线 $x=y+2$ 在右、抛物线 $x=y^2$ 在左：</p>
+                <p>$$S=\\int_{-1}^2\\big((y+2)-y^2\\big)dy=\\Big[\\frac{y^2}{2}+2y-\\frac{y^3}{3}\\Big]_{-1}^2$$</p>
+                <p>$$=\\Big(2+4-\\frac83\\Big)-\\Big(\\frac12-2+\\frac13\\Big)=\\frac{10}{3}+\\frac76=\\frac{27}{6}=\\frac92$$</p>
+                <p><strong>解（X 型 · 拆三段）</strong>：抛物线拆 $x=\\sqrt{y}=\\pm\\sqrt{y}$，直线 $x=y+2$。</p>
+                <p>在 $y\\in[-1,0]$：左 $x=-\\sqrt{y}$，右 $x=y+2$；$y\\in[0,2]$：左 $x=\\sqrt{y}$，右 $x=y+2$。</p>
+                <p>$$S=\\int_{-1}^0\\big((y+2)-(-\\sqrt{y})\\big)dy+\\int_0^2\\big((y+2)-\\sqrt{y}\\big)dy$$</p>
+                <p>$$=\\int_{-1}^0(y+2+\\sqrt{y})dy+\\int_0^2(y+2-\\sqrt{y})dy=\\frac{11}{6}+\\frac{8}{3}=\\frac92\\ ✓$$</p>
+                <blockquote>同一题两种解法都能算出 $\\dfrac92$，但<strong>Y 型算量比 X 型小一半</strong>——印证了「开口向右时 Y 型优先」的口诀。<strong>大题拿分关键</strong>：用 Y 型算完后再用 X 型验算一遍，答案一致才稳，专升本阅卷按步给分。</blockquote>
             `)}
 
             ${groupTitle('fa-sync', '12.2 旋转体体积', 'var(--color-green)')}
