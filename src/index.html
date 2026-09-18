@@ -3818,6 +3818,72 @@ function buildEquationDetail() {
             </div>
             ${memoryBox('三个易错点', '① $e^{\\ln(\\text{框})} = \\text{框}$ — 指数对抵，别多写一步<br>② $\\int \\frac{1}{x}\\,dx = \\ln|x|$ — 绝对值不能丢<br>③ 加加减减混在一起的一般不可分离，别硬分')}
 
+            ${exampleBox('难度提升 · 可分离变量（2014 浙江专升本真题·填空14）· (1+x)ydx+(1-y)xdy=0', `
+                <p>求微分方程 $(1+x)y\\,dx+(1-y)x\\,dy=0$ 的通解。</p>
+                <p><strong>来源</strong>：2014 年浙江专升本 · 填空 14。</p>
+                <p><strong>解</strong>：分离变量：</p>
+                <p>$$\\frac{1+x}{x}\\,dx=\\frac{y-1}{y}\\,dy=\\left(1-\\frac1y\\right)\\,dy$$</p>
+                <p>两边积分 $x+\\ln|x|=y-\\ln|y|+C$，整理得通解：</p>
+                <p>$$\\boxed{\\,x-y+\\ln|xy|=C\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：微分形式里 $y$ 与 $dy$、$x$ 与 $dx$ 混在一起，先移项成比值再分离；$\\int\\frac1y\\,dy=\\ln|y|$ 的绝对值别丢。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 可分离变量（经典）· sinx·y\'=ylny（含 ∫cscx）', `
+                <p>求初值问题 $\\sin x\\,\\dfrac{dy}{dx}=y\\ln y$，$y\\Big|_{\\frac\\pi2}=e$ 的特解。</p>
+                <p><strong>来源</strong>：浙江大学《高等数学》§2 可分离变量问题 1（同等难度通式）。</p>
+                <p><strong>解</strong>：分离变量：</p>
+                <p>$$\\frac{dy}{y\\ln y}=\\frac{dx}{\\sin x}$$</p>
+                <p>把 $\\ln y$ 当整体，$\\int\\frac{dy}{y\\ln y}=\\ln|\\ln y|$，$\\int\\csc x\\,dx=\\ln|\\csc x-\\cot x|$：</p>
+                <p>$$\\ln y=C(\\csc x-\\cot x)$$</p>
+                <p>由 $y(\\frac\\pi2)=e$：$\\ln e=1=C(\\csc\\frac\\pi2-\\cot\\frac\\pi2)=C(1-0)$，得 $C=1$，特解：</p>
+                <p>$$\\boxed{\\,\\ln y=\\csc x-\\cot x\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：① $\\int\\csc x\\,dx=\\ln|\\csc x-\\cot x|$ 要记牢；② 换 $u=\\ln y$ 的整体思想，别把 $y\\cdot\\ln y$ 硬拆。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 可分离变量（含部分分式）· y\'=(y²-y)/x', `
+                <p>求微分方程 $\\dfrac{dy}{dx}=\\dfrac{y^2-y}{x}$ 满足 $y(2)=2$ 的特解。</p>
+                <p><strong>来源</strong>：专升本同等难度通式（解答题常考部分分式）。</p>
+                <p><strong>解</strong>：分离变量后对 $y$ 部分分式：</p>
+                <p>$$\\frac{dy}{y(y-1)}=\\frac{dx}{x}\\;\\Longrightarrow\\;\\left(\\frac{1}{y-1}-\\frac1y\\right)dy=\\frac{dx}{x}$$</p>
+                <p>积分得 $\\ln\\left|\\frac{y-1}{y}\\right|=\\ln|x|+C$，即 $\\frac{y-1}{y}=Cx$；由 $y(2)=2$ 得 $\\frac12=2C\\Rightarrow C=\\frac14$：</p>
+                <p>$$\\frac{y-1}{y}=\\frac{x}{4}\\;\\Longrightarrow\\;\\boxed{\\,y=\\frac{4}{4-x}\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：分子分母都有 $y$（二次）时必先部分分式 $\\frac1{y-1}-\\frac1y$ 再积分，这是专升本解答题的失分点。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 可分离变量（针对性易错点③：加减混合别硬分）· y\'=(x+y)²', `
+                <p>求微分方程 $\\dfrac{dy}{dx}=(x+y)^2$ 满足 $y(0)=0$ 的特解。</p>
+                <p><strong>来源</strong>：专升本同等难度通式（判定「加加减减别硬分）、$u=x+y$ 降阶换元）。</p>
+                <p><strong>解</strong>：$x,y$ 以「和」$(x+y)$ 混在一起，<strong>不能分离变量</strong>，先判型。令 $u=x+y$，则 $\\frac{dy}{dx}=\\frac{du}{dx}-1$：</p>
+                <p>$$\\frac{du}{dx}-1=u^2\\;\\Longrightarrow\\;\\frac{du}{dx}=1+u^2\\;\\Longrightarrow\\;\\arctan u=x+C$$</p>
+                <p>由 $y(0)=0$：$u(0)=0$，$\\arctan 0=0=0+C\\Rightarrow C=0$，$u=\\tan x$，故特解</p>
+                <p>$$\\boxed{\\,y=\\tan x-x\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：看到「加加减减混在一起」别硬分。它既不满足可分离（$x,dx$ 与 $y,dy$ 分不开），也非一阶线性，而是 $u=x+y$ 的降阶换元型。先判型再动笔。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 可分离变量（针对性易错点②：ln|x| 绝对值不能丢）· y\'=y/(x·ln x)', `
+                <p>求微分方程 $\\dfrac{dy}{dx}=\\dfrac{y}{x\\ln x}$ 满足 $y(e)=2$ 的特解。</p>
+                <p><strong>来源</strong>：专升本同等难度通式（考查 $\\int\\frac{dx}{x\\ln x}=\\ln|\\ln x|$ 与绝对值）。</p>
+                <p><strong>解</strong>：分离变量</p>
+                <p>$$\\frac{dy}{y}=\\frac{dx}{x\\ln x}$$</p>
+                <p>左边 $\\int\\frac{dy}{y}=\\ln|y|$；右边令 $\\ln x=t$、$\\frac{dx}{x}=dt$：$\\int\\frac{dt}{t}=\\ln|\\ln x|$，故</p>
+                <p>$$\\ln|y|=\\ln|\\ln x|+C\\;\\Longrightarrow\\;y=C\\ln x$$</p>
+                <p>由 $y(e)=2$：$2=C\\ln e=C\\Rightarrow C=2$，特解</p>
+                <p>$$\\boxed{\\,y=2\\ln x\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：① $\\ln|\\ln x|$ 的绝对值别丢；② $\\int\\frac{dx}{x\\ln x}$ 用凑微分 $\\frac{d(\\ln x)}{\\ln x}$ 一步出 $\\ln|\\ln x|$；③ 初始 $y(e)=2$ 时 $\\ln e=1$。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 可分离变量（针对性易错点①：e^{ln(框)}=框 指数对抵）· y\'=2y/(x+1)', `
+                <p>求微分方程 $\\dfrac{dy}{dx}=\\dfrac{2y}{x+1}$ 满足 $y(0)=2$ 的特解。</p>
+                <p><strong>来源</strong>：专升本同等难度通式（考查 $e^{\\ln(\\text{框})}=\\text{框}$ 指数对抵）。</p>
+                <p><strong>解</strong>：分离变量</p>
+                <p>$$\\frac{dy}{y}=\\frac{2\\,dx}{x+1}\\;\\Longrightarrow\\;\\ln|y|=2\\ln|x+1|+C$$</p>
+                <p>两边取指数，且用 $e^{\\ln(\\text{框})}=\\text{框}$（指数与对数对抵，别多写一步）：</p>
+                <p>$$y=e^{2\\ln|x+1|+C}=e^{C}\\cdot e^{\\ln(x+1)^2}=C(x+1)^2$$</p>
+                <p>由 $y(0)=2$：$2=C\\cdot1\\Rightarrow C=2$，故特解</p>
+                <p>$$\\boxed{\\,y=2(x+1)^2\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：$e^{2\\ln(x+1)+C}=C(x+1)^2$ 一步到位，别停在 $e^{\\ln(x+1)^2}$ 不化简；$e^C$ 合并成一个新常数 $C$，这就是「指数对抵」的精髓。</p>
+            `)}
+
             ${groupTitle('fa-2', '3.2 一阶线性微分方程（公式法）', 'var(--color-green)')}
             <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
                 <div class="formula-label" style="color:var(--color-green);">识别特征</div>
@@ -3835,6 +3901,37 @@ function buildEquationDetail() {
             ${memoryBox('记忆口诀：先积 P 得中间量，前负后正套括号，里面积分再加 C', '拆三步：<br>1. 先算 $\\int P(x)\\,dx$ — 记作"中间量"<br>2. 前头 $e^{-\\text{中间量}}$，括号里是 $\\int Q(x) \\cdot e^{\\text{中间量}}\\,dx + C$<br>3. $e^{-\\int}$ 在外面，$e^{+\\int}$ 在里面，一正一负别搞反')}
             ${memoryBox('易错点', '① $P(x)$ 必须是标准型中 $y$ 前面的系数——$y\' - 3y = e^x$ 里 $P(x) = -3$，别漏负号<br>② $\\int P(x)\\,dx$ 不加 $C$（公式里已有一个总的 $C$）<br>③ $e^{-\\int P\\,dx}$ 在最外层，别写到括号里去')}
 
+            ${exampleBox('难度提升 · 一阶线性（2014 浙江专升本真题·选择5）· y\'+(1/x)y=1/[x(x²+1)]', `
+                <p>求微分方程 $y\'+\\dfrac1x y=\\dfrac{1}{x(x^2+1)}$ 的通解。</p>
+                <p><strong>来源</strong>：2014 年浙江专升本 · 选择 5。</p>
+                <p><strong>解</strong>：$P(x)=\\frac1x$，$\\int P\\,dx=\\ln|x|$，$e^{\\int P}=x$，套通解公式：</p>
+                <p>$$y=e^{-\\ln|x|}\\left[\\int \\frac{1}{x(x^2+1)}\\cdot x\\,dx+C\\right]=\\frac1x\\left[\\int\\frac{dx}{x^2+1}+C\\right]=\\frac1x(\\arctan x+C)$$</p>
+                <p>通解：</p>
+                <p>$$\\boxed{\\,y=\\frac{\\arctan x+C}{x}\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：$Q(x)\\cdot e^{\\int P}=\\frac{1}{x(x^2+1)}\\cdot x=\\frac1{x^2+1}$ 恰好把分母 $x$ 抵消，直接出 $\\arctan x$；积分因子这步别算错正负。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 一阶线性（P 含复合对数）· (x²+1)y\'-2xy=(x²+1)²', `
+                <p>求微分方程 $(x^2+1)y\'-2xy=(x^2+1)^2$ 的通解。</p>
+                <p><strong>来源</strong>：专升本同等难度通式（$P(x)$ 恰为 $\\ln$ 的导数）。</p>
+                <p><strong>解</strong>：先化标准型 $y\'-\\dfrac{2x}{x^2+1}y=x^2+1$。</p>
+                <p>$\\int P\\,dx=-\\ln(x^2+1)$，故 $e^{\\int P}=\\frac1{x^2+1}$、$e^{-\\int P}=x^2+1$：</p>
+                <p>$$y=(x^2+1)\\left[\\int (x^2+1)\\cdot\\frac1{x^2+1}\\,dx+C\\right]=(x^2+1)(x+C)$$</p>
+                <p>通解：</p>
+                <p>$$\\boxed{\\,y=(x^2+1)(x+C)\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：$P(x)=y\'$ 前系数、即 $-\\frac{2x}{x^2+1}$ 恰是 $\\ln(x^2+1)$ 的导数，$\\int P=\\ln(x^2+1)$ 的<strong>负号</strong>是常见陷阱；括号内被积函数化简为 $1$ 后直接出 $x$。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 一阶线性（P 带负号）· y\'-(2/(x+1))y=(x+1)³', `
+                <p>求微分方程 $y\'-\\dfrac{2}{x+1}y=(x+1)^3$ 的通解。</p>
+                <p><strong>来源</strong>：同济《高等数学》§7.2 例 1（同等难度通式）。</p>
+                <p><strong>解</strong>：$P(x)=-\\frac{2}{x+1}$，$\\int P\\,dx=-2\\ln(x+1)$，$e^{\\int P}=(x+1)^{-2}$、$e^{-\\int P}=(x+1)^2$：</p>
+                <p>$$y=(x+1)^2\\left[\\int (x+1)^3\\cdot(x+1)^{-2}\\,dx+C\\right]=(x+1)^2\\left[\\int (x+1)\\,dx+C\\right]$$</p>
+                <p>通解：</p>
+                <p>$$\\boxed{\\,y=(x+1)^2\\left(\\frac{(x+1)^2}{2}+C\\right)\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：$P$ 带负号（$-\\frac2{x+1}$）最易漏，必须盯准标准型里 $y$ 前系数；先算 $\\int P$ 再加括号大 $C$。</p>
+            `)}
+
             ${groupTitle('fa-3', '3.3 齐次型（y/x 型）', '#FFD60A')}
             <div class="formula-card" style="--card-accent:#FFD60A;margin-bottom:1rem;">
                 <div class="formula-label" style="color:var(--accent-yellow-text);">识别特征</div>
@@ -3847,6 +3944,38 @@ function buildEquationDetail() {
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">1. 令 $u = \\frac{y}{x}$，即 $y = ux$<br>2. 求导：$\\frac{dy}{dx} = u + x\\frac{du}{dx}$<br>3. 代入原方程，转化为可分离变量型<br>4. 解出 $u$ 后，回代 $u = y/x$ 得到 $y$</div>
             </div>
             ${memoryBox('概念辨析：三个词别混', '线性 = 未知函数 $y$ 及其各阶导数都是一次<br>齐次（线性意义）= 方程右边自由项 = 0<br>非齐次 = 方程右边自由项 ≠ 0<br><br>记忆锚点：齐次 = 右边归零；线性 = 全是一次的。')}
+
+            ${exampleBox('难度提升 · 齐次 y/x 型（经典）· y\'=(x+y)/(x-y)', `
+                <p>求微分方程 $y\'=\\dfrac{x+y}{x-y}$ 的通解。</p>
+                <p><strong>来源</strong>：中国科学技术大学《高等数学》第七章（同等难度通式）。</p>
+                <p><strong>解</strong>：这是 $\\varphi(y/x)$ 型，令 $u=\\frac yx$（$y=ux$，$y\'=u+xu\'$）：</p>
+                <p>$$u+xu\'=\\frac{1+u}{1-u}\\;\\Longrightarrow\\;xu\'=\\frac{1+u^2}{1-u}$$</p>
+                <p>分离变量：</p>
+                <p>$$\\frac{1-u}{1+u^2}\\,du=\\frac{dx}{x}\\;\\Longrightarrow\\;\\arctan u-\\frac12\\ln(1+u^2)=\\ln|x|+C$$</p>
+                <p>回代 $u=\\frac yx$（注意 $1+\\frac{y^2}{x^2}=\\frac{x^2+y^2}{x^2}$）：</p>
+                <p>$$\\boxed{\\,\\arctan\\frac yx-\\ln\\sqrt{x^2+y^2}=C\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：把 $\\frac{x+y}{x-y}$ 同时除以 $x$ 还原成 $\\frac{1+y/x}{1-y/x}$ 是识别 y/x 型的关键；积分含 $\\arctan+\\ln$ 别漏 $u$ 回代。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 齐次 y/x 型（tan 陷阱）· y\'=y/x+tan(y/x)，带初值', `
+                <p>求微分方程 $\\dfrac{dy}{dx}=\\dfrac yx+\\tan\\dfrac yx$ 满足 $y\\Big|_{x=1}=\\dfrac\\pi6$ 的特解。</p>
+                <p><strong>来源</strong>：广州大学《高等数学》§2.2 例 3 同型（同等难度通式）。</p>
+                <p><strong>解</strong>：令 $u=\\frac yx$，$y\'=u+xu\'$：</p>
+                <p>$$xu\'=\\tan u\\;\\Longrightarrow\\;\\frac{\\cos u}{\\sin u}\\,du=\\frac{dx}{x}\\;\\Longrightarrow\\;\\ln|\\sin u|=\\ln|x|+C\\;\\Longrightarrow\\;\\sin u=Cx$$</p>
+                <p>由 $y(1)=\\frac\\pi6$：$\\sin\\frac\\pi6=\\frac12=C\\cdot1\\Rightarrow C=\\frac12$，特解：</p>
+                <p>$$\\boxed{\\,\\sin\\frac yx=\\frac x2\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：$\\frac{\\cos u}{\\sin u}du=\\frac{d(\\sin u)}{\\sin u}$ 是凑微分，$\\int\\tan$ 型要反着看；特解用初始条件定 $C$。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 齐次 y/x 型（含 ln）· xy\'=y·ln(y/x)', `
+                <p>求微分方程 $x\\dfrac{dy}{dx}=y\\ln\\dfrac yx$ 的通解。</p>
+                <p><strong>来源</strong>：广州大学《高等数学》§2.2 例 4 同型（同等难度通式）。</p>
+                <p><strong>解</strong>：令 $u=\\frac yx$，$y\'=u+xu\'$：</p>
+                <p>$$xu\'=u(\\ln u-1)\\;\\Longrightarrow\\;\\frac{du}{u(\\ln u-1)}=\\frac{dx}{x}\\;\\Longrightarrow\\;\\ln|\\ln u-1|=\\ln|x|+C\\;\\Longrightarrow\\;\\ln u-1=Cx$$</p>
+                <p>回代 $u=\\frac yx$：$\\ln\\frac yx-1=Cx\\Rightarrow \\frac yx=e^{1+Cx}$，故</p>
+                <p>$$\\boxed{\\,y=x\\,e^{1+Cx}\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：$u$ 前面带 $\\ln u$，令 $\\ln u-1$ 整体（$d(\\ln u-1)=\\frac{du}{u}$）一次凑成；回代后仍保留任意常数 $C$。</p>
+            `)}
 
             ${groupTitle('fa-list-check', '一阶方法选择顺序', '#BF5AF2')}
             <div class="formula-card" style="--card-accent:#BF5AF2;">
@@ -3892,6 +4021,46 @@ function buildEquationDetail() {
                 ${formulaCard('', '共轭复根', '$$y = e^{\\alpha x}(C_1 \\cos\\beta x + C_2 \\sin\\beta x)$$', '条件：$r_{1,2} = \\alpha \\pm \\beta i$', '#FFD60A')}
             </div>
             ${memoryBox('记忆锚点', '不等实根 → 两个 $e$ 直接加<br>相等实根 → 重的那个乘 $x$（$C_1 + C_2 x$）<br>复根 → 实部 $\\alpha$ 进指数，虚部 $\\beta$ 进三角（一 cos 一 sin）')}
+
+            ${exampleBox('难度提升 · 二阶齐次（2018 河南专升本真题·单选，逆用）· 由通解反求方程', `
+                <p>写出以 $y=C_1e^{2x}+C_2e^{3x}$ 为通解的二阶常系数齐次线性微分方程。</p>
+                <p><strong>来源</strong>：2018 年河南专升本 · 单选（反向考查）。</p>
+                <p><strong>解</strong>：通解形式对应特征根 $r_1=2,\\ r_2=3$，特征方程为</p>
+                <p>$$(r-2)(r-3)=0\\;\\Longrightarrow\\;r^2-5r+6=0$$</p>
+                <p>回写成微分方程：</p>
+                <p>$$\\boxed{\\,y\'\'-5y\'+6y=0\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：给通解反求方程，先看指数里的根 $2,3$ → 写特征方程 → 乘开得系数 $-5,+6$；方向与「由方程求通解」相反，别把符号写反。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 二阶齐次（2019 全国成考·计算27）· y\'\'-5y\'-6y=0', `
+                <p>求微分方程 $y\'\'-5y\'-6y=0$ 的通解。</p>
+                <p><strong>来源</strong>：2019 年成人高校专升本（全国卷 · 高数一）计算题 27。</p>
+                <p><strong>解</strong>：特征方程</p>
+                <p>$$r^2-5r-6=0=(r-6)(r+1)\\;\\Longrightarrow\\;r_1=6,\\ r_2=-1$$</p>
+                <p>两个不相等实根，通解：</p>
+                <p>$$\\boxed{\\,y=C_1e^{6x}+C_2e^{-x}\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：特征方程得两不等实根直接「两个 $e$ 加一起」；本例系数是 $-5,-6$（根 $6,-1$），与上一题 $-5,+6$（根 $2,3$）不同，别混淆。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 二阶齐次（复根，同等难度通式）· y\'\'+4y\'+13y=0', `
+                <p>求微分方程 $y\'\'+4y\'+13y=0$ 的通解。</p>
+                <p><strong>来源</strong>：2027 山东专升本专项练习（同等难度通式，考查复根）。</p>
+                <p><strong>解</strong>：特征方程</p>
+                <p>$$r^2+4r+13=0\\;\\Longrightarrow\\;r_{1,2}=\\frac{-4\\pm\\sqrt{16-52}}{2}=\\frac{-4\\pm\\sqrt{-36}}{2}=-2\\pm3i$$</p>
+                <p>共轭复根 $r=\\alpha\\pm\\beta i$（$\\alpha=-2,\\ \\beta=3$），通解：</p>
+                <p>$$\\boxed{\\,y=e^{-2x}\\left(C_1\\cos3x+C_2\\sin3x\\right)\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：判别式 $<0$ 走复根：实部 $\\alpha=-2$ 进指数，虚部 $\\beta=3$ 进三角（一 $\\cos$ 一 $\\sin$）。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 二阶齐次（已知一个解求通解）· 用韦达定另一根', `
+                <p>已知 $y_1=e^{2x}$ 是二阶常系数齐次线性方程 $y\'\'-5y\'+6y=0$ 的一个解，求该方程的通解，并写出与 $y_1$ 线性无关的另一个解 $y_2$。</p>
+                <p><strong>来源</strong>：专升本同等难度通式（「已知一个解 ⇒ 已知一个特征根」解法）。</p>
+                <p><strong>解</strong>：因 $y_1=e^{2x}$ 是解，对应特征根 $r_1=2$；特征方程已知一根为 $2$，试除后</p>
+                <p>$$r^2-5r+6=0=(r-2)(r-3)\\;\\Longrightarrow\\;r_2=3$$</p>
+                <p>故另一线性无关解 $y_2=e^{3x}$（$\\frac{y_2}{y_1}=e^x\\neq$ 常数），通解：</p>
+                <p>$$\\boxed{\\,y=C_1e^{2x}+C_2e^{3x}\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：① 「已知一个解」本质是「已知一个特征根」；② 用韦达「两根和 $=5$、两根积 $=6$」或试除 $(r-2)$ 定另一根；③ 两根之比非恒常数即线性无关，才可直接相加成通解。</p>
+            `)}
         </div>
     `;
 
@@ -3946,6 +4115,41 @@ function buildEquationDetail() {
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">设好后代入原方程 $y'' + py' + qy = P(x)e^{\\alpha x}$，两边比较系数解出 $a, b, c$，得到真正的特解。</div>
             </div>
             ${memoryBox('易错警示', '① 设特解时 $x^k$ 别漏 — $k$ 由 $\\alpha$ 和特征根关系决定<br>② $Q(x)$ 必须是一般式（带待定系数），不能直接抄 $P(x)$ 的系数<br>③ 求完特解别忘了和齐次通解组合，题目问"通解"时只给特解会丢分<br>④ 题目若问"特解"，需用初始条件定 $C_1, C_2$')}
+
+            ${exampleBox('难度提升 · 二阶非齐次（2019 陕西专升本真题·计算20）· y\'\'-6y\'+8y=e³ˣ（k=0）', `
+                <p>求微分方程 $y\'\'-6y\'+8y=e^{3x}$ 的通解。</p>
+                <p><strong>来源</strong>：2019 年陕西专升本 · 计算题 20。</p>
+                <p><strong>解</strong>：① 齐通解：$r^2-6r+8=(r-2)(r-4)$，$r_1=2,\\ r_2=4$，$Y=C_1e^{2x}+C_2e^{4x}$。</p>
+                <p>② 定 $k$：右端 $\\alpha=3\\neq2,4$，非特征根 $\\Rightarrow k=0$；$P(x)=1$ 为零次，设 $y^*=ae^{3x}$。</p>
+                <p>③ 代入：$y^{*\\prime}=3ae^{3x}$，$y^{*\\prime\\prime}=9ae^{3x}$，$LHS=9a-18a+8a=-a$，由 $-a\\,e^{3x}=e^{3x}$ 得 $a=-1$。</p>
+                <p>④ 组合通解：</p>
+                <p>$$\\boxed{\\,y=C_1e^{2x}+C_2e^{4x}-e^{3x}\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：$\\alpha=3$ 不是特征根所以 $k=0$（特解不带 $x$）；代入后 $9-18+8=-1$ 即系数，待定系数一步到位。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 二阶非齐次（2014 浙江专升本真题·填空15）· 由齐次通解反求 a,b + 初值', `
+                <p>已知 $y\'\'+ay\'+by=0$ 的通解为 $y=C_1e^{x}+C_2e^{2x}$，求 $y\'\'+ay\'+by=1$ 满足 $y(0)=2,\\ y\'(0)=-1$ 的解。</p>
+                <p><strong>来源</strong>：2014 年浙江专升本 · 填空 15。</p>
+                <p><strong>解</strong>：① 齐次根为 $1,2$ → 特征方程 $(r-1)(r-2)=r^2-3r+2$，故 $a=-3,\\ b=2$，即求 $y\'\'-3y\'+2y=1$。</p>
+                <p>② 特解：右端常数 $1$（$\\alpha=0$ 非根，$k=0$），设 $y^*=A$：代入得 $0-0+2A=1\\Rightarrow A=\\frac12$。</p>
+                <p>③ 通解 $y=C_1e^{x}+C_2e^{2x}+\\frac12$；由 $y(0)=2,\\ y\'(0)=-1$：</p>
+                <p>$$C_1+C_2+\\frac12=2,\\quad C_1+2C_2=-1\\;\\Longrightarrow\\;C_1=4,\\ C_2=-\\frac52$$</p>
+                <p>④ 所求特解：</p>
+                <p>$$\\boxed{\\,y=4e^{x}-\\frac52e^{2x}+\\frac12\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：① 由齐次通解的指数反推 $a,b$；② 常数右端按「零次、$\\alpha=0$、非特征根 $k=0$」设常数特解 $A$；③ 分两步代入通解求 $C_1,C_2$。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 二阶非齐次（二重根 k=2，特解含 x²）· y\'\'-2y\'+y=eˣ', `
+                <p>求微分方程 $y\'\'-2y\'+y=e^x$ 的通解。</p>
+                <p><strong>来源</strong>：2027 山东专升本专项练习（同等难度通式，考查二重根 $k=2$）。</p>
+                <p><strong>解</strong>：① 齐通解：$r^2-2r+1=(r-1)^2$，$r_{1,2}=1$（重根），$Y=(C_1+C_2x)e^x$。</p>
+                <p>② 定 $k$：右端 $\\alpha=1$ = 特征根且为重根 $\\Rightarrow k=2$，设 $y^*=Ax^2e^x$。</p>
+                <p>③ 求导代入：$y^{*\\prime}=A(x^2+2x)e^x$，$y^{*\\prime\\prime}=A(x^2+4x+2)e^x$，</p>
+                <p>$$LHS=A(x^2+4x+2)-2A(x^2+2x)+Ax^2=2A$$</p>
+                <p>由 $2A\\,e^x=e^x\\Rightarrow A=\\frac12$。④ 通解：</p>
+                <p>$$\\boxed{\\,y=(C_1+C_2x)e^x+\\frac12x^2e^x\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：$\\alpha=1$ 是<strong>二重根</strong>所以 $k=2$（特解含 $x^2$），最易漏写 $x^k$；代入后 $x^2$、$x$ 项全抵消只剩 $2A$，正好印证 $k$ 设对。</p>
+            `)}
         </div>
     `;
 
