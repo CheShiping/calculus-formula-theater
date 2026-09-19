@@ -4150,6 +4150,34 @@ function buildEquationDetail() {
                 <p>$$\\boxed{\\,y=(C_1+C_2x)e^x+\\frac12x^2e^x\\,}$$</p>
                 <p>💡 <strong>抢分点</strong>：$\\alpha=1$ 是<strong>二重根</strong>所以 $k=2$（特解含 $x^2$），最易漏写 $x^k$；代入后 $x^2$、$x$ 项全抵消只剩 $2A$，正好印证 $k$ 设对。</p>
             `)}
+
+            ${exampleBox('难度提升 · 二阶非齐次（题目问特解·需用初值定 C₁,C₂）· y\'\'+4y\'+3y=2e⁻ˣ', `
+                <p>求微分方程 $y\'\'+4y\'+3y=2e^{-x}$ 满足 $y(0)=0,\\ y\'(0)=1$ 的特解。</p>
+                <p><strong>来源</strong>：专升本同等难度通式（「问特解必须用初始条件定 $C_1,C_2$」）。</p>
+                <p><strong>解</strong>：① 齐通解：$r^2+4r+3=(r+1)(r+3)$，$r_1=-1,\\ r_2=-3$，$Y=C_1e^{-x}+C_2e^{-3x}$。</p>
+                <p>② 定 $k$：右端 $\\alpha=-1=r_1$ 是<strong>单根</strong>$\\Rightarrow k=1$，设 $y^*=Ax\\,e^{-x}$。</p>
+                <p>③ 代入：$y^{*\\prime}=A(1-x)e^{-x}$，$y^{*\\prime\\prime}=A(x-2)e^{-x}$，</p>
+                <p>$$LHS=A[(x-2)+4(1-x)+3x]e^{-x}=2A\\,e^{-x}\\;\\Rightarrow\\;2A=2\\;\\Rightarrow\\;A=1$$</p>
+                <p>④ 通解 $y=C_1e^{-x}+C_2e^{-3x}+x\\,e^{-x}$。⑤ 问<strong>特解</strong>需用初值定 $C_1,C_2$：</p>
+                <p>$$y(0)=0:\\ C_1+C_2=0;\\qquad y\'(0)=1:\\ -C_1-3C_2+1=1$$</p>
+                <p>解得 $C_1=C_2=0$，故特解：</p>
+                <p>$$\\boxed{\\,y=x\\,e^{-x}\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：区分「通解」（保留 $C_1,C_2$）与「特解」（必须用初值定两个 $C$）。本例恰好 $C_1=C_2=0$，特解退化为 $xe^{-x}$，是「单根 $k=1$ + 初值求特解」的典型。</p>
+            `)}
+
+            ${exampleBox('难度提升 · 二阶非齐次（无特殊情况·右端为普通多项式 k=0）· y\'\'-2y\'-3y=x', `
+                <p>求微分方程 $y\'\'-2y\'-3y=x$ 的通解。</p>
+                <p><strong>来源</strong>：专升本同等难度通式（「无特殊情况」的纯待定系数法流程）。</p>
+                <p><strong>解</strong>：① 齐通解：$r^2-2r-3=(r-3)(r+1)$，$r_1=3,\\ r_2=-1$，$Y=C_1e^{3x}+C_2e^{-x}$。</p>
+                <p>② 定 $k$：右端 $P(x)e^{\\alpha x}=x\\cdot e^{0x}$，$\\alpha=0$ 不是特征根 $\\Rightarrow k=0$，无指数特殊情况。</p>
+                <p>③ 设 $Q(x)$ 与 $P(x)=x$ 同次的<strong>一般式</strong>：$y^*=ax+b$。</p>
+                <p>④ 代入：$y^{*\\prime}=a$，$y^{*\\prime\\prime}=0$，</p>
+                <p>$$LHS=0-2a-3(ax+b)=-3ax+(-2a-3b)$$</p>
+                <p>比较系数：$-3a=1\\Rightarrow a=-\\frac13$，$-2a-3b=0\\Rightarrow b=\\frac29$，特解 $y^*=-\\frac13x+\\frac29$。</p>
+                <p>⑤ 组合通解：</p>
+                <p>$$\\boxed{\\,y=C_1e^{3x}+C_2e^{-x}-\\frac13x+\\frac29\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：这道「没有特殊情况」考最纯的通式流程——右端无 $e^{\\alpha x}$（$\\alpha=0$）、非特征根（$k=0$）、$Q(x)$ 取一次一般式 $ax+b$、代入比系数。先把这种「无技巧」题写稳，再去碰 $k=1,2$ 或含 $\\ln$、三角的特殊题。</p>
+            `)}
         </div>
     `;
 
