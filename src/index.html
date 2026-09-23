@@ -4552,7 +4552,7 @@ function buildMultivarDetail() {
                 <table style="width:100%;color:var(--text-secondary);font-size:0.9rem;border-collapse:collapse;">
                     <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">题型</td><td style="padding:0.3rem 0;">特征关键字</td><td style="padding:0.3rem 0;">方法</td></tr>
                     <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">无条件极值</td><td style="padding:0.3rem 0;">直接给 $z=f(x,y)$，无附加等式</td><td style="padding:0.3rem 0;">驻点 + $A,B,C$</td></tr>
-                    <tr><td style="padding:0.3rem 0;">条件极值</td><td style="padding:0.3rem 0;">出现「条件」$\varphi(x,y)=0$ 或实际问题</td><td style="padding:0.3rem 0;">拉格朗日</td></tr>
+                    <tr><td style="padding:0.3rem 0;">条件极值</td><td style="padding:0.3rem 0;">出现「条件」$\\varphi(x,y)=0$ 或实际问题</td><td style="padding:0.3rem 0;">拉格朗日</td></tr>
                 </table>
             </div>
             ${memoryBox('判断口诀', '有约束就用拉格朗日，没约束就走 $A,B,C$。题目出现「求 $f(x,y)$ 在 $\\varphi(x,y)=0$ 条件下的最值/极值」，或「XXX 达到最大/最小」的实际建模，多半是条件极值。')}
@@ -4572,7 +4572,7 @@ function buildMultivarDetail() {
             ${formulaCard('多7', '条件极值（拉格朗日）', '$$L(x,y,\\lambda)=f(x,y)+\\lambda\\,\\varphi(x,y)$$', '目标 + 拉姆达 × 约束，三偏导置零，解出驻点', '#FF9F0A')}
             <div class="formula-card" style="--card-accent:#FF9F0A;margin:1rem 0;">
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
-                    步骤：① 找目标 $z=f(x,y)$、约束 $\varphi(x,y)=0$（先把右边挪到 0）；② 构造 $L=f+\\lambda\\varphi$（$\\lambda$ 读「拉姆达」）；③ 对 $x,y,\\lambda$ 求偏导并令其 $=0$（$L_x=0,L_y=0,L_\\lambda=0$）；④ 解出驻点 $(x,y)$；⑤ 由实际意义（或比较函数值）决定最值。
+                    步骤：① 找目标 $z=f(x,y)$、约束 $\\varphi(x,y)=0$（先把右边挪到 0）；② 构造 $L=f+\\lambda\\varphi$（$\\lambda$ 读「拉姆达」）；③ 对 $x,y,\\lambda$ 求偏导并令其 $=0$（$L_x=0,L_y=0,L_\\lambda=0$）；④ 解出驻点 $(x,y)$；⑤ 由实际意义（或比较函数值）决定最值。
                 </div>
             </div>
             ${exampleBox('专升本真题（2018 成人高考专升本 · 高数二 第 28 题）', '求函数 $f(x,y)=x^3+y^3$ 在条件 $x^2+2y^2=1$ 下的最值。<br><br><strong>解</strong>：① 约束化为 $\\varphi=x^2+2y^2-1=0$；目标 $f=x^3+y^3$。<br>② 构造 $L=x^3+y^3+\\lambda(x^2+2y^2-1)$。<br>③ 令偏导为 0：$L_x=3x^2+2\\lambda x=0,\\ L_y=3y^2+4\\lambda y=0,\\ L_\\lambda=x^2+2y^2-1=0$。<br>④ 由 $x(3x+2\\lambda)=0$、$y(3y+4\\lambda)=0$，结合 $x^2+2y^2=1$ 解出候选驻点，逐一比较 $f=x^3+y^3$ 得最值。（展示「目标 + 拉格朗日 + 三偏导置零」的完整套路）')}
