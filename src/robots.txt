@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cheshiping.github.io/calculus-formula-theater/sitemap.xml
