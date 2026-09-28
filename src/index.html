@@ -5778,6 +5778,11 @@ function buildLinearDetail() {
                     $$\\begin{vmatrix} a_{11} & a_{12} \\\\ a_{21} & a_{22} \\end{vmatrix} = a_{11}a_{22} - a_{12}a_{21}$$
                 </div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">口诀：<strong>主对角相乘减副对角相乘</strong>。</div>
+                <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    计算 $\\begin{vmatrix} 3 & -2 \\\\ 1 & 4 \\end{vmatrix}$：$3 \\times 4 - (-2) \\times 1 = 14$<br>
+                    含参：已知 $\\begin{vmatrix} k & 1 \\\\ 2 & 3 \\end{vmatrix} = 0$，则 $3k - 2 = 0$，得 $k = \\tfrac{2}{3}$
+                </div>
             </div>
 
             ${groupTitle('fa-3', '1.2 三阶行列式（沙路法）', 'var(--color-green)')}
@@ -5789,6 +5794,14 @@ function buildLinearDetail() {
                     <strong>一个串两个</strong>——每行元素向后串两列，形成 3 条主对角线 + 3 条副对角线：<br>
                     • 主对角线方向（3 条）相乘<strong>相加</strong><br>
                     • 副对角线方向（3 条）相乘<strong>相减</strong>
+                </div>
+                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">真题（2024 河北专升本 · 数一 · 填空题第 11 题）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    计算 $D = \\begin{vmatrix} 1 & 3 & 2 \\\\ 7 & 5 & 0 \\\\ 3 & 1 & -1 \\end{vmatrix}$<br>
+                    沙路法：主对角 $1\\times5\\times(-1) + 3\\times0\\times3 + 2\\times7\\times1 = -5 + 0 + 14 = 9$<br>
+                    副对角 $2\\times5\\times3 + 1\\times0\\times1 + 3\\times7\\times(-1) = 30 + 0 - 21 = 9$<br>
+                    $D = 9 - 9 = 0$<br>
+                    <span style="opacity:.75;">结构洞察：第 2 行 (7, 5, 0) = 第 1 行 + 2 × 第 3 行，由性质 6 亦可一眼判定 $D = 0$。</span>
                 </div>
             </div>
             ${memoryBox('关键提醒', '四阶及以上<strong>没有</strong>对角线计算法！必须用后面的展开定理降阶。')}
@@ -5851,6 +5864,69 @@ function buildLinearDetail() {
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">某行全为 0 / 两行成比例 → $D = 0$。</div>
                 </div>
             </div>
+
+            ${groupTitle('fa-wand-magic-sparkles', '六条性质的用法示范（每性质一题）', '#FFD60A')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <span class="formula-num">性质 1</span>
+                    <div class="formula-label" style="color:#0A84FF;">转置不变 · 怎么用</div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);line-height:1.8;">
+                        行与列地位平等，行上的技巧（提公因式、倍加、行和相同）在列上同样成立；可把「列和相同」转置成「行和相同」。<br>
+                        <strong>示范</strong>：$D = \\begin{vmatrix} 1 & 4 & 2 \\\\ 5 & 2 & 3 \\\\ 3 & 3 & 4 \\end{vmatrix}$，各列和均为 9。转置后各行和均为 9，套「加列→提公因式→减首行」：$D = 9 \\times (-3) = -27$。
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <span class="formula-num">性质 2</span>
+                    <div class="formula-label" style="color:var(--color-green);">互换变号 · 怎么用</div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);line-height:1.8;">
+                        主元是 0 时，交换两行把它换走（记得补一个负号），消元才顺畅。<br>
+                        <strong>示范</strong>：$D = \\begin{vmatrix} 0 & 2 & 1 \\\\ 1 & 3 & 2 \\\\ 2 & 1 & 4 \\end{vmatrix}$，$a_{11}=0$。交换 1、2 行：$D = -\\begin{vmatrix} 1 & 3 & 2 \\\\ 0 & 2 & 1 \\\\ 2 & 1 & 4 \\end{vmatrix} \\xrightarrow{R_3-2R_1} -\\begin{vmatrix} 1 & 3 & 2 \\\\ 0 & 2 & 1 \\\\ 0 & -5 & 0 \\end{vmatrix} = -(2\\times0 - 1\\times(-5)) = -5$。
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FFD60A;">
+                    <span class="formula-num">性质 3</span>
+                    <div class="formula-label" style="color:var(--accent-yellow-text);">倍乘 · 怎么用</div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);line-height:1.8;">
+                        某行有公因子 $k$ 就提到外面，数字立刻变小；逆用：$n$ 阶方阵 $|kA| = k^n|A|$。<br>
+                        <strong>示范</strong>：$D = \\begin{vmatrix} 2 & 4 & 6 \\\\ 1 & 3 & 5 \\\\ 7 & 8 & 10 \\end{vmatrix}$，第 1 行提 2：$D = 2\\begin{vmatrix} 1 & 2 & 3 \\\\ 1 & 3 & 5 \\\\ 7 & 8 & 10 \\end{vmatrix} = 2 \\times 1 = 2$。
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <span class="formula-num">性质 4</span>
+                    <div class="formula-label" style="color:#FF9F0A;">倍加不变 · 怎么用 ★</div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);line-height:1.8;">
+                        某行 × $k$ 加到另一行，值不变 —— 用来造 0、化上三角，是化简主力。<br>
+                        <strong>示范</strong>：$D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 2 & 5 & 8 \\\\ 3 & 7 & 10 \\end{vmatrix}$，$R_2-2R_1,\\ R_3-3R_1$：$D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 2 \\\\ 0 & 1 & 1 \\end{vmatrix} = 1 \\times (1 - 2) = -1$。
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:#BF5AF2;">
+                    <span class="formula-num">性质 5</span>
+                    <div class="formula-label" style="color:#BF5AF2;">拆分 · 怎么用</div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);line-height:1.8;">
+                        某行元素是两数之和，拆成两个行列式之和；常有一项因两行相同而直接为 0。<br>
+                        <strong>示范</strong>：$D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 2 & 3 & 4 \\\\ 2 & 1 & 4 \\end{vmatrix}$，拆 $R_2 = R_1 + (1,1,1)$：$D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 1 & 2 & 3 \\\\ 2 & 1 & 4 \\end{vmatrix} + \\begin{vmatrix} 1 & 2 & 3 \\\\ 1 & 1 & 1 \\\\ 2 & 1 & 4 \\end{vmatrix} = 0 + (-4) = -4$。
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <span class="formula-num">性质 6</span>
+                    <div class="formula-label" style="color:#FF3B30;">零判 · 怎么用</div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);line-height:1.8;">
+                        某行全 0、两行相同或成比例，直接 $D=0$ —— 拿到题先扫一眼，可「秒杀」。<br>
+                        <strong>示范</strong>：$D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 2 & 4 & 6 \\\\ 7 & 8 & 9 \\end{vmatrix}$，$R_2 = 2R_1$（成比例）→ $D = 0$。
+                    </div>
+                </div>
+            </div>
+
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#FF9F0A;">综合应用（4 阶 · 多性质联用）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.85;">
+                    计算 $D = \\begin{vmatrix} 1 & 2 & 3 & 4 \\\\ 2 & 3 & 4 & 1 \\\\ 3 & 4 & 1 & 2 \\\\ 4 & 1 & 2 & 3 \\end{vmatrix}$<br>
+                    <strong>Step 1 加列（性质 4 · 倍加）</strong>：第 2、3、4 列加到第 1 列，各行和均为 10<br>
+                    <strong>Step 2 提公因式（性质 3）</strong>：第 1 列提 10，该列全变 1<br>
+                    <strong>Step 3 造三角（性质 4 · 倍加）</strong>：$R_2-R_1,\\,R_3-R_1,\\,R_4-R_1$，逐步消零得上三角<br>
+                    <strong>结果</strong>：$D = 10 \\times (-4)^2 = 160$
+                </div>
+            </div>
             ${memoryBox('记忆要点', '性质 4「倍加不变」是化上三角的核心工具；性质 2「互换变号」用于调整主元位置时记号。两行相同或成比例，行列式必为 0。')}
         </div>
     `;
@@ -5892,11 +5968,18 @@ function buildLinearDetail() {
                     <strong>Step 5</strong> 必要时调换行序；若出现两列全为 1，重新提公因式
                 </div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;"><strong>提示</strong>：一般加到第 1 列，但也有例外情形需要灵活选择。</div>
-                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">例题</div>
+                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">例题①（3 阶）</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     $D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 2 & 3 & 1 \\\\ 3 & 1 & 2 \\end{vmatrix}$（行和均为 6）<br>
                     加列 → 提 6 → 消行 → 展开：<br>
                     $D = 6 \\begin{vmatrix} 1 & 2 & 3 \\\\ 0 & 1 & -2 \\\\ 0 & -1 & -1 \\end{vmatrix} = 6 \\times (-3) = -18$
+                </div>
+                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">例题②（专升本真题 · 2025 重庆 · 第 19 题）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    求 $D = \\begin{vmatrix} 1 & 2025 & 2025 & 2025 \\\\ 2025 & 1 & 2025 & 2025 \\\\ 2025 & 2025 & 1 & 2025 \\\\ 2025 & 2025 & 2025 & 1 \\end{vmatrix}$，行和相同（均为 $1 + 3\\times2025 = 6076$）<br>
+                    <strong>Step 1</strong> 第 2、3、4 列加到第 1 列 → 提公因式 6076<br>
+                    <strong>Step 2</strong> 消元造 0：$R_2-R_1,\\ R_3-R_1,\\ R_4-R_1$ → 化成<strong>上三角</strong><br>
+                    <strong>Step 3</strong> 三角行列式直接相乘：$D = 6076 \\times 1 \\times (-2024)^3$
                 </div>
             </div>
 
@@ -5907,14 +5990,24 @@ function buildLinearDetail() {
                 </div>
                 <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">解法</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">利用性质把第 1 行（或第 1 列）的非对角元素消为 0，化为上（下）三角，再按行/列展开计算。</div>
-                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">例题</div>
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">方法总结（分两种情况 ★）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>① 所有对角元 ≠ 0</strong>：用列变换（倍加）把第 1 行（或第 1 列）的非对角元逐个消为 0 → 化成上三角，套爪形公式。<strong>最快</strong>。<br>
+                    <strong>② 存在对角元 = 0</strong>：<strong>不能消爪！</strong>此时消元要除以 0、结构被破坏，改选 <strong>含 0 最多的行 / 列展开降阶</strong>。<strong>必考坑</strong>。
+                </div>
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">例题① （所有对角元 ≠ 0 · 消爪化三角）</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     $D = \\begin{vmatrix} 1 & 2 & 3 & 4 \\\\ 2 & 3 & 0 & 0 \\\\ 3 & 0 & 4 & 0 \\\\ 4 & 0 & 0 & 5 \\end{vmatrix}$<br>
                     消第 1 行非对角元（用各列消）：$a'_{11} = 1 - \\tfrac{4}{3} - \\tfrac{9}{4} - \\tfrac{16}{5} = -\\tfrac{347}{60}$<br>
                     $D = -\\tfrac{347}{60} \\times 3 \\times 4 \\times 5 = -347$
                 </div>
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">例题② （存在对角元 = 0 · 改用展开降阶）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 4 & 0 & 0 \\\\ 5 & 0 & 6 \\end{vmatrix}$，其中 $a_2 = 0$，无法消爪。<br>
+                    第 2 行含 0 最多，按第 2 行展开：$D = 4 \\cdot (-1)^{2+1} \\begin{vmatrix} 2 & 3 \\\\ 0 & 6 \\end{vmatrix} = -4 \\times 12 = -48$
+                </div>
             </div>
-            ${memoryBox('爪形技巧', '通用套路——「消头化尾」：把第 1 行（或第 1 列）的非对角元全部消为 0，剩下对角线元素相乘。')}
+            ${memoryBox('爪形技巧', '先看对角元：<strong>全非 0 → 「消头化尾」消爪化三角</strong>；<strong>有 0 → 别消，按 0 最多的行/列展开降阶</strong>。')}
 
             ${groupTitle('fa-th-large', '3.4 分块行列式', '#BF5AF2')}
             <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
@@ -5922,15 +6015,28 @@ function buildLinearDetail() {
                     $$\\begin{vmatrix} A & O \\\\ O & B \\end{vmatrix} = |A| \\cdot |B| \\quad\\quad \\begin{vmatrix} A & C \\\\ O & B \\end{vmatrix} = |A| \\cdot |B|$$
                 </div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">分块上/下三角行列式 = 主对角分块行列式之积；非对角分块需具体展开，不可直接套乘。</div>
-                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">例题</div>
+                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">四种情形与前提（★）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>① 分块三角（上/下）与分块对角</strong>：$\\begin{vmatrix} A & O \\\\ O & B \\end{vmatrix} = \\begin{vmatrix} A & C \\\\ O & B \\end{vmatrix} = \\begin{vmatrix} A & O \\\\ C & B \\end{vmatrix} = |A| \\cdot |B|$ —— <strong>主对角块行列式相乘</strong>。<br>
+                    <strong>② 反对角分块</strong>：$\\begin{vmatrix} O & A \\\\ B & O \\end{vmatrix} = (-1)^{mn}\\,|A| \\cdot |B|$，其中 $m, n$ 分别是 $A, B$ 的阶数（等价于把反对角「换」成主对角，符号 $(-1)^{mn}$）。<br>
+                    <strong>③ 四个块都非零</strong>：<strong>不能</strong>直接套 $AD - BC$！必须先用性质造 0（化为三角/对角分块）或用拉普拉斯具体展开。<br>
+                    <strong>④ 前提</strong>：被分割出的 $A, B$ <strong>必须是方阵</strong>，$|A|$、$|B|$ 才有意义。
+                </div>
+                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">例题① （分块下三角）</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
                     $D = \\begin{vmatrix} 2 & 1 & 0 & 0 \\\\ 1 & 3 & 0 & 0 \\\\ 1 & 2 & 4 & 5 \\\\ 3 & 4 & 1 & 2 \\end{vmatrix}$<br>
                     识别为分块下三角（右上为零）：<br>
                     $|A| = \\begin{vmatrix} 2 & 1 \\\\ 1 & 3 \\end{vmatrix} = 5$，$|B| = \\begin{vmatrix} 4 & 5 \\\\ 1 & 2 \\end{vmatrix} = 3$<br>
                     $D = |A| \\cdot |B| = 5 \\times 3 = 15$
                 </div>
+                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">例题② （反对角分块）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $D = \\begin{vmatrix} 0 & 0 & 1 & 2 \\\\ 0 & 0 & 3 & 4 \\\\ 5 & 6 & 0 & 0 \\\\ 7 & 8 & 0 & 0 \\end{vmatrix}$，识别为反对角分块 $\\begin{vmatrix} O & A \\\\ B & O \\end{vmatrix}$：<br>
+                    $|A| = \\begin{vmatrix} 1 & 2 \\\\ 3 & 4 \\end{vmatrix} = -2$，$|B| = \\begin{vmatrix} 5 & 6 \\\\ 7 & 8 \\end{vmatrix} = -2$，$m = n = 2$<br>
+                    $D = (-1)^{2 \\times 2} \\times (-2) \\times (-2) = 4$
+                </div>
             </div>
-            ${memoryBox('分块关键', '识别分块结构后，右上角为零即为分块下三角，左下角为零即为分块上三角，两者都可套用 $|A| \\cdot |B|$；分块 $C$ 的内容不影响结果。')}
+            ${memoryBox('分块关键', '① 分块三角/对角：<strong>主对角块相乘</strong> $|A|\\cdot|B|$，非对角块 $C$ 不影响结果；② 反对角分块：乘 $(-1)^{mn}$；③ 四块全非零：不能套 $AD-BC$，先造 0 或展开；④ $A,B$ 必须是方阵。')}
         </div>
     `;
 
@@ -5953,6 +6059,15 @@ function buildLinearDetail() {
                     <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$i+j$ 偶数取正，奇数取负（棋盘格）。</div>
                 </div>
             </div>
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#0A84FF;">例题</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    行列式 $D = \\begin{vmatrix} 0 & -1 & 1 \\\\ 1 & 0 & -1 \\\\ -1 & 1 & 0 \\end{vmatrix}$，求元素 $a_{21}$ 的余子式 $M_{21}$ 与代数余子式 $A_{21}$。<br>
+                    划去第 2 行第 1 列：$M_{21} = \\begin{vmatrix} -1 & 1 \\\\ 1 & 0 \\end{vmatrix} = -1$<br>
+                    定符号 $(-1)^{2+1} = -1$：$A_{21} = (-1)^{2+1} M_{21} = (-1) \\times (-1) = 1$
+                </div>
+            </div>
+            <div class="text-note"><strong>易错点</strong>：$M_{ij}$、$A_{ij}$ 只由元素<strong>所在的位置</strong>决定，与该元素本身的值无关——即便 $a_{ij}=0$，$A_{ij}$ 也通常不为 0。</div>
 
             ${groupTitle('fa-list-ol', '4.2 拉普拉斯展开定理', 'var(--color-green)')}
             <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
@@ -5965,26 +6080,30 @@ function buildLinearDetail() {
                     $$D = a_{1j}A_{1j} + a_{2j}A_{2j} + \\cdots + a_{nj}A_{nj}$$
                 </div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;">选择策略：优先选 <strong>0 元素最多</strong>的行/列展开，减少计算量。</div>
-                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">专升本真题（2025 重庆 · 第 19 题）</div>
+                <div class="formula-label" style="color:var(--color-green);margin-top:1rem;">例题 · 造 0 后不是三角，才展开降阶</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
-                    求 $D = \\begin{vmatrix} 1 & 2025 & 2025 & 2025 \\\\ 2025 & 1 & 2025 & 2025 \\\\ 2025 & 2025 & 1 & 2025 \\\\ 2025 & 2025 & 2025 & 1 \\end{vmatrix}$<br><br>
-                    <strong>Step 1</strong> 行和相同（均为 6076）：加列 → 提公因式 6076<br>
-                    <strong>Step 2</strong> 消元造 0：R₂−R₁, R₃−R₁, R₄−R₁ → 上三角<br>
-                    <strong>Step 3</strong> 拉普拉斯展开：按第 1 列展开降为 3 阶<br>
-                    <strong>结果</strong>：$D = 6076 \\times (-2024)^3$
+                    求 $D = \\begin{vmatrix} 1 & 2 & 3 & 4 \\\\ 1 & 0 & 1 & 2 \\\\ 3 & -1 & -1 & 0 \\\\ 1 & 2 & 0 & -5 \\end{vmatrix}$<br>
+                    <strong>Step 1 造 0（倍加）</strong>：$R_2-R_1,\\ R_3-3R_1,\\ R_4-R_1$：<br>
+                    $D = \\begin{vmatrix} 1 & 2 & 3 & 4 \\\\ 0 & -2 & -2 & -2 \\\\ 0 & -7 & -10 & -12 \\\\ 0 & 0 & -3 & -9 \\end{vmatrix}$<br>
+                    <strong>Step 2</strong> 此时<strong>还不是三角</strong>，按第 1 列展开降阶（该列只剩 $a_{11}=1$）：<br>
+                    $D = 1 \\cdot \\begin{vmatrix} -2 & -2 & -2 \\\\ -7 & -10 & -12 \\\\ 0 & -3 & -9 \\end{vmatrix}$<br>
+                    <strong>Step 3</strong> 3 阶用沙路法：$D = (-180 + 0 - 42) - (0 - 72 - 126) = -24$
                 </div>
             </div>
-            <div class="text-note"><strong>真题启示</strong>：专升本行列式大题的标准套路是「<strong>先用性质造 0 → 再用拉普拉斯展开降阶</strong>」。本题综合考查了行和相同技巧、倍加造 0、拉普拉斯展开三个知识点，是典型的专升本难度题。考试时<strong>先观察结构再选方法</strong>——能套公式就套公式，不能套再展开降阶。</div>
+            <div class="text-note"><strong>思路逻辑</strong>：先用性质（倍加、提公因子）造 0 → <strong>能化成三角就直接按对角线相乘</strong>（如上页「行和相同」真题）；<strong>造完 0 还不是三角，才按 0 最多的行/列做拉普拉斯展开降阶</strong>。本例题属后者：按第 1 列展开降为 3 阶。</div>
 
             ${groupTitle('fa-arrows-rotate', '4.3 展开的逆用', '#FF9F0A')}
             <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
                 <div class="formula-label" style="color:#FF9F0A;">引理（代数余子式线性组合）</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">若某行代数余子式 $A_{i1}, A_{i2}, \\cdots, A_{in}$ 前的系数为 $b_1, b_2, \\cdots, b_n$，则其和等于<strong>把原行列式第 $i$ 行替换为 $b_1, b_2, \\cdots, b_n$ 后</strong>的新行列式。</div>
-                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">例题</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    设 $D = \\begin{vmatrix} 1 & 2 & 3 \\\\ 2 & 1 & 1 \\\\ 3 & 2 & 1 \\end{vmatrix}$，求 $2A_{21} + A_{22} + A_{23}$。<br>
-                    系数 $(2,1,1)$ 恰为第 2 行本身，故：$2A_{21} + A_{22} + A_{23} = D$<br>
-                    <span style="opacity:.75;">（此例展示「替换后恰好等于自身」的巧合情形；若把系数换成 $(1,1,1)$，则等于把第 2 行换成 $(1,1,1)$ 后的新行列式。）</span>
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">例题（专升本难度）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    设 $D = \\begin{vmatrix} 1 & 2 & 1 & 4 \\\\ 0 & 3 & -2 & 6 \\\\ 3 & 4 & 1 & 2 \\\\ 2 & 1 & -2 & 1 \\end{vmatrix}$，求 $A_{11} + 2A_{21} + A_{31} + 2A_{41}$。<br>
+                    系数 $(1,2,1,2)$ 与前 4 列都不同 → 把<strong>第 1 列</strong>替换为 $(1,2,1,2)$，构造新行列式：<br>
+                    $D' = \\begin{vmatrix} 1 & 2 & 1 & 4 \\\\ 2 & 3 & -2 & 6 \\\\ 1 & 4 & 1 & 2 \\\\ 2 & 1 & -2 & 1 \\end{vmatrix}$<br>
+                    $R_2-2R_1,\\ R_3-R_1,\\ R_4-2R_1$ 造 0 后按第 1 列展开降为 3 阶：<br>
+                    $D' = \\begin{vmatrix} -1 & -4 & -2 \\\\ 2 & 0 & -2 \\\\ -3 & -4 & -7 \\end{vmatrix} = 8 - 80 + 16 = -56$<br>
+                    故 $A_{11} + 2A_{21} + A_{31} + 2A_{41} = -56$。
                 </div>
             </div>
 
@@ -5994,10 +6113,24 @@ function buildLinearDetail() {
                     $$a_{i1}A_{j1} + a_{i2}A_{j2} + \\cdots + a_{in}A_{jn} = 0 \\quad (i \\neq j)$$
                 </div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">相当于把第 $j$ 行替换为第 $i$ 行元素后求行列式，此时两行相同，故 $D = 0$。</div>
-                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">例题</div>
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
-                    同上 $D$，求 $a_{11}A_{21} + a_{12}A_{22} + a_{13}A_{23}$（第 1 行元素 × 第 2 行代数余子式，异行）：<br>
-                    $a_{11}A_{21} + a_{12}A_{22} + a_{13}A_{23} = 0$
+                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">列版本（同理）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$a_{1j}A_{1s} + a_{2j}A_{2s} + \\cdots + a_{nj}A_{ns} = 0 \\quad (j \\neq s)$</div>
+                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">例题（反求参数 → 必考）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    设 3 阶方阵 $A$ 的第 1 行元素为 $1, 2, 3$，第 2 行元素的代数余子式分别为 $2,\\ a+1,\\ a-2$，求 $a$。<br>
+                    由异行正交性 $a_{11}A_{21} + a_{12}A_{22} + a_{13}A_{23} = 0$：<br>
+                    $1 \\times 2 + 2\\,(a+1) + 3\\,(a-2) = 5a - 2 = 0 \\Rightarrow a = \\tfrac{2}{5}$
+                </div>
+                <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">原理 · 为什么等于 0（帮助记忆）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.85;">
+                    通俗一句话：<strong>用别的行去乘这一行的代数余子式，结果等于 0</strong>。<br>
+                    $A_{i1}, A_{i2}, \\cdots, A_{in}$ 是划掉第 $i$ 行得到的，<strong>里面根本不含第 $i$ 行元素</strong>。<br>
+                    构造 $D_1$：把原行列式的<strong>第 $i$ 行替换成第 $k$ 行</strong>（$k \\neq i$），其余行不变 —— 此时第 $k$ 行与第 $i$ 行完全相同，<strong>两行相同 ⇒ $D_1 = 0$</strong>；<br>
+                    再对 $D_1$ <strong>按第 $i$ 行展开</strong>：$D_1 = a_{k1}A_{i1} + a_{k2}A_{i2} + \\cdots + a_{kn}A_{in} = 0$。<br>
+                    👉 这就是<strong>异行公式</strong>的来源。
+                </div>
+                <div class="formula-block" style="border:none;background:none;padding:0;margin-top:.5rem;">
+                    $$D_1 = \\begin{vmatrix} a_{11} & \\cdots & a_{1n} \\\\ \\vdots & & \\vdots \\\\ a_{k1} & \\cdots & a_{kn} \\\\ \\vdots & & \\vdots \\\\ a_{k1} & \\cdots & a_{kn} \\\\ \\vdots & & \\vdots \\end{vmatrix} = 0$$
                 </div>
             </div>
             ${memoryBox('核心记忆', '<strong>同自己得 D，替别人得 0</strong>。<br>• 同行（列）元素 × 自己的代数余子式 = $D$<br>• 异行（列）元素 × 代数余子式 = $0$')}
@@ -6016,8 +6149,8 @@ function buildLinearDetail() {
                     <strong>三阶</strong> — 沙路法（3 主 + 3 副）— 四阶以上不可用<br>
                     <strong>范德蒙德</strong> — 大下标减小下标连乘 — $\\prod (x_j - x_i)$<br>
                     <strong>行和相同</strong> — 加到第 1 列 → 提公因式 → 减第 1 行 — 化上三角<br>
-                    <strong>爪形</strong> — 消第 1 行非对角元为 0 — 再展开<br>
-                    <strong>分块三角</strong> — 主对角分块相乘 — $|A| \\cdot |B|$<br>
+                    <strong>爪形</strong> — 对角元全≠0：消爪化三角；对角元含 0：按 0 最多行列展开<br>
+                    <strong>分块</strong> — 三角/对角：主对角块相乘；反对角：乘 $(-1)^{mn}$；四块全非零不可套<br>
                     <strong>一般 n 阶</strong> — 选 0 最多的行/列展开降阶 — 拉普拉斯
                 </div>
             </div>
@@ -6052,12 +6185,12 @@ function buildLinearDetail() {
                 <div class="formula-card" style="--card-accent:#FF3B30;">
                     <span class="formula-num">6</span>
                     <div class="formula-label" style="color:#FF3B30;">爪形</div>
-                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">消头化尾再展开</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">对角元全非 0 消爪化三角；有 0 改展开降阶</div>
                 </div>
                 <div class="formula-card" style="--card-accent:${C};">
                     <span class="formula-num">7</span>
-                    <div class="formula-label" style="color:${C};">分块三角</div>
-                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">主对角分块直接乘</div>
+                    <div class="formula-label" style="color:${C};">分块</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">三角/对角主对角块相乘；反对角乘 $(-1)^{mn}$</div>
                 </div>
             </div>
 
