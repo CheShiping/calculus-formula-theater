@@ -6619,11 +6619,25 @@ ${memoryBox('逆伴随串联', '判定可逆 → 求伴随 $A^*$ → 套 $A^{-1}
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
                     ① $R(A_{m\\times n})\\le \\min\\{m,n\\}$，秩不会超过行数、列数里更小的那个；<br>
                     ② $n$ 阶方阵 $A$ 可逆 $\\iff R(A)=n$（满秩）$\\iff |A|\\neq 0$；<br>
-                    ③ $R(A)=r$ 等价于矩阵最高阶非零子式是 $r$ 阶。
+                    ③ $R(A)=r$ 等价于矩阵最高阶非零子式是 $r$ 阶；<br>
+                    ④ <strong>子式判定</strong>：若 $R(A)=r$，则<strong>所有 $(r+1)$ 阶子式全为 0</strong>（且至少有一个 $r$ 阶子式 $\neq 0$）。
                 </div>
             </div>
 
             ${exampleBox("💡 专升本真题（四川专升本）· 求矩阵的秩", "设 $A = \\begin{pmatrix} 2 & -3 & 5 \\\\ 1 & 3 & -1 \\\\ 2 & 4 & 2 \\\\ 3 & 6 & 8 \\end{pmatrix}$，求 $r(A)$。<br><br><strong>解</strong>：初等行变换化行阶梯形（交换 $R_1\\leftrightarrow R_2$ 便于以 1 为主元）：<br>$A \\xrightarrow{R_1\\leftrightarrow R_2} \\begin{pmatrix} 1 & 3 & -1 \\\\ 2 & -3 & 5 \\\\ 2 & 4 & 2 \\\\ 3 & 6 & 8 \\end{pmatrix} \\xrightarrow{R_2-2R_1,\\ R_3-2R_1,\\ R_4-3R_1} \\begin{pmatrix} 1 & 3 & -1 \\\\ 0 & -9 & 7 \\\\ 0 & -2 & 4 \\\\ 0 & -3 & 11 \\end{pmatrix}$<br>$\\xrightarrow{9R_3-2R_2,\\ 3R_4-R_2} \\begin{pmatrix} 1 & 3 & -1 \\\\ 0 & -9 & 7 \\\\ 0 & 0 & 22 \\\\ 0 & 0 & 26 \\end{pmatrix} \\xrightarrow{11R_4-13R_3} \\begin{pmatrix} 1 & 3 & -1 \\\\ 0 & -9 & 7 \\\\ 0 & 0 & 22 \\\\ 0 & 0 & 0 \\end{pmatrix}$<br>非零行共 3 行，故 $r(A) = 3$。<br><br><span style=\"color:var(--color-green);\">✅ 真题启示：求秩标准套路——初等行变换化行阶梯形，数非零行；本题为 $4\\times3$ 矩阵，秩最大不超过列数 3。</span>")}
+
+            ${groupTitle('fa-clipboard-question', '题型精讲 · 已知矩阵的秩，求未知参数', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>核心</strong>：秩 = 行阶梯形中<strong>非零行的行数</strong>。令「非零行数 = 已知秩」，即可解出参数。<br>
+                    <strong>解题步骤</strong>：① 含参数 $t$ 的矩阵只用<strong>初等行变换</strong>化行阶梯形；② 数非零行，令其等于已知秩 $r$；③ 解出 $t$（若 $r=n-1$，常先由 $|A|=0$ 得候选值）；④ <strong>代回验证</strong>——候选值可能使秩进一步下降，需排除。<br>
+                    <strong>提醒</strong>：$R(A)=n-1$ 时 $|A|=0$ 只是必要条件，必须回代确认秩正好是 $n-1$。
+                </div>
+            </div>
+
+            ${exampleBox("💡 专升本真题（四川 2024 专升本 · 填空第16题）· 已知秩求参数", "已知矩阵 $A = \\begin{pmatrix} 2 & 2 & a \\\\ 2 & a & 2 \\\\ a & 2 & 2 \\end{pmatrix}$ 的秩为 2，求 $a$。<br><br><strong>解</strong>：$R(A)=2<3$，故 $|A|=0$。<br>$|A| = 2(2a-4) - 2(4-2a) + a(4-a^2) = -a^3+12a-16 = -(a-2)^2(a+4)$，令 $|A|=0$ 得 $a=2$ 或 $a=-4$。<br><strong>回代验证</strong>：$a=2$ 时三行全为 $(2,2,2)$，$R(A)=1\\neq2$，舍去；$a=-4$ 时 $A=\\begin{pmatrix} 2 & 2 & -4 \\\\ 2 & -4 & 2 \\\\ -4 & 2 & 2 \\end{pmatrix}$，有 $R_1+R_2+R_3=O$（故秩 <3），且前两行不成比例，$R(A)=2$ ✓。<br>故 $a=-4$。<br><br><span style=\"color:var(--color-green);\">✅ 真题启示：$R(A)=n-1$ 先令 $|A|=0$ 定候选，再回代数非零行，只取让秩恰好为 2 的那个。</span>")}
+            ${exampleBox("例题 · 已知秩求参数（4 阶提升）", "设 $A = \\begin{pmatrix} t & 1 & 1 & 1 \\\\ 1 & t & 1 & 1 \\\\ 1 & 1 & t & 1 \\\\ 1 & 1 & 1 & t \\end{pmatrix}$，已知 $R(A)=3$，求 $t$。<br><br><strong>解</strong>：$R(A)=3<4$，故 $|A|=0$。把其余各行加到第 1 行：<br>$|A| = \\begin{vmatrix} t+3 & t+3 & t+3 & t+3 \\\\ 1 & t & 1 & 1 \\\\ 1 & 1 & t & 1 \\\\ 1 & 1 & 1 & t \\end{vmatrix} = (t+3)\\begin{vmatrix} 1 & 1 & 1 & 1 \\\\ 1 & t & 1 & 1 \\\\ 1 & 1 & t & 1 \\\\ 1 & 1 & 1 & t \\end{vmatrix} = (t+3)(t-1)^3$，令 $|A|=0$ 得 $t=-3$ 或 $t=1$。<br><strong>回代验证（化行阶梯，数非零行）</strong>：<br>$t=1$：四行全为 $(1,1,1,1)$，$R_2-R_1,\\ R_3-R_1,\\ R_4-R_1$ 得 3 个零行，只剩 <strong>1 个非零行</strong>，$R(A)=1\\neq3$，舍去。<br>$t=-3$：$A\\xrightarrow{R_1\\leftrightarrow R_2}\\begin{pmatrix} 1 & -3 & 1 & 1 \\\\ -3 & 1 & 1 & 1 \\\\ 1 & 1 & -3 & 1 \\\\ 1 & 1 & 1 & -3 \\end{pmatrix}\\xrightarrow{R_2+3R_1,\\ R_3-R_1,\\ R_4-R_1}\\begin{pmatrix} 1 & -3 & 1 & 1 \\\\ 0 & -8 & 4 & 4 \\\\ 0 & 4 & -4 & 0 \\\\ 0 & 4 & 0 & -4 \\end{pmatrix}\\xrightarrow{R_2\\leftrightarrow R_3,\\ R_3+2R_2,\\ R_4-R_2}\\begin{pmatrix} 1 & -3 & 1 & 1 \\\\ 0 & 4 & -4 & 0 \\\\ 0 & 0 & -4 & 4 \\\\ 0 & 0 & 4 & -4 \\end{pmatrix}\\xrightarrow{R_4+R_3}\\begin{pmatrix} 1 & -3 & 1 & 1 \\\\ 0 & 4 & -4 & 0 \\\\ 0 & 0 & -4 & 4 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$，非零行 <strong>3 行</strong>，$R(A)=3$ ✓。<br>故 $t=-3$。<br><br><span style=\"color:#30D158;\">✅ 4 阶 + $R(A)=3$ 套路：先 $|A|=0$ 得候选，再化行阶梯数非零行，只保留非零行数恰好等于 3 的那个。</span>")}
+            ${exampleBox("例题 · 用 $(r+1)$ 阶子式 = 0 求未知数（3×4）", "设 $A = \\begin{pmatrix} 1 & 2 & -1 & 3 \\\\ 2 & 4 & 1 & -2 \\\\ 3 & 6 & a & -7 \\end{pmatrix}$，已知 $R(A)=2$，求 $a$。<br><br><strong>解</strong>：由 $R(A)=2$，矩阵中<strong>所有 3 阶子式全为 0</strong>。取第 2、3、4 列构成的 3 阶子式，令其为 0：<br>$\\begin{vmatrix} 2 & -1 & 3 \\\\ 4 & 1 & -2 \\\\ 6 & a & -7 \\end{vmatrix} = 2(-7+2a) + (-28+12) + 3(4a-6) = 16a-48 = 16(a-3) = 0$，得 $a=3$。<br><strong>验证（行阶梯数非零行）</strong>：$a=3$ 时 $A\\xrightarrow{R_2-2R_1,\\ R_3-3R_1}\\begin{pmatrix} 1 & 2 & -1 & 3 \\\\ 0 & 0 & 3 & -8 \\\\ 0 & 0 & 6 & -16 \\end{pmatrix}\\xrightarrow{R_3-2R_2}\\begin{pmatrix} 1 & 2 & -1 & 3 \\\\ 0 & 0 & 3 & -8 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$，非零行 2 行，故 $R(A)=2$ ✓；且 2 阶子式 $\\begin{vmatrix} 1 & -1 \\\\ 2 & 1 \\end{vmatrix}=3\\neq 0$，说明秩 $\\geq 2$，结合三阶子式为 0 即 $R(A)=2$。<br>故 $a=3$。<br><br><span style=\"color:#30D158;\">✅ 子式法：$R(A)=r$ ⟹ 所有 $(r+1)$ 阶子式 $=0$；取一个含未知数的 $(r+1)$ 阶子式令其 $=0$，即可解出参数（再回代确认秩恰好为 $r$）。</span>")}
 ${exampleBox("练习题（专升本同类型）· 化行阶梯 → 求秩 → 化行最简", "设 $A = \\begin{pmatrix} 1 & 2 & -1 & 3 \\\\ 2 & 4 & 1 & -2 \\\\ 3 & 6 & 3 & -7 \\end{pmatrix}$，求 $R(A)$，并化为行最简形。<br><br><strong>解</strong>：$r_2-2r_1,\\ r_3-3r_1$：$$\\begin{pmatrix} 1 & 2 & -1 & 3 \\\\ 0 & 0 & 3 & -8 \\\\ 0 & 0 & 6 & -16 \\end{pmatrix}$$ 再 $r_3-2r_2$：$$\\begin{pmatrix} 1 & 2 & -1 & 3 \\\\ 0 & 0 & 3 & -8 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$$ 非零行 2 行，故 $R(A)=2$。继续化行最简：$r_2\\times\\frac13$，再 $r_1+r_2$：$$\\begin{pmatrix} 1 & 2 & 0 & \\frac13 \\\\ 0 & 0 & 1 & -\\frac83 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$$ 即为行最简形。<br><br><span style=\"color:#30D158;\">✅ 先化行阶梯数非零行求秩（省时），需要时再继续化行最简。</span>")}
 
             ${groupTitle('fa-triangle-exclamation', '专升本易错坑（一定要记）', '#FF3B30')}
@@ -6681,8 +6695,9 @@ ${memoryBox('求秩套路', '化行阶梯形 → 数非零行 → 就是秩。�
                 ${formulaCard('初2', '初等行变换求逆', '$$(A\\mid E)\\xrightarrow{\\text{行变换}}(E\\mid A^{-1})$$', '左乘 A⁻¹ 理解；推广可解 AX=B', '#5AC8FA')}
                 ${formulaCard('秩1', '秩的定义', '$$R(A)=r$$', '最高阶非零子式的阶数 = 行阶梯形非零行数', '#30D158')}
                 ${formulaCard('秩2', '满秩判定', '$$R(A)=n \\iff |A| \\neq 0$$', '满秩 ⟺ 行列式非零；不满秩 ⟺ |A|=0', '#30D158')}
+                ${formulaCard('秩3', '已知秩，求参数', '$$R(A)=r \\Leftrightarrow \\text{行阶梯非零行数}=r$$', 'R(A)=n−1 先令 |A|=0 得候选，再回代验证', '#30D158')}
             </div>
-            ${memoryBox('考前必背', '这 36 条覆盖了矩阵的几乎全部考点：特殊阵 → 运算 → 逆伴随 → 初等变换与秩。先识别题型，再套对应公式。')}
+            ${memoryBox('考前必背', '这 37 条覆盖了矩阵的几乎全部考点：特殊阵 → 运算 → 逆伴随 → 初等变换与秩。先识别题型，再套对应公式。')}
         </div>
     `;
 

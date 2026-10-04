@@ -103,10 +103,10 @@
       "buildFn": "buildMatrixDetail",
       "themeColor": "#5AC8FA",
       "notes": "notes/10-矩阵.md",
-      "formulaCount": 36,
+      "formulaCount": 37,
       "status": "done"
     }
   ],
-  "totals": { "modules": 10, "formulas": 319 },
-  "evidence": "node scripts/extractFormulas.mjs → 抽出 319 条 formulaCard，分 10 个模块（deriv 87 / integral 69 / trig 41 / diffEq 9 / multivar 10 / dblint 18 / series 29 / linalg 7 / matrix 36 / limit 13）；无穷级数于 2026-09-05 作为独立 module=series 插入学习路径（二重积分之后、行列式之前），buildSeriesDetail 9 个 tab（首 tab 为知识地图），首页新增无穷级数入口，抽提脚本 sections/MODULE_ORDER 同步；行列式/矩阵顺延。2026-10-04 矩阵章节增量：初等变换·秩 tab 丰富 4.3 行阶梯/行最简 + 4.4 矩阵的秩（定义要点、对比表、例题、练习、易错坑）；逆·伴随 tab 新增 3.7 逆矩阵运算公式总结、3.8 矩阵方程类型与解法（含 2022 重庆专升本第19题 AX=A+2X）、3.9 求矩阵 n 次方（相似法 AP=PB ⇒ A^n=PB^nP^{-1}，难度递进三例：2阶B对角 / 2阶B上三角 / 3阶+奇偶），并补三种求逆方法例题（伴随法/初等行变换/增广矩阵），速查卡 matrix 29→36 条"
+  "totals": { "modules": 10, "formulas": 320 },
+  "evidence": "node scripts/extractFormulas.mjs → 抽出 320 条 formulaCard，分 10 个模块（deriv 87 / integral 69 / trig 41 / diffEq 9 / multivar 10 / dblint 18 / series 29 / linalg 7 / matrix 37 / limit 13）；无穷级数于 2026-09-05 作为独立 module=series 插入学习路径（二重积分之后、行列式之前），buildSeriesDetail 9 个 tab（首 tab 为知识地图），首页新增无穷级数入口，抽提脚本 sections/MODULE_ORDER 同步；行列式/矩阵顺延。2026-10-04 矩阵章节增量：初等变换·秩 tab 丰富 4.3 行阶梯/行最简 + 4.4 矩阵的秩（定义要点、对比表、例题、练习、易错坑）+ 已知秩求参数题型（四川2024专升本真题 + 4阶提升）；逆·伴随 tab 新增 3.7 逆矩阵运算公式总结、3.8 矩阵方程类型与解法（含 2022 重庆专升本第19题 AX=A+2X）、3.9 求矩阵 n 次方（相似法 AP=PB ⇒ A^n=PB^nP^{-1}，难度递进三例），并补三种求逆方法例题（伴随法/初等行变换/增广矩阵），速查卡 matrix 29→37 条"
 }

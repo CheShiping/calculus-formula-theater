@@ -2759,6 +2759,15 @@ export const FORMULAS = [
     color: '#30D158',
   },
   {
+    id: 'matrix_037',
+    module: 'matrix',
+    num: '秩3',
+    label: '已知秩，求参数',
+    formula: '$$R(A)=r \\Leftrightarrow \\text{行阶梯非零行数}=r$$',
+    note: 'R(A)=n−1 先令 |A|=0 得候选，再回代验证',
+    color: '#30D158',
+  },
+  {
     id: 'limit_001',
     module: 'limit',
     num: '等1',
@@ -2936,6 +2945,6 @@ export const MODULES = [
     id: 'matrix',
     title: '线性代数·矩阵',
     color: '#5AC8FA',
-    count: 36,
+    count: 37,
   },
 ];
