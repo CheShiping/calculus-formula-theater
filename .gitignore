@@ -73,3 +73,9 @@ app/src/data/_formulas_extracted.json
 
 # Runtime logs
 debug.log
+
+# 本地试题资料（PDF，体积大，不入库）
+试题/
+
+# 临时调试脚本
+_check_script.js
