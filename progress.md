@@ -50,6 +50,13 @@
 - 知识地图 ③ 分支补「矩阵方程（看 X 位置定左右乘）」。
 - 证据：`node scripts/extractFormulas.mjs` → `抽出 320 条 formulaCard` / `共 320 条公式，分 10 个模块`，`matrix: 37`；主脚本（inline script#3，~480KB）`new Function` 语法检查通过（errors=0）。
 
+## 更新（2026-10-08）— 第一章「求函数的表达式」补第三种方法（方程组法·消元法）
+
+- `notes/01-函数、极限、连续.md` §1.2：方法表新增「方程组法（消元法）」一行；「本质」说明由两类改三类；新增子节「方法三：方程组法（消元法｜专升本必考）」，含题型特征、思路、类型①（含 $f(x)$ 与 $f(-x)$，例 3）与类型②（含 $f(x)$ 与 $f(1/x)$，例 4）完整解答，末尾附口诀。
+- `src/index.html`（`buildFunctionDetail()` 内 1.2 节）：小节标题「（两类方法）」→「（三类方法）」；`formula-grid` 新增第三张卡「方法三：方程组法（消元法）⭐必考」（紫色 `#BF5AF2`）；新增两条 `exampleBox`（例题① $2f(x)+f(-x)=3x$、例题② $f(x)+2f(1/x)=1/x$，含 `\begin{cases}` 联立方程组）与一条 `memoryBox`「方程组法口诀」；同步扩充「选择建议」。知识地图 1.2 分支补「方程组法」。
+- 仅新增内容，未改既有结构/视觉；本小节用原生 `formula-card` 组件而非 `formulaCard(...)`，**公式总量不变**（limit 仍 13），无需重跑 `extractFormulas.mjs`。
+- 证据：dev server `http://localhost:8001` 200；浏览器核对 1.2 节三张方法卡与两个新例题框均正常渲染，`cases` 方程组/分式 KaTeX 排版无误、无原始 LaTeX 泄漏，暗/浅双主题标签可读、无横向溢出。
+
 ## 下一步（按优先级）
 
 1. **加新内容时**：严格走 AGENTS.md 第 4 节五步流程——先写 `notes/` 笔记 → 等用户审核 → 在 `index.html` 对应 `buildXxxDetail()` 增量追加 `formulaCard` → 跑 `extractFormulas.mjs` → `npm run dev` 核对双主题。
