@@ -1369,6 +1369,7 @@
             <article class="path-row"><button class="path-node" style="--node-color:#E91E63" onclick="enterDetail('series')"><h2>无穷级数</h2><p>从有限项求和走向无限：常数项级数判敛（定义/性质/三大基准/莱布尼茨/三大判别法/绝对与条件收敛）+ 幂级数（收敛半径与收敛域、展开、和函数）。</p><span class="path-meta">无穷模块 · 判敛与求和</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:#759ba1" onclick="enterDetail('linear')"><h2>行列式</h2><p>计算、性质与展开，是线性代数部分的基础工具。</p><span class="path-meta">4 个专题 · 线性代数</span></button></article>
             <article class="path-row"><button class="path-node" style="--node-color:#8b98ba" onclick="enterDetail('matrix')"><h2>矩阵</h2><p>特殊矩阵、运算、逆与伴随、初等变换与秩，是线性代数的核心对象。</p><span class="path-meta">5 个专题 · 线性代数</span></button></article>
+            <article class="path-row"><button class="path-node" style="--node-color:#9b8bb4" onclick="enterDetail('linearSystem')"><h2>线性方程组</h2><p>线性代数的落脚点：齐次/非齐次 + 增广矩阵 + 初等行变换，判定有无解、几个解，通解 = 特解 + 导出组通解。</p><span class="path-meta">6 个专题 · 线代落脚点</span></button></article>
         </section>
         <footer class="path-footer"><span>选一条路径进入章节，或直接开始你熟悉的翻卡记忆。</span><a class="path-review" href="review.html">进入翻卡记忆&nbsp; →</a></footer>
     </main>
@@ -1618,6 +1619,32 @@
                             <span class="highlight-text" style="--hl-color: #5AC8FA;">主对调，副变号</span>
                         </div>
                         <div class="enter-hint">⟜ 点击进入矩阵详情 ⟝</div>
+                    </div>
+                </div>
+
+                <!-- 卡片 09：线性代数-线性方程组 -->
+                <div class="swiper-slide" onclick="enterDetail('linearSystem')">
+                    <span class="bg-number">09</span>
+                    <div class="card-content">
+                        <div class="card-icon text-purple" style="--icon-glow: rgba(155, 139, 180, 0.4);">
+                            <i class="fa-solid fa-table-columns"></i>
+                        </div>
+                        <div class="module-tag bg-purple/20 text-purple">线性代数</div>
+                        <h3 class="card-title">线性方程组</h3>
+                        <p class="card-subtitle" style="--sub-color: #9b8bb4;">齐次/非齐次 + 判定 + 通解 · 含例题</p>
+                        <div class="formula-block">
+                            $$X = X_0 + c_1\\eta_1 + \\cdots + c_{n-r}\\eta_{n-r}$$
+                        </div>
+                        <div class="formula-list" style="--dot-color: #9b8bb4;">
+                            <li>概念：系数矩阵 · 增广矩阵 (A|b)</li>
+                            <li>求解：行阶梯 → 行最简 → 同解方程组</li>
+                            <li>判定：两秩相等才有解，再比 n</li>
+                            <li>结构：通解 = 特解 + 导出组通解</li>
+                        </div>
+                        <div class="memory-tip">
+                            <span class="highlight-text" style="--hl-color: #9b8bb4;">两秩相等才有解</span>
+                        </div>
+                        <div class="enter-hint">⟜ 点击进入线性方程组详情 ⟝</div>
                     </div>
                 </div>
 
@@ -6352,6 +6379,38 @@ ${memoryBox('四类特殊阵', '单位阵=$E$、对角阵（对角任意）、�
 
             ${exampleBox("💡 专升本真题（2025《线性代数（专升本）》试题）· 消去律陷阱", "设 $A$ 是方阵，如有矩阵关系式 $AB=AC$，则必有（　）。<br>A. $A=0$　　B. $B=C$ 时 $A=0$　　C. $A\\neq0$ 时 $B=C$　　D. $|A|\\neq0$ 时 $B=C$<br><br><strong>解</strong>：选 <strong>D</strong>。矩阵乘法<strong>不满足消去律</strong>——一般 $AB=AC$ 推不出 $B=C$（反例：取 $A=O$，则任意 $B,C$ 都有 $AB=AC=O$）。只有当 $A$ <strong>可逆</strong>（即 $|A|\\neq0$）时，才能两边左乘 $A^{-1}$ 得到 $B=C$。A、B、C 都错在非可逆情形也成立。<br><br><span style=\"color:var(--color-green);\">✅ 真题启示：矩阵里「两边约去同一个因子」不成立，必须 $|A|\\neq0$ 才可约。专升本大题常在此设陷阱。</span>")}
 ${memoryBox('乘法易错', '乘之前先核「前列=后行」；乘之后别想当然交换或约分。专升本大题常在消去律上设陷阱。')}
+
+            ${groupTitle('fa-border-all', '2.4 方阵的行列式', '#FFD60A')}
+            <div class="formula-card" style="--card-accent:#FFD60A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    $|A^\\mathrm{T}| = |A|$（转置不变）<br>
+                    $|kA| = k^n|A|$（$A$ 为 $n$ 阶方阵，注意是 $k$ 的 $n$ 次方）<br>
+                    $|AB| = |A|\\cdot|B|$
+                </div>
+            </div>
+
+            ${exampleBox("例题 · 计算 $3\\times3$ 行列式", "设 $A = \\begin{pmatrix} 1 & 2 & 0 \\\\ 3 & 1 & 2 \\\\ 0 & 1 & 1 \\end{pmatrix}$，求 $|A|$。<br><br><strong>解</strong>：按第一行展开：<br>$|A| = 1\\cdot\\begin{vmatrix} 1 & 2 \\\\ 1 & 1 \\end{vmatrix} - 2\\cdot\\begin{vmatrix} 3 & 2 \\\\ 0 & 1 \\end{vmatrix} + 0 = 1\\cdot(1-2) - 2\\cdot(3-0) = -1 - 6 = -7$<br><br><span style=\"color:#FF3B30;\">⚠ 易错：行列式是「只对方阵定义的一个数」；长方矩阵没有行列式。</span>")}
+            ${groupTitle('fa-right-left', '2.5 转置', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    $(A^\\mathrm{T})^\\mathrm{T} = A$（行列互换）<br>
+                    $(\\lambda A)^\\mathrm{T} = \\lambda A^\\mathrm{T}$<br>
+                    $(A+B)^\\mathrm{T} = A^\\mathrm{T} + B^\\mathrm{T}$<br>
+                    $(AB)^\\mathrm{T} = B^\\mathrm{T}A^\\mathrm{T}$（<strong>逆序翻跟头</strong>）
+                </div>
+            </div>
+
+            ${exampleBox("例题 · 转置（$3\\times2 \\to 2\\times3$）", "设 $A = \\begin{pmatrix} 2 & -1 \\\\ 0 & 3 \\\\ 1 & 4 \\end{pmatrix}$（$3\\times 2$），求 $A^\\mathrm{T}$。<br><br><strong>解</strong>：$3\\times2$ 转置后为 $2\\times3$，行变列：<br>$A^\\mathrm{T} = \\begin{pmatrix} 2 & 0 & 1 \\\\ -1 & 3 & 4 \\end{pmatrix}$")}
+            ${exampleBox("例题 · 验证 $(AB)^\\mathrm{T} = B^\\mathrm{T}A^\\mathrm{T}$", "设 $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix},\\ B = \\begin{pmatrix} 1 & 0 \\\\ 1 & 0 \\end{pmatrix}$，求 $(AB)^\\mathrm{T}$。<br><br><strong>解</strong>：先算 $AB = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 1 & 0 \\end{pmatrix} = \\begin{pmatrix} 3 & 0 \\\\ 7 & 0 \\end{pmatrix}$，再转置得 $(AB)^\\mathrm{T} = \\begin{pmatrix} 3 & 7 \\\\ 0 & 0 \\end{pmatrix}$。<br>验证逆序律：$B^\\mathrm{T}A^\\mathrm{T} = \\begin{pmatrix} 1 & 1 \\\\ 0 & 0 \\end{pmatrix}\\begin{pmatrix} 1 & 3 \\\\ 2 & 4 \\end{pmatrix} = \\begin{pmatrix} 3 & 7 \\\\ 0 & 0 \\end{pmatrix}$，一致 ✓。")}
+            ${groupTitle('fa-superscript', '2.6 方阵多项式', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    • 只有方阵的多项式可像数一样因式分解、交换：$f(A)\\varphi(A) = \\varphi(A)f(A)$。<br>
+                    • 矩阵式里的纯数要配单位阵：$5A + 6$ 无意义，应写 $5A + 6E$。
+                </div>
+            </div>
+
+            ${exampleBox("例题（有难度）· 方阵多项式 $f(A)$", "设 $f(x)=x^2-5x+3$，$A=\\begin{pmatrix} 2 & 1 \\\\ -1 & 3 \\end{pmatrix}$，求 $f(A)$。<br><br><strong>解</strong>：先算 $A^2 = \\begin{pmatrix} 2 & 1 \\\\ -1 & 3 \\end{pmatrix}\\begin{pmatrix} 2 & 1 \\\\ -1 & 3 \\end{pmatrix} = \\begin{pmatrix} 3 & 5 \\\\ -5 & 8 \\end{pmatrix}$，再算 $5A=\\begin{pmatrix} 10 & 5 \\\\ -5 & 15 \\end{pmatrix}$，$3E=\\begin{pmatrix} 3 & 0 \\\\ 0 & 3 \\end{pmatrix}$。代入（常数必须配 $E$）：<br>$f(A)=A^2-5A+3E = \\begin{pmatrix} 3 & 5 \\\\ -5 & 8 \\end{pmatrix} - \\begin{pmatrix} 10 & 5 \\\\ -5 & 15 \\end{pmatrix} + \\begin{pmatrix} 3 & 0 \\\\ 0 & 3 \\end{pmatrix} = \\begin{pmatrix} -4 & 0 \\\\ 0 & -4 \\end{pmatrix} = -4E$<br><br><span style=\"color:#FF9F0A;\">⚠ 易错：矩阵式里的纯数必须配单位阵，写 $5A+6E$ 而非 $5A+6$。</span>")}
         </div>
     `;
 
@@ -6373,7 +6432,35 @@ ${memoryBox('乘法易错', '乘之前先核「前列=后行」；乘之后别�
             </div>
 
             ${exampleBox("例题 · 判断可逆并求逆", "判断 $B = \\begin{pmatrix} 4 & 7 \\\\ 1 & 2 \\end{pmatrix}$ 是否可逆；若可逆，求其逆。<br><br><strong>解</strong>：$|B| = 4\\cdot2 - 7\\cdot1 = 1 \\neq 0$，故可逆。二阶「主对调、副变号、除以行列式」：<br>$B^{-1} = \\dfrac{1}{1}\\begin{pmatrix} 2 & -7 \\\\ -1 & 4 \\end{pmatrix} = \\begin{pmatrix} 2 & -7 \\\\ -1 & 4 \\end{pmatrix}$")}
+            ${exampleBox("例题（三阶）· 初等行变换求逆", "用初等行变换求 $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 2 & 5 & 7 \\\\ 3 & 7 & 11 \\end{pmatrix}$ 的逆矩阵。<br><br><strong>解</strong>：作增广 $(A\\mid E)$，只用行变换把左边化为 $E$：<br>$(A\\mid E) = \\left(\\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\\\ 2 & 5 & 7 & 0 & 1 & 0 \\\\ 3 & 7 & 11 & 0 & 0 & 1 \\end{array}\\right) \\xrightarrow{R_2-2R_1,\\ R_3-3R_1} \\left(\\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -2 & 1 & 0 \\\\ 0 & 1 & 2 & -3 & 0 & 1 \\end{array}\\right)$<br>$\\xrightarrow{R_3-R_2} \\left(\\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\\\ 0 & 1 & 1 & -2 & 1 & 0 \\\\ 0 & 0 & 1 & -1 & -1 & 1 \\end{array}\\right) \\xrightarrow{R_1-3R_3,\\ R_2-R_3} \\left(\\begin{array}{ccc|ccc} 1 & 2 & 0 & 4 & 3 & -3 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & -1 & -1 & 1 \\end{array}\\right)$<br>$\\xrightarrow{R_1-2R_2} \\left(\\begin{array}{ccc|ccc} 1 & 0 & 0 & 6 & -1 & -1 \\\\ 0 & 1 & 0 & -1 & 2 & -1 \\\\ 0 & 0 & 1 & -1 & -1 & 1 \\end{array}\\right) = (E\\mid A^{-1})$<br>故 $A^{-1} = \\begin{pmatrix} 6 & -1 & -1 \\\\ -1 & 2 & -1 \\\\ -1 & -1 & 1 \\end{pmatrix}$（代回抽查：$1\\cdot6+2\\cdot(-1)+3\\cdot(-1)=1$ ✓）。")}
+            ${exampleBox("例题 · 抽象矩阵求逆（定义法）", "设 $A$ 为 $n$ 阶方阵，满足 $A^2-A-2E=O$，求 $A^{-1}$。<br><br><strong>解</strong>：移项 $A^2-A=2E$；左边提公因子 $A$（$A$ 在左侧，公因子留在左侧）：$A(A-E)=2E$，即 $A\\cdot\\dfrac{A-E}{2}=E$。由逆矩阵定义：<br>$A^{-1}=\\dfrac{1}{2}(A-E)$<br><br><span style=\"color:#FF3B30;\">✅ 套路：移项 → 提公因子 → 凑成 $A\\cdot X=E$，$X$ 就是 $A^{-1}$。</span>")}
+            ${exampleBox("例题 · 变式（专升本同难度经典题型）", "设 $A$ 满足 $A^2+2A+3E=O$，求 $A^{-1}$。<br><br><strong>解</strong>：移项 $A^2+2A=-3E$，提公因子：$A(A+2E)=-3E$，即 $A\\cdot\\left[-\\dfrac{1}{3}(A+2E)\\right]=E$，故 $A^{-1}=-\\dfrac{1}{3}(A+2E)$。<br><br><span style=\"color:#FF3B30;\">✅ 两个坑：① 常数搬到右边要变号（$-3E$）；② 「除以常数」是写成倒数乘进去。这类题不考计算考定义理解，与 $AB=AC$ 消去陷阱同源：能约是因为可逆，可逆就是能凑出 $E$。</span>")}
+            ${exampleBox("例题 · 对角阵求逆（写成倒数）", "设 $\\Lambda = \\begin{pmatrix} 2 & 0 & 0 \\\\ 0 & -1 & 0 \\\\ 0 & 0 & 5 \\end{pmatrix}$，求 $\\Lambda^{-1}$。<br><br><strong>解</strong>：对角元 2、$-1$、5 通通取倒数：<br>$\\Lambda^{-1} = \\begin{pmatrix} \\frac{1}{2} & 0 & 0 \\\\ 0 & -1 & 0 \\\\ 0 & 0 & \\frac{1}{5} \\end{pmatrix}$<br><strong>验证</strong>：$\\Lambda\\Lambda^{-1} = \\begin{pmatrix} 2\\cdot\\frac12 & 0 & 0 \\\\ 0 & (-1)\\cdot(-1) & 0 \\\\ 0 & 0 & 5\\cdot\\frac15 \\end{pmatrix} = E$ ✓（对角阵相乘 = 对角元各自配对相乘，本质仍是「定义法」凑 $E$）。<br><br><span style=\"color:#FF3B30;\">✅ 口诀：对角元通通取倒数，其余全是 0；对角元出现 0 就不可逆。</span>")}
             ${exampleBox("💡 专升本真题（重庆 2017 专升本）· 可逆条件", "矩阵可逆满足的条件是（　）。<br>A. $AA^{-1}=1$　　B. $A=0$　　C. $|A^\\mathrm{T}| = |A|$　　D. $|A| \\neq 0$<br><br><strong>解</strong>：选 <strong>D</strong>。可逆的充要条件是行列式非零；A 错在等号右边应为单位阵 $E$ 而非数 $1$。")}
+            ${groupTitle('fa-route', '求逆方法怎么选：二阶用公式 · 三阶及以上用行变换', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <table style="width:100%;color:var(--text-secondary);font-size:0.85rem;border-collapse:collapse;">
+                    <tr style="border-bottom:1px solid var(--border-medium);">
+                        <th style="padding:0.5rem;text-align:left;">阶数</th>
+                        <th style="padding:0.5rem;text-align:left;">首选方法</th>
+                        <th style="padding:0.5rem;text-align:left;">理由</th>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;"><strong>二阶</strong></td>
+                        <td style="padding:0.5rem;"><strong>公式法（伴随）</strong>：「主对调、副变号、除以行列式」</td>
+                        <td style="padding:0.5rem;">只算 1 个行列式，四个元素直接写出，10 秒出答案</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;"><strong>三阶及以上</strong></td>
+                        <td style="padding:0.5rem;"><strong>初等行变换</strong> $(A\\mid E)\\xrightarrow{\\text{行变换}}(E\\mid A^{-1})$</td>
+                        <td style="padding:0.5rem;">伴随法要算 $n^2$ 个代数余子式（三阶就是 9 个）再转置，量大易错；行变换程序化、按部就班不易错</td>
+                    </tr>
+                </table>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;margin-top:0.8rem;">
+                    💡 <strong>要点</strong>：二阶求逆背口诀秒杀，别用行变换浪费时间；三阶及以上别硬套伴随公式——考试写 $(A\\mid E)$ 老老实实行变换，算完可用 $AA^{-1}=E$ 抽查验证。
+                </div>
+            </div>
+
             ${groupTitle('fa-star', '3.2 伴随矩阵', '#BF5AF2')}
             <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
@@ -6381,6 +6468,9 @@ ${memoryBox('乘法易错', '乘之前先核「前列=后行」；乘之后别�
                     $$A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} \\Rightarrow A^* = \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$
                 </div>
             </div>
+
+            ${exampleBox("例题（二阶）· 逐个代数余子式算出 $A^*$", "设 $A = \\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$，求 $A^*$。<br><br><strong>解</strong>：逐个算代数余子式：$A_{11}=+\\begin{vmatrix} 3 \\end{vmatrix}=3$，$A_{12}=-\\begin{vmatrix} -5 \\end{vmatrix}=5$，$A_{21}=-\\begin{vmatrix} -1 \\end{vmatrix}=1$，$A_{22}=+\\begin{vmatrix} 2 \\end{vmatrix}=2$。先按原位置摆好，再<strong>整体转置</strong>：<br>$A^* = \\begin{pmatrix} A_{11} & A_{21} \\\\ A_{12} & A_{22} \\end{pmatrix} = \\begin{pmatrix} 3 & 1 \\\\ 5 & 2 \\end{pmatrix}$<br>与「主对调、副变号」口诀结果一致 ✓。")}
+            ${exampleBox("例题（三阶）· 直观展示代数余子式的排列", "设 $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 5 & 6 & 0 \\end{pmatrix}$，求 $A^*$。<br><br><strong>解</strong>：逐个算 9 个代数余子式（$A_{ij}=(-1)^{i+j}M_{ij}$：划掉第 $i$ 行第 $j$ 列，余下 2 阶行列式乘符号）：$A_{11}=+\\begin{vmatrix} 1 & 4 \\\\ 6 & 0 \\end{vmatrix}=-24$，$A_{12}=-\\begin{vmatrix} 0 & 4 \\\\ 5 & 0 \\end{vmatrix}=20$，$A_{13}=+\\begin{vmatrix} 0 & 1 \\\\ 5 & 6 \\end{vmatrix}=-5$<br>$A_{21}=-\\begin{vmatrix} 2 & 3 \\\\ 6 & 0 \\end{vmatrix}=18$，$A_{22}=+\\begin{vmatrix} 1 & 3 \\\\ 5 & 0 \\end{vmatrix}=-15$，$A_{23}=-\\begin{vmatrix} 1 & 2 \\\\ 5 & 6 \\end{vmatrix}=4$<br>$A_{31}=+\\begin{vmatrix} 2 & 3 \\\\ 1 & 4 \\end{vmatrix}=5$，$A_{32}=-\\begin{vmatrix} 1 & 3 \\\\ 0 & 4 \\end{vmatrix}=-4$，$A_{33}=+\\begin{vmatrix} 1 & 2 \\\\ 0 & 1 \\end{vmatrix}=1$<br><strong>第一步：按各自原位置摆好</strong>（此时还没转置）：$$\\begin{pmatrix} A_{11} & A_{12} & A_{13} \\\\ A_{21} & A_{22} & A_{23} \\\\ A_{31} & A_{32} & A_{33} \\end{pmatrix} = \\begin{pmatrix} -24 & 20 & -5 \\\\ 18 & -15 & 4 \\\\ 5 & -4 & 1 \\end{pmatrix}$$ <strong>第二步：整体转置</strong>（第 1 行变第 1 列）才是 $A^*$：<br>$A^* = \\begin{pmatrix} A_{11} & A_{21} & A_{31} \\\\ A_{12} & A_{22} & A_{32} \\\\ A_{13} & A_{23} & A_{33} \\end{pmatrix} = \\begin{pmatrix} -24 & 18 & 5 \\\\ 20 & -15 & -4 \\\\ -5 & 4 & 1 \\end{pmatrix}$<br><br><span style=\"color:#BF5AF2;\">✅ 最易错在「忘了转置」：代数余子式按原位置摆，$A^*$ 是它的转置——口诀「先按位摆，再转置」。这 9 个代数余子式 + 1 个三阶行列式就是三阶伴随法的全部计算量，也是三阶及以上推荐初等行变换求逆的原因。</span>")}
 
             ${groupTitle('fa-link', '3.3 核心等式与逆伴随关系', '#BF5AF2')}
             <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
@@ -6398,38 +6488,7 @@ ${memoryBox('乘法易错', '乘之前先核「前列=后行」；乘之后别�
             ${exampleBox("💡 专升本真题（2025 专升本高等代数试卷）· $|A^*|$", "设 $A$ 为 $n$ 阶可逆方阵，$|A|=a$，则 $|A^*|=$（　）。<br>A. $a$　　B. $a^{-1}$　　C. $a^{n-1}$　　D. $a^n$<br><br><strong>解</strong>：选 <strong>C</strong>。由 $AA^*=|A|E=aE$ 两边取行列式：$|A||A^*|=|aE|=a^n\\Rightarrow a|A^*|=a^n\\Rightarrow |A^*|=a^{n-1}$。<br><br><span style=\"color:var(--color-green);\">✅ 真题启示：$|A^*|=|A|^{n-1}$ 是高频结论，配合 $A^*=|A|A^{-1}$ 可速推。</span>")}
             ${exampleBox("💡 专升本真题（2025 浙江专升本 · 计算题）· 求逆矩阵", "已知 $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$，求 $A^{-1}$。<br><br><strong>解</strong>：$|A| = 1\\cdot4 - 2\\cdot3 = -2$。二阶伴随「主对调，副变号」：$A^* = \\begin{pmatrix} 4 & -2 \\\\ -3 & 1 \\end{pmatrix}$。<br>$A^{-1} = \\dfrac{1}{-2}\\begin{pmatrix} 4 & -2 \\\\ -3 & 1 \\end{pmatrix} = \\begin{pmatrix} -2 & 1 \\\\ \\frac{3}{2} & -\\frac{1}{2} \\end{pmatrix}$")}
             ${exampleBox("💡 专升本真题（2025 山西专升本 · 第21题）· 先求 $AB$ 再求逆", "设 $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix},\\ B = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$，先求 $AB$，再求 $(AB)^{-1}$。<br><br><strong>解</strong>：$AB = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 \\\\ 4 & 3 \\end{pmatrix}$。$|AB| = 2\\cdot3 - 1\\cdot4 = 2$，伴随 $(AB)^* = \\begin{pmatrix} 3 & -1 \\\\ -4 & 2 \\end{pmatrix}$。<br>$(AB)^{-1} = \\dfrac{1}{2}\\begin{pmatrix} 3 & -1 \\\\ -4 & 2 \\end{pmatrix} = \\begin{pmatrix} \\frac{3}{2} & -\\frac{1}{2} \\\\ -2 & 1 \\end{pmatrix}$<br><br><span style=\"color:var(--color-green);\">✅ 真题启示：同一道逆矩阵题在多省卷反复出现，套路固定——先求行列式，二阶直接「主对调副变号」，再除以行列式。</span>")}
-            ${groupTitle('fa-superscript', '3.4 方阵多项式', '#0A84FF')}
-            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
-                    • 只有方阵的多项式可像数一样因式分解、交换：$f(A)\\varphi(A) = \\varphi(A)f(A)$。<br>
-                    • 矩阵式里的纯数要配单位阵：$5A + 6$ 无意义，应写 $5A + 6E$。
-                </div>
-            </div>
-
-            ${exampleBox("例题（有难度）· 方阵多项式 $f(A)$", "设 $f(x)=x^2-5x+3$，$A=\\begin{pmatrix} 2 & 1 \\\\ -1 & 3 \\end{pmatrix}$，求 $f(A)$。<br><br><strong>解</strong>：先算 $A^2 = \\begin{pmatrix} 2 & 1 \\\\ -1 & 3 \\end{pmatrix}\\begin{pmatrix} 2 & 1 \\\\ -1 & 3 \\end{pmatrix} = \\begin{pmatrix} 3 & 5 \\\\ -5 & 8 \\end{pmatrix}$，再算 $5A=\\begin{pmatrix} 10 & 5 \\\\ -5 & 15 \\end{pmatrix}$，$3E=\\begin{pmatrix} 3 & 0 \\\\ 0 & 3 \\end{pmatrix}$。代入（常数必须配 $E$）：<br>$f(A)=A^2-5A+3E = \\begin{pmatrix} 3 & 5 \\\\ -5 & 8 \\end{pmatrix} - \\begin{pmatrix} 10 & 5 \\\\ -5 & 15 \\end{pmatrix} + \\begin{pmatrix} 3 & 0 \\\\ 0 & 3 \\end{pmatrix} = \\begin{pmatrix} -4 & 0 \\\\ 0 & -4 \\end{pmatrix} = -4E$<br><br><span style=\"color:#FF9F0A;\">⚠ 易错：矩阵式里的纯数必须配单位阵，写 $5A+6E$ 而非 $5A+6$。</span>")}
-            ${groupTitle('fa-right-left', '3.5 转置', '#0A84FF')}
-            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
-                    $(A^\\mathrm{T})^\\mathrm{T} = A$（行列互换）<br>
-                    $(\\lambda A)^\\mathrm{T} = \\lambda A^\\mathrm{T}$<br>
-                    $(A+B)^\\mathrm{T} = A^\\mathrm{T} + B^\\mathrm{T}$<br>
-                    $(AB)^\\mathrm{T} = B^\\mathrm{T}A^\\mathrm{T}$（<strong>逆序翻跟头</strong>）
-                </div>
-            </div>
-
-            ${exampleBox("例题 · 转置（$3\\times2 \\to 2\\times3$）", "设 $A = \\begin{pmatrix} 2 & -1 \\\\ 0 & 3 \\\\ 1 & 4 \\end{pmatrix}$（$3\\times 2$），求 $A^\\mathrm{T}$。<br><br><strong>解</strong>：$3\\times2$ 转置后为 $2\\times3$，行变列：<br>$A^\\mathrm{T} = \\begin{pmatrix} 2 & 0 & 1 \\\\ -1 & 3 & 4 \\end{pmatrix}$")}
-            ${exampleBox("例题 · 验证 $(AB)^\\mathrm{T} = B^\\mathrm{T}A^\\mathrm{T}$", "设 $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix},\\ B = \\begin{pmatrix} 1 & 0 \\\\ 1 & 0 \\end{pmatrix}$，求 $(AB)^\\mathrm{T}$。<br><br><strong>解</strong>：先算 $AB = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 1 & 0 \\end{pmatrix} = \\begin{pmatrix} 3 & 0 \\\\ 7 & 0 \\end{pmatrix}$，再转置得 $(AB)^\\mathrm{T} = \\begin{pmatrix} 3 & 7 \\\\ 0 & 0 \\end{pmatrix}$。<br>验证逆序律：$B^\\mathrm{T}A^\\mathrm{T} = \\begin{pmatrix} 1 & 1 \\\\ 0 & 0 \\end{pmatrix}\\begin{pmatrix} 1 & 3 \\\\ 2 & 4 \\end{pmatrix} = \\begin{pmatrix} 3 & 7 \\\\ 0 & 0 \\end{pmatrix}$，一致 ✓。")}
-            ${groupTitle('fa-border-all', '3.6 方阵的行列式', '#FFD60A')}
-            <div class="formula-card" style="--card-accent:#FFD60A;margin-bottom:1rem;">
-                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
-                    $|A^\\mathrm{T}| = |A|$（转置不变）<br>
-                    $|kA| = k^n|A|$（$A$ 为 $n$ 阶方阵，注意是 $k$ 的 $n$ 次方）<br>
-                    $|AB| = |A|\\cdot|B|$
-                </div>
-            </div>
-
-            ${exampleBox("例题 · 计算 $3\\times3$ 行列式", "设 $A = \\begin{pmatrix} 1 & 2 & 0 \\\\ 3 & 1 & 2 \\\\ 0 & 1 & 1 \\end{pmatrix}$，求 $|A|$。<br><br><strong>解</strong>：按第一行展开：<br>$|A| = 1\\cdot\\begin{vmatrix} 1 & 2 \\\\ 1 & 1 \\end{vmatrix} - 2\\cdot\\begin{vmatrix} 3 & 2 \\\\ 0 & 1 \\end{vmatrix} + 0 = 1\\cdot(1-2) - 2\\cdot(3-0) = -1 - 6 = -7$<br><br><span style=\"color:#FF3B30;\">⚠ 易错：行列式是「只对方阵定义的一个数」；长方矩阵没有行列式。</span>")}
-${groupTitle('fa-list-check', '3.7 逆矩阵运算公式总结', '#FF3B30')}
+${groupTitle('fa-list-check', '3.4 逆矩阵运算公式总结', '#FF3B30')}
             <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
                 <table style="width:100%;color:var(--text-secondary);font-size:0.85rem;border-collapse:collapse;">
                     <tr style="border-bottom:1px solid var(--border-medium);">
@@ -6470,7 +6529,7 @@ ${groupTitle('fa-list-check', '3.7 逆矩阵运算公式总结', '#FF3B30')}
                 </div>
             </div>
 
-            ${groupTitle('fa-equals', '3.8 矩阵方程的类型与解法', '#BF5AF2')}
+            ${groupTitle('fa-equals', '3.5 矩阵方程的类型与解法', '#BF5AF2')}
             <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
                     <strong>核心</strong>：矩阵乘法<strong>不满足交换律</strong>，所以「左乘」还是「右乘」必须看准 $X$ 的位置。<br>
@@ -6506,19 +6565,19 @@ ${groupTitle('fa-list-check', '3.7 逆矩阵运算公式总结', '#FF3B30')}
                 </table>
                 <div class="formula-label" style="color:#BF5AF2;margin-top:1rem;">求逆三条路</div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
-                    ① <strong>伴随法</strong> $A^{-1}=\\dfrac{A^*}{|A|}$（二、三阶手算最快）；<br>
-                    ② <strong>初等行变换</strong> $(A\\mid E)\\to(E\\mid A^{-1})$（高阶首选）；<br>
+                    ① <strong>公式法（伴随）</strong> $A^{-1}=\\dfrac{A^*}{|A|}$（<strong>二阶首选</strong>，「主对调副变号」秒出）；<br>
+                    ② <strong>初等行变换</strong> $(A\\mid E)\\to(E\\mid A^{-1})$（<strong>三阶及以上首选</strong>，程序化不易错）；<br>
                     ③ <strong>增广矩阵</strong> $(A\\mid B)\\to(E\\mid A^{-1}B)$，直接解 $AX=B$。
                 </div>
             </div>
 
-            ${exampleBox("例题 · 求逆三法① · 伴随法 $A^{-1}=A^*/|A|$", "设 $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 5 & 6 & 0 \\end{pmatrix}$，用伴随法求 $A^{-1}$。<br><br><strong>解</strong>：① 求行列式（按第一行展开）：$|A| = 1\\cdot(0-24) - 2\\cdot(0-20) + 3\\cdot(0-5) = -24+40-15 = 1$。<br>② 各代数余子式：$A_{11}=-24,\\ A_{12}=20,\\ A_{13}=-5,\\ A_{21}=18,\\ A_{22}=-15,\\ A_{23}=4,\\ A_{31}=5,\\ A_{32}=-4,\\ A_{33}=1$。<br>③ 伴随矩阵 = 代数余子式矩阵的<strong>转置</strong>：$A^* = \\begin{pmatrix} -24 & 18 & 5 \\\\ 20 & -15 & -4 \\\\ -5 & 4 & 1 \\end{pmatrix}$。<br>④ $A^{-1} = \\dfrac{A^*}{|A|} = \\dfrac{A^*}{1} = \\begin{pmatrix} -24 & 18 & 5 \\\\ 20 & -15 & -4 \\\\ -5 & 4 & 1 \\end{pmatrix}$。<br><br><span style=\"color:#FF3B30;\">✅ 伴随法：先算 $|A|$ → 写代数余子式矩阵 → <strong>转置</strong>得 $A^*$ → 除以 $|A|$。二、三阶手算最快。</span>")}
-            ${exampleBox("例题 · 求逆三法② · 初等行变换 $(A\\mid E)\\to(E\\mid A^{-1})$", "用同一矩阵 $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 5 & 6 & 0 \\end{pmatrix}$，用初等行变换求 $A^{-1}$。<br><br><strong>解</strong>：作增广矩阵 $(A\\mid E)$，只用<strong>行变换</strong>把左边化为 $E$：<br>$(A\\mid E) = \\left(\\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\\\ 0 & 1 & 4 & 0 & 1 & 0 \\\\ 5 & 6 & 0 & 0 & 0 & 1 \\end{array}\\right) \\xrightarrow{R_3-5R_1} \\left(\\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\\\ 0 & 1 & 4 & 0 & 1 & 0 \\\\ 0 & -4 & -15 & -5 & 0 & 1 \\end{array}\\right)$<br>$\\xrightarrow{R_3+4R_2} \\left(\\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\\\ 0 & 1 & 4 & 0 & 1 & 0 \\\\ 0 & 0 & 1 & -5 & 4 & 1 \\end{array}\\right) \\xrightarrow{R_2-4R_3,\\ R_1-3R_3} \\left(\\begin{array}{ccc|ccc} 1 & 2 & 0 & 16 & -12 & -3 \\\\ 0 & 1 & 0 & 20 & -15 & -4 \\\\ 0 & 0 & 1 & -5 & 4 & 1 \\end{array}\\right)$<br>$\\xrightarrow{R_1-2R_2} \\left(\\begin{array}{ccc|ccc} 1 & 0 & 0 & -24 & 18 & 5 \\\\ 0 & 1 & 0 & 20 & -15 & -4 \\\\ 0 & 0 & 1 & -5 & 4 & 1 \\end{array}\\right) = (E\\mid A^{-1})$<br>故 $A^{-1} = \\begin{pmatrix} -24 & 18 & 5 \\\\ 20 & -15 & -4 \\\\ -5 & 4 & 1 \\end{pmatrix}$，与伴随法结果一致。<br><br><span style=\"color:#FF3B30;\">✅ 初等行变换法：$(A\\mid E)\\to(E\\mid A^{-1})$，全程只用行变换，高阶首选。</span>")}
+            ${exampleBox("例题 · 求逆三法① · 伴随法 $A^{-1}=A^*/|A|$", "设 $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 5 & 6 & 0 \\end{pmatrix}$，用伴随法求 $A^{-1}$。<br><br><strong>解</strong>：① 求行列式（按第一行展开）：$|A| = 1\\cdot(0-24) - 2\\cdot(0-20) + 3\\cdot(0-5) = -24+40-15 = 1$。<br>② 各代数余子式：$A_{11}=-24,\\ A_{12}=20,\\ A_{13}=-5,\\ A_{21}=18,\\ A_{22}=-15,\\ A_{23}=4,\\ A_{31}=5,\\ A_{32}=-4,\\ A_{33}=1$。<br>③ 伴随矩阵 = 代数余子式矩阵的<strong>转置</strong>：$A^* = \\begin{pmatrix} -24 & 18 & 5 \\\\ 20 & -15 & -4 \\\\ -5 & 4 & 1 \\end{pmatrix}$。<br>④ $A^{-1} = \\dfrac{A^*}{|A|} = \\dfrac{A^*}{1} = \\begin{pmatrix} -24 & 18 & 5 \\\\ 20 & -15 & -4 \\\\ -5 & 4 & 1 \\end{pmatrix}$。<br><br><span style=\"color:#FF3B30;\">✅ 伴随法：先算 $|A|$ → 写代数余子式矩阵 → <strong>转置</strong>得 $A^*$ → 除以 $|A|$。二阶首选；三阶及以上推荐改用初等行变换。</span>")}
+            ${exampleBox("例题 · 求逆三法② · 初等行变换 $(A\\mid E)\\to(E\\mid A^{-1})$", "用同一矩阵 $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 5 & 6 & 0 \\end{pmatrix}$，用初等行变换求 $A^{-1}$。<br><br><strong>解</strong>：作增广矩阵 $(A\\mid E)$，只用<strong>行变换</strong>把左边化为 $E$：<br>$(A\\mid E) = \\left(\\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\\\ 0 & 1 & 4 & 0 & 1 & 0 \\\\ 5 & 6 & 0 & 0 & 0 & 1 \\end{array}\\right) \\xrightarrow{R_3-5R_1} \\left(\\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\\\ 0 & 1 & 4 & 0 & 1 & 0 \\\\ 0 & -4 & -15 & -5 & 0 & 1 \\end{array}\\right)$<br>$\\xrightarrow{R_3+4R_2} \\left(\\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\\\ 0 & 1 & 4 & 0 & 1 & 0 \\\\ 0 & 0 & 1 & -5 & 4 & 1 \\end{array}\\right) \\xrightarrow{R_2-4R_3,\\ R_1-3R_3} \\left(\\begin{array}{ccc|ccc} 1 & 2 & 0 & 16 & -12 & -3 \\\\ 0 & 1 & 0 & 20 & -15 & -4 \\\\ 0 & 0 & 1 & -5 & 4 & 1 \\end{array}\\right)$<br>$\\xrightarrow{R_1-2R_2} \\left(\\begin{array}{ccc|ccc} 1 & 0 & 0 & -24 & 18 & 5 \\\\ 0 & 1 & 0 & 20 & -15 & -4 \\\\ 0 & 0 & 1 & -5 & 4 & 1 \\end{array}\\right) = (E\\mid A^{-1})$<br>故 $A^{-1} = \\begin{pmatrix} -24 & 18 & 5 \\\\ 20 & -15 & -4 \\\\ -5 & 4 & 1 \\end{pmatrix}$，与伴随法结果一致。<br><br><span style=\"color:#FF3B30;\">✅ 初等行变换法：$(A\\mid E)\\to(E\\mid A^{-1})$，全程只用行变换，三阶及以上求逆首选。</span>")}
             ${exampleBox("例题 · 求逆三法③ · 增广矩阵解 $AX=B$", "设 $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 5 & 6 & 0 \\end{pmatrix}$，$B = \\begin{pmatrix} 4 & 3 \\\\ 4 & 1 \\\\ 5 & 11 \\end{pmatrix}$，用增广矩阵法解矩阵方程 $AX=B$。<br><br><strong>解</strong>：作分块 $(A\\mid B)$，行变换化左边为 $E$，右边即为 $X=A^{-1}B$：<br>$(A\\mid B) = \\left(\\begin{array}{ccc|cc} 1 & 2 & 3 & 4 & 3 \\\\ 0 & 1 & 4 & 4 & 1 \\\\ 5 & 6 & 0 & 5 & 11 \\end{array}\\right) \\xrightarrow{R_3-5R_1} \\left(\\begin{array}{ccc|cc} 1 & 2 & 3 & 4 & 3 \\\\ 0 & 1 & 4 & 4 & 1 \\\\ 0 & -4 & -15 & -15 & -4 \\end{array}\\right)$<br>$\\xrightarrow{R_3+4R_2} \\left(\\begin{array}{ccc|cc} 1 & 2 & 3 & 4 & 3 \\\\ 0 & 1 & 4 & 4 & 1 \\\\ 0 & 0 & 1 & 1 & 0 \\end{array}\\right) \\xrightarrow{R_2-4R_3,\\ R_1-3R_3} \\left(\\begin{array}{ccc|cc} 1 & 2 & 0 & 1 & 3 \\\\ 0 & 1 & 0 & 0 & 1 \\\\ 0 & 0 & 1 & 1 & 0 \\end{array}\\right)$<br>$\\xrightarrow{R_1-2R_2} \\left(\\begin{array}{ccc|cc} 1 & 0 & 0 & 1 & 1 \\\\ 0 & 1 & 0 & 0 & 1 \\\\ 0 & 0 & 1 & 1 & 0 \\end{array}\\right) = (E\\mid X)$<br>故 $X = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$。<br><br><span style=\"color:#FF3B30;\">✅ 增广矩阵法：$(A\\mid B)\\to(E\\mid A^{-1}B)$，一步同时完成「求逆 + 解方程」，是解 $AX=B$ 的通用快法。</span>")}
             ${exampleBox("例题 · 矩阵方程 AX=B（基础型）", "设 $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$，$B = \\begin{pmatrix} 3 & 5 \\\\ 5 & 9 \\end{pmatrix}$，求矩阵 $X$ 使 $AX=B$。<br><br><strong>解</strong>：$X$ 在 $A$ 的<strong>右边</strong>，两边<strong>左乘</strong> $A^{-1}$，得 $X = A^{-1}B$。$|A| = 1\\cdot4-2\\cdot3 = -2$，二阶伴随「主对调、副变号」：$A^* = \\begin{pmatrix} 4 & -2 \\\\ -3 & 1 \\end{pmatrix}$。<br>$A^{-1} = \\dfrac{A^*}{|A|} = -\\dfrac12\\begin{pmatrix} 4 & -2 \\\\ -3 & 1 \\end{pmatrix} = \\begin{pmatrix} -2 & 1 \\\\ \\frac32 & -\\frac12 \\end{pmatrix}$。<br>$X = A^{-1}B = \\begin{pmatrix} -2 & 1 \\\\ \\frac32 & -\\frac12 \\end{pmatrix}\\begin{pmatrix} 3 & 5 \\\\ 5 & 9 \\end{pmatrix} = \\begin{pmatrix} -1 & -1 \\\\ 2 & 3 \\end{pmatrix}$。<br><br><span style=\"color:#BF5AF2;\">✅ 位置决定左右：$X$ 在右 → 左乘 $A^{-1}$；$X$ 在左 → 右乘 $A^{-1}$。</span>")}
-            ${exampleBox("💡 专升本真题（2022 重庆专升本 · 第19题）· 两处 X 型", "已知 $AX = A + 2X$，其中 $A = \\begin{pmatrix} 4 & 2 & 3 \\\\ 1 & 1 & 0 \\\\ -1 & 2 & 3 \\end{pmatrix}$，求 $X$。<br><br><strong>解</strong>：含 $X$ 的项移到同一边：$AX - 2X = A$，左边提公因式 $X$（$X$ 在右，系数括号留在左）：$(A-2E)X = A$。<br>$A-2E = \\begin{pmatrix} 2 & 2 & 3 \\\\ 1 & -1 & 0 \\\\ -1 & 2 & 1 \\end{pmatrix}$，$|A-2E| = -1 \\neq 0$，可逆。<br>两边左乘 $(A-2E)^{-1}$：$X = (A-2E)^{-1}A$。用初等行变换（或伴随法）求得 $(A-2E)^{-1} = \\begin{pmatrix} 1 & -4 & -3 \\\\ 1 & -5 & -3 \\\\ -1 & 6 & 4 \\end{pmatrix}$。<br>$X = (A-2E)^{-1}A = \\begin{pmatrix} 3 & -8 & -6 \\\\ 2 & -9 & -6 \\\\ -2 & 12 & 9 \\end{pmatrix}$。<br><br><span style=\"color:#BF5AF2;\">✅ 两处 X 的套路：<strong>移项 → 提 X → 两边乘逆</strong>；$X$ 在右则系数括号留在左，解为 $X = (\\text{系数})^{-1} \\times B$。</span>")}
+            ${exampleBox("💡 专升本真题（2022 重庆专升本 · 第19题）· 两处 X 型", "已知 $AX = A + 2X$，其中 $A = \\begin{pmatrix} 4 & 2 & 3 \\\\ 1 & 1 & 0 \\\\ -1 & 2 & 3 \\end{pmatrix}$，求 $X$。<br><br><strong>解</strong>：含 $X$ 的项移到同一边：$AX - 2X = A$，左边提公因式 $X$（$X$ 在右，系数括号留在左）：$(A-2E)X = A$。<br>$A-2E = \\begin{pmatrix} 2 & 2 & 3 \\\\ 1 & -1 & 0 \\\\ -1 & 2 & 1 \\end{pmatrix}$，$|A-2E| = -1 \\neq 0$，可逆。<br>两边左乘 $(A-2E)^{-1}$：$X = (A-2E)^{-1}A$。用初等行变换求得 $(A-2E)^{-1} = \\begin{pmatrix} 1 & -4 & -3 \\\\ 1 & -5 & -3 \\\\ -1 & 6 & 4 \\end{pmatrix}$。<br>$X = (A-2E)^{-1}A = \\begin{pmatrix} 3 & -8 & -6 \\\\ 2 & -9 & -6 \\\\ -2 & 12 & 9 \\end{pmatrix}$。<br><br><span style=\"color:#BF5AF2;\">✅ 两处 X 的套路：<strong>移项 → 提 X → 两边乘逆</strong>；$X$ 在右则系数括号留在左，解为 $X = (\\text{系数})^{-1} \\times B$。</span>")}
 
-            ${groupTitle('fa-superscript', '3.9 求矩阵的 n 次方（相似法：$AP=PB$）', '#5AC8FA')}
+            ${groupTitle('fa-superscript', '3.6 求矩阵的 n 次方（相似法：$AP=PB$）', '#5AC8FA')}
             <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
                     <strong>核心</strong>：若 $AP = PB$ 且 $P$ 可逆，则 $A = PBP^{-1}$，于是 $A^n = PB^nP^{-1}$——把难算的 $A^n$ 换成好算的 $B^n$。<br>
@@ -6530,7 +6589,7 @@ ${groupTitle('fa-list-check', '3.7 逆矩阵运算公式总结', '#FF3B30')}
             ${exampleBox("例题 1 · 求 $A^n$（基础 · $B$ 为对角阵）", "设 $P = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\end{pmatrix}$，$B = \\begin{pmatrix} 1 & 0 \\\\ 0 & 2 \\end{pmatrix}$，且 $AP = PB$，求 $A^n$。<br><br><strong>解</strong>：$|P| = 1$，$P$ 可逆。由 $AP = PB$ 两边右乘 $P^{-1}$ 得 $A = PBP^{-1}$，于是 $A^n = PB^nP^{-1}$。<br>① 二阶伴随「主对调、副变号」：$P^{-1} = \\begin{pmatrix} 2 & -1 \\\\ -1 & 1 \\end{pmatrix}$。<br>② $B$ 是对角阵，对角元各自升幂：$B^n = \\begin{pmatrix} 1 & 0 \\\\ 0 & 2^n \\end{pmatrix}$。<br>③ $A^n = PB^nP^{-1} = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 0 & 2^n \\end{pmatrix}\\begin{pmatrix} 2 & -1 \\\\ -1 & 1 \\end{pmatrix} = \\begin{pmatrix} 2-2^n & 2^n-1 \\\\ 2-2^{n+1} & 2^{n+1}-1 \\end{pmatrix}$。<br><br><span style=\"color:#5AC8FA;\">✅ 相似法：$AP=PB \\Rightarrow A=PBP^{-1} \\Rightarrow A^n=PB^nP^{-1}$；对角阵的 $n$ 次方最好算。</span>")}
             ${exampleBox("例题 2 · 求 $A^n$（进阶 · $B$ 需先找规律）", "设 $P = \\begin{pmatrix} 2 & 1 \\\\ 1 & 1 \\end{pmatrix}$，$B = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$，且 $AP = PB$，求 $A^n$。<br><br><strong>解</strong>：$|P| = 1$，$P^{-1} = \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}$。由 $AP = PB$ 得 $A^n = PB^nP^{-1}$。<br>① $B$ 是上三角，先找 $B^n$：$B^2 = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$，$B^3 = \\begin{pmatrix} 1 & 3 \\\\ 0 & 1 \\end{pmatrix}$，归纳得 $B^n = \\begin{pmatrix} 1 & n \\\\ 0 & 1 \\end{pmatrix}$。<br>② $A^n = PB^nP^{-1} = \\begin{pmatrix} 2 & 1 \\\\ 1 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & n \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix} = \\begin{pmatrix} 1-2n & 4n \\\\ -n & 2n+1 \\end{pmatrix}$。<br><br><span style=\"color:#5AC8FA;\">✅ $B$ 不是对角阵时，先把 $B^n$ 的规律找出来（上三角看非对角元的递增），再代回 $PB^nP^{-1}$。</span>")}
             ${exampleBox("例题 3 · 求 $A^n$（高阶 · 3 阶 + 奇偶型 $B$）", "设 $P = \\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & -1 & 0 \\\\ 2 & 1 & 1 \\end{pmatrix}$，$B = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 0 & 0 \\\\ 0 & 0 & -1 \\end{pmatrix}$，且 $AP = PB$，求 $A^n$。<br><br><strong>解</strong>：$|P| = -1 \\neq 0$，由 $AP = PB$ 得 $A^n = PB^nP^{-1}$。<br>① 求 $P^{-1}$（$P$ 为下三角，回代即得）：$P^{-1} = \\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & -1 & 0 \\\\ -4 & 1 & 1 \\end{pmatrix}$。<br>② $B$ 为对角阵且含 $-1$，故 $B^n = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 0 & 0 \\\\ 0 & 0 & (-1)^n \\end{pmatrix}$。<br>③ $A^n = PB^nP^{-1} = \\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & -1 & 0 \\\\ 2 & 1 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 0 & 0 \\\\ 0 & 0 & (-1)^n \\end{pmatrix}\\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & -1 & 0 \\\\ -4 & 1 & 1 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & 0 & 0 \\\\ 2-4(-1)^n & (-1)^n & (-1)^n \\end{pmatrix}$。<br><br><span style=\"color:#5AC8FA;\">✅ 三阶套路完全一致：仍是 $A^n = PB^nP^{-1}$，难点在 3 阶求逆 + 对角元含 $-1$（结果分奇偶）。</span>")}
-${memoryBox('逆伴随串联', '判定可逆 → 求伴随 $A^*$ → 套 $A^{-1}=A^*/|A|$。二阶直接「主对调副变号除以行列式」，高阶用初等变换。解矩阵方程：X 在右左乘 A⁻¹，X 在左右乘 A⁻¹。求 Aⁿ 用相似法：$AP=PB \\Rightarrow A=PBP^{-1} \\Rightarrow A^n=PB^nP^{-1}$（先求 $P^{-1}$，再找 $B^n$ 规律）。')}
+${memoryBox('逆伴随串联', '判定可逆 → 求伴随 $A^*$ → 套 $A^{-1}=A^*/|A|$。求逆分阶：<strong>二阶用「主对调副变号除以行列式」公式秒杀，三阶及以上用初等行变换 $(A|E)\\to(E|A^{-1})$</strong>。解矩阵方程：X 在右左乘 A⁻¹，X 在左右乘 A⁻¹。求 Aⁿ 用相似法：$AP=PB \\Rightarrow A=PBP^{-1} \\Rightarrow A^n=PB^nP^{-1}$（先求 $P^{-1}$，再找 $B^n$ 规律）。')}
         </div>
     `;
 
@@ -6547,6 +6606,15 @@ ${memoryBox('逆伴随串联', '判定可逆 → 求伴随 $A^*$ → 套 $A^{-1}
                     • <strong>倍乘</strong>：某行乘 $k\\neq 0$，性质不变（乘 0 会清零整行）。<br>
                     • <strong>倍加</strong>：某行的 $k$ 倍加到另一行，性质不变。
                 </div>
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">⚠ 易混淆：行列式换行变号 vs 矩阵换行不变号</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>行列式两行对调</strong> → <strong>变号</strong>：$|A| \\to -|A|$。行列式是一个「数」，换行改变它的值；<br>
+                    <strong>矩阵两行对调</strong> → <strong>不变号、意义不变</strong>。矩阵是一张「数表」，行换位置不改变它装的信息。
+                </div>
+                <div class="formula-label" style="color:#FF9F0A;margin-top:1rem;">最好用的理解：线性方程组视角</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    把矩阵每一行看成一个方程，两行对调就是把「第 1 个方程和第 2 个方程调换一下顺序」。第一个和第二个方程调换顺序，怎么会改变方程组的解呢？——不会。所以矩阵换行只是「换位置」，不需要变号。
+                </div>
             </div>
 
             ${exampleBox("例题 · 三类初等行变换", "以 $M = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\end{pmatrix}$ 为例，做三类初等行变换。<br><br><strong>解</strong>：<br>① <strong>互换</strong>：$R_1\\leftrightarrow R_2 \\Rightarrow \\begin{pmatrix} 4 & 5 & 6 \\\\ 1 & 2 & 3 \\\\ 7 & 8 & 9 \\end{pmatrix}$<br>② <strong>倍乘</strong>：$R_2\\times 2 \\Rightarrow \\begin{pmatrix} 1 & 2 & 3 \\\\ 8 & 10 & 12 \\\\ 7 & 8 & 9 \\end{pmatrix}$<br>③ <strong>倍加</strong>：$R_3+2R_2\\to R_3 \\Rightarrow \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 15 & 18 & 21 \\end{pmatrix}$<br><br><span style=\"color:#FF3B30;\">⚠ 倍乘要求 $k\\neq0$；乘 0 会把整行清零、改变秩。</span>")}
@@ -6556,7 +6624,7 @@ ${memoryBox('逆伴随串联', '判定可逆 → 求伴随 $A^*$ → 套 $A^{-1}
                     $$(A\\mid E) \\xrightarrow{\\text{行变换}} (E\\mid A^{-1})$$
                 </div>
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;">
-                    理解：左乘 $A^{-1}$ 把 $A$ 变 $E$，同时把 $E$ 变 $A^{-1}$。推广：解 $AX=B$ 用 $(A\\mid B)\\rightarrow(E\\mid A^{-1}B)$。
+                    理解：左乘 $A^{-1}$ 把 $A$ 变 $E$，同时把 $E$ 变 $A^{-1}$。<strong>这是三阶及以上求逆的标准方法</strong>（二阶用「主对调副变号」公式更快）。推广：解 $AX=B$ 用 $(A\\mid B)\\rightarrow(E\\mid A^{-1}B)$。
                 </div>
             </div>
 
@@ -6683,6 +6751,9 @@ ${memoryBox('求秩套路', '化行阶梯形 → 数非零行 → 就是秩。�
                 ${formulaCard('逆3', '逆的逆与积逆', '$$(A^{-1})^{-1}=A,\\quad (AB)^{-1}=B^{-1}A^{-1}$$', '逆的逆是本身；积的逆要逆序（翻跟头）', '#FF3B30')}
                 ${formulaCard('逆4', '数乘的逆', '$$(\\lambda A)^{-1}=\\frac{1}{\\lambda}A^{-1}\\ (\\lambda\\neq 0)$$', '常数提出来变倒数', '#FF3B30')}
                 ${formulaCard('逆5', '逆的行列式', '$$|A^{-1}|=\\frac{1}{|A|}$$', '逆的行列式 = 行列式的倒数', '#FF3B30')}
+                ${formulaCard('逆6', '求逆方法分阶', '$$\\text{二阶：公式法}\\quad\\text{三阶及以上：初等行变换}$$', '二阶「主对调副变号」秒杀；三阶以上伴随要算 n² 个代数余子式，改用 (A|E)→(E|A⁻¹)', '#FF3B30')}
+                ${formulaCard('逆7', '抽象矩阵求逆', '$$A^2-A-2E=O \\Rightarrow A^{-1}=\\frac{A-E}{2}$$', '用定义凑 AB=E：移项→提公因子→凑 E', '#FF3B30')}
+                ${formulaCard('逆8', '对角阵求逆', '$$\\Lambda^{-1}=\\mathrm{diag}\\!\\left(\\tfrac{1}{a_1},\\dots,\\tfrac{1}{a_n}\\right)$$', '对角元通通取倒数，其余全 0；有 0 不可逆', '#FF3B30')}
                 ${formulaCard('伴1', '伴随矩阵', '$$A^*=(A_{ji})_{n\\times n}$$', '代数余子式的转置；只有方阵有伴随', '#BF5AF2')}
                 ${formulaCard('伴2', '二阶伴随口诀', '$$A=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\\Rightarrow A^*=\\begin{pmatrix}d&-b\\\\-c&a\\end{pmatrix}$$', '主对调，副变号', '#BF5AF2')}
                 ${formulaCard('伴3', '核心等式', '$$AA^*=A^*A=|A|E$$', '对角元按行展开=|A|，非对角为 0', '#BF5AF2')}
@@ -6693,16 +6764,441 @@ ${memoryBox('求秩套路', '化行阶梯形 → 数非零行 → 就是秩。�
                 ${formulaCard('幂1', '矩阵高次幂（相似法）', '$$AP=PB \\Rightarrow A^n=PB^nP^{-1}$$', '把 Aⁿ 换成好算的 Bⁿ；B 对角/上三角/幂零', '#5AC8FA')}
                 ${formulaCard('初1', '初等行变换', '互换 / 倍乘(k≠0) / 倍加', '三类操作都不改变矩阵的可逆性与秩', '#5AC8FA')}
                 ${formulaCard('初2', '初等行变换求逆', '$$(A\\mid E)\\xrightarrow{\\text{行变换}}(E\\mid A^{-1})$$', '左乘 A⁻¹ 理解；推广可解 AX=B', '#5AC8FA')}
+                ${formulaCard('初3', '换行：变号 vs 不变号', '$$\\text{行列式换行}\\to\\text{变号}\\quad\\text{矩阵换行}\\to\\text{不变号}$$', '行列式是数，换行值变号；矩阵像方程组，换行=调换方程顺序，意义不变', '#5AC8FA')}
                 ${formulaCard('秩1', '秩的定义', '$$R(A)=r$$', '最高阶非零子式的阶数 = 行阶梯形非零行数', '#30D158')}
                 ${formulaCard('秩2', '满秩判定', '$$R(A)=n \\iff |A| \\neq 0$$', '满秩 ⟺ 行列式非零；不满秩 ⟺ |A|=0', '#30D158')}
                 ${formulaCard('秩3', '已知秩，求参数', '$$R(A)=r \\Leftrightarrow \\text{行阶梯非零行数}=r$$', 'R(A)=n−1 先令 |A|=0 得候选，再回代验证', '#30D158')}
             </div>
-            ${memoryBox('考前必背', '这 37 条覆盖了矩阵的几乎全部考点：特殊阵 → 运算 → 逆伴随 → 初等变换与秩。先识别题型，再套对应公式。')}
+            ${memoryBox('考前必背', '这 41 条覆盖了矩阵的几乎全部考点：特殊阵 → 运算 → 逆伴随 → 初等变换与秩。先识别题型，再套对应公式。')}
         </div>
     `;
 
 
     return { title: '矩阵详情（线性代数）', color: C, tabs, body: mapBody + matSpecialBody + matOpBody + matInvBody + matElemBody + matSummaryBody };
+}
+
+
+// ---------- 第十一章·线性代数·线性方程组详情 ----------
+function buildLinearSystemDetail() {
+    const C = '#9b8bb4';
+    const T = 'rgba(155,139,180,0.2)';
+    const TB = 'rgba(155,139,180,0.4)';
+    const tabs = `
+        <div class="detail-tab active" style="--tab-color:${T};--tab-border:${TB};" onclick="switchTab('sys-map', this)">知识地图</div>
+        <div class="detail-tab" style="--tab-color:${T};--tab-border:${TB};" onclick="switchTab('sys-concept', this)">概念与矩阵表示</div>
+        <div class="detail-tab" style="--tab-color:${T};--tab-border:${TB};" onclick="switchTab('sys-solve', this)">求解方程组</div>
+        <div class="detail-tab" style="--tab-color:${T};--tab-border:${TB};" onclick="switchTab('sys-decide', this)">解的判定</div>
+        <div class="detail-tab" style="--tab-color:${T};--tab-border:${TB};" onclick="switchTab('sys-types', this)">题型实战</div>
+        <div class="detail-tab" style="--tab-color:${T};--tab-border:${TB};" onclick="switchTab('sys-structure', this)">解的结构</div>
+        <div class="detail-tab" style="--tab-color:${T};--tab-border:${TB};" onclick="switchTab('sys-frame', this)">解题框架</div>
+        <div class="detail-tab" style="--tab-color:${T};--tab-border:${TB};" onclick="switchTab('sys-summary', this)">速查·口诀</div>
+    `;
+    // === 线性方程组详情（独立章节，模块 id = linSys）===
+    // === 知识地图（第一个 tab，同时作为默认活动 section）===
+    const mapBody = `
+        <div class="detail-section active" id="sys-map">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-map-location-dot"></i> 知识地图 · 线性方程组</div>
+            <div class="section-desc">线性方程组是线性代数的「落脚点」：行列式提供判据（一个数），矩阵提供工具（一张表 + 初等行变换），最终都用来回答三个问题——有没有解？有几个解？解长什么样？</div>
+
+            ${groupTitle('fa-sitemap', '知识地图与学习路径', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>线性方程组</strong><br>
+                    ├── ① 概念与表示：齐次 $AX=0$（一定有解）· 非齐次 $AX=b$（不一定有解）· 系数矩阵 A · 未知数向量 X · 增广矩阵 (A|b)<br>
+                    ├── ② 求解：只用初等行变换 → 行阶梯 → 行最简 → 同解方程组 → 自由未知量 → 基础解系 → 通解<br>
+                    ├── ③ 判定（看秩，比大小）：$R(A)&lt;R(A\\mid b)$ 无解 · $=n$ 唯一解 · $&lt;n$ 无穷多解<br>
+                    ├── ④ 解的结构：齐次=解空间（基础解系 $n-R(A)$ 个）· 非齐次=特解 + 导出组通解<br>
+                    └── ⑤ 联动：方阵齐次 $|A|=0 \\Leftrightarrow$ 有非零解 · 幂等矩阵 $A^2=A$ 综合题
+                </div>
+            </div>
+            ${memoryBox('学习路径一句话', '先分清齐次/非齐次、把方程组写成增广矩阵 → 只用行变换化行阶梯（先判有没有解）→ 再化行最简写同解方程组 → 主元列留左、自由未知量移右 → 求基础解系，拼出通解。')}
+            ${memoryBox('与行列式·矩阵的关系', '行列式给「判据」：方阵齐次用 $|A|$ 判有没有非零解；矩阵给「工具」：初等行变换 + 秩是求解与判定的全部手段。前两章不熟，先回看 09、10 两章。')}
+        </div>
+    `;
+    // === 概念与矩阵表示 ===
+    const conceptBody = `
+        <div class="detail-section" id="sys-concept">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-shapes"></i> 概念与矩阵表示</div>
+            <div class="section-desc">先把「齐次 / 非齐次」「系数矩阵 / 增广矩阵」分清楚，后面的求解与判定全部建立在这套语言上。</div>
+
+            ${groupTitle('fa-1', '1.1 齐次线性方程组（$AX=0$）', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\begin{cases} a_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n = 0 \\\\ a_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n = 0 \\\\ \\quad\\vdots \\\\ a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = 0 \\end{cases}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    常数项全为 0 的方程组，矩阵形式记作 $AX = 0$。<br>
+                    <strong>要点</strong>：齐次方程组<strong>一定有解</strong>——$x_1=x_2=\\cdots=x_n=0$ 永远满足，称为<strong>零解</strong>。所以齐次方程组只会问「是否只有零解」，问不到「无解」。<br>
+                    <strong>「零解」这个概念只属于齐次方程组</strong>，非齐次方程组不谈零解。
+                </div>
+            </div>
+
+            ${groupTitle('fa-2', '1.2 非齐次线性方程组（$AX=b$）', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    常数项不全为 0 的方程组，矩阵形式记作 $AX = b\\ (b \\neq 0)$。
+                </div>
+            </div>
+            ${exampleBox("例题 · 零解只属齐次（实例辨析）", "取同一个系数矩阵 $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & -1 \\end{pmatrix}$，对比两个方程组：<br><br><strong>齐次</strong>：$\\begin{cases} x_1 + 2x_2 = 0 \\\\ 3x_1 - x_2 = 0 \\end{cases}$，把 $X=(0,0)^T$ 代进去：左边 $=(0,0)^T=$ 右边，成立 → 齐次一定有<strong>零解</strong>（本题 $|A|=-7\\neq0$，而且是<strong>唯一</strong>的零解）。<br><br><strong>非齐次</strong>：$\\begin{cases} x_1 + 2x_2 = 3 \\\\ 3x_1 - x_2 = 5 \\end{cases}$，把 $X=(0,0)^T$ 代进去：左边 $=(0,0)^T\\neq(3,5)^T$，不成立 → 非齐次<strong>没有「零解」这个概念</strong>，解要么不是零向量，要么根本无解。<br><br><span style=\"color:#FF3B30;\">⚠ 易错：非齐次方程组不一定有解；$X=0$ 代入得 $0=b\\neq0$ 不成立，所以非齐次不谈零解。</span>")}
+
+            ${groupTitle('fa-3', '1.3 系数矩阵 · 未知数向量 · 常数项向量', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$A = \\begin{pmatrix} a_{11} & a_{12} & \\cdots & a_{1n} \\\\ a_{21} & a_{22} & \\cdots & a_{2n} \\\\ \\vdots & \\vdots & & \\vdots \\\\ a_{m1} & a_{m2} & \\cdots & a_{mn} \\end{pmatrix}_{m\\times n},\\quad X = \\begin{pmatrix} x_1 \\\\ x_2 \\\\ \\vdots \\\\ x_n \\end{pmatrix}_{n\\times 1},\\quad b = \\begin{pmatrix} b_1 \\\\ b_2 \\\\ \\vdots \\\\ b_m \\end{pmatrix}_{m\\times 1}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    对含 $m$ 个方程、$n$ 个未知量的方程组：<br>
+                    • <strong>系数矩阵 $A$</strong>：只取各未知数前面的系数，排成 $m\\times n$ 表；<br>
+                    • <strong>未知数向量 $X$</strong>：全部未知数竖着排成一列；<br>
+                    • <strong>常数项向量 $b$</strong>：等号右边的结果竖着排成一列（齐次时 $b=0$）。
+                </div>
+            </div>
+
+            ${groupTitle('fa-4', '1.4 增广矩阵：把「结果」并进去', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$(A \\mid b) = \\left(\\begin{array}{cccc|c} a_{11} & a_{12} & \\cdots & a_{1n} & b_1 \\\\ a_{21} & a_{22} & \\cdots & a_{2n} & b_2 \\\\ \\vdots & \\vdots & & \\vdots & \\vdots \\\\ a_{m1} & a_{m2} & \\cdots & a_{mn} & b_m \\end{array}\\right)$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    把常数项 $b$ 作为<strong>最后一列</strong>并到系数矩阵 $A$ 右边，中间画一条竖线。<br>
+                    💡 <strong>为什么并进去</strong>：解方程组时，系数和结果必须<strong>同步做行变换</strong>，否则解就变了。并成增广矩阵后「一整行一起动」，一次行变换同时处理系数和结果。<br>
+                    • <strong>齐次</strong> $AX=0$：可以只写<strong>系数矩阵 $A$</strong>（最后一列恒为 0，行变换后仍是 0，写不写都不影响解）；要严谨也可以写成 $(A\\mid 0)$。<br>
+                    • <strong>非齐次</strong> $AX=b$：<strong>必须写增广矩阵 $(A\\mid b)$</strong>，不能只写 $A$，否则丢失结果信息，无法判断有没有解。
+                </div>
+            </div>
+            ${exampleBox("例题 · 写出矩阵形式与增广矩阵", "把方程组 $\\begin{cases} x_1 + 2x_2 - x_3 = 3 \\\\ 2x_1 - x_2 + 3x_3 = 1 \\end{cases}$ 写成矩阵形式与增广矩阵。<br><br><strong>解</strong>：<br>$A = \\begin{pmatrix} 1 & 2 & -1 \\\\ 2 & -1 & 3 \\end{pmatrix},\\quad b = \\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix},\\quad (A\\mid b) = \\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 2 & -1 & 3 & 1 \\end{array}\\right)$")}
+
+            ${groupTitle('fa-diagram-project', '1.5 一条主干：行变换 → 行阶梯 → 行最简', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:2;">
+                    $$(A \\mid b) \\xrightarrow{\\text{只用初等行变换（向下化 0）}} \\text{行阶梯形} \\xrightarrow{\\text{主元归一} + \\text{向上消 0}} \\text{行最简形} \\xrightarrow{\\text{写同解方程组}} \\text{求解}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    解方程组的全过程，就是给矩阵「整容」：<br>
+                    • <strong>初等行变换三种</strong>：① 交换两行 $r_i \\leftrightarrow r_j$；② 某行乘非零数 $r_i\\times k\\ (k\\neq0)$；③ 某行的 $k$ 倍加到另一行 $r_i + k\\,r_j$。<br>
+                    • <strong>行阶梯形</strong>：主元（每行第一个非零元）下方全部为 0，零行放最下面；主元<strong>不必是 1</strong>。<br>
+                    • <strong>行最简形</strong>：在行阶梯基础上，<strong>每个主元化为 1</strong>，且<strong>主元所在列上下其余元素全部为 0</strong>。<br>
+                    ⚠ <strong>铁律</strong>：解方程组、求逆、求秩，<strong>只能用行变换，绝不能用列变换</strong>。
+                </div>
+            </div>
+            ${memoryBox('概念速记', '齐次必有解（至少有零解），非齐次未必有解；齐次可只写系数矩阵，非齐次必须写增广矩阵 (A|b)；零解只属齐次。')}
+        </div>
+    `;
+    // === 求解方程组 ===
+    const solveBody = `
+        <div class="detail-section" id="sys-solve">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-list-ol"></i> 求解线性方程组</div>
+            <div class="section-desc">核心三件套：同解方程组（为什么能直接读答案）、自由未知量与 $c_1,c_2$ 怎么设、齐次与非齐次的完整五步。</div>
+
+            ${groupTitle('fa-equals', '2.1 什么是「同解方程组」', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    <strong>定义</strong>：如果两个方程组的<strong>解集完全相同</strong>，就称它们互为<strong>同解方程组</strong>。<br><br>
+                    为什么行变换后可以「直接读答案」？因为<strong>对增广矩阵作初等行变换，得到的方程组与原方程组同解</strong>：<br>
+                    • 交换两行 = 交换两个方程的书写次序，解不变；<br>
+                    • 某行乘非零数 = 方程两边同乘非零数，解不变；<br>
+                    • 某行的 $k$ 倍加到另一行 = 两个方程相加减消元，解不变。<br><br>
+                    所以把 $(A\\mid b)$ 化成行最简形后写成的新方程组，就是<strong>同解方程组</strong>——它和原方程组解一模一样，但形式最简单，可以直接读出解。
+                </div>
+                <div class="formula-label" style="color:#0A84FF;margin-top:1rem;">演示</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    $(A\\mid b) \\to$ 行最简形 $\\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & -3 \\end{pmatrix}$ 对应的同解方程组就是 $\\begin{cases} x_1 = 2 \\\\ x_2 = -3 \\end{cases}$
+                </div>
+            </div>
+
+            ${groupTitle('fa-sliders', '2.2 自由未知量，与 $c_1,c_2$ 到底怎么设', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    ⚠ 这是初学者最容易卡住的一步，务必看清：<strong>$c_1,c_2$ 是乘在「自由未知量」上的，而自由未知量 = 非主元列对应的未知数。</strong><br><br>
+                    把行最简形还原成方程组后——<br>
+                    ① <strong>主元列</strong>所在的未知数，叫<strong>主未知量</strong>（真未知量），留在<strong>左边</strong>；<br>
+                    ② 其余列（<strong>非主元列</strong>）所在的未知数，叫<strong>自由未知量</strong>（自由元），<strong>移到右边</strong>；<br>
+                    ③ 自由未知量的<strong>个数 = 未知数总数 $n$ − 系数矩阵的秩 $R(A)$</strong>；<br>
+                    ④ 每个自由未知量配一个任意常数（$c_1, c_2, \\dots$）；让自由未知量<strong>依次取</strong> $(1,0,\\dots,0)$、$(0,1,\\dots,0)$、…，就得到<strong>基础解系</strong>，通解就是这些基础解乘以 $c_i$ 再相加。
+                </div>
+            </div>
+            ${exampleBox("关键澄清 · $c_1,c_2$ 配在非主元列上", "行最简形 $\\begin{pmatrix} 1 & 0 & 2 & -1 \\\\ 0 & 1 & -3 & 1 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$，主元在第 1、2 列（$x_1,x_2$ 是主未知量），<br>则 $x_3,x_4$ 是自由未知量，令 $x_3=c_1,\\ x_4=c_2$（或先取 $(1,0),(0,1)$ 求基础解系），<br><span style=\"color:#FF3B30;\">⚠ 而不是令 $x_1=c_1,\\ x_2=c_2$——$c_1,c_2$ 一定配在「非主元列」对应的未知数上，绝不能配在主元列上。</span>")}
+
+            ${groupTitle('fa-circle-half-stroke', '2.3 求解齐次线性方程组 $AX=0$', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>标准五步</strong>：<br>
+                    ① 只写系数矩阵 $A$；<br>
+                    ② 只用初等行变换，把 $A$ 化成「行最简形」；<br>
+                    ③ 由行最简形写出「同解方程组」，主未知量留左、自由未知量移右；<br>
+                    ④ 令自由未知量依次取 $(1,0,\\dots,0)$、$(0,1,\\dots,0)$、…，求出基础解系 $\\eta_1,\\eta_2,\\dots$；<br>
+                    ⑤ 通解 $X = c_1\\eta_1 + c_2\\eta_2 + \\cdots + c_{n-r}\\eta_{n-r}$（$c_1,c_2,\\dots$ 为任意常数）。<br><br>
+                    💡 <strong>基础解系个数</strong> $= n - R(A)$；$R(A)=n$ 时无自由元，只有<strong>唯一零解</strong>（此时谈不上基础解系）。
+                </div>
+            </div>
+            ${exampleBox("例题（上难度 · 4 个未知量）· 解齐次方程组", "解齐次线性方程组 $\\begin{cases} x_1 + x_2 - 3x_3 - x_4 = 0 \\\\ 3x_1 - x_2 - 3x_3 + 4x_4 = 0 \\\\ x_1 + 5x_2 - 9x_3 - 8x_4 = 0 \\end{cases}$<br><br><strong>解</strong>：只写系数矩阵，作初等行变换：<br>$A = \\begin{pmatrix} 1 & 1 & -3 & -1 \\\\ 3 & -1 & -3 & 4 \\\\ 1 & 5 & -9 & -8 \\end{pmatrix} \\xrightarrow{\\substack{r_2-3r_1 \\\\ r_3-r_1}} \\begin{pmatrix} 1 & 1 & -3 & -1 \\\\ 0 & -4 & 6 & 7 \\\\ 0 & 4 & -6 & -7 \\end{pmatrix} \\xrightarrow{r_3+r_2} \\begin{pmatrix} 1 & 1 & -3 & -1 \\\\ 0 & -4 & 6 & 7 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$<br>化为行最简（$r_2\\times(-\\frac14)$，再 $r_1-r_2$）：$\\begin{pmatrix} 1 & 0 & -\\frac32 & \\frac34 \\\\ 0 & 1 & -\\frac32 & -\\frac74 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$<br><br>$R(A)=2&lt;n=4$，有非零解，自由未知量个数 $=4-2=2$。写出<strong>同解方程组</strong>（主元在第 1、2 列 → $x_1,x_2$ 留左，$x_3,x_4$ 移右）：$\\begin{cases} x_1 = \\frac32 x_3 - \\frac34 x_4 \\\\ x_2 = \\frac32 x_3 + \\frac74 x_4 \\end{cases}$<br><br>令自由未知量 $(x_3,x_4)$ 依次取 $(1,0)$、$(0,1)$：<br>$(x_3,x_4)=(1,0)$：$\\left(\\frac32,\\frac32,1,0\\right)\\xrightarrow{\\times 2}\\eta_1=\\begin{pmatrix} 3 \\\\ 3 \\\\ 2 \\\\ 0 \\end{pmatrix}$；$(x_3,x_4)=(0,1)$：$\\left(-\\frac34,\\frac74,0,1\\right)\\xrightarrow{\\times 4}\\eta_2=\\begin{pmatrix} -3 \\\\ 7 \\\\ 0 \\\\ 4 \\end{pmatrix}$<br><br>故通解为 $X = c_1\\begin{pmatrix} 3 \\\\ 3 \\\\ 2 \\\\ 0 \\end{pmatrix} + c_2\\begin{pmatrix} -3 \\\\ 7 \\\\ 0 \\\\ 4 \\end{pmatrix}$，$c_1,c_2$ 为任意常数。<br><br><span style=\"color:#5AC8FA;\">💡 技巧：得到含分数的基础解向量时，可以整体乘一个非零数（如上面的 $\\times2$、$\\times4$）把它「化整」，解空间不变（因为 $c_1,c_2$ 本来就是任意常数）。</span>")}
+
+            ${groupTitle('fa-circle-dot', '2.4 求解非齐次线性方程组 $AX=b$', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>标准五步</strong>：<br>
+                    ① 写增广矩阵 $(A\\mid b)$；<br>
+                    ② 只用初等行变换，把 $(A\\mid b)$ 化成「行阶梯形」，先判断有没有解：$R(A)&lt;R(A\\mid b)$ → 出现 $0=k\\ (k\\neq0)$ 矛盾行，直接「无解」结束；$R(A)=R(A\\mid b)$ → 继续；<br>
+                    ③ 继续化成「行最简形」；<br>
+                    ④ 先求一个特解 $X_0$（令全部自由未知量 $=0$，最省事），再求导出组 $AX=0$ 的基础解系；<br>
+                    ⑤ 通解 $X = X_0 + c_1\\eta_1 + c_2\\eta_2 + \\cdots$（特解 + 导出组通解）。
+                </div>
+            </div>
+            ${exampleBox("💡 专升本真题（河北 2023《高等数学(一)》考试大纲样题第 18 题）· 非齐次通解", "已知线性方程组 $\\begin{cases} x_1 + x_2 + x_3 - 3x_4 = 3 \\\\ 2x_1 + x_2 + x_3 - 5x_4 = 4 \\\\ 3x_1 + 2x_2 + 2x_3 - 8x_4 = 7 \\end{cases}$，用<strong>导出组（对应齐次方程组）的基础解系</strong>表示其通解。<br><br><strong>解</strong>：作增广矩阵并化行阶梯：<br>$(A\\mid b) = \\left(\\begin{array}{cccc|c} 1 & 1 & 1 & -3 & 3 \\\\ 2 & 1 & 1 & -5 & 4 \\\\ 3 & 2 & 2 & -8 & 7 \\end{array}\\right) \\xrightarrow{\\substack{r_2-2r_1 \\\\ r_3-3r_1}} \\left(\\begin{array}{cccc|c} 1 & 1 & 1 & -3 & 3 \\\\ 0 & -1 & -1 & 1 & -2 \\\\ 0 & -1 & -1 & 1 & -2 \\end{array}\\right) \\xrightarrow{r_3-r_2} \\left(\\begin{array}{cccc|c} 1 & 1 & 1 & -3 & 3 \\\\ 0 & -1 & -1 & 1 & -2 \\\\ 0 & 0 & 0 & 0 & 0 \\end{array}\\right)$<br><br>没有出现「$0=k\\ (k\\neq0)$」的矛盾行，$R(A)=R(A\\mid b)=2&lt;n=4$，故<strong>有无穷多解</strong>。继续化行最简（$r_2\\times(-1)$，再 $r_1-r_2$）：$\\left(\\begin{array}{cccc|c} 1 & 0 & 0 & -2 & 1 \\\\ 0 & 1 & 1 & -1 & 2 \\\\ 0 & 0 & 0 & 0 & 0 \\end{array}\\right)$<br><br>主元在第 1、2 列（$x_1,x_2$ 主未知量），自由未知量 $x_3,x_4$（个数 $4-2=2$）。写出<strong>同解方程组</strong>：$\\begin{cases} x_1 = 1 + 2x_4 \\\\ x_2 = 2 - x_3 + x_4 \\end{cases}$<br><br><strong>① 求特解 $X_0$</strong>：令自由未知量 $x_3=x_4=0$，得 $X_0=\\begin{pmatrix} 1 \\\\ 2 \\\\ 0 \\\\ 0 \\end{pmatrix}$。<br><strong>② 求导出组 $AX=0$ 的基础解系</strong>：把常数项去掉，$\\begin{cases} x_1 = 2x_4 \\\\ x_2 = -x_3 + x_4 \\end{cases}$，令 $(x_3,x_4)$ 依次取 $(1,0)$、$(0,1)$：$\\eta_1=\\begin{pmatrix} 0 \\\\ -1 \\\\ 1 \\\\ 0 \\end{pmatrix},\\quad \\eta_2=\\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\\\ 1 \\end{pmatrix}$。<br><strong>③ 写出通解</strong>：<br>$X = X_0 + c_1\\eta_1 + c_2\\eta_2 = \\begin{pmatrix} 1 \\\\ 2 \\\\ 0 \\\\ 0 \\end{pmatrix} + c_1\\begin{pmatrix} 0 \\\\ -1 \\\\ 1 \\\\ 0 \\end{pmatrix} + c_2\\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\\\ 1 \\end{pmatrix}$，$c_1,c_2$ 为任意常数。<br><br><span style=\"color:var(--color-green);\">💡 要点：求特解时，为省事一律令全部自由未知量 = 0；求基础解系时才让自由未知量取 $(1,0),(0,1),\\dots$——两者不要混。</span>")}
+            ${memoryBox('求解套路一句话', '行阶梯先定「有没有解」→ 行最简写同解方程组 → 主元列留左、自由元移右 → 特解令自由元全 0，基础解系令自由元取 (1,0),(0,1),… → 非齐次通解 = 特解 + 导出组通解。')}
+        </div>
+    `;
+    // === 解的判定 ===
+    const decideBody = `
+        <div class="detail-section" id="sys-decide">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-scale-unbalanced"></i> 线性方程组解的判定</div>
+            <div class="section-desc">全部考点的核心：比较 $R(A)$ 与 $R(A\\mid b)$，再和未知数个数 $n$ 比大小。方阵齐次另有行列式捷径。</div>
+
+            ${groupTitle('fa-scale-balanced', '3.1 判定定理（核心，必背）', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    设 $n$ 为<strong>未知数的个数</strong>，$R(A)$ 为<strong>系数矩阵</strong>的秩，$R(A\\mid b)$ 为<strong>增广矩阵</strong>的秩：
+                </div>
+                <table style="width:100%;color:var(--text-secondary);font-size:0.85rem;border-collapse:collapse;margin-top:0.5rem;">
+                    <tr style="border-bottom:1px solid var(--border-medium);">
+                        <th style="padding:0.5rem;text-align:left;">秩的关系</th>
+                        <th style="padding:0.5rem;text-align:left;">结论</th>
+                        <th style="padding:0.5rem;text-align:left;">直观理解</th>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;">$R(A) &lt; R(A\\mid b)$</td>
+                        <td style="padding:0.5rem;"><strong>无解</strong></td>
+                        <td style="padding:0.5rem;">化简后出现 $0 = k\\ (k\\neq0)$，矛盾</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;">$R(A) = R(A\\mid b) = n$</td>
+                        <td style="padding:0.5rem;"><strong>唯一解</strong></td>
+                        <td style="padding:0.5rem;">每个未知量都被「钉死」，无自由元</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);">
+                        <td style="padding:0.5rem;">$R(A) = R(A\\mid b) &lt; n$</td>
+                        <td style="padding:0.5rem;"><strong>无穷多解</strong></td>
+                        <td style="padding:0.5rem;">有 $n-R(A)$ 个自由未知量</td>
+                    </tr>
+                </table>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;margin-top:0.8rem;">
+                    🔑 <strong>一句话记忆</strong>：<strong>先看两个秩是否相等（等则「有解」），再看它和 $n$ 谁大（等于 $n$ 唯一，小于 $n$ 无穷）。</strong><br>
+                    • $R(A)$ = 纯系数矩阵化简后的秩；$R(A\\mid b)$ = 带上结果列、化简后的增广矩阵的秩。<br>
+                    • 该定理<strong>齐次、非齐次通用</strong>：齐次时 $b=0$，$R(A\\mid 0)=R(A)$ 恒成立，所以齐次<strong>永远有解</strong>，只剩「唯一零解 / 无穷多解」两种情况。
+                </div>
+            </div>
+            ${exampleBox("例题（有解的矩阵 · 判定 + 求解）", "解线性方程组 $\\begin{cases} x_1 + x_2 + x_3 + x_4 = 2 \\\\ 2x_1 + 3x_2 + x_3 + x_4 = 3 \\\\ x_1 - x_2 + 3x_3 + 2x_4 = 3 \\end{cases}$<br><br><strong>解</strong>：作增广矩阵，只用初等行变换化行阶梯：<br>$(A\\mid b) = \\left(\\begin{array}{cccc|c} 1 & 1 & 1 & 1 & 2 \\\\ 2 & 3 & 1 & 1 & 3 \\\\ 1 & -1 & 3 & 2 & 3 \\end{array}\\right) \\xrightarrow{\\substack{r_2-2r_1 \\\\ r_3-r_1}} \\left(\\begin{array}{cccc|c} 1 & 1 & 1 & 1 & 2 \\\\ 0 & 1 & -1 & -1 & -1 \\\\ 0 & -2 & 2 & 1 & 1 \\end{array}\\right) \\xrightarrow{r_3+2r_2} \\left(\\begin{array}{cccc|c} 1 & 1 & 1 & 1 & 2 \\\\ 0 & 1 & -1 & -1 & -1 \\\\ 0 & 0 & 0 & 1 & 1 \\end{array}\\right)$<br><br><strong>读秩</strong>：系数矩阵有 3 个非零行，$R(A)=3$；增广矩阵也有 3 个非零行，$R(A\\mid b)=3$。两秩<strong>相等</strong> → <strong>有解</strong>（没有出现 $0=k\\ (k\\neq0)$ 的矛盾行）；又 $R(A)=R(A\\mid b)=3&lt;n=4$，故<strong>有无穷多解</strong>，自由未知量 $4-3=1$ 个。<br><br>继续化行最简（$r_2+r_3$，$r_1-r_3$，$r_1-r_2$）：$\\left(\\begin{array}{cccc|c} 1 & 0 & 2 & 0 & 1 \\\\ 0 & 1 & -1 & 0 & 0 \\\\ 0 & 0 & 0 & 1 & 1 \\end{array}\\right)$<br><br>主元在第 1、2、4 列（$x_1,x_2,x_4$ 主未知量），$x_3$ 是自由未知量。同解方程组：$\\begin{cases} x_1 = 1-2x_3 \\\\ x_2 = x_3 \\\\ x_4 = 1 \\end{cases}$<br><br>特解（令 $x_3=0$）：$X_0=(1,0,0,1)^T$；导出组基础解系（令 $x_3=1$）：$\\eta=(-2,1,1,0)^T$。故通解 $X = \\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\\\ 1 \\end{pmatrix} + c\\begin{pmatrix} -2 \\\\ 1 \\\\ 1 \\\\ 0 \\end{pmatrix}$，$c$ 为任意常数。<br><br><span style=\"color:#FF3B30;\">💡 对照本例：先在行阶梯上数两个秩定「有没有解」，再继续化行最简求通解。若把第 3 个方程换成 $3x_1+4x_2+2x_3+2x_4=8$（左端系数恰为前两个方程之和，右端却是 $8\\neq2+3$），行变换后就会多出一行 $(0\\ 0\\ 0\\ 0 \\mid 3)$，$R(A)=2&lt;R(A\\mid b)=3$，无解——对比即可体会「两秩相等」为什么是有解的分界线。唯一解的情形见题型实战的 $\\lambda$ 例题。</span>")}
+
+            ${groupTitle('fa-square-root-variable', '3.2 齐次方程组：用行列式判「有没有非零解」（仅限方阵）', '#FFD60A')}
+            <div class="formula-card" style="--card-accent:#FFD60A;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$AX=0 \\text{ 有非零解} \\iff |A| = 0 \\iff R(A) &lt; n \\iff A \\text{ 不可逆}$$
+                    $$AX=0 \\text{ 只有唯一零解} \\iff |A| \\neq 0 \\iff R(A) = n \\iff A \\text{ 可逆（满秩）}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.6rem;">
+                    当 $A$ 是<strong>方阵</strong>（方程个数 = 未知数个数）时，齐次方程组可以用<strong>行列式</strong>快速判定。<br>
+                    ⚠ <strong>重要边界</strong>：<br>
+                    • <strong>行列式法则只对「方阵」有效</strong>，长方形矩阵没有行列式，只能用秩判。<br>
+                    • <strong>非齐次方程组不能用行列式直接判「有没有解」</strong>！$|A|\\neq0$ 只能说明「若有解则唯一」（Cramer 法则），<strong>推不出一定有解</strong>；要判有无解，必须看 $R(A)$ 与 $R(A\\mid b)$。<br>
+                    • 齐次方程组可以用行列式法则，是因为它「一定有解」，$|A|=0$ 恰好刻画了「解是否唯一」——这一步在非齐次上不成立。
+                </div>
+            </div>
+            ${exampleBox("例题（用行列式判齐次非零解 · 中等）", "$k$ 取何值时，齐次线性方程组 $\\begin{cases} x_1 + x_2 + x_3 = 0 \\\\ 2x_1 + 3x_2 + x_3 = 0 \\\\ x_1 + 2x_2 + kx_3 = 0 \\end{cases}$ 有非零解？并求出此时的全部解。<br><br><strong>解</strong>：系数矩阵是 3 阶方阵，直接用行列式判定。按第 1 行展开：<br>$|A| = \\begin{vmatrix} 1 & 1 & 1 \\\\ 2 & 3 & 1 \\\\ 1 & 2 & k \\end{vmatrix} = 1\\cdot(3k-2) - 1\\cdot(2k-1) + 1\\cdot(4-3) = (3k-2)-(2k-1)+1 = k$<br><br>所以 $|A|=0 \\iff k=0$，即 <strong>$k=0$</strong> 时齐次方程组有非零解；$k\\neq0$ 时只有唯一零解。<br><br>当 $k=0$ 时，对系数矩阵作初等行变换化行最简：<br>$A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 2 & 3 & 1 \\\\ 1 & 2 & 0 \\end{pmatrix} \\xrightarrow{\\substack{r_2-2r_1 \\\\ r_3-r_1}} \\begin{pmatrix} 1 & 1 & 1 \\\\ 0 & 1 & -1 \\\\ 0 & 1 & -1 \\end{pmatrix} \\xrightarrow{r_3-r_2} \\begin{pmatrix} 1 & 1 & 1 \\\\ 0 & 1 & -1 \\\\ 0 & 0 & 0 \\end{pmatrix} \\xrightarrow{r_1-r_2} \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & -1 \\\\ 0 & 0 & 0 \\end{pmatrix}$<br><br>$R(A)=2&lt;3$，自由未知量 1 个（$x_3$）。同解方程组为 $\\begin{cases} x_1 = -2x_3 \\\\ x_2 = x_3 \\end{cases}$，令 $x_3=1$ 得基础解系 $\\eta=(-2,1,1)^T$，故全部解为 $X = c\\begin{pmatrix} -2 \\\\ 1 \\\\ 1 \\end{pmatrix}$，$c$ 为任意常数。<br><br><span style=\"color:#FFD60A;\">💡 对照要点：本题是方阵，能「一步用 $|A|$ 定生死」（有没有非零解）；若换成非齐次 $AX=b$，就只能靠 $R(A)$ 与 $R(A\\mid b)$ 判有无解，$|A|$ 顶多告诉你「有解时是否唯一」。</span>")}
+            ${memoryBox('判定速记', '两秩相等才有解；相等时 =n 唯一、<n 无穷。方阵齐次才可用 |A|：|A|=0 有非零解、|A|≠0 只有零解。非齐次判有无解只看秩，不看行列式。')}
+        </div>
+    `;
+    // === 题型实战 ===
+    const typesBody = `
+        <div class="detail-section" id="sys-types">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-swords"></i> 判定题型实战</div>
+            <div class="section-desc">四种高频题型：已知无穷解求参数、含参讨论三种情形、齐次非零解充要条件、幂等矩阵综合。</div>
+
+            ${groupTitle('fa-key', '题型 1：已知有无穷多解，求参数 $a,b$ 并求通解', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    <strong>思路</strong>：无穷多解 $\\iff R(A)=R(A\\mid b)&lt;n$。把 $(A\\mid b)$ 化行阶梯，令「矛盾行系数为 0、同时右端也为 0」。
+                </div>
+            </div>
+            ${exampleBox("例题（专升本难度 · 典型题）· 无穷解求 $a,b$", "已知线性方程组 $\\begin{cases} x_1 + x_2 + x_3 = 1 \\\\ 2x_1 + 3x_2 + 4x_3 = 2 \\\\ x_1 + 2x_2 + ax_3 = b \\end{cases}$ 有无穷多解，求 $a,b$ 的值，并求其通解。<br><br><strong>解</strong>：作增广矩阵并化行阶梯：<br>$(A\\mid b) = \\left(\\begin{array}{ccc|c} 1 & 1 & 1 & 1 \\\\ 2 & 3 & 4 & 2 \\\\ 1 & 2 & a & b \\end{array}\\right) \\xrightarrow{\\substack{r_2-2r_1 \\\\ r_3-r_1}} \\left(\\begin{array}{ccc|c} 1 & 1 & 1 & 1 \\\\ 0 & 1 & 2 & 0 \\\\ 0 & 1 & a-1 & b-1 \\end{array}\\right) \\xrightarrow{r_3-r_2} \\left(\\begin{array}{ccc|c} 1 & 1 & 1 & 1 \\\\ 0 & 1 & 2 & 0 \\\\ 0 & 0 & a-3 & b-1 \\end{array}\\right)$<br><br>要<strong>有无穷多解</strong>，最后一行必须化为全 0（$0=0$，既不矛盾也不提供新信息），即 $\\begin{cases} a-3=0 \\\\ b-1=0 \\end{cases} \\Rightarrow a=3,\\ b=1$。<br><br>此时 $R(A)=R(A\\mid b)=2&lt;n=3$，自由未知量 1 个。继续化行最简（$r_1-r_2$）：$\\left(\\begin{array}{ccc|c} 1 & 0 & -1 & 1 \\\\ 0 & 1 & 2 & 0 \\\\ 0 & 0 & 0 & 0 \\end{array}\\right) \\Rightarrow \\begin{cases} x_1 = 1+x_3 \\\\ x_2 = -2x_3 \\end{cases}$<br><br>特解（令 $x_3=0$）：$X_0=(1,0,0)^T$；导出组基础解系（令 $x_3=1$）：$\\eta=(1,-2,1)^T$。故通解 $X = \\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + c\\begin{pmatrix} 1 \\\\ -2 \\\\ 1 \\end{pmatrix}$，$c$ 为任意常数。")}
+
+            ${groupTitle('fa-shuffle', '题型 2：含一个参数，讨论何时有解 / 无解 / 无穷多解', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    <strong>思路</strong>：方阵情形常先用 $|A|$ 分出「唯一解」的临界值，再对留下的特殊值<strong>逐个回代</strong>，看 $(A\\mid b)$ 化成什么、$R(A)$ 与 $R(A\\mid b)$ 是否相等。
+                </div>
+            </div>
+            ${exampleBox("例题（专升本经典母题）· $\\lambda$ 三态讨论", "讨论 $\\lambda$ 取何值时，线性方程组 $\\begin{cases} \\lambda x_1 + x_2 + x_3 = 1 \\\\ x_1 + \\lambda x_2 + x_3 = 1 \\\\ x_1 + x_2 + \\lambda x_3 = 1 \\end{cases}$ 有唯一解、无解、无穷多解？有解时求出通解。<br><br><strong>解</strong>：系数矩阵是方阵，先算行列式（各列加到第 1 列、提公因式，见行列式章）：$|A| = \\begin{vmatrix} \\lambda & 1 & 1 \\\\ 1 & \\lambda & 1 \\\\ 1 & 1 & \\lambda \\end{vmatrix} = (\\lambda+2)(\\lambda-1)^2$<br><br><strong>① 唯一解</strong>：$|A|\\neq0$，即 $\\lambda\\neq1$ 且 $\\lambda\\neq-2$ 时，$R(A)=R(A\\mid b)=3=n$，<strong>有唯一解</strong>（可用 Cramer 法则或行变换求出）。<br><strong>② $\\lambda=1$</strong>：三行完全相同，$(A\\mid b)\\to\\begin{pmatrix} 1 & 1 & 1 & 1 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$，$R(A)=R(A\\mid b)=1&lt;3$，<strong>有无穷多解</strong>，自由未知量 $3-1=2$ 个：<br>$\\begin{cases} x_1 = 1-x_2-x_3 \\end{cases} \\Rightarrow X = \\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + c_1\\begin{pmatrix} -1 \\\\ 1 \\\\ 0 \\end{pmatrix} + c_2\\begin{pmatrix} -1 \\\\ 0 \\\\ 1 \\end{pmatrix}$<br><strong>③ $\\lambda=-2$</strong>：三式相加得左边 $=-2(x_1+x_2+x_3)$ 而右边 $=3$，矛盾；化简后 $(A\\mid b)$ 末行为 $(0\\ 0\\ 0 \\mid 3)$，$R(A)=2&lt;R(A\\mid b)=3$，<strong>无解</strong>。<br><br><span style=\"color:#FF9F0A;\">⚠ 易错：算出 $|A|=0$ 的两个根后，必须分别回代验证——不同根可能对应「无穷多解」或「无解」，不能一概而论（本题 $1$ 与 $-2$ 恰好一解一无解）。</span>")}
+
+            ${groupTitle('fa-vector-square', '题型 3：齐次方程组解的性质与非零解充要条件', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    齐次 $AX=0$ 的<strong>解的性质</strong>（这也是「解空间」「基础解系」的由来）：<br>
+                    ① 若 $\\xi_1,\\xi_2$ 是解，则 $\\xi_1+\\xi_2$ 也是解（$A(\\xi_1+\\xi_2)=0$）；<br>
+                    ② 若 $\\xi$ 是解，$k$ 任意常数，则 $k\\xi$ 也是解（$A(k\\xi)=kA\\xi=0$）；<br>
+                    ③ 若 $\\xi_1,\\dots,\\xi_s$ 是解，则其任意线性组合 $k_1\\xi_1+\\cdots+k_s\\xi_s$ 仍是解。<br><br>
+                    <strong>非零解的充要条件</strong>（与矩阵的秩强关联）：<br>
+                    $$AX=0 \\text{ 有非零解} \\iff R(A) &lt; n \\quad (n \\text{ 为未知数个数})$$
+                    若 $A$ 为 $n$ 阶方阵，还可等价写成：$AX=0$ 有非零解 $\\iff |A|=0 \\iff A$ 不可逆。<br>
+                    ⚠ <strong>概念边界</strong>：<strong>「零解」只属于齐次方程组</strong>，非齐次方程组没有「零解」概念，也<strong>不能用 $|A|=0$ 判有无解</strong>。
+                </div>
+            </div>
+            ${exampleBox("例题（齐次 · 用行列式判非零解）", "$k$ 取何值时，齐次方程组 $\\begin{cases} kx_1 + x_2 + x_3 = 0 \\\\ x_1 + kx_2 + x_3 = 0 \\\\ x_1 + x_2 + kx_3 = 0 \\end{cases}$ 有非零解？<br><br><strong>解</strong>：系数矩阵为方阵，有非零解 $\\iff |A|=0$。由题型 2 已算 $|A|=(k+2)(k-1)^2=0$，得 $k=1$ 或 $k=-2$。<br>即当 $k=1$ 或 $k=-2$ 时有非零解；其余情形 $|A|\\neq0$，只有唯一零解。")}
+
+            ${groupTitle('fa-arrow-rotate-right', '题型 4：幂等矩阵 $A^2=A$（与方程组结合的综合考点）', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    <strong>幂等矩阵</strong>：满足 $A^2=A$ 的方阵。它是「投影」的代数影子，常和方程组、秩、行列式结合考。<br>
+                    <strong>核心性质</strong>：<br>
+                    • <strong>降幂</strong>：$A^n=A\\ (n\\ge1)$（$A^2=A$，再乘 $A$ 仍是 $A$）；<br>
+                    • <strong>因式分解</strong>：$A(A-E)=O$，$(A-E)A=O$（联系方程组 $AX=0$）；<br>
+                    • <strong>若 $A$ 可逆</strong>：则 $A=E$（两边左乘 $A^{-1}$ 即得）；<br>
+                    • <strong>特征值</strong>：只能是 $0$ 或 $1$（由 $\\lambda^2=\\lambda$）；<br>
+                    • <strong>与方程组联动</strong>：$A(A-E)=O \\Rightarrow (A-E)$ 的每一列都是 $AX=0$ 的解；若 $A\\neq E$，则 $A-E\\neq O$，$AX=0$ 有非零解 $\\Rightarrow |A|=0$。
+                </div>
+            </div>
+            ${exampleBox("例题（专升本难度 · 综合）· 幂等矩阵不可逆", "设 $A$ 为 $n$ 阶方阵，满足 $A^2=A$，且 $A\\neq E$。证明 $A$ 不可逆，即 $|A|=0$。<br><br><strong>证（反证）</strong>：由 $A^2=A$ 得 $A^2-A=O$，即 $A(A-E)=O$。若 $A$ 可逆，两边左乘 $A^{-1}$：<br>$A^{-1}A(A-E)=A^{-1}O \\Rightarrow (A^{-1}A)(A-E)=O \\Rightarrow E(A-E)=O \\Rightarrow A-E=O \\Rightarrow A=E$<br>这与已知 $A\\neq E$ 矛盾，故 $A$ 不可逆，$|A|=0$。<br><br><strong>另证（用方程组）</strong>：由 $A(A-E)=O$ 知矩阵 $(A-E)$ 的每一列都是齐次方程组 $AX=0$ 的解向量；又 $A\\neq E$ 所以 $A-E\\neq O$，即 $AX=0$ 存在非零解，于是 $R(A)&lt;n$，$|A|=0$。<br><br><span style=\"color:#BF5AF2;\">💡 两条路殊途同归：凑定义用逆矩阵，或者转成 $AX=0$ 有无非零解——正是本章「秩 + 方程组」语言的价值。</span>")}
+            ${memoryBox('题型速配', '给「无穷解」求参数 → 令矛盾行全 0；给 $\\lambda$ 讨论三态 → 先 $|A|$ 定临界再回代；问齐次非零解 → $R(A)<n$ 或方阵 $|A|=0$；幂等矩阵 → $A(A-E)=O$，可逆则 $A=E$。')}
+        </div>
+    `;
+    // === 解的结构 ===
+    const structureBody = `
+        <div class="detail-section" id="sys-structure">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-cubes-stacked"></i> 线性方程组解的结构</div>
+            <div class="section-desc">解「长什么样」：齐次的解构成解空间，非齐次的解 = 一个特解 + 导出组通解。</div>
+
+            ${groupTitle('fa-cube', '5.1 齐次方程组解的结构', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$X = c_1\\eta_1 + c_2\\eta_2 + \\cdots + c_{n-r}\\eta_{n-r},\\quad c_1,\\dots,c_{n-r} \\text{ 为任意常数}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.6rem;">
+                    齐次 $AX=0$ 的<strong>全体解</strong>构成一个向量空间，称为<strong>解空间</strong>。当 $R(A)=r&lt;n$ 时，解空间可由 $n-r$ 个线性无关的解向量<strong>张成</strong>。<br>
+                    其中 $\\eta_1,\\dots,\\eta_{n-r}$ 是<strong>基础解系</strong>（解空间的一组基），满足：① 它们线性无关；② 任一解都能由它们线性表示。<br>
+                    💡 <strong>要点</strong>：基础解系含 <strong>$n-R(A)$</strong> 个解向量；不同选法的基础解系不唯一，但个数固定。
+                </div>
+            </div>
+            ${exampleBox("例题（齐次解的结构 · 中等）", "设 $A$ 为 4 阶方阵，$R(A)=3$，且已知 $\\eta=(1,2,3,4)^T$ 是齐次方程组 $AX=0$ 的一个<strong>非零解</strong>。求 $AX=0$ 的通解。<br><br><strong>解</strong>：$A$ 是 4 阶方阵、$R(A)=3$，故基础解系所含解向量的个数为 $n-R(A)=4-3=1$。又 $\\eta\\neq0$ 且是 $AX=0$ 的解，它本身就是那唯一的基础解系，所以通解为 $X = c\\,\\eta = c\\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\\\ 4 \\end{pmatrix}$，$c$ 为任意常数。<br><br><span style=\"color:#5AC8FA;\">💡 要点：基础解系含几个向量只看 $n-R(A)$；当个数恰为 1 时，任取一个非零解即可当基础解系（不必知道 $A$ 的具体元素）。</span>")}
+
+            ${groupTitle('fa-cubes', '5.2 非齐次方程组解的结构', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                    设 $\\eta_1,\\eta_2$ 是 $AX=b$ 的解，$\\xi$ 是导出组 $AX=0$ 的解，则：<br>
+                    ① $\\eta_1-\\eta_2$ 是<strong>导出组</strong> $AX=0$ 的解（$A(\\eta_1-\\eta_2)=b-b=0$）；<br>
+                    ② $\\eta_1+\\xi$ 仍是 $AX=b$ 的解（$A(\\eta_1+\\xi)=b+0=b$）。<br><br>
+                    由此得到非齐次方程组通解的<strong>结构公式</strong>：
+                </div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$AX=b \\text{ 的通解} = \\text{一个特解 } X_0 + \\text{导出组 } AX=0 \\text{ 的通解}$$
+                    $$X = X_0 + c_1\\eta_1 + c_2\\eta_2 + \\cdots + c_{n-r}\\eta_{n-r}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:0.6rem;">
+                    💡 <strong>几何直观</strong>：非齐次的解集 = 齐次的解空间「整体平移」一个特解向量。平移不改变「形状」，只改变「位置」。
+                </div>
+            </div>
+            ${exampleBox("例题（非齐次解的结构 · 较难）", "设 $A$ 为 4 阶方阵，$R(A)=3$，已知 $\\eta_1=(1,2,3,4)^T$ 与 $\\eta_2=(2,1,3,4)^T$ 都是非齐次方程组 $AX=b$ 的解。求 $AX=b$ 的通解。<br><br><strong>解</strong>：由解的性质，两个非齐次解<strong>相减</strong>得到<strong>导出组</strong> $AX=0$ 的解：<br>$\\eta_1-\\eta_2 = \\begin{pmatrix} 1-2 \\\\ 2-1 \\\\ 3-3 \\\\ 4-4 \\end{pmatrix} = \\begin{pmatrix} -1 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} \\neq 0$<br><br>导出组基础解系含 $n-R(A)=4-3=1$ 个向量，故 $\\eta_1-\\eta_2$ 就是导出组的基础解系。取 $\\eta_1$ 作特解，得通解<br>$X = \\eta_1 + c(\\eta_1-\\eta_2) = \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\\\ 4 \\end{pmatrix} + c\\begin{pmatrix} -1 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix}$，$c$ 为任意常数。<br><br><span style=\"color:#FF9F0A;\">💡 要点：已知两个非齐次解，相减即可得导出组的解；再用「特解 + 导出组通解」拼出通解。这类结构题不需要知道 $A$、$b$ 的具体内容。</span>")}
+            ${memoryBox('结构速记', '齐次：解空间由 n−R(A) 个基础解张成；非齐次：通解 = 特解 + 导出组通解；两个非齐次解相减 = 导出组的解。')}
+        </div>
+    `;
+    // === 解题框架 ===
+    const frameBody = `
+        <div class="detail-section" id="sys-frame">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-diagram-successor"></i> 线性方程组解题框架（总览）</div>
+            <div class="section-desc">拿到题先定性：齐次还是非齐次？方阵还是长方？按图索骥，一步不乱。</div>
+
+            ${groupTitle('fa-route', '一、齐次线性方程组 $AX=0$（一定有解，至少有零解）', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>大题套路</strong>：系数矩阵 $A$ ──行变换──► 行阶梯形：<br>
+                    • $R(A)=n$ → 唯一解（唯一零解）；<br>
+                    • $R(A)&lt;n$ → 无穷解（有非零解）。<br>
+                    再 ──► 行最简形 ──► 写同解方程组 ──► 求基础解系 ──► 通解。<br><br>
+                    <strong>选择 / 填空题（$A$ 为方阵时）</strong>：<br>
+                    • $|A|=0$ → $AX=0$ 有非零解；<br>
+                    • $|A|\\neq0$ → $AX=0$ 只有唯一零解。
+                </div>
+            </div>
+
+            ${groupTitle('fa-route', '二、非齐次线性方程组 $AX=b$（不一定有解）', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    $(A\\mid b)$ ──行变换──► 行阶梯形：<br>
+                    • $R(A)&lt;R(A\\mid b)$ → 无解（出现 $0=k$，$k\\neq0$）；<br>
+                    • $R(A)=R(A\\mid b)=n$ → 唯一解；<br>
+                    • $R(A)=R(A\\mid b)&lt;n$ → 无穷解。<br>
+                    ──► 行最简形 ──► 特解 $X_0$ + 导出组基础解系 ──► 通解 $= X_0 + c_1\\eta_1 + \\cdots$
+                </div>
+            </div>
+
+            ${groupTitle('fa-star', '三、小考点（背）', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    ① <strong>自由未知量个数</strong> = 未知数总数 $n$ − 有效方程个数 $= n - R(A)$；<br>
+                    ② $AX=0$：<strong>$|A|=0 \\Rightarrow$ 有非零解</strong>（$R&lt;n$，$A$ 不可逆）；<strong>$|A|\\neq0 \\Rightarrow$ 唯一零解</strong>（$R=n$，$A$ 满秩、可逆）；<br>
+                    ③ 非齐次判有无解<strong>只看秩，不看行列式</strong>。
+                </div>
+            </div>
+            ${memoryBox('框架一句话', '齐次必解看秩分唯一/无穷，方阵还能用 |A| 秒判；非齐次先比两秩定有无解，再比 n 定唯一/无穷，最后特解 + 导出组通解。')}
+        </div>
+    `;
+    // === 速查·口诀 ===
+    const summaryBody = `
+        <div class="detail-section" id="sys-summary">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-table-list"></i> 速查公式卡 · 记忆口诀</div>
+            <div class="section-desc">线性方程组核心结论一表打包，考前速查，也是翻卡记忆卡池。</div>
+
+            <div class="formula-grid">
+                ${formulaCard('定1', '判定·无解', '$$R(A) < R(A\\mid b) \\Rightarrow \\text{无解}$$', '化简后出现 0 = k（k≠0）矛盾行', '#FF3B30')}
+                ${formulaCard('定2', '判定·唯一解', '$$R(A) = R(A\\mid b) = n \\Rightarrow \\text{唯一解}$$', 'n 为未知数个数；无自由元', '#30D158')}
+                ${formulaCard('定3', '判定·无穷多解', '$$R(A) = R(A\\mid b) < n \\Rightarrow \\text{无穷多解}$$', '自由未知量 n − R(A) 个', '#FF9F0A')}
+                ${formulaCard('定4', '判定口诀', '$$\\text{先比两秩定有无解，再比 } n \\text{ 定唯一/无穷}$$', '两秩相等才有解；齐次恒相等故必有解', '#FF3B30')}
+                ${formulaCard('齐1', '齐次必有零解', '$$AX=0 \\Rightarrow X=0 \\text{ 恒成立}$$', '零解概念只属齐次；非齐次不谈零解', '#5AC8FA')}
+                ${formulaCard('齐2', '非零解充要条件', '$$AX=0 \\text{ 有非零解} \\iff R(A) < n$$', '与矩阵的秩直接挂钩', '#5AC8FA')}
+                ${formulaCard('齐3', '方阵行列式判定', '$$|A|=0 \\iff \\text{非零解},\\quad |A|\\neq0 \\iff \\text{唯一零解}$$', '仅限方阵；|A|≠0 即满秩可逆', '#FFD60A')}
+                ${formulaCard('基1', '基础解系个数', '$$n - R(A) \\text{ 个解向量}$$', '等于自由未知量个数', '#0A84FF')}
+                ${formulaCard('基2', '基础解系取法', '$$(x_{r+1},\\dots,x_n)=(1,0,\\dots),(0,1,\\dots),\\dots$$', '自由未知量轮流取 1 其余取 0', '#0A84FF')}
+                ${formulaCard('解1', '齐次通解', '$$X = c_1\\eta_1 + c_2\\eta_2 + \\cdots + c_{n-r}\\eta_{n-r}$$', '基础解系的线性组合', '#5AC8FA')}
+                ${formulaCard('解2', '非齐次通解结构', '$$X = X_0 + c_1\\eta_1 + \\cdots + c_{n-r}\\eta_{n-r}$$', '一个特解 + 导出组通解', '#FF9F0A')}
+                ${formulaCard('解3', '解的性质·差', '$$\\eta_1,\\eta_2 \\text{ 是 } AX=b \\text{ 的解} \\Rightarrow \\eta_1-\\eta_2 \\text{ 是 } AX=0 \\text{ 的解}$$', '两个非齐次解相减 = 导出组的解', '#FF9F0A')}
+                ${formulaCard('解4', '解的性质·和', '$$\\eta \\text{ 是 } AX=b \\text{ 的解},\\ \\xi \\text{ 是 } AX=0 \\text{ 的解} \\Rightarrow \\eta+\\xi \\text{ 是 } AX=b \\text{ 的解}$$', '特解加齐次解仍是非齐次解', '#FF9F0A')}
+                ${formulaCard('解5', '齐次解的组合', '$$\\xi_1,\\xi_2 \\text{ 是解} \\Rightarrow k_1\\xi_1+k_2\\xi_2 \\text{ 也是解}$$', '齐次解的线性组合仍是解（解空间）', '#5AC8FA')}
+                ${formulaCard('同1', '同解方程组', '$$\\text{初等行变换不改变解集}$$', '行最简形直接读出的方程组与原方程组同解', '#0A84FF')}
+                ${formulaCard('同2', '自由未知量', '$$\\text{自由元} = \\text{非主元列对应未知数},\\ \\text{个数} = n-R(A)$$', '主元列留左，自由元移右', '#0A84FF')}
+                ${formulaCard('同3', 'c 取法', '$$\\text{特解：自由元全取 } 0;\\ \\text{基础解系：取 } (1,0),(0,1),\\dots$$', '两种取法不要混', '#0A84FF')}
+                ${formulaCard('通1', '增广矩阵', '$$(A\\mid b) = (A \\text{ 并上常数列 } b)$$', '齐次可只写 A；非齐次必须写 (A|b)', '#BF5AF2')}
+                ${formulaCard('幂1', '幂等矩阵', '$$A^2 = A \\Rightarrow A(A-E)=O$$', '降幂 A^n=A；特征值只能 0 或 1', '#BF5AF2')}
+                ${formulaCard('幂2', '幂等·可逆', '$$A^2=A,\\ A \\text{ 可逆} \\Rightarrow A=E$$', '两边左乘 A⁻¹ 即得；A≠E 则 |A|=0', '#BF5AF2')}
+            </div>
+
+            ${groupTitle('fa-list-check', '速查总表', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <table style="width:100%;color:var(--text-secondary);font-size:0.85rem;border-collapse:collapse;">
+                    <tr style="border-bottom:1px solid var(--border-medium);">
+                        <th style="padding:0.5rem;text-align:left;">类型</th>
+                        <th style="padding:0.5rem;text-align:left;">判定 / 公式</th>
+                        <th style="padding:0.5rem;text-align:left;">记忆点</th>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.5rem;">齐次 $AX=0$</td><td style="padding:0.5rem;">一定有解，至少有零解</td><td style="padding:0.5rem;">零解概念只属齐次</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.5rem;">非齐次 $AX=b$</td><td style="padding:0.5rem;">不一定有解</td><td style="padding:0.5rem;">不谈零解</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.5rem;">无解</td><td style="padding:0.5rem;">$R(A)&lt;R(A\\mid b)$</td><td style="padding:0.5rem;">出现 $0=k\\ (k\\neq0)$</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.5rem;">唯一解</td><td style="padding:0.5rem;">$R(A)=R(A\\mid b)=n$</td><td style="padding:0.5rem;">无自由元</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.5rem;">无穷多解</td><td style="padding:0.5rem;">$R(A)=R(A\\mid b)&lt;n$</td><td style="padding:0.5rem;">自由元 $n-R(A)$ 个</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.5rem;">齐次非零解</td><td style="padding:0.5rem;">$R(A)&lt;n$；方阵时 $\\iff|A|=0$</td><td style="padding:0.5rem;">不可逆</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.5rem;">齐次唯一零解</td><td style="padding:0.5rem;">$R(A)=n$；方阵时 $\\iff|A|\\neq0$</td><td style="padding:0.5rem;">满秩、可逆</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.5rem;">基础解系个数</td><td style="padding:0.5rem;">$n-R(A)$</td><td style="padding:0.5rem;">自由未知量个数</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.5rem;">非齐次通解</td><td style="padding:0.5rem;">$X=X_0+c_1\\eta_1+\\cdots$</td><td style="padding:0.5rem;">特解 + 导出组通解</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.5rem;">特解取法</td><td style="padding:0.5rem;">令全部自由未知量 $=0$</td><td style="padding:0.5rem;">最省事</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.5rem;">基础解系取法</td><td style="padding:0.5rem;">自由未知量依次取 $(1,0,\\dots),(0,1,\\dots)$</td><td style="padding:0.5rem;">别和特解混</td></tr>
+                    <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.5rem;">幂等矩阵 $A^2=A$</td><td style="padding:0.5rem;">$A(A-E)=O$；可逆则 $A=E$；特征值 $0,1$</td><td style="padding:0.5rem;">联动 $AX=0$</td></tr>
+                </table>
+            </div>
+
+            ${groupTitle('fa-lightbulb', '核心记忆口诀', '#30D158')}
+            ${memoryBox('口诀 1-4', '① 齐次必有解（至少有零解），非齐次未必有解。② 判定看两秩：两秩不等 → 无解；相等时 =n → 唯一，<n → 无穷。③ 基础解系 n−r 个，自由未知量也就是 n−r 个。④ c₁,c₂ 配自由未知量（非主元列），不配主元列上的未知数。')}
+            ${memoryBox('口诀 5-8', '⑤ 非齐次通解 = 特解 + 导出组通解。⑥ 方阵齐次用行列式：|A|=0 有非零解，|A|≠0 只有零解；非齐次不能靠 |A| 判有无解。⑦ 零解只属齐次，非齐次不谈零解。⑧ 求特解令自由元 =0，求基础解系令自由元取 (1,0),(0,1),…——两者分清。')}
+        </div>
+    `;
+
+    return { title: '线性方程组详情（线性代数）', color: C, tabs, body: mapBody + conceptBody + solveBody + decideBody + typesBody + structureBody + frameBody + summaryBody };
 }
 
 
@@ -7438,6 +7934,106 @@ function buildFunctionDetail() {
             ${exampleBox('经典例题 · 震荡间断点', '$f(x) = \\sin\\!\\left(\\dfrac{1}{x}\\right)$ 在 $x=0$ 判间断点类型。<br><br><strong>解</strong>：$x\\to 0$ 时 $1/x \\to \\infty$，$\\sin(1/x)$ 在 $[-1, 1]$ 内无限震荡，极限不存在 → <strong>震荡间断点</strong>。')}
             ${memoryBox('间断点判断题步骤', 'Step 1：找「嫌疑点」——分母为 0 的点 / 分段函数分段点 / ln 真数为 0 的点 / arcsin/arccos 定义域边界；<br>Step 2：依次计算每个嫌疑点的左右极限；<br>Step 3：按分类表判类型——都存在且相等→可去，都存在不等→跳跃，至少一个不存在→无穷/震荡。')}
 
+            ${groupTitle('fa-left-right', '要不要分左右极限？一眼判断（间断点场景）', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    ✅ <strong>一句话通俗解释</strong>：<strong>间断点两侧表达式一样</strong>——在间断点 $x_0$ 的左边一点点、右边一点点，函数都是<strong>同一个式子</strong>，没有换公式。<br>
+                    比如 $f(x)=\\dfrac{x^2-9}{x-3}$，不管是 $x=3$ 左边（$2.999$）还是右边（$3.001$），代入函数都用 $\\boldsymbol{\\dfrac{x^2-9}{x-3}}$ 计算，<strong>式子不变</strong>。<br>
+                    👉 这种情况：<strong>不用分左右极限</strong>。
+                </div>
+            </div>
+
+            ${groupTitle('fa-equals', '对比 1：两侧表达式相同（不用分左右）', 'var(--color-green)')}
+            <div class="formula-card" style="--card-accent:var(--color-green);margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                    $$f(x)=\\frac{x^2-9}{x-3}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    间断点：$x=3$。取左边靠近 3：$x=2.99$，代入式子 $\\dfrac{2.99^2-9}{2.99-3}$；取右边靠近 3：$x=3.01$，代入式子 $\\dfrac{3.01^2-9}{3.01-3}$。<br>
+                    ✅ 左右<strong>公式完全一样</strong>，只是 $x$ 取值一个略小于 3、一个略大于 3。函数是<strong>一个式子从头到尾</strong>，不是分段函数。<br>
+                    👉 <strong>不需要</strong>单独算左极限、右极限。
+                </div>
+            </div>
+
+            ${groupTitle('fa-not-equal', '对比 2：两侧表达式不一样（必须分左右！）', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                    $$f(x)=\\begin{cases} \\boldsymbol{x+1}, & x>0 \\\\ x-1, & x\\le 0 \\end{cases}$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    间断点（分段点）：$x=0$。$x$ 在 0 左边一点点（$-0.01$）：用公式 $\\boldsymbol{x-1}$；$x$ 在 0 右边一点点（$+0.01$）：用公式 $\\boldsymbol{x+1}$。<br>
+                    ❌ 左右<strong>公式不一样</strong>，跨过 $x=0$，函数表达式直接换了。<br>
+                    👉 <strong>必须分开</strong>求左极限、右极限。
+                </div>
+            </div>
+
+            ${groupTitle('fa-triangle-exclamation', '另外两种「两侧行为不一样」——表面同一个式子，也要分左右', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>重点坑</strong>：<strong>表面是同一个表达式，但里面有 $e^{\\frac{1}{x}}$、$\\vert x\\vert$、$\\arctan\\frac{1}{x}$，依旧两侧行为不同，必须分左右！</strong><br><br>
+                    <strong>例 1</strong>：$f(x)=e^{\\frac{1}{x}}$，只有一个表达式，但：<br>
+                    $x\\to 0^-$ 时 $\\frac{1}{x}\\to -\\infty$，$e^{\\frac{1}{x}}\\to 0$；$x\\to 0^+$ 时 $\\frac{1}{x}\\to +\\infty$，$e^{\\frac{1}{x}}\\to +\\infty$。<br>
+                    虽然写的同一个式子，但 $x$ 从左边趋近和右边趋近，趋势完全不同 → <strong>强制分左右极限！</strong><br><br>
+                    <strong>例 2</strong>：$f(x)=\\dfrac{x}{\\vert x\\vert}$，表面一个式子，但绝对值会自动分段，左右结果不同，也要分左右。
+                </div>
+            </div>
+
+            ${groupTitle('fa-list-check', '判断总规则（考场直接用）｜专升本仅以下 4 种情况需要分左右极限', '#5AC8FA')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <div class="formula-label" style="color:#0A84FF;">① 分段函数的分段点</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">分段点处左右表达式不同，必须分别求 $x \\to x_0^-$ 和 $x \\to x_0^+$。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <div class="formula-label" style="color:var(--color-green);">② $\\arctan \\infty$ 型</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">
+                        $$\\lim_{x \\to +\\infty} \\arctan x = \\frac{\\pi}{2} \\quad \\lim_{x \\to -\\infty} \\arctan x = -\\frac{\\pi}{2}$$
+                    </div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);">正负无穷结果不同，必须分。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <div class="formula-label" style="color:#FF9F0A;">③ $e^\\infty$ 型</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">
+                        $$\\lim_{x \\to +\\infty} e^x = +\\infty \\quad \\lim_{x \\to -\\infty} e^x = 0$$
+                    </div>
+                    <div class="formula-note" style="font-size:0.85rem;color:var(--text-secondary);">一边无穷一边为 0，必须分。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <div class="formula-label" style="color:#FF3B30;">④ 含 $|x|$ 的表达式</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        $|x|$ 在 $x=0$ 处左边 $=-x$，右边 $=x$，必须分。<br>
+                        同样 $|x-x_0|$ 在 $x_0$ 点要分。
+                    </div>
+                </div>
+            </div>
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>规则 1</strong>：函数是<strong>单一初等分式 / 式子</strong>，不含 $|\\cdots|$、$e^{\\frac{1}{x-x_0}}$、$\\arctan\\frac{1}{x-x_0}$，且不是分段函数<br>
+                    → 间断点两侧表达式一样，<strong>不用分左右极限</strong>。<br><br>
+                    <strong>规则 2</strong>：<strong>分段点</strong>；或者<strong>含绝对值</strong>；或者研究点含 $e^{\\frac{1}{x-x_0}}$、$\\arctan\\frac{1}{x-x_0}$<br>
+                    → 两侧表达式 / 函数行为不一样，<strong>必须分左右极限</strong>。
+                </div>
+            </div>
+
+            ${groupTitle('fa-clipboard-question', '小自测：快速判断要不要分左右', '#BF5AF2')}
+            ${exampleBox('自测 1 · 单一分式', '$f(x)=\\dfrac{\\sin(x-1)}{x^2-1}$，研究 $x\\to 1$，要不要分左右极限？<br><br><strong>解</strong>：单一初等分式，无 $|x|$、$e^{\\frac{1}{x}}$、$\\arctan\\frac{1}{x}$ 等特殊结构，也不是分段函数 → 两侧表达式一样，✅ <strong>不用分左右</strong>，直接写 $x\\to 1$。')}
+            ${exampleBox('自测 2 · 含绝对值', '$f(x)=\\dfrac{x}{|x|}$，研究 $x\\to 0$，要不要分左右极限？<br><br><strong>解</strong>：含绝对值，$|x|$ 在 $x=0$ 处自动分段（左 $-x$、右 $x$）→ 两侧不一样，❌ <strong>必须分左右</strong>。')}
+            ${exampleBox('自测 3 · 含 $e^{1/x}$', '$f(x)=e^{\\frac{1}{x}}$，研究 $x\\to 0$，要不要分左右极限？<br><br><strong>解</strong>：表面一个式子，但 $x\\to 0^-$ 时 $e^{\\frac{1}{x}}\\to 0$，$x\\to 0^+$ 时 $e^{\\frac{1}{x}}\\to +\\infty$ → 两侧行为完全不同，❌ <strong>必须分左右</strong>。')}
+            ${exampleBox('自测 4 · 分段函数', '$f(x)=\\begin{cases} x^2, & x<2 \\\\ \\boldsymbol{x+1}, & x>2 \\end{cases}$，研究 $x\\to 2$，要不要分左右极限？<br><br><strong>解</strong>：$x=2$ 是分段点，两侧表达式不同 → ❌ <strong>必须分左右</strong>。')}
+
+            ${groupTitle('fa-pen-to-square', '标准满分答题模板（间断点题型）', '#FFD60A')}
+            <div class="formula-card" style="--card-accent:#FFD60A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    ✍️ <strong>书写规范</strong>：① 先找间断点；② 判断<strong>是否需要分左右极限</strong>；③ 求极限；④ 下结论。<br>
+                    需要分左右的，必须写 $\\boldsymbol{x \\to x_0^-}$、$\\boldsymbol{x \\to x_0^+}$；不需要分的直接写 $\\boldsymbol{x \\to x_0}$。
+                </div>
+            </div>
+            ${exampleBox('例题 1 · 分段函数（必须分左右，跳跃间断满分书写）', '$$f(x)=\\begin{cases} x^2+1, & x<1 \\\\ 2, & x=1 \\\\ x+2, & x>1 \\end{cases}$$<br><strong>题目</strong>：判断 $f(x)$ 在 $x=1$ 处间断点类型。<br><br><strong>解</strong>：函数为分段函数，$x=1$ 是分段点，需要计算左右极限。<br><br>左极限：$$\\lim_{x \\to 1^-} f(x)=\\lim_{x \\to 1^-}(x^2+1)=1^2+1=2$$ 右极限：$$\\lim_{x \\to 1^+} f(x)=\\lim_{x \\to 1^+}(x+2)=1+2=3$$ 左右极限都存在，但 $\\boldsymbol{\\lim\\limits_{x \\to 1^-} f(x) \\neq \\lim\\limits_{x \\to 1^+} f(x)}$，因此 $x=1$ 是<strong>第一类跳跃间断点</strong>。')}
+            ${exampleBox('例题 2 · 分式（不用分左右，满分书写）', '$f(x)=\\dfrac{\\sin(x-1)}{x^2-1}$，找出间断点并判断类型。<br><br><strong>解</strong>：$f(x)$ 为初等函数，间断点为分母等于 0 的点：$x^2-1=0 \\Rightarrow x=1$，$x=-1$。<br><br><strong>① 当 $x=1$</strong>：两侧函数表达式相同，不需要分左右极限。$$\\lim_{x \\to 1} f(x)=\\lim_{x \\to 1}\\dfrac{\\sin(x-1)}{(x-1)(x+1)}$$ 利用等价无穷小：$x\\to 1$ 时 $\\sin(x-1)\\sim x-1$，$$\\lim_{x \\to 1}\\dfrac{x-1}{(x-1)(x+1)}=\\lim_{x \\to 1}\\dfrac{1}{x+1}=\\dfrac{1}{2}$$ 极限存在，但 $f(x)$ 在 $x=1$ 无定义，故 $x=1$ 为<strong>第一类可去间断点</strong>。<br><br><strong>② 当 $x=-1$</strong>：$$\\lim_{x \\to -1} f(x)=\\lim_{x \\to -1}\\dfrac{\\sin(x-1)}{(x-1)(x+1)}=\\infty$$ 极限为无穷，故 $x=-1$ 为<strong>第二类无穷间断点</strong>。<br><br><strong>综上</strong>：$x=1$ 是第一类可去间断点；$x=-1$ 是第二类无穷间断点。')}
+            ${exampleBox('例题 3 · 含 $e^{1/x}$（必考，必须分左右）', '$$f(x)=\\begin{cases} e^{\\frac{1}{x}}, & x<0 \\\\ 0, & x=0 \\\\ x+\\sin x, & x>0 \\end{cases}$$<br><strong>题目</strong>：判断 $x=0$ 间断点类型。<br><br><strong>解</strong>：$x=0$ 是分段点，含 $e^{\\frac{1}{x}}$，需要计算左右极限。<br><br>左极限：$x\\to 0^-$ 时 $\\frac{1}{x}\\to -\\infty$，$$\\lim_{x \\to 0^-} f(x)=\\lim_{x \\to 0^-}e^{\\frac{1}{x}}=0$$ 右极限：$$\\lim_{x \\to 0^+} f(x)=\\lim_{x \\to 0^+}(x+\\sin x)=0+0=0$$ 左右极限相等且都为 0，且 $f(0)=0$，即 $\\lim\\limits_{x \\to 0} f(x)=f(0)$，函数在 $x=0$ 处<strong>连续，不是间断点</strong>。')}
+            ${exampleBox('例题 4 · 绝对值（必须分左右，高频）', '$f(x)=\\dfrac{x}{|x|}$，判断 $x=0$ 间断点类型。<br><br><strong>解</strong>：$f(x)$ 含绝对值，$x=0$ 时分母为 0，是间断点，需要求左右极限。$$\\lim_{x \\to 0^-} f(x)=\\lim_{x \\to 0^-}\\dfrac{x}{-x}=-1 \\qquad \\lim_{x \\to 0^+} f(x)=\\lim_{x \\to 0^+}\\dfrac{x}{x}=1$$ 左右极限都存在，但不相等，故 $x=0$ 为<strong>第一类跳跃间断点</strong>。')}
+            ${memoryBox('考场扣分点（一定要避开）', '1. 该分左右极限的题目，<strong>不写 $x \\to x_0^-$、$x \\to x_0^+$，直接写极限</strong> → 扣一半分；<br>2. 只算出极限，<strong>最后不下结论是什么间断点</strong> → 丢结论分；<br>3. 可去间断点：只看极限，不要混淆 $f(x_0)$ 的值；<br>4. 跳跃间断判定：<strong>只对比左右极限，和 $f(x_0)$ 无关</strong>；<br>5. 不要简写「一类间断」，必须写完整：<strong>第一类可去间断点 / 第一类跳跃间断点</strong>。')}
+
             ${groupTitle('fa-arrows-alt-h', '4.7 水平渐近线（四川考纲要求）', '#5AC8FA')}
             <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
                 <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
@@ -7700,6 +8296,17 @@ function buildOverviewDetail() {
                     </div>
                     <div style="margin-top:0.75rem;color:#5AC8FA;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
                 </div>
+
+                <div class="formula-card" style="--card-accent:#9b8bb4;cursor:pointer;" onclick="exitDetail();setTimeout(()=>enterDetail('linearSystem'),450)">
+                    <div class="formula-label" style="color:#9b8bb4;"><i class="fa-solid fa-table-columns"></i> 线性方程组模块</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">
+                        <strong>内容</strong>：概念与增广矩阵 + 齐次/非齐次求解 + 解的判定 + 解的结构<br>
+                        <strong>判定</strong>：两秩相等才有解；= n 唯一解，&lt; n 无穷多解<br>
+                        <strong>结构</strong>：通解 = 特解 + 导出组通解；基础解系 n−R(A) 个<br>
+                        <strong>地位</strong>：线性代数落脚点，含完整例题
+                    </div>
+                    <div style="margin-top:0.75rem;color:#9b8bb4;font-size:0.8rem;font-family:'JetBrains Mono',monospace;">点击进入 →</div>
+                </div>
             </div>
 
             ${memoryBox('联动记忆四大策略', '① 导数↔积分联动记忆，记住一边等于记住两边；② 微分不用单独背，导数 × dx 就是微分；③ 三角函数抓主干——从一个核心平方公式推导所有恒等式；④ 微分方程 = 导数与积分的综合应用，非齐等于齐加特。')}
@@ -7724,6 +8331,7 @@ function buildDetailContent(type) {
         case 'series': return buildSeriesDetail();
         case 'linear': return buildLinearDetail();
         case 'matrix': return buildMatrixDetail();
+        case 'linearSystem': return buildLinearSystemDetail();
     }
 }
 

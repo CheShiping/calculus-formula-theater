@@ -7,7 +7,7 @@
     "只做增量添加，绝不改动现有页面架构 / 设计 / 风格",
     "公式唯一事实来源 = index.html 的 formulaCard 调用",
     "formulas.js 永远由脚本生成，禁止手改",
-    "模块集合固定为 {limit, deriv, integral, trig, diffEq, multivar, dblint, series, linalg, matrix}，无 diff（微分已并入 deriv）；linalg 与 matrix 同属线性代数但是两个独立章节/入口",
+    "模块集合固定为 {limit, deriv, integral, trig, diffEq, multivar, dblint, series, linalg, matrix, linSys}，无 diff（微分已并入 deriv）；linalg / matrix / linSys 同属线性代数但是三个独立章节/入口",
     "新增模块须同步：buildXxxDetail() + scripts/extractFormulas.mjs 的 sections/MODULE_ORDER + notes/00-笔记索引.md",
     "改动必须同时适配暗/浅双主题",
     "review.html 公式为自动同步，禁手动改其公式列表",
@@ -103,10 +103,20 @@
       "buildFn": "buildMatrixDetail",
       "themeColor": "#5AC8FA",
       "notes": "notes/10-矩阵.md",
-      "formulaCount": 37,
+      "formulaCount": 41,
+      "status": "done"
+    },
+    {
+      "id": "linSys",
+      "title": "线性代数·线性方程组",
+      "buildFn": "buildLinearSystemDetail",
+      "themeColor": "#9b8bb4",
+      "notes": "notes/12-线性方程组.md",
+      "formulaCount": 20,
+      "subTopics": ["知识地图 / 概念与矩阵表示 / 求解方程组 / 解的判定 / 题型实战 / 解的结构 / 解题框架 / 速查·口诀"],
       "status": "done"
     }
   ],
-  "totals": { "modules": 10, "formulas": 320 },
-  "evidence": "node scripts/extractFormulas.mjs → 抽出 320 条 formulaCard，分 10 个模块（deriv 87 / integral 69 / trig 41 / diffEq 9 / multivar 10 / dblint 18 / series 29 / linalg 7 / matrix 37 / limit 13）；无穷级数于 2026-09-05 作为独立 module=series 插入学习路径（二重积分之后、行列式之前），buildSeriesDetail 9 个 tab（首 tab 为知识地图），首页新增无穷级数入口，抽提脚本 sections/MODULE_ORDER 同步；行列式/矩阵顺延。2026-10-04 矩阵章节增量：初等变换·秩 tab 丰富 4.3 行阶梯/行最简 + 4.4 矩阵的秩（定义要点、对比表、例题、练习、易错坑）+ 已知秩求参数题型（四川2024专升本真题 + 4阶提升）；逆·伴随 tab 新增 3.7 逆矩阵运算公式总结、3.8 矩阵方程类型与解法（含 2022 重庆专升本第19题 AX=A+2X）、3.9 求矩阵 n 次方（相似法 AP=PB ⇒ A^n=PB^nP^{-1}，难度递进三例），并补三种求逆方法例题（伴随法/初等行变换/增广矩阵），速查卡 matrix 29→37 条"
+  "totals": { "modules": 11, "formulas": 344 },
+  "evidence": "node scripts/extractFormulas.mjs → 抽出 320 条 formulaCard，分 10 个模块（deriv 87 / integral 69 / trig 41 / diffEq 9 / multivar 10 / dblint 18 / series 29 / linalg 7 / matrix 37 / limit 13）；无穷级数于 2026-09-05 作为独立 module=series 插入学习路径（二重积分之后、行列式之前），buildSeriesDetail 9 个 tab（首 tab 为知识地图），首页新增无穷级数入口，抽提脚本 sections/MODULE_ORDER 同步；行列式/矩阵顺延。2026-10-04 矩阵章节增量：初等变换·秩 tab 丰富 4.3 行阶梯/行最简 + 4.4 矩阵的秩（定义要点、对比表、例题、练习、易错坑）+ 已知秩求参数题型（四川2024专升本真题 + 4阶提升）；逆·伴随 tab 新增 3.7 逆矩阵运算公式总结、3.8 矩阵方程类型与解法（含 2022 重庆专升本第19题 AX=A+2X）、3.9 求矩阵 n 次方（相似法 AP=PB ⇒ A^n=PB^nP^{-1}，难度递进三例），并补三种求逆方法例题（伴随法/初等行变换/增广矩阵），速查卡 matrix 29→37 条。2026-10-11 逆矩阵再增量：3.1 新增「求逆方法怎么选」分阶策略表（二阶公式法/三阶及以上初等行变换）+ 三阶行变换求逆例题；3.2 补二阶伴随例题与三阶伴随例题（直观展示代数余子式按位摆→转置）；新增 3.8 两种常用求逆技巧（抽象矩阵用定义凑 AB=E、对角阵求逆写倒数）；4.1 新增「行列式换行变号 vs 矩阵换行不变号」方程组视角易混淆说明；速查卡 matrix 37→41 条（逆6 分阶/逆7 抽象定义法/逆8 对角阵/初3 换行变号对比）。2026-10-16 新增「线性方程组」独立章节 module=linSys（行列式/矩阵之后）：buildLinearSystemDetail 8 个 tab（首 tab 知识地图：知识地图/概念与矩阵表示/求解方程组/解的判定/题型实战/解的结构/解题框架/速查·口诀），首页 path-home 新增入口行（#9b8bb4）+ swiper 卡 09 + 总览模块推荐卡；抽提脚本 sections/MODULE_ORDER 同步；速查卡 linSys 20 条；notes/12-线性方程组.md 完整笔记（含河北2023专升本《高数(一)》大纲样题第18题）并在 00-笔记索引.md 登记为第 11 章。证据：抽出 344 条 formulaCard，分 11 个模块（limit 13 / deriv 87 / integral 69 / trig 41 / diffEq 9 / multivar 10 / dblint 18 / series 29 / linalg 7 / matrix 41 / linSys 20）；内联脚本 new Function 语法检查 errors=0（JSON-LD 除外）；vm 执行 buildLinearSystemDetail 成功：8 section id 唯一、13 张例题翻卡、42 个公式块；formulas.js import 验证 MODULES 含 linSys:20"
 }
