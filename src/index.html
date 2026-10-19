@@ -2479,6 +2479,49 @@ function buildDerivativeDetail() {
                 <blockquote>隐函数二阶导务必对一阶导方程再求导，并将 $y'$ 用已求表达式回代；先代入数值可大大简化计算。</blockquote>
             `)}
 
+            ${exampleBox('例题 1（专升本难度 · 隐函数求导，求定点导数）', `
+                <p>由方程 $xy+\\ln y=1$，求 $\\dfrac{dy}{dx}\\Big|_{x=0}$。</p>
+                <strong>解</strong>：
+                <p>$x=0$ 代入方程：$0+\\ln y=1 \\Rightarrow y=e$，得点 $(0,e)$。</p>
+                <p>两边对 $x$ 求导：</p>
+                <p>$$y+x\\cdot y\' +\\frac{1}{y}\\cdot y\'=0$$</p>
+                <p>整理：</p>
+                <p>$$y\'\\left(x+\\frac{1}{y}\\right)=-y \\implies y\'=\\frac{-y}{x+\\frac{1}{y}}$$</p>
+                <p>代入 $(0,e)$：</p>
+                <p>$$y\'\\Big|_{x=0}=\\frac{-e}{0+\\frac{1}{e}}=-e^2$$</p>
+            `)}
+
+            ${exampleBox('例题 2（专升本难度 · 幂指函数求导）', `
+                <p>$y=x^{\\sin x}\\quad(x>0)$，求 $y\'$。</p>
+                <strong>解</strong>：
+                <p><strong>方法一（指数化）</strong>：</p>
+                <p>$$y=e^{\\sin x\\cdot \\ln x}$$</p>
+                <p>$$y\'=e^{\\sin x\\ln x}\\left(\\cos x\\cdot\\ln x+\\sin x\\cdot\\frac{1}{x}\\right)=x^{\\sin x}\\left(\\cos x\\ln x+\\frac{\\sin x}{x}\\right)$$</p>
+                <p><strong>方法二（取对数求导）</strong>：</p>
+                <p>$$\\ln y=\\sin x \\ln x$$</p>
+                <p>$$\\frac{y\'}{y}=\\cos x\\ln x+\\frac{\\sin x}{x}$$</p>
+                <p>$$y\'=x^{\\sin x}\\left(\\cos x \\ln x+\\frac{\\sin x}{x}\\right)$$</p>
+            `)}
+
+            ${groupTitle('fa-dumbbell', '强化练习题（2 道）', '#BF5AF2')}
+
+            ${exampleBox('强化练习题 1（隐函数 · 定点导数）', `
+                <p>设方程 $e^y+xy=e$ 确定隐函数 $y=y(x)$，求 $y\'$ 以及 $y\'\\big|_{x=0}$。</p>
+                <strong>解</strong>：
+                <p>两边对 $x$ 求导（$y$ 视为 $x$ 的函数）：</p>
+                <p>$$e^y\\cdot y\'+y+xy\'=0 \\implies y\'(e^y+x)=-y \\implies y\'=\\frac{-y}{e^y+x}$$</p>
+                <p>$x=0$ 代入原方程：$e^{y}=e \\Rightarrow y=1$，代入点 $(0,1)$：</p>
+                <p>$$y\'\\big|_{x=0}=\\frac{-1}{e}=-\\frac{1}{e}$$</p>
+            `)}
+
+            ${exampleBox('强化练习题 2（幂指 · 综合）', `
+                <p>$y=(1+x)^{\\ln x}\\quad(x>0)$，求 $y\'$。</p>
+                <strong>解</strong>：
+                <p>取对数：$\\ln y=\\ln x\\cdot\\ln(1+x)$，两边对 $x$ 求导：</p>
+                <p>$$\\frac{y\'}{y}=\\frac{1}{x}\\ln(1+x)+\\ln x\\cdot\\frac{1}{1+x}$$</p>
+                <p>$$y\'=(1+x)^{\\ln x}\\left[\\frac{\\ln(1+x)}{x}+\\frac{\\ln x}{1+x}\\right]$$</p>
+            `)}
+
             ${groupTitle('fa-diagram-project', '参数方程求导', '#5AC8FA')}
             <div class="formula-grid">
                 ${formulaCard('参1', '一阶导', '$$\\frac{dy}{dx} = \\frac{y\'(t)}{x\'(t)}$$', '参数方程 x=x(t), y=y(t)：分子分母分别对参数 t 求导', '#5AC8FA')}
@@ -2544,6 +2587,51 @@ function buildDerivativeDetail() {
                 <p>$$F(x)=x\\int_0^x \\cos t\\,dt$$</p>
                 <p>用乘法法则 + 变限公式：</p>
                 <p>$$F'(x)=1\\cdot\\int_0^x \\cos t\\,dt+x\\cdot\\cos x=\\sin x+x\\cos x$$</p>
+            `)}
+
+            ${exampleBox('例题 1（专升本难度 · 上下限都变）', `
+                <p>求 $\\dfrac{d}{dx}\\int_{2x}^{x^2}\\ln(1+t)\\,dt$。</p>
+                <strong>解</strong>：
+                <p>上下限都变，用口诀「上减下」：上限 $x^2$ 代入乘以上限导，减下限 $2x$ 代入乘以下限导。</p>
+                <p>$$\\frac{d}{dx}\\int_{2x}^{x^2}\\ln(1+t)\\,dt=\\ln(1+x^2)\\cdot(x^2)\'-\\ln(1+2x)\\cdot(2x)\'$$</p>
+                <p>$$=2x\\ln(1+x^2)-2\\ln(1+2x)$$</p>
+            `)}
+
+            ${exampleBox('例题 2（专升本难度 · 被积函数含 $x$，坑题）', `
+                <p>求 $\\dfrac{d}{dx}\\int_0^x t^2 e^{x}\\,dt$。</p>
+                <strong>解</strong>：
+                <p>被积函数里的 $e^x$ 相对积分变量 $t$ 是常数，先提出积分号：</p>
+                <p>$$\\int_0^x t^2 e^x\\,dt=e^x\\int_0^x t^2\\,dt=e^x\\cdot\\frac{x^3}{3}$$</p>
+                <p>再对 $x$ 求导（注意用乘法法则，别漏了对 $e^x$ 的求导）：</p>
+                <p>$$\\frac{d}{dx}\\!\\left(e^x\\cdot\\frac{x^3}{3}\\right)=e^x\\cdot\\frac{x^3}{3}+e^x\\cdot x^2=e^x\\!\\left(\\frac{x^3}{3}+x^2\\right)=\\frac{x^2 e^x(x+3)}{3}$$</p>
+            `)}
+
+            ${exampleBox('例题 3（专升本难度 · 变限积分 + 洛必达，王牌组合）', `
+                <p>求 $\\lim_{x\\to 0}\\dfrac{\\displaystyle\\int_0^{x^2}\\sin t\\,dt}{x^4}$。</p>
+                <strong>解</strong>：
+                <p>$x\\to 0$ 时分子分母都趋于 $0$，是 $\\dfrac{0}{0}$ 型，用洛必达法则（分子对 $x$ 求导即变限积分求导公式）：</p>
+                <p>$$\\lim_{x\\to 0}\\frac{\\int_0^{x^2}\\sin t\\,dt}{x^4}=\\lim_{x\\to 0}\\frac{\\sin(x^2)\\cdot 2x}{4x^3}=\\lim_{x\\to 0}\\frac{\\sin(x^2)}{2x^2}$$</p>
+                <p>由等价无穷小 $\\sin(x^2)\\sim x^2$（$x\\to 0$）：</p>
+                <p>$$=\\lim_{x\\to 0}\\frac{x^2}{2x^2}=\\frac{1}{2}$$</p>
+            `)}
+
+            ${exampleBox('例题 4（专升本难度 · 终极坑题，被积函数含 $x$，必须换元）', `
+                <p>求 $\\dfrac{d}{dx}\\int_0^x f(x-t)\\,dt$。</p>
+                <strong>解</strong>：
+                <p>被积函数中 $x-t$ 把 $x$ 与 $t$ 绑在一起，没法把 $x$ 提出积分号，必须换元。</p>
+                <p>令 $u=x-t$，则 $\\mathrm{d}t=-\\mathrm{d}u$；当 $t=0$ 时 $u=x$，当 $t=x$ 时 $u=0$：</p>
+                <p>$$\\int_0^x f(x-t)\\,dt=\\int_{x}^{0} f(u)(-\\mathrm{d}u)=\\int_0^x f(u)\\,\\mathrm{d}u$$</p>
+                <p>于是</p>
+                <p>$$\\frac{d}{dx}\\int_0^x f(x-t)\\,dt=\\frac{d}{dx}\\int_0^x f(u)\\,\\mathrm{d}u=f(x)$$</p>
+            `)}
+
+            ${exampleBox('例题 5（专升本难度 · 换元 + 变限，注意上下限）', `
+                <p>求 $\\dfrac{d}{dx}\\int_0^{x^2} e^{x-t}\\,dt$。</p>
+                <strong>解</strong>：
+                <p>同样令 $u=x-t$，$\\mathrm{d}t=-\\mathrm{d}u$；当 $t=0$ 时 $u=x$，当 $t=x^2$ 时 $u=x-x^2$：</p>
+                <p>$$\\int_0^{x^2} e^{x-t}\\,dt=\\int_{x}^{x-x^2} e^u(-\\mathrm{d}u)=\\int_{x-x^2}^{x} e^u\\,\\mathrm{d}u=e^{x}-e^{x-x^2}$$</p>
+                <p>再对 $x$ 求导：</p>
+                <p>$$\\frac{d}{dx}\\!\\left(e^x-e^{x-x^2}\\right)=e^x-e^{x-x^2}\\cdot(1-2x)$$</p>
             `)}
 
             ${memoryBox('变限积分两类处理', '① 被积函数含 x → 先把 x 提出（相对 t 是常数），用乘法法则；② x 不好提出 → 换元 u=x-t，注意换元时上下限同步换。')}
