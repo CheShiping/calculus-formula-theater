@@ -111,6 +111,30 @@
 - `feature_list.json`：modules 加 linSys 条目，totals 11 模块 / 344 条，invariants 模块集合更新，evidence 追加。
 - 证据：`node scripts/extractFormulas.mjs` → `抽出 344 条 formulaCard` / `共 344 条公式，分 11 个模块`，模块统计 `{ deriv: 87, integral: 69, trig: 41, diffEq: 9, multivar: 10, dblint: 18, series: 29, linalg: 7, matrix: 41, linSys: 20, limit: 13 }`；内联脚本 `new Function` 语法检查 errors=0（script#0 为 JSON-LD 非可执行，基线即如此，非本次引入）；vm 顺序执行内联脚本后调用 `buildLinearSystemDetail()` 成功（8 个 section id 唯一，tabs 顺序正确）；`formulas.js` 动态 import 验证 `MODULES` 含 `linSys:20`；dev server（localhost:8001）首页含 `enterDetail('linearSystem')` 入口与 `buildLinearSystemDetail` 函数体，`review.html` 返回 200。
 
+## 更新（2026-10-21）— 第一章极限增量：两参数反求 + 夹逼根号题型 + 新增「见识题型」tab
+
+- `notes/01-函数、极限、连续.md` 增量（§2.4 / §2.5 / §2.9 / §2.10，与页面同步）：
+  - §2.4 夹逼：新增「n 次根号求和 → 抓最大值」核心题型（三步套路 + 3 道一眼出答案例子 + $\lim\sqrt[n]{C}=1$、$\lim\sqrt[n]{n}=1$ 必背结论 + 与分式求和夹逼的区分）。
+  - §2.5 反求参数：新增「两个未知数 · 列方程组 + 洛必达」：两步法口诀；类型 1 两参数求和（$a+b=-3$）；类型 2 单参数（$c=4$）；类型 3 无穷远通分降次；两场景区分表；参数分布在分子分母的洛必达联立模板 3 例（$e^{ax}$ 型 $a=2,b=0$、根号型 $a=3,b=-1$、$\sin(ax)$ 型 $b$ 被约掉为任意实数的坑）；配套练习 4 道附解析。
+  - §2.9 见识题型·含有极限的方程（考点 23）：三步法 + 例 73（$f(x)=\frac{\sin 2x}{x}-3$）+ 例 74（2024 年试题，$f(1)=\frac{\pi-1}{2}$）。
+  - §2.10 见识题型·已知一个极限求另一个极限（考点 24）：例 75（$\lim f(x)=6$）+ 例 76（2021 年试题，$\lim\frac{f(x)}{x^2}=2$）+ 例 77（选择题 C.36；加减不能直接等价、加项减项 $\sin 6x=(\sin 6x-6x)+6x$）+ 例 78（2023 年试题，$f(kx)$ 型优先换元统一 $f(u)/u$，选 C.3）；小结增补第 ④ 条。
+- `src/index.html`（`buildFunctionDetail()` 内增量）：
+  - 「极限·方法汇总」tab：3.4 夹逼新增根号题型卡组（核心题型卡 + 三步卡 + 例题翻卡 + 必背结论 memoryBox + 两张对比卡）；3.5 反求参数新增两步法卡、「进阶类型 1/2」分组 6 张例题翻卡 + 4 道强化练习翻卡。
+  - **新增第 6 个 tab「见识题型」**（id `fn-insight`，位于「速查总表」之后）：考点 23（方法卡 + 三步卡 + 例 73/74）与考点 24（方法卡 + 例 75–78），全部走既有 `exampleBox` 翻卡 / `memoryBox` / `groupTitle` 组件；`return` 拼接追加 `insightBody`。首 tab 仍为知识地图。
+- 未改 formulaCard / `formulas.js` / `review.html` / `extractFormulas.mjs`（公式总数仍 344；例题为 exampleBox 不进抽提）。
+- 修正用户草稿两处数学笔误（已同步页面与笔记）：① 例 1 方程(1) 应为 $4+2a+b=0$（原稿误写 $4+2(a+b)$）；② ∞ 型例题原稿 $x-\frac{ax^2}{x+1}=2$ 无解，改为 $2x-\frac{ax^2}{x+1}=2$（$a=2$，验证一次项极限 $=2$ 自洽）。
+- 证据：内联脚本 `new Function` 语法检查 errors=0（script#0 为 JSON-LD 非可执行，基线即如此，非本次引入）；dev server localhost:8001 运行正常。⚠ 浏览器双主题肉眼复核未完成（浏览器代理两次被用户中断），待用户打开 http://localhost:8001 自行复核或下次会话补验。
+
+## 更新（2026-10-28）— 无穷级数：判敛两招澄清 + 下标平移题型补充
+
+- `notes/11-无穷级数.md` 与 `src/index.html`（basicBody「收敛与发散的定义」tab）同步增量：
+  - 「判敛第一招」memoryBox 补澄清：求极限的对象是**通项 $u_n$**，不是部分和 $S_n$（$S_n$ 取极限是定义法的活）。
+  - 1.1 例题后新增 memoryBox「**判敛第二招**」：级数收敛性用 $S_n$ 判别（极限存在 ⇒ 收敛 / 不存在含 $\pm\infty$ ⇒ 发散）；数列收敛性用 $a_n$ 判别；末尾防混淆提示「级数看 $S_n$，数列看 $a_n$」。
+  - 性质例题（5 道）后新增 exampleBox「**题型补充 · 已知和求新和（下标平移型）**」：已知 $\sum u_n=S$ 求 $\sum(u_n-u_{n-1}+2u_{n+2})$；正面只显示题面（题目+约定+核心公式），背面走「解」分界显示第一步拆分 / 第二步合并 / 高频考点提醒 / 裂项特例 / 应试模板 / 最终答案 $2S-u_0-2u_1-2u_2$ / 下标笔误核对补充。
+- 未改 formulaCard / 公式总数（344 不变；本批均为 memoryBox / exampleBox，不进抽提，`review.html` 自动同步无需操作）。
+- 技术点：KaTeX 不支持 `\xlongequal`，页面用 `\overset{k=n-1}{=}` 等价实现；exampleBox 靠 `<strong>解</strong>` 标志拆分正反面，新例题必须带该标志否则答案会漏到正面。
+- 证据：dev server（localhost:8001）运行中；正反面拆分与公式渲染经代码层确认，浏览器肉眼复核待用户确认。
+
 ## 下一步（按优先级）
 
 1. **加新内容时**：严格走 AGENTS.md 第 4 节五步流程——先写 `notes/` 笔记 → 等用户审核 → 在 `index.html` 对应 `buildXxxDetail()` 增量追加 `formulaCard` → 跑 `extractFormulas.mjs` → `npm run dev` 核对双主题。

@@ -2837,6 +2837,24 @@ function buildDerivativeDetail() {
             </div>
             ${memoryBox('极值判别法二何时用', '当 f\'(x)=0 求出多个驻点且 f\'\'(x) 计算简单时用法二更高效（避免分区间判断符号）。如 f(x)=x³−3x²，驻点 x=0,2，f\'\'(0)=−6<0（极大），f\'\'(2)=6>0（极小）。若 f\'\'(x0)=0（如 x⁴ 在 x=0），法二失效，需用一阶导符号变化判断。')}
 
+            ${groupTitle('fa-bullseye', '驻点 & 极值点的关系', '#FF9F0A')}
+            <div class="formula-grid">
+                ${formulaCard('驻点', '驻点定义', '$$f\'(x_0)=0 \\iff x_0 \\text{ 为驻点}$$', '前提：函数在该点可导。驻点只是「候选极值点」，需检验', '#FF9F0A')}
+                ${formulaCard('极值', '极值点定义', '$$\\text{邻域内恒有 } f(x)\\le f(x_0)\\ (\\text{或}\\ge)$$', '极大/极小看邻域内函数值比较；极值点不要求可导', '#FF9F0A')}
+            </div>
+            ${memoryBox('一句话口诀', '驻点不一定是极值点；极值点不一定是驻点。')}
+
+            <div class="formula-grid" style="grid-template-columns:1fr;gap:0.4rem;">
+                ${formulaCard('结论1', '驻点 ⟹ 不一定极值', '$$f\'(x_0)=0 \\nRightarrow x_0 \\text{ 为极值点}$$', '反例：y=x³，f\'(0)=0，x=0 是驻点但不是极值点（左右导数同号，单调不回头）', '#FF9F0A')}
+                ${formulaCard('结论2', '可导极值点 ⟹ 必是驻点', '$$x_0 \\text{ 为极值点，} f\'(x_0)\\text{ 存在} \\implies f\'(x_0)=0$$', '费马引理：可导的极值点一定是驻点', '#FF9F0A')}
+                ${formulaCard('结论3', '不可导极值点 ⟹ 不是驻点', '$$x_0 \\text{ 为极值点，} f\'(x_0)\\text{ 不存在} \\implies x_0 \\text{ 不是驻点}$$', '反例：y=|x|，x=0 是极小值点，但 f\'(0) 不存在，不是驻点', '#FF9F0A')}
+                ${formulaCard('结论4', '驻点 + 左右变号 ⟹ 极值点', '$$f\'(x)\\text{ 左正右负}\\Rightarrow\\text{极大};\quad \\text{左负右正}\\Rightarrow\\text{极小}$$', '第一充分条件；左右同号（如 x³）则不是极值点', '#FF9F0A')}
+            </div>
+
+            ${formulaCard('框图', '逻辑框图', '$$\\text{极值点}\\begin{cases}\\text{可导极值点}\\implies\\text{驻点}\\\\\\text{不可导极值点}\\implies\\textbf{不是驻点}\\end{cases}$$', '驻点只是候选，必须检验；极值点分「可导」与「不可导」两类', '#FF9F0A')}
+
+            ${memoryBox('易错坑（四川专升本高频）', '❌ 错：驻点就是极值点。❌ 错：极值点导数一定等于 0。✅ 对：可导函数的极值点一定是驻点。判断题见到「极值点必为驻点」要想到 y=|x| 这个反例。')}
+
             ${exampleBox('专升本真题（2025 年河南专升本 · 高数一 · 解答题）', `
                 <p>求函数 $f(x)=x^3-3x+1$ 的单调区间和极值。</p>
                 <p><strong>解</strong>（列表法，法一标准呈现）：</p>
@@ -3358,16 +3376,33 @@ function buildIntegralDetail() {
                 <p>$$\\int_0^2 f(x)\\,dx = \\int_0^1 x^2\\,dx + \\int_1^2 (2-x)\\,dx = \\frac13+\\frac12=\\frac56$$</p>
             `)}
 
-            ${exampleBox('例题 · 类型二 内层是 f(x−1) → 换元', `
-                <p>设 $\\displaystyle\\int_0^1 f(t)\\,dt=2$，求 $\\displaystyle\\int_1^2 f(x-1)\\,dx$。</p>
-                <p><strong>解</strong>：令 $x-1=u$，则 $dx=du$；当 $x=1\\Rightarrow u=0$，$x=2\\Rightarrow u=1$。本题纯换元：</p>
-                <p>$$\\int_1^2 f(x-1)\\,dx = \\int_0^1 f(u)\\,du = 2$$</p>
+            ${exampleBox('例题 · 类型二 内层是 f(x+2) → 换元 + 分段切割（综合题）', `
+                <p>设 $f(x)=\\begin{cases}\\sqrt{4-x^2},&-2\\lt x\\lt 2\\\\ x,&x\\ge2\\end{cases}$，求 $\\displaystyle\\int_{-2}^{2} f(x+2)\\,dx$。</p>
+                <p><strong>解</strong>：内层是 $x+2$，先换元——令 $u=x+2$，则 $dx=du$；当 $x=-2\\Rightarrow u=0$，$x=2\\Rightarrow u=4$（<strong>换上下限</strong>）：</p>
+                <p>$$\\int_{-2}^{2} f(x+2)\\,dx = \\int_{0}^{4} f(u)\\,du$$</p>
+                <p>再按 $f$ 的分段点 $u=2$ 切割区间 $[0,4]$：$u\\in(0,2)$ 用 $\\sqrt{4-u^2}$，$u\\ge2$ 用 $u$：</p>
+                <p>$$\\int_{0}^{4} f(u)\\,du = \\int_{0}^{2}\\sqrt{4-u^2}\\,du + \\int_{2}^{4} u\\,du$$</p>
+                <p>第一段直接用<strong>四分之一圆面积</strong>（联动 8.2，$a=2$）：$\\dfrac{\\pi\\cdot2^2}{4}=\\pi$；第二段用牛莱公式：$\\displaystyle\\int_{2}^{4}u\\,du=\\Big[\\frac{u^2}{2}\\Big]_{2}^{4}=8-2=6$。</p>
+                <p>所以 $\\displaystyle\\int_{-2}^{2} f(x+2)\\,dx = \\pi + 6$。</p>
+                <blockquote>三招联动：<strong>① 内层含式 → 换元</strong>（三换，令“框框”=u，同时换上下限）；<strong>② f 分段 → 按分段点切区间</strong>（换元后新上限 4 跨了 $f$ 的两段，拆成 $[0,2]+[2,4]$ 各积各的）；<strong>③ $\\sqrt{4-u^2}$ → 四分之一圆面积</strong>（联动 8.2 直接背，别硬算三角代换）。</blockquote>
             `)}
 
             ${exampleBox('例题 · 类型三 带绝对值', `
                 <p>求 $\\displaystyle\\int_{-1}^2 |x-1|\\,dx$。</p>
                 <p><strong>解</strong>：$|x-1|$ 在 $x=1$ 处分段，各段确定符号后去绝对值再积：</p>
                 <p>$$\\int_{-1}^2 |x-1|\\,dx = \\int_{-1}^1 (1-x)\\,dx + \\int_1^2 (x-1)\\,dx = \\frac52$$</p>
+            `)}
+
+            ${exampleBox('例题 · 类型三 根号开出绝对值（√(1−sin2x) 经典综合）', `
+                <p>求 $\\displaystyle\\int_{0}^{\\frac{\\pi}{2}}\\sqrt{1-\\sin 2x}\\,dx$。</p>
+                <p><strong>解</strong>：先用「$1=\\sin^2x+\\cos^2x$」配方：</p>
+                <p>$$1-\\sin 2x=\\sin^2x+\\cos^2x-2\\sin x\\cos x=(\\sin x-\\cos x)^2$$</p>
+                <p>开根号出来是<strong>绝对值</strong>（联动类型三公式 $\\sqrt{x^2}=|x|$）：</p>
+                <p>$$\\sqrt{(\\sin x-\\cos x)^2}=|\\sin x-\\cos x|$$</p>
+                <p>找零点：$\\sin x=\\cos x\\Rightarrow x=\\dfrac{\\pi}{4}$，按号脱绝对值：</p>
+                <p>$$\\int_{0}^{\\frac{\\pi}{2}}|\\sin x-\\cos x|\\,dx=\\int_{0}^{\\frac{\\pi}{4}}(\\cos x-\\sin x)\\,dx+\\int_{\\frac{\\pi}{4}}^{\\frac{\\pi}{2}}(\\sin x-\\cos x)\\,dx$$</p>
+                <p>$$=\\Big[\\sin x+\\cos x\\Big]_{0}^{\\frac{\\pi}{4}}+\\Big[-\\cos x-\\sin x\\Big]_{\\frac{\\pi}{4}}^{\\frac{\\pi}{2}}=(\\sqrt2-1)+(\\sqrt2-1)=2\\sqrt2-2$$</p>
+                <blockquote>三步链：<strong>① 配方</strong>（逆用 $1=\\sin^2x+\\cos^2x$ 凑出完全平方）→ <strong>② 开根出绝对值</strong>（$\\sqrt{(\\;)^2}=|\\;|$，千万别直接开成 $\\sin x-\\cos x$——那样两段一正一负互相抵消，会算出 0）→ <strong>③ 找零点分段脱绝对值</strong>（零点 $x=\\tfrac{\\pi}{4}$ 就是切割界）。两段各得 $\\sqrt2-1$，合起来 $2\\sqrt2-2$。</blockquote>
             `)}
 
             ${exampleBox('难度提升 · 类型一 复合分段函数（分段点 x=0，函数形式跨类型）', `
@@ -5435,7 +5470,7 @@ function buildSeriesDetail() {
                 ${formulaCard('收1', '收敛定义', '$$\\sum_{n=1}^{\\infty}u_n\\text{ 收敛 }\\iff\\lim_{n\\to\\infty}S_n=S\\text{（有限值）}$$', '先算部分和 S_n=u_1+…+u_n，再令 n→∞ 取极限', '#0A84FF')}
                 ${formulaCard('收2', '发散定义', '$$\\lim_{n\\to\\infty}S_n\\text{ 不存在（含 }\\pm\\infty\\text{）}\\Rightarrow\\sum_{n=1}^{\\infty}u_n\\text{ 发散}$$', '部分和数列极限不存在即为发散', '#0A84FF')}
             </div>
-            ${memoryBox('判敛第一招', '先求通项极限 $\\lim u_n$：结果 ≠ 0 ⇒ 必发散（秒杀）；结果 = 0 ⇒ 不能判收敛，另谋他法（等价、抓大头、放缩→四大天王）。')}
+            ${memoryBox('判敛第一招', '先求通项极限 $\\lim u_n$：结果 ≠ 0 ⇒ 必发散（秒杀）；结果 = 0 ⇒ 不能判收敛，另谋他法（等价、抓大头、放缩→四大天王）。⚠️ 别搞混：求极限的是通项 $u_n$，不是部分和 $S_n$——$S_n$ 取极限是定义法的活。')}
 
             ${exampleBox('例题 · 定义法判敛（裂项相消）', `
                 <p>用部分和定义法判断级数 $\\sum_{n=1}^{\\infty}\\dfrac{1}{n(n+1)}$ 的敛散性，若收敛求其和。</p>
@@ -5444,6 +5479,8 @@ function buildSeriesDetail() {
                 <p>$$\\lim_{n\\to\\infty}S_n=\\lim_{n\\to\\infty}\\left(1-\\frac{1}{n+1}\\right)=1$$</p>
                 <p class="ex-answer">级数收敛，和为 $1$。</p>
             `)}
+
+            ${memoryBox('判敛第二招', '级数收敛性：用 $S_n$ 判别——$\\lim_{n\\to\\infty}S_n$ 存在（有限值）$\\Rightarrow$ $\\sum_{n=1}^{\\infty}u_n$ 收敛；不存在（含 $\\pm\\infty$）$\\Rightarrow$ 发散。数列收敛性：$\\lim_{n\\to\\infty}a_n$ 存在 $\\Rightarrow$ 收敛；不存在 $\\Rightarrow$ 发散。两个对象别搞混：级数看 $S_n$，数列看 $a_n$。')}
 
             ${groupTitle('fa-list-check', '1.2 级数的五条基本性质', '#30D158')}
             <div class="formula-grid">
@@ -5479,6 +5516,28 @@ function buildSeriesDetail() {
                 <p>(1) $\\lim_{n\\to\\infty}\\dfrac{2n+1}{3n-1}=\\dfrac23\\neq0$ ⇒ 发散。</p>
                 <p>(2) $\\lim_{n\\to\\infty}\\sqrt[n]{3}=1\\neq0$ ⇒ 发散。</p>
                 <p>(3) $\\lim_{n\\to\\infty}\\sin n$ 不存在 ⇒ 发散。</p>
+            `)}
+            ${exampleBox('题型补充 · 已知和求新和（下标平移型）', `
+                <p><strong>题目</strong>：已知 $\\sum\\limits_{n=1}^{\\infty}u_n=S$（收敛，和为 $S$），求 $\\boldsymbol{\\sum\\limits_{n=1}^{\\infty}\\big(u_n-u_{n-1}+2u_{n+2}\\big)}$ 的和。</p>
+                <p>约定：下标 $n=1$ 时，$u_0$ 为第 0 项；$u_{n+2}$ 是往后两项。<strong>核心公式：收敛级数可以拆开、线性运算</strong>——若 $\\sum u_n,\\sum v_n$ 都收敛，则 $\\sum(Au_n+Bv_n)=A\\sum u_n+B\\sum v_n$。</p>
+                <p><strong>解</strong>：</p>
+                <p><strong>第一步 · 拆分级数</strong>：</p>
+                $$\\sum_{n=1}^{\\infty}\\big(u_n-u_{n-1}+2u_{n+2}\\big)=\\sum_{n=1}^{\\infty}u_n-\\sum_{n=1}^{\\infty}u_{n-1}+2\\sum_{n=1}^{\\infty}u_{n+2}$$
+                <p>分别处理三个级数：</p>
+                <p>(1) $\\sum_{n=1}^{\\infty}u_n=S$；</p>
+                <p>(2) $\\sum_{n=1}^{\\infty}u_{n-1}\\overset{k=n-1}{=}\\sum_{k=0}^{\\infty}u_k=u_0+\\sum_{k=1}^{\\infty}u_k=u_0+S$；</p>
+                <p>(3) $\\sum_{n=1}^{\\infty}u_{n+2}\\overset{k=n+2}{=}\\sum_{k=3}^{\\infty}u_k=\\sum_{k=1}^{\\infty}u_k-u_1-u_2=S-u_1-u_2$。</p>
+                <p><strong>第二步 · 代入合并</strong>：</p>
+                $$\\begin{aligned}\\text{原式}&=S-\\big(u_0+S\\big)+2\\big(S-u_1-u_2\\big)\\\\&=S-u_0-S+2S-2u_1-2u_2\\\\&=\\boldsymbol{2S-u_0-2u_1-2u_2}\\end{aligned}$$
+                <p><strong>⚠️ 高频考点提醒（专升本最爱挖坑）</strong>：收敛级数<strong>平移下标，和会变，差的是被砍掉的前面有限项</strong>！$\\sum_{n=1}^{\\infty}u_{n+m}$ 不等于 $S$，要减掉前 $m$ 项。</p>
+                <p><strong>举个简化特例帮你感受</strong>：如果题目是 $\\sum_{n=1}^{\\infty}(u_n-u_{n+1})$，这就是裂项型：</p>
+                $$\\sum_{n=1}^{\\infty}(u_n-u_{n+1})=\\lim_{n\\to\\infty}(u_1-u_{n+1})$$
+                <p>只有 $\\lim u_n=0$ 时，和才等于 $u_1$。</p>
+                <p><strong>应试模板（直接记）</strong>：已知 $\\sum_{n=1}^{\\infty}u_n=S$：</p>
+                <p>· $\\sum_{n=1}^{\\infty}u_{n+k}=S-(u_1+u_2+\\dots+u_k)$（往后挪 k 项，砍掉前 k 项）；</p>
+                <p>· $\\sum_{n=1}^{\\infty}u_{n-k}=u_0+u_{-1}+\\dots+u_{1-k}+S$（往前挪，多出前面项）。</p>
+                <p class="ex-answer">最终答案：$\\boldsymbol{\\sum_{n=1}^{\\infty}(u_n-u_{n-1}+2u_{n+2})=2S-u_0-2u_1-2u_2}$</p>
+                <p><strong>补充</strong>：很多试卷出题时会把下标改成从 $n=2$ 开始 $u_{n-1}$，或者题目给 $u_0=0$，那结果会简化；如果原题下标是笔误，比如是 $u_{n+1}$ 而不是 $u_{n-1}$，结果会不一样，记得核对一下原题下标。</p>
             `)}
         </div>
     `;
@@ -7299,6 +7358,7 @@ function buildFunctionDetail() {
         <div class="detail-tab" style="--tab-color:rgba(255,214,10,0.2);--tab-border:rgba(255,214,10,0.4);" onclick="switchTab('fn-limit2', this)">极限·方法汇总</div>
         <div class="detail-tab" style="--tab-color:rgba(255,214,10,0.2);--tab-border:rgba(255,214,10,0.4);" onclick="switchTab('fn-cont', this)">连续·间断·渐近线</div>
         <div class="detail-tab" style="--tab-color:rgba(255,214,10,0.2);--tab-border:rgba(255,214,10,0.4);" onclick="switchTab('fn-summary', this)">速查总表</div>
+        <div class="detail-tab" style="--tab-color:rgba(255,214,10,0.2);--tab-border:rgba(255,214,10,0.4);" onclick="switchTab('fn-insight', this)">见识题型</div>
     `;
 
     // === Tab 1: 知识地图 · 函数板块 ===
@@ -7853,6 +7913,49 @@ function buildFunctionDetail() {
             </div>
             ${exampleBox('例题（经典）· 夹逼定理', '$I = \\lim\\limits_{n\\to\\infty}\\left(\\dfrac{1}{\\sqrt{n^2+1}} + \\dfrac{1}{\\sqrt{n^2+2}} + \\cdots + \\dfrac{1}{\\sqrt{n^2+n}}\\right)$<br><br><strong>解</strong>：每项分母范围：$\\sqrt{n^2+1} \\sim \\sqrt{n^2+n}$，共 $n$ 项。分母小（$\\sqrt{n^2+1}$）→ 分式大，<strong>上界</strong> = $\\dfrac{n}{\\sqrt{n^2+1}} \\to 1$；分母大（$\\sqrt{n^2+n}$）→ 分式小，<strong>下界</strong> = $\\dfrac{n}{\\sqrt{n^2+n}} \\to 1$。由夹逼定理，$I = \\boxed{1}$')}
 
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#5AC8FA;">核心题型 · n 次根号求和（夹逼固定套路）</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                    $$\\lim_{n\\to\\infty}\\sqrt[n]{a_1^n+a_2^n+\\cdots+a_k^n}=\\max\\{a_1,a_2,\\cdots,a_k\\}\\quad(a_1,a_2,\\cdots,a_k>0)$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    <span style="color:#5AC8FA;"><strong>一句话结论：极限等于里面最大的那个数。</strong></span><br>
+                    设 $M=\\max\\{a_1,a_2,\\cdots,a_k\\}$（里面最大的数），三步固定套路：
+                </div>
+            </div>
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#5AC8FA;">三步夹逼套路</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <strong>① 放缩</strong>（最大项撑场面，其余全换成最大项）：$$M^n \\le a_1^n+a_2^n+\\cdots+a_k^n \\le \\underbrace{M^n+M^n+\\cdots+M^n}_{k\\text{ 个}}=k\\cdot M^n$$
+                    <strong>② 全部开 $n$ 次方</strong>：$$M \\le \\sqrt[n]{a_1^n+a_2^n+\\cdots+a_k^n} \\le M\\cdot\\sqrt[n]{k}$$
+                    <strong>③ 求左右两端极限</strong>：左边 $\\lim\\limits_{n\\to\\infty}M=M$；右边 $\\lim\\limits_{n\\to\\infty}\\sqrt[n]{k}=1$（常数开 $n$ 次方极限都是 1）$\\Rightarrow M\\cdot 1=M$。<br>
+                    左右相等，夹逼得极限就是最大值 $M$。
+                </div>
+            </div>
+            ${exampleBox('例题 · n 次根号求和（一眼出答案）', `
+                <p>用「抓最大值」口算下列极限：</p>
+                <p>（1）$\\lim\\limits_{n\\to\\infty}\\sqrt[n]{1^n+2^n+3^n}$　（2）$\\lim\\limits_{n\\to\\infty}\\sqrt[n]{5^n+4^n+10^n}$　（3）$\\lim\\limits_{n\\to\\infty}\\sqrt[n]{2+2^n}$</p>
+                <strong>解</strong>：
+                <p>（1）最大是 3，极限 $=3$；（2）最大是 10，极限 $=10$；（3）把 2 看成 $1^n$，即 $\\sqrt[n]{1^n+2^n}$，最大是 2，极限 $=2$。</p>
+            `)}
+            ${memoryBox('必背小结论（n 次根号专用）', '① $\\lim\\limits_{n\\to\\infty}\\sqrt[n]{C}=1$（$C>0$ 是任意正常数）；② $\\lim\\limits_{n\\to\\infty}\\sqrt[n]{n}=1$。常数、$n$ 开 $n$ 次方，极限统统是 1。')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#5AC8FA;">
+                    <div class="formula-label" style="color:#5AC8FA;">✓ 这类：抓最大值</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                        $$\\sqrt[n]{a_1^n+a_2^n+\\cdots+a_k^n}$$
+                    </div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">根号里是<strong>n 次方之和</strong> → 用上面的夹逼套路，极限 = 最大值。</div>
+                </div>
+                <div class="formula-card" style="--card-accent:#FF9F0A;">
+                    <div class="formula-label" style="color:#FF9F0A;">✗ 别搞混：分式求和夹逼</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                        $$\\frac{1}{n+\\sqrt{1}}+\\frac{1}{n+\\sqrt{2}}+\\cdots$$
+                    </div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">这是<strong>分式求和</strong> → 放缩分母再求和夹逼（见上面经典例题），不是抓最大值套路。</div>
+                </div>
+            </div>
+
             ${groupTitle('fa-reply', '3.5 高频：已知极限存在 · 反求参数', '#FF3B30')}
             <div class="formula-grid">
                 <div class="formula-card" style="--card-accent:#FF3B30;">
@@ -7875,6 +7978,116 @@ function buildFunctionDetail() {
             </div>
             ${exampleBox('例题（2024 四川专升本难度）· 反求参数 ∞/∞型', '已知 $\\lim\\limits_{x\\to\\infty} \\dfrac{ax^3 + x^2 + 1}{2x^3 - x + 1} = 3$，求 $a$。<br><br><strong>解</strong>：抓大头：分子分母最高次<strong>同为 3 次</strong> → 极限 = 最高次系数之比。$\\dfrac{a}{2} = 3 \\implies \\boldsymbol{a = 6}$。<br><br><span style="color:var(--color-green);">✅ 口诀：次同系数比，次分低→0，次分高→∞（不存在）。</span>')}
             ${exampleBox('例题（专升本难度）· 反求参数 0/0型', '已知 $\\lim\\limits_{x \\to 1} \\dfrac{x^2+ax-2}{x-1}=3$，求 $a$。<br><br><strong>解</strong>：当 $x\\to1$ 时，分母 $x-1\\to0$；要使极限存在，分子也必须趋于 0：$1^2+a\\cdot1-2=0 \\implies \\boldsymbol{a=1}$。<strong>验证</strong>：$x^2+x-2=(x+2)(x-1)$，所以 $\\lim\\limits_{x\\to1}\\dfrac{(x+2)(x-1)}{x-1}=\\lim\\limits_{x\\to1}(x+2)=3\\;\\checkmark$')}
+
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#FF3B30;">核心原理 · 反求参数两步法（两个未知数 → 列方程组，洛必达联动）</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;text-align:center;">
+                    $$\\lim_{x\\to x_0}\\frac{f(x)}{g(x)}=A\\;(A\\text{ 为有限常数}) \\quad\\Longrightarrow\\quad \\lim_{x\\to x_0}g(x)=0\\;\\Rightarrow\\;\\lim_{x\\to x_0}f(x)=0$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    ① 若分母极限 $\\lim g(x)=0$，则<strong>分子极限一定也等于 0</strong>（否则极限是 $\\infty$，不存在有限极限）；<br>
+                    ② 满足 $\\dfrac{0}{0}$ 型后，再用<strong>洛必达</strong>或<strong>因式分解、等价无穷小</strong>算出极限值，列第二个方程解参数。<br>
+                    <span style="color:#FF3B30;"><strong>一句话口诀：分母趋 0，分子必趋 0；得到第一式，再算极限列第二式。</strong></span>
+                </div>
+            </div>
+            ${groupTitle('fa-calculator', '进阶类型 1 · 两个未知数：定点型与无穷远型', '#FF3B30')}
+            ${exampleBox('例 1 · 两个参数，求参数之和（考最多）', `
+                <p>已知 $\\lim\\limits_{x\\to 2}\\dfrac{x^2+ax+b}{x-2}=3$，求 $a+b$。</p>
+                <strong>解</strong>：
+                <p><strong>第一步 · 定第一式</strong>：分母 $\\lim\\limits_{x\\to2}(x-2)=0$，极限存在为有限数 $\\Rightarrow$ 分子 $\\lim\\limits_{x\\to2}(x^2+ax+b)=0$：</p>
+                <p>$$2^2+2a+b=0 \\implies 4+2a+b=0 \\quad (1)$$</p>
+                <p><strong>第二步 · 因式分解列第二式</strong>：$\\dfrac{0}{0}$ 型，设 $x^2+ax+b=(x-2)(x-k)$：</p>
+                <p>$$\\lim_{x\\to2}\\frac{(x-2)(x-k)}{x-2}=\\lim_{x\\to2}(x-k)=2-k=3 \\implies k=-1$$</p>
+                <p>所以 $x^2+ax+b=(x-2)(x+1)=x^2-x-2$，对比系数得 $a=-1,\\;b=-2$，故 $a+b=\\boxed{-3}$。</p>
+                <p><strong>另法（洛必达）</strong>：$\\lim\\limits_{x\\to2}\\dfrac{2x+a}{1}=4+a=3 \\implies a=-1$，代回 $(1)$ 得 $b=-2$，两法一致。</p>
+            `)}
+            ${exampleBox('例 2 · 只求一个参数（附检验）', `
+                <p>已知 $\\lim\\limits_{x\\to 1}\\dfrac{x^2-5x+c}{x-1}=-3$，求 $c$。</p>
+                <strong>解</strong>：
+                <p>分母 $\\to0$ $\\Rightarrow$ 分子 $\\to0$：</p>
+                <p>$$1^2-5\\cdot 1+c=0 \\implies 1-5+c=0 \\implies \\boxed{c=4}$$</p>
+                <p><strong>检验</strong>：$\\lim\\limits_{x\\to1}\\dfrac{x^2-5x+4}{x-1}=\\lim\\limits_{x\\to1}\\dfrac{(x-1)(x-4)}{x-1}=-3$，符合条件 ✓。</p>
+            `)}
+            ${exampleBox('例 3 · 无穷远处极限，同样逻辑（通分降次）', `
+                <p>已知 $\\lim\\limits_{x\\to\\infty}\\left(2x-\\dfrac{ax^2}{x+1}\\right)=2$，求 $a$。</p>
+                <strong>解</strong>：
+                <p>先通分：</p>
+                <p>$$2x-\\frac{ax^2}{x+1}=\\frac{2x(x+1)-ax^2}{x+1}=\\frac{(2-a)x^2+2x}{x+1}$$</p>
+                <p>$x\\to\\infty$ 时分式极限为有限常数，<strong>分子最高次幂必须不高于分母，二次项系数 = 0</strong>：</p>
+                <p>$$2-a=0 \\implies \\boxed{a=2}$$</p>
+                <p><strong>再验证一次项</strong>：$\\lim\\limits_{x\\to\\infty}\\dfrac{2x}{x+1}=2$，与题目极限一致 ✓。</p>
+            `)}
+            ${memoryBox('x→∞ 有理分式 · 次数规则（反求参数视角）', '极限存在为有限数：分子次数 ≤ 分母次数；次数相等 → 极限 = 最高次系数比；分子次数 > 分母 → 极限 $\\infty$。反求参数时，令多余的「高次系数 = 0」降次即可。')}
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#FF3B30;">
+                    <div class="formula-label" style="color:#FF3B30;">场景 1：$x\\to x_0$（趋向定点，0/0 型）</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                        分母 $\\to0$ $\\Rightarrow$ 分子 $\\to0$，得到方程①；再求极限（洛必达 / 因式分解）列第二个方程②，联立解参数。
+                    </div>
+                </div>
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <div class="formula-label" style="color:#0A84FF;">场景 2：$x\\to\\infty$（趋向无穷，有理多项式）</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                        看最高次：分子次数必须 $\\leq$ 分母次数，由「高次系数 = 0」控制次数；次数相等时极限 = 最高次系数比。
+                    </div>
+                </div>
+            </div>
+            ${groupTitle('fa-shuffle', '进阶类型 2 · 参数一个在分子、一个在分母（洛必达联立模板）', '#BF5AF2')}
+            ${exampleBox('例 4 · 标准模板：分母参数先分类讨论（考试直接照搬格式）', `
+                <p>已知 $\\lim\\limits_{x\\to 0}\\dfrac{e^{ax}-1}{x+b}=2$，求 $a$、$b$。</p>
+                <strong>解</strong>：
+                <p><strong>第一步 · 先看分母极限</strong>：$\\lim\\limits_{x\\to0}(x+b)=b$，分类判断：</p>
+                <p>如果 $b\\neq0$：分母极限 $b\\neq0$，而分子 $\\lim\\limits_{x\\to0}(e^{ax}-1)=0$，整个极限 $=0$，与「极限等于 2」矛盾；</p>
+                <p>因此只能 $b=0$，此时变成 $\\dfrac{0}{0}$ 型，满足洛必达条件 → <strong>方程①：$b=0$</strong>。</p>
+                <p><strong>第二步 · 洛必达列第二式</strong>：原式变为 $\\lim\\limits_{x\\to0}\\dfrac{e^{ax}-1}{x}=2$，分子分母分别求导：</p>
+                <p>$$\\lim_{x\\to0}\\frac{a\\cdot e^{ax}}{1}=a=2$$</p>
+                <p>✅ 结果：$\\boxed{a=2,\\;b=0}$。</p>
+            `)}
+            ${exampleBox('例 5 · 重点：根号 + 两个参数，0/0 洛必达', `
+                <p>已知 $\\lim\\limits_{x\\to 1}\\dfrac{\\sqrt{x+a}-2}{x+b}=\\dfrac{1}{4}$，求 $a$、$b$。</p>
+                <strong>解</strong>：
+                <p>要能使用洛必达，必须构成 $\\dfrac{0}{0}$ 型：分子、分母在 $x\\to1$ 时同时 $\\to0$：</p>
+                <p>$$\\begin{cases}\\lim\\limits_{x\\to1}(\\sqrt{x+a}-2)=0 \\\\ \\lim\\limits_{x\\to1}(x+b)=0\\end{cases}$$</p>
+                <p><strong>方程 1</strong>：$\\sqrt{1+a}-2=0 \\implies \\sqrt{1+a}=2 \\implies 1+a=4 \\implies a=3$；　<strong>方程 2</strong>：$1+b=0 \\implies b=-1$。</p>
+                <p><strong>代入验证（洛必达核对）</strong>：</p>
+                <p>$$\\lim_{x\\to1}\\frac{\\sqrt{x+3}-2}{x-1}\\xlongequal{\\frac{0}{0}}\\lim_{x\\to1}\\frac{\\dfrac{1}{2\\sqrt{x+3}}}{1}=\\frac{1}{2\\sqrt{4}}=\\frac{1}{4}$$</p>
+                <p>与题目极限一致 ✓，故 $a=3,\\;b=-1$。</p>
+            `)}
+            ${exampleBox('例 6 · 进阶坑题：洛必达后参数被约掉（容易错！）', `
+                <p>已知 $\\lim\\limits_{x\\to 0}\\dfrac{\\sin(ax)}{x+bx^2}=3$，求 $a$、$b$。</p>
+                <strong>解</strong>：
+                <p>$x\\to0$，分母 $x+bx^2\\to0$，分子 $\\sin(ax)\\to0$（天然满足），属于 $\\dfrac{0}{0}$ 型，洛必达：</p>
+                <p>$$\\lim_{x\\to0}\\frac{a\\cos(ax)}{1+2bx}=\\frac{a\\cdot\\cos 0}{1+0}=a=3$$</p>
+                <p>这里发现：<strong>$b$ 消掉了，$b$ 可以是任意实数！</strong></p>
+                <p><span style="color:#FF3B30;">⚠ 考点提醒：不是所有题都能解出 $b$——洛必达后参数被约掉，说明 $b$ 无限制，这个坑专升本考过！</span></p>
+            `)}
+            ${memoryBox('题型小结 · 固定两步', '① 0/0 先决条件：分子极限 = 0、分母极限 = 0，直接得到两个方程，解两个参数；② 代入洛必达验算极限，防止踩坑——有些题不是同时趋于 0，是别的情况；有些参数会被约掉，说明该参数无限制。')}
+            ${groupTitle('fa-dumbbell', '强化练习题（4 道，翻转对答案）', '#BF5AF2')}
+            ${exampleBox('强化练习题 1（两参数求和）', `
+                <p>$\\lim\\limits_{x\\to3}\\dfrac{x^2+mx+n}{x-3}=4$，求 $m+n$。</p>
+                <strong>解</strong>：
+                <p>分母 $\\to0$ $\\Rightarrow$ 分子 $\\to0$：$9+3m+n=0$ ……①；洛必达：$\\lim\\limits_{x\\to3}\\dfrac{2x+m}{1}=6+m=4 \\implies m=-2$，代回①得 $n=-3$。</p>
+                <p>故 $m+n=\\boxed{-5}$。（因式分解验证：$x^2-2x-3=(x-3)(x+1)$，$\\lim\\limits_{x\\to3}(x+1)=4$ ✓）</p>
+            `)}
+            ${exampleBox('强化练习题 2（一个参数 + 顺带求极限值）', `
+                <p>$\\lim\\limits_{x\\to-2}\\dfrac{x^2+kx-6}{x+2}=p$，求 $k$。</p>
+                <strong>解</strong>：
+                <p>分母 $\\to0$ $\\Rightarrow$ 分子 $\\to0$：$4-2k-6=0 \\implies \\boxed{k=-1}$。</p>
+                <p>顺带求 $p$：$x^2-x-6=(x+2)(x-3)$，$p=\\lim\\limits_{x\\to-2}(x-3)=-5$。</p>
+            `)}
+            ${exampleBox('强化练习题 3（分子分母各一参 · 对数版）', `
+                <p>已知 $\\lim\\limits_{x\\to0}\\dfrac{\\ln(1+ax)}{x+b}=5$，求 $a$、$b$。</p>
+                <strong>解</strong>：
+                <p>分母极限 $=b$：若 $b\\neq0$，分子 $\\to0$ 而分母极限非零，整个极限应为 $0\\neq5$，矛盾 $\\implies$ <strong>方程①：$b=0$</strong>。</p>
+                <p>$\\dfrac{0}{0}$ 型洛必达：$\\lim\\limits_{x\\to0}\\dfrac{a/(1+ax)}{1}=a=5$。故 $\\boxed{a=5,\\;b=0}$。</p>
+            `)}
+            ${exampleBox('强化练习题 4（三角分母 · 含取舍判断）', `
+                <p>已知 $\\lim\\limits_{x\\to2}\\dfrac{x^2+a-4}{\\sin(x+b)}=4$，求 $a$、$b$。</p>
+                <strong>解</strong>：
+                <p>$\\dfrac{0}{0}$ 型要求：分子 $4+a-4=a=0$（方程①），分母 $\\sin(2+b)=0 \\implies 2+b=k\\pi$。</p>
+                <p>洛必达：$\\lim\\limits_{x\\to2}\\dfrac{2x}{\\cos(x+b)}=\\dfrac{4}{\\cos(2+b)}=4 \\implies \\cos(2+b)=1 \\implies 2+b=2k\\pi$（$k$ 为奇数时 $\\cos=-1$，极限为 $-4$，不符）。</p>
+                <p>取最简：$\\boxed{b=-2}$，故 $a=0,\\;b=-2$。</p>
+            `)}
 
             ${groupTitle('fa-wind', '3.6 无穷小与无穷大', 'var(--color-green)')}
             <div class="formula-grid">
@@ -8281,8 +8494,111 @@ function buildFunctionDetail() {
         </div>
     `;
 
+    // === Tab 6: 见识题型 ===
+    const insightBody = `
+        <div class="detail-section" id="fn-insight">
+            <div class="section-title" style="color:${C};"><i class="fa-solid fa-binoculars"></i> 见识题型 · 拓展视野的考法</div>
+            <div class="section-desc">主干考点之外的冷门题型——真题考过、教辅高频标注。目的不是刷题量，而是「见过、不慌、会套路」。</div>
+
+            ${groupTitle('fa-scale-balanced', '考点 23：含有极限的方程', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#FF3B30;">解题方法 · 固定三步</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    见到含有极限的方程，核心洞察：<strong>「$\\lim\\limits_{x\\to x_0} f(x)$ 存在」$\\Rightarrow$ 它是一个确定的常数</strong>，设为 $A$。方程里那个「$\\lim f(x)$」其实就是 $A$——两边同时取极限，就变成关于 $A$ 的一元方程。
+                </div>
+            </div>
+            <div class="formula-grid">
+                <div class="formula-card" style="--card-accent:#0A84FF;">
+                    <span class="formula-num">第一步</span>
+                    <div class="formula-label" style="color:#0A84FF;">设常数</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$\\lim_{x\\to x_0} f(x) = A$$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">极限存在 $\\Rightarrow$ 确定常数</div>
+                </div>
+                <div class="formula-card" style="--card-accent:${C};">
+                    <span class="formula-num">第二步</span>
+                    <div class="formula-label" style="color:var(--accent-yellow-text);">两边取极限</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$\\text{等式两边同时取极限}$$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">$f(x)$ 的极限就是 $A$，其余项照常求极限</div>
+                </div>
+                <div class="formula-card" style="--card-accent:var(--color-green);">
+                    <span class="formula-num">第三步</span>
+                    <div class="formula-label" style="color:var(--color-green);">解 A 并代回</div>
+                    <div class="formula-block" style="border:none;background:none;padding:0;">$$\\text{解出 } A \\;\\Rightarrow\\; \\text{代入原方程求 } f(x)$$</div>
+                    <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">得到关于 $A$ 的一元方程</div>
+                </div>
+            </div>
+            ${exampleBox('例 73 · 含有极限的方程（求 f(x)）', `
+                <p>设 $\\lim\\limits_{x\\to 0} f(x)$ 存在，且 $f(x)=\\dfrac{\\sin 2x}{x}+3\\lim\\limits_{x\\to 0} f(x)$，求 $f(x)$。</p>
+                <strong>解</strong>：
+                <p><strong>第一步</strong>：令 $A=\\lim\\limits_{x\\to 0} f(x)$；<strong>第二步</strong>：等式两边同时取极限（$x\\to 0$）：</p>
+                <p>$$A=\\lim_{x\\to 0}\\frac{\\sin 2x}{x}+3A=2+3A \\implies A=-1$$</p>
+                <p>其中 $\\lim\\limits_{x\\to 0}\\dfrac{\\sin 2x}{x}=\\lim\\limits_{x\\to 0}\\dfrac{2x}{x}=2$（等价无穷小 $\\sin 2x\\sim 2x$）。</p>
+                <p><strong>第三步</strong>：把 $A=-1$ 代回原方程：</p>
+                <p>$$f(x)=\\dfrac{\\sin 2x}{x}-3$$</p>
+            `)}
+            ${exampleBox('例 74（2024 年试题）· 含 arctan 综合（求 f(1)）', `
+                <p>（2024 年试题）设 $\\lim\\limits_{x\\to 0} f(x)$ 存在，且 $f(x)=\\dfrac{1}{x}\\arctan x+x\\arctan\\dfrac{1}{x}-\\lim\\limits_{x\\to 0} f(x)$，求 $f(1)$。</p>
+                <strong>解</strong>：
+                <p><strong>第一步</strong>：令 $A=\\lim\\limits_{x\\to 0} f(x)$；<strong>第二步</strong>：两边同时取极限（$x\\to 0$）：</p>
+                <p>$$A=\\lim_{x\\to 0}\\frac{\\arctan x}{x}+\\lim_{x\\to 0}\\,x\\arctan\\frac{1}{x}-A$$</p>
+                <p>第一项：$\\arctan x\\sim x$（等价无穷小）$\\implies \\lim\\limits_{x\\to 0}\\dfrac{\\arctan x}{x}=1$；</p>
+                <p>第二项：$x\\to 0$ 是无穷小，$\\left|\\arctan\\dfrac{1}{x}\\right|\\lt\\dfrac{\\pi}{2}$ 有界 $\\implies \\lim\\limits_{x\\to 0}\\,x\\arctan\\dfrac{1}{x}=0$（<strong>无穷小 × 有界 = 无穷小</strong>，见 3.6 核心性质）。</p>
+                <p>所以 $A=1+0-A \\implies A=\\dfrac{1}{2}$。</p>
+                <p><strong>第三步</strong>：代回得 $f(x)=\\dfrac{\\arctan x}{x}+x\\arctan\\dfrac{1}{x}-\\dfrac{1}{2}$，代入 $x=1$：</p>
+                <p>$$f(1)=\\arctan 1+1\\cdot\\arctan 1-\\dfrac{1}{2}=\\dfrac{\\pi}{4}+\\dfrac{\\pi}{4}-\\dfrac{1}{2}=\\dfrac{\\pi-1}{2}$$</p>
+            `)}
+            ${memoryBox('要点 · 最容易懵的地方', '方程里出现的「$\\lim\\limits_{x\\to 0} f(x)$」不是未知函数，是<strong>待定常数</strong>：设 $A$ → 两边取极限 → 解一元方程 → 代回。另外例 74 第二项是「无穷小 × 有界」——见到 $\\arctan\\dfrac{1}{x}$、$\\sin\\dfrac{1}{x}$ 且 $x\\to 0$，先想有界！')}
+
+            ${groupTitle('fa-link', '考点 24：已知一个极限，求另一个极限', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#0A84FF;">解题方法 · 将已知的极限变形，可解出所求的极限</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    核心武器是等价无穷小「反着用」：<strong>极限存在 $\\Rightarrow$ 分子必趋于 0 $\\Rightarrow$ 括号里的 $u\\to0$</strong>——这一步既是定型分析，也是 $\\ln(1+u)\\sim u$、$\\sqrt{1+u}-1\\sim\\dfrac{u}{2}$ 能用的合法性来源。化简后已知极限就变成含所求极限的方程。
+                </div>
+            </div>
+            ${exampleBox('例 75 · 根号型（求 lim f(x)）', `
+                <p>已知 $f(x)$ 满足 $\\lim\\limits_{x\\to 0}\\dfrac{\\sqrt{1+f(x)\\sin 2x}-1}{e^{3x}-1}=2$，求 $\\lim\\limits_{x\\to 0} f(x)$。</p>
+                <strong>解</strong>：
+                <p><strong>先定型</strong>：分母 $e^{3x}-1\\to0$，极限存在为有限数 $\\Rightarrow$ 分子 $\\to0$ $\\Rightarrow$ $1+f(x)\\sin 2x\\to1$，即 $u=f(x)\\sin 2x\\to0$（等价无穷小可用）。</p>
+                <p>用 $\\sqrt{1+u}-1\\sim\\dfrac{u}{2}$ 与 $e^{3x}-1\\sim 3x$：</p>
+                <p>$$\\lim_{x\\to 0}\\frac{\\sqrt{1+f(x)\\sin 2x}-1}{e^{3x}-1}=\\lim_{x\\to 0}\\frac{\\dfrac{1}{2}f(x)\\sin 2x}{3x}=\\lim_{x\\to 0}\\frac{f(x)\\cdot 2x}{6x}=\\frac{1}{3}\\lim_{x\\to 0}f(x)=2$$</p>
+                <p>所以 $\\boxed{\\lim\\limits_{x\\to 0} f(x)=6}$。</p>
+            `)}
+            ${exampleBox('例 76（2021 年试题）· 对数型（求 lim f(x)/x²）', `
+                <p>（2021 年试题）已知极限 $\\lim\\limits_{x\\to 0}\\dfrac{\\ln\\left[1+x+\\dfrac{f(x)}{x}\\right]}{x}=3$，求 $\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x^2}$。</p>
+                <strong>解</strong>：
+                <p><strong>先定型</strong>：分母 $x\\to0$，极限存在 $\\Rightarrow$ 分子 $\\to0$ $\\Rightarrow$ $1+x+\\dfrac{f(x)}{x}\\to1$，即 $u=x+\\dfrac{f(x)}{x}\\to0$，可用 $\\ln(1+u)\\sim u$。</p>
+                <p>$$3=\\lim_{x\\to 0}\\frac{\\ln\\left[1+x+\\dfrac{f(x)}{x}\\right]}{x}=\\lim_{x\\to 0}\\frac{x+\\dfrac{f(x)}{x}}{x}=\\lim_{x\\to 0}\\left(1+\\frac{f(x)}{x^2}\\right)=1+\\lim_{x\\to 0}\\frac{f(x)}{x^2}$$</p>
+                <p>所以 $\\boxed{\\lim\\limits_{x\\to 0}\\dfrac{f(x)}{x^2}=2}$。</p>
+            `)}
+            ${exampleBox('例 77 · 选择题（易错：加减不能直接等价）', `
+                <p>若 $\\lim\\limits_{x\\to 0}\\dfrac{\\sin 6x+xf(x)}{x^3}=0$，则 $\\lim\\limits_{x\\to 0}\\dfrac{6+f(x)}{x^2}=$（　　）</p>
+                <p>A. $0$　　B. $6$　　C. $36$　　D. $\\infty$</p>
+                <strong>解</strong>：
+                <p><span style="color:#FF3B30;">⚠ 易错点：$\\sin 6x$ 出现在<strong>加法</strong>里，不能直接用 $\\sin 6x\\sim 6x$ 替换——等价无穷小「乘除可用、加减慎用」！</span></p>
+                <p>正确姿势「<strong>加项减项</strong>」：把 $\\sin 6x$ 拆成 $(\\sin 6x-6x)+6x$：</p>
+                <p>$$\\lim_{x\\to 0}\\frac{\\sin 6x+xf(x)}{x^3}=\\lim_{x\\to 0}\\frac{\\sin 6x-6x}{x^3}+\\lim_{x\\to 0}\\frac{6+f(x)}{x^2}=0$$</p>
+                <p>由 $\\sin t-t\\sim-\\dfrac{t^3}{6}$：$\\sin 6x-6x\\sim-\\dfrac{(6x)^3}{6}=-36x^3$，第一项极限 $=-36$。</p>
+                <p>所以 $\\lim\\limits_{x\\to 0}\\dfrac{6+f(x)}{x^2}=0-(-36)=36$，选 $\\boxed{C}$。</p>
+            `)}
+            ${exampleBox('例 78（2023 年试题）· 抽象函数 f(kx)：优先换元', `
+                <p>（2023 年试题）若 $\\lim\\limits_{x\\to 0}\\dfrac{f\\left(\\dfrac{x}{2}\\right)}{x}=\\dfrac{1}{2}$，则 $\\lim\\limits_{x\\to 0}\\dfrac{x}{f\\left(\\dfrac{x}{3}\\right)}=$（　　）</p>
+                <p>A. $\\dfrac{1}{2}$　　B. $2$　　C. $3$　　D. $\\dfrac{1}{3}$</p>
+                <strong>解</strong>：
+                <p><span style="color:#0A84FF;">🔑 特征识别：括号里是 $f(kx)$ 型——<strong>优先换元，统一成 $\\dfrac{f(u)}{u}$ 的形式</strong>。</span></p>
+                <p><strong>第一步 · 处理已知</strong>：令 $u=\\dfrac{x}{2}$（则 $x=2u$，$x\\to0 \\Rightarrow u\\to0$）：</p>
+                <p>$$\\lim_{u\\to 0}\\frac{f(u)}{2u}=\\frac{1}{2} \\implies \\lim\\limits_{u\\to 0}\\frac{f(u)}{u}=1$$</p>
+                <p><strong>第二步 · 处理所求</strong>：令 $v=\\dfrac{x}{3}$（则 $x=3v$，$v\\to0$）：</p>
+                <p>$$\\lim_{v\\to 0}\\frac{x}{f\\left(\\dfrac{x}{3}\\right)}=\\lim_{v\\to 0}\\frac{3v}{f(v)}=3\\cdot\\lim_{v\\to 0}\\frac{v}{f(v)}=3\\times 1=3$$</p>
+                <p>（$\\lim\\limits_{v\\to 0}\\dfrac{f(v)}{v}=1\\neq 0$，取倒数得 $\\lim\\limits_{v\\to 0}\\dfrac{v}{f(v)}=1$。）</p>
+                <p>所以选 $\\boxed{C}$。</p>
+            `)}
+            ${memoryBox('考点 24 小结', '「已知一个极限求另一个」：① 极限存在 ⇒ 分子→0 ⇒ 括号内 u→0（等价无穷小反着用的合法性来源）；② 用 ln(1+u)~u、√(1+u)−1~u/2 把已知极限化成含所求极限的方程；③ 目标藏在加法里时（如 sin6x+xf(x)），先加项减项再拆极限——加减别硬替换等价；④ 抽象函数括号里是 kx 时（f(x/2)、f(x/3)），优先换元，统一成 f(u)/u 的形式再运算。')}
+        </div>
+    `;
+
     // mapBody contains the knowledge-map wrapper; close it before appending sibling tab sections.
-    return { title: '第一章 · 函数·极限·连续', color: C, tabs, body: `${mapBody}</div>` + limit1Body + limit2Body + contBody + summaryBody };
+    return { title: '第一章 · 函数·极限·连续', color: C, tabs, body: `${mapBody}</div>` + limit1Body + limit2Body + contBody + summaryBody + insightBody };
 }
 
 // ---------- 总览详情 ----------
