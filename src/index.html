@@ -2957,6 +2957,9 @@ function buildIntegralDetail() {
                 ${formulaCard('(1)', '常数', '$$\\int k \\, dx = kx + c$$', '导数 (kx)\'=k 的逆运算', '#FFD60A')}
                 ${formulaCard('(2)', '幂函数', '$$\\int x^\\mu \\, dx = \\frac{x^{\\mu+1}}{\\mu+1} + c$$', '导数 (x^(μ+1)/(μ+1))\'=x^μ 的逆运算。注意 μ≠-1', '#FFD60A')}
                 ${formulaCard('(3)', '倒数', '$$\\int \\frac{dx}{x} = \\ln|x| + c$$', 'μ=-1 的特例，结果是对数。绝对值不能丢', '#FFD60A')}
+                ${formulaCard('', '根号分之一', '$$\\int \\frac{1}{\\sqrt{x}} \\, dx = 2\\sqrt{x} + c$$', '幂函数 μ=-½ 的特例：½+1=½，系数取倒数得 2。别和 ∫(1/x)dx=ln|x|+C 混', '#FFD60A')}
+                ${formulaCard('', '平方分之一', '$$\\int \\frac{1}{x^2} \\, dx = -\\frac{1}{x} + c$$', '幂函数 μ=-2 的特例：结果是 -1/x。与 ∫(1/x)dx=ln|x|+C 一负一对，别混', '#FFD60A')}
+                ${formulaCard('', '根号 x', '$$\\int \\sqrt{x} \\, dx = \\frac{2}{3}x^{\\frac{3}{2}} + c$$', '幂函数 μ=½ 的特例：½+1=3/2，系数取倒数得 2/3', '#FFD60A')}
             </div>
 
             ${groupTitle('fa-superscript', '指数函数', '#FF9F0A')}
@@ -2971,6 +2974,8 @@ function buildIntegralDetail() {
                 ${formulaCard('(7)', '正弦→负余弦', '$$\\int \\sin x \\, dx = -\\cos x + c$$', '导数 (-cos x)\'=sin x 的逆运算', 'var(--color-green)')}
                 ${formulaCard('(8)', '正割平方', '$$\\int \\frac{1}{\\cos^2 x} \\, dx = \\int \\sec^2 x \\, dx = \\tan x + c$$', '导数 (tan x)\'=sec²x 的逆运算。高频', 'var(--color-green)')}
                 ${formulaCard('(9)', '余割平方', '$$\\int \\frac{1}{\\sin^2 x} \\, dx = \\int \\csc^2 x \\, dx = -\\cot x + c$$', '导数 (-cot x)\'=csc²x 的逆运算', 'var(--color-green)')}
+                ${formulaCard('', '正割乘正切', '$$\\int \\sec x \\tan x \\, dx = \\sec x + c$$', '导数 (sec x)\'=sec x·tan x 的逆运算。基本公式表第 11 条', 'var(--color-green)')}
+                ${formulaCard('', '余割乘余切', '$$\\int \\csc x \\cot x \\, dx = -\\csc x + c$$', '导数 (-csc x)\'=csc x·cot x 的逆运算。基本公式表第 12 条，负号别丢', 'var(--color-green)')}
             </div>
 
             ${groupTitle('fa-rotate', '反三角型', '#BF5AF2')}
@@ -3148,6 +3153,55 @@ function buildIntegralDetail() {
                 <p><strong>解</strong>：先降幂 $\\cos^2x=\\frac{1+\\cos2x}{2}$：</p>
                 <p>$$\\int\\cos^2x\\,dx=\\frac12\\int(1+\\cos2x)\\,dx=\\frac{x}{2}+\\frac{\\sin2x}{4}+C$$</p>
                 <blockquote>遇到 sin²x / cos²x 无法直接积，先降幂——三角恒等变形是积分前的第一反应。</blockquote>
+            `)}
+
+            ${groupTitle('fa-puzzle-piece', '部分分式分解（分母是多项式的有理分式专用）', 'var(--color-green)')}
+            <div class="formula-grid">
+                ${formulaCard('', '部分分式分解', '$$\\frac{1}{(x-a)(x-b)}=\\frac{A}{x-a}+\\frac{B}{x-b}\\ \\Rightarrow\\ \\text{通分比系数，或代特殊值求 } A,B$$', '分母是多项式的有理分式专用四步：① 分解因式 ② 设部分分式 ③ 定系数（代根最快）④ 逐项积分（套 ln / arctan）', 'var(--color-green)')}
+            </div>
+            <div class="text-note"><strong>什么时候用</strong>：被积函数是「多项式 ÷ 多项式」的有理分式。分母能分解 → 拆成部分分式；判别式 < 0 分解不了 → 配方套 arctan / arcsin；假分式（分子次数 ≥ 分母）先长除化成真分式再拆。</div>
+
+            ${exampleBox('例题 · 部分分式 例13（分母两不同一次因式）', `
+                <p>求 $\\displaystyle\\int \\frac{1}{x^2-x-2}\\,dx$。</p>
+                <p><strong>解</strong>：四步走——</p>
+                <p>① 分解：$x^2-x-2=(x-1)(x+2)$；</p>
+                <p>② 设：$\\dfrac{1}{(x-1)(x+2)}=\\dfrac{A}{x-1}+\\dfrac{B}{x+2}$，通分得 $1=A(x+2)+B(x-1)$；</p>
+                <p>③ 代根定系数：$x=1\\Rightarrow A=\\tfrac13$，$x=-2\\Rightarrow B=-\\tfrac13$（代根时另一项自动消失，最快）；</p>
+                <p>④ 逐项积分：</p>
+                <p>$$\\int \\frac{dx}{x^2-x-2}=\\frac13\\int\\Big(\\frac{1}{x-1}-\\frac{1}{x+2}\\Big)dx=\\frac13\\ln\\left|\\frac{x-1}{x+2}\\right|+C$$</p>
+            `)}
+
+            ${exampleBox('例题 · 部分分式 例14（一次因式带系数，⚠️联动凑微分）', `
+                <p>求 $\\displaystyle\\int \\frac{1}{(2x+1)(x+3)}\\,dx$。</p>
+                <p><strong>解</strong>：设 $\\dfrac{1}{(2x+1)(x+3)}=\\dfrac{A}{2x+1}+\\dfrac{B}{x+3}$，通分：$1=A(x+3)+B(2x+1)$。</p>
+                <p>代根：$x=-3\\Rightarrow B=-\\tfrac15$；$x=-\\tfrac12\\Rightarrow A=\\tfrac25$。</p>
+                <p>逐项积分（$\\int\\frac{dx}{2x+1}$ 要凑微分除以 2）：</p>
+                <p>$$\\int \\frac{dx}{(2x+1)(x+3)}=\\frac25\\int\\frac{dx}{2x+1}-\\frac15\\int\\frac{dx}{x+3}=\\frac15\\ln|2x+1|-\\frac15\\ln|x+3|+C$$</p>
+                <blockquote>易错点：$\\frac25\\cdot\\frac12=\\frac15$——一次因式带系数时，积分系数最容易在这里丢半截。</blockquote>
+            `)}
+
+            ${exampleBox('例题 · 部分分式 变式①（分子含 x，同为二次分母）', `
+                <p>求 $\\displaystyle\\int \\frac{x+1}{x^2-3x+2}\\,dx$。（与专升本解答题难度相当）</p>
+                <p><strong>解</strong>：$x^2-3x+2=(x-1)(x-2)$；设 $\\dfrac{x+1}{(x-1)(x-2)}=\\dfrac{A}{x-1}+\\dfrac{B}{x-2}$，通分：$x+1=A(x-2)+B(x-1)$。</p>
+                <p>代根：$x=1\\Rightarrow A=-2$；$x=2\\Rightarrow B=3$。</p>
+                <p>$$\\int \\frac{x+1}{x^2-3x+2}\\,dx=-2\\ln|x-1|+3\\ln|x-2|+C$$</p>
+                <blockquote>分子是一次式照样拆，系数可以为负——通分后比系数或代根都可以。</blockquote>
+            `)}
+
+            ${exampleBox('例题 · 部分分式 变式②（判别式<0，配方 → arctan）', `
+                <p>求 $\\displaystyle\\int \\frac{1}{x^2+2x+5}\\,dx$。（与专升本解答题难度相当）</p>
+                <p><strong>解</strong>：$\\Delta=4-20<0$，分母分解不了，改配方：$x^2+2x+5=(x+1)^2+2^2$。</p>
+                <p>令 $u=x+1$，套 $\\displaystyle\\int\\frac{du}{u^2+a^2}=\\frac1a\\arctan\\frac{u}{a}+C$：</p>
+                <p>$$\\int \\frac{dx}{x^2+2x+5}=\\int\\frac{d(x+1)}{(x+1)^2+2^2}=\\frac12\\arctan\\frac{x+1}{2}+C$$</p>
+                <blockquote>联动基本公式 (10)「反正切型」：分母 $a^2+u^2$ 直接出 arctan，系数 $1/a$ 别丢。</blockquote>
+            `)}
+
+            ${exampleBox('例题 · 部分分式 变式③（重因式 (x−1)²，要设两层）', `
+                <p>求 $\\displaystyle\\int \\frac{3x+1}{(x-1)^2}\\,dx$。（与专升本解答题难度相当）</p>
+                <p><strong>解</strong>：分母是 $(x-1)^2$，要设两层：$\\dfrac{3x+1}{(x-1)^2}=\\dfrac{A}{x-1}+\\dfrac{B}{(x-1)^2}$，通分：$3x+1=A(x-1)+B$。</p>
+                <p>代 $x=1\\Rightarrow B=4$；比 $x$ 的系数 $\\Rightarrow A=3$。</p>
+                <p>$$\\int \\frac{3x+1}{(x-1)^2}\\,dx=3\\int\\frac{dx}{x-1}+4\\int(x-1)^{-2}dx=3\\ln|x-1|-\\frac{4}{x-1}+C$$</p>
+                <blockquote>$(x-1)^{-2}$ 积分得 $-(x-1)^{-1}$：负号来自幂函数公式（指数 −2+1=−1，系数取倒数）。</blockquote>
             `)}
 
             ${groupTitle('fa-arrows-split-up-and-left', '4.3 分部积分法（⭐核心）', '#0A84FF')}
