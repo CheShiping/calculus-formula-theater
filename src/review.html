@@ -656,6 +656,8 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            /* 溢出时退化为顶部对齐：flex center 在内容超高时会把顶部推出滚动可达区，导致窗口最大化后侧栏滚不动 */
+            justify-content: safe center;
         }
         .hero {
             margin-bottom: 1.75rem;
@@ -700,22 +702,6 @@
             font-size: 0.68rem;
             font-weight: 500;
         }
-        .filter-bar {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.5rem;
-            padding: 0;
-            margin-bottom: 1.75rem;
-        }
-        .chip {
-            width: 100%;
-            justify-content: space-between;
-            padding: 0.4rem 0.7rem;
-            border-radius: 8px;
-            background: var(--bg-elevated);
-            font-size: 0.78rem;
-        }
-        .chip:first-child { grid-column: span 2; }
         .chip.active { color: var(--text-primary); }
         .chip.active .count { color: var(--color-green); }
         .side-progress-heading {
@@ -888,6 +874,23 @@
                 box-shadow: 0 6px 24px rgba(0,0,0,0.45);
             }
             .card-grid { grid-template-columns: 1fr; }
+            /* 选择章节：移动端两列网格全面平铺（桌面端 ≥641px 为单行横向滚动 tab，勿混用） */
+            .filter-bar {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.5rem;
+                padding: 0;
+                margin-bottom: 1.75rem;
+            }
+            .chip {
+                width: 100%;
+                justify-content: space-between;
+                padding: 0.4rem 0.7rem;
+                border-radius: 8px;
+                background: var(--bg-elevated);
+                font-size: 0.78rem;
+            }
+            .chip:first-child { grid-column: span 2; }
             .flip-card { height: 220px; }
             .toolbar { flex-direction: column; align-items: stretch; }
             .toolbar .actions { justify-content: center; }
@@ -1389,6 +1392,18 @@
         if (mbar) centerActiveChip(mbar, mbar.querySelector('.mchip.active'));
     }
 
+    // ========== 桌面端选择章节栏：滚轮横向滚动 ==========
+    // 桌面端 filter-bar 为单行横向溢出且滚动条隐藏，鼠标垂直滚轮默认无法横滚（窗口最大化时章节多、必须横滚才能看全），这里把滚轮增量转为 scrollLeft
+    function initFilterBarWheelScroll() {
+        const bar = document.getElementById('filterBar');
+        if (!bar) return;
+        bar.addEventListener('wheel', (e) => {
+            if (bar.scrollWidth <= bar.clientWidth + 1) return; // 无横向溢出时不拦截，保持默认
+            e.preventDefault();
+            bar.scrollLeft += Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+        }, { passive: false });
+    }
+
     // ========== 校验激活模块是否有效（数据载入前用 'all' 兜底） ==========
     function ensureActiveModuleValid() {
         const ids = ['all', ...MODULES.map(m => m.id)];
@@ -1671,6 +1686,7 @@
     initBackToTop();
     initSwipeNavigation();
     initMobileCategoryBarScroll();
+    initFilterBarWheelScroll();
 
     // 把按钮需要的全局函数挂到 window（onclick 用）
     window.toggleTheme = toggleTheme;
