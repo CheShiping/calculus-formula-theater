@@ -1,73 +1,145 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     width="1200" height="420" viewBox="0 0 1200 420"
+     width="1200" height="440" viewBox="0 0 1200 440"
      role="img" aria-labelledby="relTitle relDesc">
-  <title id="relTitle">四大模块联动关系</title>
-  <desc id="relDesc">导数是核心枢纽：导数×dx=微分，积分是导数的逆运算，三角函数贯穿三大模块。</desc>
+  <title id="relTitle">11 个模块的联动学习路径</title>
+  <desc id="relDesc">第一行一元主线：函数极限连续 → 求导 → 导数与微分 → 逆运算 → 一元积分 → 综合 → 微分方程；三角函数贯穿一元与多元。第二行升维：多元函数微分学 → 二重积分 → 无穷级数。第三行线性代数：行列式 → 矩阵 → 线性方程组。</desc>
 
   <defs>
-    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0A84FF"/>
+    <marker id="arrowInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9b9a8d"/>
     </marker>
-    <marker id="arrowYellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FFD60A"/>
+    <marker id="arrowInkSoft" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9b9a8d" fill-opacity="0.7"/>
     </marker>
-    <marker id="arrowPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#BF5AF2"/>
-    </marker>
-    <radialGradient id="coreGlow" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0%" stop-color="#30D158" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#30D158" stop-opacity="0"/>
-    </radialGradient>
   </defs>
 
-  <rect width="1200" height="420" rx="24" fill="#0F1320"/>
+  <!-- 纸张底 -->
+  <rect width="1200" height="440" rx="24" fill="#1b1a16"/>
 
-  <!-- 背景光晕 -->
-  <circle cx="600" cy="160" r="180" fill="url(#coreGlow)"/>
-
-  <!-- 左上：微分 -->
-  <g transform="translate(60 130)">
-    <rect width="200" height="80" rx="14" fill="#FFD60A" fill-opacity="0.08" stroke="#FFD60A" stroke-opacity="0.45" stroke-width="1.5"/>
-    <text x="100" y="34" text-anchor="middle" font-family="-apple-system, 'PingFang SC', sans-serif" font-size="17" font-weight="700" fill="#FFD60A">微分</text>
-    <text x="100" y="58" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" fill="#9CA3AF">dy = f′(x)dx</text>
+  <!-- ===== 第一行：一元主线 ===== -->
+  <!-- 卡 1：函数·极限·连续 -->
+  <g>
+    <rect x="56" y="56" width="190" height="72" rx="12" fill="#232119" stroke="#ecebe2" stroke-opacity="0.10"/>
+    <rect x="56" y="66" width="3" height="52" rx="1.5" fill="#8fb0c4"/>
+    <text x="74" y="86" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#ecebe2">函数·极限·连续</text>
+    <text x="74" y="108" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">极限工具 · 地基</text>
   </g>
 
-  <!-- 右上：积分 -->
-  <g transform="translate(940 130)">
-    <rect width="200" height="80" rx="14" fill="#BF5AF2" fill-opacity="0.08" stroke="#BF5AF2" stroke-opacity="0.45" stroke-width="1.5"/>
-    <text x="100" y="34" text-anchor="middle" font-family="-apple-system, 'PingFang SC', sans-serif" font-size="17" font-weight="700" fill="#BF5AF2">积分</text>
-    <text x="100" y="58" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" fill="#9CA3AF">∫f(x)dx = F(x)+C</text>
+  <!-- 卡 2：导数与微分 -->
+  <g>
+    <rect x="300" y="56" width="190" height="72" rx="12" fill="#232119" stroke="#ecebe2" stroke-opacity="0.10"/>
+    <rect x="300" y="66" width="3" height="52" rx="1.5" fill="#b3a4cc"/>
+    <text x="318" y="86" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#ecebe2">导数与微分</text>
+    <text x="318" y="108" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">f′(x) · 核心枢纽</text>
   </g>
 
-  <!-- 中心：导数（核心枢纽，居中偏上）-->
-  <g transform="translate(500 80)">
-    <circle cx="100" cy="80" r="92" fill="#30D158" fill-opacity="0.08" stroke="#30D158" stroke-width="2.5"/>
-    <circle cx="100" cy="80" r="76" fill="#30D158" fill-opacity="0.12" stroke="#30D158" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="4 3"/>
-    <text x="100" y="62" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" font-weight="700" fill="#30D158" letter-spacing="2">CORE</text>
-    <text x="100" y="90" text-anchor="middle" font-family="-apple-system, 'PingFang SC', sans-serif" font-size="26" font-weight="800" fill="#FFFFFF">导数</text>
-    <text x="100" y="112" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" fill="#9CA3AF">f′(x)</text>
+  <!-- 卡 3：一元函数积分学 -->
+  <g>
+    <rect x="544" y="56" width="190" height="72" rx="12" fill="#232119" stroke="#ecebe2" stroke-opacity="0.10"/>
+    <rect x="544" y="66" width="3" height="52" rx="1.5" fill="#6fae87"/>
+    <text x="562" y="86" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#ecebe2">一元函数积分学</text>
+    <text x="562" y="108" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">∫f(x)dx · 导数的逆</text>
   </g>
 
-  <!-- 底部：三角函数（贯穿）-->
-  <g transform="translate(420 300)">
-    <rect width="360" height="80" rx="14" fill="#FF453A" fill-opacity="0.08" stroke="#FF453A" stroke-opacity="0.45" stroke-width="1.5"/>
-    <text x="180" y="34" text-anchor="middle" font-family="-apple-system, 'PingFang SC', sans-serif" font-size="17" font-weight="700" fill="#FF453A">三角函数</text>
-    <text x="180" y="58" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" fill="#9CA3AF">sin²x + cos²x = 1 · 贯穿三大模块</text>
+  <!-- 卡 4：微分方程 -->
+  <g>
+    <rect x="788" y="56" width="190" height="72" rx="12" fill="#232119" stroke="#ecebe2" stroke-opacity="0.10"/>
+    <rect x="788" y="66" width="3" height="52" rx="1.5" fill="#c9ab74"/>
+    <text x="806" y="86" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#ecebe2">微分方程</text>
+    <text x="806" y="108" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">y′=f(x,y) · 综合</text>
   </g>
 
-  <!-- 箭头：导数 → 微分（×dx）-->
-  <path d="M 500 160 Q 350 150 260 170" fill="none" stroke="#FFD60A" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrowYellow)"/>
-  <text x="360" y="140" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#FFD60A">× dx</text>
+  <!-- 行内箭头与标签 -->
+  <line x1="250" y1="92" x2="294" y2="92" stroke="#9b9a8d" stroke-opacity="0.55" stroke-width="1.5" marker-end="url(#arrowInk)"/>
+  <text x="273" y="84" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">求导</text>
 
-  <!-- 箭头：导数 → 积分（逆运算）-->
-  <path d="M 700 160 Q 850 150 940 170" fill="none" stroke="#BF5AF2" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrowPurple)"/>
-  <text x="840" y="140" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" font-weight="600" fill="#BF5AF2">逆运算</text>
+  <line x1="494" y1="92" x2="538" y2="92" stroke="#9b9a8d" stroke-opacity="0.55" stroke-width="1.5" marker-end="url(#arrowInk)"/>
+  <text x="517" y="84" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">逆运算</text>
 
-  <!-- 箭头：导数 → 三角函数（贯穿）-->
-  <path d="M 600 260 Q 600 285 600 300" fill="none" stroke="#FF453A" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrowBlue)" opacity="0.6"/>
-  <text x="620" y="285" font-family="ui-monospace, monospace" font-size="12" font-weight="600" fill="#FF453A" opacity="0.8">贯穿</text>
+  <line x1="738" y1="92" x2="782" y2="92" stroke="#9b9a8d" stroke-opacity="0.55" stroke-width="1.5" marker-end="url(#arrowInk)"/>
+  <text x="761" y="84" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">综合应用</text>
 
-  <!-- 角落标注 -->
-  <text x="64" y="400" font-family="ui-monospace, monospace" font-size="12" fill="#6B7280">导数是核心枢纽 · 记住一个 = 推出一串</text>
-  <text x="1136" y="400" text-anchor="end" font-family="ui-monospace, monospace" font-size="12" fill="#6B7280">CORE → DERIVATIVE</text>
+  <!-- 三角函数：贯穿一元与多元 -->
+  <g>
+    <rect x="1016" y="48" width="128" height="220" rx="12" fill="#232119" stroke="#cd9b94" stroke-opacity="0.35"/>
+    <rect x="1016" y="58" width="3" height="200" rx="1.5" fill="#cd9b94"/>
+    <text x="1034" y="92" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#cd9b94">三角函数</text>
+    <text x="1034" y="120" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#ecebe2" fill-opacity="0.75">sin²x+cos²x=1</text>
+    <text x="1034" y="146" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11.5" fill="#9b9a8d">关系式贯穿</text>
+    <text x="1034" y="164" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11.5" fill="#9b9a8d">一元与多元，</text>
+    <text x="1034" y="182" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11.5" fill="#9b9a8d">是网络不是清单</text>
+    <text x="1034" y="222" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10" fill="#cd9b94">41 条 · 关系网络</text>
+  </g>
+  <line x1="982" y1="92" x2="1012" y2="92" stroke="#cd9b94" stroke-opacity="0.5" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <line x1="900" y1="222" x2="1012" y2="222" stroke="#cd9b94" stroke-opacity="0.5" stroke-width="1.5" stroke-dasharray="5 4"/>
+
+  <!-- 换行箭头：微分方程 → 多元函数微分学 -->
+  <path d="M 883 128 L 883 157 L 176 157 L 176 180" fill="none" stroke="#9b9a8d" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrowInkSoft)"/>
+  <text x="529" y="150" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">升维 · 一元 → 多元</text>
+
+  <!-- ===== 第二行：多元与无穷 ===== -->
+  <!-- 卡 5：多元函数微分学 -->
+  <g>
+    <rect x="56" y="186" width="240" height="72" rx="12" fill="#232119" stroke="#ecebe2" stroke-opacity="0.10"/>
+    <rect x="56" y="196" width="3" height="52" rx="1.5" fill="#7fb8a8"/>
+    <text x="74" y="216" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#ecebe2">多元函数微分学</text>
+    <text x="74" y="238" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">偏导 · 全微分 · 链式</text>
+  </g>
+
+  <!-- 卡 6：二重积分 -->
+  <g>
+    <rect x="356" y="186" width="240" height="72" rx="12" fill="#232119" stroke="#ecebe2" stroke-opacity="0.10"/>
+    <rect x="356" y="196" width="3" height="52" rx="1.5" fill="#b3a4cc"/>
+    <text x="374" y="216" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#ecebe2">二重积分</text>
+    <text x="374" y="238" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">∬f dσ · 定积分的升维</text>
+  </g>
+
+  <!-- 卡 7：无穷级数 -->
+  <g>
+    <rect x="656" y="186" width="240" height="72" rx="12" fill="#232119" stroke="#ecebe2" stroke-opacity="0.10"/>
+    <rect x="656" y="196" width="3" height="52" rx="1.5" fill="#E91E63"/>
+    <text x="674" y="216" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#ecebe2">无穷级数</text>
+    <text x="674" y="238" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">Σuₙ · 判敛求和 · 幂级数</text>
+  </g>
+
+  <line x1="300" y1="222" x2="348" y2="222" stroke="#9b9a8d" stroke-opacity="0.55" stroke-width="1.5" marker-end="url(#arrowInk)"/>
+  <text x="326" y="214" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">继续升维</text>
+
+  <line x1="600" y1="222" x2="648" y2="222" stroke="#9b9a8d" stroke-opacity="0.55" stroke-width="1.5" marker-end="url(#arrowInk)"/>
+  <text x="626" y="214" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">有限到无限</text>
+
+  <!-- 换行箭头：无穷级数 → 行列式 -->
+  <path d="M 776 258 L 776 286 L 176 286 L 176 308" fill="none" stroke="#9b9a8d" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrowInkSoft)"/>
+  <text x="476" y="279" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">并列 · 线性代数</text>
+
+  <!-- ===== 第三行：线性代数 ===== -->
+  <!-- 卡 8：行列式 -->
+  <g>
+    <rect x="56" y="314" width="240" height="72" rx="12" fill="#232119" stroke="#ecebe2" stroke-opacity="0.10"/>
+    <rect x="56" y="324" width="3" height="52" rx="1.5" fill="#759ba1"/>
+    <text x="74" y="344" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#ecebe2">行列式</text>
+    <text x="74" y="366" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">|A| · 线代判据</text>
+  </g>
+
+  <!-- 卡 9：矩阵 -->
+  <g>
+    <rect x="356" y="314" width="240" height="72" rx="12" fill="#232119" stroke="#ecebe2" stroke-opacity="0.10"/>
+    <rect x="356" y="324" width="3" height="52" rx="1.5" fill="#8b98ba"/>
+    <text x="374" y="344" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#ecebe2">矩阵</text>
+    <text x="374" y="366" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">A⁻¹ · 初等变换 · 秩</text>
+  </g>
+
+  <!-- 卡 10：线性方程组 -->
+  <g>
+    <rect x="656" y="314" width="240" height="72" rx="12" fill="#232119" stroke="#ecebe2" stroke-opacity="0.10"/>
+    <rect x="656" y="324" width="3" height="52" rx="1.5" fill="#9b8bb4"/>
+    <text x="674" y="344" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700" fill="#ecebe2">线性方程组</text>
+    <text x="674" y="366" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">R(A) 与 R(A|b) 判解</text>
+  </g>
+
+  <line x1="300" y1="350" x2="348" y2="350" stroke="#9b9a8d" stroke-opacity="0.55" stroke-width="1.5" marker-end="url(#arrowInk)"/>
+  <text x="326" y="342" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">基础工具</text>
+
+  <line x1="600" y1="350" x2="648" y2="350" stroke="#9b9a8d" stroke-opacity="0.55" stroke-width="1.5" marker-end="url(#arrowInk)"/>
+  <text x="626" y="342" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#9b9a8d">求解工具</text>
 </svg>

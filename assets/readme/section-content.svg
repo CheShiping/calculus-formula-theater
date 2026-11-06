@@ -1,31 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     width="1200" height="140" viewBox="0 0 1200 140"
-     role="img" aria-labelledby="s3Title s3Desc">
-  <title id="s3Title">内容覆盖 · 五大模块</title>
-  <desc id="s3Desc">项目内容覆盖的五大模块章节标题。</desc>
+     width="1200" height="120" viewBox="0 0 1200 120"
+     role="img" aria-labelledby="scTitle scDesc">
+  <title id="scTitle">内容覆盖 · 11 章 360 条公式</title>
+  <desc id="scDesc">内容覆盖章节标题，右侧 11 个圆点对应 11 个模块色。</desc>
 
   <defs>
-    <linearGradient id="s3Bar" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#FFD60A"/>
-      <stop offset="100%" stop-color="#FFD60A" stop-opacity="0"/>
-    </linearGradient>
+    <clipPath id="scClip"><rect width="1200" height="120" rx="16"/></clipPath>
   </defs>
 
-  <rect width="1200" height="140" rx="20" fill="#0F1320"/>
-  <rect x="0" y="0" width="6" height="140" rx="3" fill="url(#s3Bar)"/>
+  <g clip-path="url(#scClip)">
+    <rect width="1200" height="120" fill="#1b1a16"/>
+    <rect x="0" y="0" width="6" height="120" fill="#c9ab74"/>
+  </g>
 
-  <text x="64" y="86" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="64" font-weight="800" fill="#FFD60A" fill-opacity="0.25">03</text>
+  <text x="48" y="86" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="56" font-weight="800" fill="#c9ab74" fill-opacity="0.22">02</text>
 
-  <text x="180" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" fill="#FFD60A" letter-spacing="3">CONTENT</text>
-  <text x="180" y="98" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="32" font-weight="800" fill="#FFFFFF">五大模块 · 层级递进</text>
+  <text x="160" y="47" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" letter-spacing="3.5" fill="#c9ab74">CONTENT COVERAGE</text>
+  <text x="160" y="85" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="27" font-weight="800" fill="#ecebe2">内容覆盖 · 11 章 360 条公式</text>
 
-  <!-- 右侧装饰：5 个模块圆点 -->
-  <g transform="translate(1010 70)">
-    <circle cx="0" cy="0" r="8" fill="#0A84FF"/>
-    <circle cx="28" cy="0" r="8" fill="#30D158"/>
-    <circle cx="56" cy="0" r="8" fill="#FFD60A"/>
-    <circle cx="84" cy="0" r="8" fill="#BF5AF2"/>
-    <circle cx="112" cy="0" r="8" fill="#FF453A"/>
-    <line x1="-20" y1="0" x2="132" y2="0" stroke="#FFFFFF" stroke-opacity="0.1" stroke-width="1"/>
+  <!-- 右侧装饰：11 个模块色圆点（时间轴母题） -->
+  <g>
+    <circle cx="1012" cy="60" r="4.5" fill="#8fb0c4"/>
+    <circle cx="1026" cy="60" r="4.5" fill="#b3a4cc"/>
+    <circle cx="1040" cy="60" r="4.5" fill="#6fae87"/>
+    <circle cx="1054" cy="60" r="4.5" fill="#cd9b94"/>
+    <circle cx="1068" cy="60" r="4.5" fill="#c9ab74"/>
+    <circle cx="1082" cy="60" r="4.5" fill="#7fb8a8"/>
+    <circle cx="1096" cy="60" r="4.5" fill="#b3a4cc"/>
+    <circle cx="1110" cy="60" r="4.5" fill="#E91E63"/>
+    <circle cx="1124" cy="60" r="4.5" fill="#759ba1"/>
+    <circle cx="1138" cy="60" r="4.5" fill="#8b98ba"/>
+    <circle cx="1152" cy="60" r="4.5" fill="#9b8bb4"/>
   </g>
 </svg>

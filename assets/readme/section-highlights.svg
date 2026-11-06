@@ -1,30 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     width="1200" height="140" viewBox="0 0 1200 140"
-     role="img" aria-labelledby="s1Title s1Desc">
-  <title id="s1Title">亮点 · 为什么不一样</title>
-  <desc id="s1Desc">项目核心亮点章节标题。</desc>
+     width="1200" height="120" viewBox="0 0 1200 120"
+     role="img" aria-labelledby="shTitle shDesc">
+  <title id="shTitle">亮点 · 三层联动记忆</title>
+  <desc id="shDesc">项目核心亮点章节标题。</desc>
 
   <defs>
-    <linearGradient id="s1Bar" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#0A84FF"/>
-      <stop offset="100%" stop-color="#0A84FF" stop-opacity="0"/>
-    </linearGradient>
+    <clipPath id="hlClip"><rect width="1200" height="120" rx="16"/></clipPath>
   </defs>
 
-  <rect width="1200" height="140" rx="20" fill="#0F1320"/>
-  <rect x="0" y="0" width="6" height="140" rx="3" fill="url(#s1Bar)"/>
+  <g clip-path="url(#hlClip)">
+    <rect width="1200" height="120" fill="#1b1a16"/>
+    <rect x="0" y="0" width="6" height="120" fill="#6fae87"/>
+  </g>
 
-  <!-- 大编号 -->
-  <text x="64" y="86" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="64" font-weight="800" fill="#0A84FF" fill-opacity="0.25">01</text>
+  <text x="48" y="86" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="56" font-weight="800" fill="#6fae87" fill-opacity="0.22">01</text>
 
-  <!-- 标题 -->
-  <text x="180" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" fill="#0A84FF" letter-spacing="3">HIGHLIGHTS</text>
-  <text x="180" y="98" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="32" font-weight="800" fill="#FFFFFF">为什么不一样</text>
+  <text x="160" y="47" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" letter-spacing="3.5" fill="#6fae87">WHY DIFFERENT</text>
+  <text x="160" y="85" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="27" font-weight="800" fill="#ecebe2">亮点 · 三层联动记忆</text>
 
-  <!-- 右侧装饰：卡片堆叠图标 -->
-  <g transform="translate(1040 50)">
-    <rect x="20" y="0" width="60" height="40" rx="6" fill="none" stroke="#0A84FF" stroke-opacity="0.3" stroke-width="1.5" transform="skewY(-8)"/>
-    <rect x="10" y="6" width="60" height="40" rx="6" fill="none" stroke="#0A84FF" stroke-opacity="0.5" stroke-width="1.5" transform="skewY(-4)"/>
-    <rect x="0" y="12" width="60" height="40" rx="6" fill="#0A84FF" fill-opacity="0.15" stroke="#0A84FF" stroke-width="1.5"/>
+  <!-- 右侧装饰：公式卡叠影（3px 左色条母题） -->
+  <g>
+    <rect x="1074" y="30" width="70" height="22" rx="5" fill="none" stroke="#6fae87" stroke-opacity="0.30" stroke-width="1.2"/>
+    <rect x="1064" y="50" width="70" height="22" rx="5" fill="none" stroke="#6fae87" stroke-opacity="0.50" stroke-width="1.2"/>
+    <rect x="1054" y="70" width="70" height="22" rx="5" fill="#6fae87" fill-opacity="0.10" stroke="#6fae87" stroke-opacity="0.75" stroke-width="1.2"/>
+    <rect x="1054" y="70" width="2.5" height="22" rx="1" fill="#6fae87"/>
   </g>
 </svg>

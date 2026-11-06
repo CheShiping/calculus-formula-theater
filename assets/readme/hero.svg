@@ -1,106 +1,109 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     width="1200" height="420" viewBox="0 0 1200 420"
+     width="1200" height="440" viewBox="0 0 1200 440"
      role="img" aria-labelledby="heroTitle heroDesc">
-  <title id="heroTitle">calculus-formula-theater · 微积分与三角函数公式体系联动记忆卡</title>
-  <desc id="heroDesc">一套用 3D 卡片剧场 + 公式详情页重新组织的微积分与三角函数公式速查系统。</desc>
+  <title id="heroTitle">calculus-formula-theater · 四川专升本高数框架梳理 · 知识路径联动记忆系统</title>
+  <desc id="heroDesc">从地基开始，每一步都有来处。11 个模块、360 条公式沿一条知识路径相互支撑，左侧是标题与数据徽章，右侧是站点首页的模块时间轴示意。</desc>
 
   <defs>
-    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0B0E14"/>
-      <stop offset="55%" stop-color="#0F1320"/>
-      <stop offset="100%" stop-color="#0B0E14"/>
-    </linearGradient>
-    <radialGradient id="glowBlue" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0%" stop-color="#0A84FF" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#0A84FF" stop-opacity="0"/>
+    <radialGradient id="glowGreen" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#6fae87" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#6fae87" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowPurple" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0%" stop-color="#BF5AF2" stop-opacity="0.24"/>
-      <stop offset="100%" stop-color="#BF5AF2" stop-opacity="0"/>
+    <radialGradient id="glowViolet" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#b3a4cc" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#b3a4cc" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#1A1F2E"/>
-      <stop offset="100%" stop-color="#0F1320"/>
-    </linearGradient>
   </defs>
 
-  <!-- 背景 -->
-  <rect width="1200" height="420" rx="28" fill="url(#bgGrad)"/>
-  <circle cx="980" cy="120" r="280" fill="url(#glowBlue)"/>
-  <circle cx="1090" cy="320" r="220" fill="url(#glowPurple)"/>
+  <!-- 纸张底 -->
+  <rect width="1200" height="440" rx="24" fill="#1b1a16"/>
+  <circle cx="1000" cy="60" r="280" fill="url(#glowGreen)"/>
+  <circle cx="140" cy="420" r="260" fill="url(#glowViolet)"/>
 
   <!-- 左侧标题区 -->
-  <g transform="translate(64 70)">
-    <!-- 类别标签 -->
-    <rect x="0" y="0" width="156" height="28" rx="14" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.12"/>
-    <circle cx="16" cy="14" r="4" fill="#0A84FF"/>
-    <text x="28" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="#9CA3AF" letter-spacing="1.5">MATH · FORMULA</text>
+  <text x="64" y="88" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="12" font-weight="700" letter-spacing="3" fill="#6fae87">KNOWLEDGE PATH · 四川专升本高数</text>
 
-    <!-- 项目名 -->
-    <text x="0" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="46" font-weight="800" fill="#FFFFFF">微积分与三角函数</text>
-    <text x="0" y="128" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="600" fill="#0A84FF">公式体系联动记忆卡</text>
+  <text x="64" y="138" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="40" font-weight="800" fill="#ecebe2">从地基开始，</text>
+  <text x="64" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="40" font-weight="800" fill="#ecebe2">每一步都有来处。</text>
 
-    <!-- 描述 -->
-    <text x="0" y="172" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="16" fill="#D1D5DB">点开一张定义卡 → 进入完整公式网络</text>
-    <text x="0" y="196" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif" font-size="16" fill="#9CA3AF">3D Coverflow 卡片剧场 · 4 大模块 · 53+ 公式</text>
+  <text x="64" y="226" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#9b9a8d">公式不是散点。11 章公式沿一条路径相互支撑，随时翻卡巩固。</text>
 
-    <!-- 元数据 -->
-    <g transform="translate(0 232)">
-      <rect x="0" y="0" width="100" height="26" rx="13" fill="#0A84FF" fill-opacity="0.15" stroke="#0A84FF" stroke-opacity="0.4"/>
-      <text x="50" y="17" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" fill="#0A84FF">HTML/CSS/JS</text>
+  <!-- 数据徽章 -->
+  <g>
+    <rect x="64" y="256" width="104" height="30" rx="15" fill="none" stroke="#6fae87" stroke-opacity="0.45"/>
+    <text x="116" y="276" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" fill="#6fae87">11 MODULES</text>
 
-      <rect x="110" y="0" width="78" height="26" rx="13" fill="#30D158" fill-opacity="0.15" stroke="#30D158" stroke-opacity="0.4"/>
-      <text x="149" y="17" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" fill="#30D158">Swiper</text>
+    <rect x="178" y="256" width="116" height="30" rx="15" fill="none" stroke="#ecebe2" stroke-opacity="0.16"/>
+    <text x="236" y="276" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" fill="#ecebe2" fill-opacity="0.85">360 FORMULAS</text>
 
-      <rect x="198" y="0" width="78" height="26" rx="13" fill="#FFD60A" fill-opacity="0.15" stroke="#FFD60A" stroke-opacity="0.4"/>
-      <text x="237" y="17" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" fill="#FFD60A">KaTeX</text>
-    </g>
+    <rect x="304" y="256" width="80" height="30" rx="15" fill="none" stroke="#ecebe2" stroke-opacity="0.16"/>
+    <text x="344" y="276" text-anchor="middle" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#ecebe2" fill-opacity="0.85">真题例题</text>
+
+    <rect x="394" y="256" width="104" height="30" rx="15" fill="none" stroke="#ecebe2" stroke-opacity="0.16"/>
+    <text x="446" y="276" text-anchor="middle" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#ecebe2" fill-opacity="0.85">深·浅双主题</text>
   </g>
 
-  <!-- 右侧：3D 卡片剧场（项目原生视觉）-->
-  <g transform="translate(720 60)">
-    <!-- 卡片 1（后景，紫，倾斜）-->
-    <g transform="translate(280 50) skewY(-12) scale(0.85)">
-      <rect width="200" height="260" rx="22" fill="url(#cardGrad)" stroke="#BF5AF2" stroke-opacity="0.3" stroke-width="1"/>
-      <circle cx="100" cy="50" r="20" fill="#BF5AF2" fill-opacity="0.2"/>
-      <text x="100" y="56" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700" fill="#BF5AF2">∫</text>
-      <text x="100" y="130" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">积分</text>
-      <text x="100" y="200" text-anchor="middle" font-family="ui-monospace, monospace" font-size="36" font-weight="800" fill="#BF5AF2" fill-opacity="0.3">04</text>
-    </g>
+  <!-- 底部信息 -->
+  <line x1="64" y1="396" x2="1136" y2="396" stroke="#ecebe2" stroke-opacity="0.08" stroke-width="1"/>
+  <text x="64" y="418" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="11" fill="#8b8a7e">github.com/CheShiping/calculus-formula-theater</text>
+  <text x="1136" y="418" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="11" fill="#8b8a7e">MIT · 在线可交互</text>
 
-    <!-- 卡片 2（中景，黄，轻微倾斜）-->
-    <g transform="translate(150 30) skewY(-6) scale(0.92)">
-      <rect width="200" height="260" rx="22" fill="url(#cardGrad)" stroke="#FFD60A" stroke-opacity="0.35" stroke-width="1"/>
-      <circle cx="100" cy="50" r="20" fill="#FFD60A" fill-opacity="0.2"/>
-      <text x="100" y="56" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700" fill="#FFD60A">d</text>
-      <text x="100" y="130" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">微分</text>
-      <text x="100" y="200" text-anchor="middle" font-family="ui-monospace, monospace" font-size="36" font-weight="800" fill="#FFD60A" fill-opacity="0.3">03</text>
-    </g>
+  <!-- 右侧：知识路径时间轴（站点首页示意） -->
+  <text x="912" y="30" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10" letter-spacing="2" fill="#9b9a8d">11 MODULES · 360 FORMULAS</text>
+  <line x1="912" y1="40" x2="912" y2="390" stroke="#ecebe2" stroke-opacity="0.14" stroke-width="1"/>
 
-    <!-- 卡片 3（前景，居中，蓝）-->
-    <g transform="translate(20 10)">
-      <rect width="220" height="290" rx="24" fill="url(#cardGrad)" stroke="#0A84FF" stroke-opacity="0.55" stroke-width="1.5"/>
-      <!-- 顶部光晕 -->
-      <rect x="0" y="0" width="220" height="80" rx="24" fill="#0A84FF" fill-opacity="0.08"/>
-      <!-- 图标 -->
-      <circle cx="110" cy="60" r="28" fill="#0A84FF" fill-opacity="0.2"/>
-      <text x="110" y="68" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="700" fill="#0A84FF">f′</text>
-      <!-- 模块标签 -->
-      <rect x="78" y="100" width="64" height="22" rx="11" fill="#0A84FF" fill-opacity="0.25"/>
-      <text x="110" y="115" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#0A84FF" letter-spacing="1">导数</text>
-      <!-- 标题 -->
-      <text x="110" y="150" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">变化率 / 切线</text>
-      <!-- 公式列表 -->
-      <text x="110" y="185" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#9CA3AF">(sin x)′ = cos x</text>
-      <text x="110" y="205" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#9CA3AF">(eˣ)′ = eˣ</text>
-      <text x="110" y="225" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#9CA3AF">(xᵘ)′ = μxᵘ⁻¹</text>
-      <!-- 底部大编号 -->
-      <text x="110" y="270" text-anchor="middle" font-family="ui-monospace, monospace" font-size="42" font-weight="800" fill="#0A84FF" fill-opacity="0.3">02</text>
-    </g>
-  </g>
+  <!-- 1 函数·极限·连续（左） -->
+  <circle cx="912" cy="50" r="4.5" fill="#8fb0c4"/>
+  <text x="898" y="48" text-anchor="end" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13.5" font-weight="700" fill="#ecebe2">函数·极限·连续</text>
+  <text x="898" y="63" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10" fill="#8fb0c4">13 条</text>
 
-  <!-- 底部分隔线 -->
-  <line x1="64" y1="380" x2="1136" y2="380" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="1"/>
-  <text x="64" y="402" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#6B7280">github.com/CheShiping/calculus-formula-theater</text>
-  <text x="1136" y="402" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#6B7280">v1.0 · MIT</text>
+  <!-- 2 导数与微分（右） -->
+  <circle cx="912" cy="85" r="4.5" fill="#b3a4cc"/>
+  <text x="926" y="83" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13.5" font-weight="700" fill="#ecebe2">导数与微分</text>
+  <text x="926" y="98" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10" fill="#b3a4cc">94 条</text>
+
+  <!-- 3 一元函数积分学（左） -->
+  <circle cx="912" cy="119" r="4.5" fill="#6fae87"/>
+  <text x="898" y="117" text-anchor="end" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13.5" font-weight="700" fill="#ecebe2">一元函数积分学</text>
+  <text x="898" y="132" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10" fill="#6fae87">78 条</text>
+
+  <!-- 4 三角函数（右） -->
+  <circle cx="912" cy="154" r="4.5" fill="#cd9b94"/>
+  <text x="926" y="152" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13.5" font-weight="700" fill="#ecebe2">三角函数</text>
+  <text x="926" y="167" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10" fill="#cd9b94">41 条</text>
+
+  <!-- 5 微分方程（左） -->
+  <circle cx="912" cy="188" r="4.5" fill="#c9ab74"/>
+  <text x="898" y="186" text-anchor="end" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13.5" font-weight="700" fill="#ecebe2">微分方程</text>
+  <text x="898" y="201" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10" fill="#c9ab74">9 条</text>
+
+  <!-- 6 多元函数微分学（右） -->
+  <circle cx="912" cy="223" r="4.5" fill="#7fb8a8"/>
+  <text x="926" y="221" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13.5" font-weight="700" fill="#ecebe2">多元函数微分学</text>
+  <text x="926" y="236" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10" fill="#7fb8a8">10 条</text>
+
+  <!-- 7 二重积分（左） -->
+  <circle cx="912" cy="257" r="4.5" fill="#b3a4cc"/>
+  <text x="898" y="255" text-anchor="end" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13.5" font-weight="700" fill="#ecebe2">二重积分</text>
+  <text x="898" y="270" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10" fill="#b3a4cc">18 条</text>
+
+  <!-- 8 无穷级数（右） -->
+  <circle cx="912" cy="292" r="4.5" fill="#E91E63"/>
+  <text x="926" y="290" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13.5" font-weight="700" fill="#ecebe2">无穷级数</text>
+  <text x="926" y="305" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10" fill="#E91E63">29 条</text>
+
+  <!-- 9 行列式（左） -->
+  <circle cx="912" cy="326" r="4.5" fill="#759ba1"/>
+  <text x="898" y="324" text-anchor="end" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13.5" font-weight="700" fill="#ecebe2">行列式</text>
+  <text x="898" y="339" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10" fill="#759ba1">7 条</text>
+
+  <!-- 10 矩阵（右） -->
+  <circle cx="912" cy="361" r="4.5" fill="#8b98ba"/>
+  <text x="926" y="359" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13.5" font-weight="700" fill="#ecebe2">矩阵</text>
+  <text x="926" y="374" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10" fill="#8b98ba">41 条</text>
+
+  <!-- 11 线性方程组（左） -->
+  <circle cx="912" cy="395" r="4.5" fill="#9b8bb4"/>
+  <text x="898" y="393" text-anchor="end" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13.5" font-weight="700" fill="#ecebe2">线性方程组</text>
+  <text x="898" y="408" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace" font-size="10" fill="#9b8bb4">20 条</text>
 </svg>

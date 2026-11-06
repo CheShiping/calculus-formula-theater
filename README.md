@@ -1,72 +1,136 @@
 <p align="center">
-  <img src="./assets/readme/hero.svg" width="100%" alt="calculus-formula-theater · 微积分与三角函数公式体系联动记忆卡">
+  <img src="./assets/readme/hero.svg" width="100%" alt="calculus-formula-theater · 四川专升本高数框架梳理 · 知识路径联动记忆系统">
 </p>
 
 <p align="center">
   <a href="https://cheshiping.github.io/calculus-formula-theater/"><strong>🌐 在线演示</strong></a>&nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="#-本地运行"><strong>🚀 本地运行</strong></a>&nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="#-内容覆盖"><strong>📚 内容覆盖</strong></a>
+  <a href="https://cheshiping.github.io/calculus-formula-theater/review.html"><strong>🃏 翻卡记忆</strong></a>&nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="./notes/00-笔记索引.md"><strong>📖 笔记目录</strong></a>&nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="#-快速开始"><strong>🚀 快速开始</strong></a>
 </p>
 
 ---
 
 ## 这是什么
 
-一套用 **3D Coverflow 卡片剧场 + 公式详情页**重新组织的四川专升本高数框架梳理系统。
+四川专升本高数的**联动记忆系统**：把 **11 个章节、360 条公式**组织成「**知识路径 → 公式详情 → 翻卡自测**」三层结构。
 
-不再是死记硬背的清单，而是「**点开一张定义卡 → 进入完整知识网络**」的联动记忆体验。每张卡片背后藏着对应模块的全部知识——一个不漏，配合结构化记忆文本，帮你建立完整的知识网络。
+- **知识路径首页** — 11 个模块按学习顺序排在一条垂直时间轴上，每个模块标注公式条数与定位（地基 / 核心枢纽 / 导数的逆……）
+- **公式详情页** — 点开任一模块，公式卡按考点分组，每条配**记忆口诀**与**联动说明**，真题例题穿插其中
+- **翻卡自测** — 360 张翻卡覆盖全部公式，按模块筛选，掌握状态本地保存
 
-**适合谁**：四川专升本考生、正在学高等数学、需要快速查阅公式并理解联动关系的学生。
+**适合谁**：四川专升本考生、正在学高等数学、需要把公式连成网络而不是清单的人。
 
-> 📖 **文字版笔记**：网站内容同步整理为 Markdown 笔记，位于 [`notes/`](./notes) 目录，按章节分文件，方便离线学习与复习。详见 [笔记索引](./notes/00-笔记索引.md)。
+> 📖 **文字版笔记**：全站内容同步整理为 Markdown 笔记（11 章），位于 [`notes/`](./notes)，从 [笔记索引](./notes/00-笔记索引.md) 进入，方便离线学习与复习。
+
+<p align="center">
+  <img src="./assets/readme/shot-home.png" width="49%" alt="知识路径首页（浅色主题）：纸张 + 墨色的文档式排版">&nbsp;<img src="./assets/readme/shot-detail.png" width="49%" alt="公式详情页（深色主题）：KaTeX 公式卡 + 判断小技巧">
+</p>
+<p align="center">
+  <img src="./assets/readme/shot-review.png" width="49%" alt="翻卡自测页：按章节筛选（导数与微分 94 / 积分 75 / 三角函数 41），掌握进度本地保存">
+</p>
 
 ---
 
-<img src="./assets/readme/section-highlights.svg" width="100%" alt="亮点 · 为什么不一样">
+<img src="./assets/readme/section-highlights.svg" width="100%" alt="亮点 · 三层联动记忆">
 
-### 沉浸式 3D 卡片剧场
+### 三层结构，一个入口
 
-- **Coverflow 3D 轮播** — Apple 风格 3D 透视卡片，键盘 / 鼠标滚轮 / 点击三种导航
-- **侧边栏叙事** — 左侧实时同步当前卡片的解说、要点、模块进度
-- **荧光笔高亮** — 选中卡片关键字段划线高亮，视觉聚焦
+| 层 | 页面 | 干什么 |
+|---|------|--------|
+| **1 · 知识路径** | [首页](https://cheshiping.github.io/calculus-formula-theater/) | 从「函数·极限·连续」开始，沿时间轴看清每章的来处与去处 |
+| **2 · 公式详情** | 详情页（全屏覆盖层） | 每章的公式卡、口诀、真题例题、交互演示（如六边形记忆法） |
+| **3 · 翻卡自测** | [翻卡页](https://cheshiping.github.io/calculus-formula-theater/review.html) | 按模块筛选翻卡自测，「标记掌握」状态存 `localStorage` |
 
-### 结构化记忆，不是堆公式
+### 联动记忆，不是堆公式
 
-每条公式都配有**记忆口诀**和**联动关系说明**：
+每条公式都标注它与其它章节的联动关系：
 
 | 联动 | 说明 |
 |------|------|
 | 导数 ↔ 积分 | 记住 `(tan x)' = sec²x` → 自动知道 `∫sec²x dx = tan x + C` |
-| 导数 ↔ 微分 | 导数公式 × `dx` 就是微分公式，不用单独背 |
 | 二倍角 ↔ 降幂 | `cos2α` 三种形式 ↔ `sin²x` / `cos²x` 降幂 |
-| 平方关系 ↔ 六边形 | `sin²+cos²=1` → 推导倒数、商数、平方关系 |
+| 定积分 ↔ 二重积分 | 一元算面积、二元算体积，X/Y 型、交换次序、极坐标同源 |
+| 行列式 ↔ 方程组 | 行列式给判据、矩阵给工具，最终判定「有无解 / 几个解」 |
 
 ### 深色 / 浅色双主题
 
 - 右上角一键切换，选择持久化到 `localStorage`
 - 首次访问跟随系统 `prefers-color-scheme`
-- 所有组件（卡片、详情页、六边形 SVG、公式块）全部适配双主题
+- 知识路径首页是「纸张 + 墨色」的文档式排版，两套主题下都适合长时间阅读
 
 ---
 
-<img src="./assets/readme/module-relationship.svg" width="100%" alt="四大模块联动关系图">
+<img src="./assets/readme/module-relationship.svg" width="100%" alt="11 个模块的联动学习路径：一元主线 → 升维 → 线性代数，三角函数贯穿">
 
 ---
 
-<img src="./assets/readme/section-tech.svg" width="100%" alt="技术栈 · 单文件无框架">
+<img src="./assets/readme/section-content.svg" width="100%" alt="内容覆盖 · 11 章 360 条公式">
+
+11 个模块与公式卡条数（与翻卡页数据实时同步）：
+
+| # | 模块 | 公式卡 | 核心内容 |
+|---|------|-------|---------|
+| 01 | 函数 · 极限 · 连续 | 13 | 定义域、七种未定式、等价无穷小、间断点与渐近线 |
+| 02 | 导数与微分 | 94 | 定义式、求导法（分段/隐函数/幂指/参数方程/变限积分）、高阶导数、应用 |
+| 03 | 一元函数积分学 | 78 | 不定积分四大方法、定积分技巧与变限积分、反常积分 |
+| 04 | 三角函数 | 41 | 关系式、特殊值、升降幂、六边形记忆法、诱导公式 |
+| 05 | 微分方程 | 9 | 一阶（可分离/齐次/一阶线性）+ 二阶齐次/非齐次 |
+| 06 | 多元函数微分学 | 10 | 偏导、全微分、链式法则、隐函数、无条件极值 |
+| 07 | 多元函数积分学（二重积分） | 18 | 直角坐标 X/Y 型、交换次序、对称性、极坐标 |
+| 08 | 无穷级数 | 29 | 三大基准级数、正项级数判别法、幂级数收敛域与和函数 |
+| 09 | 线性代数 · 行列式 | 7 | 计算、6 条性质、展开定理 |
+| 10 | 线性代数 · 矩阵 | 41 | 运算、逆与伴随、初等变换、秩 |
+| 11 | 线性代数 · 线性方程组 | 20 | 齐次/非齐次求解、$R(A)$ 与 $R(A\mid b)$ 判解、解的结构 |
+
+### 📖 Markdown 笔记镜像
+
+| 章节 | 笔记 |
+|------|------|
+| 01 函数、极限、连续 | [01-函数、极限、连续.md](./notes/01-函数、极限、连续.md) |
+| 02 导数与微分 | [02-导数与微分.md](./notes/02-导数与微分.md) |
+| 03 一元函数积分学 | [04-一元函数积分学.md](./notes/04-一元函数积分学.md) |
+| 04 三角函数 | [05-三角函数.md](./notes/05-三角函数.md) |
+| 05 微分方程 | [06-微分方程.md](./notes/06-微分方程.md) |
+| 06 多元函数微分学 | [07-多元函数微分学.md](./notes/07-多元函数微分学.md) |
+| 07 多元函数积分学（二重积分） | [08-多元函数积分学-二重积分.md](./notes/08-多元函数积分学-二重积分.md) |
+| 08 无穷级数 | [11-无穷级数.md](./notes/11-无穷级数.md) |
+| 09 线性代数 · 行列式 | [09-线性代数-行列式.md](./notes/09-线性代数-行列式.md) |
+| 10 线性代数 · 矩阵 | [10-矩阵.md](./notes/10-矩阵.md) |
+| 11 线性代数 · 线性方程组 | [12-线性方程组.md](./notes/12-线性方程组.md) |
+
+---
+
+<img src="./assets/readme/section-hexagon.svg" width="100%" alt="六边形记忆法 · 一图打包恒等式">
+
+<img src="./assets/readme/hexagon-diagram.svg" width="100%" alt="三角函数六边形记忆法：tan 正上、中心 1，对角线倒数关系，三个阴影三角形平方关系">
+
+三角函数详情页内置**交互式六边形 SVG**（与上图同一几何）：
+
+- 六个顶点 = 六个三角函数，**中心是 1**
+- **对角线（琥珀虚线）** = 倒数关系
+- **三个阴影三角形** = 平方关系
+- 鼠标悬停顶点高亮放大
+
+> **记忆口诀**：中下二、下中下、导相乘、对对和
+
+---
+
+<img src="./assets/readme/section-tech.svg" width="100%" alt="技术栈 · 纯静态单页应用">
 
 | 技术 | 用途 |
 |------|------|
-| **原生 HTML/CSS/JS** | 单文件应用，无框架依赖 |
-| [Tailwind CSS](https://tailwindcss.com/) | 原子化样式 |
-| [Swiper](https://swiperjs.com/) | 3D Coverflow 卡片轮播 |
-| [KaTeX](https://katex.org/) | 数学公式渲染（`$...$` 和 `$$...$$`） |
-| [Font Awesome](https://fontawesome.com/) | 图标库 |
-| **CSS 自定义属性** | 深色/浅色主题切换 |
+| **原生 HTML/CSS/JS** | 「源码 = 产物」，无框架、无打包器 |
+| [Tailwind CSS](https://tailwindcss.com/)（CDN） | 原子化样式 + 扩展色板 |
+| [KaTeX](https://katex.org/)（CDN） | `$...$` / `$$...$$` 数学公式渲染 |
+| **CSS 自定义属性** | 深色/浅色主题 + 纸张式排版 |
+| [Font Awesome](https://fontawesome.com/)（CDN） | 图标库 |
+
+> **公式数据流**：`index.html` 里的 `formulaCard(...)` → `scripts/extractFormulas.mjs` 抽提 → `src/data/formulas.js` → 翻卡页 `import` 自动同步。
 
 ---
 
-## 🚀 本地运行
+## 🚀 快速开始
 
 ```bash
 # 安装依赖
@@ -75,80 +139,11 @@ npm install
 # 启动开发服务器（默认 http://localhost:8001）
 npm run dev
 
-# 构建产物（纯拷贝 src/ → dist/output/）
+# 构建产物（纯拷贝 src/ → dist/output/，不打包不改路径）
 npm run build
 ```
 
-> 也可以直接用浏览器打开 `src/index.html`，无需构建。
-
----
-
-<img src="./assets/readme/section-content.svg" width="100%" alt="内容覆盖 · 五大模块">
-
-五张定义卡分别通往对应的完整公式详情页：
-
-| # | 模块 | 定义卡内容 | 详情页内容 |
-|---|------|-----------|-----------|
-| 01 | <span style="color:#0A84FF">总览</span> | 四大模块联动关系 | 全景导航，一键跳转任意模块 |
-| 02 | <span style="color:#30D158">导数</span> | 定义 + 几何/物理意义 | **18 条导数公式**，按函数类型分组 |
-| 03 | <span style="color:#FFD60A">微分</span> | `dy = f'(x)dx` | **16 条微分公式 + 3 类微分方程** |
-| 04 | <span style="color:#BF5AF2">积分</span> | `∫f(x)dx = F(x)+C` | **常见 11 条 + 特殊 8 条**积分公式 |
-| 05 | <span style="color:#FF453A">三角函数</span> | `sin²+cos²=1` | **6 大版块**：关系/特殊值/升降幂/六边形/诱导 |
-
-### 导数（18 条）
-
-常数 & 幂函数 · 三角函数 · 指数 & 对数 · 反三角函数
-
-> **记忆要点**：幂函数降次、`eˣ` 不变、三角「正变余、余变负」
-
-### 微分（16 条 + 3 类方程）
-
-微分公式 = 导数 × `dx` · 可分离变量方程 · 齐次方程 · 一阶线性非齐次方程
-
-> **记忆要点**：微分不用单独背，导数右侧加 `dx` 即可
-
-### 积分（11 + 8 条）
-
-基本积分公式（导数逆运算） · 特殊积分（`tan` / `sec` / 含 `a²` 型）
-
-> **记忆口诀**：塞进去弹出来，a 在前面用 arc
-
-### 三角函数（6 大版块）
-
-1. **关系与特殊值** — 0°~360° 特殊值表 + 15° 实记值
-2. **常见关系** — 倒数 · 商数 · 平方
-3. **升幂缩角** — 二倍角公式（`cos2α` 三种形式）
-4. **降幂扩角** — `sin²x` / `cos²x` 降幂
-5. **六边形记忆法** — 交互式 SVG + 三大规则
-6. **诱导公式** — 「奇变偶不变，符号看象限」八字口诀
-
----
-
-<img src="./assets/readme/section-hexagon.svg" width="100%" alt="六边形记忆法 · 一图打包所有恒等式">
-
-<img src="./assets/readme/hexagon-diagram.svg" width="100%" alt="宇宙无敌最强六边形记忆法示意图">
-
-三角函数详情页内置**交互式六边形 SVG**：
-
-- 六个顶点 = 六个三角函数
-- **对角线（黄色虚线）** = 倒数关系
-- **三个阴影三角形** = 平方关系
-- 鼠标悬停顶点放大发光
-
-> **记忆口诀**：中下二、下中下、导相乘、对对和
-
----
-
-## 🎮 交互方式
-
-| 操作 | 效果 |
-|------|------|
-| `←` / `→` | 切换卡片 |
-| 鼠标滚轮 | 翻页卡片 |
-| 点击居中卡片 | 进入对应模块详情页 |
-| `Esc` | 从详情页返回卡片剧场 |
-| 点击右上角 ☀️/🌙 | 切换深色/浅色主题 |
-| 详情页顶部 Tab | 切换该模块的子版块 |
+> 直接用浏览器打开 `src/index.html` 也可以；但 `review.html` 用 ES module 加载公式数据，**必须走 HTTP**（用 `npm run dev` 即可）。
 
 ---
 
@@ -157,24 +152,21 @@ npm run build
 ```
 .
 ├── src/
-│   └── index.html          # 单文件应用（HTML + CSS + JS 全内联）
-├── assets/
-│   └── readme/             # README 视觉资产（SVG）
-├── .github/
-│   └── workflows/
-│       └── deploy.yml      # GitHub Pages 自动部署
+│   ├── index.html          # 主应用：知识路径首页 + 各章详情页
+│   ├── review.html         # 翻卡记忆页（360 张卡，按模块筛选）
+│   ├── data/formulas.js    # 公式数据（脚本自动生成，勿手改）
+│   └── prototypes/         # 早期设计原型
+├── notes/                  # 11 章 Markdown 笔记（站点内容镜像）
+├── scripts/
+│   └── extractFormulas.mjs # 从 index.html 抽提公式卡数据
+├── assets/readme/          # README 视觉资产（SVG + 界面截图）
+├── docs/
+│   └── design-system.md    # 语义化设计系统文档
+├── .github/workflows/
+│   └── deploy.yml          # push 到 main 自动发布 GitHub Pages
 ├── package.json
 └── README.md
 ```
-
----
-
-## 🎨 设计理念
-
-- **暗色科技风**为主调，Apple 系配色（蓝/绿/黄/紫/红）
-- **玻璃拟态**卡片 + `backdrop-filter` 模糊
-- **渐进式讲解**：定义卡 → 详情页 → 分组公式 → 记忆口诀
-- **联动记忆**代替孤立背诵：导数↔积分、二倍角↔降幂、平方关系↔六边形
 
 ---
 
