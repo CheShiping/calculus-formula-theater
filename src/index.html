@@ -3204,6 +3204,57 @@ function buildIntegralDetail() {
                 <blockquote>$(x-1)^{-2}$ 积分得 $-(x-1)^{-1}$：负号来自幂函数公式（指数 −2+1=−1，系数取倒数）。</blockquote>
             `)}
 
+            ${groupTitle('fa-route', '有理真分式总结 · 一次分子 ÷ 二次分母（三类型判断）', 'var(--color-green)')}
+            <div class="text-note"><strong>适用</strong>：分子最高一次、分母最高二次，分子次数低于分母（真分式）。<strong>做题固定判断顺序：先看分子和分母导数的倍数关系，再看判别式</strong>。设分母 $ax^2+bx+c$，分母导数 $(ax^2+bx)'=2ax+b$，判别式 $\\Delta=b^2-4ac$。</div>
+
+            <div class="formula-grid">
+                ${formulaCard('', '类型1 · 分子是分母导数的倍数', '$$\\int\\frac{k\\,(2ax+b)}{ax^2+bx+c}\\,dx=k\\,\\ln|ax^2+bx+c|+C$$', '凑微分，套 ∫f\'(x)/f(x)dx=ln|f(x)|+C。Δ 可正可负；哪怕分母能因式分解，只要满足倍数关系优先凑微分，不用拆分。结果：单独对数项', 'var(--color-green)')}
+                ${formulaCard('', '类型2 · 非倍数 & Δ>0', '$$ax^2+bx+c=a(x-x_1)(x-x_2),\\quad \\frac{mx+n}{(x-x_1)(x-x_2)}=\\frac{A}{x-x_1}+\\frac{B}{x-x_2}$$', '分母可分解成两个不同一次因式 → 部分分式分解，求出 A、B 分开积分。结果：两个对数相加减，都要带绝对值', 'var(--color-green)')}
+                ${formulaCard('', '类型3 · 非倍数 & Δ<0', '$$mx+n=A(2ax+b)+B:\\ \\ A\\!\\int\\!\\tfrac{2ax+b}{ax^2+bx+c}dx+B\\!\\int\\!\\tfrac{dx}{ax^2+bx+c}$$', '分母无实根不能分解 → 拆分子：第一项凑微分出对数（Δ<0 二次式恒正，不用绝对值）；第二项配方化成 u²+a² 套 (1/a)arctan(u/a)+C。结果：对数项 + 反正切项', 'var(--color-green)')}
+            </div>
+
+            ${memoryBox('做题流程（背诵版）', '① 分母求导，检查分子是否为它的常数倍 → 是，直接凑微分得对数；② 不是，计算判别式 Δ：Δ>0 → 分母因式分解，部分分式，两个对数；Δ<0 → 拆分子，对数 + 反正切。')}
+
+            ${exampleBox('例题 · 类型1 分子=分母导数（直接凑微分）', `
+                <p>求 $\\displaystyle\\int \\frac{2x-1}{x^2-x+5}\\,dx$。</p>
+                <p><strong>解</strong>：分母导数 $(x^2-x+5)'=2x-1$，分子正好是它——类型 1，直接凑微分：</p>
+                <p>$$\\int \\frac{2x-1}{x^2-x+5}\\,dx = \\int \\frac{d(x^2-x+5)}{x^2-x+5} = \\ln(x^2-x+5)+C$$</p>
+                <blockquote>此处 $\\Delta=1-20<0$，分母恒正，对数<strong>不用绝对值</strong>；哪怕 $\\Delta>0$ 也优先凑微分，不要手痒去分解。</blockquote>
+            `)}
+
+            ${exampleBox('例题 · 类型2 Δ>0 部分分式（两个对数）', `
+                <p>求 $\\displaystyle\\int \\frac{3x+1}{x^2-2x-3}\\,dx$。</p>
+                <p><strong>解</strong>：分子 $3x+1$ 不是分母导数 $(x^2-2x-3)'=2x-2$ 的倍数；$\\Delta=4+12>0$，分母拆成 $(x-3)(x+1)$——类型 2，部分分式：</p>
+                <p>$$\\frac{3x+1}{(x-3)(x+1)}=\\frac{A}{x-3}+\\frac{B}{x+1},\\quad 3x+1=A(x+1)+B(x-3)$$</p>
+                <p>代根定系数：$x=3\\Rightarrow A=\\dfrac{10}{4}=\\dfrac52$；$x=-1\\Rightarrow B=\\dfrac{-2}{-4}=\\dfrac12$。</p>
+                <p>$$\\int \\frac{3x+1\\,dx}{x^2-2x-3}=\\frac52\\ln|x-3|+\\frac12\\ln|x+1|+C$$</p>
+                <blockquote>$\\Delta>0$：两个对数相加减，绝对值<strong>都必须带</strong>。</blockquote>
+            `)}
+
+            ${exampleBox('例题 · 类型3 Δ<0 拆分子（对数 + 反正切）', `
+                <p>求 $\\displaystyle\\int \\frac{x+4}{2x^2+2x+3}\\,dx$。</p>
+                <p><strong>解</strong>：分母导数 $(2x^2+2x+3)'=4x+2$，分子不是它的倍数；$\\Delta=4-24<0$ 不能分解——类型 3，拆分子：</p>
+                <p>$$x+4=A(4x+2)+B\\ \\Rightarrow\\ A=\\tfrac14,\\quad B=4-\\tfrac12=\\tfrac72$$</p>
+                <p>第一项凑微分（$\\Delta<0$ 分母恒正，免绝对值）：</p>
+                <p>$$\\frac14\\int\\frac{(4x+2)\\,dx}{2x^2+2x+3}=\\frac14\\ln(2x^2+2x+3)$$</p>
+                <p>第二项配方（⚠️ 注意二次项系数 2 别漏）：</p>
+                <p>$$2x^2+2x+3=2\\Big(x+\\tfrac12\\Big)^2+\\tfrac52,\\quad \\int\\frac{dx}{2x^2+2x+3}=\\frac1{\\sqrt5}\\arctan\\frac{2x+1}{\\sqrt5}$$</p>
+                <p>合起来：</p>
+                <p>$$\\int \\frac{x+4\\,dx}{2x^2+2x+3}=\\frac14\\ln(2x^2+2x+3)+\\frac{7}{2\\sqrt5}\\arctan\\frac{2x+1}{\\sqrt5}+C$$</p>
+                <blockquote>配方带系数 $a$ 时：先提 $a$ 得 $a\\big[(x+\\tfrac{b}{2a})^2+\\tfrac{4ac-b^2}{4a^2}\\big]$，再逐层除干净，arctan 的系数才不会错。</blockquote>
+            `)}
+
+            ${memoryBox('易错点（三条都要背）', '① 优先级：<strong>凑微分 &gt; 部分分式</strong>，能凑微分就不分解；② Δ&gt;0 对数内必须加绝对值，Δ&lt;0 二次式恒正可以去掉绝对值；③ 配方时注意系数，不要漏掉前面的常数，否则影响反正切里面的系数。')}
+
+            ${memoryBox('一句话区分三个模板', '分子是分母导数倍数 → 单一对数；凑微分不行、Δ&gt;0 → 两个对数加减；凑微分不行、Δ&lt;0 → 对数 + arctan。')}
+
+            <div class="practice-list">
+                <div class="practice-title" style="color:var(--color-green);font-weight:700;margin-top:.4rem;">三类型练习 3 道（各对应一个模板）</div>
+                <div class="practice-item">1. $\\displaystyle\\int \\frac{4x-2}{2x^2-2x+7}\\,dx$ <span class="hint">（类型 1：分子=分母导数 $4x-2$，直接凑微分，$=\\ln(2x^2-2x+7)+C$）</span></div>
+                <div class="practice-item">2. $\\displaystyle\\int \\frac{2x+5}{x^2+x-6}\\,dx$ <span class="hint">（类型 2：$\\Delta&gt;0$，$x^2+x-6=(x-2)(x+3)$，$A=\\tfrac95,B=\\tfrac15$，$=\\tfrac95\\ln|x-2|+\\tfrac15\\ln|x+3|+C$）</span></div>
+                <div class="practice-item">3. $\\displaystyle\\int \\frac{x-1}{x^2+4x+5}\\,dx$ <span class="hint">（类型 3：$\\Delta&lt;0$，$x-1=\\tfrac12(2x+4)-3$，配方 $(x+2)^2+1$，$=\\tfrac12\\ln(x^2+4x+5)-3\\arctan(x+2)+C$）</span></div>
+            </div>
+
             ${groupTitle('fa-arrows-split-up-and-left', '4.3 分部积分法（⭐核心）', '#0A84FF')}
             <div class="formula-grid">
                 ${formulaCard('', '分部积分公式', '$$\\boxed{\\;\\int u\\,dv = uv - \\int v\\,du\\;}\\quad\\text{或}\\quad \\boxed{\\;\\int u\\,v\'\\,dx = uv - \\int u\'v\\,dx\\;}$$', '⭐ 必背。选 u 的口诀「反对幂指三」', '#0A84FF')}
@@ -5825,6 +5876,93 @@ function buildSeriesDetail() {
                 <p>已知 $\\sum_{n=0}^{\\infty}a_n(x-1)^n$ 在 $x=-1$ 处收敛，判断在 $x=2$ 处的敛散性，并求收敛半径至少为多少。</p>
                 <p><strong>解</strong>：中心 $x_0=1$，$x=-1$ 到中心距离 $=2$。由阿贝尔定理，$R\\geq2$。</p>
                 <p>$x=2$ 到中心距离 $=1<R_{min}=2$，在内部 ⇒ 绝对收敛。</p>
+            `)}
+
+            ${groupTitle('fa-shuffle', '题型补充 · 缺项幂级数（换元法）', '#FF3B30')}
+            <div class="formula-card" style="--card-accent:#FF3B30;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    通项<strong>缺奇次项（只有 $x^{2n}$）</strong>时，<strong>不能直接套</strong> $\\rho=\\lim|a_{n+1}/a_n|$（相邻系数出现 0）。两招：① <strong>换元</strong>：令 $y=x^2$，化成标准幂级数求出 $y$ 的收敛范围，再解出 $x$；② 对<strong>通项</strong>直接用比值 $\\lim\\left|\\frac{u_{n+1}}{u_n}\\right|<1$ 解出 $x$。
+                </div>
+            </div>
+            ${exampleBox('缺项幂级数例题（2019 南工大专转本第8题同源·缺项变式）', `
+                <p>求幂级数 $\\boldsymbol{\\sum_{n=1}^{\\infty}\\dfrac{2^n}{n}x^{2n}}$ 的收敛半径、收敛区间和收敛域。</p>
+                <p><strong>解</strong>：通项只有偶次项 $x^{2n}$（缺奇次项），令 $y=x^2$，化为标准幂级数 $\\sum_{n=1}^{\\infty}\\dfrac{2^n}{n}y^n$。</p>
+                <p>$\\rho=\\lim\\left|\\dfrac{2^{n+1}/(n+1)}{2^n/n}\\right|=\\lim\\dfrac{2n}{n+1}=2$ ⇒ $y$ 的收敛半径 $R_y=\\dfrac12$，即 $|y|<\\dfrac12$ 时收敛。</p>
+                <p>回代 $y=x^2$：$x^2<\\dfrac12$ ⇒ $|x|<\\dfrac{1}{\\sqrt2}=\\dfrac{\\sqrt2}{2}$。</p>
+                <p class="ex-answer">收敛半径 $R=\\dfrac{\\sqrt2}{2}$；收敛区间 $\\left(-\\dfrac{\\sqrt2}{2},\\ \\dfrac{\\sqrt2}{2}\\right)$。</p>
+                <p><strong>端点单独判</strong>：$x=\\pm\\dfrac{\\sqrt2}{2}$ 时 $y=\\dfrac12$，级数变为 $\\sum\\dfrac{2^n}{n}\\cdot\\dfrac{1}{2^n}=\\sum\\dfrac1n$（调和级数），发散。</p>
+                <p class="ex-answer">收敛域 $\\left(-\\dfrac{\\sqrt2}{2},\\ \\dfrac{\\sqrt2}{2}\\right)$（开区间，两端点都发散）。</p>
+                <p><strong>对照</strong>：直接对比值也行——$\\lim\\left|\\dfrac{u_{n+1}}{u_n}\\right|=\\lim\\dfrac{2n}{n+1}\\cdot x^2=2x^2<1$ ⇒ $x^2<\\dfrac12$，结果相同。<strong>换元更稳（大题推荐），直接比值更快（选择填空）</strong>。</p>
+            `)}
+
+            ${groupTitle('fa-location-crosshairs', '题型补充 · 平移型幂级数（中心点 x₀≠0）', '#BF5AF2')}
+            <div class="formula-card" style="--card-accent:#BF5AF2;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    $(x-x_0)^n$ 形式的幂级数：令 $t=x-x_0$ 化成标准型求收敛范围，再解出 $x$。<strong>收敛半径 $R$ 是到中心点 $x_0$ 的距离</strong>，收敛区间以 $x_0$ 为中心左右各张开 $R$；端点照旧单独判（把 $x$ 代回<strong>原级数</strong>算）。
+                </div>
+            </div>
+            ${exampleBox('平移型幂级数例题（专升本高频·真题同难度变式）', `
+                <p><strong>题目</strong>：求幂级数 $\\boldsymbol{\\sum\\limits_{n=1}^{\\infty}\\dfrac{1}{2^n \\cdot n}(x-1)^n}$ 的收敛半径、收敛区间和收敛域。</p>
+                <p><strong>解</strong>：这是平移型幂级数，令 $t=x-1$，级数变为 $\\sum_{n=1}^{\\infty}\\dfrac{1}{2^n n}t^n$，系数 $a_n=\\dfrac{1}{2^n n}$。</p>
+                <p>用前项比后项求 $t$ 的收敛半径：</p>
+                $$R_t=\\lim_{n\\to\\infty}\\left|\\frac{a_n}{a_{n+1}}\\right|=\\lim_{n\\to\\infty}\\frac{\\dfrac{1}{2^n n}}{\\dfrac{1}{2^{n+1}(n+1)}}=\\lim_{n\\to\\infty}2\\cdot\\frac{n+1}{n}=2$$
+                <p>对变量 $t$：$R_t=2$，即 $|t|<2$。代回 $t=x-1$：$|x-1|<2$，$-2<x-1<2$ ⇒ $-1<x<3$。</p>
+                <p class="ex-answer">收敛半径（关于中心点 $x=1$）：$R=2$；收敛区间 $(-1,\\ 3)$。</p>
+                <p><strong>检验两个端点</strong>：</p>
+                <p>$x=-1$：$\\sum\\dfrac{1}{2^n n}(-1-1)^n=\\sum\\dfrac{(-2)^n}{2^n n}=\\sum\\dfrac{(-1)^n}{n}$，交错调和级数，<strong>收敛</strong>。</p>
+                <p>$x=3$：$\\sum\\dfrac{1}{2^n n}(3-1)^n=\\sum\\dfrac{2^n}{2^n n}=\\sum\\dfrac1n$，调和级数，<strong>发散</strong>。</p>
+                <p class="ex-answer">收敛域 $[-1,\\ 3)$。</p>
+                <p><strong>小结</strong>：这种 $(x-x_0)^n$ 形式的幂级数，收敛半径 $R$ 是到中心点 $x_0$ 的距离，收敛区间以 $x_0$ 为中心左右张开长度 $R$。</p>
+            `)}
+
+            ${groupTitle('fa-scissors', '题型补充 · 系数带加减（拆分取最小 R）', '#0A84FF')}
+            <div class="formula-card" style="--card-accent:#0A84FF;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    系数是 $\\dfrac{3^n+n}{n^2}$ 这类<strong>加减组合</strong>、式子太复杂时，<strong>用加法拆开</strong>成两个标准幂级数，分别求 $R_1$、$R_2$，<strong>取最小</strong>：$R=\\min\\{R_1,R_2\\}$——指数增长项收敛半径更小，是「短板」，起限制作用。
+                </div>
+            </div>
+            ${exampleBox('拆分取最小例题（专升本通用试卷库同题型·真题同难度变式）', `
+                <p><strong>题目</strong>：求幂级数 $\\boldsymbol{\\sum\\limits_{n=1}^{\\infty}\\dfrac{3^n+n}{n^2} x^n}$ 的收敛半径。</p>
+                <p><strong>解</strong>：拆分：</p>
+                $$\\sum_{n=1}^{\\infty}\\frac{3^n+n}{n^2}x^n=\\sum_{n=1}^{\\infty}\\frac{3^n}{n^2}x^n+\\sum_{n=1}^{\\infty}\\frac{1}{n}x^n$$
+                <p><strong>① 求 $R_1$</strong>：级数 $\\sum \\dfrac{3^n}{n^2}x^n$，$a_n=\\dfrac{3^n}{n^2}$，用前项比后项：</p>
+                $$R_1=\\lim_{n\\to\\infty}\\frac{a_n}{a_{n+1}}=\\lim_{n\\to\\infty}\\frac{\\dfrac{3^n}{n^2}}{\\dfrac{3^{n+1}}{(n+1)^2}}=\\lim_{n\\to\\infty}\\frac{3^n}{3^{n+1}}\\cdot\\frac{(n+1)^2}{n^2}=\\lim_{n\\to\\infty}\\frac13\\cdot\\left(\\frac{n+1}{n}\\right)^2=\\frac13$$
+                <p><strong>② 求 $R_2$</strong>：级数 $\\sum \\dfrac1n x^n$，$b_n=\\dfrac1n$：</p>
+                $$R_2=\\lim_{n\\to\\infty}\\frac{b_n}{b_{n+1}}=\\lim_{n\\to\\infty}\\frac{\\dfrac1n}{\\dfrac{1}{n+1}}=\\lim_{n\\to\\infty}\\frac{n+1}{n}=1$$
+                <p><strong>③ 取最小值</strong>：$R=\\min\\{R_1,R_2\\}=\\min\\left\\{\\dfrac13,1\\right\\}=\\dfrac13$。</p>
+                <p class="ex-answer">收敛半径 $R=\\dfrac13$。</p>
+                <p><strong>补充小复盘</strong>：这里起限制作用的是带 $3^n$ 的那一项，指数增长项收敛半径更小，是「短板」。</p>
+            `)}
+
+            ${groupTitle('fa-map-location-dot', '题型补充 · 三种位置判敛（内点 / 端点 / 区间外）', '#30D158')}
+            <div class="formula-card" style="--card-accent:#30D158;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                    设幂级数 $\\sum a_n x^n$ 收敛半径 $R>0$、收敛区间 $(-R,R)$：<strong>① 内点 $|x|&lt;R$：必绝对收敛</strong>（比值/根值判别得到 $|x|&lt;R$ 时 $\\sum|a_nx^n|$ 收敛）；<strong>② 端点 $x=\\pm R$：绝对收敛 / 条件收敛 / 发散三种都有可能</strong>，必须单独代入判敛；<strong>③ 区间外 $|x|&gt;R$：必发散</strong>（通项不趋于 0）。
+                </div>
+            </div>
+            ${memoryBox('一句话口诀', '内点必绝对，端点单独判，外面全发散。重要推论：幂级数在某点 $x_0$ 收敛 ⇒ $|x_0|\\le R$；反之 $|x_0|&gt;R$ 直接发散，通项一定不趋于 0。')}
+            ${exampleBox('三种位置判敛例题（以 ∑3ⁿ/n²·xⁿ 为例）', `
+                <p><strong>题目</strong>：已知 $\\sum\\limits_{n=1}^{\\infty}\\dfrac{3^n}{n^2}x^n$ 的收敛半径 $R_1=\\dfrac13$，收敛区间 $\\boldsymbol{\\left(-\\dfrac13,\\dfrac13\\right)}$，判断 $x=1$、$x=\\dfrac13$、$x=-\\dfrac13$ 三处的敛散性。</p>
+                <p><strong>解 · 第一步先看 $x=1$</strong>：$\\sum_{n=1}^{\\infty}\\dfrac{3^n}{n^2}\\cdot 1^n=\\sum\\dfrac{3^n}{n^2}$，通项 $\\dfrac{3^n}{n^2}\\to+\\infty$（$n\\to\\infty$），通项不趋于 0 ⇒ <strong>发散</strong>，而且 $x=1$ 在收敛区间外面。</p>
+                <p><strong>分三类位置统一讲规则（通用模板，所有幂级数都适用）</strong>：设幂级数 $\\sum a_n x^n$，收敛半径 $R>0$，收敛区间 $(-R,R)$：</p>
+                <p>① <strong>在收敛区间内部：$|x|&lt;R$（开区间里面的点）</strong>——任意一点都<strong>绝对收敛</strong>。原理：比值/根值判别得到 $|x|&lt;R$ 时 $\\sum|a_nx^n|$ 收敛，所以绝对收敛。</p>
+                <p>② <strong>在收敛区间端点：$x=R$ 或 $x=-R$</strong>——三种可能性都有，<strong>必须单独代入判敛</strong>：绝对收敛（$\\sum|a_nR^n|$ 收敛）、条件收敛（$\\sum a_nR^n$ 收敛，但 $\\sum|a_nR^n|$ 发散）、发散（$\\sum a_nR^n$ 发散）。</p>
+                <p>拿本题端点举例：$x=\\dfrac13$：$\\sum\\dfrac{3^n}{n^2}\\left(\\dfrac13\\right)^n=\\sum\\dfrac{1}{n^2}$，$p=2$ 的 p 级数，收敛，而且是正项级数 ⇒ <strong>绝对收敛</strong>。</p>
+                <p>$x=-\\dfrac13$：$\\sum\\dfrac{3^n}{n^2}\\left(-\\dfrac13\\right)^n=\\sum\\dfrac{(-1)^n}{n^2}$，$\\sum\\left|\\dfrac{(-1)^n}{n^2}\\right|=\\sum\\dfrac{1}{n^2}$ 收敛 ⇒ <strong>绝对收敛</strong>。</p>
+                <p>③ <strong>在收敛区间外面：$|x|&gt;R$</strong>——级数一定<strong>发散</strong>。重要推论：幂级数如果在某点 $x_0$ 收敛，则一定满足 $|x_0|\\le R$；反过来，如果 $|x_0|&gt;R$，直接发散，通项一定不趋于 0。刚才的 $x=1$，$|1|&gt;\\dfrac13$，属于区间外，发散。</p>
+                <p class="ex-answer">一句话浓缩口诀：内点必绝对，端点单独判，外面全发散。</p>
+            `)}
+            ${exampleBox('端点另两种情况 · 条件收敛与发散（以 ∑xⁿ/n 为例，高校教材经典例·真题同难度变式）', `
+                <p><strong>题目</strong>：求幂级数 $\\boldsymbol{\\sum\\limits_{n=1}^{\\infty}\\dfrac{x^n}{n}}$ 的收敛域。</p>
+                <p><strong>解</strong>：$a_n=\\dfrac1n$，$\\rho=\\lim\\left|\\dfrac{a_{n+1}}{a_n}\\right|=\\lim\\dfrac{n}{n+1}=1$ ⇒ $R=1$，收敛区间 $(-1,1)$。</p>
+                <p><strong>端点 $x=1$（发散情况）</strong>：$\\sum\\dfrac{1^n}{n}=\\sum\\dfrac1n$，调和级数 ⇒ <strong>发散</strong>。</p>
+                <p><strong>端点 $x=-1$（条件收敛情况）</strong>：$\\sum\\dfrac{(-1)^n}{n}$，交错调和级数——由莱布尼茨判别法收敛；但 $\\sum\\left|\\dfrac{(-1)^n}{n}\\right|=\\sum\\dfrac1n$ 发散 ⇒ <strong>条件收敛</strong>（不是绝对收敛！）。</p>
+                <p class="ex-answer">收敛域 $[-1,\\ 1)$。</p>
+                <p><strong>三题对照，端点三种情况就齐了</strong>：</p>
+                <p>· $\\sum\\dfrac{x^n}{n^2}$（2023 成考真题第 8 题）：两端点都是 $\\sum\\frac{1}{n^2}$（$p=2$）⇒ 两端都<strong>绝对收敛</strong>，收敛域 $[-1,1]$；</p>
+                <p>· $\\sum\\dfrac{x^n}{n}$（本题）：$x=-1$ <strong>条件收敛</strong>、$x=1$ <strong>发散</strong>，收敛域 $[-1,1)$；</p>
+                <p>· $\\sum\\dfrac{3^n}{n^2}x^n$（上一题）：$R=\\frac13$，两端点<strong>绝对收敛</strong>，收敛域 $\\left[-\\frac13,\\frac13\\right]$。</p>
+                <p>同是 $\\sum\\frac{x^n}{n^k}$ 形状，端点结论完全不同——<strong>端点必须一个一个代入单独判</strong>，这正是「端点单独判」口诀的意义。</p>
             `)}
         </div>
     `;

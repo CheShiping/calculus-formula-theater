@@ -1160,13 +1160,40 @@ export const FORMULAS = [
     id: 'integral_035',
     module: 'integral',
     num: '',
+    label: '类型1 · 分子是分母导数的倍数',
+    formula: '$$\\int\\frac{k\\,(2ax+b)}{ax^2+bx+c}\\,dx=k\\,\\ln|ax^2+bx+c|+C$$',
+    note: '凑微分，套 ∫f\'(x)/f(x)dx=ln|f(x)|+C。Δ 可正可负；哪怕分母能因式分解，只要满足倍数关系优先凑微分，不用拆分。结果：单独对数项',
+    color: 'var(--color-green)',
+  },
+  {
+    id: 'integral_036',
+    module: 'integral',
+    num: '',
+    label: '类型2 · 非倍数 & Δ>0',
+    formula: '$$ax^2+bx+c=a(x-x_1)(x-x_2),\\quad \\frac{mx+n}{(x-x_1)(x-x_2)}=\\frac{A}{x-x_1}+\\frac{B}{x-x_2}$$',
+    note: '分母可分解成两个不同一次因式 → 部分分式分解，求出 A、B 分开积分。结果：两个对数相加减，都要带绝对值',
+    color: 'var(--color-green)',
+  },
+  {
+    id: 'integral_037',
+    module: 'integral',
+    num: '',
+    label: '类型3 · 非倍数 & Δ<0',
+    formula: '$$mx+n=A(2ax+b)+B:\\ \\ A\\!\\int\\!\\tfrac{2ax+b}{ax^2+bx+c}dx+B\\!\\int\\!\\tfrac{dx}{ax^2+bx+c}$$',
+    note: '分母无实根不能分解 → 拆分子：第一项凑微分出对数（Δ<0 二次式恒正，不用绝对值）；第二项配方化成 u²+a² 套 (1/a)arctan(u/a)+C。结果：对数项 + 反正切项',
+    color: 'var(--color-green)',
+  },
+  {
+    id: 'integral_038',
+    module: 'integral',
+    num: '',
     label: '分部积分公式',
     formula: '$$\\boxed{\\;\\int u\\,dv = uv - \\int v\\,du\\;}\\quad\\text{或}\\quad \\boxed{\\;\\int u\\,v\'\\,dx = uv - \\int u\'v\\,dx\\;}$$',
     note: '⭐ 必背。选 u 的口诀「反对幂指三」',
     color: '#0A84FF',
   },
   {
-    id: 'integral_036',
+    id: 'integral_039',
     module: 'integral',
     num: '',
     label: '选 u 的口诀',
@@ -1175,7 +1202,7 @@ export const FORMULAS = [
     color: '#0A84FF',
   },
   {
-    id: 'integral_037',
+    id: 'integral_040',
     module: 'integral',
     num: '',
     label: '单根式换',
@@ -1184,7 +1211,7 @@ export const FORMULAS = [
     color: '#FF9F0A',
   },
   {
-    id: 'integral_038',
+    id: 'integral_041',
     module: 'integral',
     num: '',
     label: '多重根式换',
@@ -1193,7 +1220,7 @@ export const FORMULAS = [
     color: '#FF9F0A',
   },
   {
-    id: 'integral_039',
+    id: 'integral_042',
     module: 'integral',
     num: '',
     label: 'x²+a² 型',
@@ -1202,7 +1229,7 @@ export const FORMULAS = [
     color: '#BF5AF2',
   },
   {
-    id: 'integral_040',
+    id: 'integral_043',
     module: 'integral',
     num: '',
     label: 'a²−x² 型',
@@ -1211,7 +1238,7 @@ export const FORMULAS = [
     color: '#BF5AF2',
   },
   {
-    id: 'integral_041',
+    id: 'integral_044',
     module: 'integral',
     num: '',
     label: 'x²−a² 型',
@@ -1220,7 +1247,7 @@ export const FORMULAS = [
     color: '#BF5AF2',
   },
   {
-    id: 'integral_042',
+    id: 'integral_045',
     module: 'integral',
     num: '',
     label: '定积分定义',
@@ -1229,7 +1256,7 @@ export const FORMULAS = [
     color: '#FFD60A',
   },
   {
-    id: 'integral_043',
+    id: 'integral_046',
     module: 'integral',
     num: '',
     label: '与积分变量无关',
@@ -1238,7 +1265,7 @@ export const FORMULAS = [
     color: '#FFD60A',
   },
   {
-    id: 'integral_044',
+    id: 'integral_047',
     module: 'integral',
     num: '1',
     label: '常数可提前',
@@ -1247,7 +1274,7 @@ export const FORMULAS = [
     color: 'var(--color-green)',
   },
   {
-    id: 'integral_045',
+    id: 'integral_048',
     module: 'integral',
     num: '2',
     label: '加减可拆',
@@ -1256,7 +1283,7 @@ export const FORMULAS = [
     color: 'var(--color-green)',
   },
   {
-    id: 'integral_046',
+    id: 'integral_049',
     module: 'integral',
     num: '3',
     label: '区间可加',
@@ -1265,7 +1292,7 @@ export const FORMULAS = [
     color: 'var(--color-green)',
   },
   {
-    id: 'integral_047',
+    id: 'integral_050',
     module: 'integral',
     num: '4',
     label: '上下限相同为零',
@@ -1274,7 +1301,7 @@ export const FORMULAS = [
     color: 'var(--color-green)',
   },
   {
-    id: 'integral_048',
+    id: 'integral_051',
     module: 'integral',
     num: '5',
     label: '上下限互换变号',
@@ -1283,7 +1310,7 @@ export const FORMULAS = [
     color: 'var(--color-green)',
   },
   {
-    id: 'integral_049',
+    id: 'integral_052',
     module: 'integral',
     num: '6',
     label: '比大小',
@@ -1292,7 +1319,7 @@ export const FORMULAS = [
     color: 'var(--color-green)',
   },
   {
-    id: 'integral_050',
+    id: 'integral_053',
     module: 'integral',
     num: '7',
     label: '保号性/估值',
@@ -1301,7 +1328,7 @@ export const FORMULAS = [
     color: 'var(--color-green)',
   },
   {
-    id: 'integral_051',
+    id: 'integral_054',
     module: 'integral',
     num: '8',
     label: '积分中值定理',
@@ -1310,7 +1337,7 @@ export const FORMULAS = [
     color: 'var(--color-green)',
   },
   {
-    id: 'integral_052',
+    id: 'integral_055',
     module: 'integral',
     num: '',
     label: '牛莱公式',
@@ -1319,7 +1346,7 @@ export const FORMULAS = [
     color: '#FFD60A',
   },
   {
-    id: 'integral_053',
+    id: 'integral_056',
     module: 'integral',
     num: '',
     label: '定积分分部',
@@ -1328,7 +1355,7 @@ export const FORMULAS = [
     color: '#0A84FF',
   },
   {
-    id: 'integral_054',
+    id: 'integral_057',
     module: 'integral',
     num: '',
     label: '三换公式',
@@ -1337,7 +1364,7 @@ export const FORMULAS = [
     color: 'var(--color-green)',
   },
   {
-    id: 'integral_055',
+    id: 'integral_058',
     module: 'integral',
     num: '',
     label: '偶函数',
@@ -1346,7 +1373,7 @@ export const FORMULAS = [
     color: '#0A84FF',
   },
   {
-    id: 'integral_056',
+    id: 'integral_059',
     module: 'integral',
     num: '',
     label: '奇函数',
@@ -1355,7 +1382,7 @@ export const FORMULAS = [
     color: '#0A84FF',
   },
   {
-    id: 'integral_057',
+    id: 'integral_060',
     module: 'integral',
     num: '',
     label: '四分之一圆面积',
@@ -1364,7 +1391,7 @@ export const FORMULAS = [
     color: '#0A84FF',
   },
   {
-    id: 'integral_058',
+    id: 'integral_061',
     module: 'integral',
     num: '',
     label: '点火公式',
@@ -1373,7 +1400,7 @@ export const FORMULAS = [
     color: '#0A84FF',
   },
   {
-    id: 'integral_059',
+    id: 'integral_062',
     module: 'integral',
     num: '',
     label: '类型一 · 直接给分段函数',
@@ -1382,7 +1409,7 @@ export const FORMULAS = [
     color: '#FF9F0A',
   },
   {
-    id: 'integral_060',
+    id: 'integral_063',
     module: 'integral',
     num: '',
     label: '类型三 · 绝对值天然分段',
@@ -1391,7 +1418,7 @@ export const FORMULAS = [
     color: '#FF9F0A',
   },
   {
-    id: 'integral_061',
+    id: 'integral_064',
     module: 'integral',
     num: '',
     label: '题型一 · 变限积分 → 求导',
@@ -1400,7 +1427,7 @@ export const FORMULAS = [
     color: '#FF9F0A',
   },
   {
-    id: 'integral_062',
+    id: 'integral_065',
     module: 'integral',
     num: '',
     label: '题型二 · 定积分 → 令 A',
@@ -1409,7 +1436,7 @@ export const FORMULAS = [
     color: '#FF9F0A',
   },
   {
-    id: 'integral_063',
+    id: 'integral_066',
     module: 'integral',
     num: 'X',
     label: '面积 · X 型',
@@ -1418,7 +1445,7 @@ export const FORMULAS = [
     color: '#FF9F0A',
   },
   {
-    id: 'integral_064',
+    id: 'integral_067',
     module: 'integral',
     num: 'Y',
     label: '面积 · Y 型',
@@ -1427,7 +1454,7 @@ export const FORMULAS = [
     color: '#FF9F0A',
   },
   {
-    id: 'integral_065',
+    id: 'integral_068',
     module: 'integral',
     num: 'X',
     label: '体积 · 绕 x 轴',
@@ -1436,7 +1463,7 @@ export const FORMULAS = [
     color: 'var(--color-green)',
   },
   {
-    id: 'integral_066',
+    id: 'integral_069',
     module: 'integral',
     num: 'X',
     label: '体积 · 绕 y 轴（柱壳）',
@@ -1445,7 +1472,7 @@ export const FORMULAS = [
     color: 'var(--color-green)',
   },
   {
-    id: 'integral_067',
+    id: 'integral_070',
     module: 'integral',
     num: 'Y',
     label: '体积 · 绕 y 轴',
@@ -1454,7 +1481,7 @@ export const FORMULAS = [
     color: 'var(--color-green)',
   },
   {
-    id: 'integral_068',
+    id: 'integral_071',
     module: 'integral',
     num: '',
     label: '椭圆面积',
@@ -1463,7 +1490,7 @@ export const FORMULAS = [
     color: '#FF9F0A',
   },
   {
-    id: 'integral_069',
+    id: 'integral_072',
     module: 'integral',
     num: '1',
     label: '∫ₐ^+∞',
@@ -1472,7 +1499,7 @@ export const FORMULAS = [
     color: '#0A84FF',
   },
   {
-    id: 'integral_070',
+    id: 'integral_073',
     module: 'integral',
     num: '2',
     label: '∫_−∞^a',
@@ -1481,7 +1508,7 @@ export const FORMULAS = [
     color: '#0A84FF',
   },
   {
-    id: 'integral_071',
+    id: 'integral_074',
     module: 'integral',
     num: '3',
     label: '∫_−∞^+∞',
@@ -1490,7 +1517,7 @@ export const FORMULAS = [
     color: '#0A84FF',
   },
   {
-    id: 'integral_072',
+    id: 'integral_075',
     module: 'integral',
     num: '',
     label: 'p 判定 · 无穷区间',
@@ -1499,7 +1526,7 @@ export const FORMULAS = [
     color: '#0A84FF',
   },
   {
-    id: 'integral_073',
+    id: 'integral_076',
     module: 'integral',
     num: '',
     label: '无界端点定义',
@@ -1508,7 +1535,7 @@ export const FORMULAS = [
     color: '#FF9F0A',
   },
   {
-    id: 'integral_074',
+    id: 'integral_077',
     module: 'integral',
     num: '',
     label: 'p 判定 · 无界端点（相反）',
@@ -1517,7 +1544,7 @@ export const FORMULAS = [
     color: '#FF9F0A',
   },
   {
-    id: 'integral_075',
+    id: 'integral_078',
     module: 'integral',
     num: '',
     label: '数列极限→定积分',
@@ -3236,7 +3263,7 @@ export const MODULES = [
     id: 'integral',
     title: '积分',
     color: '#30D158',
-    count: 75,
+    count: 78,
   },
   {
     id: 'trig',

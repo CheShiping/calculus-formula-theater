@@ -79,3 +79,6 @@ debug.log
 
 # 临时调试脚本
 _check_script.js
+
+# 工具生成的分享包（由 src/ 压缩而来，不入库）
+.trae-html-share-packages/
