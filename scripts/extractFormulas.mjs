@@ -101,7 +101,7 @@ function inferModule(color) {
 }
 
 // 章节顺序（用于 MODULES 输出排序，按学习路径）
-const MODULE_ORDER = ['limit', 'deriv', 'integral', 'trig', 'diffEq', 'multivar', 'dblint', 'series', 'linalg', 'matrix', 'linSys'];
+const MODULE_ORDER = ['limit', 'deriv', 'integral', 'trig', 'diffEq', 'multivar', 'dblint', 'series', 'vector', 'linalg', 'matrix', 'linSys'];
 
 // 用 buildXxxDetail 的位置切分 cards
 function splitBySection(src, cards) {
@@ -116,6 +116,7 @@ function splitBySection(src, cards) {
     { name: 'multivar', title: '多元函数微分学', module: 'multivar', color: '#2BB8A3' },
     { name: 'doubleInt', title: '多元函数积分学·二重积分', module: 'dblint', color: '#A06CD5' },
     { name: 'series', title: '无穷级数', module: 'series', color: '#FF6B9D' },
+    { name: 'vector', title: '向量代数与空间解析几何', module: 'vector', color: '#8a7fae' },
     { name: 'linear', title: '线性代数·行列式', module: 'linalg', color: '#5AC8FA' },
     { name: 'matrix', title: '线性代数·矩阵', module: 'matrix', color: '#5AC8FA' },
     { name: 'linearSystem', title: '线性代数·线性方程组', module: 'linSys', color: '#9b8bb4' },
@@ -217,7 +218,7 @@ const lines = [];
 lines.push('// 公式数据（自动从 src/index.html 抽提，勿手改）');
 lines.push('// 由 scripts/extractFormulas.mjs 生成');
 lines.push('// 字段：module / id / num / label / formula / note / color');
-lines.push('// module ∈ { limit, deriv, integral, trig, diffEq, multivar, dblint, series, linalg, matrix, linSys }');
+lines.push('// module ∈ { limit, deriv, integral, trig, diffEq, multivar, dblint, series, vector, linalg, matrix, linSys }');
 lines.push('');
 lines.push('export const FORMULAS = [');
 for (const f of formulaList) {

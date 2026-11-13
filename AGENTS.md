@@ -158,12 +158,17 @@ node scripts/extractFormulas.mjs
 | `buildIntegralDetail` | `integral` | `#30D158` | 积分 |
 | `buildTrigonometricDetail` | `trig` | `#FF3B30` | 三角函数 |
 | `buildEquationDetail` | `diffEq` | `#FF9F0A` | 微分方程 |
+| `buildMultivarDetail` | `multivar` | `#2BB8A3` | 多元函数微分学 |
+| `buildDoubleIntDetail` | `dblint` | `#A06CD5` | 多元函数积分学·二重积分 |
+| `buildSeriesDetail` | `series` | `#FF6B9D` | 无穷级数 |
+| `buildVectorDetail` | `vector` | `#8a7fae` | 向量代数与空间解析几何 |
 | `buildLinearDetail` | `linalg` | `#5AC8FA` | 线性代数·行列式 |
 | `buildMatrixDetail` | `matrix` | `#5AC8FA` | 线性代数·矩阵 |
+| `buildLinearSystemDetail` | `linSys` | `#9b8bb4` | 线性代数·线性方程组 |
 
-> ⚠️ 模块固定集合为 `{ limit, deriv, integral, trig, diffEq, linalg, matrix }`。**没有 `diff` 这个 module**（微分已并入 `deriv`）。`linalg` 与 `matrix` 同属「线性代数」但为**两个独立章节/入口**（行列式 ≠ 矩阵，笔记也是 06/07 两章）。新增 build 函数时注意在脚本 `sections` 与 `MODULE_ORDER` 中同步。
+> ⚠️ 模块固定集合为 `{ limit, deriv, integral, trig, diffEq, multivar, dblint, series, vector, linalg, matrix, linSys }`。**没有 `diff` 这个 module**（微分已并入 `deriv`）。`linalg` / `matrix` / `linSys` 同属「线性代数」但为**三个独立章节/入口**（行列式 ≠ 矩阵 ≠ 线性方程组）。新增 build 函数时注意在脚本 `sections` 与 `MODULE_ORDER` 中同步。
 
-当前公式总量：**205 条**（deriv 87 / integral 19 / trig 41 / diffEq 9 / linalg 7 / matrix 29 / limit 13；6 模块基线为 176，矩阵独立成章后 +29）。
+当前公式总量：**437 条**（limit 13 / deriv 94 / integral 80 / trig 41 / diffEq 9 / multivar 10 / dblint 18 / series 29 / vector 75 / linalg 7 / matrix 41 / linSys 20）。
 
 ---
 

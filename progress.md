@@ -186,6 +186,17 @@
 - 仅 `exampleBox`/`memoryBox` 增量替换，未加 `formulaCard`，公式总数仍 351，`review.html` 无变化。
 - 证据：主脚本 `new Function` 语法检查 0 错误（JSON-LD 块基线不可执行）；`node scripts/extractFormulas.mjs` 正常输出 351 条、11 模块。
 
+## 更新（2026-11-13）— 新增「向量代数与空间解析几何」独立章节
+
+- **位置**：无穷级数之后、行列式之前；首页 `path-home` 新增入口行（`#8a7fae`），路由 `buildDetailContent` 新增 `case 'vector'`。
+- **笔记**：新增 `notes/13-向量代数与空间解析几何.md`，`notes/00-笔记索引.md` 登记为第 09 章；内容覆盖空间直角坐标系（$\vec{i},\vec{j},\vec{k}$ + SVG 图）、向量概念/模/两点距离/单位向量/方向余弦/对称点、线性运算、数量积与投影、向量积与面积、平行垂直判定、平面（点法式/一般式/截距式/三点求平面）、直线（点向式/参数式/交面式）、面面/线线/线面位置关系、夹角、距离、二次曲面。
+- **页面**：`buildVectorDetail()` 共 13 个 tab，首 tab 为「知识地图」；75 条 `formulaCard`、36 张例题翻卡；真题含 2024 四川（单选第 6 题）、2024 河北（数一第 8/12 题）、2025 山东（高数Ⅰ第 7/15 题）、2025 河北（数一第 12 题）、2025 浙江（高数（一）第 3 题/计算题）、2025 福建（单选第 9 题）、2025 江苏专转本（单选第 5 题），另配变式与综合题。
+- **抽提**：`scripts/extractFormulas.mjs` 的 `sections` 与 `MODULE_ORDER` 增加 `vector`；运行输出 **437 条 formulaCard / 12 个模块**，`vector: 75`。
+- **文档**：`src/index.html` 的 `437 FORMULAS`、SEO 描述与关键词、JSON-LD；`feature_list.json`（totals 12/437、vector 条目、evidence）；`README.md` 与 `AGENTS.md` 模块表/计数同步。
+- **验证**：内联脚本 `new Function` 语法检查 0 错误；`vm` 执行 `buildVectorDetail()` 成功（13 个 section id 唯一、36 张例题、76 个 formula-card 容器、1 个 SVG、`undefined` 0 次）；KaTeX 0.16.9 逐条渲染 vector 75 条公式 0 错误；`npm run dev` 返回 200，浏览器打开向量章节详情页，首 tab 为「知识地图」、13 个 tab、控制台无脚本错误；review 页显示「全部 437」「向量代数与空间解析几何 75」，控制台无 error。
+- **构建**：`npm run build` 成功（7 个 HTML），`dist/output/index.html` 含 `ve-dot`、`ve-quadric`、`437 FORMULAS`，`dist/output/data/formulas.js` 含 `vector` / `count: 75`。顺带修复 favicon data URI 内的单引号：改用 `%27` 编码，避免 `coding-html-devserver` 的 og-meta 正则截断导致 minify 解析失败。
+- **说明**：本轮按用户要求跳过 md 框架审核，笔记写完后直接进入页面实现与验证。
+
 ## 下一步（按优先级）
 
 1. **加新内容时**：严格走 AGENTS.md 第 4 节五步流程——先写 `notes/` 笔记 → 等用户审核 → 在 `index.html` 对应 `buildXxxDetail()` 增量追加 `formulaCard` → 跑 `extractFormulas.mjs` → `npm run dev` 核对双主题。
