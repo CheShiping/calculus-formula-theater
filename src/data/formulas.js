@@ -2764,7 +2764,7 @@ export const FORMULAS = [
     num: '叉1',
     label: '方向',
     formula: '$$\\vec{c}=\\vec{a}\\times\\vec{b}\\Longrightarrow \\vec{c}\\perp\\vec{a},\\ \\vec{c}\\perp\\vec{b}$$',
-    note: '题目说“同时垂直于 a、b”，隐含用叉乘得到它',
+    note: '题目说“同时垂直于 $\\vec{a}$、$\\vec{b}$”，隐含用叉乘得到它',
     color: '#0A84FF',
   },
   {
@@ -2782,7 +2782,7 @@ export const FORMULAS = [
     num: '叉3',
     label: '叉乘行列式',
     formula: '$$\\vec{a}\\times\\vec{b}=\\begin{vmatrix}\\vec{i}&\\vec{j}&\\vec{k}\\\\x_1&y_1&z_1\\\\x_2&y_2&z_2\\end{vmatrix}=(y_1z_2-z_1y_2,\\ z_1x_2-x_1z_2,\\ x_1y_2-y_1x_2)$$',
-    note: '第一行 i、j、k；第二行 a；第三行 b；中间项前面是负号',
+    note: '第一行 $\\vec{i}$、$\\vec{j}$、$\\vec{k}$；第二行 $\\vec{a}$；第三行 $\\vec{b}$；中间项前面是负号',
     color: '#30D158',
   },
   {

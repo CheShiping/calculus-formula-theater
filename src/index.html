@@ -6245,9 +6245,12 @@ function buildVectorDetail() {
                     <text x="238" y="48" fill="currentColor" font-size="19" font-weight="700" font-family="Inter, Noto Sans SC, sans-serif">z</text>
                     <text x="232" y="290" fill="currentColor" font-size="16" font-weight="700" font-family="Inter, Noto Sans SC, sans-serif">O</text>
                     <text x="188" y="324" fill="#E63946" font-size="20" font-weight="800" font-family="Inter, Noto Sans SC, sans-serif">i</text>
+                    <path d="M182 312 L196 312 M192 308 L196 312 L192 316" stroke="#E63946" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                     <text x="312" y="288" fill="#2A9D8F" font-size="20" font-weight="800" font-family="Inter, Noto Sans SC, sans-serif">j</text>
+                    <path d="M307 276 L319 276 M315 272 L319 276 L315 280" stroke="#2A9D8F" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                     <text x="262" y="210" fill="#C9A227" font-size="20" font-weight="800" font-family="Inter, Noto Sans SC, sans-serif">k</text>
-                    <text x="280" y="382" fill="var(--text-muted)" font-size="13" text-anchor="middle" font-family="Inter, Noto Sans SC, sans-serif">x、y、z 三轴两两垂直；i、j、k 长度均为 1</text>
+                    <path d="M257 198 L269 198 M265 194 L269 198 L265 202" stroke="#C9A227" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="280" y="382" fill="var(--text-muted)" font-size="13" text-anchor="middle" font-family="Inter, Noto Sans SC, sans-serif">x、y、z 三轴两两垂直；三条单位向量长度均为 1</text>
                 </svg>
                 <div style="text-align:center;color:var(--text-muted);font-size:0.82rem;margin-top:0.5rem;">右手系：四指从 x 轴弯向 y 轴，拇指指向 z 轴；$\\vec{i},\\vec{j},\\vec{k}$ 分别是三条坐标轴正方向的单位向量。</div>
             </div>
@@ -6468,7 +6471,7 @@ function buildVectorDetail() {
             <div class="text-note"><strong>拧瓶盖比喻</strong>：右手握住瓶盖，四指从 $\\vec{a}$ 的方向弯向 $\\vec{b}$ 的方向（转角取不超过 $180^\\circ$ 的那个），拇指所指的方向就是 $\\vec{a}\\times\\vec{b}$ 的方向。这就是右手螺旋法则。</div>
             <div class="text-note">方向：$\\vec{c}=\\vec{a}\\times\\vec{b}$ 同时垂直于 $\\vec{a}$ 和 $\\vec{b}$；大小：$|\\vec{a}\\times\\vec{b}|=|\\vec{a}||\\vec{b}|\\sin\\theta$，也就是以 $\\vec{a}$、$\\vec{b}$ 为邻边的平行四边形的面积。</div>
             <div class="formula-grid">
-                ${formulaCard('叉1', '方向', '$$\\vec{c}=\\vec{a}\\times\\vec{b}\\Longrightarrow \\vec{c}\\perp\\vec{a},\\ \\vec{c}\\perp\\vec{b}$$', '题目说“同时垂直于 a、b”，隐含用叉乘得到它', '#0A84FF')}
+                ${formulaCard('叉1', '方向', '$$\\vec{c}=\\vec{a}\\times\\vec{b}\\Longrightarrow \\vec{c}\\perp\\vec{a},\\ \\vec{c}\\perp\\vec{b}$$', '题目说“同时垂直于 $\\vec{a}$、$\\vec{b}$”，隐含用叉乘得到它', '#0A84FF')}
                 ${formulaCard('叉2', '大小', '$$|\\vec{a}\\times\\vec{b}|=|\\vec{a}|\\,|\\vec{b}|\\sin\\theta$$', '模 = 平行四边形面积', '#0A84FF')}
             </div>
             ${memoryBox('解题信号', '题目说“一个向量 $\\vec{c}$ 同时垂直于 $\\vec{a}$、$\\vec{b}$”，隐含意思就是——可以用 $\\vec{c}=\\vec{a}\\times\\vec{b}$ 得到它。')}
@@ -6476,7 +6479,7 @@ function buildVectorDetail() {
             ${groupTitle('fa-table-cells', '5.2 坐标计算', '#30D158')}
             <div class="text-note">设 $\\vec{a}=(x_1,y_1,z_1)$，$\\vec{b}=(x_2,y_2,z_2)$，则叉乘按行列式展开。</div>
             <div class="formula-grid">
-                ${formulaCard('叉3', '叉乘行列式', '$$\\vec{a}\\times\\vec{b}=\\begin{vmatrix}\\vec{i}&\\vec{j}&\\vec{k}\\\\x_1&y_1&z_1\\\\x_2&y_2&z_2\\end{vmatrix}=(y_1z_2-z_1y_2,\\ z_1x_2-x_1z_2,\\ x_1y_2-y_1x_2)$$', '第一行 i、j、k；第二行 a；第三行 b；中间项前面是负号', '#30D158')}
+                ${formulaCard('叉3', '叉乘行列式', '$$\\vec{a}\\times\\vec{b}=\\begin{vmatrix}\\vec{i}&\\vec{j}&\\vec{k}\\\\x_1&y_1&z_1\\\\x_2&y_2&z_2\\end{vmatrix}=(y_1z_2-z_1y_2,\\ z_1x_2-x_1z_2,\\ x_1y_2-y_1x_2)$$', '第一行 $\\vec{i}$、$\\vec{j}$、$\\vec{k}$；第二行 $\\vec{a}$；第三行 $\\vec{b}$；中间项前面是负号', '#30D158')}
             </div>
             ${memoryBox('记忆', '第一行写 $\\vec{i},\\vec{j},\\vec{k}$，第二行写 $\\vec{a}$ 的坐标，第三行写 $\\vec{b}$ 的坐标；按第一行展开，注意中间项前面是<strong>负号</strong>。')}
 
