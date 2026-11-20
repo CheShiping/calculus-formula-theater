@@ -197,6 +197,16 @@
 - **构建**：`npm run build` 成功（7 个 HTML），`dist/output/index.html` 含 `ve-dot`、`ve-quadric`、`437 FORMULAS`，`dist/output/data/formulas.js` 含 `vector` / `count: 75`。顺带修复 favicon data URI 内的单引号：改用 `%27` 编码，避免 `coding-html-devserver` 的 og-meta 正则截断导致 minify 解析失败。
 - **说明**：本轮按用户要求跳过 md 框架审核，笔记写完后直接进入页面实现与验证。
 
+## 更新（2026-11-20）— 微分方程「一阶方程」补两类题型（隐藏一阶线性 + 变上限积分方程）
+
+- `src/index.html`（`buildEquationDetail()` 的「一阶方程」tab，3.3 齐次型例题之后、「一阶方法选择顺序」之前）新增两组：
+  - **3.4 隐藏一阶线性（把 x 看成 y 的函数）**：识别特征卡（$\frac{dy}{dx}=\frac1{x-y}$ 取倒数反转）+ 标准型 $\frac{dx}{dy}+P(y)x=Q(y)$ + 通解公式（字母换 $y$）+ 例题翻卡 $\frac{dy}{dx}=\frac{1}{x-y}$ → $x=Ce^{y}+y+1$（含分部积分 $\int -ye^{-y}dy=ye^{-y}+e^{-y}$）。
+  - **3.5 变上限积分方程（积分方程化微分方程）**：识别特征卡 + 标准三步（先令 $x=0$ 求 $f(0)$ → 两边求导化一阶方程 → 定 $C$）+ 易错点 memoryBox + 例题翻卡 $f(x)=3\int_0^x f(t)dt-2x+2$ → $f(0)=2$，$f'-3f=-2$，$f(x)=\frac43 e^{3x}+\frac23$ + 复盘流程 memoryBox（含第 4 步回代验算）。
+- `notes/06-微分方程.md` 同步新增 §3.4 / §3.5（概念、公式、例题与复盘流程，放在 §3.3 之后、「一阶方法选择顺序」之前）。
+- 两题均未检索到原卷出处（用户提供的新题型），按专升本同等难度通式标注，未冒认省份年份。
+- 仅 `exampleBox` / 说明卡 / `memoryBox` 增量，未改 `formulaCard`，公式总数仍 344，`review.html` 无变化。
+- 证据：主脚本 `new Function` 语法检查 0 错误（JSON-LD 块基线不可执行）；`vm` 执行 `buildEquationDetail()` 成功，两组标题顺序正确（3.4 → 3.5 → 一阶方法选择顺序），新例题正/反面按 `<strong>解</strong>` 正确拆分、题目面未泄漏解析。
+
 ## 下一步（按优先级）
 
 1. **加新内容时**：严格走 AGENTS.md 第 4 节五步流程——先写 `notes/` 笔记 → 等用户审核 → 在 `index.html` 对应 `buildXxxDetail()` 增量追加 `formulaCard` → 跑 `extractFormulas.mjs` → `npm run dev` 核对双主题。

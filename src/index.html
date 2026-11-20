@@ -4320,6 +4320,66 @@ function buildEquationDetail() {
                 <p>💡 <strong>抢分点</strong>：$u$ 前面带 $\\ln u$，令 $\\ln u-1$ 整体（$d(\\ln u-1)=\\frac{du}{u}$）一次凑成；回代后仍保留任意常数 $C$。</p>
             `)}
 
+            ${groupTitle('fa-right-left', '3.4 隐藏一阶线性（把 x 看成 y 的函数）', '#5AC8FA')}
+            <div class="formula-card" style="--card-accent:#5AC8FA;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#5AC8FA;">识别特征</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">方程写成 $\\dfrac{dy}{dx}=\\dfrac{1}{x-y}$ 时，$y'$ 与 $y$ 不成一次关系，看不出线性——<strong>取倒数反转</strong>，把 $x$ 看成 $y$ 的函数，此时 $\\dfrac{dx}{dy}$ 与 $x$ 都是一次的，就是标准一阶线性。</div>
+                <div class="formula-label" style="color:#5AC8FA;margin-top:1rem;">标准型（字母全部换成 y）</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\frac{dx}{dy} + P(y)\\,x = Q(y)$$
+                </div>
+                <div class="formula-label" style="color:#5AC8FA;margin-top:1rem;">通解公式</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$x = e^{-\\int P(y)\\,dy}\\left[\\int Q(y)\\,e^{\\int P(y)\\,dy}\\,dy + C\\right]$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:1rem;"><strong>要点</strong>：公式是同一个，只是字母整体换名——$P$、$Q$ 都是 $y$ 的函数，积分变量是 $y$；最后通解写成 $x=\\cdots$ 即可，不必再解回 $y$。</div>
+            </div>
+
+            ${exampleBox('难度提升 · 隐藏一阶线性（反转 x,y）· dy/dx=1/(x-y)', `
+                <p>求微分方程 $\\dfrac{dy}{dx}=\\dfrac{1}{x-y}$ 的通解。</p>
+                <p><strong>来源</strong>：专升本高频经典题型（未检索到原卷，同等难度通式）。</p>
+                <strong>解</strong>：
+                <p><strong>① 识别：反解成 $x$ 关于 $y$ 的方程</strong>。原式取倒数：</p>
+                <p>$$\\frac{dx}{dy}=x-y$$</p>
+                <p>整理成标准一阶线性 $\\dfrac{dx}{dy}+P(y)x=Q(y)$：</p>
+                <p>$$\\frac{dx}{dy}-x=-y,\\qquad P(y)=-1,\\ Q(y)=-y$$</p>
+                <p><strong>② 套通解公式（字母全换成 $y$）</strong>，积分因子 $e^{\\int P\\,dy}=e^{-y}$：</p>
+                <p>$$x=e^{y}\\left[\\int(-y)e^{-y}\\,dy+C\\right]$$</p>
+                <p><strong>③ 算括号里的积分</strong>（分部积分）：</p>
+                <p>$$\\int -y\\,e^{-y}\\,dy=y\\,e^{-y}+e^{-y}$$</p>
+                <p>$$x=e^{y}\\left(y\\,e^{-y}+e^{-y}+C\\right)=y+1+Ce^{y}$$</p>
+                <p>通解：</p>
+                <p>$$\\boxed{\\,x=Ce^{y}+y+1\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：看到 $\\dfrac{dy}{dx}$ 右边分母含 $y$、整体不像线性，先<strong>取倒数把 $x$ 当未知函数</strong>；$P,Q$ 里的 $x$ 全部换成 $y$，最后写成 $x=\\cdots$ 的隐式通解也照样给分。</p>
+            `)}
+
+            ${groupTitle('fa-arrows-rotate', '3.5 变上限积分方程（积分方程化微分方程）', '#FF6B9D')}
+            <div class="formula-card" style="--card-accent:#FF6B9D;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#FF6B9D;">识别特征</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">未知函数 $f(x)$ 既出现在积分号外，又出现在被积函数里（如 $f(x)=3\\displaystyle\\int_0^x f(t)\\,dt-2x+2$）——这是「积分方程」，先化成微分方程再解。</div>
+                <div class="formula-label" style="color:#FF6B9D;margin-top:1rem;">标准三步（背这个）</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">1. 令 $x=0$，先算出 $f(0)$（<strong>必做，很多人漏这一步</strong>）<br>2. 两边对 $x$ 求导，消去变上限积分，得到一阶微分方程（可能是可分离，也可能是一阶线性）<br>3. 解微分方程，用初值 $f(0)$ 定常数 $C$</div>
+            </div>
+            ${memoryBox('易错点', '① 被积函数里若混有 $x$，先提出或换元，再对 $x$ 求导<br>② 求导后要先整理成标准型，再套通解公式<br>③ 只求通解不定 $C$ 会丢分——初值 $f(0)$ 必须回代')}
+
+            ${exampleBox('难度提升 · 变上限积分方程 · f(x)=3∫₀ˣf(t)dt-2x+2', `
+                <p>设 $f(x)$ 连续，且 $f(x)=3\\displaystyle\\int_0^x f(t)\\,dt-2x+2$，求 $f(x)$。</p>
+                <p><strong>来源</strong>：专升本高频经典题型（未检索到原卷，同等难度通式）。</p>
+                <strong>解</strong>：
+                <p><strong>① 求初值</strong>：令 $x=0$，积分项 $\\displaystyle\\int_0^0 f(t)\\,dt=0$，得 $f(0)=2$。</p>
+                <p><strong>② 两边对 $x$ 求导</strong>（$f$ 连续，变上限积分可导，右边第一项用变限积分求导公式）：</p>
+                <p>$$f'(x)=3f(x)-2$$</p>
+                <p>整理成一阶线性标准型：</p>
+                <p>$$f'(x)-3f(x)=-2,\\qquad P(x)=-3,\\ Q(x)=-2$$</p>
+                <p><strong>③ 套通解公式</strong>，积分因子 $e^{\\int P\\,dx}=e^{-3x}$：</p>
+                <p>$$f(x)=e^{3x}\\left[\\int(-2)e^{-3x}\\,dx+C\\right]=e^{3x}\\left(\\frac23 e^{-3x}+C\\right)=\\frac23+Ce^{3x}$$</p>
+                <p><strong>④ 代初值定 $C$</strong>：$f(0)=\\frac23+C=2$，得 $C=\\frac43$。</p>
+                <p>$$\\boxed{\\,f(x)=\\frac43 e^{3x}+\\frac23\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：这类题三步固定——<strong>先代 $x=0$ 求初值 → 两边求导化微分方程 → 套公式后再用初值定 $C$</strong>；漏掉第一步只能得到含 $C$ 的通解，拿不到最终答案。</p>
+            `)}
+
+            ${memoryBox('变上限积分方程复盘流程（背这个）', '1. 令 $x=0$，算出 $f(0)$（必做，很多人漏这一步）<br>2. 等式两边对 $x$ 求导，消去变上限积分，得到一阶微分方程（可分离或一阶线性）<br>3. 解微分方程，用初值确定常数 $C$<br>4. 回代原式验算（考场可选）')}
+
             ${groupTitle('fa-list-check', '一阶方法选择顺序', '#BF5AF2')}
             <div class="formula-card" style="--card-accent:#BF5AF2;">
                 <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
