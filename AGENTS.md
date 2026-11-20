@@ -174,6 +174,7 @@ node scripts/extractFormulas.mjs
 
 ## 6. 部署与其他
 
+- **写完 HTML 后自行直接推送（不需再询问用户）**：改动与验证完成后，agent 自行执行 `git add` → `git commit`（中文 message）→ `git push origin main`；push 到 `main` 会自动触发 GitHub Pages 发布，推送完把提交号与结果告知用户即可。
 - `.github/workflows/deploy.yml` 在 push 到 `main` 时把 `src/` 直接发布到 GitHub Pages。
 - `notes/` 是站点内容的 Markdown 镜像，改公式若影响文字内容需同步。
 - `.workbuddy/memory/` 是每日开发日志，大改动后追加记录（参考已有格式）。
