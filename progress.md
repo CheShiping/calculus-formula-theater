@@ -217,6 +217,19 @@
 - 仅 `exampleBox` / 说明卡增量，未改 `formulaCard`，公式总数仍 344，`review.html` 无变化。
 - 证据：主脚本 `new Function` 语法检查 0 错误（JSON-LD 块基线不可执行）；`vm` 执行 `buildEquationDetail()` 成功，题型 A/B 均位于「二阶齐次」section 内、顺序为 A → B → 二阶非齐次，两张新例题正/反面按 `<strong>解</strong>` 正确拆分、题目面未泄漏解析。
 
+## 更新（2026-11-21·二）— 微分方程「二阶非齐次」补 k = 2/1/0 三连配套练习
+
+- `src/index.html`（`buildEquationDetail()` 的「二阶非齐次」tab，末位「无特殊情况」例题之后）新增分组「配套练习：k = 2 / 1 / 0 三连对比」+ 三张例题翻卡：
+  - **配套练习 1（k=2 二重根）**：$y''-4y'+4y=(2x-1)e^{2x}$，用 $y^*=ue^{2x}$ 化简得 $u''=2x-1$ → $a=\frac13,\ b=-\frac12$ → $y=(C_1+C_2x)e^{2x}+\left(\frac13x^3-\frac12x^2\right)e^{2x}$。
+  - **配套练习 2（k=1 单根）**：$y''-2y'-3y=(x+2)e^{-x}$，用 $y^*=ue^{-x}$ 化简得 $(u''-4u')e^{-x}$ → $a=-\frac18,\ b=-\frac{9}{16}$。
+  - **配套练习 3（k=0 非特征根）**：$y''+y'=(x+1)e^{2x}$，$y^*=(ax+b)e^{2x}$ → $a=\frac16,\ b=\frac{1}{36}$。
+- `notes/06-微分方程.md` §7.5 同步新增「难 5-6 / 5-7 / 5-8」。
+- **修正用户草稿两处计算笔误**（页面与笔记均用正确值，数值代入验证通过）：
+  - 练习 2 的 $b$：草稿 $-\frac{17}{32}$ → 正确 $-\frac{9}{16}$（由 $2a-4b=2$、$a=-\frac18$ 解得）。
+  - 练习 3 的 $b$：草稿 $-\frac{1}{36}$ → 正确 $+\frac{1}{36}$（由 $6b+5a=1$、$a=\frac16$ 解得）。
+- 仅 `exampleBox` / 说明卡增量，未改 `formulaCard`，公式总数仍 344，`review.html` 无变化。
+- 证据：主脚本 `new Function` 语法检查 0 错误（JSON-LD 块基线不可执行）；`vm` 执行 `buildEquationDetail()` 成功，三张练习卡正/反面按 `<strong>解</strong>` 正确拆分、题目面未泄漏解析；三题特解代回原方程数值校验全部通过（$x=-1,0,0.5,1,2,3$ 取样点误差 $<10^{-9}$）。
+
 ## 下一步（按优先级）
 
 1. **加新内容时**：严格走 AGENTS.md 第 4 节五步流程——先写 `notes/` 笔记 → 等用户审核 → 在 `index.html` 对应 `buildXxxDetail()` 增量追加 `formulaCard` → 跑 `extractFormulas.mjs` → `npm run dev` 核对双主题。
