@@ -3739,6 +3739,34 @@ function buildIntegralDetail() {
                 <blockquote>同一题两种解法都能算出 $\\dfrac92$，但<strong>Y 型算量比 X 型小一半</strong>——印证了「开口向右时 Y 型优先」的口诀。<strong>大题拿分关键</strong>：用 Y 型算完后再用 X 型验算一遍，答案一致才稳，专升本阅卷按步给分。</blockquote>
             `)}
 
+            ${memoryBox('题型模板 · 切线 + 坐标轴围面积最值（专升本高频 · 固定套路）', '① 设切点 $(x_0,f(x_0))$；② 求导得斜率 $k=f\'(x_0)$，写切线点斜式；③ 求横截距（$y=0$）、纵截距（$x=0$）；④ 面积 $S=\\dfrac12|a\\cdot b|$，消去绝对值得到一元函数；⑤ 求导、找驻点、判断单调性（极大 = 最大）；⑥ 代回求切线方程。⚠️ 核心坑：<strong>截距有正负，面积必须带绝对值；看清自变量定义域！</strong>')}
+
+            ${exampleBox('题型拓展示范 · 题1 指数函数切线围面积最大（y=e⁻ˣ）', `
+                <p>设曲线 $y=e^{-x}\\ (x\\ge0)$，求它的一条切线，使切线与 x 轴、y 轴围成三角形面积最大。</p>
+                <p><strong>解</strong>：设切点 $(x_0,e^{-x_0})$，$k=-e^{-x_0}$，切线：</p>
+                <p>$$y=-e^{-x_0}\\,x+e^{-x_0}(1+x_0)$$</p>
+                <p>横截距 $a=1+x_0$，纵截距 $b=e^{-x_0}(1+x_0)$（$x_0\\ge0$ 时均正，绝对值可去）：</p>
+                <p>$$S=\\frac12(1+x_0)^2e^{-x_0},\\qquad S\'=\\frac12(1+x_0)e^{-x_0}(1-x_0)$$</p>
+                <p>$x_0<1$ 递增、$x_0>1$ 递减 ⇒ $x_0=1$ 极大即最大。代回：</p>
+                <p>$$\\text{切线：}\\ y=-\\frac1e x+\\frac2e,\\qquad S_{\\max}=\\frac12\\cdot4\\cdot\\frac1e=\\frac2e$$</p>
+            `)}
+
+            <div class="practice-list">
+                <div class="practice-title" style="color:var(--color-orange);font-weight:700;margin-top:.4rem;">同类练习 2 道（难度对标题 1 模型，先做再核对）</div>
+                <div class="practice-item">1. 曲线 $y=\\ln x\\ (x&gt;0)$，求切线，使其与两坐标轴围成面积<strong>最大</strong>。 <span class="hint">（切线 $y=\\dfrac{x}{x_0}-1+\\ln x_0$，$S=\\dfrac12x_0(\\ln x_0-1)^2$；$S\'=\\dfrac12(\\ln x_0-1)(\\ln x_0+1)$，驻点 $x_0=\\tfrac1e$ 最大（$x_0=e$ 时 $S=0$ 退化）。答：切点 $\\left(\\tfrac1e,-1\\right)$，切线 $y=ex-2$，最大面积 $\\tfrac2e$。⚠️ 常见错解漏掉 $x_0=\\tfrac1e$ 这个驻点、误取 $x_0=1$ 得 $\\tfrac12$——那不是最大）</span></div>
+                <div class="practice-item">2. 曲线 $y=4-x^2\\ (x&gt;0)$，求切线，使其与 $x,y$ 轴围成面积<strong>最小</strong>（审题：是最小值！）。 <span class="hint">（切线 $y=-2x_0x+4+x_0^2$，$S=\\dfrac{(4+x_0^2)^2}{4x_0}$；$S\'=\\dfrac{(4+x_0^2)(3x_0^2-4)}{4x_0^2}$，最小在 $x_0=\\tfrac{2\\sqrt3}{3}$。答：切点 $\\left(\\tfrac{2\\sqrt3}{3},\\tfrac83\\right)$，切线 $y=-\\tfrac{4\\sqrt3}{3}x+\\tfrac{16}{3}$，最小面积 $\\tfrac{32\\sqrt3}{9}\\approx6.16$）</span></div>
+            </div>
+
+            ${exampleBox('审题陷阱 · 题4 y=√x 围面积「最小」——单调函数没有内部最值', `
+                <p>曲线 $y=\\sqrt{x}\\ (x&gt;0)$，求切线，使切线与坐标轴围成面积最小。</p>
+                <p><strong>解</strong>：设切点 $(x_0,\\sqrt{x_0})$，$k=\\dfrac{1}{2\\sqrt{x_0}}$，切线：</p>
+                <p>$$y=\\frac{x}{2\\sqrt{x_0}}+\\frac{\\sqrt{x_0}}{2}$$</p>
+                <p>纵截距 $b=\\dfrac{\\sqrt{x_0}}{2}$；横截距 $a$：$0=\\dfrac{x}{2\\sqrt{x_0}}+\\dfrac{\\sqrt{x_0}}{2}\\Rightarrow a=-x_0$（在<strong>负半轴</strong>）。面积：</p>
+                <p>$$S=\\frac12\\,x_0\\cdot\\frac{\\sqrt{x_0}}{2}=\\frac{x_0^{3/2}}{4}$$</p>
+                <p>$S\'=\\dfrac{3\\sqrt{x_0}}{8}&gt;0$，$S$ <strong>单调递增，无驻点</strong>——切点越靠左面积越小，$x_0\\to0^+$ 时 $S\\to0$（切线退化过原点）。所以本题<strong>没有非退化的最小值</strong>（下确界 0 取不到）。</p>
+                <blockquote>⚠️ 常见错解给「切点 $\\left(\\tfrac14,\\tfrac12\\right)$、切线 $y=x+\\tfrac14$、面积 $\\tfrac18$」——错两处：① 面积漏乘 $\\tfrac12$（$x_0=\\tfrac14$ 时实际是 $\\tfrac1{32}$）；② $S(x_0)=\\tfrac{x_0^{3/2}}4$ 单调递增，$x_0=\\tfrac14$ 根本不是最小。教训：写完 $S(x_0)$ 先求导看单调性，<strong>单调函数没有内部最值</strong>；若题目限定 $0&lt;x_0\\le\\tfrac14$，最小才在端点 $x_0=\\tfrac14$、$S=\\tfrac1{32}$。</blockquote>
+            `)}
+
             ${groupTitle('fa-sync', '12.2 旋转体体积', 'var(--color-green)')}
             <div class="formula-grid">
                 ${formulaCard('X', '体积 · 绕 x 轴', '$$V=\\pi\\int_a^b\\big[f(x)\\big]^2\\,dx$$', '薄片法，把 f(x) 平方再积', 'var(--color-green)')}
