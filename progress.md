@@ -207,6 +207,16 @@
 - 仅 `exampleBox` / 说明卡 / `memoryBox` 增量，未改 `formulaCard`，公式总数仍 344，`review.html` 无变化。
 - 证据：主脚本 `new Function` 语法检查 0 错误（JSON-LD 块基线不可执行）；`vm` 执行 `buildEquationDetail()` 成功，两组标题顺序正确（3.4 → 3.5 → 一阶方法选择顺序），新例题正/反面按 `<strong>解</strong>` 正确拆分、题目面未泄漏解析。
 
+## 更新（2026-11-21）— 微分方程「二阶齐次」补两类定解条件题型（极值 / 极限）
+
+- `src/index.html`（`buildEquationDetail()` 的「二阶齐次」tab，韦达定另一根例题之后）新增两组：
+  - **题型 A：极值作为初始条件**：核心卡 $x=x_0$ 取极值 $A$ ⇒ $y(x_0)=A,\ y'(x_0)=0$（一次拿两个条件）+ 例题翻卡 $y''-3y'+2y=0$、$x=0$ 取极值 $4$ → $r=1,2$，$C_1=8,\ C_2=-4$，$y=8e^x-4e^{2x}$。
+  - **题型 B：极限作为初始条件**：核心卡 $\lim_{x\to0}\frac{y(x)}{x}=k$ ⇒ $y(0)=0,\ y'(0)=k$（一个极限条件 = 两个初始条件）+ 例题翻卡 $y''-4y'+4y=0$、$\lim\frac{y(x)}{x}=2$ → 重根 $y=(C_1+C_2x)e^{2x}$，$C_1=0,\ C_2=2$，$y=2xe^{2x}$。
+- `notes/06-微分方程.md` §7.4 同步新增「难 4-5（题型 A）」「难 4-6（题型 B）」，与页面文字一致。
+- 两题未检索到原卷出处（用户提供的新题型），按专升本同等难度通式标注，未冒认省份年份。
+- 仅 `exampleBox` / 说明卡增量，未改 `formulaCard`，公式总数仍 344，`review.html` 无变化。
+- 证据：主脚本 `new Function` 语法检查 0 错误（JSON-LD 块基线不可执行）；`vm` 执行 `buildEquationDetail()` 成功，题型 A/B 均位于「二阶齐次」section 内、顺序为 A → B → 二阶非齐次，两张新例题正/反面按 `<strong>解</strong>` 正确拆分、题目面未泄漏解析。
+
 ## 下一步（按优先级）
 
 1. **加新内容时**：严格走 AGENTS.md 第 4 节五步流程——先写 `notes/` 笔记 → 等用户审核 → 在 `index.html` 对应 `buildXxxDetail()` 增量追加 `formulaCard` → 跑 `extractFormulas.mjs` → `npm run dev` 核对双主题。

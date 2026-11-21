@@ -4492,6 +4492,58 @@ function buildEquationDetail() {
                 <p>$$\\boxed{\\,y=C_1e^{2x}+C_2e^{3x}\\,}$$</p>
                 <p>💡 <strong>抢分点</strong>：① 「已知一个解」本质是「已知一个特征根」；② 用韦达「两根和 $=5$、两根积 $=6$」或试除 $(r-2)$ 定另一根；③ 两根之比非恒常数即线性无关，才可直接相加成通解。</p>
             `)}
+
+            ${groupTitle('fa-bullseye', '题型 A：极值作为初始条件（y(x₀)=A，y′(x₀)=0）', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-label" style="color:var(--accent-yellow-text);">核心结论</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">若 $y(x)$ 在 $x=x_0$ 处取得极值 $A$（且可导），则「极值」两个字一次给出<strong>两个条件</strong>：</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$y(x_0)=A,\\qquad y'(x_0)=0$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:1rem;"><strong>套路</strong>：特征方程 → 通解（含 $C_1,C_2$）→ 用 $y(x_0)=A$ 与 $y'(x_0)=0$ 列两个方程 → 解出 $C_1,C_2$。二阶方程正好两个未知常数，两个条件刚好定死。</div>
+            </div>
+
+            ${exampleBox('难度提升 · 题型 A（极值定初始条件）· y\'\'-3y\'+2y=0，x=0 取极值 4', `
+                <p>设 $y=y(x)$ 是 $y''-3y'+2y=0$ 的解，且在 $x=0$ 处取得极值 $4$，求 $y(x)$。</p>
+                <p><strong>来源</strong>：专升本高频经典题型（未检索到原卷，同等难度通式）。</p>
+                <strong>解</strong>：
+                <p><strong>① 特征方程</strong>：</p>
+                <p>$$r^2-3r+2=0\\;\\Longrightarrow\\;(r-1)(r-2)=0\\;\\Longrightarrow\\;r_1=1,\\ r_2=2$$</p>
+                <p><strong>② 通解</strong>（两个不相等实根）：</p>
+                <p>$$y=C_1e^{x}+C_2e^{2x},\\qquad y'=C_1e^{x}+2C_2e^{2x}$$</p>
+                <p><strong>③ 翻译条件</strong>：在 $x=0$ 处取极值 $4$ ⇒ $y(0)=4$ 且 $y'(0)=0$：</p>
+                <p>$$\\begin{cases}C_1+C_2=4\\\\ C_1+2C_2=0\\end{cases}\\;\\Longrightarrow\\;C_1=8,\\ C_2=-4$$</p>
+                <p><strong>④ 写出特解</strong>：</p>
+                <p>$$\\boxed{\\,y(x)=8e^{x}-4e^{2x}\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：「极值」一次给出<strong>两个</strong>条件——函数值 $y(0)=4$ + 导数 $y'(0)=0$；只写 $y(0)=4$ 会缺一个方程，定不出两个常数。</p>
+            `)}
+
+            ${groupTitle('fa-divide', '题型 B：极限作为初始条件（lim y(x)/x = k）', '#FF6B9D')}
+            <div class="formula-card" style="--card-accent:#FF6B9D;margin-bottom:1rem;">
+                <div class="formula-label" style="color:#FF6B9D;">核心结论</div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);">已知 $\\lim\\limits_{x\\to0}\\dfrac{y(x)}{x}=k$（$k$ 为有限数）：分母 $\\to0$ 而极限存在 ⇒ 分子也必须 $\\to0$，即 $y(0)=0$；再用导数定义：</div>
+                <div class="formula-block" style="border:none;background:none;padding:0;">
+                    $$\\lim_{x\\to0}\\frac{y(x)}{x}=\\lim_{x\\to0}\\frac{y(x)-y(0)}{x-0}=y'(0)=k$$
+                </div>
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);margin-top:1rem;"><strong>即「一个极限条件」等价于「两个初始条件」</strong>：$y(0)=0$、$y'(0)=k$。若题目给的是 $\\lim\\limits_{x\\to x_0}\\dfrac{y(x)}{x-x_0}=k$，则换成 $y(x_0)=0,\\ y'(x_0)=k$。</div>
+            </div>
+
+            ${exampleBox('难度提升 · 题型 B（极限定初始条件）· y\'\'-4y\'+4y=0，lim y(x)/x=2', `
+                <p>设函数 $y=y(x)$ 满足 $y''-4y'+4y=0$，且 $\\displaystyle\\lim_{x\\to0}\\frac{y(x)}{x}=2$，求 $y(x)$。</p>
+                <p><strong>来源</strong>：专升本高频经典题型（未检索到原卷，同等难度通式）。</p>
+                <strong>解</strong>：
+                <p><strong>① 特征方程</strong>：</p>
+                <p>$$r^2-4r+4=0\\;\\Longrightarrow\\;(r-2)^2=0\\;\\Longrightarrow\\;r_1=r_2=2\\ \\text{（重根）}$$</p>
+                <p><strong>② 通解</strong>（两个相等实根，重的那个乘 $x$）：</p>
+                <p>$$y=(C_1+C_2x)e^{2x}$$</p>
+                <p><strong>③ 翻译极限条件</strong>：分母 $x\\to0$ 而极限存在有限 ⇒ 分子 $y(0)=0$，代入通解得 $C_1=0$：</p>
+                <p>$$y=C_2xe^{2x}$$</p>
+                <p>再算极限（也等价于 $y'(0)=2$）：</p>
+                <p>$$\\lim_{x\\to0}\\frac{C_2xe^{2x}}{x}=\\lim_{x\\to0}C_2e^{2x}=C_2=2$$</p>
+                <p><strong>④ 写出特解</strong>：</p>
+                <p>$$\\boxed{\\,y(x)=2xe^{2x}\\,}$$</p>
+                <p>💡 <strong>抢分点</strong>：见到 $\\lim\\limits_{x\\to0}\\dfrac{y(x)}{x}=k$ 就翻译成 $y(0)=0,\\ y'(0)=k$（洛必达一步即 $y'(0)$）；重根通解 $(C_1+C_2x)e^{2x}$ 里的 $x$ 别漏。</p>
+            `)}
         </div>
     `;
 
