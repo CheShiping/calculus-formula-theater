@@ -5767,6 +5767,30 @@ function buildDoubleIntDetail() {
                 <blockquote>$\\cos\\theta\\sin^3\\theta$ 在 $[0,\\pi]$ 上关于 $\\theta=\\frac\\pi2$ 对称、为奇，故为 $0$；几何上偏心圆关于 $y$ 轴对称，形心横坐标 $x=0$，故成立。<strong>看见圆的方程里出现单独的 $y$（或 $x$）项，一定是偏心圆，先配方再用 $r=2\\sin\\theta$（或 $2\\cos\\theta$）。</strong></blockquote>
             `)}
 
+            ${groupTitle('fa-arrows-to-dot', '题型：极坐标 + 对称性（先化简，再算）', '#FF9F0A')}
+            <div class="section-desc">看到圆 / 圆环先别急着整套搬极坐标：<strong>先用对称性把能归零的项划掉，剩下的再转极坐标</strong>。题 1 的图形关于 $y$ 轴对称、$x^2$ 对 $x$ 为偶，可只算右半再乘 2；题 2 的圆环双对称，$xy$ 直接归零。</div>
+
+            ${exampleBox('例题 3（专升本难度 · 偏心圆 + 对称性）', `
+                <p>$D:\\ x^2+y^2\\le2y$，求 $I=\\iint_D x^2\\,dx\\,dy$。</p>
+                <p><strong>解</strong>：① 对称性：图形 $D$ 是圆心 $(0,1)$、半径 $1$ 的圆，关于 $y$ 轴对称；$f=x^2$ 对 $x$ 为偶函数 ⟹ 只算右半（$0\\le\\theta\\le\\frac\\pi2$）再乘 $2$。</p>
+                <p>② 极坐标：$r=2\\sin\\theta$，$x^2=r^2\\cos^2\\theta$，$dx\\,dy=r\\,dr\\,d\\theta$：</p>
+                <p>$$I=2\\int_0^{\\frac\\pi2}d\\theta\\int_0^{2\\sin\\theta}r^2\\cos^2\\theta\\cdot r\\,dr=2\\int_0^{\\frac\\pi2}\\cos^2\\theta\\cdot\\frac{(2\\sin\\theta)^4}{4}\\,d\\theta=8\\int_0^{\\frac\\pi2}\\sin^4\\theta\\cos^2\\theta\\,d\\theta$$</p>
+                <p>③ 混合华里士：$\\displaystyle\\int_0^{\\frac\\pi2}\\sin^m\\theta\\cos^n\\theta\\,d\\theta=\\frac{(m-1)!!(n-1)!!}{(m+n)!!}\\cdot\\frac\\pi2$（$m,n$ 都为偶），所以</p>
+                <p>$$\\int_0^{\\frac\\pi2}\\sin^4\\theta\\cos^2\\theta\\,d\\theta=\\frac{3!!\\cdot1!!}{6!!}\\cdot\\frac\\pi2=\\frac{3}{6\\cdot4\\cdot2}\\cdot\\frac\\pi2=\\frac{\\pi}{32}$$</p>
+                <p class="ex-answer">$$I=8\\cdot\\frac{\\pi}{32}=\\frac{\\pi}{4}$$</p>
+                <blockquote>也可拆成 $\\sin^4\\theta\\cos^2\\theta=\\sin^4\\theta-\\sin^6\\theta$，用点火公式验证：$\\frac{3\\pi}{16}-\\frac{5\\pi}{32}=\\frac{\\pi}{32}$。</blockquote>
+            `)}
+
+            ${exampleBox('例题 4（专升本难度 · 圆环 + 对称性）', `
+                <p>$D:\\ 1\\le x^2+y^2\\le4$，求 $I=\\iint_D\\big(xy+x^2+y^2\\big)dx\\,dy$。</p>
+                <p><strong>解</strong>：① 拆项：$I=\\iint_D xy\\,dx\\,dy+\\iint_D(x^2+y^2)\\,dx\\,dy$。</p>
+                <p>② 对称性：圆环关于 $x$ 轴、$y$ 轴都对称，$f=xy$ 对 $y$ 是奇函数（对 $x$ 也是奇）⟹ $\\iint_D xy\\,dx\\,dy=0$，只剩 $\\iint_D(x^2+y^2)\\,dx\\,dy$。</p>
+                <p>③ 极坐标：$r\\in[1,2]$、$\\theta\\in[0,2\\pi]$、$x^2+y^2=r^2$：</p>
+                <p>$$I=\\int_0^{2\\pi}d\\theta\\int_1^2 r^2\\cdot r\\,dr=\\int_0^{2\\pi}\\Big[\\frac{r^4}{4}\\Big]_1^2d\\theta=\\int_0^{2\\pi}\\frac{15}{4}\\,d\\theta=\\frac{15}{4}\\cdot2\\pi$$</p>
+                <p class="ex-answer">$$I=\\frac{15\\pi}{2}$$</p>
+                <blockquote>圆环双对称时，$xy$、$x$、$y$ 这类「奇数次」项先直接归零，别搬进极坐标白算一遍。</blockquote>
+            `)}
+
             ${groupTitle('fa-volcano', '含绝对值的极坐标（冲刺 150 看）', '#FF3B30')}
             <div class="section-desc">满分级压轴内容，一般掌握上式即可；冲 150 再看这里。<strong>极坐标里拆绝对值：先找 $r=$ 常数分界线（$x^2+y^2=r^2$），再用区域可加性拆环域。</strong></div>
             ${exampleBox('冲刺例题（极坐标绝对值）', `

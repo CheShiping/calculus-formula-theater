@@ -241,6 +241,16 @@
 - `notes/08-多元函数积分学-二重积分.md` §四 同步重写为 4.1~4.4。
 - 证据：inline script `new Function` 语法检查 0 错误；`formulas.js` 动态 import 成功（437 条，dblint_013/014/015 标签正确）；浏览器实测 index「对称性」tab 三段 + 两例题 + 自测表均正常，review.html 翻卡页同步出现「对 x 的奇 / 偶」「对 y 的奇 / 偶」，无 JS error。
 
+## 更新（2026-11-23·二）— 极坐标新增「极坐标 + 对称性」两道题型
+
+- `src/index.html`（`buildDoubleIntDetail()` 的「极坐标」tab，2008 河南真题之后）新增分组「题型：极坐标 + 对称性（先化简，再算）」：
+  - 例题 3：$D:x^2+y^2\le2y$，求 $\iint_D x^2\,dx\,dy$。图形关于 $y$ 轴对称、$x^2$ 对 $x$ 偶 → 右半乘 2；极坐标 $r=2\sin\theta$，混合华里士得 $\int_0^{\pi/2}\sin^4\theta\cos^2\theta=\pi/32$，故 $I=\pi/4$。
+  - 例题 4：$D:1\le x^2+y^2\le4$，求 $\iint_D(xy+x^2+y^2)$。圆环双对称，$xy$ 对 $y$ 为奇 → 0；余下极坐标得 $\frac{15\pi}{2}$。
+- 修正草稿中华里士那一行的乘积笔误（$3/4\cdot1/2\cdot1/2\cdot\pi/2=3\pi/32$，与作者自己写的 $\pi/32$ 不一致）；最终答案 $\pi/4$ 正确，页面改为标准混合华里士 $\frac{(m-1)!!(n-1)!!}{(m+n)!!}\cdot\frac{\pi}{2}$。
+- `notes/08-多元函数积分学-二重积分.md` §5.2 同步新增「题型：极坐标 + 对称性」，两题完整过程。
+- 仅 `exampleBox` 增量，未改公式卡；总数 437 不变。
+- 证据：语法检查 0 错误；数值积分校验 $I_2=0.785398\approx\pi/4$、$I_3=23.5619\approx15\pi/2$；浏览器实测极坐标 tab 新分组、两题翻卡与公式渲染正常，无 JS error。
+
 ## 下一步（按优先级）
 
 1. **加新内容时**：严格走 AGENTS.md 第 4 节五步流程——先写 `notes/` 笔记 → 等用户审核 → 在 `index.html` 对应 `buildXxxDetail()` 增量追加 `formulaCard` → 跑 `extractFormulas.mjs` → `npm run dev` 核对双主题。
