@@ -5615,11 +5615,22 @@ function buildDoubleIntDetail() {
     const symBody = `
         <div class="detail-section" id="di-sym">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-arrows-to-dot"></i> 普通对称性（奇偶性）</div>
-            <div class="section-desc">先回忆一元：$g(-t)=-g(t)$ 是奇函数，$g(-t)=g(t)$ 是偶函数。二重积分里的「对 $x$ 奇偶、对 $y$ 奇偶」，就是把它拆成两个方向——<strong>单独固定另一个变量不动，只变这一个</strong>。用法也和一元一致：<strong>奇函数积分为 0，偶函数取 2 倍</strong>。</div>
+            <div class="section-desc">先回忆一元：$g(-t)=-g(t)$ 是奇函数，$g(-t)=g(t)$ 是偶函数。二重积分里的「对 $x$ 奇偶、对 $y$ 奇偶」，就是把它拆成两个方向——<strong>单独固定另一个变量不动，只变这一个</strong>。<br><strong>关键前提：这里的对称性，说的是积分区域（图形 $D$）本身的形状关于 $x$ 轴或 $y$ 轴对称，不是被积函数 $f$ 的图像对称。</strong>图形对称在哪条轴，就去看被积函数对<strong>另一个</strong>变量的奇偶。</div>
 
-            ${groupTitle('fa-arrows-left-right', '① 关于 x 的奇偶（只换 x → −x，y 不动）', '#FF3B30')}
+            ${groupTitle('fa-diagram-project', '第一步：图形对称性 ↔ 被积函数奇偶（别配错）', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <table style="width:100%;font-size:0.88rem;">
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">图形 $D$ 本身</td><td style="padding:0.3rem 0;color:var(--text-muted);">看被积函数对谁</td><td style="padding:0.3rem 0;color:var(--text-muted);">奇函数</td><td style="padding:0.3rem 0;color:var(--text-muted);">偶函数</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;"><strong>关于 $y$ 轴对称</strong>（左右：有 $(x,y)$ 就有 $(-x,y)$）</td><td style="padding:0.3rem 0;">对 $x$</td><td style="padding:0.3rem 0;color:#FF3B30;font-weight:700;">积分 $=0$</td><td style="padding:0.3rem 0;">$2$ 倍右半</td></tr>
+                        <tr><td style="padding:0.3rem 0;"><strong>关于 $x$ 轴对称</strong>（上下：有 $(x,y)$ 就有 $(x,-y)$）</td><td style="padding:0.3rem 0;">对 $y$</td><td style="padding:0.3rem 0;color:#FF3B30;font-weight:700;">积分 $=0$</td><td style="padding:0.3rem 0;">$2$ 倍上半</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            ${groupTitle('fa-arrows-left-right', '① 图形关于 y 轴对称 → 看被积函数对 x 的奇偶（只换 x → −x，y 不动）', '#FF3B30')}
             <div class="formula-grid">
-                ${formulaCard('对1', '对 x 的奇 / 偶', '$$f(-x,y)=-f(x,y)\\Rightarrow\\iint_D f=0;\\qquad f(-x,y)=f(x,y)\\Rightarrow\\iint_D f=2\\iint_{D_{\\text{右}}}f$$', '例：x、xy 对 x 为奇；x²、x²+y² 对 x 为偶；x³+y 非奇非偶。前提：区域关于 y 轴对称（左右对称）', '#FF3B30')}
+                ${formulaCard('对1', '对 x 的奇 / 偶', '$$f(-x,y)=-f(x,y)\\Rightarrow\\iint_D f=0;\\qquad f(-x,y)=f(x,y)\\Rightarrow\\iint_D f=2\\iint_{D_{\\text{右}}}f$$', '例：x、xy 对 x 为奇；x²、x²+y² 对 x 为偶；x³+y 非奇非偶。前提：图形 D 关于 y 轴对称（左右对称）', '#FF3B30')}
             </div>
             ${exampleBox('例题（专升本难度 · 对 x 为奇）', `
                 <p>$D:\\ x^2+y^2\\le2y$（圆心 $(0,1)$、半径 $1$，关于 $y$ 轴对称），求 $\\iint_D x\\,dx\\,dy$。</p>
@@ -5629,9 +5640,9 @@ function buildDoubleIntDetail() {
                 <blockquote>同一道题在「极坐标」里要算 $\\int_0^\\pi\\cos\\theta\\sin^3\\theta\\,d\\theta$ 才得 $0$；用对称性一眼看穿，这就是先想对称性的价值。</blockquote>
             `)}
 
-            ${groupTitle('fa-arrows-up-down', '② 关于 y 的奇偶（只换 y → −y，x 不动）', '#0A84FF')}
+            ${groupTitle('fa-arrows-up-down', '② 图形关于 x 轴对称 → 看被积函数对 y 的奇偶（只换 y → −y，x 不动）', '#0A84FF')}
             <div class="formula-grid">
-                ${formulaCard('对2', '对 y 的奇 / 偶', '$$f(x,-y)=-f(x,y)\\Rightarrow\\iint_D f=0;\\qquad f(x,-y)=f(x,y)\\Rightarrow\\iint_D f=2\\iint_{D_{\\text{上}}}f$$', '例：y、xy 对 y 为奇；y²、x²+y² 对 y 为偶。前提：区域关于 x 轴对称（上下对称）', '#0A84FF')}
+                ${formulaCard('对2', '对 y 的奇 / 偶', '$$f(x,-y)=-f(x,y)\\Rightarrow\\iint_D f=0;\\qquad f(x,-y)=f(x,y)\\Rightarrow\\iint_D f=2\\iint_{D_{\\text{上}}}f$$', '例：y、xy 对 y 为奇；y²、x²+y² 对 y 为偶。前提：图形 D 关于 x 轴对称（上下对称）', '#0A84FF')}
             </div>
             ${exampleBox('例题（专升本难度 · 对 y 为奇）', `
                 <p>$D:\\ x^2+y^2\\le2x$（圆心 $(1,0)$、半径 $1$，关于 $x$ 轴对称），求 $\\iint_D y\\,dx\\,dy$。</p>
@@ -5646,7 +5657,7 @@ function buildDoubleIntDetail() {
                 ${formulaCard('对3', '两轴都对称', '$$f\\ \\text{对 }x,y\\ \\text{都为偶}\\Rightarrow\\iint_D f=4\\iint_{D_{1}}f;\\qquad \\text{对某个变量为奇}\\Rightarrow\\iint_D f=0$$', '例：x²+y² 两方向都偶 → 4 倍第一象限；x、y、xy 某方向为奇 → 0', '#6fae87')}
             </div>
 
-            ${memoryBox('一句话区分 + 最大坑', '看<strong>对 x 的奇偶</strong>：只换 $x\\to -x$、y 不动 → 搭配<strong>区域关于 y 轴对称</strong>（左右）；看<strong>对 y 的奇偶</strong>：只换 $y\\to -y$、x 不动 → 搭配<strong>区域关于 x 轴对称</strong>（上下）。<br><strong>口诀：先看区域对称轴，再看被积函数奇偶；对轴的那一变量，偶数翻倍、奇数归零。</strong><br><strong>⚠️ 大坑：奇偶性是函数属性，能不能用「奇零偶倍」，要看区域有没有对应的对称性！</strong>函数是奇函数，但区域不对称 → 不能直接写 0。例如 $f=x$ 是奇函数，但取 $D:[1,2]\\times[0,1]$（不关于 $y$ 轴对称），$\\iint_D x\\,dx\\,dy=\\frac32\\ne0$。')}
+            ${memoryBox('一句话区分 + 最大坑', '<strong>先看图形，再判函数</strong>：图形 $D$ 关于 $y$ 轴对称（左右）→ 看被积函数对 $x$ 的奇偶；图形 $D$ 关于 $x$ 轴对称（上下）→ 看被积函数对 $y$ 的奇偶。<br><strong>口诀：先看图形对称轴，再看被积函数奇偶；对轴的那一变量，偶数翻倍、奇数归零。</strong><br><strong>⚠️ 大坑：图形对称和函数奇偶是两回事，必须同时满足才能用！</strong>被积函数是奇函数，但图形不关于对应轴对称 → 不能直接写 0。例如 $f=x$ 是奇函数，但取 $D:[1,2]\\times[0,1]$（图形不关于 $y$ 轴对称），$\\iint_D x\\,dx\\,dy=\\frac32\\ne0$。')}
 
             ${groupTitle('fa-table-list', '快速自测（两个方向分开判）', '#FF9F0A')}
             <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">

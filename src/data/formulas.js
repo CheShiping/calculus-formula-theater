@@ -2224,7 +2224,7 @@ export const FORMULAS = [
     num: '对1',
     label: '对 x 的奇 / 偶',
     formula: '$$f(-x,y)=-f(x,y)\\Rightarrow\\iint_D f=0;\\qquad f(-x,y)=f(x,y)\\Rightarrow\\iint_D f=2\\iint_{D_{\\text{右}}}f$$',
-    note: '只换 x、y 不动；前提是区域关于 y 轴对称（左右）：奇归零、偶翻倍',
+    note: '只换 x、y 不动；前提是图形 D 关于 y 轴对称（左右）：奇归零、偶翻倍',
     color: '#FF3B30',
   },
   {
@@ -2233,7 +2233,7 @@ export const FORMULAS = [
     num: '对2',
     label: '对 y 的奇 / 偶',
     formula: '$$f(x,-y)=-f(x,y)\\Rightarrow\\iint_D f=0;\\qquad f(x,-y)=f(x,y)\\Rightarrow\\iint_D f=2\\iint_{D_{\\text{上}}}f$$',
-    note: '只换 y、x 不动；前提是区域关于 x 轴对称（上下）：奇归零、偶翻倍',
+    note: '只换 y、x 不动；前提是图形 D 关于 x 轴对称（上下）：奇归零、偶翻倍',
     color: '#0A84FF',
   },
   {
