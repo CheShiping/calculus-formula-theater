@@ -133,7 +133,7 @@ node scripts/extractFormulas.mjs
 ### 第 5 步 · 验证 + 记录
 - `npm run dev` 打开 `http://localhost:8001`，肉眼核对 index 详情页与 review 翻卡页公式正确、双主题无错位。
 - 更新 `feature_list.json`（公式数、状态）与 `progress.md`（证据、下一步）。
-- 提交：`feat(notes): ...` 或 `feat(index): ...`（中文描述）。
+- 提交并推送：`git add` → `git commit`（`feat(notes): ...` / `feat(index): ...`，中文描述）→ `git push origin main`；**做完即推，无需再问用户**（唯一例外：用户明确要求先别推）。
 
 **一句话口诀：笔记(人工初版→AI润色)→用户审核→index.html 增量→extractFormulas→review 自动同步。**
 
@@ -174,7 +174,8 @@ node scripts/extractFormulas.mjs
 
 ## 6. 部署与其他
 
-- **写完 HTML 后自行直接推送（不需再询问用户）**：改动与验证完成后，agent 自行执行 `git add` → `git commit`（中文 message）→ `git push origin main`；push 到 `main` 会自动触发 GitHub Pages 发布，推送完把提交号与结果告知用户即可。
+- **做完就自动推送（默认铁律，不需询问用户）**：无论是改 `notes/`、`src/index.html`、`src/data/formulas.js` 还是其他文档，只要改动完成且验证通过，agent **立即**执行 `git add` → `git commit`（中文 message）→ `git push origin main`；**不许先问「要不要推送」，也不许留到下一轮**。push 到 `main` 会自动触发 GitHub Pages 发布，推送完把提交号与结果告诉用户即可。
+- **唯一例外**：用户明确说「先别推 / 我来推 / 只改本地」时，才停在本地不 push。
 - `.github/workflows/deploy.yml` 在 push 到 `main` 时把 `src/` 直接发布到 GitHub Pages。
 - `notes/` 是站点内容的 Markdown 镜像，改公式若影响文字内容需同步。
 - `.workbuddy/memory/` 是每日开发日志，大改动后追加记录（参考已有格式）。
