@@ -5615,23 +5615,53 @@ function buildDoubleIntDetail() {
     const symBody = `
         <div class="detail-section" id="di-sym">
             <div class="section-title" style="color:${C};"><i class="fa-solid fa-arrows-to-dot"></i> 普通对称性（奇偶性）</div>
-            <div class="section-desc">一元定积分有「偶倍奇零」$\\int_{-a}^a$（偶 2 倍、奇 0）；二重积分把它<strong>推广到平面区域</strong>上——<strong>区域关于哪条轴对称，就看被积函数对哪个变量是奇是偶</strong>。<strong>口诀：对轴的那一变量，偶数翻倍、奇数归零。</strong></div>
+            <div class="section-desc">先回忆一元：$g(-t)=-g(t)$ 是奇函数，$g(-t)=g(t)$ 是偶函数。二重积分里的「对 $x$ 奇偶、对 $y$ 奇偶」，就是把它拆成两个方向——<strong>单独固定另一个变量不动，只变这一个</strong>。用法也和一元一致：<strong>奇函数积分为 0，偶函数取 2 倍</strong>。</div>
 
-            ${groupTitle('fa-clone', '规则（普通对称性）', '#FF3B30')}
+            ${groupTitle('fa-arrows-left-right', '① 关于 x 的奇偶（只换 x → −x，y 不动）', '#FF3B30')}
             <div class="formula-grid">
-                ${formulaCard('对1', '关于 y 轴对称', '$$f(-x,y)=f(x,y)\\Rightarrow\\iint_D f=2\\iint_{D_{\\text{右}}}f;\\quad f(-x,y)=-f(x,y)\\Rightarrow\\iint_D f=0$$', '左右对称，看对 x 的奇偶：偶翻倍、奇归零', '#FF3B30')}
-                ${formulaCard('对2', '关于 x 轴对称', '$$f(x,-y)=f(x,y)\\Rightarrow\\iint_D f=2\\iint_{D_{\\text{上}}}f;\\quad f(x,-y)=-f(x,y)\\Rightarrow\\iint_D f=0$$', '上下对称，看对 y 的奇偶：偶翻倍、奇归零', '#0A84FF')}
-                ${formulaCard('对3', '两轴都对称', '$$f\\ \\text{对 }x,y\\ \\text{都为偶}\\Rightarrow\\iint_D f=4\\iint_{D_{I}}f;\\quad \\text{对某变量为奇}\\Rightarrow 0$$', '圆 / 以原点为中心矩形：4 倍第一象限', '#6fae87')}
+                ${formulaCard('对1', '对 x 的奇 / 偶', '$$f(-x,y)=-f(x,y)\\Rightarrow\\iint_D f=0;\\qquad f(-x,y)=f(x,y)\\Rightarrow\\iint_D f=2\\iint_{D_{\\text{右}}}f$$', '例：x、xy 对 x 为奇；x²、x²+y² 对 x 为偶；x³+y 非奇非偶。前提：区域关于 y 轴对称（左右对称）', '#FF3B30')}
             </div>
-            ${memoryBox('口诀', '先看区域对称轴，再看被积函数奇偶；对轴的那一变量：<strong>偶数翻倍、奇数归零</strong>。看到区域对称、被积函数「单独一个变量」或「含奇数次那个变量」时，别急着算——先想对称性，多数直接归零。')}
-            ${exampleBox('例题（专升本难度 · 对称性）', `
-                <p>设 $D:\\ x^2+y^2\\le1$，求 $\\iint_D\\left(x+xy^2\\right)dx\\,dy$。</p>
-                <p><strong>解</strong>：① 区域是单位圆，关于 $x$ 轴、$y$ 轴都对称。</p>
-                <p>② 拆开两项分别看：</p>
-                <p>$$\\iint_D x\\,dx\\,dy=0 \\quad(\\text{对 }y\\text{ 轴为奇函数});\\qquad \\iint_D xy^2\\,dx\\,dy=0 \\quad(\\text{对 }x\\text{ 为奇})$$</p>
-                <p class="ex-answer">$$\\iint_D\\left(x+xy^2\\right)dx\\,dy=0+0=0$$</p>
-                <blockquote>这是定积分「偶倍奇零」在二重积分里的二维版：区域对称 + 被积函数含奇数次该变量 → 直接归零。</blockquote>
+            ${exampleBox('例题（专升本难度 · 对 x 为奇）', `
+                <p>$D:\\ x^2+y^2\\le2y$（圆心 $(0,1)$、半径 $1$，关于 $y$ 轴对称），求 $\\iint_D x\\,dx\\,dy$。</p>
+                <p><strong>解</strong>：① 只看函数：$f(x,y)=x$，把 $x$ 换成 $-x$：$f(-x,y)=-x=-f(x,y)$ ⟹ <strong>对 $x$ 是奇函数</strong>。</p>
+                <p>② 再看区域：$D$ 关于 $y$ 轴对称（有 $(x,y)$ 就有 $(-x,y)$），恰好配上「对 $x$ 的奇偶」。</p>
+                <p class="ex-answer">$$\\iint_D x\\,dx\\,dy=0$$</p>
+                <blockquote>同一道题在「极坐标」里要算 $\\int_0^\\pi\\cos\\theta\\sin^3\\theta\\,d\\theta$ 才得 $0$；用对称性一眼看穿，这就是先想对称性的价值。</blockquote>
             `)}
+
+            ${groupTitle('fa-arrows-up-down', '② 关于 y 的奇偶（只换 y → −y，x 不动）', '#0A84FF')}
+            <div class="formula-grid">
+                ${formulaCard('对2', '对 y 的奇 / 偶', '$$f(x,-y)=-f(x,y)\\Rightarrow\\iint_D f=0;\\qquad f(x,-y)=f(x,y)\\Rightarrow\\iint_D f=2\\iint_{D_{\\text{上}}}f$$', '例：y、xy 对 y 为奇；y²、x²+y² 对 y 为偶。前提：区域关于 x 轴对称（上下对称）', '#0A84FF')}
+            </div>
+            ${exampleBox('例题（专升本难度 · 对 y 为奇）', `
+                <p>$D:\\ x^2+y^2\\le2x$（圆心 $(1,0)$、半径 $1$，关于 $x$ 轴对称），求 $\\iint_D y\\,dx\\,dy$。</p>
+                <p><strong>解</strong>：① 只看函数：$f(x,y)=y$，把 $y$ 换成 $-y$：$f(x,-y)=-y=-f(x,y)$ ⟹ <strong>对 $y$ 是奇函数</strong>。</p>
+                <p>② 再看区域：$D$ 关于 $x$ 轴对称（有 $(x,y)$ 就有 $(x,-y)$），恰好配上「对 $y$ 的奇偶」。</p>
+                <p class="ex-answer">$$\\iint_D y\\,dx\\,dy=0$$</p>
+                <blockquote>方向别配错：<strong>对 $y$ 的奇偶，配的是关于 $x$ 轴对称</strong>（上下），不是关于 $y$ 轴。</blockquote>
+            `)}
+
+            ${groupTitle('fa-clone', '③ 两轴都对称（圆、以原点为中心的矩形）', '#6fae87')}
+            <div class="formula-grid">
+                ${formulaCard('对3', '两轴都对称', '$$f\\ \\text{对 }x,y\\ \\text{都为偶}\\Rightarrow\\iint_D f=4\\iint_{D_{1}}f;\\qquad \\text{对某个变量为奇}\\Rightarrow\\iint_D f=0$$', '例：x²+y² 两方向都偶 → 4 倍第一象限；x、y、xy 某方向为奇 → 0', '#6fae87')}
+            </div>
+
+            ${memoryBox('一句话区分 + 最大坑', '看<strong>对 x 的奇偶</strong>：只换 $x\\to -x$、y 不动 → 搭配<strong>区域关于 y 轴对称</strong>（左右）；看<strong>对 y 的奇偶</strong>：只换 $y\\to -y$、x 不动 → 搭配<strong>区域关于 x 轴对称</strong>（上下）。<br><strong>口诀：先看区域对称轴，再看被积函数奇偶；对轴的那一变量，偶数翻倍、奇数归零。</strong><br><strong>⚠️ 大坑：奇偶性是函数属性，能不能用「奇零偶倍」，要看区域有没有对应的对称性！</strong>函数是奇函数，但区域不对称 → 不能直接写 0。例如 $f=x$ 是奇函数，但取 $D:[1,2]\\times[0,1]$（不关于 $y$ 轴对称），$\\iint_D x\\,dx\\,dy=\\frac32\\ne0$。')}
+
+            ${groupTitle('fa-table-list', '快速自测（两个方向分开判）', '#FF9F0A')}
+            <div class="formula-card" style="--card-accent:#FF9F0A;margin-bottom:1rem;">
+                <div class="formula-note" style="font-size:0.9rem;color:var(--text-secondary);line-height:1.9;">
+                    <table style="width:100%;font-size:0.88rem;">
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;color:var(--text-muted);">$f(x,y)$</td><td style="padding:0.3rem 0;color:var(--text-muted);">只换 $x\\to -x$</td><td style="padding:0.3rem 0;color:var(--text-muted);">对 x</td><td style="padding:0.3rem 0;color:var(--text-muted);">只换 $y\\to -y$</td><td style="padding:0.3rem 0;color:var(--text-muted);">对 y</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">$x$</td><td style="padding:0.3rem 0;">$-x=-f$</td><td style="padding:0.3rem 0;">奇</td><td style="padding:0.3rem 0;">$x=f$</td><td style="padding:0.3rem 0;">偶</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">$xy$</td><td style="padding:0.3rem 0;">$-xy=-f$</td><td style="padding:0.3rem 0;">奇</td><td style="padding:0.3rem 0;">$-xy=-f$</td><td style="padding:0.3rem 0;">奇</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">$x^2$</td><td style="padding:0.3rem 0;">$(-x)^2=x^2=f$</td><td style="padding:0.3rem 0;">偶</td><td style="padding:0.3rem 0;">$x^2=f$</td><td style="padding:0.3rem 0;">偶</td></tr>
+                        <tr style="border-bottom:1px solid var(--border-soft);"><td style="padding:0.3rem 0;">$x^2y$</td><td style="padding:0.3rem 0;">$x^2y=f$</td><td style="padding:0.3rem 0;">偶</td><td style="padding:0.3rem 0;">$-x^2y=-f$</td><td style="padding:0.3rem 0;">奇</td></tr>
+                        <tr><td style="padding:0.3rem 0;">$x+y$</td><td style="padding:0.3rem 0;">$-x+y\\ne\\pm f$</td><td style="padding:0.3rem 0;">非奇非偶</td><td style="padding:0.3rem 0;">$x-y\\ne\\pm f$</td><td style="padding:0.3rem 0;">非奇非偶</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="section-desc">⚠️ 注意：$x+y$ 不是「对 $x$ 奇、对 $y$ 奇」——单独一个 $x$ 是奇函数，但加上 $y$ 之后整体不再满足 $f(-x,y)=-f(x,y)$。<strong>判断永远看整个函数，不要拆项下结论。</strong></div>
         </div>
     `;
 

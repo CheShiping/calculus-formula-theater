@@ -230,6 +230,16 @@
 - 仅 `exampleBox` / 说明卡增量，未改 `formulaCard`，公式总数仍 344，`review.html` 无变化。
 - 证据：主脚本 `new Function` 语法检查 0 错误（JSON-LD 块基线不可执行）；`vm` 执行 `buildEquationDetail()` 成功，三张练习卡正/反面按 `<strong>解</strong>` 正确拆分、题目面未泄漏解析；三题特解代回原方程数值校验全部通过（$x=-1,0,0.5,1,2,3$ 取样点误差 $<10^{-9}$）。
 
+## 更新（2026-11-23）— 二重积分「对称性」改为通俗对照版（x / y 分开讲）
+
+- `src/index.html`（`buildDoubleIntDetail()` 的「对称性」tab）重写：先与一元 $g(-t)=\pm g(t)$ 对照，再分「① 关于 x 的奇偶（只换 x→−x，y 不动）」「② 关于 y 的奇偶（只换 y→−y，x 不动）」「③ 两轴都对称」。
+- 每个方向配一道例题：$D:x^2+y^2\le2y$（关于 $y$ 轴对称）$f=x$ 为奇 ⟹ 0；$D:x^2+y^2\le2x$（关于 $x$ 轴对称）$f=y$ 为奇 ⟹ 0。后者与「极坐标」tab 的偏心圆例题形成对照。
+- 新增「一句话区分 + 最大坑」提示与「快速自测」判定表（x / xy / x² / x²y / x+y），强调「区域不对称不能直接写 0」，并给出反例 $D:[1,2]\times[0,1]$、$\iint_D x=\frac32$。
+- 修正草稿数学错误：$f(x,y)=x+y$ 并非「对 x 奇、对 y 奇」（$f(-x,y)=-x+y\ne -f(x,y)$），页面与笔记均改为「两个方向都非奇非偶」，并说明「判断看整个函数，不能拆项」。
+- `src/data/formulas.js` 手动同步 dblint_013 / 014 / 015（未跑 extractFormulas.mjs，避免覆盖）；id 与总数 437 未变。
+- `notes/08-多元函数积分学-二重积分.md` §四 同步重写为 4.1~4.4。
+- 证据：inline script `new Function` 语法检查 0 错误；`formulas.js` 动态 import 成功（437 条，dblint_013/014/015 标签正确）；浏览器实测 index「对称性」tab 三段 + 两例题 + 自测表均正常，review.html 翻卡页同步出现「对 x 的奇 / 偶」「对 y 的奇 / 偶」，无 JS error。
+
 ## 下一步（按优先级）
 
 1. **加新内容时**：严格走 AGENTS.md 第 4 节五步流程——先写 `notes/` 笔记 → 等用户审核 → 在 `index.html` 对应 `buildXxxDetail()` 增量追加 `formulaCard` → 跑 `extractFormulas.mjs` → `npm run dev` 核对双主题。
