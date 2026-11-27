@@ -3272,6 +3272,15 @@ export const FORMULAS = [
     color: '#5AC8FA',
   },
   {
+    id: 'linalg_008',
+    module: 'linalg',
+    num: '行8',
+    label: '上/下三角',
+    formula: '$$\\begin{vmatrix} a_{11} & a_{12} & a_{13} \\\\ 0 & a_{22} & a_{23} \\\\ 0 & 0 & a_{33} \\end{vmatrix} = a_{11}a_{22}a_{33}$$',
+    note: '三角行列式 = 主对角线连乘；先找 1、按列化零',
+    color: '#FFD60A',
+  },
+  {
     id: 'matrix_001',
     module: 'matrix',
     num: '单1',

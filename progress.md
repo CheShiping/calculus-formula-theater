@@ -251,6 +251,14 @@
 - 仅 `exampleBox` 增量，未改公式卡；总数 437 不变。
 - 证据：语法检查 0 错误；数值积分校验 $I_2=0.785398\approx\pi/4$、$I_3=23.5619\approx15\pi/2$；浏览器实测极坐标 tab 新分组、两题翻卡与公式渲染正常，无 JS error。
 
+## 更新（2026-11-27）— 行列式新增「上三角与下三角（化三角法）」
+
+- `notes/09-线性代数-行列式.md` 新增 §3.1：上/下三角定义与主对角连乘公式；化三角法两步（① 按列化零 ② 找「1」化零，即令 $a_{11}=1$），并说明找 1 的三种手段：互换（补负号）、提公因式（倍乘）、倍加消零（值不变）；配三阶例题 $D=-5$。原范德蒙德 / 行和相同 / 爪形 / 分块顺延为 3.2–3.5。
+- `src/index.html`（`buildLinearDetail()` 的「特殊行列式」tab）同步新增 3.1 分组与例题；知识地图、总览描述、速查总表、核心口诀（7 条→8 条）与核心公式卡同步；原 3.1–3.4 顺延。
+- `src/data/formulas.js` 手动追加 `linalg_008`（未跑 extractFormulas.mjs，避免覆盖已有数据）；linalg 7→8，总公式 437→438。
+- 同步计数：`src/index.html`（SEO / path-count）、`src/review.html`、`README.md`、`AGENTS.md`、`feature_list.json`。
+- 证据：inline script `new Function` 语法检查 6 个脚本 0 错误；执行 `buildLinearDetail()` 成功（6 tab、3.1–3.5 齐全、无 undefined/NaN）；`formulas.js` 动态 import 成功（438 条、linalg 8、末条 `linalg_008 上/下三角`）；`npm run build` 成功（7 个 HTML）。
+
 ## 下一步（按优先级）
 
 1. **加新内容时**：严格走 AGENTS.md 第 4 节五步流程——先写 `notes/` 笔记 → 等用户审核 → 在 `index.html` 对应 `buildXxxDetail()` 增量追加 `formulaCard` → 跑 `extractFormulas.mjs` → `npm run dev` 核对双主题。

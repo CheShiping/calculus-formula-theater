@@ -168,7 +168,7 @@ node scripts/extractFormulas.mjs
 
 > ⚠️ 模块固定集合为 `{ limit, deriv, integral, trig, diffEq, multivar, dblint, series, vector, linalg, matrix, linSys }`。**没有 `diff` 这个 module**（微分已并入 `deriv`）。`linalg` / `matrix` / `linSys` 同属「线性代数」但为**三个独立章节/入口**（行列式 ≠ 矩阵 ≠ 线性方程组）。新增 build 函数时注意在脚本 `sections` 与 `MODULE_ORDER` 中同步。
 
-当前公式总量：**437 条**（limit 13 / deriv 94 / integral 80 / trig 41 / diffEq 9 / multivar 10 / dblint 18 / series 29 / vector 75 / linalg 7 / matrix 41 / linSys 20）。
+当前公式总量：**438 条**（limit 13 / deriv 94 / integral 80 / trig 41 / diffEq 9 / multivar 10 / dblint 18 / series 29 / vector 75 / linalg 8 / matrix 41 / linSys 20）。
 
 ---
 
